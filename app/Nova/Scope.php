@@ -3,11 +3,12 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\BelongsTo;
 
 /**
  * @mixin \App\Models\Scope
@@ -53,6 +54,9 @@ class Scope extends Resource
             Textarea::make(__('Desc'), 'desc')
                 ->sortable()
                 ->rules('max:255'),
+            BelongsTo::make(__('Owner'), 'owner', User::class)
+                ->sortable()
+                ->hideWhenUpdating()->hideWhenCreating(),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             DateTime::make(__('Updated At'), 'updated_at')

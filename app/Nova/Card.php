@@ -56,6 +56,9 @@ class Card extends Resource
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
+            BelongsTo::make(__('Owner'), 'owner', User::class)
+                ->sortable()
+                ->hideWhenUpdating()->hideWhenCreating(),
             BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(),
             Text::make(__('Tags'), 'tags_string')->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Decks'), 'decks_string')->hideWhenCreating()->hideWhenUpdating(),

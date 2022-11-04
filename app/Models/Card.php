@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
 use App\Models\Traits\Decks;
+use App\Models\Traits\Owner;
 
 /**
  * @property int|null $id
@@ -25,7 +26,7 @@ use App\Models\Traits\Decks;
  */
 class Card extends Model
 {
-    use HasFactory, Tags, Decks;
+    use HasFactory, Tags, Decks, Owner;
 
     /**
      * @return BelongsTo

@@ -52,6 +52,9 @@ class Tag extends Resource
             Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
+            BelongsTo::make(__('Owner'), 'owner', User::class)
+                ->sortable()
+                ->hideWhenUpdating()->hideWhenCreating(),
             BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(true),
             Text::make(__('Decks'), 'decks_string')->hideWhenCreating()->hideWhenUpdating(),
             Textarea::make(__('Desc'), 'desc')

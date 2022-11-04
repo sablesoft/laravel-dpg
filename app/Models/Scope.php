@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Tags;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Traits\Tags;
+use App\Models\Traits\Owner;
 
 /**
  * @property int|null $id
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Scope extends Model
 {
-    use HasFactory, Tags;
+    use HasFactory, Tags, Owner;
 
     /**
      * @return HasMany

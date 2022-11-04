@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\DateTime;
@@ -47,6 +48,9 @@ class Deck extends Resource
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
+            BelongsTo::make(__('Owner'), 'owner', User::class)
+                ->sortable()
+                ->hideWhenUpdating()->hideWhenCreating(),
             Text::make(__('Tags'), 'tags_string')->hideWhenCreating()->hideWhenUpdating(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->rules('max:255'),

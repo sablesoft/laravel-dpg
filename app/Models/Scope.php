@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Tags;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Scope extends Model
 {
-    use HasFactory;
+    use HasFactory, Tags;
 
     /**
      * @return HasMany

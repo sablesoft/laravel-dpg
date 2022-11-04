@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -48,20 +49,25 @@ class Tag extends Resource
     {
         return [
 //            ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(true),
             Text::make(__('Code'), 'code')
                 ->sortable()
                 ->rules('required', 'max:20'),
             Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
+            BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(true),
+            Text::make(__('Decks'), 'decks_string')->hideWhenCreating()->hideWhenUpdating(),
             Textarea::make(__('Desc'), 'desc')
                 ->sortable()
                 ->rules('max:255'),
             DateTime::make(__('Created At'), 'created_at')
+                ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             DateTime::make(__('Updated At'), 'updated_at')
-                ->hideWhenCreating()->hideWhenUpdating()->sortable(true)
+                ->hideFromIndex()
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
+            BelongsToMany::make(__('Cards'), 'cards')->sortable()->nullable(true),
+            BelongsToMany::make(__('Decks'), 'decks')->sortable()->nullable(true),
         ];
     }
 

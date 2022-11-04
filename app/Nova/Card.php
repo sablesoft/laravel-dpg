@@ -53,10 +53,12 @@ class Card extends Resource
     {
         return [
 //            ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(),
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
+            BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(),
+            Text::make(__('Tags'), 'tags_string')->hideWhenCreating()->hideWhenUpdating(),
+            Text::make(__('Decks'), 'decks_string')->hideWhenCreating()->hideWhenUpdating(),
             Textarea::make(__('Public Desc'), 'public_desc')
                 ->nullable()->rules('max:255'),
             Textarea::make(__('Private Desc'), 'private_desc')
@@ -64,8 +66,10 @@ class Card extends Resource
             BelongsToMany::make(__('Tags'), 'tags')->sortable()->nullable(true),
             BelongsToMany::make(__('Decks'), 'decks')->sortable()->nullable(true),
             DateTime::make(__('Created At'), 'created_at')
+                ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             DateTime::make(__('Updated At'), 'updated_at')
+                ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true)
         ];
     }

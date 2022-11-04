@@ -47,6 +47,7 @@ class Deck extends Resource
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
+            Text::make(__('Tags'), 'tags_string')->hideWhenCreating()->hideWhenUpdating(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->rules('max:255'),
             BelongsToMany::make(__('Tags'), 'tags')->sortable()->nullable(true),

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Traits\Decks;
 
 /**
  * @property int|null $id
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Tag extends Model
 {
-    use HasFactory;
+    use HasFactory, Decks;
 
     /**
      * @return BelongsTo

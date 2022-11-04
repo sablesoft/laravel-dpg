@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Tags;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Deck extends Model
 {
-    use HasFactory;
+    use HasFactory, Tags;
 
     /**
      * @return BelongsToMany

@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create('adventures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('scope_id')->nullable(true);
-            $table->string('name', 30)->nullable(false);
-            $table->text('public_desc')->nullable(true);
-            $table->text('private_desc')->nullable(true);
+            $table->string('name', 50)->nullable(false);
+            $table->text('desc')->nullable(true);
             $table->foreignId('owner_id')->nullable(false);
             $table->boolean('is_public')->nullable(false)->default(false);
             $table->timestamps();
 
-            $table->foreign('scope_id')->references('id')->on('scopes');
             $table->foreign('owner_id')->references('id')->on('users');
         });
     }
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists('adventures');
     }
 };

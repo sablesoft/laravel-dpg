@@ -16,8 +16,12 @@ return new class extends Migration
         Schema::create('decks', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false)->unique();
-            $table->string('desc')->nullable(true);
+            $table->text('desc')->nullable(true);
+            $table->foreignId('owner_id')->nullable(false);
+            $table->boolean('is_public')->nullable(false)->default(false);
             $table->timestamps();
+
+            $table->foreign('owner_id')->references('id')->on('users');
         });
     }
 

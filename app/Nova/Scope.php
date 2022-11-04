@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -58,7 +59,9 @@ class Scope extends Resource
             DateTime::make(__('Created At'), 'created_at')
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             DateTime::make(__('Updated At'), 'updated_at')
-                ->hideWhenCreating()->hideWhenUpdating()->sortable(true)
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
+            HasMany::make(__('Tags'), 'tags')->sortable(),
+            HasMany::make(__('Cards'), 'cards')->sortable()
         ];
     }
 

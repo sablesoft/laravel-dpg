@@ -36,7 +36,7 @@ class Tag extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'code', 'name'
+        'id', 'name'
     ];
 
     /**
@@ -49,9 +49,6 @@ class Tag extends Resource
     {
         return [
 //            ID::make(__('ID'), 'id')->sortable(),
-            Text::make(__('Code'), 'code')
-                ->sortable()
-                ->rules('required', 'max:20'),
             Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),

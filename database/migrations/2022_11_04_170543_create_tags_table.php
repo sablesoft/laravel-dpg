@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->foreignId('scope_id')->nullable(true);
-            $table->string('code', 20)->nullable(false)->unique();
             $table->string('name')->nullable(false)->unique();
             $table->text('desc')->nullable(true);
             $table->foreignId('owner_id')->nullable(false);

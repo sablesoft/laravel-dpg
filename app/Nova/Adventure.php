@@ -3,23 +3,21 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\DateTime;
 
-/**
- * @mixin \App\Models\Scope
- */
-class Scope extends Resource
+class Adventure extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static string $model = \App\Models\Scope::class;
+    public static string $model = \App\Models\Adventure::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -48,17 +46,19 @@ class Scope extends Resource
         return [
 //            ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('Name'), 'name')
-                ->sortable()
-                ->rules('required', 'max:255'),
-            Textarea::make(__('Desc'), 'desc')
-                ->sortable()
-                ->rules('max:255'),
+                ->nullable(false)->required()
+                ->sortable()->rules('required', 'max:30'),
+            Text::make(__('Tags'), 'tags_string')->hideWhenCreating()->hideWhenUpdating(),
+            Text::make(__('Decks'), 'decks_string')->hideWhenCreating()->hideWhenUpdating(),
+            Textarea::make(__('Desc'), 'desc')->nullable(),
+            BelongsToMany::make(__('Tags'), 'tags')->sortable()->nullable(true),
+            BelongsToMany::make(__('Decks'), 'decks')->sortable()->nullable(true),
             DateTime::make(__('Created At'), 'created_at')
+                ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             DateTime::make(__('Updated At'), 'updated_at')
-                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
-            HasMany::make(__('Tags'), 'tags')->sortable(),
-            HasMany::make(__('Cards'), 'cards')->sortable()
+                ->hideFromIndex()
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true)
         ];
     }
 

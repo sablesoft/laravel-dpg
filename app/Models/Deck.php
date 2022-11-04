@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int|null $id
- * @property string|null $code
  * @property string|null $name
  * @property string|null $desc
  * @property Carbon|null $created_at
@@ -18,23 +17,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property-read Tag[]|null $tags
  * @property-read Card[]|null $cards
  */
-class Scope extends Model
+class Deck extends Model
 {
     use HasFactory;
 
     /**
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function tags(): HasMany
+    public function tags(): BelongsToMany
     {
-        return $this->hasMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'tag_deck');
     }
 
     /**
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function cards(): HasMany
+    public function cards(): BelongsToMany
     {
-        return $this->hasMany(Card::class);
+        return $this->belongsToMany(Card::class, 'card_deck');
     }
 }

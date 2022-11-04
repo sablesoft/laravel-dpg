@@ -11,17 +11,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * @property int|null $id
  * @property int|null $scope_id
- * @property string|null $code
  * @property string|null $name
- * @property string|null $desc
+ * @property string|null $public_desc
+ * @property string|null $private_desc
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
  * @property-read Scope|null $scope
+ * @property-read Tag[]|null $tags
  * @property-read Deck[]|null $decks
- * @property-read Card[]|null $cards
  */
-class Tag extends Model
+class Card extends Model
 {
     use HasFactory;
 
@@ -36,16 +36,16 @@ class Tag extends Model
     /**
      * @return BelongsToMany
      */
-    public function decks(): BelongsToMany
+    public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Deck::class, 'tag_deck');
+        return $this->belongsToMany(Tag::class, 'tag_card');
     }
 
     /**
      * @return BelongsToMany
      */
-    public function cards(): BelongsToMany
+    public function decks(): BelongsToMany
     {
-        return $this->belongsToMany(Card::class, 'tag_card');
+        return $this->belongsToMany(Deck::class, 'card_deck');
     }
 }

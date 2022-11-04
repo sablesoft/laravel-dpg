@@ -33,7 +33,7 @@ class Scope extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'code', 'name'
     ];
 
     /**
@@ -45,7 +45,7 @@ class Scope extends Resource
     public function fields(Request $request): array
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
+//            ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('Code'), 'code')
                 ->sortable()
                 ->rules('required', 'max:20'),

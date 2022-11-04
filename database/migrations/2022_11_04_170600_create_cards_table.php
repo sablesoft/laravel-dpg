@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('scope_id')->nullable(true);
             $table->string('name', 30)->nullable(false);
-            $table->string('public_desc');
-            $table->string('private_desc');
+            $table->string('public_desc')->nullable(true);
+            $table->string('private_desc')->nullable(true);
             $table->timestamps();
 
             $table->foreign('scope_id')->references('id')->on('scopes');

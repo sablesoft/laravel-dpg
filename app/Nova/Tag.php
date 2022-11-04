@@ -10,6 +10,9 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
+/**
+ * @mixin \App\Models\Tag
+ */
 class Tag extends Resource
 {
     /**
@@ -24,7 +27,7 @@ class Tag extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -32,7 +35,7 @@ class Tag extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'code', 'name'
     ];
 
     /**
@@ -44,7 +47,7 @@ class Tag extends Resource
     public function fields(Request $request): array
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
+//            ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(true),
             Text::make(__('Code'), 'code')
                 ->sortable()

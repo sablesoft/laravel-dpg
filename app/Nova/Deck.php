@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Textarea;
@@ -58,7 +59,15 @@ class Deck extends Resource
                 ->sortable()
                 ->hideWhenUpdating()->hideWhenCreating(),
             BelongsToMany::make(__('Cards'), 'cards')
-                ->sortable()->nullable(true),
+                ->fields(function () {
+                    return [
+                        Number::make(__('Count'), 'count')
+                            ->required(true)
+                            ->nullable(false)
+                            ->rules('required')
+                            ->min(1)->step(1)->default(1),
+                    ];
+                })->sortable()->nullable(true),
             BelongsToMany::make(__('Adventures'), 'adventures')
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Tags'), 'tags')

@@ -48,17 +48,26 @@ class Deck extends Resource
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
+            Text::make(__('Adventures'), 'adventures_string')
+                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
+            Text::make(__('Tags'), 'tags_string')
+                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
+            Textarea::make(__('Desc'), 'desc')
+                ->nullable()->rules('max:255'),
             BelongsTo::make(__('Owner'), 'owner', User::class)
                 ->sortable()
                 ->hideWhenUpdating()->hideWhenCreating(),
-            Text::make(__('Tags'), 'tags_string')->hideWhenCreating()->hideWhenUpdating(),
-            Textarea::make(__('Desc'), 'desc')
-                ->nullable()->rules('max:255'),
-            BelongsToMany::make(__('Tags'), 'tags')->sortable()->nullable(true),
-            BelongsToMany::make(__('Cards'), 'cards')->sortable()->nullable(true),
+            BelongsToMany::make(__('Cards'), 'cards')
+                ->sortable()->nullable(true),
+            BelongsToMany::make(__('Adventures'), 'adventures')
+                ->sortable()->nullable(true),
+            BelongsToMany::make(__('Tags'), 'tags')
+                ->sortable()->nullable(true),
             DateTime::make(__('Created At'), 'created_at')
+                ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             DateTime::make(__('Updated At'), 'updated_at')
+                ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true)
         ];
     }

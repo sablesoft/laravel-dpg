@@ -7,11 +7,13 @@ namespace App\Models\Traits;
  */
 trait Decks
 {
+    use Resources;
+
+    /**
+     * @return string|null
+     */
     public function getDecksStringAttribute(): ?string
     {
-        $names = $this->decks()->select('name')
-            ->pluck('name')->toArray();
-
-        return $names ? implode(', ', $names) : null;
+        return $this->getResourcesString('decks');
     }
 }

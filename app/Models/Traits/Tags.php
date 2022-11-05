@@ -7,11 +7,13 @@ namespace App\Models\Traits;
  */
 trait Tags
 {
+    use Resources;
+
+    /**
+     * @return string|null
+     */
     public function getTagsStringAttribute(): ?string
     {
-        $names = $this->tags()->select('name')
-            ->pluck('name')->toArray();
-
-        return $names ? implode(', ', $names) : null;
+        return $this->getResourcesString('tags');
     }
 }

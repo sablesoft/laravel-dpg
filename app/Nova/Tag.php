@@ -52,22 +52,30 @@ class Tag extends Resource
             Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
-            BelongsTo::make(__('Owner'), 'owner', User::class)
-                ->sortable()
-                ->hideWhenUpdating()->hideWhenCreating(),
-            BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(true),
-            Text::make(__('Decks'), 'decks_string')->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Scope'), 'scope')
+                ->nullable(true)->sortable(true),
+            Text::make(__('Decks'), 'decks_string')
+                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
+            Text::make(__('Adventures'), 'adventures_string')
+                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')
                 ->sortable()
                 ->rules('max:255'),
+            BelongsTo::make(__('Owner'), 'owner', User::class)
+                ->sortable()
+                ->hideWhenUpdating()->hideWhenCreating(),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             DateTime::make(__('Updated At'), 'updated_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
-            BelongsToMany::make(__('Cards'), 'cards')->sortable()->nullable(true),
-            BelongsToMany::make(__('Decks'), 'decks')->sortable()->nullable(true),
+            BelongsToMany::make(__('Cards'), 'cards')
+                ->sortable()->nullable(true),
+            BelongsToMany::make(__('Decks'), 'decks')
+                ->sortable()->nullable(true),
+            BelongsToMany::make(__('Adventures'), 'adventures')
+                ->sortable()->nullable(true),
         ];
     }
 

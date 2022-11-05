@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Owner;
 use App\Models\Traits\Decks;
+use App\Models\Traits\Adventures;
 
 /**
  * @property int|null $id
@@ -24,7 +25,7 @@ use App\Models\Traits\Decks;
  */
 class Tag extends Model
 {
-    use HasFactory, Decks, Owner;
+    use HasFactory, Decks, Adventures, Owner;
 
     /**
      * @return BelongsTo
@@ -48,5 +49,13 @@ class Tag extends Model
     public function cards(): BelongsToMany
     {
         return $this->belongsToMany(Card::class, 'tag_card');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function adventures(): BelongsToMany
+    {
+        return $this->belongsToMany(Adventure::class, 'tag_adventure');
     }
 }

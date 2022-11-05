@@ -48,16 +48,18 @@ class Adventure extends Resource
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
-            BelongsTo::make(__('Owner'), 'owner', User::class)
-                ->sortable()
-                ->hideWhenUpdating()->hideWhenCreating(),
             Text::make(__('Tags'), 'tags_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Text::make(__('Decks'), 'decks_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')->nullable(),
-            BelongsToMany::make(__('Tags'), 'tags')->sortable()->nullable(true),
-            BelongsToMany::make(__('Decks'), 'decks')->sortable()->nullable(true),
+            BelongsToMany::make(__('Tags'), 'tags')
+                ->sortable()->nullable(true),
+            BelongsToMany::make(__('Decks'), 'decks')
+                ->sortable()->nullable(true),
+            BelongsTo::make(__('Owner'), 'owner', User::class)
+                ->sortable()
+                ->hideWhenUpdating()->hideWhenCreating(),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),

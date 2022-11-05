@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->foreign('tag_id')->references('id')->on('tags');
             $table->foreign('deck_id')->references('id')->on('decks');
+            $table->unique(['tag_id', 'deck_id']);
         });
     }
 

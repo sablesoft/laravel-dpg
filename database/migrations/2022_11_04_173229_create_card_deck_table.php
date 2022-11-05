@@ -20,6 +20,7 @@ return new class extends Migration
 
             $table->foreign('card_id')->references('id')->on('cards');
             $table->foreign('deck_id')->references('id')->on('decks');
+            $table->unique(['card_id', 'deck_id']);
         });
     }
 

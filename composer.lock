@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9769e5763c669a6b384ced4ad61179d",
+    "content-hash": "b1d1cf2fc910546b193b3a9399ff6e17",
     "packages": [
         {
             "name": "brick/math",
@@ -184,50 +184,6 @@
                 "source": "https://github.com/cakephp/chronos"
             },
             "time": "2022-10-21T08:22:45+00:00"
-        },
-        {
-            "name": "day4/switch-locale",
-            "version": "0.5.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/u12206050/switch-locale.git",
-                "reference": "fa9e762cf4623f88e078e7d0f52e17b1d53a22e0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/u12206050/switch-locale/zipball/fa9e762cf4623f88e078e7d0f52e17b1d53a22e0",
-                "reference": "fa9e762cf4623f88e078e7d0f52e17b1d53a22e0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Day4\\SwitchLocale\\ToolServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Day4\\SwitchLocale\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A Laravel Nova tool to switch the locale",
-            "keywords": [
-                "laravel",
-                "nova"
-            ],
-            "support": {
-                "source": "https://github.com/u12206050/switch-locale/tree/0.5.9"
-            },
-            "time": "2021-07-19T10:08:58+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -3515,21 +3471,20 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.5.1",
+            "version": "4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "a161a26d917604dc6d3aa25100fddf2556e9f35d"
+                "reference": "ad63bc700e7d021039e30ce464eba384c4a1d40f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a161a26d917604dc6d3aa25100fddf2556e9f35d",
-                "reference": "a161a26d917604dc6d3aa25100fddf2556e9f35d",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/ad63bc700e7d021039e30ce464eba384c4a1d40f",
+                "reference": "ad63bc700e7d021039e30ce464eba384c4a1d40f",
                 "shasum": ""
             },
             "require": {
                 "brick/math": "^0.8.8 || ^0.9 || ^0.10",
-                "ext-ctype": "*",
                 "ext-json": "*",
                 "php": "^8.0",
                 "ramsey/collection": "^1.0"
@@ -3561,7 +3516,6 @@
             },
             "suggest": {
                 "ext-bcmath": "Enables faster math with arbitrary-precision integers using BCMath.",
-                "ext-ctype": "Enables faster processing of character classification using ctype functions.",
                 "ext-gmp": "Enables faster math with arbitrary-precision integers using GMP.",
                 "ext-uuid": "Enables the use of PeclUuidTimeGenerator and PeclUuidRandomGenerator.",
                 "paragonie/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
@@ -3593,7 +3547,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.5.1"
+                "source": "https://github.com/ramsey/uuid/tree/4.6.0"
             },
             "funding": [
                 {
@@ -3605,7 +3559,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-16T03:22:46+00:00"
+            "time": "2022-11-05T23:03:38+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",

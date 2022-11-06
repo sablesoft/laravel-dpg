@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('adventures', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->nullable(false);
+            $table->text('name')->nullable(false);
             $table->text('desc')->nullable(true);
             $table->foreignId('owner_id')->nullable(false);
             $table->boolean('is_public')->nullable(false)->default(false);

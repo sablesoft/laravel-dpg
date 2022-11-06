@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1d1cf2fc910546b193b3a9399ff6e17",
+    "content-hash": "4227da0c78626f4c0cbc55b4d58d710f",
     "packages": [
         {
             "name": "brick/math",
@@ -893,6 +893,65 @@
                 }
             ],
             "time": "2022-06-18T20:57:19+00:00"
+        },
+        {
+            "name": "eolica/nova-locale-switcher",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Eolica-Web/nova-locale-switcher.git",
+                "reference": "a8978ee82df4c094a9dc51c9586344b3e4473c99"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Eolica-Web/nova-locale-switcher/zipball/a8978ee82df4c094a9dc51c9586344b3e4473c99",
+                "reference": "a8978ee82df4c094a9dc51c9586344b3e4473c99",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^3.0",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Eolica\\NovaLocaleSwitcher\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Eolica\\NovaLocaleSwitcher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Llobell",
+                    "email": "dllobellmoya@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple locale switcher for Nova without any concrete localization implementation",
+            "keywords": [
+                "eolica",
+                "laravel",
+                "locale",
+                "nova",
+                "switcher"
+            ],
+            "support": {
+                "issues": "https://github.com/Eolica-Web/nova-locale-switcher/issues",
+                "source": "https://github.com/Eolica-Web/nova-locale-switcher/tree/1.0.0"
+            },
+            "time": "2020-10-29T19:11:00+00:00"
         },
         {
             "name": "fideloper/proxy",

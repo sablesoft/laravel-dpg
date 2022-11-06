@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
             $table->foreignId('scope_id')->nullable(true);
-            $table->text('name')->nullable(false);
+            $table->text('name')->nullable(false)->unique();
             $table->text('public_desc')->nullable(true);
             $table->text('private_desc')->nullable(true);
             $table->foreignId('owner_id')->nullable(false);

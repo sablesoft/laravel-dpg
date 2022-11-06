@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 
@@ -73,7 +74,10 @@ class User extends Resource
                 ->updateRules('nullable', 'string', 'min:8'),
 
             BelongsTo::make(__('Language'), 'language')
-                ->nullable(true)
+                ->nullable(true)->sortable(),
+            Image::make('Flag', function(\App\Models\User $user) {
+                return $user->language ? $user->language->code . '.svg' : null;
+            })->disk('flags')->disableDownload()->hideWhenCreating()->hideWhenUpdating(),
         ];
     }
 

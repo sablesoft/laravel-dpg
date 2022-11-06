@@ -28,6 +28,17 @@ class Language extends Model
     public array $translatable = ['name'];
 
     /**
+     * Encode the given value as JSON.
+     *
+     * @param  mixed  $value
+     * @return string
+     */
+    protected function asJson($value)
+    {
+        return json_encode($value, JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
      * @return HasMany
      */
     public function users(): HasMany

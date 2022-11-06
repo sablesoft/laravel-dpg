@@ -15,6 +15,17 @@ class Content extends Model
     use HasTranslations;
 
     /**
+     * Encode the given value as JSON.
+     *
+     * @param  mixed  $value
+     * @return string
+     */
+    protected function asJson($value)
+    {
+        return json_encode($value, JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
      * @var array|string[]
      */
     public array $translatable = ['name', 'desc'];
@@ -25,6 +36,7 @@ class Content extends Model
 
         static::creating(function (Content $content) {
             $content->owner()->associate(Auth::user());
+
         });
     }
 }

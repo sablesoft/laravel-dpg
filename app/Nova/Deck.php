@@ -4,7 +4,6 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\DateTime;
@@ -13,6 +12,13 @@ use Laravel\Nova\Fields\BelongsToMany;
 
 class Deck extends Resource
 {
+    /**
+     * The logical group associated with the resource.
+     *
+     * @var string
+     */
+    public static $group = 'Content';
+
     /**
      * The model the resource corresponds to.
      *
@@ -45,7 +51,6 @@ class Deck extends Resource
     public function fields(Request $request): array
     {
         return [
-//            ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),

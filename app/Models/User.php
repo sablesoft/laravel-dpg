@@ -6,9 +6,11 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * @property int|null $id
@@ -22,10 +24,20 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Carbon|null $updated_at
  *
  * @property-read Language|null $language
+ * @property-read Adventure[]|null $adventures
+ * @property-read Deck[]|null $decks
+ * @property-read Card[]|null $cards
+ * @property-read Tag[]|null $tags
+ * @property-read Scope[]|null $scopes
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, HasTranslations, Notifiable;
+
+    /**
+     * @var array|string[]
+     */
+    public array $translatable = ['name'];
 
     /**
      * The attributes that are mass assignable.
@@ -63,6 +75,46 @@ class User extends Authenticatable
     public function language(): BelongsTo
     {
         return $this->belongsTo(Language::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function adventures(): HasMany
+    {
+        return $this->hasMany(Adventure::class, 'owner_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function decks(): HasMany
+    {
+        return $this->hasMany(Deck::class, 'owner_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function cards(): HasMany
+    {
+        return $this->hasMany(Card::class, 'owner_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function tags(): HasMany
+    {
+        return $this->hasMany(Tag::class, 'owner_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function scopes(): HasMany
+    {
+        return $this->hasMany(Scope::class, 'owner_id');
     }
 
     /**

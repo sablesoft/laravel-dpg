@@ -95,7 +95,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ->setLocales(Language::getList())
                 ->onSwitchLocale(function ($request) {
                     $locale = $request->post('locale');
-                    $request->user()->updateLanguage($locale);
+                    /** @var User $user */
+                    $user = $request->user();
+                    $user->updateLanguage($locale);
                 })
         ];
     }

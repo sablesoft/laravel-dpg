@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('scope_id')->nullable(true);
             $table->text('name')->nullable(false)->unique();
-            $table->text('public_desc')->nullable(true);
+            $table->text('desc')->nullable(true);
             $table->text('private_desc')->nullable(true);
             $table->foreignId('owner_id')->nullable(false);
             $table->boolean('is_public')->nullable(false)->default(false);

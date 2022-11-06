@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
+/**
+ * @property string|null $name
+ * @property string|null $desc
+ */
 class Content extends Model
 {
     use HasTranslations;

@@ -13,8 +13,6 @@ use App\Models\Traits\Owner;
 /**
  * @property int|null $id
  * @property int|null $scope_id
- * @property string|null $name
- * @property string|null $public_desc
  * @property string|null $private_desc
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -30,7 +28,7 @@ class Card extends Content
     /**
      * @var array|string[]
      */
-    public array $translatable = ['name', 'public_desc', 'private_desc'];
+    public array $translatable = ['name', 'desc', 'private_desc'];
 
     /**
      * @return BelongsTo

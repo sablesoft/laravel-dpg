@@ -11,8 +11,6 @@ use App\Models\Traits\Owner;
 
 /**
  * @property int|null $id
- * @property string|null $name
- * @property string|null $desc
  * @property int|null $owner_id
  * @property bool|null $is_public
  * @property Carbon|null $created_at

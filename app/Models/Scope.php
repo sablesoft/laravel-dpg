@@ -10,8 +10,6 @@ use App\Models\Traits\Owner;
 
 /**
  * @property int|null $id
- * @property string|null $name
- * @property string|null $desc
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *

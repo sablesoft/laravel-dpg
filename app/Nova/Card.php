@@ -55,8 +55,8 @@ class Card extends Resource
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
             BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(),
-            Textarea::make(__('Public Desc'), 'public_desc')
-                ->nullable()->rules('max:255')->alwaysShow(),
+            Textarea::make(__('Desc'), 'desc')
+                ->nullable()->alwaysShow(),
             Textarea::make(__('Private Desc'), 'private_desc')
                 ->nullable()->rules('max:255'),
             Text::make(__('Tags'), 'tags_string')

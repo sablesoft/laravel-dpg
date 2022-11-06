@@ -64,4 +64,17 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Language::class);
     }
+
+    /**
+     * @param string $code
+     * @return $this
+     */
+    public function updateLanguage(string $code): static
+    {
+        $language = Language::where('code', '=', $code)->firstOrFail();
+        $this->language()->associate($language);
+        $this->save();
+
+        return $this;
+    }
 }

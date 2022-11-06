@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
-use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Eolica\NovaLocaleSwitcher\LocaleSwitcher;
+use App\Models\User;
+use App\Models\Language;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -91,13 +92,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             LocaleSwitcher::make()
-                ->setLocales(config('nova.locales'))
+                ->setLocales(Language::getList())
                 ->onSwitchLocale(function ($request) {
                     $locale = $request->post('locale');
-
-                    if (array_key_exists($locale, config('nova.locales'))) {
-                        $request->user()->update(['locale' => $locale]);
-                    }
+                    $request->user()->updateLanguage($locale);
                 })
         ];
     }

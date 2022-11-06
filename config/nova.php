@@ -34,12 +34,6 @@ return [
 
     'domain' => env('NOVA_DOMAIN_NAME', null),
 
-    'locales' => [
-        'en' => 'English',
-        'de' => 'Deutsch',
-        'es' => 'Español',
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Nova App URL

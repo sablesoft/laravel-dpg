@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Tags;
@@ -19,7 +18,7 @@ use App\Models\Traits\Owner;
  * @property-read Tag[]|null $tags
  * @property-read Card[]|null $cards
  */
-class Scope extends Model
+class Scope extends Content
 {
     use HasFactory, Tags, Owner;
 

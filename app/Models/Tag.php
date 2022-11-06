@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -23,7 +22,7 @@ use App\Models\Traits\Adventures;
  * @property-read Deck[]|null $decks
  * @property-read Card[]|null $cards
  */
-class Tag extends Model
+class Tag extends Content
 {
     use HasFactory, Decks, Adventures, Owner;
 

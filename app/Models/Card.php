@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -24,9 +23,14 @@ use App\Models\Traits\Owner;
  * @property-read Tag[]|null $tags
  * @property-read Deck[]|null $decks
  */
-class Card extends Model
+class Card extends Content
 {
     use HasFactory, Tags, Decks, Owner;
+
+    /**
+     * @var array|string[]
+     */
+    public array $translatable = ['name', 'public_desc', 'private_desc'];
 
     /**
      * @return BelongsTo

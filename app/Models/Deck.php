@@ -46,4 +46,15 @@ class Deck extends Content
     {
         return $this->belongsToMany(Adventure::class, 'deck_adventure');
     }
+
+    /**
+     * @return array
+     */
+    public function export(): array
+    {
+        $data = parent::export();
+        $data['cards'] = $this->cards()->get()->pluck('name')->toArray();
+
+        return $data;
+    }
 }

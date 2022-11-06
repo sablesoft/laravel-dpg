@@ -35,4 +35,15 @@ class Scope extends Content
     {
         return $this->hasMany(Card::class);
     }
+
+    /**
+     * @return array
+     */
+    public function export(): array
+    {
+        $data = parent::export();
+        $data['cards'] = $this->cards()->get()->pluck('name')->toArray();
+
+        return $data;
+    }
 }

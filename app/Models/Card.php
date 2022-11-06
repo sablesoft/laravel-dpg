@@ -53,4 +53,16 @@ class Card extends Content
     {
         return $this->belongsToMany(Deck::class, 'card_deck');
     }
+
+    /**
+     * @return array
+     */
+    public function export(): array
+    {
+        $data = parent::export();
+        $data['scope'] = optional($this->scope)->name;
+        $data['decks'] = $this->decks()->get()->pluck('name')->toArray();
+
+        return $data;
+    }
 }

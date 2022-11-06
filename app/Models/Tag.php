@@ -55,4 +55,21 @@ class Tag extends Content
     {
         return $this->belongsToMany(Adventure::class, 'tag_adventure');
     }
+
+    /**
+     * @return array
+     */
+    public function export(): array
+    {
+        $data = [];
+        $map = ['name', 'desc', 'is_public'];
+        foreach ($map as $key) {
+            $data[$key] = $this->$key;
+        }
+        $data['scope'] = optional($this->scope)->name;
+        $data['decks'] = $this->decks()->get()->pluck('name')->toArray();
+        $data['cards'] = $this->cards()->get()->pluck('name')->toArray();
+
+        return $data;
+    }
 }

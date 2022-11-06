@@ -12,7 +12,6 @@ use App\Models\Traits\Owner;
 /**
  * @property int|null $id
  * @property int|null $owner_id
- * @property bool|null $is_public
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
@@ -37,5 +36,16 @@ class Adventure extends Content
     public function decks(): BelongsToMany
     {
         return $this->belongsToMany(Deck::class, 'deck_adventure');
+    }
+
+    /**
+     * @return array
+     */
+    public function export(): array
+    {
+        $data = parent::export();
+        $data['decks'] = $this->decks()->get()->pluck('name')->toArray();
+
+        return $data;
     }
 }

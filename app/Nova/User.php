@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
+use App\Nova\Actions\CacheContent;
 
 /**
  * @mixin \App\Models\User
@@ -129,6 +129,8 @@ class User extends Resource
      */
     public function actions(Request $request): array
     {
-        return [];
+        return [
+            new CacheContent()
+        ];
     }
 }

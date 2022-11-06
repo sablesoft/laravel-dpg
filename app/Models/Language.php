@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -42,5 +43,20 @@ class Language extends Model
         return Language::select('code', 'name')->get()->map(function($language) {
             return [$language->code => $language->name];
         })->collapse()->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAllCodesList(): array
+    {
+        $list = [];
+        $path = storage_path('flags');
+        foreach (File::allFiles($path) as $file) {
+            $code = $file->getFilenameWithoutExtension();
+            $list[$code] = $code;
+        }
+
+        return $list;
     }
 }

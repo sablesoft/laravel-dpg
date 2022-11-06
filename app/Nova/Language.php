@@ -4,6 +4,8 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 
 class Language extends Resource
@@ -47,8 +49,18 @@ class Language extends Resource
     public function fields(Request $request): array
     {
         return [
+            Image::make('Flag', function($language) {
+                return $language->code . '.svg';
+            })->disk('flags')->disableDownload()->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Code'), 'code')
-                ->nullable(false)->required()->rules('required', 'max:5'),
+                ->nullable(false)->required()->rules('required', 'max:5')
+                ->hideWhenUpdating()->hideWhenCreating(),
+            Select::make(__('Code'), 'code')
+                ->options(\App\Models\Language::getAllCodesList())->searchable()
+                ->hideWhenUpdating()->hideFromIndex()->hideFromDetail(),
+            Text::make(__('Code'), 'code')
+                ->nullable(false)->readonly()
+                ->hideWhenCreating()->hideFromIndex()->hideFromDetail(),
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()->rules('required','max:20'),
             HasMany::make(__('Users'), 'users')

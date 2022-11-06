@@ -3,7 +3,6 @@
 namespace App\Models\Traits;
 
 use App\Models\Content;
-use Illuminate\Database\Eloquent\Collection;
 
 trait Resources
 {
@@ -13,15 +12,11 @@ trait Resources
      */
     protected function getResourcesString(string $key): ?string
     {
-        /** @var Collection $resources */
-        $resources = $this->$key;
-        $names = $resources->map(function(Content $content) {
-           return [$content->getKey() => $content->name];
-        })->collapse()->toArray();
-
         $links = [];
-        foreach ($names as $id => $name) {
-            $href = url(sprintf("/nova/resources/%s/%d", $key, $id));
+        /** @var Content $content */
+        foreach ($this->$key as $content) {
+            $href = url(sprintf("/nova/resources/%s/%d", $key, $content->getKey()));
+            $name = $content->name;
             $links[] = "<a href='$href'>$name</a>";
         }
 

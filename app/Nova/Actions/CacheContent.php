@@ -50,7 +50,7 @@ class CacheContent extends Action
             }
         }
         Storage::put(
-            'users/'. $user->getKey() .'/content.json',
+            'users/'. $user->getKey() ."/$locale.json",
             json_encode($content, JSON_UNESCAPED_UNICODE)
         );
         App::setLocale($currentLocale);

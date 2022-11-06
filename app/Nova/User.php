@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
@@ -79,6 +80,7 @@ class User extends Resource
             Image::make('Flag', function(\App\Models\User $user) {
                 return $user->language ? $user->language->code . '.svg' : null;
             })->disk('flags')->disableDownload()->hideWhenCreating()->hideWhenUpdating(),
+            File::make(__('Content'), 'content_path')->disk('local'),
 
             HasMany::make(__('Adventures'), 'adventures'),
             HasMany::make(__('Decks'), 'decks'),

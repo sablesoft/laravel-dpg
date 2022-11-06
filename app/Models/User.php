@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Translatable\HasTranslations;
 
@@ -29,6 +30,8 @@ use Spatie\Translatable\HasTranslations;
  * @property-read Card[]|null $cards
  * @property-read Tag[]|null $tags
  * @property-read Scope[]|null $scopes
+ *
+ * @property-read string|null $content_path
  */
 class User extends Authenticatable
 {
@@ -128,5 +131,21 @@ class User extends Authenticatable
         $this->save();
 
         return $this;
+    }
+
+    /**
+     * @param string|null $locale
+     * @return string|null
+     */
+    public function getContentPathAttribute(?string $locale = null): ?string
+    {
+        $locale = $locale ?: optional($this->language)->code;
+        if (!$locale) {
+            return null;
+        }
+
+        $path = '/users/' . $this->getKey() . '/' . $locale . '.json';
+
+        return Storage::exists($path) ? $path : null;
     }
 }

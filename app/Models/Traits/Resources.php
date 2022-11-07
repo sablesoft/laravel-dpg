@@ -15,7 +15,8 @@ trait Resources
         $links = [];
         /** @var Content $content */
         foreach ($this->$key as $content) {
-            $href = url(sprintf("/nova/resources/%s/%d", $key, $content->getKey()));
+            $path = trim(config('nova.path'), '/');
+            $href = url(sprintf("/$path/resources/%s/%d", $key, $content->getKey()));
             $name = $content->name;
             $links[] = "<a href='$href' class='no-underline dim text-primary font-bold'>$name</a>";
         }

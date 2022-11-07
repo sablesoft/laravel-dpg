@@ -17,7 +17,7 @@ trait Resources
         foreach ($this->$key as $content) {
             $href = url(sprintf("/nova/resources/%s/%d", $key, $content->getKey()));
             $name = $content->name;
-            $links[] = "<a href='$href'>$name</a>";
+            $links[] = "<a href='$href' class='no-underline dim text-primary font-bold'>$name</a>";
         }
 
         return $links ? implode(', ', $links) : null;

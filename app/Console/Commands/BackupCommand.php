@@ -26,6 +26,8 @@ class BackupCommand extends Command
     protected array $tables = [
         'languages',
         'users',
+        'roles',
+        'model_has_roles',
         'scopes',
         'tags',
         'cards',

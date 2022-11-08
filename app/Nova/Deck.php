@@ -55,7 +55,8 @@ class Deck extends Resource
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
-            Image::make(__('Image'), 'image')->nullable(true),
+            Image::make(__('Image'), 'image')
+                ->nullable(true)->hideFromIndex(),
             Text::make(__('Adventures'), 'adventures_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Text::make(__('Tags'), 'tags_string')

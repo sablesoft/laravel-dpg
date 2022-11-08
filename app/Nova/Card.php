@@ -55,7 +55,8 @@ class Card extends Resource
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
-            Image::make(__('Image'), 'image')->nullable(true),
+            Image::make(__('Image'), 'image')
+                ->nullable(true)->hideFromIndex(),
             BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),

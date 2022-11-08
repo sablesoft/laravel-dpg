@@ -24,6 +24,11 @@ class DeckAdventureTableSeeder extends Seeder
                 'deck_id' => 1,
                 'adventure_id' => 1,
             ),
+            1 => 
+            array (
+                'deck_id' => 2,
+                'adventure_id' => 1,
+            ),
         ));
         
         

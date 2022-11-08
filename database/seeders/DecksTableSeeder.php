@@ -29,6 +29,16 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:08:46',
                 'updated_at' => '2022-11-06 06:48:23',
             ),
+            1 => 
+            array (
+                'id' => 2,
+                'name' => '{"en":"Characters","ru":"Персонажи"}',
+                'desc' => '{"ru":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-08 02:22:19',
+                'updated_at' => '2022-11-08 02:22:41',
+            ),
         ));
         
         

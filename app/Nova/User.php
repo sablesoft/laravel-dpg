@@ -56,13 +56,14 @@ class User extends Resource
     public function fields(Request $request): array
     {
         return [
-//            ID::make()->sortable(),
-
-            Gravatar::make()->maxWidth(50),
-
             Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),
+
+            Gravatar::make()->maxWidth(50),
+
+            Image::make(__('Image'), 'image')
+                ->nullable(true)->hideFromIndex(),
 
             Text::make('Email')
                 ->sortable()

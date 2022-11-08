@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 
@@ -49,6 +50,7 @@ class Tag extends Resource
             Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
+            Image::make(__('Image'), 'image')->nullable(true),
             BelongsTo::make(__('Scope'), 'scope')
                 ->nullable(true)->sortable(true),
             Text::make(__('Decks'), 'decks_string')

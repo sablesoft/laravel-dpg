@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Textarea;
@@ -49,6 +50,7 @@ class Scope extends Resource
             Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
+            Image::make(__('Image'), 'image')->nullable(true),
             Textarea::make(__('Desc'), 'desc')
                 ->sortable()
                 ->rules('max:255'),

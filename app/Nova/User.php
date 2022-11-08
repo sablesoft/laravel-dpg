@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use App\Nova\Actions\AssignRole;
 use App\Nova\Actions\CacheContent;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 /**
  * @mixin \App\Models\User
@@ -130,14 +131,18 @@ class User extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param Request $request
+     * @param NovaRequest $request
      * @return array
      */
     public function actions(Request $request): array
     {
         return [
-            new AssignRole(),
-            new CacheContent()
+            AssignRole::make()
+                ->canSeeWhen(\App\Models\User::ROLE_ADMIN)
+                ->canRun(function (NovaRequest $request) {
+                    return $request->user()->hasRole(\App\Models\User::ROLE_ADMIN);
+                }),
+            CacheContent::make()->onlyOnDetail()
         ];
     }
 }

@@ -40,6 +40,8 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, HasTranslations,
         HasRoles, Notifiable, Options;
 
+    const ROLE_ADMIN = 'Admin';
+
     /**
      * @var array|string[]
      */

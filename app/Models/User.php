@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Permission\Traits\HasRoles;
 use App\Models\Traits\Options;
 
 /**
@@ -35,7 +36,8 @@ use App\Models\Traits\Options;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasTranslations, Notifiable, Options;
+    use HasApiTokens, HasFactory, HasTranslations,
+        HasRoles, Notifiable, Options;
 
     /**
      * @var array|string[]

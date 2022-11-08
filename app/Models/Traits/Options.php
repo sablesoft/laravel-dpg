@@ -14,7 +14,9 @@ trait Options
         $options = [];
         $rows = static::select(['id', 'name'])->get()->toArray();
         foreach ($rows as $row) {
-            $options[$row['id']] = $row['name'][App::currentLocale()];
+            $name = $row['name'][App::currentLocale()] ??
+                $row['name'][config('app.fallback_locale')];
+            $options[$row['id']] = $name;
         }
 
         return $options;

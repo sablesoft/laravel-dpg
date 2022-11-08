@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
@@ -58,6 +59,8 @@ class Card extends Content
             BelongsToMany::make(__('Tags'), 'tags')->sortable()->nullable(true),
             BelongsToMany::make(__('Decks'), 'decks')
                 ->sortable()->nullable(true),
+            Boolean::make(__('Is Public'), 'is_public')
+                ->nullable(false)->sortable(),
             BelongsTo::make(__('Owner'), 'owner', User::class)
                 ->sortable()
                 ->hideWhenUpdating()->hideWhenCreating(),

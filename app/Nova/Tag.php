@@ -2,18 +2,20 @@
 
 namespace App\Nova;
 
-use App\Nova\Filters\AdventuresFilter;
-use App\Nova\Filters\CardsFilter;
-use App\Nova\Filters\DecksFilter;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use App\Nova\Filters\CardsFilter;
+use App\Nova\Filters\DecksFilter;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\ScopesFilter;
+use App\Nova\Filters\IsPublicFilter;
+use App\Nova\Filters\AdventuresFilter;
 
 /**
  * @mixin \App\Models\Tag
@@ -49,6 +51,8 @@ class Tag extends Content
             Textarea::make(__('Desc'), 'desc')
                 ->sortable()
                 ->rules('max:255'),
+            Boolean::make(__('Is Public'), 'is_public')
+                ->nullable(false)->sortable(),
             BelongsTo::make(__('Owner'), 'owner', User::class)
                 ->sortable()
                 ->hideWhenUpdating()->hideWhenCreating(),
@@ -87,6 +91,7 @@ class Tag extends Content
     public function filters(Request $request): array
     {
         return [
+            new IsPublicFilter(),
             new OwnersFilter(),
             new ScopesFilter(),
             new AdventuresFilter(),

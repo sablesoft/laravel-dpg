@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use App\Nova\Filters\TagsFilter;
 use App\Nova\Filters\OwnersFilter;
+use App\Nova\Filters\IsPublicFilter;
 
 abstract class Content extends Resource
 {
@@ -34,6 +35,7 @@ abstract class Content extends Resource
     public function filters(Request $request): array
     {
         return [
+            new IsPublicFilter(),
             new OwnersFilter(),
             new TagsFilter()
         ];

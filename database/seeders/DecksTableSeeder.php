@@ -22,6 +22,7 @@ class DecksTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
+                'image' => NULL,
                 'name' => '{"en":"Legend","ru":"Легенда"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -32,6 +33,7 @@ class DecksTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
+                'image' => NULL,
                 'name' => '{"en":"Characters","ru":"Персонажи"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,

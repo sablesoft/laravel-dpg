@@ -23,6 +23,7 @@ class TagsTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'scope_id' => 1,
+                'image' => NULL,
                 'name' => '{"en":"Clan","ru":"Клан"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -34,6 +35,7 @@ class TagsTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'scope_id' => 1,
+                'image' => NULL,
                 'name' => '{"en":"Legend","ru":"Легенда"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -45,6 +47,7 @@ class TagsTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'scope_id' => 2,
+                'image' => NULL,
                 'name' => '{"en":"Animal","ru":"Животное"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -56,6 +59,7 @@ class TagsTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'scope_id' => 2,
+                'image' => NULL,
                 'name' => '{"en":"Plant","ru":"Растение"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -67,6 +71,7 @@ class TagsTableSeeder extends Seeder
             array (
                 'id' => 5,
                 'scope_id' => 2,
+                'image' => NULL,
                 'name' => '{"en":"Human","ru":"Человек"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -78,6 +83,7 @@ class TagsTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'scope_id' => 2,
+                'image' => NULL,
                 'name' => '{"en":"Bird","ru":"Птица"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -89,6 +95,7 @@ class TagsTableSeeder extends Seeder
             array (
                 'id' => 7,
                 'scope_id' => 2,
+                'image' => NULL,
                 'name' => '{"en":"Insect","ru":"Насекомое"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -100,6 +107,7 @@ class TagsTableSeeder extends Seeder
             array (
                 'id' => 8,
                 'scope_id' => 4,
+                'image' => NULL,
                 'name' => '{"en":"Spirit","ru":"Дух"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -111,6 +119,7 @@ class TagsTableSeeder extends Seeder
             array (
                 'id' => 9,
                 'scope_id' => 5,
+                'image' => NULL,
                 'name' => '{"ru":"Джунгли","en":"Rainforest"}',
                 'desc' => '{"en":null}',
                 'owner_id' => 1,

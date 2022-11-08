@@ -22,6 +22,7 @@ class ScopesTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
+                'image' => NULL,
                 'name' => '{"en":"Info","ru":"Инфо"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -32,6 +33,7 @@ class ScopesTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
+                'image' => NULL,
                 'name' => '{"en":"Creature","ru":"Существо"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -42,6 +44,7 @@ class ScopesTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
+                'image' => NULL,
                 'name' => '{"en":"Character","ru":"Персонаж"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -52,6 +55,7 @@ class ScopesTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 4,
+                'image' => NULL,
                 'name' => '{"en":"Power","ru":"Сила"}',
                 'desc' => '{"ru":null}',
                 'owner_id' => 1,
@@ -62,6 +66,7 @@ class ScopesTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 5,
+                'image' => NULL,
                 'name' => '{"ru":"Место","en":"Place"}',
                 'desc' => '{"en":null}',
                 'owner_id' => 1,

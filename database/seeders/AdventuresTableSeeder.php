@@ -22,12 +22,13 @@ class AdventuresTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
+                'image' => '5JwWzj3NJfN0etCZb1ZPxSk3jLaggQNqWrxlgpxA.jpg',
                 'name' => '{"en":"Totem Quest","ru":"Поиски Тотема"}',
-                'desc' => '{"ru":null}',
+                'desc' => '{"en":null}',
                 'owner_id' => 1,
                 'is_public' => false,
                 'created_at' => '2022-11-06 05:07:24',
-                'updated_at' => '2022-11-06 06:45:59',
+                'updated_at' => '2022-11-08 12:31:57',
             ),
         ));
         

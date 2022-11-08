@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Translatable\HasTranslations;
+use App\Models\Traits\Options;
 
 /**
  * @property int|null $id
@@ -35,7 +35,7 @@ use Spatie\Translatable\HasTranslations;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasTranslations, Notifiable;
+    use HasApiTokens, HasFactory, HasTranslations, Notifiable, Options;
 
     /**
      * @var array|string[]

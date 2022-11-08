@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsToMany;
+use App\Nova\Filters\OwnerFiler;
 
 class Deck extends Resource
 {
@@ -108,7 +109,9 @@ class Deck extends Resource
      */
     public function filters(Request $request): array
     {
-        return [];
+        return [
+            new OwnerFiler()
+        ];
     }
 
     /**

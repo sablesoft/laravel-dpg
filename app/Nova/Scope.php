@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\BelongsTo;
+use App\Nova\Filters\OwnerFiler;
 
 /**
  * @mixin \App\Models\Scope
@@ -85,7 +86,9 @@ class Scope extends Resource
      */
     public function filters(Request $request): array
     {
-        return [];
+        return [
+            new OwnerFiler()
+        ];
     }
 
     /**

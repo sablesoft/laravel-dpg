@@ -9,6 +9,8 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use App\Nova\Filters\OwnerFiler;
+use App\Nova\Filters\ScopeFiler;
 
 /**
  * @mixin \App\Models\Tag
@@ -97,7 +99,10 @@ class Tag extends Resource
      */
     public function filters(Request $request): array
     {
-        return [];
+        return [
+            new OwnerFiler(),
+            new ScopeFiler()
+        ];
     }
 
     /**

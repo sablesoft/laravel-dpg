@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use App\Nova\Filters\OwnerFiler;
 
 class Adventure extends Resource
 {
@@ -89,7 +90,9 @@ class Adventure extends Resource
      */
     public function filters(Request $request): array
     {
-        return [];
+        return [
+            new OwnerFiler()
+        ];
     }
 
     /**

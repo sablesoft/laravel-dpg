@@ -11,6 +11,7 @@ class SequencesSeeder extends Seeder
     protected array $tables = [
         'languages',
         'users',
+        'roles',
         'scopes',
         'tags',
         'cards',

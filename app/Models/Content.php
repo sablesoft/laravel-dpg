@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
@@ -9,9 +10,12 @@ use App\Models\Traits\Owner;
 use App\Models\Traits\Options;
 
 /**
+ * @property int|null $id
  * @property string|null $name
  * @property string|null $desc
  * @property bool|null $is_public
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class Content extends Model
 {

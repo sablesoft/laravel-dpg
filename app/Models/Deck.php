@@ -2,17 +2,12 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
 use App\Models\Traits\Adventures;
 
 /**
- * @property int|null $id
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- *
  * @property-read Tag[]|null $tags
  * @property-read Card[]|null $cards
  * @property-read Adventure[]|null $adventures

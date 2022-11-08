@@ -18,6 +18,13 @@ class DeckAdventureTableSeeder extends Seeder
 
         \DB::table('deck_adventure')->delete();
         
+        \DB::table('deck_adventure')->insert(array (
+            0 => 
+            array (
+                'deck_id' => 1,
+                'adventure_id' => 1,
+            ),
+        ));
         
         
     }

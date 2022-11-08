@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
+
     /**
      * Auto generated seed file
      *
@@ -14,9 +14,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->delete();
-        DB::table('users')->insert(array (
-            0 =>
+        
+
+        \DB::table('users')->delete();
+        
+        \DB::table('users')->insert(array (
+            0 => 
             array (
                 'id' => 1,
                 'name' => '{"ru":"Админ","en":"Admin"}',
@@ -29,5 +32,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2022-11-07 14:13:50',
             ),
         ));
+        
+        
     }
 }

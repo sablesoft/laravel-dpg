@@ -11,7 +11,10 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use App\Nova\Filters\OwnerFiler;
 
-class Adventure extends Resource
+/**
+ * @mixin \App\Models\Adventure
+ */
+class Adventure extends Content
 {
     /**
      * The model the resource corresponds to.
@@ -19,22 +22,6 @@ class Adventure extends Resource
      * @var string
      */
     public static string $model = \App\Models\Adventure::class;
-
-    /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
-    public static $title = 'name';
-
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
-    public static $search = [
-        'id', 'name'
-    ];
 
     /**
      * Get the fields displayed by the resource.
@@ -90,9 +77,7 @@ class Adventure extends Resource
      */
     public function filters(Request $request): array
     {
-        return [
-            new OwnerFiler()
-        ];
+        return parent::filters($request);
     }
 
     /**

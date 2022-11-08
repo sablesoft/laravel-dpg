@@ -2,29 +2,44 @@
 
 namespace App\Nova;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Resource as NovaResource;
+use App\Nova\Filters\TagFiler;
+use App\Nova\Filters\OwnerFiler;
 
-abstract class Resource extends NovaResource
+abstract class Content extends Resource
 {
-    public static $tableStyle = 'tight';
-
-    public static $showColumnBorders = true;
-
     /**
-     * The single value that should be used to represent the resource when being displayed.
+     * The logical group associated with the resource.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $group = 'Content';
 
     /**
-     * The number of resources to show per page via relationships.
+     * The columns that should be searched.
      *
-     * @var int
+     * @var array
      */
-    public static $perPageViaRelationship = 10;
+    public static $search = [
+        'name'
+    ];
+
+
+    /**
+     * Get the filters available for the resource.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function filters(Request $request): array
+    {
+        return [
+            new OwnerFiler(),
+            new TagFiler()
+        ];
+    }
 
     /**
      * Build an "index" query for the given resource.
@@ -74,13 +89,5 @@ abstract class Resource extends NovaResource
     public static function relatableQuery(NovaRequest $request, $query): Builder
     {
         return parent::relatableQuery($request, $query);
-    }
-
-    /**
-     * @return int[]
-     */
-    public static function perPageOptions(): array
-    {
-        return [10, 25, 50];
     }
 }

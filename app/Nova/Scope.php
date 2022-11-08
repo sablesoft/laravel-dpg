@@ -9,12 +9,11 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\BelongsTo;
-use App\Nova\Filters\OwnerFiler;
 
 /**
  * @mixin \App\Models\Scope
  */
-class Scope extends Resource
+class Scope extends Content
 {
     /**
      * The model the resource corresponds to.
@@ -22,22 +21,6 @@ class Scope extends Resource
      * @var string
      */
     public static string $model = \App\Models\Scope::class;
-
-    /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
-    public static $title = 'name';
-
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
-    public static $search = [
-        'id', 'name'
-    ];
 
     /**
      * Get the fields displayed by the resource.
@@ -86,9 +69,7 @@ class Scope extends Resource
      */
     public function filters(Request $request): array
     {
-        return [
-            new OwnerFiler()
-        ];
+        return parent::filters($request);
     }
 
     /**

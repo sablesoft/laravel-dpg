@@ -9,13 +9,12 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use App\Nova\Filters\OwnerFiler;
 use App\Nova\Filters\ScopeFiler;
 
 /**
  * @mixin \App\Models\Card
  */
-class Card extends Resource
+class Card extends Content
 {
     /**
      * The model the resource corresponds to.
@@ -25,21 +24,8 @@ class Card extends Resource
     public static string $model = \App\Models\Card::class;
 
     /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
+     * @return string
      */
-    public static $title = 'name';
-
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
-    public static $search = [
-        'id', 'name'
-    ];
-
     public static function uriKey(): string
     {
         return 'units';
@@ -102,10 +88,9 @@ class Card extends Resource
      */
     public function filters(Request $request): array
     {
-        return [
-            new OwnerFiler(),
+        return array_merge(parent::filters($request), [
             new ScopeFiler()
-        ];
+        ]);
     }
 
     /**

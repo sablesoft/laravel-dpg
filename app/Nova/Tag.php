@@ -15,7 +15,7 @@ use App\Nova\Filters\ScopeFiler;
 /**
  * @mixin \App\Models\Tag
  */
-class Tag extends Resource
+class Tag extends Content
 {
     /**
      * The model the resource corresponds to.
@@ -23,22 +23,6 @@ class Tag extends Resource
      * @var string
      */
     public static string $model = \App\Models\Tag::class;
-
-    /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
-    public static $title = 'name';
-
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
-    public static $search = [
-        'id', 'name'
-    ];
 
     /**
      * Get the fields displayed by the resource.

@@ -10,39 +10,18 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsToMany;
-use App\Nova\Filters\OwnerFiler;
 
-class Deck extends Resource
+/**
+ * @mixin \App\Models\Deck
+ */
+class Deck extends Content
 {
-    /**
-     * The logical group associated with the resource.
-     *
-     * @var string
-     */
-    public static $group = 'Content';
-
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
     public static string $model = \App\Models\Deck::class;
-
-    /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
-    public static $title = 'name';
-
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
-    public static $search = [
-        'id', 'name'
-    ];
 
     /**
      * Get the fields displayed by the resource.
@@ -109,9 +88,7 @@ class Deck extends Resource
      */
     public function filters(Request $request): array
     {
-        return [
-            new OwnerFiler()
-        ];
+        return parent::filters($request);
     }
 
     /**

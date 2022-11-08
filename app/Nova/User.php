@@ -8,8 +8,10 @@ use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
+use App\Nova\Actions\AssignRole;
 use App\Nova\Actions\CacheContent;
 
 /**
@@ -69,12 +71,20 @@ class User extends Resource
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
 
+            Text::make(__('Roles'), function () {
+                $names = $this->roles_names;
+                $string = implode(",</span> <span style='display:inline-block;'>", $names);
+                return $string ? "<span style='display:inline-block;'>$string</span>" : $string;
+            })->readonly()->asHtml(),
+
             BelongsTo::make(__('Language'), 'language')
                 ->nullable(true)->sortable(),
             Image::make('Flag', function(\App\Models\User $user) {
                 return $user->language ? $user->language->code . '.svg' : null;
             })->disk('flags')->disableDownload()->hideWhenCreating()->hideWhenUpdating(),
             File::make(__('Content'), 'content_path')->disk('local'),
+
+            MorphToMany::make(__('Roles'), 'roles', Role::class),
 
             HasMany::make(__('Adventures'), 'adventures'),
             HasMany::make(__('Decks'), 'decks'),
@@ -126,6 +136,7 @@ class User extends Resource
     public function actions(Request $request): array
     {
         return [
+            new AssignRole(),
             new CacheContent()
         ];
     }

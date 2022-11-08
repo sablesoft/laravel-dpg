@@ -33,6 +33,7 @@ use App\Models\Traits\Options;
  * @property-read Scope[]|null $scopes
  *
  * @property-read string|null $content_path
+ * @property-read array $roles_names
  */
 class User extends Authenticatable
 {
@@ -133,6 +134,14 @@ class User extends Authenticatable
         $this->save();
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRolesNamesAttribute(): array
+    {
+        return $this->roles()->pluck('name')->toArray();
     }
 
     /**

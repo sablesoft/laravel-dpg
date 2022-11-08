@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('decks', function (Blueprint $table) {
             $table->id();
+            $table->string('image')->nullable(true);
             $table->text('name')->nullable(false)->unique();
             $table->text('desc')->nullable(true);
             $table->foreignId('owner_id')->nullable(false);

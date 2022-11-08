@@ -10,6 +10,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsToMany;
+use App\Nova\Filters\CardsFilter;
+use App\Nova\Filters\AdventuresFilter;
 
 /**
  * @mixin \App\Models\Deck
@@ -88,7 +90,10 @@ class Deck extends Content
      */
     public function filters(Request $request): array
     {
-        return parent::filters($request);
+        return array_merge(parent::filters($request), [
+            new AdventuresFilter(),
+            new CardsFilter(),
+        ]);
     }
 
     /**

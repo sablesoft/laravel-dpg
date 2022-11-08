@@ -5,16 +5,16 @@ namespace App\Nova\Filters;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use OptimistDigtal\NovaMultiselectFilter\MultiselectFilter;
-use App\Models\Scope;
+use App\Models\User;
 
-class ScopesFiler extends MultiselectFilter
+class OwnersFilter extends MultiselectFilter
 {
     /**
      * The displayable name of the filter.
      *
      * @var string
      */
-    public $name = 'Scopes';
+    public $name = 'Owners';
 
     /**
      * Apply the filter to the given query.
@@ -26,7 +26,7 @@ class ScopesFiler extends MultiselectFilter
      */
     public function apply(Request $request, $query, $value): Builder
     {
-        return $query->whereIn('scope_id', $value);
+        return $query->whereIn('owner_id', $value);
     }
 
     /**
@@ -37,6 +37,6 @@ class ScopesFiler extends MultiselectFilter
      */
     public function options(Request $request): array
     {
-        return Scope::options();
+        return User::options();
     }
 }

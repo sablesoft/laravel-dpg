@@ -2,6 +2,9 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\AdventuresFilter;
+use App\Nova\Filters\CardsFilter;
+use App\Nova\Filters\DecksFilter;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
@@ -9,8 +12,8 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use App\Nova\Filters\OwnersFiler;
-use App\Nova\Filters\ScopesFiler;
+use App\Nova\Filters\OwnersFilter;
+use App\Nova\Filters\ScopesFilter;
 
 /**
  * @mixin \App\Models\Tag
@@ -84,8 +87,11 @@ class Tag extends Content
     public function filters(Request $request): array
     {
         return [
-            new OwnersFiler(),
-            new ScopesFiler()
+            new OwnersFilter(),
+            new ScopesFilter(),
+            new AdventuresFilter(),
+            new DecksFilter(),
+            new CardsFilter(),
         ];
     }
 

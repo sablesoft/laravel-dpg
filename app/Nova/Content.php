@@ -4,7 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use App\Nova\Filters\TagsFilter;
-use App\Nova\Filters\OwnersFiler;
+use App\Nova\Filters\OwnersFilter;
 
 abstract class Content extends Resource
 {
@@ -34,7 +34,7 @@ abstract class Content extends Resource
     public function filters(Request $request): array
     {
         return [
-            new OwnersFiler(),
+            new OwnersFilter(),
             new TagsFilter()
         ];
     }

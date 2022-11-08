@@ -5,16 +5,29 @@ namespace App\Nova\Filters;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use OptimistDigtal\NovaMultiselectFilter\MultiselectFilter;
-use App\Models\User;
+use App\Models\Card;
 
-class OwnersFiler extends MultiselectFilter
+class CardsFilter extends MultiselectFilter
 {
     /**
      * The displayable name of the filter.
      *
      * @var string
      */
-    public $name = 'Owners';
+    public $name = 'Cards';
+
+    /**
+     * @var string|mixed
+     */
+    protected string $whereInField = 'card_id';
+
+    /**
+     * @param string $whereInField
+     */
+    public function __construct(string $whereInField = 'card_id')
+    {
+        $this->whereInField = $whereInField;
+    }
 
     /**
      * Apply the filter to the given query.
@@ -26,7 +39,9 @@ class OwnersFiler extends MultiselectFilter
      */
     public function apply(Request $request, $query, $value): Builder
     {
-        return $query->whereIn('owner_id', $value);
+        return $query->whereHas('cards', function ($query) use ($value) {
+            $query->whereIn($this->whereInField, $value);
+        });
     }
 
     /**
@@ -37,6 +52,6 @@ class OwnersFiler extends MultiselectFilter
      */
     public function options(Request $request): array
     {
-        return User::options();
+        return Card::options();
     }
 }

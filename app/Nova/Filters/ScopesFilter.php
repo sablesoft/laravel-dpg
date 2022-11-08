@@ -5,41 +5,28 @@ namespace App\Nova\Filters;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use OptimistDigtal\NovaMultiselectFilter\MultiselectFilter;
-use App\Models\Tag;
+use App\Models\Scope;
 
-class TagsFilter extends MultiselectFilter
+class ScopesFilter extends MultiselectFilter
 {
     /**
      * The displayable name of the filter.
      *
      * @var string
      */
-    public $name = 'Tags';
+    public $name = 'Scopes';
 
     /**
-     * @var string|mixed
-     */
-    protected string $whereInField = 'tag_id';
-
-    /**
-     * @param string $whereInField
-     */
-    public function __construct(string $whereInField = 'tag_id')
-    {
-        $this->whereInField = $whereInField;
-    }
-
-    /**
+     * Apply the filter to the given query.
+     *
      * @param Request $request
-     * @param $query
-     * @param $value
+     * @param  Builder  $query
+     * @param  mixed  $value
      * @return Builder
      */
     public function apply(Request $request, $query, $value): Builder
     {
-        return $query->whereHas('tags', function ($query) use ($value) {
-            $query->whereIn($this->whereInField, $value);
-        });
+        return $query->whereIn('scope_id', $value);
     }
 
     /**
@@ -50,6 +37,6 @@ class TagsFilter extends MultiselectFilter
      */
     public function options(Request $request): array
     {
-        return Tag::options();
+        return Scope::options();
     }
 }

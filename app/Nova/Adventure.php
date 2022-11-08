@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use App\Nova\Filters\DecksFilter;
 
 /**
  * @mixin \App\Models\Adventure
@@ -76,7 +77,9 @@ class Adventure extends Content
      */
     public function filters(Request $request): array
     {
-        return parent::filters($request);
+        return array_merge(parent::filters($request), [
+            new DecksFilter()
+        ]);
     }
 
     /**

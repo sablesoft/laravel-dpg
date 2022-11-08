@@ -9,6 +9,9 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\BelongsTo;
+use App\Nova\Filters\TagsFilter;
+use App\Nova\Filters\CardsFilter;
+use App\Nova\Filters\OwnersFilter;
 
 /**
  * @mixin \App\Models\Scope
@@ -69,7 +72,11 @@ class Scope extends Content
      */
     public function filters(Request $request): array
     {
-        return parent::filters($request);
+        return [
+            new OwnersFilter(),
+            new TagsFilter('id'),
+            new CardsFilter('id')
+        ];
     }
 
     /**

@@ -8,6 +8,7 @@ use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Eolica\NovaLocaleSwitcher\LocaleSwitcher;
+use BinaryBuilds\NovaAdvancedCommandRunner\CommandRunner;
 use App\Models\User;
 use App\Models\Language;
 
@@ -98,7 +99,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     /** @var User $user */
                     $user = $request->user();
                     $user->updateLanguage($locale);
-                })
+                }),
+            new CommandRunner
         ];
     }
 

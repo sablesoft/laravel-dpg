@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AdventuresTableSeeder::class);
         $this->call(TagAdventureTableSeeder::class);
         $this->call(DeckAdventureTableSeeder::class);
+        $this->call(SequencesSeeder::class);
     }
 }

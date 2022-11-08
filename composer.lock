@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21e63d9072de15544f519d95be71c03b",
+    "content-hash": "8fda655aed5981e3492d5f3f55a7553e",
     "packages": [
+        {
+            "name": "binarybuilds/nova-advanced-command-runner",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/binarybuilds/nova-advanced-command-runner.git",
+                "reference": "1499e8d2f80143aa6177d843e991ac792a8f2c2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/binarybuilds/nova-advanced-command-runner/zipball/1499e8d2f80143aa6177d843e991ac792a8f2c2e",
+                "reference": "1499e8d2f80143aa6177d843e991ac792a8f2c2e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BinaryBuilds\\NovaAdvancedCommandRunner\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BinaryBuilds\\NovaAdvancedCommandRunner\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Laravel Nova tool for running Artisan and bash(shell) commands.",
+            "keywords": [
+                "artisan",
+                "bash",
+                "commands",
+                "laravel",
+                "nova",
+                "shell"
+            ],
+            "support": {
+                "issues": "https://github.com/binarybuilds/nova-advanced-command-runner/issues",
+                "source": "https://github.com/binarybuilds/nova-advanced-command-runner/tree/master"
+            },
+            "time": "2020-08-14T15:08:35+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.9.3",
@@ -3394,16 +3443,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.8",
+            "version": "v0.11.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "f455acf3645262ae389b10e9beba0c358aa6994e"
+                "reference": "1acec99d6684a54ff92f8b548a4e41b566963778"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/f455acf3645262ae389b10e9beba0c358aa6994e",
-                "reference": "f455acf3645262ae389b10e9beba0c358aa6994e",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/1acec99d6684a54ff92f8b548a4e41b566963778",
+                "reference": "1acec99d6684a54ff92f8b548a4e41b566963778",
                 "shasum": ""
             },
             "require": {
@@ -3464,9 +3513,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.8"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.9"
             },
-            "time": "2022-07-28T14:25:11+00:00"
+            "time": "2022-11-06T15:29:46+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

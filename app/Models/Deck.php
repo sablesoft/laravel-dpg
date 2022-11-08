@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
-use App\Models\Traits\Owner;
 use App\Models\Traits\Adventures;
 
 /**
@@ -20,7 +19,7 @@ use App\Models\Traits\Adventures;
  */
 class Deck extends Content
 {
-    use HasFactory, Tags, Adventures, Owner;
+    use HasFactory, Tags, Adventures;
 
     /**
      * @return BelongsToMany

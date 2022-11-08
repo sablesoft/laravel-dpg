@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use App\Models\Traits\Owner;
+use App\Models\Traits\Options;
 
 /**
  * @property string|null $name
@@ -13,7 +15,7 @@ use Spatie\Translatable\HasTranslations;
  */
 class Content extends Model
 {
-    use HasTranslations;
+    use HasTranslations, Options, Owner;
 
     /**
      * Encode the given value as JSON.
@@ -21,7 +23,7 @@ class Content extends Model
      * @param  mixed  $value
      * @return string
      */
-    protected function asJson($value)
+    protected function asJson($value): string
     {
         return json_encode($value, JSON_UNESCAPED_UNICODE);
     }

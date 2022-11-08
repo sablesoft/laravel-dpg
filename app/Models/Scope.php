@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Tags;
-use App\Models\Traits\Owner;
 
 /**
  * @property int|null $id
@@ -18,7 +17,7 @@ use App\Models\Traits\Owner;
  */
 class Scope extends Content
 {
-    use HasFactory, Tags, Owner;
+    use HasFactory, Tags;
 
     /**
      * @return HasMany

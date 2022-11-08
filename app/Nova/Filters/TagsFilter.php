@@ -2,38 +2,31 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use Laravel\Nova\Filters\Filter;
+use OptimistDigtal\NovaMultiselectFilter\MultiselectFilter;
+use App\Models\Tag;
 
-class TagFiler extends Filter
+class TagsFilter extends MultiselectFilter
 {
     /**
      * The displayable name of the filter.
      *
      * @var string
      */
-    public $name = 'Tag';
+    public $name = 'Tags';
 
     /**
-     * The filter's component.
-     *
-     * @var string
-     */
-    public $component = 'select-filter';
-
-    /**
-     * Apply the filter to the given query.
-     *
      * @param Request $request
-     * @param  Builder  $query
-     * @param  mixed  $value
+     * @param $query
+     * @param $value
      * @return Builder
      */
     public function apply(Request $request, $query, $value): Builder
     {
-        return $query;
+        return $query->whereHas('tags', function ($query) use ($value) {
+            $query->whereIn('tag_id', $value);
+        });
     }
 
     /**
@@ -44,6 +37,6 @@ class TagFiler extends Filter
      */
     public function options(Request $request): array
     {
-        return array_flip(Tag::options());
+        return Tag::options();
     }
 }

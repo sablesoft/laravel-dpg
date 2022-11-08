@@ -9,7 +9,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use App\Nova\Filters\ScopeFiler;
+use App\Nova\Filters\ScopesFiler;
 
 /**
  * @mixin \App\Models\Card
@@ -89,7 +89,7 @@ class Card extends Content
     public function filters(Request $request): array
     {
         return array_merge(parent::filters($request), [
-            new ScopeFiler()
+            new ScopesFiler()
         ]);
     }
 

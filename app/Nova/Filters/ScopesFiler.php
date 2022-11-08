@@ -2,26 +2,19 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\Scope;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use Laravel\Nova\Filters\Filter;
+use OptimistDigtal\NovaMultiselectFilter\MultiselectFilter;
+use App\Models\Scope;
 
-class ScopeFiler extends Filter
+class ScopesFiler extends MultiselectFilter
 {
     /**
      * The displayable name of the filter.
      *
      * @var string
      */
-    public $name = 'Scope';
-
-    /**
-     * The filter's component.
-     *
-     * @var string
-     */
-    public $component = 'select-filter';
+    public $name = 'Scopes';
 
     /**
      * Apply the filter to the given query.
@@ -33,7 +26,7 @@ class ScopeFiler extends Filter
      */
     public function apply(Request $request, $query, $value): Builder
     {
-        return $query->where('scope_id', $value);
+        return $query->whereIn('scope_id', $value);
     }
 
     /**
@@ -44,6 +37,6 @@ class ScopeFiler extends Filter
      */
     public function options(Request $request): array
     {
-        return array_flip(Scope::options());
+        return Scope::options();
     }
 }

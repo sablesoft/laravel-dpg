@@ -15,6 +15,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "orangehill/iseed": "^3.0",
+        "outl1ne/nova-multiselect-filter": "*",
         "spatie/laravel-translatable": "^6.1"
     },
     "require-dev": {

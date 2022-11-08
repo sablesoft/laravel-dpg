@@ -2,26 +2,19 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use Laravel\Nova\Filters\Filter;
+use OptimistDigtal\NovaMultiselectFilter\MultiselectFilter;
+use App\Models\User;
 
-class OwnerFiler extends Filter
+class OwnersFiler extends MultiselectFilter
 {
     /**
      * The displayable name of the filter.
      *
      * @var string
      */
-    public $name = 'Owner';
-
-    /**
-     * The filter's component.
-     *
-     * @var string
-     */
-    public $component = 'select-filter';
+    public $name = 'Owners';
 
     /**
      * Apply the filter to the given query.
@@ -33,7 +26,7 @@ class OwnerFiler extends Filter
      */
     public function apply(Request $request, $query, $value): Builder
     {
-        return $query->where('owner_id', $value);
+        return $query->whereIn('owner_id', $value);
     }
 
     /**
@@ -44,6 +37,6 @@ class OwnerFiler extends Filter
      */
     public function options(Request $request): array
     {
-        return array_flip(User::options());
+        return User::options();
     }
 }

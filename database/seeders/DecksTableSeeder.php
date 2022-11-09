@@ -22,6 +22,7 @@ class DecksTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
+                'scope_id' => NULL,
                 'image' => NULL,
                 'name' => '{"en":"Legend","ru":"Легенда"}',
                 'desc' => '{"ru":null}',
@@ -33,6 +34,7 @@ class DecksTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
+                'scope_id' => NULL,
                 'image' => NULL,
                 'name' => '{"en":"Characters","ru":"Персонажи"}',
                 'desc' => '{"ru":null}',

@@ -22,6 +22,7 @@ class AdventuresTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
+                'scope_id' => NULL,
                 'image' => '5JwWzj3NJfN0etCZb1ZPxSk3jLaggQNqWrxlgpxA.jpg',
                 'name' => '{"en":"Totem Quest","ru":"Поиски Тотема"}',
                 'desc' => '{"en":null}',

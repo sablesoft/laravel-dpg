@@ -21,42 +21,42 @@ class TagCardTableSeeder extends Seeder
         \DB::table('tag_card')->insert(array (
             0 => 
             array (
-                'tag_id' => 1,
+                'tag_id' => 10,
                 'card_id' => 1,
             ),
             1 => 
             array (
-                'tag_id' => 2,
+                'tag_id' => 11,
                 'card_id' => 1,
             ),
             2 => 
             array (
-                'tag_id' => 2,
+                'tag_id' => 11,
                 'card_id' => 2,
             ),
             3 => 
             array (
-                'tag_id' => 1,
+                'tag_id' => 10,
                 'card_id' => 2,
             ),
             4 => 
             array (
-                'tag_id' => 5,
+                'tag_id' => 14,
                 'card_id' => 3,
             ),
             5 => 
             array (
-                'tag_id' => 5,
+                'tag_id' => 14,
                 'card_id' => 5,
             ),
             6 => 
             array (
-                'tag_id' => 5,
+                'tag_id' => 14,
                 'card_id' => 9,
             ),
             7 => 
             array (
-                'tag_id' => 5,
+                'tag_id' => 14,
                 'card_id' => 6,
             ),
             8 => 

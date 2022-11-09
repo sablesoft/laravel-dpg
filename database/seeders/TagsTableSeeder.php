@@ -21,7 +21,67 @@ class TagsTableSeeder extends Seeder
         \DB::table('tags')->insert(array (
             0 => 
             array (
+                'id' => 3,
+                'scope_id' => NULL,
+                'image' => NULL,
+                'name' => '{"en":"Character","ru":"Персонаж"}',
+                'desc' => '{"ru":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-08 02:20:38',
+                'updated_at' => '2022-11-08 02:20:54',
+            ),
+            1 => 
+            array (
+                'id' => 4,
+                'scope_id' => NULL,
+                'image' => NULL,
+                'name' => '{"en":"Power","ru":"Сила"}',
+                'desc' => '{"ru":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-08 02:43:27',
+                'updated_at' => '2022-11-08 02:44:09',
+            ),
+            2 => 
+            array (
+                'id' => 5,
+                'scope_id' => NULL,
+                'image' => NULL,
+                'name' => '{"ru":"Место","en":"Place"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-08 02:56:32',
+                'updated_at' => '2022-11-08 17:40:21',
+            ),
+            3 => 
+            array (
+                'id' => 1,
+                'scope_id' => NULL,
+                'image' => NULL,
+                'name' => '{"en":"Info","ru":"Инфо"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-06 05:07:36',
+                'updated_at' => '2022-11-08 17:40:42',
+            ),
+            4 => 
+            array (
                 'id' => 2,
+                'scope_id' => NULL,
+                'image' => NULL,
+                'name' => '{"en":"Creature","ru":"Существо"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-08 02:11:58',
+                'updated_at' => '2022-11-08 17:40:54',
+            ),
+            5 => 
+            array (
+                'id' => 11,
                 'scope_id' => 1,
                 'image' => NULL,
                 'name' => '{"en":"Clan","ru":"Клан"}',
@@ -31,7 +91,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:08:04',
                 'updated_at' => '2022-11-06 06:48:54',
             ),
-            1 => 
+            6 => 
             array (
                 'id' => 6,
                 'scope_id' => 2,
@@ -43,7 +103,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:17:34',
                 'updated_at' => '2022-11-08 02:19:24',
             ),
-            2 => 
+            7 => 
             array (
                 'id' => 7,
                 'scope_id' => 2,
@@ -55,7 +115,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:18:53',
                 'updated_at' => '2022-11-08 02:19:38',
             ),
-            3 => 
+            8 => 
             array (
                 'id' => 8,
                 'scope_id' => 4,
@@ -67,7 +127,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:43:41',
                 'updated_at' => '2022-11-08 02:44:22',
             ),
-            4 => 
+            9 => 
             array (
                 'id' => 9,
                 'scope_id' => 5,
@@ -79,9 +139,9 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:56:49',
                 'updated_at' => '2022-11-08 02:57:48',
             ),
-            5 => 
+            10 => 
             array (
-                'id' => 1,
+                'id' => 10,
                 'scope_id' => 1,
                 'image' => NULL,
                 'name' => '{"en":"Legend","ru":"Легенда"}',
@@ -91,9 +151,9 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:07:52',
                 'updated_at' => '2022-11-08 17:42:46',
             ),
-            6 => 
+            11 => 
             array (
-                'id' => 3,
+                'id' => 12,
                 'scope_id' => 2,
                 'image' => NULL,
                 'name' => '{"en":"Animal","ru":"Животное"}',
@@ -103,9 +163,9 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:13:44',
                 'updated_at' => '2022-11-08 17:43:10',
             ),
-            7 => 
+            12 => 
             array (
-                'id' => 4,
+                'id' => 13,
                 'scope_id' => 2,
                 'image' => NULL,
                 'name' => '{"en":"Plant","ru":"Растение"}',
@@ -115,9 +175,9 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:14:35',
                 'updated_at' => '2022-11-08 17:43:38',
             ),
-            8 => 
+            13 => 
             array (
-                'id' => 5,
+                'id' => 14,
                 'scope_id' => 2,
                 'image' => NULL,
                 'name' => '{"en":"Human","ru":"Человек"}',

@@ -21,7 +21,7 @@ class TagAdventureTableSeeder extends Seeder
         \DB::table('tag_adventure')->insert(array (
             0 => 
             array (
-                'tag_id' => 1,
+                'tag_id' => 10,
                 'adventure_id' => 1,
             ),
         ));

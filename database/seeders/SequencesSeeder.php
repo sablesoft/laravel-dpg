@@ -12,7 +12,6 @@ class SequencesSeeder extends Seeder
         'languages',
         'users',
         'roles',
-        'scopes',
         'tags',
         'cards',
         'decks',

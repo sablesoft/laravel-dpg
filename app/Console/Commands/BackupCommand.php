@@ -28,7 +28,6 @@ class BackupCommand extends Command
         'users',
         'roles',
         'model_has_roles',
-        'scopes',
         'tags',
         'cards',
         'tag_card',

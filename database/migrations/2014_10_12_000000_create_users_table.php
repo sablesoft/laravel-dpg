@@ -20,11 +20,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('language_id')->nullable(true);
+            $table->foreignId('language_id')->nullable(true)
+                ->constrained('languages')->cascadeOnUpdate()->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('language_id')->references('id')->on('languages');
         });
     }
 

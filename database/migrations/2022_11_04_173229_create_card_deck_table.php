@@ -14,14 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('card_deck', function (Blueprint $table) {
-            $table->foreignId('card_id');
-            $table->foreignId('deck_id');
-            $table->unsignedSmallInteger('count')->nullable(false)->default(1);
+            $table->foreignId('card_id')->constrained('cards')
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('deck_id')->constrained('decks')
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedSmallInteger('count')
+                ->nullable(false)->default(1);
 
-            $table->foreign('card_id')->references('id')
-                ->on('cards')->cascadeOnDelete();
-            $table->foreign('deck_id')->references('id')
-                ->on('decks')->cascadeOnDelete();
             $table->unique(['card_id', 'deck_id']);
         });
     }

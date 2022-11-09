@@ -14,13 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tag_card', function (Blueprint $table) {
-            $table->foreignId('tag_id');
-            $table->foreignId('card_id');
+            $table->foreignId('tag_id')->constrained('tags')
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('card_id')->constrained('cards')
+                ->cascadeOnUpdate()->cascadeOnDelete();
 
-            $table->foreign('tag_id')->references('id')
-                ->on('tags')->cascadeOnDelete();
-            $table->foreign('card_id')->references('id')
-                ->on('cards')->cascadeOnDelete();
             $table->unique(['tag_id', 'card_id']);
         });
     }

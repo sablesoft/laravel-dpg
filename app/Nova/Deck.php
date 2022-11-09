@@ -12,7 +12,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsToMany;
 use App\Nova\Filters\CardsFilter;
-use App\Nova\Filters\AdventuresFilter;
+use App\Nova\Filters\BooksFilter;
 
 /**
  * @mixin \App\Models\Deck
@@ -42,7 +42,7 @@ class Deck extends Content
                 ->nullable(true)->hideFromIndex(),
             BelongsTo::make(__('Scope'), 'scope', Tag::class)
                 ->nullable(true)->sortable(),
-            Text::make(__('Adventures'), 'adventures_string')
+            Text::make(__('Books'), 'books_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Text::make(__('Tags'), 'tags_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
@@ -63,7 +63,7 @@ class Deck extends Content
                             ->min(1)->step(1)->default(1),
                     ];
                 })->sortable()->nullable(true),
-            BelongsToMany::make(__('Adventures'), 'adventures')
+            BelongsToMany::make(__('Books'), 'books')
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Tags'), 'tags')
                 ->sortable()->nullable(true),
@@ -96,7 +96,7 @@ class Deck extends Content
     public function filters(Request $request): array
     {
         return array_merge(parent::filters($request), [
-            new AdventuresFilter(),
+            new BooksFilter(),
             new CardsFilter(),
         ]);
     }

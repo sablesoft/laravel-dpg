@@ -13,16 +13,16 @@ use Laravel\Nova\Fields\Textarea;
 use App\Nova\Filters\DecksFilter;
 
 /**
- * @mixin \App\Models\Adventure
+ * @mixin \App\Models\Book
  */
-class Adventure extends Content
+class Book extends Content
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static string $model = \App\Models\Adventure::class;
+    public static string $model = \App\Models\Book::class;
 
     /**
      * Get the fields displayed by the resource.

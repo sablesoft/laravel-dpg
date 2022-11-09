@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use App\Models\User;
-use App\Models\Adventure;
+use App\Models\Book;
 use Laravel\Nova\Fields\Select;
 
 class CacheContent extends Action
@@ -37,12 +37,12 @@ class CacheContent extends Action
         $locale = $fields->get('locale');
         $content = [
             "locale" => $locale,
-            'adventures' => []
+            'books' => []
         ];
         $currentLocale = App::currentLocale();
         App::setLocale($locale);
 
-        $fields = ['adventures', 'decks', 'cards', 'tags', 'scopes'];
+        $fields = ['books', 'decks', 'cards', 'tags', 'scopes'];
         foreach ($fields as $field) {
             /** @var Content $model */
             foreach ($user->$field as $model) {

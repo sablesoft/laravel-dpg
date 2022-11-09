@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        $this->upContent('adventures');
+        $this->upContent('books');
     }
 
     /**
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adventures');
+        Schema::dropIfExists('books');
     }
 };

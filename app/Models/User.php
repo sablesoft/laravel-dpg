@@ -26,7 +26,7 @@ use App\Models\Traits\Options;
  * @property Carbon|null $updated_at
  *
  * @property-read Language|null $language
- * @property-read Adventure[]|null $adventures
+ * @property-read Book[]|null $books
  * @property-read Deck[]|null $decks
  * @property-read Card[]|null $cards
  * @property-read Tag[]|null $tags
@@ -104,9 +104,9 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function adventures(): HasMany
+    public function books(): HasMany
     {
-        return $this->hasMany(Adventure::class, 'owner_id');
+        return $this->hasMany(Book::class, 'owner_id');
     }
 
     /**

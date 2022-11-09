@@ -158,25 +158,25 @@ abstract class ContentPolicy
     }
 
     /**
-     * Determine whether the user can attach any adventure to the content.
+     * Determine whether the user can attach any book to the content.
      *
      * @param User $user
      * @param Content $content
      * @return bool
      */
-    public function attachAnyAdventure(User $user, Content $content): bool
+    public function attachAnyBook(User $user, Content $content): bool
     {
         return $user->isAdmin() || $user->isOwner($content);
     }
 
     /**
-     * Determine whether the user can add adventure to the content.
+     * Determine whether the user can add book to the content.
      *
      * @param User $user
      * @param Content $content
      * @return bool
      */
-    public function addAdventure(User $user, Content $content): bool
+    public function addBook(User $user, Content $content): bool
     {
         return $user->isAdmin() || $user->isOwner($content);
     }

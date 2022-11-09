@@ -11,7 +11,7 @@ use App\Models\Traits\Decks;
  * @property-read Tag[]|null $tags
  * @property-read Deck[]|null $decks
  */
-class Adventure extends Content
+class Book extends Content
 {
     use HasFactory, Tags, Decks;
 
@@ -20,7 +20,7 @@ class Adventure extends Content
      */
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'tag_adventure');
+        return $this->belongsToMany(Tag::class, 'tag_book');
     }
 
     /**
@@ -28,7 +28,7 @@ class Adventure extends Content
      */
     public function decks(): BelongsToMany
     {
-        return $this->belongsToMany(Deck::class, 'deck_adventure');
+        return $this->belongsToMany(Deck::class, 'deck_book');
     }
 
     /**

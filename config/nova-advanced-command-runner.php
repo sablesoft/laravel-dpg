@@ -34,7 +34,7 @@ return [
             'help' => 'Backup tables to seed files'
         ],
         'Restore' => [
-            'run' => 'migrate:refresh --seed',
+            'run' => 'migrate:fresh --seed',
             'type' => 'danger',
             'group' => 'Database',
             'help' => 'Refresh database and seed'

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class AdventuresTableSeeder extends Seeder
+class BooksTableSeeder extends Seeder
 {
 
     /**
@@ -14,12 +14,12 @@ class AdventuresTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('adventures')->delete();
-        
-        \DB::table('adventures')->insert(array (
-            0 => 
+
+        \DB::table('books')->delete();
+
+        \DB::table('books')->insert(array (
+            0 =>
             array (
                 'id' => 1,
                 'scope_id' => NULL,
@@ -32,7 +32,7 @@ class AdventuresTableSeeder extends Seeder
                 'updated_at' => '2022-11-08 12:31:57',
             ),
         ));
-        
-        
+
+
     }
 }

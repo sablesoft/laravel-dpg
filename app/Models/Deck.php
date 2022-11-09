@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
-use App\Models\Traits\Adventures;
+use App\Models\Traits\Books;
 
 /**
  * @property-read Tag[]|null $tags
  * @property-read Card[]|null $cards
- * @property-read Adventure[]|null $adventures
+ * @property-read Book[]|null $books
  */
 class Deck extends Content
 {
-    use HasFactory, Tags, Adventures;
+    use HasFactory, Tags, Books;
 
     /**
      * @return BelongsToMany
@@ -36,9 +36,9 @@ class Deck extends Content
     /**
      * @return BelongsToMany
      */
-    public function adventures(): BelongsToMany
+    public function books(): BelongsToMany
     {
-        return $this->belongsToMany(Adventure::class, 'deck_adventure');
+        return $this->belongsToMany(Book::class, 'deck_book');
     }
 
     /**

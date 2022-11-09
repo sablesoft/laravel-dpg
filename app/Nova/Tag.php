@@ -16,7 +16,7 @@ use App\Nova\Filters\DecksFilter;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\IsPublicFilter;
-use App\Nova\Filters\AdventuresFilter;
+use App\Nova\Filters\BooksFilter;
 
 /**
  * @mixin \App\Models\Tag
@@ -47,7 +47,7 @@ class Tag extends Content
                 ->nullable(true)->sortable(true),
             Text::make(__('Decks'), 'decks_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
-            Text::make(__('Adventures'), 'adventures_string')
+            Text::make(__('Books'), 'books_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')
                 ->sortable()
@@ -69,13 +69,13 @@ class Tag extends Content
                 ->sortable()->nullable(true),
             HasMany::make(__('Scoped Decks'), 'scopedDecks', Deck::class)
                 ->sortable()->nullable(true),
-            HasMany::make(__('Scoped Adventures'), 'scopedAdventures', Adventure::class)
+            HasMany::make(__('Scoped Books'), 'scopedBooks', Book::class)
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Cards'), 'cards')
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Decks'), 'decks')
                 ->sortable()->nullable(true),
-            BelongsToMany::make(__('Adventures'), 'adventures')
+            BelongsToMany::make(__('Books'), 'books')
                 ->sortable()->nullable(true),
         ];
     }
@@ -103,7 +103,7 @@ class Tag extends Content
             new IsPublicFilter(),
             new OwnersFilter(),
             new ScopesFilter(),
-            new AdventuresFilter(),
+            new BooksFilter(),
             new DecksFilter(),
             new CardsFilter(),
         ];

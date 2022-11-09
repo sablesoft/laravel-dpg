@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class DeckAdventureTableSeeder extends Seeder
+class DeckBookTableSeeder extends Seeder
 {
 
     /**
@@ -14,28 +14,28 @@ class DeckAdventureTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('deck_adventure')->delete();
-        
-        \DB::table('deck_adventure')->insert(array (
-            0 => 
+
+        \DB::table('deck_book')->delete();
+
+        \DB::table('deck_book')->insert(array (
+            0 =>
             array (
                 'deck_id' => 1,
-                'adventure_id' => 1,
+                'book_id' => 1,
             ),
-            1 => 
+            1 =>
             array (
                 'deck_id' => 2,
-                'adventure_id' => 1,
+                'book_id' => 1,
             ),
-            2 => 
+            2 =>
             array (
                 'deck_id' => 3,
-                'adventure_id' => 1,
+                'book_id' => 1,
             ),
         ));
-        
-        
+
+
     }
 }

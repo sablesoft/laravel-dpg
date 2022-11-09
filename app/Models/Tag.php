@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Decks;
-use App\Models\Traits\Adventures;
+use App\Models\Traits\Books;
 
 /**
  * @property-read Tag[]|null $nested
@@ -14,12 +14,12 @@ use App\Models\Traits\Adventures;
  * @property-read Deck[]|null $scopedDecks
  * @property-read Card[]|null $cards
  * @property-read Card[]|null $scopedCards
- * @property-read Adventures[]|null $adventures
- * @property-read Adventures[]|null $scopedAdventures
+ * @property-read Books[]|null $books
+ * @property-read Books[]|null $scopedBooks
  */
 class Tag extends Content
 {
-    use HasFactory, Decks, Adventures;
+    use HasFactory, Decks, Books;
 
     /**
      * @return HasMany
@@ -64,17 +64,17 @@ class Tag extends Content
     /**
      * @return BelongsToMany
      */
-    public function adventures(): BelongsToMany
+    public function books(): BelongsToMany
     {
-        return $this->belongsToMany(Adventure::class, 'tag_adventure');
+        return $this->belongsToMany(Book::class, 'tag_book');
     }
 
     /**
      * @return HasMany
      */
-    public function scopedAdventures(): HasMany
+    public function scopedBooks(): HasMany
     {
-        return $this->hasMany(Adventure::class, 'scope_id');
+        return $this->hasMany(Book::class, 'scope_id');
     }
 
     /**
@@ -93,8 +93,8 @@ class Tag extends Content
         $data['scopedDecks'] = $this->scopedDecks()->get()->pluck('name')->toArray();
         $data['cards'] = $this->cards()->get()->pluck('name')->toArray();
         $data['scopedCards'] = $this->scopedCards()->get()->pluck('name')->toArray();
-        $data['adventures'] = $this->adventures()->get()->pluck('name')->toArray();
-        $data['scopedAdventures'] = $this->scopedAdventures()->get()->pluck('name')->toArray();
+        $data['books'] = $this->books()->get()->pluck('name')->toArray();
+        $data['scopedBooks'] = $this->scopedBooks()->get()->pluck('name')->toArray();
 
         return $data;
     }

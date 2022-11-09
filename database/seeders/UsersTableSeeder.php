@@ -28,9 +28,22 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => NULL,
                 'password' => '$2y$10$tqFq6LC1Vniwd30udVbFi.WzT.rsKmrVvUa6rM/4/fbbcrNEWN0hW',
                 'language_id' => 1,
-                'remember_token' => 'fjtvVl7wVfmPPGRCpdjmcQswOTB4crSQ6x7Mq4OmeKpF0zaXaVbLk160770q',
+                'remember_token' => 'gN1vKde1LvIlOF8jisSQdqfnPp8JYTcpWz0YCI0PgxGrf0VXSXxtnmH46hGq',
                 'created_at' => '2022-11-06 05:05:12',
                 'updated_at' => '2022-11-08 21:50:13',
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'name' => '{"en":"Test"}',
+                'image' => NULL,
+                'email' => 'test@gmail.com',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$rUke3HZ0PtOZyhsukkDBWOdMS8zAdFmdCMxGEjxXUbftHtCD46gHq',
+                'language_id' => 1,
+                'remember_token' => 'WFGUTGwPo0hMenEMNUVR4jIZ7kdulfLgYnwBC3dtYsBkgsdmgnrQoEnOFbLl',
+                'created_at' => '2022-11-08 23:12:13',
+                'updated_at' => '2022-11-08 23:57:43',
             ),
         ));
         

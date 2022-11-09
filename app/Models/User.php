@@ -78,6 +78,23 @@ class User extends Authenticatable
     ];
 
     /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole(static::ROLE_ADMIN);
+    }
+
+    /**
+     * @param Content $content
+     * @return bool
+     */
+    public function isOwner(Content $content): bool
+    {
+        return $content->owner_id == $this->getKey();
+    }
+
+    /**
      * @return BelongsTo
      */
     public function language(): BelongsTo

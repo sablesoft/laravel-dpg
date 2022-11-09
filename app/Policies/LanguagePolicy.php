@@ -18,7 +18,7 @@ class LanguagePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(User::ROLE_ADMIN);
+        return $user->isAdmin();
     }
 
 
@@ -31,7 +31,7 @@ class LanguagePolicy
      */
     public function view(User $user, Language $language): bool
     {
-        return $user->hasRole(User::ROLE_ADMIN);
+        return $user->isAdmin();
     }
 
     /**
@@ -40,7 +40,7 @@ class LanguagePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(User::ROLE_ADMIN);
+        return $user->isAdmin();
     }
 
     /**
@@ -50,7 +50,7 @@ class LanguagePolicy
      */
     public function update(User $user, Language $language): bool
     {
-        return $user->hasRole(User::ROLE_ADMIN);
+        return $user->isAdmin();
     }
 
     /**
@@ -60,7 +60,7 @@ class LanguagePolicy
      */
     public function delete(User $user, Language $language): bool
     {
-        return $user->hasRole(User::ROLE_ADMIN);
+        return $user->isAdmin();
     }
 
     /**
@@ -70,7 +70,7 @@ class LanguagePolicy
      */
     public function restore(User $user, Language $language): bool
     {
-        return $user->hasRole(User::ROLE_ADMIN);
+        return $user->isAdmin();
     }
 
     /**
@@ -80,6 +80,6 @@ class LanguagePolicy
      */
     public function forceDelete(User $user, Language $language): bool
     {
-        return $user->hasRole(User::ROLE_ADMIN);
+        return $user->isAdmin();
     }
 }

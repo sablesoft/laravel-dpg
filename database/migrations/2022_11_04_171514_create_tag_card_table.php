@@ -17,8 +17,10 @@ return new class extends Migration
             $table->foreignId('tag_id');
             $table->foreignId('card_id');
 
-            $table->foreign('tag_id')->references('id')->on('tags');
-            $table->foreign('card_id')->references('id')->on('cards');
+            $table->foreign('tag_id')->references('id')
+                ->on('tags')->cascadeOnDelete();
+            $table->foreign('card_id')->references('id')
+                ->on('cards')->cascadeOnDelete();
             $table->unique(['tag_id', 'card_id']);
         });
     }

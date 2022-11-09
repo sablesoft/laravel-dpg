@@ -17,8 +17,10 @@ return new class extends Migration
             $table->foreignId('tag_id');
             $table->foreignId('adventure_id');
 
-            $table->foreign('tag_id')->references('id')->on('tags');
-            $table->foreign('adventure_id')->references('id')->on('adventures');
+            $table->foreign('tag_id')->references('id')
+                ->on('tags')->cascadeOnDelete();
+            $table->foreign('adventure_id')->references('id')
+                ->on('adventures')->cascadeOnDelete();
             $table->unique(['tag_id', 'adventure_id']);
         });
     }

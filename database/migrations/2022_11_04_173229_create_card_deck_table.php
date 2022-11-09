@@ -18,8 +18,10 @@ return new class extends Migration
             $table->foreignId('deck_id');
             $table->unsignedSmallInteger('count')->nullable(false)->default(1);
 
-            $table->foreign('card_id')->references('id')->on('cards');
-            $table->foreign('deck_id')->references('id')->on('decks');
+            $table->foreign('card_id')->references('id')
+                ->on('cards')->cascadeOnDelete();
+            $table->foreign('deck_id')->references('id')
+                ->on('decks')->cascadeOnDelete();
             $table->unique(['card_id', 'deck_id']);
         });
     }

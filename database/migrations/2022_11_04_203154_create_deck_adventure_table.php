@@ -17,8 +17,10 @@ return new class extends Migration
             $table->foreignId('deck_id');
             $table->foreignId('adventure_id');
 
-            $table->foreign('deck_id')->references('id')->on('decks');
-            $table->foreign('adventure_id')->references('id')->on('adventures');
+            $table->foreign('deck_id')->references('id')
+                ->on('decks')->cascadeOnDelete();
+            $table->foreign('adventure_id')->references('id')
+                ->on('adventures')->cascadeOnDelete();
             $table->unique(['deck_id', 'adventure_id']);
         });
     }

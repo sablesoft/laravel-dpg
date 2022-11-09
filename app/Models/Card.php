@@ -2,17 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
 use App\Models\Traits\Decks;
 
 /**
- * @property int|null $scope_id
- * @property string|null $private_desc
- *
- * @property-read Scope|null $scope
  * @property-read Tag[]|null $tags
  * @property-read Deck[]|null $decks
  */
@@ -24,14 +19,6 @@ class Card extends Content
      * @var array|string[]
      */
     public array $translatable = ['name', 'desc', 'private_desc'];
-
-    /**
-     * @return BelongsTo
-     */
-    public function scope(): BelongsTo
-    {
-        return $this->belongsTo(Scope::class);
-    }
 
     /**
      * @return BelongsToMany

@@ -91,7 +91,6 @@ class User extends Resource
             HasMany::make(__('Decks'), 'decks'),
             HasMany::make(__('Cards'), 'cards'),
             HasMany::make(__('Tags'), 'tags'),
-            HasMany::make(__('Scopes'), 'scopes'),
         ];
     }
 

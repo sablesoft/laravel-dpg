@@ -2,10 +2,10 @@
 
 namespace App\Nova\Filters;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use OptimistDigtal\NovaMultiselectFilter\MultiselectFilter;
-use App\Models\Scope;
 
 class ScopesFilter extends MultiselectFilter
 {
@@ -37,6 +37,6 @@ class ScopesFilter extends MultiselectFilter
      */
     public function options(Request $request): array
     {
-        return Scope::options();
+        return Tag::options();
     }
 }

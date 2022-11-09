@@ -47,16 +47,16 @@ class Card extends Content
                 ->sortable()->rules('required', 'max:30'),
             Image::make(__('Image'), 'image')
                 ->nullable(true)->hideFromIndex(),
-            BelongsTo::make(__('Scope'), 'scope')->nullable(true)->sortable(),
+            BelongsTo::make(__('Scope'), 'scope', Tag::class)
+                ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
-            Textarea::make(__('Private Desc'), 'private_desc')
-                ->nullable()->rules('max:255'),
             Text::make(__('Tags'), 'tags_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Text::make(__('Decks'), 'decks_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
-            BelongsToMany::make(__('Tags'), 'tags')->sortable()->nullable(true),
+            BelongsToMany::make(__('Tags'), 'tags')
+                ->sortable()->nullable(true),
             BelongsToMany::make(__('Decks'), 'decks')
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')

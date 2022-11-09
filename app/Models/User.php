@@ -30,7 +30,6 @@ use App\Models\Traits\Options;
  * @property-read Deck[]|null $decks
  * @property-read Card[]|null $cards
  * @property-read Tag[]|null $tags
- * @property-read Scope[]|null $scopes
  *
  * @property-read string|null $content_path
  * @property-read array $roles_names
@@ -132,14 +131,6 @@ class User extends Authenticatable
     public function tags(): HasMany
     {
         return $this->hasMany(Tag::class, 'owner_id');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function scopes(): HasMany
-    {
-        return $this->hasMany(Scope::class, 'owner_id');
     }
 
     /**

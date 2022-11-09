@@ -38,6 +38,8 @@ class Adventure extends Content
                 ->sortable()->rules('required', 'max:30'),
             Image::make(__('Image'), 'image')
                 ->nullable(true)->hideFromIndex(),
+            BelongsTo::make(__('Scope'), 'scope', Tag::class)
+                ->nullable(true)->sortable(),
             Text::make(__('Tags'), 'tags_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Text::make(__('Decks'), 'decks_string')

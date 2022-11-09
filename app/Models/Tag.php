@@ -2,29 +2,31 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Decks;
 use App\Models\Traits\Adventures;
 
 /**
- * @property int|null $scope_id
- *
- * @property-read Scope|null $scope
+ * @property-read Tag[]|null $nested
  * @property-read Deck[]|null $decks
+ * @property-read Deck[]|null $scopedDecks
  * @property-read Card[]|null $cards
+ * @property-read Card[]|null $scopedCards
+ * @property-read Adventures[]|null $adventures
+ * @property-read Adventures[]|null $scopedAdventures
  */
 class Tag extends Content
 {
     use HasFactory, Decks, Adventures;
 
     /**
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function scope(): BelongsTo
+    public function nested(): HasMany
     {
-        return $this->belongsTo(Scope::class);
+        return $this->hasMany(Tag::class, 'scope_id');
     }
 
     /**
@@ -36,6 +38,14 @@ class Tag extends Content
     }
 
     /**
+     * @return HasMany
+     */
+    public function scopedDecks(): HasMany
+    {
+        return $this->hasMany(Deck::class, 'scope_id');
+    }
+
+    /**
      * @return BelongsToMany
      */
     public function cards(): BelongsToMany
@@ -44,11 +54,27 @@ class Tag extends Content
     }
 
     /**
+     * @return HasMany
+     */
+    public function scopedCards(): HasMany
+    {
+        return $this->hasMany(Card::class, 'scope_id');
+    }
+
+    /**
      * @return BelongsToMany
      */
     public function adventures(): BelongsToMany
     {
         return $this->belongsToMany(Adventure::class, 'tag_adventure');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function scopedAdventures(): HasMany
+    {
+        return $this->hasMany(Adventure::class, 'scope_id');
     }
 
     /**
@@ -62,8 +88,13 @@ class Tag extends Content
             $data[$key] = $this->$key;
         }
         $data['scope'] = optional($this->scope)->name;
+        $data['nested'] = $this->nested()->get()->pluck('name')->toArray();
         $data['decks'] = $this->decks()->get()->pluck('name')->toArray();
+        $data['scopedDecks'] = $this->scopedDecks()->get()->pluck('name')->toArray();
         $data['cards'] = $this->cards()->get()->pluck('name')->toArray();
+        $data['scopedCards'] = $this->scopedCards()->get()->pluck('name')->toArray();
+        $data['adventures'] = $this->adventures()->get()->pluck('name')->toArray();
+        $data['scopedAdventures'] = $this->scopedAdventures()->get()->pluck('name')->toArray();
 
         return $data;
     }

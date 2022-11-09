@@ -7,6 +7,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -42,7 +43,7 @@ class Tag extends Content
                 ->sortable()
                 ->rules('required', 'max:255'),
             Image::make(__('Image'), 'image')->nullable(true),
-            BelongsTo::make(__('Scope'), 'scope')
+            BelongsTo::make(__('Scope'), 'scope', Tag::class)
                 ->nullable(true)->sortable(true),
             Text::make(__('Decks'), 'decks_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
@@ -62,6 +63,14 @@ class Tag extends Content
             DateTime::make(__('Updated At'), 'updated_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
+            HasMany::make(__('Scoped Tags'), 'nested', Tag::class)
+                ->sortable()->nullable(true),
+            HasMany::make(__('Scoped Cards'), 'scopedCards', Card::class)
+                ->sortable()->nullable(true),
+            HasMany::make(__('Scoped Decks'), 'scopedDecks', Deck::class)
+                ->sortable()->nullable(true),
+            HasMany::make(__('Scoped Adventures'), 'scopedAdventures', Adventure::class)
+                ->sortable()->nullable(true),
             BelongsToMany::make(__('Cards'), 'cards')
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Decks'), 'decks')

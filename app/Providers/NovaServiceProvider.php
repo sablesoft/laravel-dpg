@@ -100,7 +100,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     $user = $request->user();
                     $user->updateLanguage($locale);
                 }),
-            CommandRunner::make()->canSeeWhen(User::ROLE_ADMIN)
+            CommandRunner::make()->canSee(function ($request) {
+                return $request->user()->isAdmin();
+            })
         ];
     }
 

@@ -21,27 +21,39 @@ class DecksTableSeeder extends Seeder
         \DB::table('decks')->insert(array (
             0 => 
             array (
-                'id' => 1,
-                'scope_id' => NULL,
-                'image' => NULL,
-                'name' => '{"en":"Legend","ru":"Легенда"}',
-                'desc' => '{"ru":null}',
-                'owner_id' => 1,
-                'is_public' => false,
-                'created_at' => '2022-11-06 05:08:46',
-                'updated_at' => '2022-11-06 06:48:23',
-            ),
-            1 => 
-            array (
                 'id' => 2,
-                'scope_id' => NULL,
+                'scope_id' => 3,
                 'image' => NULL,
                 'name' => '{"en":"Characters","ru":"Персонажи"}',
-                'desc' => '{"ru":null}',
+                'desc' => '{"en":null}',
                 'owner_id' => 1,
                 'is_public' => false,
                 'created_at' => '2022-11-08 02:22:19',
-                'updated_at' => '2022-11-08 02:22:41',
+                'updated_at' => '2022-11-09 04:49:57',
+            ),
+            1 => 
+            array (
+                'id' => 1,
+                'scope_id' => 10,
+                'image' => NULL,
+                'name' => '{"en":"Legend","ru":"Легенда"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-06 05:08:46',
+                'updated_at' => '2022-11-09 04:50:40',
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Events"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-09 04:52:26',
+                'updated_at' => '2022-11-09 04:52:26',
             ),
         ));
         

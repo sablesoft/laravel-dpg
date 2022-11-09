@@ -127,6 +127,90 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:31:41',
                 'updated_at' => '2022-11-09 04:42:00',
             ),
+            9 => 
+            array (
+                'id' => 10,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Animal Encounter"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-09 04:57:14',
+                'updated_at' => '2022-11-09 04:57:14',
+            ),
+            10 => 
+            array (
+                'id' => 11,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Plant Encounter"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-09 04:58:48',
+                'updated_at' => '2022-11-09 04:58:48',
+            ),
+            11 => 
+            array (
+                'id' => 12,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Human Encounter"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-09 05:00:36',
+                'updated_at' => '2022-11-09 05:00:36',
+            ),
+            12 => 
+            array (
+                'id' => 13,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Spirit Encounter"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-09 05:01:41',
+                'updated_at' => '2022-11-09 05:01:41',
+            ),
+            13 => 
+            array (
+                'id' => 14,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Character Encounter"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-09 05:07:18',
+                'updated_at' => '2022-11-09 05:07:41',
+            ),
+            14 => 
+            array (
+                'id' => 15,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Insect Encounter"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-09 05:09:34',
+                'updated_at' => '2022-11-09 05:09:34',
+            ),
+            15 => 
+            array (
+                'id' => 16,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Bird Encounter"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-09 05:10:58',
+                'updated_at' => '2022-11-09 05:10:58',
+            ),
         ));
         
         

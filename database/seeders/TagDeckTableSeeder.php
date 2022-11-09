@@ -18,13 +18,6 @@ class TagDeckTableSeeder extends Seeder
 
         \DB::table('tag_deck')->delete();
         
-        \DB::table('tag_deck')->insert(array (
-            0 => 
-            array (
-                'tag_id' => 10,
-                'deck_id' => 1,
-            ),
-        ));
         
         
     }

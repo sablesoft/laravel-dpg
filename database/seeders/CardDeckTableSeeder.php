@@ -73,6 +73,48 @@ class CardDeckTableSeeder extends Seeder
                 'deck_id' => 2,
                 'count' => 1,
             ),
+            9 => 
+            array (
+                'card_id' => 10,
+                'deck_id' => 3,
+                'count' => 1,
+            ),
+            10 => 
+            array (
+                'card_id' => 16,
+                'deck_id' => 3,
+                'count' => 1,
+            ),
+            11 => 
+            array (
+                'card_id' => 14,
+                'deck_id' => 3,
+                'count' => 1,
+            ),
+            12 => 
+            array (
+                'card_id' => 12,
+                'deck_id' => 3,
+                'count' => 1,
+            ),
+            13 => 
+            array (
+                'card_id' => 15,
+                'deck_id' => 3,
+                'count' => 1,
+            ),
+            14 => 
+            array (
+                'card_id' => 11,
+                'deck_id' => 3,
+                'count' => 1,
+            ),
+            15 => 
+            array (
+                'card_id' => 13,
+                'deck_id' => 3,
+                'count' => 1,
+            ),
         ));
         
         

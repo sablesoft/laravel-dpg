@@ -21,18 +21,6 @@ class TagsTableSeeder extends Seeder
         \DB::table('tags')->insert(array (
             0 => 
             array (
-                'id' => 3,
-                'scope_id' => NULL,
-                'image' => NULL,
-                'name' => '{"en":"Character","ru":"Персонаж"}',
-                'desc' => '{"ru":null}',
-                'owner_id' => 1,
-                'is_public' => false,
-                'created_at' => '2022-11-08 02:20:38',
-                'updated_at' => '2022-11-08 02:20:54',
-            ),
-            1 => 
-            array (
                 'id' => 4,
                 'scope_id' => NULL,
                 'image' => NULL,
@@ -43,7 +31,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:43:27',
                 'updated_at' => '2022-11-08 02:44:09',
             ),
-            2 => 
+            1 => 
             array (
                 'id' => 5,
                 'scope_id' => NULL,
@@ -55,7 +43,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:56:32',
                 'updated_at' => '2022-11-08 17:40:21',
             ),
-            3 => 
+            2 => 
             array (
                 'id' => 1,
                 'scope_id' => NULL,
@@ -67,7 +55,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:07:36',
                 'updated_at' => '2022-11-08 17:40:42',
             ),
-            4 => 
+            3 => 
             array (
                 'id' => 2,
                 'scope_id' => NULL,
@@ -79,7 +67,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:11:58',
                 'updated_at' => '2022-11-08 17:40:54',
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 11,
                 'scope_id' => 1,
@@ -91,7 +79,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:08:04',
                 'updated_at' => '2022-11-06 06:48:54',
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 6,
                 'scope_id' => 2,
@@ -103,7 +91,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:17:34',
                 'updated_at' => '2022-11-08 02:19:24',
             ),
-            7 => 
+            6 => 
             array (
                 'id' => 7,
                 'scope_id' => 2,
@@ -115,7 +103,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:18:53',
                 'updated_at' => '2022-11-08 02:19:38',
             ),
-            8 => 
+            7 => 
             array (
                 'id' => 8,
                 'scope_id' => 4,
@@ -127,7 +115,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:43:41',
                 'updated_at' => '2022-11-08 02:44:22',
             ),
-            9 => 
+            8 => 
             array (
                 'id' => 9,
                 'scope_id' => 5,
@@ -139,7 +127,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:56:49',
                 'updated_at' => '2022-11-08 02:57:48',
             ),
-            10 => 
+            9 => 
             array (
                 'id' => 10,
                 'scope_id' => 1,
@@ -151,7 +139,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:07:52',
                 'updated_at' => '2022-11-08 17:42:46',
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 12,
                 'scope_id' => 2,
@@ -163,7 +151,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:13:44',
                 'updated_at' => '2022-11-08 17:43:10',
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 13,
                 'scope_id' => 2,
@@ -175,7 +163,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:14:35',
                 'updated_at' => '2022-11-08 17:43:38',
             ),
-            13 => 
+            12 => 
             array (
                 'id' => 14,
                 'scope_id' => 2,
@@ -186,6 +174,42 @@ class TagsTableSeeder extends Seeder
                 'is_public' => true,
                 'created_at' => '2022-11-08 02:15:03',
                 'updated_at' => '2022-11-08 17:44:02',
+            ),
+            13 => 
+            array (
+                'id' => 15,
+                'scope_id' => NULL,
+                'image' => NULL,
+                'name' => '{"en":"Event"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-09 04:51:54',
+                'updated_at' => '2022-11-09 04:51:54',
+            ),
+            14 => 
+            array (
+                'id' => 16,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Encounter"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-09 04:55:16',
+                'updated_at' => '2022-11-09 04:55:16',
+            ),
+            15 => 
+            array (
+                'id' => 3,
+                'scope_id' => 2,
+                'image' => NULL,
+                'name' => '{"en":"Character","ru":"Персонаж"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-08 02:20:38',
+                'updated_at' => '2022-11-09 05:06:49',
             ),
         ));
         

@@ -104,6 +104,76 @@ class TagCardTableSeeder extends Seeder
                 'tag_id' => 9,
                 'card_id' => 5,
             ),
+            17 => 
+            array (
+                'tag_id' => 12,
+                'card_id' => 10,
+            ),
+            18 => 
+            array (
+                'tag_id' => 16,
+                'card_id' => 10,
+            ),
+            19 => 
+            array (
+                'tag_id' => 16,
+                'card_id' => 11,
+            ),
+            20 => 
+            array (
+                'tag_id' => 13,
+                'card_id' => 11,
+            ),
+            21 => 
+            array (
+                'tag_id' => 14,
+                'card_id' => 12,
+            ),
+            22 => 
+            array (
+                'tag_id' => 16,
+                'card_id' => 12,
+            ),
+            23 => 
+            array (
+                'tag_id' => 16,
+                'card_id' => 13,
+            ),
+            24 => 
+            array (
+                'tag_id' => 8,
+                'card_id' => 13,
+            ),
+            25 => 
+            array (
+                'tag_id' => 3,
+                'card_id' => 14,
+            ),
+            26 => 
+            array (
+                'tag_id' => 16,
+                'card_id' => 14,
+            ),
+            27 => 
+            array (
+                'tag_id' => 16,
+                'card_id' => 15,
+            ),
+            28 => 
+            array (
+                'tag_id' => 7,
+                'card_id' => 15,
+            ),
+            29 => 
+            array (
+                'tag_id' => 6,
+                'card_id' => 16,
+            ),
+            30 => 
+            array (
+                'tag_id' => 16,
+                'card_id' => 16,
+            ),
         ));
         
         

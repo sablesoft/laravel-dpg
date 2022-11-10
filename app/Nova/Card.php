@@ -54,9 +54,11 @@ class Card extends Content
                 ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
+            Number::make(__('Deck Size'), 'deck_size')
+                ->nullable(true)->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Books'), 'books_string')
-                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
-            Text::make(__('Decks'), 'decks_string')
+                ->onlyOnDetail()->asHtml(),
+            Text::make(__('In Decks'), 'decks_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Text::make(__('Tags'), 'tags_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),

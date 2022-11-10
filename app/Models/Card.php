@@ -13,6 +13,8 @@ use App\Models\Traits\Books;
  * @property-read Card[]|null $deck
  * @property-read Card[]|null $decks
  * @property-read Books[]|null $books
+ *
+ * @property-read Books[]|null $deck_size
  */
 class Card extends Content
 {
@@ -37,6 +39,14 @@ class Card extends Content
     public function books(): BelongsToMany
     {
         return $this->belongsToMany(Book::class, 'book_card');
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getDeckSizeAttribute(): ?int
+    {
+        return $this->deck()->sum('count') ?: null;
     }
 
     /**

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CardTagTableSeeder::class);
         $this->call(BooksTableSeeder::class);
         $this->call(BookTagTableSeeder::class);
+        $this->call(BookCardTableSeeder::class);
         $this->call(SequencesSeeder::class);
     }
 }

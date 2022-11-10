@@ -9,6 +9,8 @@ use App\Models\Traits\Tags;
 /**
  * @property-read Tag[]|null $tags
  * @property-read Card[]|null $cards
+ *
+ * @property-read int|null $cards_count
  */
 class Book extends Content
 {
@@ -28,6 +30,14 @@ class Book extends Content
     public function cards(): BelongsToMany
     {
         return $this->belongsToMany(Card::class, 'book_card');
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getCardsCountAttribute(): ?int
+    {
+        return $this->cards()->count() ?: null;
     }
 
     /**

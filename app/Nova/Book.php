@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use App\Nova\Filters\CardsFilter;
@@ -39,6 +40,8 @@ class Book extends Content
                 ->sortable()->rules('required', 'max:30'),
             Image::make(__('Image'), 'image')
                 ->nullable(true)->hideFromIndex(),
+            Number::make(__('Cards Count'), 'cards_count')
+                ->hideWhenUpdating()->hideWhenCreating(),
             BelongsTo::make(__('Scope'), 'scope', Tag::class)
                 ->nullable(true)->sortable(),
             Text::make(__('Tags'), 'tags_string')

@@ -3,6 +3,8 @@
 namespace App\Models\Traits;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 trait Options
 {
@@ -12,7 +14,7 @@ trait Options
     public static function options(): array
     {
         $options = [];
-        $rows = static::select(['id', 'name'])->get()->toArray();
+        $rows = static::getOptionsQuery()->get()->toArray();
         foreach ($rows as $row) {
             $name = $row['name'][App::currentLocale()] ??
                 $row['name'][config('app.fallback_locale')];
@@ -20,5 +22,24 @@ trait Options
         }
 
         return $options;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected static function getOptionsQuery()
+    {
+        $query = static::select(['id', 'name']);
+        if (get_called_class() == User::class) {
+            return $query;
+        }
+
+        /** @var User $user */
+        $user = Auth::user();
+        if (!$user->isAdmin()) {
+            $query->where('is_public', true)->orWhere('owner_id', $user->getKey());
+        }
+
+        return $query;
     }
 }

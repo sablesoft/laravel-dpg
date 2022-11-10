@@ -5,13 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use App\Models\Traits\Decks;
 use App\Models\Traits\Books;
 
 /**
  * @property-read Tag[]|null $nested
- * @property-read Deck[]|null $decks
- * @property-read Deck[]|null $scopedDecks
  * @property-read Card[]|null $cards
  * @property-read Card[]|null $scopedCards
  * @property-read Books[]|null $books
@@ -19,7 +16,7 @@ use App\Models\Traits\Books;
  */
 class Tag extends Content
 {
-    use HasFactory, Decks, Books;
+    use HasFactory, Books;
 
     /**
      * @return HasMany
@@ -32,25 +29,9 @@ class Tag extends Content
     /**
      * @return BelongsToMany
      */
-    public function decks(): BelongsToMany
-    {
-        return $this->belongsToMany(Deck::class, 'tag_deck');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function scopedDecks(): HasMany
-    {
-        return $this->hasMany(Deck::class, 'scope_id');
-    }
-
-    /**
-     * @return BelongsToMany
-     */
     public function cards(): BelongsToMany
     {
-        return $this->belongsToMany(Card::class, 'tag_card');
+        return $this->belongsToMany(Card::class, 'card_tag');
     }
 
     /**
@@ -66,7 +47,7 @@ class Tag extends Content
      */
     public function books(): BelongsToMany
     {
-        return $this->belongsToMany(Book::class, 'tag_book');
+        return $this->belongsToMany(Book::class, 'book_tag');
     }
 
     /**
@@ -89,8 +70,6 @@ class Tag extends Content
         }
         $data['scope'] = optional($this->scope)->name;
         $data['nested'] = $this->nested()->get()->pluck('name')->toArray();
-        $data['decks'] = $this->decks()->get()->pluck('name')->toArray();
-        $data['scopedDecks'] = $this->scopedDecks()->get()->pluck('name')->toArray();
         $data['cards'] = $this->cards()->get()->pluck('name')->toArray();
         $data['scopedCards'] = $this->scopedCards()->get()->pluck('name')->toArray();
         $data['books'] = $this->books()->get()->pluck('name')->toArray();

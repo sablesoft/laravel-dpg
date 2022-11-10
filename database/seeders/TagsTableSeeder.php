@@ -117,18 +117,6 @@ class TagsTableSeeder extends Seeder
             ),
             8 => 
             array (
-                'id' => 9,
-                'scope_id' => 5,
-                'image' => NULL,
-                'name' => '{"ru":"Джунгли","en":"Rainforest"}',
-                'desc' => '{"en":null}',
-                'owner_id' => 1,
-                'is_public' => false,
-                'created_at' => '2022-11-08 02:56:49',
-                'updated_at' => '2022-11-08 02:57:48',
-            ),
-            9 => 
-            array (
                 'id' => 10,
                 'scope_id' => 1,
                 'image' => NULL,
@@ -139,7 +127,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:07:52',
                 'updated_at' => '2022-11-08 17:42:46',
             ),
-            10 => 
+            9 => 
             array (
                 'id' => 12,
                 'scope_id' => 2,
@@ -151,7 +139,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:13:44',
                 'updated_at' => '2022-11-08 17:43:10',
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 13,
                 'scope_id' => 2,
@@ -163,7 +151,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:14:35',
                 'updated_at' => '2022-11-08 17:43:38',
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 14,
                 'scope_id' => 2,
@@ -175,7 +163,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:15:03',
                 'updated_at' => '2022-11-08 17:44:02',
             ),
-            13 => 
+            12 => 
             array (
                 'id' => 3,
                 'scope_id' => 2,
@@ -187,7 +175,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:20:38',
                 'updated_at' => '2022-11-09 05:06:49',
             ),
-            14 => 
+            13 => 
             array (
                 'id' => 16,
                 'scope_id' => 15,
@@ -199,7 +187,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 04:55:16',
                 'updated_at' => '2022-11-10 01:49:12',
             ),
-            15 => 
+            14 => 
             array (
                 'id' => 15,
                 'scope_id' => NULL,
@@ -210,6 +198,78 @@ class TagsTableSeeder extends Seeder
                 'is_public' => true,
                 'created_at' => '2022-11-09 04:51:54',
                 'updated_at' => '2022-11-10 01:49:48',
+            ),
+            15 => 
+            array (
+                'id' => 17,
+                'scope_id' => 5,
+                'image' => NULL,
+                'name' => '{"en":"Wilderness"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-10 14:24:51',
+                'updated_at' => '2022-11-10 14:24:51',
+            ),
+            16 => 
+            array (
+                'id' => 9,
+                'scope_id' => 17,
+                'image' => NULL,
+                'name' => '{"ru":"Джунгли","en":"Rainforest"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-08 02:56:49',
+                'updated_at' => '2022-11-10 14:25:17',
+            ),
+            17 => 
+            array (
+                'id' => 18,
+                'scope_id' => 5,
+                'image' => NULL,
+                'name' => '{"en":"Settlement"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-10 14:26:20',
+                'updated_at' => '2022-11-10 14:26:20',
+            ),
+            18 => 
+            array (
+                'id' => 19,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Rest"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-10 14:36:47',
+                'updated_at' => '2022-11-10 14:36:47',
+            ),
+            19 => 
+            array (
+                'id' => 20,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Practice"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-10 14:36:58',
+                'updated_at' => '2022-11-10 14:36:58',
+            ),
+            20 => 
+            array (
+                'id' => 21,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Find"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-10 14:39:42',
+                'updated_at' => '2022-11-10 14:39:42',
             ),
         ));
         

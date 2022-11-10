@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Database\Migration;
 
@@ -12,7 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        $this->upContent('decks');
+        Schema::create('decks', function (Blueprint $table) {
+            $table->foreignId('deck_id')->constrained('cards')
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('card_id')->constrained('cards')
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedSmallInteger('count')
+                ->nullable(false)->default(1);
+
+            $table->unique(['deck_id', 'card_id']);
+        });
     }
 
     /**

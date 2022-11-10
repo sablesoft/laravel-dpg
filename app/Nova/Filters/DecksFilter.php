@@ -2,9 +2,9 @@
 
 namespace App\Nova\Filters;
 
+use App\Models\Card;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Deck;
 
 class DecksFilter extends ContentFilter
 {
@@ -38,6 +38,6 @@ class DecksFilter extends ContentFilter
      */
     public function options(Request $request): array
     {
-        return Deck::options();
+        return Card::options();
     }
 }

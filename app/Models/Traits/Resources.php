@@ -13,13 +13,14 @@ trait Resources
      * @param string $key
      * @return string|null
      */
-    protected function getResourcesString(string $key): ?string
+    protected function getResourcesString(string $key, string $resource = null): ?string
     {
         $links = [];
+        $resource = $resource ?: $key;
         /** @var Content $content */
         foreach ($this->getFilteredResources($key) as $content) {
             $path = trim(config('nova.path'), '/');
-            $href = url(sprintf("/$path/resources/%s/%d", $key, $content->getKey()));
+            $href = url(sprintf("/$path/resources/%s/%d", $resource, $content->getKey()));
             $name = $content->name;
             $links[] = "<a href='$href' class='no-underline dim text-primary font-bold'>$name</a>";
         }

@@ -14,6 +14,6 @@ trait Decks
      */
     public function getDecksStringAttribute(): ?string
     {
-        return $this->getResourcesString('decks');
+        return $this->getResourcesString('decks', 'units');
     }
 }

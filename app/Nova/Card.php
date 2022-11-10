@@ -8,10 +8,13 @@ use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use App\Nova\Filters\TagsFilter;
 use App\Nova\Filters\DecksFilter;
 use App\Nova\Filters\ScopesFilter;
+use App\Nova\Filters\IsPublicFilter;
 
 /**
  * @mixin \App\Models\Card
@@ -51,18 +54,33 @@ class Card extends Content
                 ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
-            Text::make(__('Tags'), 'tags_string')
+            Text::make(__('Books'), 'books_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Text::make(__('Decks'), 'decks_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
+            Text::make(__('Tags'), 'tags_string')
+                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
+            BelongsToMany::make(__('Deck'), 'deck', Card::class)
+                ->fields(function () {
+                    return [
+                        Number::make(__('Count'), 'count')
+                            ->required(true)
+                            ->nullable(false)
+                            ->rules('required')
+                            ->min(1)->step(1)->default(1),
+                    ];
+                })->sortable()->nullable(true),
+            BelongsToMany::make(__('Books'), 'books', Book::class)
+                ->sortable()->nullable(true),
             BelongsToMany::make(__('Tags'), 'tags', Tag::class)
                 ->sortable()->nullable(true),
-            BelongsToMany::make(__('Decks'), 'decks', Deck::class)
+            BelongsToMany::make(__('In Decks'), 'decks', Card::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')
+                ->hideFromIndex()
                 ->nullable(false)->sortable(),
             BelongsTo::make(__('Owner'), 'owner', User::class)
-                ->sortable()
+                ->sortable()->hideFromIndex()
                 ->hideWhenUpdating()->hideWhenCreating(),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
@@ -93,8 +111,10 @@ class Card extends Content
     public function filters(Request $request): array
     {
         return array_merge(parent::filters($request), [
+            new IsPublicFilter(),
             new ScopesFilter(),
-            new DecksFilter()
+            new DecksFilter(),
+            new TagsFilter()
         ]);
     }
 

@@ -14,7 +14,6 @@ class SequencesSeeder extends Seeder
         'roles',
         'tags',
         'cards',
-        'decks',
         'books'
     ];
 

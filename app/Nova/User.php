@@ -88,7 +88,6 @@ class User extends Resource
             MorphToMany::make(__('Roles'), 'roles', Role::class),
 
             HasMany::make(__('Books'), 'books'),
-            HasMany::make(__('Decks'), 'decks'),
             HasMany::make(__('Cards'), 'cards'),
             HasMany::make(__('Tags'), 'tags'),
         ];

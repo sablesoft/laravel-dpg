@@ -10,7 +10,8 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use App\Nova\Filters\DecksFilter;
+use App\Nova\Filters\CardsFilter;
+use App\Nova\Filters\IsPublicFilter;
 
 /**
  * @mixin \App\Models\Book
@@ -42,12 +43,10 @@ class Book extends Content
                 ->nullable(true)->sortable(),
             Text::make(__('Tags'), 'tags_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
-            Text::make(__('Decks'), 'decks_string')
-                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')->nullable(),
             BelongsToMany::make(__('Tags'), 'tags', Tag::class)
                 ->sortable()->nullable(true),
-            BelongsToMany::make(__('Decks'), 'decks', Deck::class)
+            BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
@@ -83,7 +82,8 @@ class Book extends Content
     public function filters(Request $request): array
     {
         return array_merge(parent::filters($request), [
-            new DecksFilter()
+            new IsPublicFilter(),
+            new CardsFilter()
         ]);
     }
 

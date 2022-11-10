@@ -5,30 +5,29 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
-use App\Models\Traits\Decks;
 
 /**
  * @property-read Tag[]|null $tags
- * @property-read Deck[]|null $decks
+ * @property-read Card[]|null $cards
  */
 class Book extends Content
 {
-    use HasFactory, Tags, Decks;
+    use HasFactory, Tags;
 
     /**
      * @return BelongsToMany
      */
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'tag_book');
+        return $this->belongsToMany(Tag::class, 'book_tag');
     }
 
     /**
      * @return BelongsToMany
      */
-    public function decks(): BelongsToMany
+    public function cards(): BelongsToMany
     {
-        return $this->belongsToMany(Deck::class, 'deck_book');
+        return $this->belongsToMany(Card::class, 'book_card');
     }
 
     /**
@@ -37,7 +36,7 @@ class Book extends Content
     public function export(): array
     {
         $data = parent::export();
-        $data['decks'] = $this->decks()->get()->pluck('name')->toArray();
+        $data['cards'] = $this->cards()->get()->pluck('name')->toArray();
 
         return $data;
     }

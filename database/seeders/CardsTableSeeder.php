@@ -211,6 +211,66 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 04:57:14',
                 'updated_at' => '2022-11-10 01:58:07',
             ),
+            16 => 
+            array (
+                'id' => 17,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Way Event"}',
+                'desc' => '{"en":"Something happened along the way. Draw a card from the deck."}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-10 13:55:09',
+                'updated_at' => '2022-11-10 13:55:09',
+            ),
+            17 => 
+            array (
+                'id' => 18,
+                'scope_id' => 18,
+                'image' => NULL,
+                'name' => '{"en":"Lanza Piya"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-10 14:31:06',
+                'updated_at' => '2022-11-10 14:31:06',
+            ),
+            18 => 
+            array (
+                'id' => 19,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Rest Time"}',
+                'desc' => '{"en":"Nothing special happened. But after a while, the hero decided to take a break. At the same time, he can switch to some practice."}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-10 14:37:54',
+                'updated_at' => '2022-11-10 14:37:54',
+            ),
+            19 => 
+            array (
+                'id' => 20,
+                'scope_id' => 10,
+                'image' => NULL,
+                'name' => '{"en":"Legends"}',
+                'desc' => '{"en":"A people without legends is like a tree without roots."}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-10 15:34:14',
+                'updated_at' => '2022-11-10 15:34:14',
+            ),
+            20 => 
+            array (
+                'id' => 21,
+                'scope_id' => 1,
+                'image' => NULL,
+                'name' => '{"en":"Knowledge"}',
+                'desc' => '{"en":"Nothing is free in this world, and the acquisition of knowledge is the most difficult of all tasks that a person can face."}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-10 15:40:03',
+                'updated_at' => '2022-11-10 15:40:03',
+            ),
         ));
         
         

@@ -12,7 +12,6 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use App\Nova\Filters\CardsFilter;
-use App\Nova\Filters\DecksFilter;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\IsPublicFilter;
@@ -45,8 +44,6 @@ class Tag extends Content
             Image::make(__('Image'), 'image')->nullable(true),
             BelongsTo::make(__('Scope'), 'scope', Tag::class)
                 ->nullable(true)->sortable(true),
-            Text::make(__('Decks'), 'decks_string')
-                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Text::make(__('Books'), 'books_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')
@@ -67,13 +64,9 @@ class Tag extends Content
                 ->sortable()->nullable(true),
             HasMany::make(__('Scoped Cards'), 'scopedCards', Card::class)
                 ->sortable()->nullable(true),
-            HasMany::make(__('Scoped Decks'), 'scopedDecks', Deck::class)
-                ->sortable()->nullable(true),
             HasMany::make(__('Scoped Books'), 'scopedBooks', Book::class)
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
-                ->sortable()->nullable(true),
-            BelongsToMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Books'), 'books', Book::class)
                 ->sortable()->nullable(true),
@@ -104,7 +97,6 @@ class Tag extends Content
             new OwnersFilter(),
             new ScopesFilter(),
             new BooksFilter(),
-            new DecksFilter(),
             new CardsFilter(),
         ];
     }

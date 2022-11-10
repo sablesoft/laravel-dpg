@@ -4,10 +4,9 @@ namespace App\Nova\Filters;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use OptimistDigtal\NovaMultiselectFilter\MultiselectFilter;
 use App\Models\Tag;
 
-class TagsFilter extends MultiselectFilter
+class TagsFilter extends ContentFilter
 {
     /**
      * The displayable name of the filter.

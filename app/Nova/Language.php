@@ -45,7 +45,7 @@ class Language extends Resource
     public function fields(Request $request): array
     {
         return [
-            Image::make('Flag', function($language) {
+            Image::make(__('Flag'), function($language) {
                 return $language->code . '.svg';
             })->disk('flags')->disableDownload()->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Code'), 'code')
@@ -59,7 +59,7 @@ class Language extends Resource
                 ->hideWhenCreating()->hideFromIndex()->hideFromDetail(),
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()->rules('required','max:20'),
-            HasMany::make(__('Users'), 'users')
+            HasMany::make(__('Users'), 'users', User::class)
         ];
     }
 

@@ -4,10 +4,9 @@ namespace App\Nova\Filters;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use OptimistDigtal\NovaMultiselectFilter\MultiselectFilter;
 use App\Models\User;
 
-class OwnersFilter extends MultiselectFilter
+class OwnersFilter extends ContentFilter
 {
     /**
      * The displayable name of the filter.

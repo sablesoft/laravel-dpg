@@ -16,6 +16,16 @@ class IsPublicFilter extends BooleanFilter
     public $name = 'Is Public';
 
     /**
+     * Get the displayable name of the filter.
+     *
+     * @return string
+     */
+    public function name(): string
+    {
+        return __(parent::name());
+    }
+
+    /**
      * Apply the filter to the given query.
      *
      * @param Request $request
@@ -42,8 +52,8 @@ class IsPublicFilter extends BooleanFilter
     public function options(Request $request): array
     {
         return [
-            'Yes' => 'yes',
-            'No'  => 'no'
+            __('Yes') => 'yes',
+            __('No')  => 'no'
         ];
     }
 }

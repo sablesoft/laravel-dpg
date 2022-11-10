@@ -45,9 +45,9 @@ class Book extends Content
             Text::make(__('Decks'), 'decks_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')->nullable(),
-            BelongsToMany::make(__('Tags'), 'tags')
+            BelongsToMany::make(__('Tags'), 'tags', Tag::class)
                 ->sortable()->nullable(true),
-            BelongsToMany::make(__('Decks'), 'decks')
+            BelongsToMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),

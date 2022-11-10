@@ -71,11 +71,11 @@ class Tag extends Content
                 ->sortable()->nullable(true),
             HasMany::make(__('Scoped Books'), 'scopedBooks', Book::class)
                 ->sortable()->nullable(true),
-            BelongsToMany::make(__('Cards'), 'cards')
+            BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->sortable()->nullable(true),
-            BelongsToMany::make(__('Decks'), 'decks')
+            BelongsToMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
-            BelongsToMany::make(__('Books'), 'books')
+            BelongsToMany::make(__('Books'), 'books', Book::class)
                 ->sortable()->nullable(true),
         ];
     }

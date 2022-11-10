@@ -53,7 +53,7 @@ class Deck extends Content
             BelongsTo::make(__('Owner'), 'owner', User::class)
                 ->sortable()
                 ->hideWhenUpdating()->hideWhenCreating(),
-            BelongsToMany::make(__('Cards'), 'cards')
+            BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->fields(function () {
                     return [
                         Number::make(__('Count'), 'count')
@@ -63,9 +63,9 @@ class Deck extends Content
                             ->min(1)->step(1)->default(1),
                     ];
                 })->sortable()->nullable(true),
-            BelongsToMany::make(__('Books'), 'books')
+            BelongsToMany::make(__('Books'), 'books', Book::class)
                 ->sortable()->nullable(true),
-            BelongsToMany::make(__('Tags'), 'tags')
+            BelongsToMany::make(__('Tags'), 'tags', Tag::class)
                 ->sortable()->nullable(true),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()

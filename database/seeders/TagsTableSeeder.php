@@ -177,30 +177,6 @@ class TagsTableSeeder extends Seeder
             ),
             13 => 
             array (
-                'id' => 15,
-                'scope_id' => NULL,
-                'image' => NULL,
-                'name' => '{"en":"Event"}',
-                'desc' => '{"en":null}',
-                'owner_id' => 1,
-                'is_public' => true,
-                'created_at' => '2022-11-09 04:51:54',
-                'updated_at' => '2022-11-09 04:51:54',
-            ),
-            14 => 
-            array (
-                'id' => 16,
-                'scope_id' => 15,
-                'image' => NULL,
-                'name' => '{"en":"Encounter"}',
-                'desc' => '{"en":null}',
-                'owner_id' => 1,
-                'is_public' => false,
-                'created_at' => '2022-11-09 04:55:16',
-                'updated_at' => '2022-11-09 04:55:16',
-            ),
-            15 => 
-            array (
                 'id' => 3,
                 'scope_id' => 2,
                 'image' => NULL,
@@ -210,6 +186,30 @@ class TagsTableSeeder extends Seeder
                 'is_public' => false,
                 'created_at' => '2022-11-08 02:20:38',
                 'updated_at' => '2022-11-09 05:06:49',
+            ),
+            14 => 
+            array (
+                'id' => 16,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Encounter","ru":"Встреча"}',
+                'desc' => '{"ru":null}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-09 04:55:16',
+                'updated_at' => '2022-11-10 01:49:12',
+            ),
+            15 => 
+            array (
+                'id' => 15,
+                'scope_id' => NULL,
+                'image' => NULL,
+                'name' => '{"en":"Event","ru":"Событие"}',
+                'desc' => '{"ru":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-09 04:51:54',
+                'updated_at' => '2022-11-10 01:49:48',
             ),
         ));
         

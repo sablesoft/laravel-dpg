@@ -48,12 +48,12 @@ class DecksTableSeeder extends Seeder
                 'id' => 3,
                 'scope_id' => 15,
                 'image' => NULL,
-                'name' => '{"en":"Events"}',
-                'desc' => '{"en":null}',
+                'name' => '{"en":"Events","ru":"События"}',
+                'desc' => '{"ru":null}',
                 'owner_id' => 1,
                 'is_public' => false,
                 'created_at' => '2022-11-09 04:52:26',
-                'updated_at' => '2022-11-09 04:52:26',
+                'updated_at' => '2022-11-10 01:54:32',
             ),
         ));
         

@@ -14,12 +14,12 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('books')->delete();
-
+        
         \DB::table('books')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'scope_id' => NULL,
@@ -32,7 +32,7 @@ class BooksTableSeeder extends Seeder
                 'updated_at' => '2022-11-08 12:31:57',
             ),
         ));
-
-
+        
+        
     }
 }

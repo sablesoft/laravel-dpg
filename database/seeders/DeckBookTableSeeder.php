@@ -14,28 +14,28 @@ class DeckBookTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('deck_book')->delete();
-
+        
         \DB::table('deck_book')->insert(array (
-            0 =>
+            0 => 
             array (
                 'deck_id' => 1,
                 'book_id' => 1,
             ),
-            1 =>
+            1 => 
             array (
                 'deck_id' => 2,
                 'book_id' => 1,
             ),
-            2 =>
+            2 => 
             array (
                 'deck_id' => 3,
                 'book_id' => 1,
             ),
         ));
-
-
+        
+        
     }
 }

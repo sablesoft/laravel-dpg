@@ -14,18 +14,18 @@ class TagBookTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('tag_book')->delete();
-
+        
         \DB::table('tag_book')->insert(array (
-            0 =>
+            0 => 
             array (
                 'tag_id' => 10,
                 'book_id' => 1,
             ),
         ));
-
-
+        
+        
     }
 }

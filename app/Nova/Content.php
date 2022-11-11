@@ -55,9 +55,9 @@ abstract class Content extends Resource
     public function filters(Request $request): array
     {
         return [
+            new TagsFilter(),
             new IsPublicFilter(),
             new OwnersFilter(),
-            new TagsFilter()
         ];
     }
 }

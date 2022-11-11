@@ -11,10 +11,8 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use App\Nova\Filters\TagsFilter;
 use App\Nova\Filters\DecksFilter;
 use App\Nova\Filters\ScopesFilter;
-use App\Nova\Filters\IsPublicFilter;
 
 /**
  * @mixin \App\Models\Card
@@ -50,28 +48,28 @@ class Card extends Content
                 ->sortable()->rules('required', 'max:30'),
             Image::make(__('Image'), 'image')
                 ->nullable(true)->hideFromIndex(),
+            BelongsToMany::make(__('Deck'), 'deck', Card::class)
+                ->fields(function () {
+                    return [
+                        Number::make(__('Count'), 'count')
+                            ->nullable(false)->sortable()
+                            ->required(true)
+                            ->rules('required')
+                            ->min(1)->step(1)->default(1),
+                    ];
+                })->sortable()->nullable(true),
+            Number::make(__('Deck Size'), 'deck_size')
+                ->nullable(true)->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Scope'), 'scope', Tag::class)
                 ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
-            Number::make(__('Deck Size'), 'deck_size')
-                ->nullable(true)->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Books'), 'books_string')
                 ->onlyOnDetail()->asHtml(),
             Text::make(__('In Decks'), 'decks_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Text::make(__('Tags'), 'tags_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
-            BelongsToMany::make(__('Deck'), 'deck', Card::class)
-                ->fields(function () {
-                    return [
-                        Number::make(__('Count'), 'count')
-                            ->required(true)
-                            ->nullable(false)
-                            ->rules('required')
-                            ->min(1)->step(1)->default(1),
-                    ];
-                })->sortable()->nullable(true),
             BelongsToMany::make(__('Books'), 'books', Book::class)
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Tags'), 'tags', Tag::class)
@@ -112,12 +110,10 @@ class Card extends Content
      */
     public function filters(Request $request): array
     {
-        return array_merge(parent::filters($request), [
-            new IsPublicFilter(),
+        return array_merge([
             new ScopesFilter(),
-            new DecksFilter(),
-            new TagsFilter()
-        ]);
+            new DecksFilter()
+        ], parent::filters($request));
     }
 
     /**

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Database\Migration;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {

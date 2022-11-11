@@ -40,12 +40,16 @@ class Book extends Content
                 ->sortable()->rules('required', 'max:30'),
             Image::make(__('Image'), 'image')
                 ->nullable(true)->hideFromIndex(),
-            Number::make(__('Cards Count'), 'cards_count')
+            Number::make(__('Unique Cards'), 'cards_count')
                 ->hideWhenUpdating()->hideWhenCreating(),
             BelongsTo::make(__('Scope'), 'scope', Tag::class)
-                ->nullable(true)->sortable(),
+                ->nullable(true)->sortable()->hideFromIndex(),
+            BelongsTo::make(__('Hero'), 'hero', Card::class)
+                ->nullable(true),
+            BelongsTo::make(__('Main Quest'), 'quest', Card::class)
+                ->nullable(true),
             Text::make(__('Tags'), 'tags_string')
-                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
+                ->hideFromIndex()->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')->nullable(),
             BelongsToMany::make(__('Tags'), 'tags', Tag::class)
                 ->sortable()->nullable(true),

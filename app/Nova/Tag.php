@@ -41,7 +41,8 @@ class Tag extends Content
             Text::make(__('Name'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
-            Image::make(__('Image'), 'image')->nullable(true),
+            Image::make(__('Image'), 'image')
+                ->nullable(true)->hideFromIndex(),
             BelongsTo::make(__('Scope'), 'scope', Tag::class)
                 ->nullable(true)->sortable(true),
             Text::make(__('Books'), 'books_string')

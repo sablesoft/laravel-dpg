@@ -5,23 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Traits\Decks;
 use App\Models\Traits\Books;
 
 /**
- * @property-read Tag[]|null $nested
+ * @property-read Tag[]|null $tags
  * @property-read Card[]|null $cards
  * @property-read Card[]|null $scopedCards
+ * @property-read Deck[]|null $decks
+ * @property-read Deck[]|null $scopedDecks
  * @property-read Books[]|null $books
  * @property-read Books[]|null $scopedBooks
  */
 class Tag extends Content
 {
-    use HasFactory, Books;
+    use HasFactory, Books, Decks;
 
     /**
      * @return HasMany
      */
-    public function nested(): HasMany
+    public function tags(): HasMany
     {
         return $this->hasMany(Tag::class, 'scope_id');
     }
@@ -40,6 +43,22 @@ class Tag extends Content
     public function scopedCards(): HasMany
     {
         return $this->hasMany(Card::class, 'scope_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function decks(): BelongsToMany
+    {
+        return $this->belongsToMany(Deck::class, 'deck_tag');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function scopedDecks(): HasMany
+    {
+        return $this->hasMany(Deck::class, 'scope_id');
     }
 
     /**
@@ -69,9 +88,11 @@ class Tag extends Content
             $data[$key] = $this->$key;
         }
         $data['scope'] = optional($this->scope)->name;
-        $data['nested'] = $this->nested()->get()->pluck('name')->toArray();
+        $data['tags'] = $this->tags()->get()->pluck('name')->toArray();
         $data['cards'] = $this->cards()->get()->pluck('name')->toArray();
         $data['scopedCards'] = $this->scopedCards()->get()->pluck('name')->toArray();
+        $data['decks'] = $this->decks()->get()->pluck('name')->toArray();
+        $data['scopedDecks'] = $this->scopedDecks()->get()->pluck('name')->toArray();
         $data['books'] = $this->books()->get()->pluck('name')->toArray();
         $data['scopedBooks'] = $this->scopedBooks()->get()->pluck('name')->toArray();
 

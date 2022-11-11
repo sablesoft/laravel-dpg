@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -14,6 +15,7 @@ use App\Models\Traits\Tags;
  * @property-read int|null $cards_count
  * @property-read Card|null $hero
  * @property-read Card|null $quest
+ * @property-read Deck[]|null $decks
  */
 class Book extends Content
 {
@@ -57,6 +59,14 @@ class Book extends Content
     public function getCardsCountAttribute(): ?int
     {
         return $this->cards()->count() ?: null;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function decks(): HasMany
+    {
+        return $this->hasMany(Deck::class);
     }
 
     /**

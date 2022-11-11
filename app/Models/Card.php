@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
@@ -10,11 +11,9 @@ use App\Models\Traits\Books;
 
 /**
  * @property-read Tag[]|null $tags
- * @property-read Card[]|null $deck
- * @property-read Card[]|null $decks
+ * @property-read Decks[]|null $decks
+ * @property-read Decks[]|null $inDecks
  * @property-read Books[]|null $books
- *
- * @property-read Books[]|null $deck_size
  */
 class Card extends Content
 {
@@ -42,37 +41,22 @@ class Card extends Content
     }
 
     /**
-     * @return int|null
-     */
-    public function getDeckSizeAttribute(): ?int
-    {
-        return $this->deck()->sum('count') ?: null;
-    }
-
-    /**
      * @return BelongsToMany
      */
-    public function deck(): BelongsToMany
+    public function inDecks(): BelongsToMany
     {
         return $this->belongsToMany(
-            Card::class,
-            'decks',
-            'deck_id',
-            'card_id'
+            Deck::class,
+            'deck_card',
         )->withPivot('count');
     }
 
     /**
-     * @return BelongsToMany
+     * @return HasMany
      */
-    public function decks(): BelongsToMany
+    public function decks(): HasMany
     {
-        return $this->belongsToMany(
-            Card::class,
-            'decks',
-            'card_id',
-            'deck_id'
-        )->withPivot('count');
+        return $this->hasMany(Deck::class);
     }
 
     /**
@@ -82,7 +66,8 @@ class Card extends Content
     {
         $data = parent::export();
         $data['scope'] = optional($this->scope)->name;
-        $data['deck'] = $this->deck()->get()->pluck('name')->toArray();
+        $data['decks'] = $this->decks()->get()->pluck('name')->toArray();
+        $data['in_decks'] = $this->inDecks()->get()->pluck('name')->toArray();
 
         return $data;
     }

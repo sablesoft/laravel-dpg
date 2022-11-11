@@ -3,8 +3,11 @@
 namespace App\Nova\Filters;
 
 use App\Models\Card;
+use App\Models\Deck;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class DecksFilter extends ContentFilter
 {
@@ -38,6 +41,19 @@ class DecksFilter extends ContentFilter
      */
     public function options(Request $request): array
     {
-        return Card::options();
+        $options = [];
+        $query = Deck::query();
+        /** @var User $user */
+        $user = Auth::user();
+        if (!$user->isAdmin()) {
+            $query->where('is_public', true)->orWhere('owner_id', $user->getKey());
+        }
+
+        /** @var Deck $deck */
+        foreach ($query->get() as $deck) {
+            $options[$deck->getKey()] = $deck->name;
+        }
+
+        return $options;
     }
 }

@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use App\Nova\Filters\DecksFilter;
 use App\Nova\Filters\CardsFilter;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\ScopesFilter;
@@ -47,6 +48,8 @@ class Tag extends Content
                 ->nullable(true)->sortable(true),
             Text::make(__('Books'), 'books_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
+            Text::make(__('Decks'), 'decks_string')
+                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')
                 ->sortable()
                 ->rules('max:255'),
@@ -61,13 +64,17 @@ class Tag extends Content
             DateTime::make(__('Updated At'), 'updated_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
-            HasMany::make(__('Scoped Tags'), 'nested', Tag::class)
+            HasMany::make(__('Scoped Tags'), 'tags', Tag::class)
                 ->sortable()->nullable(true),
             HasMany::make(__('Scoped Cards'), 'scopedCards', Card::class)
+                ->sortable()->nullable(true),
+            HasMany::make(__('Scoped Decks'), 'scopedDecks', Deck::class)
                 ->sortable()->nullable(true),
             HasMany::make(__('Scoped Books'), 'scopedBooks', Book::class)
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
+                ->sortable()->nullable(true),
+            BelongsToMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Books'), 'books', Book::class)
                 ->sortable()->nullable(true),
@@ -98,6 +105,7 @@ class Tag extends Content
             new OwnersFilter(),
             new ScopesFilter(),
             new BooksFilter(),
+            new DecksFilter(),
             new CardsFilter(),
         ];
     }

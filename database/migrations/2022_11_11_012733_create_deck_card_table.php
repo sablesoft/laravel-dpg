@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('decks', function (Blueprint $table) {
-            $table->foreignId('deck_id')->constrained('cards')
-                ->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('card_id')->constrained('cards')
-                ->cascadeOnUpdate()->cascadeOnDelete();
+        Schema::create('deck_card', function (Blueprint $table) {
+            $table->foreignId('deck_id')->nullable(false)
+                ->constrained('decks')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('card_id')->nullable(false)
+                ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
             $table->unsignedSmallInteger('count')
                 ->nullable(false)->default(1);
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('decks');
+        Schema::dropIfExists('deck_card');
     }
 };

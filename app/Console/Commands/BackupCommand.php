@@ -31,12 +31,13 @@ class BackupCommand extends Command
         'tags',
         'cards',
         'card_tag',
-        'decks',
         'books',
-        'book_card'
+        'book_card',
+        'book_tag',
+        'decks',
     ];
 
-    protected string $lastTable = 'book_tag';
+    protected string $lastTable = 'deck_tag';
 
     /**
      * Execute the console command.

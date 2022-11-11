@@ -7,6 +7,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -51,9 +52,11 @@ class Book extends Content
             Text::make(__('Tags'), 'tags_string')
                 ->hideFromIndex()->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')->nullable(),
-            BelongsToMany::make(__('Tags'), 'tags', Tag::class)
+            HasMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
+                ->sortable()->nullable(true),
+            BelongsToMany::make(__('Tags'), 'tags', Tag::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),

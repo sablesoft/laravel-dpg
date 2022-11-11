@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -25,9 +26,9 @@ trait Options
     }
 
     /**
-     * @return mixed
+     * @return Builder
      */
-    protected static function getOptionsQuery()
+    protected static function getOptionsQuery(): Builder
     {
         $query = static::select(['id', 'name']);
         if (get_called_class() == User::class) {

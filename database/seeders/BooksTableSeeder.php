@@ -23,13 +23,15 @@ class BooksTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'scope_id' => NULL,
-                'image' => '5JwWzj3NJfN0etCZb1ZPxSk3jLaggQNqWrxlgpxA.jpg',
-                'name' => '{"en":"Totem Quest","ru":"Поиски Тотема"}',
+                'image' => 'N5ru4ZmxP9ifSV2oGbaBfgUPkIaUG5om9lFwxIiX.jpg',
+                'name' => '{"en":"Rainforest Legends","ru":"Поиски Тотема"}',
                 'desc' => '{"en":null}',
+                'hero_id' => 3,
+                'quest_id' => 22,
                 'owner_id' => 1,
                 'is_public' => false,
                 'created_at' => '2022-11-06 05:07:24',
-                'updated_at' => '2022-11-08 12:31:57',
+                'updated_at' => '2022-11-10 23:41:53',
             ),
         ));
         

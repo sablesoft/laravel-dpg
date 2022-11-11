@@ -124,6 +124,16 @@ class BookCardTableSeeder extends Seeder
                 'book_id' => 1,
                 'card_id' => 5,
             ),
+            21 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 22,
+            ),
+            22 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 23,
+            ),
         ));
         
         

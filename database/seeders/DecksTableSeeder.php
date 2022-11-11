@@ -81,99 +81,99 @@ class DecksTableSeeder extends Seeder
             ),
             10 => 
             array (
-                'deck_id' => 17,
-                'card_id' => 19,
+                'deck_id' => 16,
+                'card_id' => 4,
                 'count' => 1,
             ),
             11 => 
             array (
-                'deck_id' => 16,
+                'deck_id' => 14,
                 'card_id' => 4,
                 'count' => 1,
             ),
             12 => 
             array (
                 'deck_id' => 14,
-                'card_id' => 4,
+                'card_id' => 9,
                 'count' => 1,
             ),
             13 => 
             array (
                 'deck_id' => 14,
-                'card_id' => 9,
+                'card_id' => 6,
                 'count' => 1,
             ),
             14 => 
             array (
                 'deck_id' => 14,
-                'card_id' => 6,
+                'card_id' => 7,
                 'count' => 1,
             ),
             15 => 
             array (
                 'deck_id' => 14,
-                'card_id' => 7,
+                'card_id' => 8,
                 'count' => 1,
             ),
             16 => 
             array (
                 'deck_id' => 14,
-                'card_id' => 3,
-                'count' => 1,
-            ),
-            17 => 
-            array (
-                'deck_id' => 14,
-                'card_id' => 8,
-                'count' => 1,
-            ),
-            18 => 
-            array (
-                'deck_id' => 14,
                 'card_id' => 5,
                 'count' => 1,
             ),
-            19 => 
+            17 => 
             array (
                 'deck_id' => 12,
                 'card_id' => 9,
                 'count' => 1,
             ),
-            20 => 
+            18 => 
             array (
                 'deck_id' => 12,
                 'card_id' => 6,
                 'count' => 1,
             ),
-            21 => 
-            array (
-                'deck_id' => 12,
-                'card_id' => 3,
-                'count' => 1,
-            ),
-            22 => 
+            19 => 
             array (
                 'deck_id' => 12,
                 'card_id' => 5,
                 'count' => 1,
             ),
-            23 => 
+            20 => 
             array (
                 'deck_id' => 20,
                 'card_id' => 2,
                 'count' => 1,
             ),
-            24 => 
+            21 => 
             array (
                 'deck_id' => 20,
                 'card_id' => 1,
                 'count' => 1,
             ),
-            25 => 
+            22 => 
             array (
                 'deck_id' => 21,
                 'card_id' => 20,
                 'count' => 1,
+            ),
+            23 => 
+            array (
+                'deck_id' => 17,
+                'card_id' => 19,
+                'count' => 10,
+            ),
+            24 => 
+            array (
+                'deck_id' => 17,
+                'card_id' => 24,
+                'count' => 2,
+            ),
+            25 => 
+            array (
+                'deck_id' => 17,
+                'card_id' => 23,
+                'count' => 3,
             ),
         ));
         

@@ -69,18 +69,6 @@ class CardsTableSeeder extends Seeder
             ),
             4 => 
             array (
-                'id' => 3,
-                'scope_id' => 3,
-                'image' => NULL,
-                'name' => '{"en":"Titu","ru":"Титу"}',
-                'desc' => '{"en":"The boy from the forest tribe. Originally from the small settlement of Lanza Piya. Raised by parents and other residents of the settlement. Has a younger sister. Smart. Leader among peers.","ru":"Мальчик из лесного племени. Родом из небольшого поселения Ланза Пийя. Воспитан родителями и другими жителями поселения. Имеет младшую сестру. Умен и сообразителен. Лидер среди сверстников."}',
-                'owner_id' => 1,
-                'is_public' => false,
-                'created_at' => '2022-11-08 02:27:58',
-                'updated_at' => '2022-11-09 04:42:27',
-            ),
-            5 => 
-            array (
                 'id' => 2,
                 'scope_id' => 1,
                 'image' => NULL,
@@ -91,7 +79,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:16:54',
                 'updated_at' => '2022-11-09 04:42:58',
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 1,
                 'scope_id' => 1,
@@ -103,7 +91,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:09:50',
                 'updated_at' => '2022-11-09 04:43:14',
             ),
-            7 => 
+            6 => 
             array (
                 'id' => 9,
                 'scope_id' => 3,
@@ -115,7 +103,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:36:25',
                 'updated_at' => '2022-11-09 04:41:07',
             ),
-            8 => 
+            7 => 
             array (
                 'id' => 5,
                 'scope_id' => 3,
@@ -127,7 +115,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:31:41',
                 'updated_at' => '2022-11-09 04:42:00',
             ),
-            9 => 
+            8 => 
             array (
                 'id' => 16,
                 'scope_id' => 15,
@@ -139,7 +127,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 05:10:58',
                 'updated_at' => '2022-11-10 01:55:58',
             ),
-            10 => 
+            9 => 
             array (
                 'id' => 15,
                 'scope_id' => 15,
@@ -151,7 +139,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 05:09:34',
                 'updated_at' => '2022-11-10 01:56:24',
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 14,
                 'scope_id' => 15,
@@ -163,7 +151,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 05:07:18',
                 'updated_at' => '2022-11-10 01:56:45',
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 13,
                 'scope_id' => 15,
@@ -175,7 +163,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 05:01:41',
                 'updated_at' => '2022-11-10 01:57:09',
             ),
-            13 => 
+            12 => 
             array (
                 'id' => 12,
                 'scope_id' => 15,
@@ -187,7 +175,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 05:00:36',
                 'updated_at' => '2022-11-10 01:57:28',
             ),
-            14 => 
+            13 => 
             array (
                 'id' => 11,
                 'scope_id' => 15,
@@ -199,7 +187,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 04:58:48',
                 'updated_at' => '2022-11-10 01:57:46',
             ),
-            15 => 
+            14 => 
             array (
                 'id' => 10,
                 'scope_id' => 15,
@@ -211,7 +199,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 04:57:14',
                 'updated_at' => '2022-11-10 01:58:07',
             ),
-            16 => 
+            15 => 
             array (
                 'id' => 17,
                 'scope_id' => 15,
@@ -223,7 +211,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 13:55:09',
                 'updated_at' => '2022-11-10 13:55:09',
             ),
-            17 => 
+            16 => 
             array (
                 'id' => 18,
                 'scope_id' => 18,
@@ -235,7 +223,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:31:06',
                 'updated_at' => '2022-11-10 14:31:06',
             ),
-            18 => 
+            17 => 
             array (
                 'id' => 19,
                 'scope_id' => 15,
@@ -247,7 +235,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:37:54',
                 'updated_at' => '2022-11-10 14:37:54',
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 20,
                 'scope_id' => 10,
@@ -259,7 +247,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 15:34:14',
                 'updated_at' => '2022-11-10 15:34:14',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 21,
                 'scope_id' => 1,
@@ -270,6 +258,54 @@ class CardsTableSeeder extends Seeder
                 'is_public' => false,
                 'created_at' => '2022-11-10 15:40:03',
                 'updated_at' => '2022-11-10 15:40:03',
+            ),
+            20 => 
+            array (
+                'id' => 3,
+                'scope_id' => 22,
+                'image' => NULL,
+                'name' => '{"en":"Titu","ru":"Титу"}',
+                'desc' => '{"en":"The boy from the forest tribe. Originally from the small settlement of Lanza Piya. Raised by parents and other residents of the settlement. Has a younger sister. Smart. Leader among peers.","ru":"Мальчик из лесного племени. Родом из небольшого поселения Ланза Пийя. Воспитан родителями и другими жителями поселения. Имеет младшую сестру. Умен и сообразителен. Лидер среди сверстников."}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-08 02:27:58',
+                'updated_at' => '2022-11-10 23:34:10',
+            ),
+            21 => 
+            array (
+                'id' => 22,
+                'scope_id' => 23,
+                'image' => 'ym4kFiMwWuKnM1KfNx7ZsM1GgigRPVAaqZkeAx63.jpg',
+                'name' => '{"en":"Totem Quest"}',
+                'desc' => '{"en":"To pass the initiation ceremony, Titus needs to find his totem of power. The difficulty is that the boy so far has a rather poor understanding of what it is and where to look for it.\\r\\n\\r\\nTherefore, at every opportunity, he needs to extract any information on this topic."}',
+                'owner_id' => 1,
+                'is_public' => false,
+                'created_at' => '2022-11-10 23:41:18',
+                'updated_at' => '2022-11-10 23:41:18',
+            ),
+            22 => 
+            array (
+                'id' => 23,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Find Item"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-10 23:58:28',
+                'updated_at' => '2022-11-10 23:58:28',
+            ),
+            23 => 
+            array (
+                'id' => 24,
+                'scope_id' => 15,
+                'image' => NULL,
+                'name' => '{"en":"Find Place"}',
+                'desc' => '{"en":null}',
+                'owner_id' => 1,
+                'is_public' => true,
+                'created_at' => '2022-11-10 23:59:46',
+                'updated_at' => '2022-11-10 23:59:46',
             ),
         ));
         

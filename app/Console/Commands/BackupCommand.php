@@ -35,6 +35,7 @@ class BackupCommand extends Command
         'book_card',
         'book_tag',
         'decks',
+        'deck_card',
     ];
 
     protected string $lastTable = 'deck_tag';

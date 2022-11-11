@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BookTagTableSeeder::class);
         $this->call(BookCardTableSeeder::class);
         $this->call(DecksTableSeeder::class);
+        $this->call(DeckCardTableSeeder::class);
         $this->call(DeckTagTableSeeder::class);
         $this->call(SequencesSeeder::class);
     }

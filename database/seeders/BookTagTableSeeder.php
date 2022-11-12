@@ -139,6 +139,61 @@ class BookTagTableSeeder extends Seeder
                 'book_id' => 1,
                 'tag_id' => 17,
             ),
+            24 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 26,
+            ),
+            25 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 27,
+            ),
+            26 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 28,
+            ),
+            27 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 29,
+            ),
+            28 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 30,
+            ),
+            29 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 31,
+            ),
+            30 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 32,
+            ),
+            31 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 33,
+            ),
+            32 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 34,
+            ),
+            33 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 35,
+            ),
+            34 => 
+            array (
+                'book_id' => 1,
+                'tag_id' => 36,
+            ),
         ));
         
         

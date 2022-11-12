@@ -117,89 +117,41 @@ class CardsTableSeeder extends Seeder
             ),
             8 => 
             array (
-                'id' => 16,
-                'name' => '{"en":"Bird Encounter","ru":"Встреча - Птица"}',
-                'desc' => '{"ru":null}',
+                'id' => 14,
+                'name' => '{"en":"Character","ru":"Встреча - Персонаж"}',
+                'desc' => '{"en":"Any creature that plays an important role in this book is a character. Each character has a name, skills, knowledge, features and other characteristics."}',
                 'is_public' => false,
                 'image' => NULL,
-                'scope_id' => 15,
+                'scope_id' => 3,
                 'owner_id' => 1,
-                'created_at' => '2022-11-09 05:10:58',
-                'updated_at' => '2022-11-10 01:55:58',
+                'created_at' => '2022-11-09 05:07:18',
+                'updated_at' => '2022-11-12 04:37:46',
             ),
             9 => 
             array (
-                'id' => 15,
-                'name' => '{"en":"Insect Encounter","ru":"Встреча - Насекомое"}',
-                'desc' => '{"ru":null}',
+                'id' => 12,
+                'name' => '{"en":"Human","ru":"Встреча - Человек"}',
+                'desc' => '{"en":null}',
                 'is_public' => false,
                 'image' => NULL,
-                'scope_id' => 15,
+                'scope_id' => 14,
                 'owner_id' => 1,
-                'created_at' => '2022-11-09 05:09:34',
-                'updated_at' => '2022-11-10 01:56:24',
+                'created_at' => '2022-11-09 05:00:36',
+                'updated_at' => '2022-11-12 04:41:42',
             ),
             10 => 
             array (
-                'id' => 14,
-                'name' => '{"en":"Character Encounter","ru":"Встреча - Персонаж"}',
-                'desc' => '{"ru":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'scope_id' => 15,
-                'owner_id' => 1,
-                'created_at' => '2022-11-09 05:07:18',
-                'updated_at' => '2022-11-10 01:56:45',
-            ),
-            11 => 
-            array (
                 'id' => 13,
-                'name' => '{"en":"Spirit Encounter","ru":"Встреча - Дух"}',
-                'desc' => '{"ru":null}',
+                'name' => '{"en":"Spirit","ru":"Встреча - Дух"}',
+                'desc' => '{"en":null}',
                 'is_public' => false,
                 'image' => NULL,
-                'scope_id' => 15,
+                'scope_id' => 8,
                 'owner_id' => 1,
                 'created_at' => '2022-11-09 05:01:41',
-                'updated_at' => '2022-11-10 01:57:09',
+                'updated_at' => '2022-11-12 04:47:35',
             ),
-            12 => 
-            array (
-                'id' => 12,
-                'name' => '{"en":"Human Encounter","ru":"Встреча - Человек"}',
-                'desc' => '{"ru":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'scope_id' => 15,
-                'owner_id' => 1,
-                'created_at' => '2022-11-09 05:00:36',
-                'updated_at' => '2022-11-10 01:57:28',
-            ),
-            13 => 
-            array (
-                'id' => 11,
-                'name' => '{"en":"Plant Encounter","ru":"Встреча - Растение"}',
-                'desc' => '{"ru":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'scope_id' => 15,
-                'owner_id' => 1,
-                'created_at' => '2022-11-09 04:58:48',
-                'updated_at' => '2022-11-10 01:57:46',
-            ),
-            14 => 
-            array (
-                'id' => 10,
-                'name' => '{"en":"Animal Encounter","ru":"Встреча - Животное"}',
-                'desc' => '{"ru":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'scope_id' => 15,
-                'owner_id' => 1,
-                'created_at' => '2022-11-09 04:57:14',
-                'updated_at' => '2022-11-10 01:58:07',
-            ),
-            15 => 
+            11 => 
             array (
                 'id' => 18,
                 'name' => '{"en":"Lanza Piya"}',
@@ -211,19 +163,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:31:06',
                 'updated_at' => '2022-11-10 14:31:06',
             ),
-            16 => 
-            array (
-                'id' => 19,
-                'name' => '{"en":"Rest Time"}',
-                'desc' => '{"en":"Nothing special happened. But after a while, the hero decided to take a break. At the same time, he can switch to some practice."}',
-                'is_public' => false,
-                'image' => NULL,
-                'scope_id' => 15,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 14:37:54',
-                'updated_at' => '2022-11-10 14:37:54',
-            ),
-            17 => 
+            12 => 
             array (
                 'id' => 20,
                 'name' => '{"en":"Legends"}',
@@ -235,7 +175,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 15:34:14',
                 'updated_at' => '2022-11-10 15:34:14',
             ),
-            18 => 
+            13 => 
             array (
                 'id' => 21,
                 'name' => '{"en":"Knowledge"}',
@@ -247,7 +187,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 15:40:03',
                 'updated_at' => '2022-11-10 15:40:03',
             ),
-            19 => 
+            14 => 
             array (
                 'id' => 3,
                 'name' => '{"en":"Titu","ru":"Титу"}',
@@ -259,7 +199,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:27:58',
                 'updated_at' => '2022-11-10 23:34:10',
             ),
-            20 => 
+            15 => 
             array (
                 'id' => 22,
                 'name' => '{"en":"Totem Quest"}',
@@ -271,31 +211,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:41:18',
                 'updated_at' => '2022-11-10 23:41:18',
             ),
-            21 => 
-            array (
-                'id' => 23,
-                'name' => '{"en":"Find Item"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => NULL,
-                'scope_id' => 15,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 23:58:28',
-                'updated_at' => '2022-11-10 23:58:28',
-            ),
-            22 => 
-            array (
-                'id' => 24,
-                'name' => '{"en":"Find Place"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => NULL,
-                'scope_id' => 15,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 23:59:46',
-                'updated_at' => '2022-11-10 23:59:46',
-            ),
-            23 => 
+            16 => 
             array (
                 'id' => 17,
                 'name' => '{"en":"Way"}',
@@ -306,6 +222,162 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-10 13:55:09',
                 'updated_at' => '2022-11-11 03:37:53',
+            ),
+            17 => 
+            array (
+                'id' => 28,
+                'name' => '{"en":"Jaguar"}',
+                'desc' => '{"en":"Jaguars spend much of their time on the ground. They use their padded paws to move silently through the forest floor. Although not quite as agile as a leopard, jaguars are capable of climbing trees to hunt or to rest.\\r\\n\\r\\nJaguars are mostly nocturnal hunters. They use their excellent vision and sharp teeth to ambush prey and crush their skulls. Jaguars are known to eat more than 85 species of prey, including armadillos, peccaries, capybaras, tapir, deer, squirrels, birds, and even snails. Not confined to hunting on land, jaguars are adept at snatching fish, turtles, and young caiman from the water. They are even able to hunt monkeys and other tree-dwellers who occasionally wander to lower branches."}',
+                'is_public' => false,
+                'image' => 'p4T9QxXKlY5BR2p0Y75BV7RLy5qCiBGcIUFD8VpC.jpg',
+                'scope_id' => 12,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 02:59:15',
+                'updated_at' => '2022-11-12 02:59:15',
+            ),
+            18 => 
+            array (
+                'id' => 10,
+                'name' => '{"en":"Animal","ru":"Встреча - Животное"}',
+                'desc' => '{"en":"This world is replete with an unimaginable variety of animals."}',
+                'is_public' => false,
+                'image' => NULL,
+                'scope_id' => 12,
+                'owner_id' => 1,
+                'created_at' => '2022-11-09 04:57:14',
+                'updated_at' => '2022-11-12 02:38:18',
+            ),
+            19 => 
+            array (
+                'id' => 11,
+                'name' => '{"en":"Plant","ru":"Встреча - Растение"}',
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'scope_id' => 13,
+                'owner_id' => 1,
+                'created_at' => '2022-11-09 04:58:48',
+                'updated_at' => '2022-11-12 04:50:47',
+            ),
+            20 => 
+            array (
+                'id' => 26,
+                'name' => '{"en":"Blue Morpho Butterfly"}',
+                'desc' => '{"en":"With its brilliant, iridescent blue wings, the blue morpho butterfly flutters through the rainforest canopy. The many “eyespots” on its brown underside trick predators into thinking the butterfly is a large predator.\\r\\n\\r\\nThe blue morpho’s diet changes throughout each stage of its lifecycle. As a caterpillar, it chews leaves of many varieties but prefers to dine on plants in the pea family. When it becomes a butterfly it can no longer chew, but drinks its food instead. Adults use a long, protruding mouthpart called a proboscis as a drinking straw to sip the juice of rotting fruit, the fluids of decomposing animals, tree sap, fungi, and wet mud. Blue morphos taste fruit with sensors on their legs, and they “taste-smell” the air with their antennae, which serve as a combined tongue and nose.\\r\\n\\r\\nBirds like the jacamar and flycatcher are the adult butterfly’s natural predators."}',
+                'is_public' => false,
+                'image' => '4a5tCKCnyZjFIwKK8UUexarCh3Vs9cYVYnJZDm8y.jpg',
+                'scope_id' => 7,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 02:19:01',
+                'updated_at' => '2022-11-12 02:25:04',
+            ),
+            21 => 
+            array (
+                'id' => 15,
+                'name' => '{"en":"Insect","ru":"Встреча - Насекомое"}',
+                'desc' => '{"en":"Insects are the most diverse group of animals; they include more than a million described species and represent more than half of all known living organisms. The total number of extant species is estimated at between six and ten million; potentially over 90% of the animal life forms on Earth are insects.\\r\\n\\r\\nInsect pollinators are essential to the life cycle of many flowering plant species on which most organisms, including humans, are at least partly dependent; without them, the terrestrial portion of the biosphere would be devastated. Many insects are considered ecologically beneficial as predators and a few provide direct economic benefit. Silkworms produce silk and honey bees produce honey and both have been domesticated by humans. Insects are consumed as food in 80% of the world\'s nations, by people in roughly 3000 ethnic groups"}',
+                'is_public' => false,
+                'image' => NULL,
+                'scope_id' => 7,
+                'owner_id' => 1,
+                'created_at' => '2022-11-09 05:09:34',
+                'updated_at' => '2022-11-12 02:31:09',
+            ),
+            22 => 
+            array (
+                'id' => 27,
+                'name' => '{"en":"Brown Sloth"}',
+                'desc' => '{"en":"This cat-sized mammal, typically weighing 8 – 9 pounds, has a round head, a short snout, small eyes, long legs, tiny ears, and a stubby tail. Sloths have long, coarse fur that is light brown in color but often appears green due to the blue-green algae that grow there. Instead of toes, their front and hind feet have three curved claws that allow them to easily hook onto tree branches and hang upside-down. Sloths can rotate their heads nearly 90 degrees, and their mouths are shaped so they look like they are always smiling.\\r\\n\\r\\nTheir algae-covered fur helps camouflage the sloth in its forest environment. Sloths spend nearly all of their time in trees, descending to the ground only once a week to defecate.\\r\\n\\r\\nSloths are among the slowest-moving animals on Earth; they can swim but are virtually unable to walk. This makes them an easy target for jaguars, eagles, and people that hunt sloths for their meat."}',
+                'is_public' => false,
+                'image' => 'Ia6saaiCLY490Tzug5xoc69if21dYC0HOBf62OQH.jpg',
+                'scope_id' => 12,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 02:48:34',
+                'updated_at' => '2022-11-12 02:49:41',
+            ),
+            23 => 
+            array (
+                'id' => 23,
+                'name' => '{"en":"Item"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 24,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 23:58:28',
+                'updated_at' => '2022-11-12 04:53:40',
+            ),
+            24 => 
+            array (
+                'id' => 24,
+                'name' => '{"en":"Place"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 5,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 23:59:46',
+                'updated_at' => '2022-11-12 04:56:01',
+            ),
+            25 => 
+            array (
+                'id' => 19,
+                'name' => '{"en":"Rest"}',
+                'desc' => '{"en":"From time to time everyone needs to rest, even the hero. At the same time, he can switch to some practice."}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 19,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 14:37:54',
+                'updated_at' => '2022-11-12 04:59:41',
+            ),
+            26 => 
+            array (
+                'id' => 29,
+                'name' => '{"en":"Capybara"}',
+                'desc' => '{"en":"Capybaras are the largest rodents on earth. They have a heavy, barrel-shaped body that sits on relatively squat legs, shorter in the front than the back. Their brown fur is coarse and sparse enough to reveal the grey skin beneath it.\\r\\n\\r\\nCapybaras have partially webbed feet, which help to propel them through the water or swampy areas. Similar to a hippopotamus, the capybara’s eyes, nose, and ears are located on the top of its head, allowing it to peek above the surface for a breath of air and a quick check for predators while the bulk of its body remains hidden beneath the water.\\r\\n\\r\\nThey are semi-aquatic and will spend most of their time in dense vegetation around rivers, lakes, ponds, marshes, and swamps. Feeding mostly in the afternoon, and on and off at night, capybaras tend to doze in the morning. They take short naps throughout the day while other members of their group stand guard.\\r\\n\\r\\nThey are herbivores and eat the vegetation that lines water sources and other aquatic plants. They also eat their own poop, which contains beneficial bacteria that helps their stomach to break down the fiber from the grass. During the dry season or in drought conditions, capybaras will also eat grains, melons, reeds and squashes.\\r\\n\\r\\nCapybaras are naturally threatened by jaguars, caimans and anacondas, and their young can be taken by ocelots and harpy eagles."}',
+                'is_public' => false,
+                'image' => '4TGnMBEBJrTHKhjJurd7rupbVf30jnagpJlECi4j.png',
+                'scope_id' => 12,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:22:02',
+                'updated_at' => '2022-11-12 03:22:02',
+            ),
+            27 => 
+            array (
+                'id' => 25,
+                'name' => '{"en":"Mountain Gorilla"}',
+                'desc' => '{"en":"Mountain gorillas are the largest living primates on earth! They can move on their two feet, on all four of their limbs, and can also climb trees and even swing from branches. Mountain gorillas, along with chimpanzees, orangutans, and bonobos, are the closest living relatives of humans, with mountain gorillas having the most developed brain of the four.\\r\\n\\r\\nMountain gorillas live in groups of roughly 30, with one dominant, male troop leader called a ‘silverback’ for the silver tint in his coat. The dominant silverback is in charge of coordinating when the troop eats, rests, and moves around the group’s home range, and the rest of the group is organized in a complex, evolved social order that points to the mountain gorilla’s extraordinary intelligence.\\r\\n\\r\\nMountain gorillas are primarily herbivores and they eat large portions of over 100 different kinds of plants. They do not drink much water because they get most of their needed hydration from their constant consumption of plants."}',
+                'is_public' => false,
+                'image' => 'l3y3Rr27v9fHC8Up2ojegcx2YdmkpJ5OoBy56k03.jpg',
+                'scope_id' => 12,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 01:35:45',
+                'updated_at' => '2022-11-12 04:13:27',
+            ),
+            28 => 
+            array (
+                'id' => 30,
+                'name' => '{"en":"Scarlet Macaw"}',
+                'desc' => '{"en":"Macaws are the largest parrots in the world! This beautiful macaw has a creamy white, almost featherless face, with bright red plumage covering most of its body, wings, and long tail. Brilliant blue and yellow feathers also adorn the lower wings. The bird’s strong beak is adapted to breaking hard nuts found in the rainforest.\\r\\n\\r\\nThey prefer to spend their time in tall, deciduous trees in forests and near rivers, usually in large, noisy groups. Macaws also mate for life, nesting from January through April in the holes of dead canopy trees. Mated adults lay up to two eggs per year, and preen each other and their offspring for hours, cleaning bugs from their feathers.\\r\\n\\r\\nNuts, leaves, berries and seeds from the rainforest make up the bulk of the scarlet macaw’s diet. Its strong, hooked beak is perfect for breaking nuts and seeds. Interestingly, the scarlet macaw can eat fruits toxic enough to kill other animals. This could be because they also eat large amounts of clay, which is thought to neutralize plant poisons."}',
+                'is_public' => false,
+                'image' => 'Jq108MbkcrlwQTFDsW2oJiGoTkOdXIRPIlh6FxwD.jpg',
+                'scope_id' => 6,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 04:20:48',
+                'updated_at' => '2022-11-12 04:20:48',
+            ),
+            29 => 
+            array (
+                'id' => 16,
+                'name' => '{"en":"Bird","ru":"Встреча - Птица"}',
+                'desc' => '{"en":"Birds are a group of warm-blooded vertebrates, characterized by feathers, toothless beaked jaws, the laying of hard-shelled eggs, a high metabolic rate, a four-chambered heart, and a strong yet lightweight skeleton. Birds live worldwide and range in size from the bee hummingbird to the ostrich. There are about ten thousand living species, more than half of which are passerine, or \\"perching\\" birds.\\r\\n\\r\\nMany social species pass on knowledge across generations, which is considered a form of culture. Birds are social, communicating with visual signals, calls, and songs, and participating in such behaviours as cooperative breeding and hunting, flocking, and mobbing of predators."}',
+                'is_public' => false,
+                'image' => NULL,
+                'scope_id' => 6,
+                'owner_id' => 1,
+                'created_at' => '2022-11-09 05:10:58',
+                'updated_at' => '2022-11-12 04:32:15',
             ),
         ));
         

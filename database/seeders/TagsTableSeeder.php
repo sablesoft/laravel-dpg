@@ -153,18 +153,6 @@ class TagsTableSeeder extends Seeder
             ),
             11 => 
             array (
-                'id' => 9,
-                'name' => '{"ru":"Джунгли","en":"Rainforest"}',
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'scope_id' => 17,
-                'owner_id' => 1,
-                'created_at' => '2022-11-08 02:56:49',
-                'updated_at' => '2022-11-10 14:25:17',
-            ),
-            12 => 
-            array (
                 'id' => 18,
                 'name' => '{"en":"Settlement"}',
                 'desc' => '{"en":null}',
@@ -175,7 +163,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:26:20',
                 'updated_at' => '2022-11-10 14:26:20',
             ),
-            13 => 
+            12 => 
             array (
                 'id' => 19,
                 'name' => '{"en":"Rest"}',
@@ -187,7 +175,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:36:47',
                 'updated_at' => '2022-11-10 14:36:47',
             ),
-            14 => 
+            13 => 
             array (
                 'id' => 20,
                 'name' => '{"en":"Practice"}',
@@ -199,7 +187,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:36:58',
                 'updated_at' => '2022-11-10 14:36:58',
             ),
-            15 => 
+            14 => 
             array (
                 'id' => 21,
                 'name' => '{"en":"Find"}',
@@ -211,7 +199,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:39:42',
                 'updated_at' => '2022-11-10 14:39:42',
             ),
-            16 => 
+            15 => 
             array (
                 'id' => 22,
                 'name' => '{"en":"Hero"}',
@@ -223,7 +211,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:33:23',
                 'updated_at' => '2022-11-10 23:33:23',
             ),
-            17 => 
+            16 => 
             array (
                 'id' => 23,
                 'name' => '{"en":"Quest"}',
@@ -235,7 +223,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:33:42',
                 'updated_at' => '2022-11-10 23:33:42',
             ),
-            18 => 
+            17 => 
             array (
                 'id' => 24,
                 'name' => '{"en":"Item"}',
@@ -247,7 +235,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:57:58',
                 'updated_at' => '2022-11-10 23:57:58',
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 16,
                 'name' => '{"en":"Encounter","ru":"Встреча"}',
@@ -259,7 +247,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 04:55:16',
                 'updated_at' => '2022-11-11 00:07:30',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 11,
                 'name' => '{"en":"Clan","ru":"Клан"}',
@@ -271,7 +259,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:08:04',
                 'updated_at' => '2022-11-11 00:08:20',
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 3,
                 'name' => '{"en":"Character","ru":"Персонаж"}',
@@ -283,7 +271,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:20:38',
                 'updated_at' => '2022-11-11 00:08:52',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 4,
                 'name' => '{"en":"Power","ru":"Сила"}',
@@ -295,7 +283,7 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:43:27',
                 'updated_at' => '2022-11-11 00:09:25',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 6,
                 'name' => '{"en":"Bird","ru":"Птица"}',
@@ -306,6 +294,162 @@ class TagsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-08 02:17:34',
                 'updated_at' => '2022-11-11 00:09:59',
+            ),
+            23 => 
+            array (
+                'id' => 25,
+                'name' => '{"en":"Mountain"}',
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'scope_id' => 17,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 01:57:20',
+                'updated_at' => '2022-11-12 01:57:20',
+            ),
+            24 => 
+            array (
+                'id' => 26,
+                'name' => '{"en":"Grassland"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 17,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:02:37',
+                'updated_at' => '2022-11-12 03:02:37',
+            ),
+            25 => 
+            array (
+                'id' => 27,
+                'name' => '{"en":"Seasonal Forest"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 17,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:04:11',
+                'updated_at' => '2022-11-12 03:04:11',
+            ),
+            26 => 
+            array (
+                'id' => 28,
+                'name' => '{"en":"Savanna"}',
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'scope_id' => 17,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:09:23',
+                'updated_at' => '2022-11-12 03:09:23',
+            ),
+            27 => 
+            array (
+                'id' => 29,
+                'name' => '{"en":"Lake"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 17,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:24:41',
+                'updated_at' => '2022-11-12 03:25:24',
+            ),
+            28 => 
+            array (
+                'id' => 30,
+                'name' => '{"en":"River"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 17,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:25:49',
+                'updated_at' => '2022-11-12 03:26:03',
+            ),
+            29 => 
+            array (
+                'id' => 31,
+                'name' => '{"en":"Swamp"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 17,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:27:08',
+                'updated_at' => '2022-11-12 03:27:08',
+            ),
+            30 => 
+            array (
+                'id' => 32,
+                'name' => '{"en":"Enemy"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 2,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:49:41',
+                'updated_at' => '2022-11-12 03:49:41',
+            ),
+            31 => 
+            array (
+                'id' => 33,
+                'name' => '{"en":"Prey"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 2,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:51:45',
+                'updated_at' => '2022-11-12 03:51:45',
+            ),
+            32 => 
+            array (
+                'id' => 34,
+                'name' => '{"en":"Predator"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 2,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:54:28',
+                'updated_at' => '2022-11-12 03:54:28',
+            ),
+            33 => 
+            array (
+                'id' => 35,
+                'name' => '{"en":"Herbivore"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 2,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:58:18',
+                'updated_at' => '2022-11-12 03:58:18',
+            ),
+            34 => 
+            array (
+                'id' => 9,
+                'name' => '{"ru":"Джунгли","en":"Rainforest"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 17,
+                'owner_id' => 1,
+                'created_at' => '2022-11-08 02:56:49',
+                'updated_at' => '2022-11-12 04:02:21',
+            ),
+            35 => 
+            array (
+                'id' => 36,
+                'name' => '{"en":"Frugivorous"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 2,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 04:23:13',
+                'updated_at' => '2022-11-12 04:23:13',
             ),
         ));
         

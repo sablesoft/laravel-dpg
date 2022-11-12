@@ -62,7 +62,7 @@ class Card extends Content
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             HasMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
-            BelongsToMany::make(__('In Decks'), 'inDecks', Card::class)
+            BelongsToMany::make(__('In Decks'), 'inDecks', Deck::class)
                 ->fields(function () {
                     return [
                         Number::make(__('Count'), 'count')

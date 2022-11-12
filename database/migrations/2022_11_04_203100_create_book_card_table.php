@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('book_card', function (Blueprint $table) {
             $table->foreignId('book_id')->constrained('books')
                 ->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('card_id')->constrained('tags')
+            $table->foreignId('card_id')->constrained('cards')
                 ->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->unique(['book_id', 'card_id']);

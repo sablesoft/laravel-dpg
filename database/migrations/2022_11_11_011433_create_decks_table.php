@@ -21,7 +21,7 @@ return new class extends Migration
                 ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('scope_id')->nullable(false)
                 ->constrained('tags')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('desc')->nullable(true);
+            $table->longText('desc')->nullable(true);
             $table->boolean('is_public')->nullable(false)->default(false);
             $table->string('image')->nullable(true);
             $table->foreignId('owner_id')->nullable(false)

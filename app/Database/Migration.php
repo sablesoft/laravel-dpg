@@ -17,7 +17,7 @@ class Migration extends BaseMigration
         Schema::create($tableName, function (Blueprint $table) use ($moreFields){
             $table->id();
             $table->text('name')->nullable(false);
-            $table->text('desc')->nullable(true);
+            $table->longText('desc')->nullable(true);
             $table->boolean('is_public')->nullable(false)->default(false);
             $table->string('image')->nullable(true);
             $table->foreignId('scope_id')->nullable(true)

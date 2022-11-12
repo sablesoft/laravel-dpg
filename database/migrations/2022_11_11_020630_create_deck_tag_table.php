@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('deck_id')->nullable(false)
                 ->constrained('decks')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('tag_id')->nullable(false)
-                ->constrained('tags')->cascadeOnUpdate()->cascadeOnDelete();
+                ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->unique(['deck_id', 'tag_id']);
         });

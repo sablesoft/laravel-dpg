@@ -28,12 +28,10 @@ class BackupCommand extends Command
         'users',
         'roles',
         'model_has_roles',
-        'tags',
         'cards',
         'card_tag',
         'books',
         'book_card',
-        'book_tag',
         'decks',
         'deck_card',
     ];

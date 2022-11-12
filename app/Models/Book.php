@@ -4,45 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use App\Models\Traits\Tags;
 
 /**
- * @property-read Tag[]|null $tags
  * @property-read Card[]|null $cards
- *
- * @property-read int|null $cards_count
- * @property-read Card|null $hero
  * @property-read Card|null $quest
  * @property-read Deck[]|null $decks
+ *
+ * @property-read int|null $cards_count
  */
 class Book extends Content
 {
-    use HasFactory, Tags;
-
-    /**
-     * @return BelongsTo
-     */
-    public function hero(): BelongsTo
-    {
-        return $this->belongsTo(Card::class, 'hero_id');
-    }
-
     /**
      * @return BelongsTo
      */
     public function quest(): BelongsTo
     {
         return $this->belongsTo(Card::class, 'quest_id');
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function tags(): BelongsToMany
-    {
-        return $this->belongsToMany(Tag::class, 'book_tag');
     }
 
     /**

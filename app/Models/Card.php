@@ -10,7 +10,7 @@ use App\Models\Traits\Decks;
 use App\Models\Traits\Books;
 
 /**
- * @property-read Tag[]|null $tags
+ * @property-read Card[]|null $tags
  * @property-read Decks[]|null $decks
  * @property-read Decks[]|null $inDecks
  * @property-read Books[]|null $books
@@ -29,7 +29,12 @@ class Card extends Content
      */
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'card_tag');
+        return $this->belongsToMany(
+            Card::class,
+            'card_tag',
+            'card_id',
+            'tag_id'
+        );
     }
 
     /**

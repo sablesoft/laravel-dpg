@@ -56,7 +56,12 @@ class Deck extends Content
      */
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'deck_tag');
+        return $this->belongsToMany(
+            Card::class,
+            'deck_tag',
+            'deck_id',
+            'tag_id'
+        );
     }
 
     /**

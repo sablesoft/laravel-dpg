@@ -28,7 +28,6 @@ use App\Models\Traits\Options;
  * @property-read Language|null $language
  * @property-read Book[]|null $books
  * @property-read Card[]|null $cards
- * @property-read Tag[]|null $tags
  *
  * @property-read string|null $content_path
  * @property-read array $roles_names
@@ -114,14 +113,6 @@ class User extends Authenticatable
     public function cards(): HasMany
     {
         return $this->hasMany(Card::class, 'owner_id');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function tags(): HasMany
-    {
-        return $this->hasMany(Tag::class, 'owner_id');
     }
 
     /**

@@ -33,7 +33,7 @@ class Deck extends Content
             BelongsTo::make(__('Target'), 'target', Card::class)
                 ->nullable(false)->sortable()
                 ->required()->rules('required'),
-            BelongsTo::make(__('Scope'), 'scope', Tag::class)
+            BelongsTo::make(__('Scope'), 'scope', Card::class)
                 ->nullable(false)->sortable()
                 ->required()->rules('required'),
             BelongsTo::make(__('Book'), 'book', Book::class)
@@ -55,7 +55,7 @@ class Deck extends Content
                 ->nullable(true)->hideFromIndex(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
-            BelongsToMany::make(__('Tags'), 'tags', Tag::class)
+            BelongsToMany::make(__('Tags'), 'tags', Card::class)
         ];
     }
 

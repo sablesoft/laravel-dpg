@@ -50,7 +50,7 @@ class Card extends Content
                 ->sortable()->rules('required', 'max:30'),
             Image::make(__('Image'), 'image')
                 ->nullable(true)->hideFromIndex(),
-            BelongsTo::make(__('Scope'), 'scope', Tag::class)
+            BelongsTo::make(__('Scope'), 'scope', Card::class)
                 ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
@@ -61,6 +61,8 @@ class Card extends Content
             Text::make(__('Tags'), 'tags_string')
                 ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             HasMany::make(__('Decks'), 'decks', Deck::class)
+                ->sortable()->nullable(true),
+            BelongsToMany::make(__('Tags'), 'tags', Card::class)
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('In Decks'), 'inDecks', Deck::class)
                 ->fields(function () {
@@ -73,8 +75,6 @@ class Card extends Content
                     ];
                 })->sortable()->nullable(true),
             BelongsToMany::make(__('Books'), 'books', Book::class)
-                ->sortable()->nullable(true),
-            BelongsToMany::make(__('Tags'), 'tags', Tag::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')
                 ->hideFromIndex()

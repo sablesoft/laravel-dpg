@@ -14,27 +14,26 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('books')->delete();
-        
+
         \DB::table('books')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
-                'name' => '{"en":"Rainforest Legends","ru":"Поиски Тотема"}',
+                'name' => '{"en":"Titu\'s Adventures","ru":"Приключения Титу"}',
                 'desc' => '{"en":null}',
                 'is_public' => false,
                 'image' => 'N5ru4ZmxP9ifSV2oGbaBfgUPkIaUG5om9lFwxIiX.jpg',
-                'scope_id' => NULL,
-                'hero_id' => 3,
-                'quest_id' => 22,
+                'scope_id' => 55,
+                'quest_id' => 40,
                 'owner_id' => 1,
                 'created_at' => '2022-11-06 05:07:24',
                 'updated_at' => '2022-11-10 23:41:53',
             ),
         ));
-        
-        
+
+
     }
 }

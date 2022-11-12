@@ -14,8 +14,6 @@ return new class extends Migration
     public function up()
     {
         $this->upContent('books', function(Blueprint $table) {
-            $table->foreignId('hero_id')->nullable(true)
-                ->constrained('cards')->nullOnDelete();
             $table->foreignId('quest_id')->nullable(true)
                 ->constrained('cards')->nullOnDelete();
         });

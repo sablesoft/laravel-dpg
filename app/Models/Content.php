@@ -20,7 +20,7 @@ use App\Models\Traits\Options;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
- * @property-read Tag|null $scope
+ * @property-read Card|null $scope
  * @property-read User|null $owner
  */
 class Content extends Model
@@ -32,7 +32,7 @@ class Content extends Model
      */
     public function scope(): BelongsTo
     {
-        return $this->belongsTo(Tag::class, 'scope_id');
+        return $this->belongsTo(Card::class, 'scope_id');
     }
 
     /**

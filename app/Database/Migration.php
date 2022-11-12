@@ -21,7 +21,7 @@ class Migration extends BaseMigration
             $table->boolean('is_public')->nullable(false)->default(false);
             $table->string('image')->nullable(true);
             $table->foreignId('scope_id')->nullable(true)
-                ->constrained('tags')->cascadeOnUpdate()->nullOnDelete();
+                ->constrained('cards')->cascadeOnUpdate()->nullOnDelete();
             if ($moreFields) {
                 $moreFields($table);
             }

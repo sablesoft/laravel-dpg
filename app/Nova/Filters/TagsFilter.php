@@ -4,7 +4,7 @@ namespace App\Nova\Filters;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Tag;
+use App\Models\Card;
 
 class TagsFilter extends ContentFilter
 {
@@ -49,6 +49,6 @@ class TagsFilter extends ContentFilter
      */
     public function options(Request $request): array
     {
-        return Tag::options();
+        return Card::options();
     }
 }

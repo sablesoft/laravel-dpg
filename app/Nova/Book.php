@@ -13,6 +13,8 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use App\Nova\Filters\CardsFilter;
+use App\Nova\Filters\OwnersFilter;
+use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\IsPublicFilter;
 
 /**
@@ -43,10 +45,8 @@ class Book extends Content
                 ->nullable(true)->hideFromIndex(),
             Number::make(__('Unique Cards'), 'cards_count')
                 ->hideWhenUpdating()->hideWhenCreating(),
-            BelongsTo::make(__('Scope'), 'scope', Tag::class)
-                ->nullable(true)->sortable()->hideFromIndex(),
-            BelongsTo::make(__('Hero'), 'hero', Card::class)
-                ->nullable(true),
+            BelongsTo::make(__('Hero'), 'scope', Card::class)
+                ->nullable(true)->sortable(),
             BelongsTo::make(__('Main Quest'), 'quest', Card::class)
                 ->nullable(true),
             Text::make(__('Tags'), 'tags_string')
@@ -55,8 +55,6 @@ class Book extends Content
             HasMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
-                ->sortable()->nullable(true),
-            BelongsToMany::make(__('Tags'), 'tags', Tag::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
@@ -91,10 +89,12 @@ class Book extends Content
      */
     public function filters(Request $request): array
     {
-        return array_merge(parent::filters($request), [
+        return [
             new IsPublicFilter(),
+            new OwnersFilter(),
+            new ScopesFilter(),
             new CardsFilter()
-        ]);
+        ];
     }
 
     /**

@@ -2,9 +2,9 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\Card;
 
 class ScopesFilter extends ContentFilter
 {
@@ -36,6 +36,6 @@ class ScopesFilter extends ContentFilter
      */
     public function options(Request $request): array
     {
-        return Tag::options();
+        return Card::options();
     }
 }

@@ -14,12 +14,12 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('books')->delete();
-
+        
         \DB::table('books')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'name' => '{"en":"Titu\'s Adventures","ru":"Приключения Титу"}',
@@ -33,7 +33,7 @@ class BooksTableSeeder extends Seeder
                 'updated_at' => '2022-11-10 23:41:53',
             ),
         ));
-
-
+        
+        
     }
 }

@@ -213,30 +213,6 @@ class CardsTableSeeder extends Seeder
             ),
             16 => 
             array (
-                'id' => 17,
-                'name' => '{"en":"Bird","ru":"Птица"}',
-                'desc' => '{"en":"Birds are a group of warm-blooded vertebrates, characterized by feathers, toothless beaked jaws, the laying of hard-shelled eggs, a high metabolic rate, a four-chambered heart, and a strong yet lightweight skeleton. Birds live worldwide and range in size from the bee hummingbird to the ostrich. There are about ten thousand living species, more than half of which are passerine, or \\"perching\\" birds.\\r\\n\\r\\nMany social species pass on knowledge across generations, which is considered a form of culture. Birds are social, communicating with visual signals, calls, and songs, and participating in such behaviours as cooperative breeding and hunting, flocking, and mobbing of predators."}',
-                'is_public' => false,
-                'image' => NULL,
-                'scope_id' => 5,
-                'owner_id' => 1,
-                'created_at' => '2022-11-08 02:17:34',
-                'updated_at' => '2022-11-11 00:09:59',
-            ),
-            17 => 
-            array (
-                'id' => 18,
-                'name' => '{"en":"Insect","ru":"Насекомое"}',
-                'desc' => '{"en":"Insects are the most diverse group of animals; they include more than a million described species and represent more than half of all known living organisms. The total number of extant species is estimated at between six and ten million; potentially over 90% of the animal life forms on Earth are insects.\\r\\n\\r\\nInsect pollinators are essential to the life cycle of many flowering plant species on which most organisms, including humans, are at least partly dependent; without them, the terrestrial portion of the biosphere would be devastated. Many insects are considered ecologically beneficial as predators and a few provide direct economic benefit. Silkworms produce silk and honey bees produce honey and both have been domesticated by humans. Insects are consumed as food in 80% of the world\'s nations, by people in roughly 3000 ethnic groups"}',
-                'is_public' => false,
-                'image' => NULL,
-                'scope_id' => 5,
-                'owner_id' => 1,
-                'created_at' => '2022-11-08 02:18:53',
-                'updated_at' => '2022-11-08 02:19:38',
-            ),
-            18 => 
-            array (
                 'id' => 19,
                 'name' => '{"en":"Animal","ru":"Животное"}',
                 'desc' => '{"en":"This world is replete with an unimaginable variety of animals."}',
@@ -247,7 +223,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:13:44',
                 'updated_at' => '2022-11-08 17:43:10',
             ),
-            19 => 
+            17 => 
             array (
                 'id' => 20,
                 'name' => '{"en":"Plant","ru":"Растение"}',
@@ -259,7 +235,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:14:35',
                 'updated_at' => '2022-11-08 17:43:38',
             ),
-            20 => 
+            18 => 
             array (
                 'id' => 21,
                 'name' => '{"en":"Human","ru":"Человек"}',
@@ -271,7 +247,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:15:03',
                 'updated_at' => '2022-11-08 17:44:02',
             ),
-            21 => 
+            19 => 
             array (
                 'id' => 22,
                 'name' => '{"en":"Enemy"}',
@@ -283,19 +259,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:49:41',
                 'updated_at' => '2022-11-12 03:49:41',
             ),
-            22 => 
-            array (
-                'id' => 23,
-                'name' => '{"en":"Prey"}',
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'scope_id' => 5,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 03:51:45',
-                'updated_at' => '2022-11-12 03:51:45',
-            ),
-            23 => 
+            20 => 
             array (
                 'id' => 24,
                 'name' => '{"en":"Predator"}',
@@ -307,7 +271,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:54:28',
                 'updated_at' => '2022-11-12 03:54:28',
             ),
-            24 => 
+            21 => 
             array (
                 'id' => 25,
                 'name' => '{"en":"Herbivore"}',
@@ -319,7 +283,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:58:18',
                 'updated_at' => '2022-11-12 03:58:18',
             ),
-            25 => 
+            22 => 
             array (
                 'id' => 26,
                 'name' => '{"en":"Frugivorous"}',
@@ -331,7 +295,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 04:23:13',
                 'updated_at' => '2022-11-12 04:23:13',
             ),
-            26 => 
+            23 => 
             array (
                 'id' => 27,
                 'name' => '{"en":"Spirit","ru":"Дух"}',
@@ -343,7 +307,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:43:41',
                 'updated_at' => '2022-11-08 02:44:22',
             ),
-            27 => 
+            24 => 
             array (
                 'id' => 28,
                 'name' => '{"en":"Mountain"}',
@@ -355,7 +319,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 01:57:20',
                 'updated_at' => '2022-11-12 01:57:20',
             ),
-            28 => 
+            25 => 
             array (
                 'id' => 29,
                 'name' => '{"en":"Grassland"}',
@@ -367,7 +331,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:02:37',
                 'updated_at' => '2022-11-12 03:02:37',
             ),
-            29 => 
+            26 => 
             array (
                 'id' => 30,
                 'name' => '{"en":"Seasonal Forest"}',
@@ -379,7 +343,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:04:11',
                 'updated_at' => '2022-11-12 03:04:11',
             ),
-            30 => 
+            27 => 
             array (
                 'id' => 31,
                 'name' => '{"en":"Savanna"}',
@@ -391,7 +355,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:09:23',
                 'updated_at' => '2022-11-12 03:09:23',
             ),
-            31 => 
+            28 => 
             array (
                 'id' => 32,
                 'name' => '{"en":"Lake"}',
@@ -403,7 +367,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:24:41',
                 'updated_at' => '2022-11-12 03:25:24',
             ),
-            32 => 
+            29 => 
             array (
                 'id' => 33,
                 'name' => '{"en":"River"}',
@@ -415,7 +379,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:25:49',
                 'updated_at' => '2022-11-12 03:26:03',
             ),
-            33 => 
+            30 => 
             array (
                 'id' => 34,
                 'name' => '{"en":"Swamp"}',
@@ -427,7 +391,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:27:08',
                 'updated_at' => '2022-11-12 03:27:08',
             ),
-            34 => 
+            31 => 
             array (
                 'id' => 35,
                 'name' => '{"ru":"Джунгли","en":"Rainforest"}',
@@ -439,7 +403,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:56:49',
                 'updated_at' => '2022-11-12 04:02:21',
             ),
-            35 => 
+            32 => 
             array (
                 'id' => 36,
                 'name' => '{"en":"Lanza Piya"}',
@@ -451,7 +415,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:31:06',
                 'updated_at' => '2022-11-10 14:31:06',
             ),
-            36 => 
+            33 => 
             array (
                 'id' => 37,
                 'name' => '{"en":"Hero"}',
@@ -463,7 +427,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:33:23',
                 'updated_at' => '2022-11-10 23:33:23',
             ),
-            37 => 
+            34 => 
             array (
                 'id' => 38,
                 'name' => '{"en":"Eagle Nest","ru":"Орлиное Гнездо"}',
@@ -475,7 +439,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:16:54',
                 'updated_at' => '2022-11-09 04:42:58',
             ),
-            38 => 
+            35 => 
             array (
                 'id' => 39,
                 'name' => '{"en":"Serpent Path","ru":"Тропа Змея"}',
@@ -487,7 +451,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:09:50',
                 'updated_at' => '2022-11-09 04:43:14',
             ),
-            39 => 
+            36 => 
             array (
                 'id' => 40,
                 'name' => '{"en":"Totem Quest"}',
@@ -499,19 +463,19 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:41:18',
                 'updated_at' => '2022-11-10 23:41:18',
             ),
-            40 => 
+            37 => 
             array (
-                'id' => 41,
-                'name' => '{"en":"Way"}',
-                'desc' => '{"en":"Something always happens along the way..."}',
+                'id' => 17,
+                'name' => '{"en":"Bird","ru":"Птица"}',
+                'desc' => '{"en":"Birds are a group of warm-blooded vertebrates, characterized by feathers, toothless beaked jaws, the laying of hard-shelled eggs, a high metabolic rate, a four-chambered heart, and a strong yet lightweight skeleton. Birds live worldwide and range in size from the bee hummingbird to the ostrich. There are about ten thousand living species, more than half of which are passerine, or \\"perching\\" birds.\\r\\n\\r\\nMany social species pass on knowledge across generations, which is considered a form of culture. Birds are social, communicating with visual signals, calls, and songs, and participating in such behaviours as cooperative breeding and hunting, flocking, and mobbing of predators."}',
                 'is_public' => false,
                 'image' => NULL,
-                'scope_id' => 3,
+                'scope_id' => 19,
                 'owner_id' => 1,
-                'created_at' => '2022-11-10 13:55:09',
-                'updated_at' => '2022-11-11 03:37:53',
+                'created_at' => '2022-11-08 02:17:34',
+                'updated_at' => '2022-11-13 02:30:53',
             ),
-            41 => 
+            38 => 
             array (
                 'id' => 42,
                 'name' => '{"en":"Knowledge"}',
@@ -523,7 +487,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 15:40:03',
                 'updated_at' => '2022-11-10 15:40:03',
             ),
-            42 => 
+            39 => 
             array (
                 'id' => 43,
                 'name' => '{"en":"Airi","ru":"Айри"}',
@@ -535,7 +499,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:35:19',
                 'updated_at' => '2022-11-09 04:41:22',
             ),
-            43 => 
+            40 => 
             array (
                 'id' => 44,
                 'name' => '{"en":"Shiinhaku","ru":"Шиинхаку"}',
@@ -547,7 +511,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:34:07',
                 'updated_at' => '2022-11-09 04:41:35',
             ),
-            44 => 
+            41 => 
             array (
                 'id' => 45,
                 'name' => '{"en":"Pua","ru":"Пуа"}',
@@ -559,7 +523,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:33:05',
                 'updated_at' => '2022-11-09 04:41:47',
             ),
-            45 => 
+            42 => 
             array (
                 'id' => 46,
                 'name' => '{"en":"Araki","ru":"Араки"}',
@@ -571,7 +535,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:29:38',
                 'updated_at' => '2022-11-09 04:42:13',
             ),
-            46 => 
+            43 => 
             array (
                 'id' => 47,
                 'name' => '{"en":"Lilika","ru":"Лилика"}',
@@ -583,7 +547,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:36:25',
                 'updated_at' => '2022-11-09 04:41:07',
             ),
-            47 => 
+            44 => 
             array (
                 'id' => 48,
                 'name' => '{"en":"Zaizi","ru":"Зайзи"}',
@@ -595,19 +559,19 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:31:41',
                 'updated_at' => '2022-11-09 04:42:00',
             ),
-            48 => 
+            45 => 
             array (
-                'id' => 49,
-                'name' => '{"en":"Scarlet Macaw"}',
-                'desc' => '{"en":"Macaws are the largest parrots in the world! This beautiful macaw has a creamy white, almost featherless face, with bright red plumage covering most of its body, wings, and long tail. Brilliant blue and yellow feathers also adorn the lower wings. The bird’s strong beak is adapted to breaking hard nuts found in the rainforest.\\r\\n\\r\\nThey prefer to spend their time in tall, deciduous trees in forests and near rivers, usually in large, noisy groups. Macaws also mate for life, nesting from January through April in the holes of dead canopy trees. Mated adults lay up to two eggs per year, and preen each other and their offspring for hours, cleaning bugs from their feathers.\\r\\n\\r\\nNuts, leaves, berries and seeds from the rainforest make up the bulk of the scarlet macaw’s diet. Its strong, hooked beak is perfect for breaking nuts and seeds. Interestingly, the scarlet macaw can eat fruits toxic enough to kill other animals. This could be because they also eat large amounts of clay, which is thought to neutralize plant poisons."}',
+                'id' => 41,
+                'name' => '{"en":"Way"}',
+                'desc' => '{"en":"Something always happens along the way..."}',
                 'is_public' => false,
-                'image' => 'Jq108MbkcrlwQTFDsW2oJiGoTkOdXIRPIlh6FxwD.jpg',
-                'scope_id' => 17,
+                'image' => NULL,
+                'scope_id' => 60,
                 'owner_id' => 1,
-                'created_at' => '2022-11-12 04:20:48',
-                'updated_at' => '2022-11-12 04:20:48',
+                'created_at' => '2022-11-10 13:55:09',
+                'updated_at' => '2022-11-13 02:03:42',
             ),
-            49 => 
+            46 => 
             array (
                 'id' => 50,
                 'name' => '{"en":"Blue Morpho Butterfly"}',
@@ -619,19 +583,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 02:19:01',
                 'updated_at' => '2022-11-12 02:25:04',
             ),
-            50 => 
-            array (
-                'id' => 51,
-                'name' => '{"en":"Jaguar"}',
-                'desc' => '{"en":"Jaguars spend much of their time on the ground. They use their padded paws to move silently through the forest floor. Although not quite as agile as a leopard, jaguars are capable of climbing trees to hunt or to rest.\\r\\n\\r\\nJaguars are mostly nocturnal hunters. They use their excellent vision and sharp teeth to ambush prey and crush their skulls. Jaguars are known to eat more than 85 species of prey, including armadillos, peccaries, capybaras, tapir, deer, squirrels, birds, and even snails. Not confined to hunting on land, jaguars are adept at snatching fish, turtles, and young caiman from the water. They are even able to hunt monkeys and other tree-dwellers who occasionally wander to lower branches."}',
-                'is_public' => false,
-                'image' => 'p4T9QxXKlY5BR2p0Y75BV7RLy5qCiBGcIUFD8VpC.jpg',
-                'scope_id' => 19,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 02:59:15',
-                'updated_at' => '2022-11-12 02:59:15',
-            ),
-            51 => 
+            47 => 
             array (
                 'id' => 52,
                 'name' => '{"en":"Brown Sloth"}',
@@ -643,19 +595,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 02:48:34',
                 'updated_at' => '2022-11-12 02:49:41',
             ),
-            52 => 
-            array (
-                'id' => 53,
-                'name' => '{"en":"Capybara"}',
-                'desc' => '{"en":"Capybaras are the largest rodents on earth. They have a heavy, barrel-shaped body that sits on relatively squat legs, shorter in the front than the back. Their brown fur is coarse and sparse enough to reveal the grey skin beneath it.\\r\\n\\r\\nCapybaras have partially webbed feet, which help to propel them through the water or swampy areas. Similar to a hippopotamus, the capybara’s eyes, nose, and ears are located on the top of its head, allowing it to peek above the surface for a breath of air and a quick check for predators while the bulk of its body remains hidden beneath the water.\\r\\n\\r\\nThey are semi-aquatic and will spend most of their time in dense vegetation around rivers, lakes, ponds, marshes, and swamps. Feeding mostly in the afternoon, and on and off at night, capybaras tend to doze in the morning. They take short naps throughout the day while other members of their group stand guard.\\r\\n\\r\\nThey are herbivores and eat the vegetation that lines water sources and other aquatic plants. They also eat their own poop, which contains beneficial bacteria that helps their stomach to break down the fiber from the grass. During the dry season or in drought conditions, capybaras will also eat grains, melons, reeds and squashes.\\r\\n\\r\\nCapybaras are naturally threatened by jaguars, caimans and anacondas, and their young can be taken by ocelots and harpy eagles."}',
-                'is_public' => false,
-                'image' => '4TGnMBEBJrTHKhjJurd7rupbVf30jnagpJlECi4j.png',
-                'scope_id' => 19,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 03:22:02',
-                'updated_at' => '2022-11-12 03:22:02',
-            ),
-            53 => 
+            48 => 
             array (
                 'id' => 54,
                 'name' => '{"en":"Mountain Gorilla"}',
@@ -667,7 +607,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 01:35:45',
                 'updated_at' => '2022-11-12 04:13:27',
             ),
-            54 => 
+            49 => 
             array (
                 'id' => 55,
                 'name' => '{"en":"Titu","ru":"Титу"}',
@@ -678,6 +618,222 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-08 02:27:58',
                 'updated_at' => '2022-11-10 23:34:10',
+            ),
+            50 => 
+            array (
+                'id' => 53,
+                'name' => '{"en":"Capybara"}',
+                'desc' => '{"en":"Capybaras are the largest rodents on earth. They have a heavy, barrel-shaped body that sits on relatively squat legs, shorter in the front than the back. Their brown fur is coarse and sparse enough to reveal the grey skin beneath it.\\r\\n\\r\\nFeeding mostly in the afternoon, and on and off at night, capybaras tend to doze in the morning. They take short naps throughout the day while other members of their group stand guard.\\r\\n\\r\\nThey are herbivores and eat the vegetation that lines water sources and other aquatic plants. They also eat their own poop, which contains beneficial bacteria that helps their stomach to break down the fiber from the grass. During the dry season or in drought conditions, capybaras will also eat grains, melons, reeds and squashes."}',
+                'is_public' => false,
+                'image' => '4TGnMBEBJrTHKhjJurd7rupbVf30jnagpJlECi4j.png',
+                'scope_id' => 19,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:22:02',
+                'updated_at' => '2022-11-13 02:56:18',
+            ),
+            51 => 
+            array (
+                'id' => 51,
+                'name' => '{"en":"Jaguar"}',
+                'desc' => '{"en":"Jaguars spend much of their time on the ground. They use their padded paws to move silently through the forest floor. Although not quite as agile as a leopard, jaguars are capable of climbing trees to hunt or to rest. Jaguars are mostly nocturnal hunters. They use their excellent vision and sharp teeth to ambush prey and crush their skulls."}',
+                'is_public' => false,
+                'image' => 'p4T9QxXKlY5BR2p0Y75BV7RLy5qCiBGcIUFD8VpC.jpg',
+                'scope_id' => 19,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 02:59:15',
+                'updated_at' => '2022-11-13 03:02:50',
+            ),
+            52 => 
+            array (
+                'id' => 56,
+                'name' => '{"en":"Poison Dart Frog"}',
+                'desc' => '{"en":"Poison dart frogs are one of the planet’s most brightly colored animals. Depending on the species, they can be yellow, copper, gold, red, blue, green, black, or a combination of those colors. Their showy colors and startling designs help warn predators of the danger they impose. Within their skin, they store natural venom that can paralyze, or even kill, a predator.\\r\\n\\r\\nThis family of frogs includes some of the world’s most toxic species. The golden poison dart frog, for example, contains enough poison to kill 10 adult men. Indigenous cultures have used these frogs’ poison for centuries to coat the tip of their blow darts before hunting—a tradition that inspired the frogs’ common name.\\r\\n\\r\\nUnlike many other amphibians, poison dart frogs are diurnal. Most species are terrestrial but a few are arboreal. Poison dart frogs are insectivores, preferring to eat ants and other small insects that they can hunt among the leaf litter of the forest floor.\\r\\n\\r\\nMany species of poison dart frogs are very attentive parents. Often these parents choose the tiny pools of water held within bromeliads, and deposit a few tadpoles in each pool."}',
+                'is_public' => false,
+                'image' => 'L7gvQLME8zT6y50biZuSIRMCmNIwM1U87tsVms3i.webp',
+                'scope_id' => 19,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 01:22:08',
+                'updated_at' => '2022-11-13 01:53:19',
+            ),
+            53 => 
+            array (
+                'id' => 57,
+                'name' => '{"en":"Time"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 01:55:13',
+                'updated_at' => '2022-11-13 01:55:13',
+            ),
+            54 => 
+            array (
+                'id' => 58,
+                'name' => '{"en":"Day"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 57,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 01:55:41',
+                'updated_at' => '2022-11-13 01:55:41',
+            ),
+            55 => 
+            array (
+                'id' => 59,
+                'name' => '{"en":"Night"}',
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'scope_id' => 57,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 01:56:02',
+                'updated_at' => '2022-11-13 01:56:02',
+            ),
+            56 => 
+            array (
+                'id' => 60,
+                'name' => '{"en":"Action"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:02:13',
+                'updated_at' => '2022-11-13 02:02:13',
+            ),
+            57 => 
+            array (
+                'id' => 62,
+                'name' => '{"en":"Wetland"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 14,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:24:58',
+                'updated_at' => '2022-11-13 02:24:58',
+            ),
+            58 => 
+            array (
+                'id' => 63,
+                'name' => '{"en":"Habitat"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 5,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:29:27',
+                'updated_at' => '2022-11-13 02:29:27',
+            ),
+            59 => 
+            array (
+                'id' => 18,
+                'name' => '{"en":"Insect","ru":"Насекомое"}',
+                'desc' => '{"en":"Insects are the most diverse group of animals; they include more than a million described species and represent more than half of all known living organisms. The total number of extant species is estimated at between six and ten million; potentially over 90% of the animal life forms on Earth are insects.\\r\\n\\r\\nInsect pollinators are essential to the life cycle of many flowering plant species on which most organisms, including humans, are at least partly dependent; without them, the terrestrial portion of the biosphere would be devastated. Many insects are considered ecologically beneficial as predators and a few provide direct economic benefit. Silkworms produce silk and honey bees produce honey and both have been domesticated by humans. Insects are consumed as food in 80% of the world\'s nations, by people in roughly 3000 ethnic groups"}',
+                'is_public' => false,
+                'image' => NULL,
+                'scope_id' => 19,
+                'owner_id' => 1,
+                'created_at' => '2022-11-08 02:18:53',
+                'updated_at' => '2022-11-13 02:30:20',
+            ),
+            60 => 
+            array (
+                'id' => 64,
+                'name' => '{"en":"Diet"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 5,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:32:11',
+                'updated_at' => '2022-11-13 02:32:11',
+            ),
+            61 => 
+            array (
+                'id' => 61,
+                'name' => '{"en":"Green Anaconda"}',
+                'desc' => '{"en":"One of the largest snakes in the world, the green anaconda can reach impressive proportions — over 9 meters in length,  and more than 250 kg! Unlike many animals, female anacondas are considerably larger than their male counterparts. Green anacondas are dark olive-brown with large alternating black spots running down their backs and smaller oval spots with yellow centers along their sides. Their eyes and noses are perched on top of their large heads, allowing them to breathe and see their prey even when submerged in water. Green anacondas are members of the boa family and are non-venomous snakes. They use their teeth and powerful jaws to hold onto their prey while their extremely muscular bodies wrap around their catches to suffocate them or drag them underwater."}',
+                'is_public' => false,
+                'image' => 'pbYi6xvyfol4ibQ7tMGuwD5RbpPRpWRHGgGhYwi0.jpg',
+                'scope_id' => 66,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:21:46',
+                'updated_at' => '2022-11-13 02:51:02',
+            ),
+            62 => 
+            array (
+                'id' => 65,
+                'name' => '{"en":"Reptile"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 19,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:48:48',
+                'updated_at' => '2022-11-13 02:48:48',
+            ),
+            63 => 
+            array (
+                'id' => 66,
+                'name' => '{"en":"Snake"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 65,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:49:38',
+                'updated_at' => '2022-11-13 02:49:38',
+            ),
+            64 => 
+            array (
+                'id' => 67,
+                'name' => '{"en":"Evening"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 57,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:53:18',
+                'updated_at' => '2022-11-13 02:53:18',
+            ),
+            65 => 
+            array (
+                'id' => 68,
+                'name' => '{"en":"Morning"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => NULL,
+                'scope_id' => 57,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:54:10',
+                'updated_at' => '2022-11-13 02:54:10',
+            ),
+            66 => 
+            array (
+                'id' => 49,
+                'name' => '{"en":"Scarlet Macaw"}',
+                'desc' => '{"en":"Macaws are the largest parrots in the world! This beautiful macaw has a creamy white, almost featherless face, with bright red plumage covering most of its body, wings, and long tail. Brilliant blue and yellow feathers also adorn the lower wings. The bird’s strong beak is adapted to breaking hard nuts found in the rainforest.\\r\\n\\r\\nMacaws also mate for life, nesting from January through April in the holes of dead canopy trees. Mated adults lay up to two eggs per year, and preen each other and their offspring for hours, cleaning bugs from their feathers.\\r\\n\\r\\nNuts, leaves, berries and seeds from the rainforest make up the bulk of the scarlet macaw’s diet. Its strong, hooked beak is perfect for breaking nuts and seeds. Interestingly, the scarlet macaw can eat fruits toxic enough to kill other animals. This could be because they also eat large amounts of clay, which is thought to neutralize plant poisons."}',
+                'is_public' => false,
+                'image' => 'Jq108MbkcrlwQTFDsW2oJiGoTkOdXIRPIlh6FxwD.jpg',
+                'scope_id' => 17,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 04:20:48',
+                'updated_at' => '2022-11-13 03:16:18',
+            ),
+            67 => 
+            array (
+                'id' => 69,
+                'name' => '{"en":"Armadillo"}',
+            'desc' => '{"en":"Armadillos are characterized by a leathery armor shell and long, sharp claws for digging. They have short legs but can move quite quickly. When threatened by a predator, Tolypeutes species frequently roll up into a ball; they are the only species of armadillo capable of this.\\r\\n\\r\\nThe diets of different armadillo species vary but consist mainly of insects, grubs, and other invertebrates. Some species, however, feed almost entirely on ants and termites.\\r\\n\\r\\nThey are prolific diggers. Many species use their sharp claws to dig for food, such as grubs, and to dig dens. The nine-banded armadillo prefers to build burrows in moist soil near the creeks, streams, and arroyos around which it lives and feeds.\\r\\n\\r\\nArmadillos have very poor eyesight and use their keen sense of smell to hunt for food. They use their claws for digging and finding food, as well as for making their homes in burrows. They dig their burrows with their claws, making only a single a corridor the width of the animal\'s body.\\r\\n\\r\\nThe underside of the animal is never armored and is simply covered with soft skin and fur. This armor-like skin appears to be an important defense for many armadillos, although most escape predators by fleeing (often into thorny patches, from which their armor protects them) or digging to safety. Only the South American three-banded armadillos (Tolypeutes) rely heavily on their armor for protection.\\r\\n\\r\\nArmadillos have short legs but can move quite quickly. The nine-banded armadillo is noted for its movement through water which is accomplished via two different methods: it can walk underwater for short distances, holding its breath for as long as six minutes; also, crossing larger bodies of water, it is capable of increasing its buoyancy by swallowing air, inflating its stomach and intestines"}',
+                'is_public' => false,
+                'image' => 'Ta4I5x2IUdeCpROws65OtvObVKa47eeUMXVdASXK.jpg',
+                'scope_id' => 19,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 18:04:42',
+                'updated_at' => '2022-11-13 18:05:06',
             ),
         ));
         

@@ -132,167 +132,232 @@ class BookCardTableSeeder extends Seeder
             22 => 
             array (
                 'book_id' => 1,
-                'card_id' => 23,
+                'card_id' => 24,
             ),
             23 => 
             array (
                 'book_id' => 1,
-                'card_id' => 24,
+                'card_id' => 25,
             ),
             24 => 
             array (
                 'book_id' => 1,
-                'card_id' => 25,
+                'card_id' => 26,
             ),
             25 => 
             array (
                 'book_id' => 1,
-                'card_id' => 26,
+                'card_id' => 27,
             ),
             26 => 
             array (
                 'book_id' => 1,
-                'card_id' => 27,
+                'card_id' => 28,
             ),
             27 => 
             array (
                 'book_id' => 1,
-                'card_id' => 28,
+                'card_id' => 29,
             ),
             28 => 
             array (
                 'book_id' => 1,
-                'card_id' => 29,
+                'card_id' => 30,
             ),
             29 => 
             array (
                 'book_id' => 1,
-                'card_id' => 30,
+                'card_id' => 31,
             ),
             30 => 
             array (
                 'book_id' => 1,
-                'card_id' => 31,
+                'card_id' => 32,
             ),
             31 => 
             array (
                 'book_id' => 1,
-                'card_id' => 32,
+                'card_id' => 33,
             ),
             32 => 
             array (
                 'book_id' => 1,
-                'card_id' => 33,
+                'card_id' => 34,
             ),
             33 => 
             array (
                 'book_id' => 1,
-                'card_id' => 34,
+                'card_id' => 35,
             ),
             34 => 
             array (
                 'book_id' => 1,
-                'card_id' => 35,
+                'card_id' => 36,
             ),
             35 => 
             array (
                 'book_id' => 1,
-                'card_id' => 36,
+                'card_id' => 37,
             ),
             36 => 
             array (
                 'book_id' => 1,
-                'card_id' => 37,
+                'card_id' => 38,
             ),
             37 => 
             array (
                 'book_id' => 1,
-                'card_id' => 38,
+                'card_id' => 39,
             ),
             38 => 
             array (
                 'book_id' => 1,
-                'card_id' => 39,
+                'card_id' => 40,
             ),
             39 => 
             array (
                 'book_id' => 1,
-                'card_id' => 40,
+                'card_id' => 41,
             ),
             40 => 
             array (
                 'book_id' => 1,
-                'card_id' => 41,
+                'card_id' => 42,
             ),
             41 => 
             array (
                 'book_id' => 1,
-                'card_id' => 42,
+                'card_id' => 43,
             ),
             42 => 
             array (
                 'book_id' => 1,
-                'card_id' => 43,
+                'card_id' => 44,
             ),
             43 => 
             array (
                 'book_id' => 1,
-                'card_id' => 44,
+                'card_id' => 45,
             ),
             44 => 
             array (
                 'book_id' => 1,
-                'card_id' => 45,
+                'card_id' => 46,
             ),
             45 => 
             array (
                 'book_id' => 1,
-                'card_id' => 46,
+                'card_id' => 47,
             ),
             46 => 
             array (
                 'book_id' => 1,
-                'card_id' => 47,
+                'card_id' => 48,
             ),
             47 => 
             array (
                 'book_id' => 1,
-                'card_id' => 48,
+                'card_id' => 49,
             ),
             48 => 
             array (
                 'book_id' => 1,
-                'card_id' => 49,
+                'card_id' => 50,
             ),
             49 => 
             array (
                 'book_id' => 1,
-                'card_id' => 50,
+                'card_id' => 51,
             ),
             50 => 
             array (
                 'book_id' => 1,
-                'card_id' => 51,
+                'card_id' => 52,
             ),
             51 => 
             array (
                 'book_id' => 1,
-                'card_id' => 52,
+                'card_id' => 53,
             ),
             52 => 
             array (
                 'book_id' => 1,
-                'card_id' => 53,
+                'card_id' => 54,
             ),
             53 => 
             array (
                 'book_id' => 1,
-                'card_id' => 54,
+                'card_id' => 55,
             ),
             54 => 
             array (
                 'book_id' => 1,
-                'card_id' => 55,
+                'card_id' => 56,
+            ),
+            55 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 57,
+            ),
+            56 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 58,
+            ),
+            57 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 59,
+            ),
+            58 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 60,
+            ),
+            59 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 61,
+            ),
+            60 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 62,
+            ),
+            61 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 64,
+            ),
+            62 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 63,
+            ),
+            63 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 65,
+            ),
+            64 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 66,
+            ),
+            65 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 67,
+            ),
+            66 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 68,
+            ),
+            67 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 69,
             ),
         ));
         

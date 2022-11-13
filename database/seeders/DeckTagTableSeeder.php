@@ -36,17 +36,22 @@ class DeckTagTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'deck_id' => 10,
-                'tag_id' => 5,
+                'deck_id' => 5,
+                'tag_id' => 24,
             ),
             4 => 
             array (
-                'deck_id' => 5,
+                'deck_id' => 4,
                 'tag_id' => 24,
             ),
             5 => 
             array (
-                'deck_id' => 4,
+                'deck_id' => 10,
+                'tag_id' => 24,
+            ),
+            6 => 
+            array (
+                'deck_id' => 18,
                 'tag_id' => 24,
             ),
         ));

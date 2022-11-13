@@ -46,183 +46,138 @@ class CardTagTableSeeder extends Seeder
             ),
             5 => 
             array (
-                'card_id' => 54,
-                'tag_id' => 28,
-            ),
-            6 => 
-            array (
-                'card_id' => 53,
-                'tag_id' => 34,
-            ),
-            7 => 
-            array (
-                'card_id' => 53,
-                'tag_id' => 30,
-            ),
-            8 => 
-            array (
-                'card_id' => 53,
-                'tag_id' => 31,
-            ),
-            9 => 
-            array (
-                'card_id' => 53,
-                'tag_id' => 33,
-            ),
-            10 => 
-            array (
-                'card_id' => 53,
-                'tag_id' => 35,
-            ),
-            11 => 
-            array (
-                'card_id' => 53,
-                'tag_id' => 32,
-            ),
-            12 => 
-            array (
-                'card_id' => 51,
-                'tag_id' => 29,
-            ),
-            13 => 
-            array (
-                'card_id' => 51,
-                'tag_id' => 32,
-            ),
-            14 => 
-            array (
-                'card_id' => 51,
-                'tag_id' => 28,
-            ),
-            15 => 
-            array (
-                'card_id' => 51,
-                'tag_id' => 24,
-            ),
-            16 => 
-            array (
-                'card_id' => 51,
-                'tag_id' => 35,
-            ),
-            17 => 
-            array (
-                'card_id' => 51,
-                'tag_id' => 33,
-            ),
-            18 => 
-            array (
-                'card_id' => 51,
-                'tag_id' => 31,
-            ),
-            19 => 
-            array (
-                'card_id' => 51,
-                'tag_id' => 30,
-            ),
-            20 => 
-            array (
                 'card_id' => 50,
                 'tag_id' => 35,
             ),
-            21 => 
+            6 => 
             array (
                 'card_id' => 49,
                 'tag_id' => 26,
             ),
-            22 => 
+            7 => 
             array (
                 'card_id' => 49,
                 'tag_id' => 25,
             ),
-            23 => 
-            array (
-                'card_id' => 49,
-                'tag_id' => 35,
-            ),
-            24 => 
-            array (
-                'card_id' => 49,
-                'tag_id' => 33,
-            ),
-            25 => 
+            8 => 
             array (
                 'card_id' => 48,
                 'tag_id' => 21,
             ),
-            26 => 
+            9 => 
             array (
                 'card_id' => 48,
                 'tag_id' => 36,
             ),
-            27 => 
+            10 => 
             array (
                 'card_id' => 47,
                 'tag_id' => 21,
             ),
-            28 => 
+            11 => 
             array (
                 'card_id' => 47,
                 'tag_id' => 36,
             ),
-            29 => 
+            12 => 
             array (
                 'card_id' => 46,
                 'tag_id' => 17,
             ),
-            30 => 
+            13 => 
             array (
                 'card_id' => 46,
                 'tag_id' => 35,
             ),
-            31 => 
+            14 => 
             array (
                 'card_id' => 45,
                 'tag_id' => 21,
             ),
-            32 => 
+            15 => 
             array (
                 'card_id' => 45,
                 'tag_id' => 36,
             ),
-            33 => 
+            16 => 
             array (
                 'card_id' => 44,
                 'tag_id' => 27,
             ),
-            34 => 
+            17 => 
             array (
                 'card_id' => 44,
                 'tag_id' => 35,
             ),
-            35 => 
+            18 => 
             array (
                 'card_id' => 43,
                 'tag_id' => 27,
             ),
-            36 => 
+            19 => 
             array (
                 'card_id' => 43,
                 'tag_id' => 35,
             ),
-            37 => 
+            20 => 
             array (
                 'card_id' => 39,
                 'tag_id' => 8,
             ),
-            38 => 
+            21 => 
             array (
                 'card_id' => 39,
                 'tag_id' => 9,
             ),
-            39 => 
+            22 => 
             array (
                 'card_id' => 38,
                 'tag_id' => 9,
             ),
-            40 => 
+            23 => 
             array (
                 'card_id' => 38,
                 'tag_id' => 8,
+            ),
+            24 => 
+            array (
+                'card_id' => 56,
+                'tag_id' => 35,
+            ),
+            25 => 
+            array (
+                'card_id' => 56,
+                'tag_id' => 58,
+            ),
+            26 => 
+            array (
+                'card_id' => 51,
+                'tag_id' => 58,
+            ),
+            27 => 
+            array (
+                'card_id' => 51,
+                'tag_id' => 59,
+            ),
+            28 => 
+            array (
+                'card_id' => 54,
+                'tag_id' => 58,
+            ),
+            29 => 
+            array (
+                'card_id' => 54,
+                'tag_id' => 26,
+            ),
+            30 => 
+            array (
+                'card_id' => 53,
+                'tag_id' => 59,
+            ),
+            31 => 
+            array (
+                'card_id' => 53,
+                'tag_id' => 67,
             ),
         ));
         

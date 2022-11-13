@@ -89,7 +89,7 @@ class User extends Resource
 
             HasMany::make(__('Books'), 'books'),
             HasMany::make(__('Cards'), 'cards'),
-            HasMany::make(__('Tags'), 'tags'),
+            HasMany::make(__('Tags'), 'tags', Card::class),
         ];
     }
 

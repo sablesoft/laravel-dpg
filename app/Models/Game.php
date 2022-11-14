@@ -89,8 +89,8 @@ class Game extends Model
                     $stack = new Stack();
                     $stack->game_id = $model->getKey();
                     $stack->deck_id = $deck->getKey();
+                    $stack = Shuffler::init($stack);
                     $stack->save();
-                    Shuffler::init($stack);
                 }
             }
         });

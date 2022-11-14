@@ -23,6 +23,7 @@ use App\Service\Shuffler;
  * @property-read User|null $master
  * @property-read User[]|null $players
  * @property-read Stack[]|null $stacks
+ * @property-read Log[]|null $logs
  * @property-read Card[]|null $board
  */
 class Game extends Model
@@ -62,6 +63,14 @@ class Game extends Model
     public function stacks(): HasMany
     {
         return $this->hasMany(Stack::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function logs(): HasMany
+    {
+        return $this->hasMany(Log::class);
     }
 
     /**

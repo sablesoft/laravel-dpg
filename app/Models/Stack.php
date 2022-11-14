@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int|null $id
@@ -21,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @property-read Game|null $game
  * @property-read Deck|null $deck
+ * @property-read Log|null $logs
  */
 class Stack extends Model
 {
@@ -70,5 +72,13 @@ class Stack extends Model
     public function deck(): BelongsTo
     {
         return $this->belongsTo(Deck::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function logs(): HasMany
+    {
+        return $this->hasMany(Log::class);
     }
 }

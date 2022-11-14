@@ -4,11 +4,12 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Number;
+use App\Nova\Actions\PullCard;
 use App\Nova\Actions\InitStack;
 use App\Nova\Actions\ShuffleStack;
-use Laravel\Nova\Fields\Number;
 
 class Stack extends Resource
 {
@@ -57,16 +58,17 @@ class Stack extends Resource
                 ->sortable()->nullable(false)->required()->rules('required'),
             Number::make(__('Pack Size'), 'pack_size')
                 ->hideWhenCreating()->hideWhenUpdating(),
-            Code::make(__('Pack'), 'pack')->json()->onlyOnDetail(),
+//            Code::make(__('Pack'), 'pack')->json()->onlyOnDetail(),
             Number::make(__('Discard Size'), 'discard_size')
                 ->hideWhenCreating()->hideWhenUpdating(),
-            Code::make(__('Discard'), 'discard')->json()->onlyOnDetail(),
+//            Code::make(__('Discard'), 'discard')->json()->onlyOnDetail(),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             DateTime::make(__('Updated At'), 'updated_at')
                 ->hideFromIndex()
-                ->hideWhenCreating()->hideWhenUpdating()->sortable(true)
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
+            HasMany::make(__('Logs'), 'logs', Log::class)
         ];
     }
 
@@ -113,7 +115,8 @@ class Stack extends Resource
     {
         return [
             InitStack::make()->showOnTableRow(),
-            ShuffleStack::make()->showOnTableRow()
+            ShuffleStack::make()->showOnTableRow(),
+            PullCard::make()->showOnTableRow()
         ];
     }
 }

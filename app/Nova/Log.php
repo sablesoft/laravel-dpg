@@ -15,6 +15,8 @@ class Log extends Resource
      */
     public static $group = 'Play';
 
+    public static $displayInNavigation = false;
+
     /**
      * The model the resource corresponds to.
      *
@@ -47,7 +49,7 @@ class Log extends Resource
     public function fields(Request $request): array
     {
         return [
-            BelongsTo::make(__('Game'), 'game'),
+//            BelongsTo::make(__('Game'), 'game'),
             BelongsTo::make(__('Stack'), 'stack'),
             BelongsTo::make(__('Card'), 'card'),
             DateTime::make(__('Created At'), 'created_at')

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
+ * @property-read string|null $name
  * @property-read Book|null $book
  * @property-read Card|null $target
  * @property-read Card[]|null $tags

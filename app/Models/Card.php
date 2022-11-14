@@ -14,6 +14,8 @@ use App\Models\Traits\Books;
  * @property-read Decks[]|null $decks
  * @property-read Decks[]|null $inDecks
  * @property-read Books[]|null $books
+ *
+ * @property-read object|null pivot
  */
 class Card extends Content
 {

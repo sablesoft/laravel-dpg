@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('master_id')->nullable(false)->constrained('users')
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->unsignedSmallInteger('status')->nullable(false)->default(0);
+
             $table->timestamps();
         });
     }

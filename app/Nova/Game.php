@@ -3,11 +3,11 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsToMany;
 
 /**
  * @mixin \App\Models\Game
@@ -66,6 +66,7 @@ class Game extends Resource
             // todo - make select:
             Number::make(__('Status'), 'status'),
 
+            BelongsToMany::make(__('Board'), 'board', Card::class),
             BelongsToMany::make(__('Players'), 'players', User::class)
         ];
     }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Service\Shuffler;
 
 /**
  * @property int|null $id
@@ -74,5 +75,24 @@ class Game extends Model
             'game_id',
             'card_id'
         );
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        self::created(function(Game $model) {
+            $model->refresh();
+            $decks = optional($model->book)->decks;
+            if ($decks) {
+                /** @var Deck $deck */
+                foreach ($decks as $deck) {
+                    $stack = new Stack();
+                    $stack->game_id = $model->getKey();
+                    $stack->deck_id = $deck->getKey();
+                    $stack->save();
+                    Shuffler::init($stack);
+                }
+            }
+        });
     }
 }

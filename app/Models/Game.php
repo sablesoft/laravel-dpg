@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Service\Shuffler;
 
 /**
  * @property int|null $id
@@ -23,6 +22,8 @@ use App\Service\Shuffler;
  * @property-read User|null $master
  * @property-read User[]|null $players
  * @property-read Stack[]|null $stacks
+ * @property-read Set[]|null $sets
+ * @property-read Unique[]|null $uniques
  * @property-read Log[]|null $logs
  * @property-read Card[]|null $board
  */
@@ -68,6 +69,22 @@ class Game extends Model
     /**
      * @return HasMany
      */
+    public function sets(): HasMany
+    {
+        return $this->hasMany(Set::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function uniques(): HasMany
+    {
+        return $this->hasMany(Unique::class);
+    }
+
+    /**
+     * @return HasMany
+     */
     public function logs(): HasMany
     {
         return $this->hasMany(Log::class);
@@ -91,15 +108,21 @@ class Game extends Model
         parent::boot();
         self::created(function(Game $model) {
             $model->refresh();
-            $decks = optional($model->book)->decks()->where('type', Deck::TYPE_STACK)->get();
+            $decks = optional($model->book)->decks;
             if ($decks) {
                 /** @var Deck $deck */
                 foreach ($decks as $deck) {
-                    $stack = new Stack();
-                    $stack->game_id = $model->getKey();
-                    $stack->deck_id = $deck->getKey();
-                    $stack = Shuffler::init($stack);
-                    $stack->save();
+                    switch ($deck->type) {
+                        case Deck::TYPE_STACK:
+                            Stack::createFromDeck($model, $deck);
+                            break;
+                        case Deck::TYPE_SET:
+                            Set::createFromDeck($model, $deck);
+                            break;
+                        case Deck::TYPE_UNIQUE:
+                            Unique::createFromDeck($model, $deck);
+                            break;
+                    }
                 }
             }
         });

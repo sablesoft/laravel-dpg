@@ -3,16 +3,13 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\DateTime;
+use App\Nova\Filters\GamesFilter;
+use App\Nova\Filters\ScopesFilter;
+use App\Nova\Filters\TargetsFilter;
 
-/**
- * @mixin \App\Models\Game
- */
-class Game extends Resource
+class Unique extends Resource
 {
     /**
      * The logical group associated with the resource.
@@ -26,7 +23,7 @@ class Game extends Resource
      *
      * @var string
      */
-    public static string $model = \App\Models\Game::class;
+    public static string $model = \App\Models\Unique::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -41,7 +38,7 @@ class Game extends Resource
      * @var array
      */
     public static $search = [
-        'name',
+        'id',
     ];
 
     /**
@@ -53,25 +50,23 @@ class Game extends Resource
     public function fields(Request $request): array
     {
         return [
-            Text::make(__('Name'), 'name')->sortable()
-                ->nullable(false)->required()->rules('required'),
-            BelongsTo::make(__('Book'), 'book')
-                ->sortable()->nullable(false)->required()
-                ->rules('required'),
-            BelongsTo::make(__('Master'), 'master', User::class)
-                ->sortable()->nullable(false)->required()
-                ->rules('required'),
-            Textarea::make(__('Desc'), 'desc')->nullable(true),
-
-            // todo - make select:
-//            Number::make(__('Status'), 'status'),
-
-            HasMany::make(__('Uniques'), 'uniques'),
-            HasMany::make(__('Stacks'), 'stacks'),
-            HasMany::make(__('Sets'), 'sets'),
-            HasMany::make(__('Logs'), 'logs', Log::class),
-            BelongsToMany::make(__('Board'), 'board', Card::class),
-            BelongsToMany::make(__('Players'), 'players', User::class),
+            BelongsTo::make(__('Game'), 'game')
+                ->sortable()->nullable(false)->required()->rules('required'),
+            BelongsTo::make(__('Target'), 'target', Card::class)
+                ->nullable(false)->sortable()
+                ->required()->rules('required'),
+            BelongsTo::make(__('Scope'), 'scope', Card::class)
+                ->nullable(false)->sortable()
+                ->required()->rules('required'),
+            BelongsTo::make(__('Unique'), 'unique', Card::class)
+                ->nullable(true)->sortable()
+                ->required(false),
+            DateTime::make(__('Created At'), 'created_at')
+                ->hideFromIndex()
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
+            DateTime::make(__('Updated At'), 'updated_at')
+                ->hideFromIndex()
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
         ];
     }
 
@@ -94,7 +89,11 @@ class Game extends Resource
      */
     public function filters(Request $request): array
     {
-        return [];
+        return [
+            GamesFilter::make(),
+            TargetsFilter::make(),
+            ScopesFilter::make(),
+        ];
     }
 
     /**

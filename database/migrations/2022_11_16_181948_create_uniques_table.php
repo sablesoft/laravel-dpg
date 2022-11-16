@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Database\Migration;
 
@@ -12,7 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        $this->upFromDeck('sets');
+        $this->upFromDeck('uniques', function(Blueprint $table) {
+            $table->foreignId('unique_id')->nullable(true)
+                ->constrained('cards')->nullOnDelete();
+        });
     }
 
     /**
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sets');
+        Schema::dropIfExists('uniques');
     }
 };

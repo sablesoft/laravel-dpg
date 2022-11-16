@@ -3,16 +3,76 @@
 namespace App\Models\Traits;
 
 use Exception;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Set;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Card;
 use App\Models\Deck;
 use App\Models\Game;
 
 /**
- * @mixin Set
+ * @property int|null $id
+ * @property int|null $game_id
+ * @property int|null $deck_id
+ * @property int|null $card_id
+ * @property int|null $scope_id
+ * @property string|null $desc
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ *
+ * @property-read string|null $name
+ *
+ * @property-read Game|null $game
+ * @property-read Deck|null $deck
+ * @property-read Card|null $target
+ * @property-read Card|null $scope
  */
 trait FromDeck
 {
+    /**
+     * @return string|null
+     */
+    public function getNameAttribute(): ?string
+    {
+        $target = optional($this->target)->name;
+        $scope = optional($this->scope)->name;
+
+        return ($target && $scope) ?
+            $target .' - '. $scope : null;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function game(): BelongsTo
+    {
+        return $this->belongsTo(Game::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function deck(): BelongsTo
+    {
+        return $this->belongsTo(Deck::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function target(): BelongsTo
+    {
+        return $this->belongsTo(Card::class, 'card_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function scope(): BelongsTo
+    {
+        return $this->belongsTo(Card::class, 'scope_id');
+    }
+
     /**
      * @param Game $game
      * @param Deck $deck

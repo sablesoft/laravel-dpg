@@ -30,4 +30,30 @@ class Migration extends BaseMigration
             $table->timestamps();
         });
     }
+
+    /**
+     * @param string $tableName
+     * @param callable|null $moreFields
+     * @return void
+     */
+    protected function upFromDeck(string $tableName, callable $moreFields = null) {
+        Schema::create($tableName, function (Blueprint $table) use ($moreFields){
+            $table->id();
+            $table->foreignId('game_id')->nullable(false)
+                ->constrained('games')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('deck_id')->nullable(false)
+                ->constrained('decks')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('card_id')->nullable(false)
+                ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('scope_id')->nullable(false)
+                ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->longText('desc')->nullable(true);
+            if ($moreFields) {
+                $moreFields($table);
+            }
+            $table->unique(['game_id', 'deck_id']);
+            $table->unique(['game_id', 'card_id', 'scope_id']);
+            $table->timestamps();
+        });
+    }
 }

@@ -21,19 +21,6 @@ class DecksTableSeeder extends Seeder
         \DB::table('decks')->insert(array (
             0 => 
             array (
-                'id' => 2,
-                'book_id' => 1,
-                'card_id' => 19,
-                'scope_id' => 13,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 16:50:38',
-                'updated_at' => '2022-11-12 16:50:38',
-            ),
-            1 => 
-            array (
                 'id' => 4,
                 'book_id' => 1,
                 'card_id' => 52,
@@ -45,46 +32,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:51:25',
                 'updated_at' => '2022-11-12 16:51:25',
             ),
-            2 => 
-            array (
-                'id' => 6,
-                'book_id' => 1,
-                'card_id' => 16,
-                'scope_id' => 13,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 16:51:51',
-                'updated_at' => '2022-11-12 16:51:51',
-            ),
-            3 => 
-            array (
-                'id' => 7,
-                'book_id' => 1,
-                'card_id' => 21,
-                'scope_id' => 13,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 16:52:51',
-                'updated_at' => '2022-11-12 16:52:51',
-            ),
-            4 => 
-            array (
-                'id' => 9,
-                'book_id' => 1,
-                'card_id' => 6,
-                'scope_id' => 12,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 16:53:21',
-                'updated_at' => '2022-11-12 16:53:21',
-            ),
-            5 => 
+            1 => 
             array (
                 'id' => 11,
                 'book_id' => 1,
@@ -97,72 +45,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:54:20',
                 'updated_at' => '2022-11-12 16:54:20',
             ),
-            6 => 
-            array (
-                'id' => 12,
-                'book_id' => 1,
-                'card_id' => 4,
-                'scope_id' => 12,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 16:55:00',
-                'updated_at' => '2022-11-12 16:55:00',
-            ),
-            7 => 
-            array (
-                'id' => 13,
-                'book_id' => 1,
-                'card_id' => 20,
-                'scope_id' => 13,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 16:55:11',
-                'updated_at' => '2022-11-12 16:55:11',
-            ),
-            8 => 
-            array (
-                'id' => 14,
-                'book_id' => 1,
-                'card_id' => 10,
-                'scope_id' => 11,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 16:55:49',
-                'updated_at' => '2022-11-12 16:55:49',
-            ),
-            9 => 
-            array (
-                'id' => 15,
-                'book_id' => 1,
-                'card_id' => 27,
-                'scope_id' => 13,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 16:59:05',
-                'updated_at' => '2022-11-12 16:59:05',
-            ),
-            10 => 
-            array (
-                'id' => 16,
-                'book_id' => 1,
-                'card_id' => 41,
-                'scope_id' => 3,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 16:59:22',
-                'updated_at' => '2022-11-13 02:05:23',
-            ),
-            11 => 
+            2 => 
             array (
                 'id' => 17,
                 'book_id' => 1,
@@ -175,7 +58,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:34:11',
                 'updated_at' => '2022-11-13 02:36:21',
             ),
-            12 => 
+            3 => 
             array (
                 'id' => 18,
                 'book_id' => 1,
@@ -188,7 +71,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:38:47',
                 'updated_at' => '2022-11-13 02:39:25',
             ),
-            13 => 
+            4 => 
             array (
                 'id' => 19,
                 'book_id' => 1,
@@ -201,7 +84,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:42:02',
                 'updated_at' => '2022-11-13 02:44:13',
             ),
-            14 => 
+            5 => 
             array (
                 'id' => 5,
                 'book_id' => 1,
@@ -214,7 +97,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:51:37',
                 'updated_at' => '2022-11-13 02:56:34',
             ),
-            15 => 
+            6 => 
             array (
                 'id' => 10,
                 'book_id' => 1,
@@ -227,7 +110,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:53:38',
                 'updated_at' => '2022-11-13 02:58:34',
             ),
-            16 => 
+            7 => 
             array (
                 'id' => 20,
                 'book_id' => 1,
@@ -240,7 +123,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:59:59',
                 'updated_at' => '2022-11-13 02:59:59',
             ),
-            17 => 
+            8 => 
             array (
                 'id' => 21,
                 'book_id' => 1,
@@ -253,7 +136,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 03:03:22',
                 'updated_at' => '2022-11-13 03:03:22',
             ),
-            18 => 
+            9 => 
             array (
                 'id' => 22,
                 'book_id' => 1,
@@ -266,7 +149,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 03:11:38',
                 'updated_at' => '2022-11-13 03:11:38',
             ),
-            19 => 
+            10 => 
             array (
                 'id' => 23,
                 'book_id' => 1,
@@ -279,7 +162,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 03:13:42',
                 'updated_at' => '2022-11-13 03:14:56',
             ),
-            20 => 
+            11 => 
             array (
                 'id' => 24,
                 'book_id' => 1,
@@ -291,6 +174,188 @@ class DecksTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-13 19:41:38',
                 'updated_at' => '2022-11-13 19:41:38',
+            ),
+            12 => 
+            array (
+                'id' => 25,
+                'book_id' => 1,
+                'card_id' => 35,
+                'scope_id' => 41,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 17:05:57',
+                'updated_at' => '2022-11-15 17:05:57',
+            ),
+            13 => 
+            array (
+                'id' => 26,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 42,
+                'desc' => '{"en":"Our hero begins his adventure with a certain set of knowledge and continues to accumulate them."}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 17:36:23',
+                'updated_at' => '2022-11-15 17:36:23',
+            ),
+            14 => 
+            array (
+                'id' => 27,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 4,
+                'desc' => '{"en":"The place where our hero is located. Always one card."}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 17:39:14',
+                'updated_at' => '2022-11-15 17:39:14',
+            ),
+            15 => 
+            array (
+                'id' => 28,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 73,
+                'desc' => '{"en":"Damage to the hero"}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 17:44:56',
+                'updated_at' => '2022-11-15 17:44:56',
+            ),
+            16 => 
+            array (
+                'id' => 29,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 16,
+                'desc' => '{"en":"Each character has specifications. Use this card as a character scope to list them."}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 17:53:59',
+                'updated_at' => '2022-11-15 17:53:59',
+            ),
+            17 => 
+            array (
+                'id' => 30,
+                'book_id' => 1,
+                'card_id' => 35,
+                'scope_id' => 13,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 21:04:44',
+                'updated_at' => '2022-11-15 21:04:44',
+            ),
+            18 => 
+            array (
+                'id' => 31,
+                'book_id' => 1,
+                'card_id' => 35,
+                'scope_id' => 19,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 21:42:11',
+                'updated_at' => '2022-11-15 21:42:11',
+            ),
+            19 => 
+            array (
+                'id' => 32,
+                'book_id' => 1,
+                'card_id' => 35,
+                'scope_id' => 20,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 02:03:36',
+                'updated_at' => '2022-11-16 02:03:36',
+            ),
+            20 => 
+            array (
+                'id' => 33,
+                'book_id' => 1,
+                'card_id' => 77,
+                'scope_id' => 22,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 02:34:21',
+                'updated_at' => '2022-11-16 02:34:21',
+            ),
+            21 => 
+            array (
+                'id' => 34,
+                'book_id' => 1,
+                'card_id' => 35,
+                'scope_id' => 27,
+                'desc' => '{"en":"The spirits of the Rainforest are everywhere. You can communicate with them and get help from them. But be afraid to anger them!"}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 02:45:10',
+                'updated_at' => '2022-11-16 02:45:10',
+            ),
+            22 => 
+            array (
+                'id' => 35,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 79,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 02:51:06',
+                'updated_at' => '2022-11-16 02:51:06',
+            ),
+            23 => 
+            array (
+                'id' => 36,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 81,
+                'desc' => '{"en":"The skill level of taming different creatures is different."}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 02:59:57',
+                'updated_at' => '2022-11-16 02:59:57',
+            ),
+            24 => 
+            array (
+                'id' => 37,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 82,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 03:05:29',
+                'updated_at' => '2022-11-16 03:05:29',
+            ),
+            25 => 
+            array (
+                'id' => 38,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 80,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 03:11:57',
+                'updated_at' => '2022-11-16 03:11:57',
             ),
         ));
         

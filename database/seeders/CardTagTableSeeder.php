@@ -179,6 +179,11 @@ class CardTagTableSeeder extends Seeder
                 'card_id' => 53,
                 'tag_id' => 67,
             ),
+            32 => 
+            array (
+                'card_id' => 77,
+                'tag_id' => 78,
+            ),
         ));
         
         

@@ -359,6 +359,76 @@ class BookCardTableSeeder extends Seeder
                 'book_id' => 1,
                 'card_id' => 69,
             ),
+            68 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 70,
+            ),
+            69 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 71,
+            ),
+            70 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 72,
+            ),
+            71 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 73,
+            ),
+            72 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 74,
+            ),
+            73 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 75,
+            ),
+            74 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 76,
+            ),
+            75 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 77,
+            ),
+            76 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 78,
+            ),
+            77 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 79,
+            ),
+            78 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 80,
+            ),
+            79 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 81,
+            ),
+            80 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 82,
+            ),
+            81 => 
+            array (
+                'book_id' => 1,
+                'card_id' => 83,
+            ),
         ));
         
         

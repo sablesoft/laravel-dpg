@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\ScopesFilter;
+use App\Nova\Filters\TargetsFilter;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
@@ -78,7 +80,10 @@ class Deck extends Content
      */
     public function filters(Request $request): array
     {
-        return [];
+        return [
+            TargetsFilter::make(),
+            ScopesFilter::make()
+        ];
     }
 
     /**

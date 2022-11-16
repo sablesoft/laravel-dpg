@@ -14,6 +14,6 @@ trait Tags
      */
     public function getTagsStringAttribute(): ?string
     {
-        return $this->getResourcesString('tags');
+        return $this->getResourcesString('tags', 'units');
     }
 }

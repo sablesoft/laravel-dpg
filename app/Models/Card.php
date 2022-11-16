@@ -14,6 +14,9 @@ use App\Models\Traits\Books;
  * @property-read Decks[]|null $decks
  * @property-read Decks[]|null $inDecks
  * @property-read Books[]|null $books
+ * @property-read Card[]|null $scopedCards
+ * @property-read Deck[]|null $scopedDecks
+ * @property-read Card[]|null $taggedCards
  *
  * @property-read object|null pivot
  */
@@ -36,6 +39,27 @@ class Card extends Content
             'card_tag',
             'card_id',
             'tag_id'
+        );
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function scopedCards(): HasMany
+    {
+        return $this->hasMany(Card::class, 'scope_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function taggedCards(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Card::class,
+            'card_tag',
+            'tag_id',
+            'card_id'
         );
     }
 
@@ -64,6 +88,14 @@ class Card extends Content
     public function decks(): HasMany
     {
         return $this->hasMany(Deck::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function scopedDecks(): HasMany
+    {
+        return $this->hasMany(Deck::class, 'scope_id');
     }
 
     /**

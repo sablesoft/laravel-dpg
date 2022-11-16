@@ -9,7 +9,10 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
 use App\Nova\Actions\PullCard;
 use App\Nova\Actions\InitStack;
+use App\Nova\Filters\GamesFilter;
 use App\Nova\Actions\ShuffleStack;
+use App\Nova\Filters\ScopesFilter;
+use App\Nova\Filters\TargetsFilter;
 
 class Stack extends Resource
 {
@@ -54,8 +57,12 @@ class Stack extends Resource
         return [
             BelongsTo::make(__('Game'), 'game')
                 ->sortable()->nullable(false)->required()->rules('required'),
-            BelongsTo::make(__('Deck'), 'deck')
-                ->sortable()->nullable(false)->required()->rules('required'),
+            BelongsTo::make(__('Target'), 'target', Card::class)
+                ->nullable(false)->sortable()
+                ->required()->rules('required'),
+            BelongsTo::make(__('Scope'), 'scope', Card::class)
+                ->nullable(false)->sortable()
+                ->required()->rules('required'),
             Number::make(__('Pack Size'), 'pack_size')
                 ->hideWhenCreating()->hideWhenUpdating(),
 //            Code::make(__('Pack'), 'pack')->json()->onlyOnDetail(),
@@ -91,7 +98,11 @@ class Stack extends Resource
      */
     public function filters(Request $request): array
     {
-        return [];
+        return [
+            GamesFilter::make(),
+            TargetsFilter::make(),
+            ScopesFilter::make(),
+        ];
     }
 
     /**

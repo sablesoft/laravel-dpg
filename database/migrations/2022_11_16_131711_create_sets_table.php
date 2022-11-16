@@ -20,7 +20,15 @@ return new class extends Migration
             $table->foreignId('deck_id')->nullable(false)
                 ->constrained('decks')->cascadeOnUpdate()->cascadeOnDelete();
 
+            $table->foreignId('card_id')->nullable(false)
+                ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('scope_id')->nullable(false)
+                ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
+
+            $table->longText('desc')->nullable(true);
+
             $table->unique(['game_id', 'deck_id']);
+            $table->unique(['game_id', 'card_id', 'scope_id']);
             $table->timestamps();
         });
     }

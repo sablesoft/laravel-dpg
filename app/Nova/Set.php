@@ -3,15 +3,24 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use App\Nova\Filters\GamesFilter;
+use App\Nova\Filters\ScopesFilter;
+use App\Nova\Filters\TargetsFilter;
+use Laravel\Nova\Fields\Text;
 
 class Set extends Resource
 {
+    /**
+     * The logical group associated with the resource.
+     *
+     * @var string
+     */
+    public static $group = 'Play';
+
     /**
      * The model the resource corresponds to.
      *
@@ -41,13 +50,18 @@ class Set extends Resource
      * @param Request $request
      * @return array
      */
-    public function fields(Request $request)
+    public function fields(Request $request): array
     {
         return [
             BelongsTo::make(__('Game'), 'game')
                 ->sortable()->nullable(false)->required()->rules('required'),
-            BelongsTo::make(__('Deck'), 'deck')
-                ->sortable()->nullable(false)->required()->rules('required'),
+            BelongsTo::make(__('Target'), 'target', Card::class)
+                ->nullable(false)->sortable()
+                ->required()->rules('required'),
+            BelongsTo::make(__('Scope'), 'scope', Card::class)
+                ->nullable(false)->sortable()
+                ->required()->rules('required'),
+            Text::make(__('Cards'), 'cards_string')->asHtml(),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->fields(function () {
                     return [
@@ -78,7 +92,7 @@ class Set extends Resource
      * @param Request $request
      * @return array
      */
-    public function cards(Request $request)
+    public function cards(Request $request): array
     {
         return [];
     }
@@ -89,9 +103,13 @@ class Set extends Resource
      * @param Request $request
      * @return array
      */
-    public function filters(Request $request)
+    public function filters(Request $request): array
     {
-        return [];
+        return [
+            GamesFilter::make(),
+            TargetsFilter::make(),
+            ScopesFilter::make(),
+        ];
     }
 
     /**
@@ -100,7 +118,7 @@ class Set extends Resource
      * @param Request $request
      * @return array
      */
-    public function lenses(Request $request)
+    public function lenses(Request $request): array
     {
         return [];
     }
@@ -111,7 +129,7 @@ class Set extends Resource
      * @param Request $request
      * @return array
      */
-    public function actions(Request $request)
+    public function actions(Request $request): array
     {
         return [];
     }

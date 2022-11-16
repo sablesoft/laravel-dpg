@@ -18,8 +18,8 @@ trait Resources
         $links = [];
         $resource = $resource ?: $key;
         /** @var Content $content */
+        $path = trim(config('nova.path'), '/');
         foreach ($this->getFilteredResources($key) as $content) {
-            $path = trim(config('nova.path'), '/');
             $href = url(sprintf("/$path/resources/%s/%d", $resource, $content->getKey()));
             $name = $content->name;
             $links[] = "<a href='$href' class='no-underline dim text-primary font-bold'>$name</a>";

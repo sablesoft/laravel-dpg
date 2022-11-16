@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int|null $type
+ * @property int|null $card_id
  *
  * @property-read string|null $name
  * @property-read Book|null $book

@@ -67,6 +67,7 @@ class Game extends Resource
 //            Number::make(__('Status'), 'status'),
 
             HasMany::make(__('Stacks'), 'stacks'),
+            HasMany::make(__('Sets'), 'sets'),
             HasMany::make(__('Logs'), 'logs', Log::class),
             BelongsToMany::make(__('Board'), 'board', Card::class),
             BelongsToMany::make(__('Players'), 'players', User::class),

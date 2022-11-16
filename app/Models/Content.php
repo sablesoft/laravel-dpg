@@ -83,7 +83,6 @@ class Content extends Model
 
         static::creating(function (Content $content) {
             $content->owner()->associate(Auth::user());
-
         });
     }
 }

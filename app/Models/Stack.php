@@ -2,15 +2,21 @@
 
 namespace App\Models;
 
+use Exception;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Service\Shuffler;
+use App\Models\Traits\FromDeck;
 
 /**
  * @property int|null $id
  * @property int|null $game_id
  * @property int|null $deck_id
+ * @property int|null $card_id
+ * @property int|null $scope_id
+ * @property string|null $desc
  * @property array|null $pack
  * @property array|null $discard
  * @property Carbon|null $created_at
@@ -22,10 +28,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property-read Game|null $game
  * @property-read Deck|null $deck
+ * @property-read Card|null $card
+ * @property-read Card|null $scope
  * @property-read Log|null $logs
  */
 class Stack extends Model
 {
+    use FromDeck;
+
     /**
      * @var string[]
      */
@@ -75,10 +85,42 @@ class Stack extends Model
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function target(): BelongsTo
+    {
+        return $this->belongsTo(Card::class, 'card_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function scope(): BelongsTo
+    {
+        return $this->belongsTo(Card::class, 'scope_id');
+    }
+
+    /**
      * @return HasMany
      */
     public function logs(): HasMany
     {
         return $this->hasMany(Log::class);
+    }
+
+    /**
+     * @param Game $game
+     * @param Deck $deck
+     * @return static
+     * @throws Exception
+     */
+    public static function createFromDeck(Game $game, Deck $deck): static
+    {
+        /** @var Stack $stack */
+        $stack = static::prepareFromDeck($game, $deck, Deck::TYPE_STACK);
+        $stack = Shuffler::init($stack);
+        $stack->save();
+
+        return $stack;
     }
 }

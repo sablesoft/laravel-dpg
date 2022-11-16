@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
+ * @property int|null $type
+ *
  * @property-read string|null $name
  * @property-read Book|null $book
  * @property-read Card|null $target
@@ -16,6 +18,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Deck extends Content
 {
+    const TYPE_STACK = 0;
+    const TYPE_SET = 1;
+    const TYPE_UNIQUE = 2;
+
     /**
      * @return string|null
      */
@@ -94,5 +100,17 @@ class Deck extends Content
         $data['cards'] = $this->cards()->get()->pluck('name')->toArray();
 
         return $data;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getTypeOptions(): array
+    {
+        return [
+            self::TYPE_STACK => __('Stack'),
+            self::TYPE_SET => __('Set'),
+            self::TYPE_UNIQUE => __('Unique')
+        ];
     }
 }

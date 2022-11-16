@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\DeckTypeFilter;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Textarea;
 
 /**
@@ -41,6 +43,9 @@ class Deck extends Content
             BelongsTo::make(__('Book'), 'book', Book::class)
                 ->nullable(false)->sortable()
                 ->required()->rules('required'),
+            Select::make(__('Type'), 'type')->nullable(false)
+                ->required()->rules('required')
+                ->options(\App\Models\Deck::getTypeOptions())->displayUsingLabels(),
             Number::make(__('Size'), 'size')
                 ->nullable(true)->hideWhenCreating()->hideWhenUpdating(),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
@@ -81,6 +86,7 @@ class Deck extends Content
     public function filters(Request $request): array
     {
         return [
+            DeckTypeFilter::make(),
             TargetsFilter::make(),
             ScopesFilter::make()
         ];

@@ -2,7 +2,6 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\Card;
 use App\Models\Deck;
 use App\Models\User;
 use Illuminate\Http\Request;

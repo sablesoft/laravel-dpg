@@ -91,7 +91,7 @@ class Game extends Model
         parent::boot();
         self::created(function(Game $model) {
             $model->refresh();
-            $decks = optional($model->book)->decks;
+            $decks = optional($model->book)->decks()->where('type', Deck::TYPE_STACK)->get();
             if ($decks) {
                 /** @var Deck $deck */
                 foreach ($decks as $deck) {

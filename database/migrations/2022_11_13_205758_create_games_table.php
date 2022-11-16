@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(false);
+            $table->string('name')->nullable(true);
             $table->longText('desc')->nullable(true);
             $table->foreignId('book_id')->nullable(false)->constrained('books')
                 ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('hero_id')->nullable(true)
+                ->constrained('cards')->nullOnDelete();
+            $table->foreignId('quest_id')->nullable(true)
+                ->constrained('cards')->nullOnDelete();
             $table->foreignId('master_id')->nullable(false)->constrained('users')
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->unsignedSmallInteger('status')->nullable(false)->default(0);

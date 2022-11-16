@@ -3,26 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property-read Card[]|null $cards
- * @property-read Card|null $quest
  * @property-read Deck[]|null $decks
  *
  * @property-read int|null $cards_count
  */
 class Book extends Content
 {
-    /**
-     * @return BelongsTo
-     */
-    public function quest(): BelongsTo
-    {
-        return $this->belongsTo(Card::class, 'quest_id');
-    }
-
     /**
      * @return BelongsToMany
      */

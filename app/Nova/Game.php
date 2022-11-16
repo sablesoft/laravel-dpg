@@ -3,11 +3,13 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 /**
  * @mixin \App\Models\Game
@@ -54,10 +56,14 @@ class Game extends Resource
     {
         return [
             Text::make(__('Name'), 'name')->sortable()
-                ->nullable(false)->required()->rules('required'),
+                ->nullable(true)->required(false),
             BelongsTo::make(__('Book'), 'book')
                 ->sortable()->nullable(false)->required()
                 ->rules('required'),
+            BelongsTo::make(__('Hero'), 'hero', Card::class)
+                ->nullable(true)->sortable(),
+            BelongsTo::make(__('Main Quest'), 'quest', Card::class)
+                ->nullable(true)->sortable(),
             BelongsTo::make(__('Master'), 'master', User::class)
                 ->sortable()->nullable(false)->required()
                 ->rules('required'),

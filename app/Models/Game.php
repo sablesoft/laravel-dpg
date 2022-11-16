@@ -13,12 +13,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $name
  * @property string|null $desc
  * @property int|null $book_id
+ * @property int|null $hero_id
+ * @property int|null $quest_id
  * @property int|null $master_id
  * @property int|null $status
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
  * @property-read Book|null $book
+ * @property-read Card|null $hero
+ * @property-read Card|null $quest
  * @property-read User|null $master
  * @property-read User[]|null $players
  * @property-read Stack[]|null $stacks
@@ -35,6 +39,22 @@ class Game extends Model
     public function book(): BelongsTo
     {
         return $this->belongsTo(Book::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function hero(): BelongsTo
+    {
+        return $this->belongsTo(Card::class, 'hero_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function quest(): BelongsTo
+    {
+        return $this->belongsTo(Card::class, 'quest_id');
     }
 
     /**

@@ -45,10 +45,6 @@ class Book extends Content
                 ->nullable(true)->hideFromIndex(),
             Number::make(__('Unique Cards'), 'cards_count')
                 ->hideWhenUpdating()->hideWhenCreating(),
-            BelongsTo::make(__('Hero'), 'scope', Card::class)
-                ->nullable(true)->sortable(),
-            BelongsTo::make(__('Main Quest'), 'quest', Card::class)
-                ->nullable(true),
             Text::make(__('Tags'), 'tags_string')
                 ->hideFromIndex()->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')->nullable(),

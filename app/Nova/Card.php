@@ -3,6 +3,8 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\App;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
@@ -15,6 +17,7 @@ use Laravel\Nova\Fields\Textarea;
 use App\Nova\Filters\BooksFilter;
 use App\Nova\Filters\DecksFilter;
 use App\Nova\Filters\ScopesFilter;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 /**
  * @mixin \App\Models\Card
@@ -95,6 +98,60 @@ class Card extends Content
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true)
         ];
+    }
+
+    /**
+     * Build a "relatable" query for the given resource.
+     *
+     * This query determines which instances of the model may be attached to other resources.
+     *
+     * @param NovaRequest $request
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public static function relatableQuery(NovaRequest $request, $query): Builder
+    {
+        /** @var \App\Models\Game $game */
+        $game = $request->findModelQuery($request->get('resourceId'))->first();
+        if (!is_object($game) || get_class($game) !== \App\Models\Game::class) {
+            return $query;
+        }
+        if ($bookId = $game->book_id) {
+            $query->whereHas('books', function($query) use ($bookId) {
+                $query->where('book_id', $bookId);
+            });
+        }
+
+        return static::setScope($request, $query);
+    }
+
+    /**
+     * @param NovaRequest $request
+     * @param Builder $query
+     * @return Builder
+     */
+    protected static function setScope(NovaRequest $request, Builder $query): Builder
+    {
+        if (!$requestSegment = strtolower($request->segment(4))) {
+            return $query;
+        }
+        $skip = ['update-fields'];
+        if (in_array($requestSegment, $skip)) {
+            return $query;
+        }
+
+        $locale = App::currentLocale();
+        App::setLocale('en');
+        $name = ucfirst($requestSegment);
+        /** @var \App\Models\Card|null $card */
+        $card = \App\Models\Card::query()
+            ->whereRaw("name ilike '%\"$name\"%'")->first();
+        if ($card && $card->name === $name) {
+            $query->where('scope_id', $card->getKey());
+        }
+        App::setLocale($locale);
+
+        return $query;
     }
 
     /**

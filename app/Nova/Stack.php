@@ -9,13 +9,15 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
 use App\Nova\Actions\PullCard;
 use App\Nova\Actions\InitStack;
-use App\Nova\Filters\GamesFilter;
 use App\Nova\Actions\ShuffleStack;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
+use Laravel\Nova\Fields\Textarea;
 
 class Stack extends Resource
 {
+    public static $displayInNavigation = false;
+
     /**
      * The logical group associated with the resource.
      *
@@ -56,19 +58,16 @@ class Stack extends Resource
     {
         return [
             BelongsTo::make(__('Game'), 'game')
-                ->sortable()->nullable(false)->required()->rules('required'),
+                ->readonly()->sortable(),
             BelongsTo::make(__('Target'), 'target', Card::class)
-                ->nullable(false)->sortable()
-                ->required()->rules('required'),
+                ->readonly()->sortable(),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
-                ->nullable(false)->sortable()
-                ->required()->rules('required'),
+                ->readonly()->sortable(),
+            Textarea::make(__('Desc'), 'desc')->alwaysShow(),
             Number::make(__('Pack Size'), 'pack_size')
                 ->hideWhenCreating()->hideWhenUpdating(),
-//            Code::make(__('Pack'), 'pack')->json()->onlyOnDetail(),
             Number::make(__('Discard Size'), 'discard_size')
                 ->hideWhenCreating()->hideWhenUpdating(),
-//            Code::make(__('Discard'), 'discard')->json()->onlyOnDetail(),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
@@ -99,7 +98,6 @@ class Stack extends Resource
     public function filters(Request $request): array
     {
         return [
-            GamesFilter::make(),
             TargetsFilter::make(),
             ScopesFilter::make(),
         ];

@@ -110,4 +110,22 @@ class Card extends Content
 
         return $data;
     }
+
+    /**
+     * @param Card $scope
+     * @param Card $card
+     * @return bool
+     */
+    public static function validateScope(Card $scope, Card $card): bool
+    {
+        if (!$card->scope) {
+            return false;
+        }
+
+        if ($card->scope->getKey() !== $scope->getKey()) {
+            return static::validateScope($scope, $card->scope);
+        } else {
+            return true;
+        }
+    }
 }

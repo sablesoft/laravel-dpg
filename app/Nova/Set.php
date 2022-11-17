@@ -3,17 +3,19 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
-use App\Nova\Filters\GamesFilter;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
-use Laravel\Nova\Fields\Text;
 
 class Set extends Resource
 {
+    public static $displayInNavigation = false;
+
     /**
      * The logical group associated with the resource.
      *
@@ -54,14 +56,14 @@ class Set extends Resource
     {
         return [
             BelongsTo::make(__('Game'), 'game')
-                ->sortable()->nullable(false)->required()->rules('required'),
+                ->readonly()->sortable(),
             BelongsTo::make(__('Target'), 'target', Card::class)
-                ->nullable(false)->sortable()
-                ->required()->rules('required'),
+                ->readonly()->sortable(),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
-                ->nullable(false)->sortable()
-                ->required()->rules('required'),
-            Text::make(__('Cards'), 'cards_string')->asHtml(),
+                ->readonly()->sortable(),
+            Textarea::make(__('Desc'), 'desc')->alwaysShow(),
+            Text::make(__('Cards'), 'cards_string')->asHtml()
+                ->hideWhenCreating()->hideWhenUpdating(),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->fields(function () {
                     return [
@@ -106,9 +108,8 @@ class Set extends Resource
     public function filters(Request $request): array
     {
         return [
-            GamesFilter::make(),
             TargetsFilter::make(),
-            ScopesFilter::make(),
+            ScopesFilter::make()
         ];
     }
 

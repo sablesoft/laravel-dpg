@@ -1,16 +1,21 @@
-<?php
+<?php /** @noinspection PhpInconsistentReturnPointsInspection */
 
 namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
-use App\Nova\Filters\GamesFilter;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
+use Laravel\Nova\Http\Requests\UpdateResourceRequest;
 
+/**
+ * @mixin \App\Models\Unique
+ */
 class Unique extends Resource
 {
+    public static $displayInNavigation = false;
+
     /**
      * The logical group associated with the resource.
      *
@@ -51,16 +56,24 @@ class Unique extends Resource
     {
         return [
             BelongsTo::make(__('Game'), 'game')
-                ->sortable()->nullable(false)->required()->rules('required'),
+                ->readonly()->sortable(),
             BelongsTo::make(__('Target'), 'target', Card::class)
-                ->nullable(false)->sortable()
-                ->required()->rules('required'),
+                ->readonly()->sortable(),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
-                ->nullable(false)->sortable()
-                ->required()->rules('required'),
+                ->readonly()->sortable(),
             BelongsTo::make(__('Unique'), 'unique', Card::class)
-                ->nullable(true)->sortable()
-                ->required(false),
+                ->nullable(true)->sortable()->required(false)
+                ->rules('integer', function($attribute, $value, $fail) {
+                    /** @var \App\Models\Card|null $scope */
+                    $scope = \App\Models\Card::select()->where('id', $this->scope_id)->first();
+                    /** @var \App\Models\Card|null $card */
+                    $card = \App\Models\Card::select()->where('id', $value)->first();
+                    if ($card && $scope) {
+                        if (!\App\Models\Card::validateScope($scope, $card)) {
+                            return $fail('Invalid scope for unique! Must be in ' . $scope->name . '!');
+                        }
+                    }
+                }),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
@@ -90,7 +103,6 @@ class Unique extends Resource
     public function filters(Request $request): array
     {
         return [
-            GamesFilter::make(),
             TargetsFilter::make(),
             ScopesFilter::make(),
         ];

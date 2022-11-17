@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
+ * @property-read string|null $prepared_name
+ *
  * @property-read Book|null $book
  * @property-read Card|null $hero
  * @property-read Card|null $quest
@@ -33,6 +35,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Game extends Model
 {
+    /**
+     * @return string|null
+     */
+    public function getPreparedNameAttribute(): ?string
+    {
+        if ($name = $this->name) {
+            return $name;
+        }
+
+        return optional($this->book)->name;
+    }
+
     /**
      * @return BelongsTo
      */

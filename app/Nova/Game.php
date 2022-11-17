@@ -3,13 +3,11 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 /**
  * @mixin \App\Models\Game
@@ -35,7 +33,7 @@ class Game extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'prepared_name';
 
     /**
      * The columns that should be searched.
@@ -55,18 +53,24 @@ class Game extends Resource
     public function fields(Request $request): array
     {
         return [
-            Text::make(__('Name'), 'name')->sortable()
+            Text::make(__('Name'), 'prepared_name')->sortable()
                 ->nullable(true)->required(false),
             BelongsTo::make(__('Book'), 'book')
                 ->sortable()->nullable(false)->required()
-                ->rules('required'),
+                ->rules('required')->hideWhenUpdating(),
+            BelongsTo::make(__('Book'), 'book')
+                ->hideWhenCreating()->hideFromIndex()->hideFromDetail()
+                ->readonly(),
             BelongsTo::make(__('Hero'), 'hero', Card::class)
-                ->nullable(true)->sortable(),
+                ->nullable(true)->sortable()->hideWhenCreating(),
             BelongsTo::make(__('Main Quest'), 'quest', Card::class)
-                ->nullable(true)->sortable(),
+                ->nullable(true)->sortable()->hideWhenCreating(),
             BelongsTo::make(__('Master'), 'master', User::class)
                 ->sortable()->nullable(false)->required()
-                ->rules('required'),
+                ->rules('required')->hideWhenUpdating(),
+            BelongsTo::make(__('Master'), 'master', User::class)
+                ->hideWhenCreating()->hideFromIndex()->hideFromDetail()
+                ->readonly(),
             Textarea::make(__('Desc'), 'desc')->nullable(true),
 
             // todo - make select:

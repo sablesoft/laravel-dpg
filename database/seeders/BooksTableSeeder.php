@@ -22,14 +22,14 @@ class BooksTableSeeder extends Seeder
             0 =>
             array (
                 'id' => 1,
-                'name' => '{"en":"Titu\'s Adventures","ru":"Приключения Титу"}',
+                'name' => '{"en":"Ancient Dreams"}',
                 'desc' => '{"en":null}',
                 'is_public' => false,
                 'image' => 'N5ru4ZmxP9ifSV2oGbaBfgUPkIaUG5om9lFwxIiX.jpg',
-                'scope_id' => null,
+                'scope_id' => NULL,
                 'owner_id' => 1,
                 'created_at' => '2022-11-06 05:07:24',
-                'updated_at' => '2022-11-10 23:41:53',
+                'updated_at' => '2022-11-16 19:03:06',
             ),
         ));
 

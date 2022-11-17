@@ -54,7 +54,8 @@ class Game extends Resource
     {
         return [
             Text::make(__('Name'), 'prepared_name')->sortable()
-                ->nullable(true)->required(false),
+                ->nullable(true)->required(false)
+                ->hideWhenCreating()->hideWhenUpdating(),
             BelongsTo::make(__('Book'), 'book')
                 ->sortable()->nullable(false)->required()
                 ->rules('required')->hideWhenUpdating(),
@@ -71,6 +72,9 @@ class Game extends Resource
             BelongsTo::make(__('Master'), 'master', User::class)
                 ->hideWhenCreating()->hideFromIndex()->hideFromDetail()
                 ->readonly(),
+            Text::make(__('Name'), 'name')->sortable()
+                ->nullable(true)->required(false)
+                ->hideFromIndex()->hideFromDetail(),
             Textarea::make(__('Desc'), 'desc')->nullable(true),
 
             // todo - make select:

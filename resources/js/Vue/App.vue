@@ -1,0 +1,3 @@
+<template>
+    Installed Vue 3 in Laravel 9 with Vite
+</template>

@@ -12,9 +12,10 @@ const props = defineProps({
 });
 
 const user = usePage().props.value.auth.user;
+const locale = usePage().props.value.locale;
 
 const form = useForm({
-    name: user.name,
+    name: user.name[locale],
     email: user.email,
 });
 </script>

@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +24,14 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('language/{language}', function ($language) {
+    /** @var \App\Models\User $user */
+    $user = auth()->user();
+    $user->updateLanguage($language);
+
+    return redirect()->back();
+})->name('language');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

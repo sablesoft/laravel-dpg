@@ -27,9 +27,10 @@ class BooksTableSeeder extends Seeder
                 'is_public' => false,
                 'image' => 'N5ru4ZmxP9ifSV2oGbaBfgUPkIaUG5om9lFwxIiX.jpg',
                 'scope_id' => NULL,
+                'cards_back' => 'Qn80whyrIagFxZbSqVBTuwvAiwuSzn9XN688nSFt.png',
                 'owner_id' => 1,
                 'created_at' => '2022-11-06 05:07:24',
-                'updated_at' => '2022-11-16 19:03:06',
+                'updated_at' => '2022-11-20 03:33:08',
             ),
         ));
         

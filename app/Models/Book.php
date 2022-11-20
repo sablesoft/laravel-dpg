@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
+ * @property string|null $cards_back
  * @property-read Card[]|null $cards
  * @property-read Deck[]|null $decks
  *

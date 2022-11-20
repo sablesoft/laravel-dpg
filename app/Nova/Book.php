@@ -50,6 +50,8 @@ class Book extends Content
             Textarea::make(__('Desc'), 'desc')->nullable(),
             HasMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
+            Image::make(__('Cards Back'), 'cards_back')
+                ->nullable(true)->hideFromIndex(),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')

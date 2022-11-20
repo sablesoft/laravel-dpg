@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Database\Migration;
 
@@ -12,7 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        $this->upContent('books');
+        $this->upContent('books', function(Blueprint $table) {
+            $table->string('cards_back')->nullable(true);
+        });
     }
 
     /**

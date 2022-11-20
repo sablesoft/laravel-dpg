@@ -14,15 +14,15 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('books')->delete();
-
+        
         \DB::table('books')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
-                'name' => '{"en":"Ancient Dreams"}',
+                'name' => '{"en":"Rainforest Dreams","ru":"Приключения Титу"}',
                 'desc' => '{"en":null}',
                 'is_public' => false,
                 'image' => 'N5ru4ZmxP9ifSV2oGbaBfgUPkIaUG5om9lFwxIiX.jpg',
@@ -32,7 +32,7 @@ class BooksTableSeeder extends Seeder
                 'updated_at' => '2022-11-16 19:03:06',
             ),
         ));
-
-
+        
+        
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\User;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 
@@ -27,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::get('language/{language}', function ($language) {
-    /** @var \App\Models\User $user */
+    /** @var User $user */
     $user = auth()->user();
     $user->updateLanguage($language);
 
@@ -41,7 +42,7 @@ Route::get('/dashboard', function () {
 Route::get('/game/{id}', [GameController::class, 'init'])
     ->middleware(['auth', 'verified'])->name('game');
 
-Route::get('/test', [GameController::class, 'test']);
+Route::get('/game/{id}/json', [GameController::class, 'json']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

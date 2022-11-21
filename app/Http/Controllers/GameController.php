@@ -25,10 +25,17 @@ class GameController extends Controller
         ]);
     }
 
-    public function test()
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function json(int $id): array
     {
-        /** @var Game $game */
-        $game = Game::select()->first();
+        /** @var Game|null $game */
+        if (!$game = Game::find($id)->first()) {
+            redirect('/');
+        }
+
         return BoardService::gameToArray($game);
     }
 }

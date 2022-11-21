@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * @property string|null $cards_back
@@ -14,6 +15,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Book extends Content
 {
+    use HasTranslations;
+
+    /**
+     * @var array|string[]
+     */
+    public array $translatable = ['name', 'desc'];
+
     /**
      * @return BelongsToMany
      */

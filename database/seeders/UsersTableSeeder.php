@@ -43,7 +43,7 @@ class UsersTableSeeder extends Seeder
                 'language_id' => 1,
                 'remember_token' => 'epLwYbVPPJVvdbhLWtwBi3rpBLxq9ETyiWeVsrnwCeCJLoYKq8HLyKhqqwJ4',
                 'created_at' => '2022-11-06 05:05:12',
-                'updated_at' => '2022-11-20 03:29:23',
+                'updated_at' => '2022-11-21 21:37:51',
             ),
         ));
         

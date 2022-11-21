@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
 use App\Models\Traits\Decks;
@@ -22,7 +21,7 @@ use App\Models\Traits\Books;
  */
 class Card extends Content
 {
-    use HasFactory, Tags, Decks, Books;
+    use Tags, Decks, Books;
 
     const RATIO = 1.4;
     const DEFAULT_WIDTH = 100;

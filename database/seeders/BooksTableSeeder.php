@@ -22,15 +22,15 @@ class BooksTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'name' => '{"en":"Rainforest Dreams","ru":"Приключения Титу"}',
-                'desc' => '{"en":null}',
+                'name' => '{"en":"Rainforest Dreams","ru":"Сны Дождливых Лесов"}',
+                'desc' => '{"ru":null}',
                 'is_public' => false,
-                'image' => 'N5ru4ZmxP9ifSV2oGbaBfgUPkIaUG5om9lFwxIiX.jpg',
+                'image' => 'book_image/9nMEX5TG126Xo3u4RXxB0L5JQCBib8mDCnrgNo4Y.jpg',
                 'scope_id' => NULL,
-                'cards_back' => 'Qn80whyrIagFxZbSqVBTuwvAiwuSzn9XN688nSFt.png',
+                'cards_back' => 'card_back/vgsvSjrgQW3pft9mk67LYr2oCGdsqpa29u71U2GQ.png',
                 'owner_id' => 1,
                 'created_at' => '2022-11-06 05:07:24',
-                'updated_at' => '2022-11-20 03:33:08',
+                'updated_at' => '2022-11-21 21:37:46',
             ),
         ));
         

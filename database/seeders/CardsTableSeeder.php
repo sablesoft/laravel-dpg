@@ -597,18 +597,6 @@ class CardsTableSeeder extends Seeder
             ),
             48 => 
             array (
-                'id' => 55,
-                'name' => '{"en":"Titu","ru":"Титу"}',
-                'desc' => '{"en":"The boy from the forest tribe. Originally from the small settlement of Lanza Piya. Raised by parents and other residents of the settlement. Has a younger sister. Smart. Leader among peers.","ru":"Мальчик из лесного племени. Родом из небольшого поселения Ланза Пийя. Воспитан родителями и другими жителями поселения. Имеет младшую сестру. Умен и сообразителен. Лидер среди сверстников."}',
-                'is_public' => false,
-                'image' => NULL,
-                'scope_id' => 37,
-                'owner_id' => 1,
-                'created_at' => '2022-11-08 02:27:58',
-                'updated_at' => '2022-11-10 23:34:10',
-            ),
-            49 => 
-            array (
                 'id' => 53,
                 'name' => '{"en":"Capybara"}',
                 'desc' => '{"en":"Capybaras are the largest rodents on earth. They have a heavy, barrel-shaped body that sits on relatively squat legs, shorter in the front than the back. Their brown fur is coarse and sparse enough to reveal the grey skin beneath it.\\r\\n\\r\\nFeeding mostly in the afternoon, and on and off at night, capybaras tend to doze in the morning. They take short naps throughout the day while other members of their group stand guard.\\r\\n\\r\\nThey are herbivores and eat the vegetation that lines water sources and other aquatic plants. They also eat their own poop, which contains beneficial bacteria that helps their stomach to break down the fiber from the grass. During the dry season or in drought conditions, capybaras will also eat grains, melons, reeds and squashes."}',
@@ -619,7 +607,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:22:02',
                 'updated_at' => '2022-11-13 02:56:18',
             ),
-            50 => 
+            49 => 
             array (
                 'id' => 51,
                 'name' => '{"en":"Jaguar"}',
@@ -631,7 +619,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 02:59:15',
                 'updated_at' => '2022-11-13 03:02:50',
             ),
-            51 => 
+            50 => 
             array (
                 'id' => 56,
                 'name' => '{"en":"Poison Dart Frog"}',
@@ -643,7 +631,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:22:08',
                 'updated_at' => '2022-11-13 01:53:19',
             ),
-            52 => 
+            51 => 
             array (
                 'id' => 57,
                 'name' => '{"en":"Time"}',
@@ -655,7 +643,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:55:13',
                 'updated_at' => '2022-11-13 01:55:13',
             ),
-            53 => 
+            52 => 
             array (
                 'id' => 58,
                 'name' => '{"en":"Day"}',
@@ -667,7 +655,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:55:41',
                 'updated_at' => '2022-11-13 01:55:41',
             ),
-            54 => 
+            53 => 
             array (
                 'id' => 59,
                 'name' => '{"en":"Night"}',
@@ -679,7 +667,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:56:02',
                 'updated_at' => '2022-11-13 01:56:02',
             ),
-            55 => 
+            54 => 
             array (
                 'id' => 60,
                 'name' => '{"en":"Action"}',
@@ -691,7 +679,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:02:13',
                 'updated_at' => '2022-11-13 02:02:13',
             ),
-            56 => 
+            55 => 
             array (
                 'id' => 62,
                 'name' => '{"en":"Wetland"}',
@@ -703,7 +691,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:24:58',
                 'updated_at' => '2022-11-13 02:24:58',
             ),
-            57 => 
+            56 => 
             array (
                 'id' => 63,
                 'name' => '{"en":"Habitat"}',
@@ -715,7 +703,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:29:27',
                 'updated_at' => '2022-11-13 02:29:27',
             ),
-            58 => 
+            57 => 
             array (
                 'id' => 18,
                 'name' => '{"en":"Insect","ru":"Насекомое"}',
@@ -727,7 +715,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:18:53',
                 'updated_at' => '2022-11-13 02:30:20',
             ),
-            59 => 
+            58 => 
             array (
                 'id' => 64,
                 'name' => '{"en":"Diet"}',
@@ -739,7 +727,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:32:11',
                 'updated_at' => '2022-11-13 02:32:11',
             ),
-            60 => 
+            59 => 
             array (
                 'id' => 61,
                 'name' => '{"en":"Green Anaconda"}',
@@ -751,7 +739,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:21:46',
                 'updated_at' => '2022-11-13 02:51:02',
             ),
-            61 => 
+            60 => 
             array (
                 'id' => 65,
                 'name' => '{"en":"Reptile"}',
@@ -763,7 +751,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:48:48',
                 'updated_at' => '2022-11-13 02:48:48',
             ),
-            62 => 
+            61 => 
             array (
                 'id' => 66,
                 'name' => '{"en":"Snake"}',
@@ -775,7 +763,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:49:38',
                 'updated_at' => '2022-11-13 02:49:38',
             ),
-            63 => 
+            62 => 
             array (
                 'id' => 67,
                 'name' => '{"en":"Evening"}',
@@ -787,7 +775,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:53:18',
                 'updated_at' => '2022-11-13 02:53:18',
             ),
-            64 => 
+            63 => 
             array (
                 'id' => 68,
                 'name' => '{"en":"Morning"}',
@@ -799,7 +787,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:54:10',
                 'updated_at' => '2022-11-13 02:54:10',
             ),
-            65 => 
+            64 => 
             array (
                 'id' => 49,
                 'name' => '{"en":"Scarlet Macaw"}',
@@ -811,7 +799,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 04:20:48',
                 'updated_at' => '2022-11-13 03:16:18',
             ),
-            66 => 
+            65 => 
             array (
                 'id' => 69,
                 'name' => '{"en":"Armadillo"}',
@@ -823,7 +811,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 18:04:42',
                 'updated_at' => '2022-11-13 18:05:06',
             ),
-            67 => 
+            66 => 
             array (
                 'id' => 70,
                 'name' => '{"en":"Nothing"}',
@@ -835,7 +823,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:09:47',
                 'updated_at' => '2022-11-15 17:09:47',
             ),
-            68 => 
+            67 => 
             array (
                 'id' => 71,
                 'name' => '{"en":"Success"}',
@@ -847,7 +835,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:11:37',
                 'updated_at' => '2022-11-15 17:11:37',
             ),
-            69 => 
+            68 => 
             array (
                 'id' => 72,
                 'name' => '{"en":"Fail"}',
@@ -859,7 +847,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:12:25',
                 'updated_at' => '2022-11-15 17:12:47',
             ),
-            70 => 
+            69 => 
             array (
                 'id' => 74,
                 'name' => '{"en":"Flashback"}',
@@ -871,7 +859,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:26:20',
                 'updated_at' => '2022-11-15 17:26:20',
             ),
-            71 => 
+            70 => 
             array (
                 'id' => 73,
                 'name' => '{"en":"Damage"}',
@@ -883,7 +871,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:16:42',
                 'updated_at' => '2022-11-15 17:45:32',
             ),
-            72 => 
+            71 => 
             array (
                 'id' => 16,
                 'name' => '{"en":"Character","ru":"Персонаж"}',
@@ -895,7 +883,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:20:38',
                 'updated_at' => '2022-11-15 21:00:58',
             ),
-            73 => 
+            72 => 
             array (
                 'id' => 75,
                 'name' => '{"en":"Tree"}',
@@ -907,19 +895,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 01:49:43',
                 'updated_at' => '2022-11-16 01:49:43',
             ),
-            74 => 
-            array (
-                'id' => 76,
-                'name' => '{"en":"Samauma"}',
-                'desc' => '{"en":"This majestic creation of nature has been nicknamed as “Queen of the Forest,” the “Tree of Life”, “Mother of All Trees”, or “Ladder of Heaven”. When it comes to the diameter of the crown and roots, the Samaúma reigns supreme, reaching up to 50 meters in diameter at her canopy and 20 meters in diameter at her roots, which spread out to support the enormous tree. This vast canopy is laced with thousands of leaves that are grouped in umbrella-shaped tassels of five to seven pointed leaves each, hanging sovereignly above the forest.\\r\\n\\r\\nThis element is core to the spiritual character of this majestic being. The Samaúma tree is sacred to the Rainforest tribes. For them, it is a spirit that brings healing, a connection between Heaven and Earth. On it, you can climb up to the crown. All the spirits of the forest are united up there, that of plants, animals, and humans. There you can feel them."}',
-                'is_public' => false,
-                'image' => '3wDFH7muWDd6K2OMzniPWqiIIwIVdZYRWncpBMrH.jpg',
-                'scope_id' => 75,
-                'owner_id' => 1,
-                'created_at' => '2022-11-16 01:57:55',
-                'updated_at' => '2022-11-16 02:01:37',
-            ),
-            75 => 
+            73 => 
             array (
                 'id' => 77,
                 'name' => '{"en":"Peccary"}',
@@ -931,7 +907,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:14:26',
                 'updated_at' => '2022-11-16 02:16:02',
             ),
-            76 => 
+            74 => 
             array (
                 'id' => 78,
                 'name' => '{"en":"Omnivorous"}',
@@ -943,7 +919,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:19:43',
                 'updated_at' => '2022-11-16 02:19:43',
             ),
-            77 => 
+            75 => 
             array (
                 'id' => 79,
                 'name' => '{"en":"Skill"}',
@@ -955,7 +931,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:48:50',
                 'updated_at' => '2022-11-16 02:49:50',
             ),
-            78 => 
+            76 => 
             array (
                 'id' => 80,
                 'name' => '{"en":"Survival"}',
@@ -967,7 +943,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:54:14',
                 'updated_at' => '2022-11-16 02:54:14',
             ),
-            79 => 
+            77 => 
             array (
                 'id' => 81,
                 'name' => '{"en":"Taming"}',
@@ -979,7 +955,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:56:34',
                 'updated_at' => '2022-11-16 02:56:34',
             ),
-            80 => 
+            78 => 
             array (
                 'id' => 82,
                 'name' => '{"en":"Handling"}',
@@ -991,7 +967,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 03:03:44',
                 'updated_at' => '2022-11-16 03:03:44',
             ),
-            81 => 
+            79 => 
             array (
                 'id' => 83,
                 'name' => '{"en":"Weapon"}',
@@ -1003,7 +979,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 03:07:32',
                 'updated_at' => '2022-11-16 03:07:32',
             ),
-            82 => 
+            80 => 
             array (
                 'id' => 84,
                 'name' => '{"en":"Spear"}',
@@ -1014,6 +990,30 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-16 03:08:36',
                 'updated_at' => '2022-11-16 03:08:36',
+            ),
+            81 => 
+            array (
+                'id' => 76,
+                'name' => '{"en":"Samauma"}',
+                'desc' => '{"en":"This majestic creation of nature has been nicknamed as “Queen of the Forest,” the “Tree of Life”, “Mother of All Trees”, or “Ladder of Heaven”. When it comes to the diameter of the crown and roots, the Samaúma reigns supreme, reaching up to 50 meters in diameter at her canopy and 20 meters in diameter at her roots, which spread out to support the enormous tree. This vast canopy is laced with thousands of leaves that are grouped in umbrella-shaped tassels of five to seven pointed leaves each, hanging sovereignly above the forest.\\r\\n\\r\\nThis element is core to the spiritual character of this majestic being. The Samaúma tree is sacred to the Rainforest tribes. For them, it is a spirit that brings healing, a connection between Heaven and Earth. On it, you can climb up to the crown. All the spirits of the forest are united up there, that of plants, animals, and humans. There you can feel them."}',
+                'is_public' => false,
+                'image' => 'card_image/mB1QZT4cJcNXxpUjnnJjBcPLSYveBKkztmcMvM4k.jpg',
+                'scope_id' => 75,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 01:57:55',
+                'updated_at' => '2022-11-21 16:42:22',
+            ),
+            82 => 
+            array (
+                'id' => 55,
+                'name' => '{"en":"Titu","ru":"Титу"}',
+                'desc' => '{"en":"The boy from the forest tribe. Originally from the small settlement of Lanza Piya. Raised by parents and other residents of the settlement.\\r\\nHas a younger sister.\\r\\nSmart. Leader among peers.","ru":"Мальчик из лесного племени. Родом из небольшого поселения Ланза Пийя. Воспитан родителями и другими жителями поселения. Имеет младшую сестру. Умен и сообразителен. Лидер среди сверстников."}',
+                'is_public' => false,
+                'image' => 'card_image/iAp4X50I2pQFwAbFyzLjAPZD3520fhnJBJH5Y7lu.jpg',
+                'scope_id' => 37,
+                'owner_id' => 1,
+                'created_at' => '2022-11-08 02:27:58',
+                'updated_at' => '2022-11-21 19:24:51',
             ),
         ));
         

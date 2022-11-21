@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Service\BoardService;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Game;
+use App\Service\BoardService;
 
-class BoardController extends Controller
+class GameController extends Controller
 {
     /**
+     * @param int $id
      * @return Response
      */
-    public function dashboard(): Response
+    public function init(int $id): Response
     {
-        /** @var Game $game */
-        $game = Game::select()->first();
+        /** @var Game|null $game */
+        if (!$game = Game::find($id)->first()) {
+            redirect('/');
+        }
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('Game', [
             'game' => BoardService::gameToArray($game)
         ]);
     }

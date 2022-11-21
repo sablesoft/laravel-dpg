@@ -10,9 +10,9 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Game" />
+    <Head :title="game.name" />
 
     <GameLayout>
-        <Board/>
+        <Board :game="game"/>
     </GameLayout>
 </template>

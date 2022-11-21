@@ -4,7 +4,10 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as ImageManager;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
@@ -52,7 +55,21 @@ class Card extends Content
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
             Image::make(__('Image'), 'image')
-                ->nullable(true)->hideFromIndex(),
+                ->store(function (Request $request, $model, $attribute, $requestAttribute) {
+                    /** @var UploadedFile $file */
+                    $file = $request->file($requestAttribute);
+                    $filename = $file->hashName('card_image');
+                    $width = \App\Models\Card::IMAGE_WIDTH;
+                    $height = \App\Models\Card::IMAGE_HEIGHT;
+                    $image = ImageManager::make($file->path())
+                        ->resize($width, $height, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        })->encode($file->guessExtension());
+                    Storage::disk('public')->put($filename, (string) $image);
+
+                    return $filename;
+                })->disk('public')->prunable()->nullable(true)->hideFromIndex(),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
                 ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')

@@ -3,6 +3,8 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
@@ -16,6 +18,7 @@ use App\Nova\Filters\CardsFilter;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\IsPublicFilter;
+use Intervention\Image\Facades\Image as ImageManager;
 
 /**
  * @mixin \App\Models\Book
@@ -42,7 +45,21 @@ class Book extends Content
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
             Image::make(__('Image'), 'image')
-                ->nullable(true)->hideFromIndex(),
+                ->store(function (Request $request, $model, $attribute, $requestAttribute) {
+                    /** @var UploadedFile $file */
+                    $file = $request->file($requestAttribute);
+                    $filename = $file->hashName('book_image');
+                    $width = \App\Models\Card::IMAGE_WIDTH;
+                    $height = \App\Models\Card::IMAGE_HEIGHT;
+                    $image = ImageManager::make($file->path())
+                        ->resize($width, $height, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        })->encode($file->guessExtension());
+                    Storage::disk('public')->put($filename, (string) $image);
+
+                    return $filename;
+                })->disk('public')->prunable()->nullable(true)->hideFromIndex(),
             Number::make(__('Unique Cards'), 'cards_count')
                 ->hideWhenUpdating()->hideWhenCreating(),
             Text::make(__('Tags'), 'tags_string')
@@ -51,6 +68,18 @@ class Book extends Content
             HasMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
             Image::make(__('Cards Back'), 'cards_back')
+                ->store(function (Request $request, $model, $attribute, $requestAttribute) {
+                    /** @var UploadedFile $file */
+                    $file = $request->file($requestAttribute);
+                    $filename = $file->hashName('card_back');
+                    $width = \App\Models\Card::width();
+                    $height = \App\Models\Card::height();
+                    $image = ImageManager::make($file->path())
+                        ->resize($width, $height)->encode($file->guessExtension());
+                    Storage::disk('public')->put($filename, (string) $image);
+
+                    return $filename;
+                })->maxWidth(\App\Models\Card::width())->disk('public')->prunable()
                 ->nullable(true)->hideFromIndex(),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->sortable()->nullable(true),

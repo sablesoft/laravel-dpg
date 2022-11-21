@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Textarea;
@@ -76,6 +77,8 @@ class Game extends Resource
                 ->nullable(true)->required(false)
                 ->hideFromIndex()->hideFromDetail(),
             Textarea::make(__('Desc'), 'desc')->nullable(true),
+            Image::make(__('Board Image'), 'board_image')
+                ->nullable(true)->hideFromIndex(),
 
             // todo - make select:
 //            Number::make(__('Status'), 'status'),

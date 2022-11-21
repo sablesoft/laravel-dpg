@@ -25,6 +25,7 @@ return new class extends Migration
                 ->constrained('cards')->nullOnDelete();
             $table->foreignId('master_id')->nullable(false)->constrained('users')
                 ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('board_image')->nullable(true);
             $table->unsignedSmallInteger('status')->nullable(false)->default(0);
 
             $table->timestamps();

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int|null $hero_id
  * @property int|null $quest_id
  * @property int|null $master_id
+ * @property string|null $board_image
  * @property int|null $status
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at

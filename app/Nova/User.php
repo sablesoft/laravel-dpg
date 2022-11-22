@@ -78,7 +78,7 @@ class User extends Resource
                 return $string ? "<span style='display:inline-block;'>$string</span>" : $string;
             })->readonly()->asHtml(),
 
-            BelongsTo::make(__('Language'), 'language')
+            BelongsTo::make(__('Language'), 'language', Language::class)
                 ->nullable(true)->sortable(),
             Image::make('Flag', function(\App\Models\User $user) {
                 return $user->language ? $user->language->code . '.svg' : null;
@@ -87,8 +87,8 @@ class User extends Resource
 
             MorphToMany::make(__('Roles'), 'roles', Role::class),
 
-            HasMany::make(__('Books'), 'books'),
-            HasMany::make(__('Cards'), 'cards'),
+            HasMany::make(__('Books'), 'books', Book::class),
+            HasMany::make(__('Cards'), 'cards', Card::class),
             HasMany::make(__('Tags'), 'tags', Card::class),
         ];
     }

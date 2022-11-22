@@ -50,8 +50,8 @@ class Log extends Resource
     {
         return [
 //            BelongsTo::make(__('Game'), 'game'),
-            BelongsTo::make(__('Stack'), 'stack'),
-            BelongsTo::make(__('Card'), 'card'),
+            BelongsTo::make(__('Stack'), 'stack', Stack::class),
+            BelongsTo::make(__('Card'), 'card', Card::class),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),

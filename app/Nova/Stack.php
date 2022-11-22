@@ -57,7 +57,7 @@ class Stack extends Resource
     public function fields(Request $request): array
     {
         return [
-            BelongsTo::make(__('Game'), 'game')
+            BelongsTo::make(__('Game'), 'game', Game::class)
                 ->readonly()->sortable(),
             BelongsTo::make(__('Target'), 'target', Card::class)
                 ->readonly()->sortable(),

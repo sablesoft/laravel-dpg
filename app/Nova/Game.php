@@ -57,10 +57,10 @@ class Game extends Resource
             Text::make(__('Name'), 'prepared_name')->sortable()
                 ->nullable(true)->required(false)
                 ->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('Book'), 'book')
+            BelongsTo::make(__('Book'), 'book', Book::class)
                 ->sortable()->nullable(false)->required()
                 ->rules('required')->hideWhenUpdating(),
-            BelongsTo::make(__('Book'), 'book')
+            BelongsTo::make(__('Book'), 'book', Book::class)
                 ->hideWhenCreating()->hideFromIndex()->hideFromDetail()
                 ->readonly(),
             BelongsTo::make(__('Hero'), 'hero', Card::class)
@@ -76,7 +76,7 @@ class Game extends Resource
             Text::make(__('Name'), 'name')->sortable()
                 ->nullable(true)->required(false)
                 ->hideFromIndex()->hideFromDetail(),
-            Textarea::make(__('Desc'), 'desc')->nullable(true),
+            Textarea::make(__('Desc'), 'desc')->nullable(true)->alwaysShow(),
             Image::make(__('Board Image'), 'board_image')
                 ->nullable(true)->hideFromIndex(),
 

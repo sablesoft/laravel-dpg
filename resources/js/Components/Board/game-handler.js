@@ -31,12 +31,24 @@ gameHandler.init = function(game, locale) {
     this.book = {
         name: this._locale(game.book.name),
         desc: this._locale(game.book.desc),
-        image: game.book.image,
-        cards_back: game.book.cards_back
+        image: '/storage/' + game.book.image,
+        cards_back: '/storage/' + game.book.cards_back
     }
     this.cards = game.book.collection;
 };
+gameHandler.getCardBack = function() {
+    if (!this.book) {
+        return null;
+    }
 
+    return this.book.cards_back;
+}
+gameHandler.getBoardImage = function() {
+    if (!this.game) {
+        return null;
+    }
+    return '/storage/' + this.game.board_image;
+}
 gameHandler.getGameCard = function() {
     if (!this.game || !this.book) {
         return null;
@@ -45,15 +57,20 @@ gameHandler.getGameCard = function() {
         name : this.game.name,
         desc : this.game.desc,
         scope_name : this.game.scope_name,
-        image : '/storage/' + this.book.image
+        image : this.book.image
     }
 }
 gameHandler.getCard = function(cardId) {
+    if (!this.game || !this.book) {
+        return null;
+    }
+
     let card = this.cards[cardId];
     card.name = this._locale(card.name);
     card.scope_name = this._locale(card.scope_name);
     card.desc = this._locale(card.desc);
     card.image = '/storage/' + card.image;
+    card.back_image = this.book.cards_back;
 
     return card;
 };

@@ -34,6 +34,13 @@ class BackupCommand extends Command
         'book_card',
         'decks',
         'deck_card',
+        'games',
+        'game_card',
+        'game_player',
+        'sets',
+        'set_card',
+        'stacks',
+        'uniques'
     ];
 
     protected string $lastTable = 'deck_tag';

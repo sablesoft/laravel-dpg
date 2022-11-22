@@ -96,14 +96,14 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     $user = $request->user();
                     $user->updateLanguage($locale);
                 }),
-            CommandRunner::make()->canSee(function ($request) {
-                return $request->user()->isAdmin();
-            }),
             (new NovaSidebar())->hydrate([
                 __('Club') => [
                     [__('Dashboard'), '/dashboard', '_self'],
                 ],
-            ])
+            ]),
+            CommandRunner::make()->canSee(function ($request) {
+                return $request->user()->isAdmin();
+            }),
         ];
     }
 

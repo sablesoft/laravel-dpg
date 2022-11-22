@@ -79,8 +79,8 @@ onMounted(() => {
             {{ card.desc }}
         </div>
         <div class="card-content card-actions">
-            <button v-if="card.object !== null && !tapped" @click="tap">Tap</button>
-            <button v-if="card.object !== null && tapped" @click="untap">Untap</button>
+            <button v-if="card.object !== null && !tapped" @click="tap">{{ __('Tap') }}</button>
+            <button v-if="card.object !== null && tapped" @click="untap">{{ __('Untap') }}</button>
         </div>
     </div>
 </template>

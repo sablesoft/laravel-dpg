@@ -41,10 +41,6 @@ class Kernel extends HttpKernel
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ],
 
-        'auth' => [
-            \App\Http\Middleware\SetLocale::class,
-        ],
-
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
@@ -55,6 +51,8 @@ class Kernel extends HttpKernel
     protected $middlewarePriority = [
         // ...
         \Illuminate\Session\Middleware\StartSession::class,
+        \App\Http\Middleware\Authenticate::class,
+        \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         \App\Http\Middleware\SetLocale::class,
         // ...
     ];

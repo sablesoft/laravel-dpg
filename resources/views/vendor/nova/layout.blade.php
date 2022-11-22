@@ -36,8 +36,10 @@
             <!-- Sidebar -->
             <div class="flex-none pt-header min-h-screen w-sidebar bg-grad-sidebar px-6">
                 <a href="{{ \Laravel\Nova\Nova::path() }}">
-                    <div class="absolute pin-t pin-l pin-r bg-logo flex items-center w-sidebar h-header px-6 text-white">
-                        <h2>{{ mb_strtoupper(__('Workshop')) }}</h2>
+                    <div class="absolute pin-t pin-l pin-r flex items-center w-sidebar h-header px-2 text-white"
+                        style="background-color: black;">
+                        <img src="{{ asset('/img/logo.svg') }}" width="40" height="40" alt="Logo">
+                        <h2 style="margin-left: 10px;">{{ mb_strtoupper(__('Workshop')) }}</h2>
                     </div>
                 </a>
 

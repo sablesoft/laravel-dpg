@@ -9,19 +9,17 @@ class Kernel extends HttpKernel
     /**
      * The application's global HTTP middleware stack.
      *
-     * These middleware are run during every request to your application.
+     * These middlewares are run during every request to your application.
      *
      * @var array<int, class-string|string>
      */
     protected $middleware = [
-        // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
         \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\SetLocale::class,
     ];
 
     /**
@@ -39,6 +37,12 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+            \App\Http\Middleware\SetLocale::class,
+        ],
+
+        'auth' => [
+            \App\Http\Middleware\Authenticate::class,
+            \App\Http\Middleware\SetLocale::class,
         ],
 
         'api' => [
@@ -49,12 +53,10 @@ class Kernel extends HttpKernel
     ];
 
     protected $middlewarePriority = [
-        // ...
         \Illuminate\Session\Middleware\StartSession::class,
         \App\Http\Middleware\Authenticate::class,
         \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         \App\Http\Middleware\SetLocale::class,
-        // ...
     ];
 
     /**

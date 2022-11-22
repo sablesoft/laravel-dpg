@@ -7,6 +7,7 @@ use Laravel\Nova\Nova;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Giuga\LaravelNovaSidebar\NovaSidebar;
 use Eolica\NovaLocaleSwitcher\LocaleSwitcher;
 use BinaryBuilds\NovaAdvancedCommandRunner\CommandRunner;
 use App\Models\User;
@@ -24,12 +25,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         parent::boot();
 
         Nova::serving(function (ServingNova $event) {
-            /** @var User $user */
-            $user = $event->request->user();
 
-            if ($locale = optional($user->language)->code) {
-                app()->setLocale($locale);
-            }
         });
     }
 
@@ -102,7 +98,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 }),
             CommandRunner::make()->canSee(function ($request) {
                 return $request->user()->isAdmin();
-            })
+            }),
+            (new NovaSidebar())->hydrate([
+                'Frontend' => [
+                    [__('Dashboard'), '/dashboard', '_self'],
+                ],
+            ])
         ];
     }
 

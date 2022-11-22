@@ -30,6 +30,12 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     {{ __('Dashboard') }}
                                 </NavLink>
+                                <a class="inline-flex items-center px-1 pt-1 text-sm
+                                font-medium leading-5 text-gray-900 focus:outline-none
+                                focus:border-indigo-700 transition duration-150 ease-in-out"
+                                   href="http://localhost/dpg">
+                                    {{ __('Workshop' )}}
+                                </a>
                             </div>
                         </div>
 
@@ -51,10 +57,10 @@ const showingNavigationDropdown = ref(false);
 
                                     <template #content>
                                         <DropdownLink :href="route('profile.edit')">
-                                            Profile
+                                            {{ __('Profile') }}
                                         </DropdownLink>
                                         <DropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
+                                            {{ __('Log Out') }}
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
@@ -103,7 +109,7 @@ const showingNavigationDropdown = ref(false);
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                            {{ __('Dashboard') }}
                         </ResponsiveNavLink>
                     </div>
 
@@ -116,10 +122,10 @@ const showingNavigationDropdown = ref(false);
 
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink :href="route('profile.edit')">
-                                Profile
+                                {{ __('Profile') }}
                             </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
+                                {{ __('Log Out') }}
                             </ResponsiveNavLink>
                         </div>
                     </div>

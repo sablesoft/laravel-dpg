@@ -40,7 +40,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/game/{id}', [GameController::class, 'init'])
-    ->middleware(['auth', 'verified', \App\Http\Middleware\SetLocale::class])->name('game');
+    ->middleware(['auth', 'verified'])->name('game');
 
 Route::get('/game/{id}/json', [GameController::class, 'json']);
 

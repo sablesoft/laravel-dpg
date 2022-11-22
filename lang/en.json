@@ -45,5 +45,10 @@
     "Main Quest": "Main Quest",
     "Tap": "Tap",
     "Untap": "Untap",
-    "Master": "Master"
+    "Master": "Master",
+    "Workshop": "Workshop",
+    "Profile": "Profile",
+    "Log Out": "Log Out",
+    "Club": "Club",
+    "Admin": "Admin"
 }

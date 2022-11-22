@@ -63,7 +63,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      *
      * @return array
      */
-    protected function cards()
+    protected function cards(): array
     {
         return [
             new Help,
@@ -75,7 +75,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      *
      * @return array
      */
-    protected function dashboards()
+    protected function dashboards(): array
     {
         return [];
     }
@@ -85,7 +85,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      *
      * @return array
      */
-    public function tools()
+    public function tools(): array
     {
         return [
             LocaleSwitcher::make()
@@ -100,7 +100,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 return $request->user()->isAdmin();
             }),
             (new NovaSidebar())->hydrate([
-                'Frontend' => [
+                __('Club') => [
                     [__('Dashboard'), '/dashboard', '_self'],
                 ],
             ])

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=1280">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ \Laravel\Nova\Nova::name() }}</title>
+    <title>{{ __('Workshop') . ': '. \Laravel\Nova\Nova::name() }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,800,800i,900,900i" rel="stylesheet">
@@ -37,7 +37,7 @@
             <div class="flex-none pt-header min-h-screen w-sidebar bg-grad-sidebar px-6">
                 <a href="{{ \Laravel\Nova\Nova::path() }}">
                     <div class="absolute pin-t pin-l pin-r bg-logo flex items-center w-sidebar h-header px-6 text-white">
-                       @include('nova::partials.logo')
+                        <h2>{{ mb_strtoupper(__('Workshop')) }}</h2>
                     </div>
                 </a>
 

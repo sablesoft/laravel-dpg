@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-    <Head :title="game.name" />
+    <Head :title="game.name[$page.props.locale]" />
 
     <GameLayout>
         <Board :game="game"/>

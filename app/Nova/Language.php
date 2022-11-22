@@ -18,7 +18,7 @@ class Language extends Resource
      *
      * @var string
      */
-    public static $group = 'Personal';
+    public static $group = 'Admin';
 
     /**
      * The model the resource corresponds to.

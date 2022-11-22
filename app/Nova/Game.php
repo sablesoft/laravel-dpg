@@ -20,7 +20,7 @@ class Game extends Resource
      *
      * @var string
      */
-    public static $group = 'Play';
+    public static $group = 'Personal';
 
     /**
      * The model the resource corresponds to.

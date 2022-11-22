@@ -14,11 +14,12 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Intervention\Image\Facades\Image as ImageManager;
 use App\Nova\Filters\CardsFilter;
+use App\Nova\Filters\ImageFilter;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\IsPublicFilter;
-use Intervention\Image\Facades\Image as ImageManager;
 
 /**
  * @mixin \App\Models\Book
@@ -120,7 +121,8 @@ class Book extends Content
             new IsPublicFilter(),
             new OwnersFilter(),
             new ScopesFilter(),
-            new CardsFilter()
+            new CardsFilter(),
+            new ImageFilter()
         ];
     }
 

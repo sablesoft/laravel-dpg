@@ -17,10 +17,11 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use App\Nova\Filters\BooksFilter;
+use App\Nova\Filters\ImageFilter;
 use App\Nova\Filters\DecksFilter;
 use App\Nova\Filters\ScopesFilter;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 /**
  * @mixin \App\Models\Card
@@ -69,7 +70,7 @@ class Card extends Content
                     Storage::disk('public')->put($filename, (string) $image);
 
                     return $filename;
-                })->disk('public')->prunable()->nullable(true)->hideFromIndex(),
+                })->disk('public')->prunable()->nullable(true),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
                 ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')
@@ -193,7 +194,8 @@ class Card extends Content
         return array_merge([
             new ScopesFilter(),
             new DecksFilter(),
-            new BooksFilter()
+            new BooksFilter(),
+            new ImageFilter()
         ], parent::filters($request));
     }
 

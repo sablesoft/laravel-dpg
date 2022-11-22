@@ -3,7 +3,7 @@ import { fabric } from 'fabric';
 fabric.Card = fabric.util.createClass(fabric.Group, {
 
     type: 'card',
-    defaultWidth: 110,
+    defaultWidth: 100,
     defaultRatio: 1.4,
 
     // initialize can be of type function(options) or function(property, options), like for text.
@@ -18,7 +18,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         this.set('ratio', options.ratio || this.defaultRatio);
         this.set('height', this.get('width') * this.get('ratio'));
 
-        const rectangle = new fabric.Rect({
+        const body = new fabric.Rect({
             originX: 'center',
             originY: 'center',
             fill: 'white',
@@ -33,13 +33,28 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         });
         const title = new fabric.Text(model.name, {
             originX: 'center',
-            top: -70,
+            top: -60,
             fontSize: 12,
             fontWeight: 'bold',
             fill: 'black',
         });
+        const scopeName = new fabric.Text(model.scope_name, {
+            originX: 'center',
+            top: 46,
+            fontSize: 12,
+            fontWeight: 'normal',
+            fill: 'black',
+        });
 
-        this.callSuper('initialize', [rectangle, title], options);
+        this.callSuper('initialize', [body, title, scopeName], options);
+
+        let self = this;
+        fabric.Image.fromURL(model.image, function(image) {
+            image.scale(0.3);
+            image.set('originX', 'center');
+            image.set('top', -37);
+            self.add(image);
+        });
 
         this.on('mousedown', function() {
             const shadow = new fabric.Shadow({
@@ -55,9 +70,9 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             this.set('shadow', null);
         });
 
-        this.on('mousedblclick', function() {
-            console.log('Double click!');
-        })
+        // this.on('mousedblclick', function() {
+            // console.log('Double click!');
+        // })
     },
 
     toObject: function() {

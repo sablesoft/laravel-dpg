@@ -141,15 +141,15 @@ class CardsTableSeeder extends Seeder
             ),
             10 => 
             array (
-                'id' => 42,
-                'name' => '{"en":"Knowledge"}',
-                'desc' => '{"en":"Nothing is free in this world, and the acquisition of knowledge is the most difficult of all tasks that a person can face."}',
+                'id' => 37,
+                'name' => '{"en":"Hero","ru":"Герой"}',
+                'desc' => '{"ru":"Герой - это любой персонаж, действия которого определяются игроками, а не мастером игры. Это главный персонаж всей игры.","en":"A hero is any character whose actions are determined by the players and not by the gamemaster. This is the main character of the whole game."}',
                 'is_public' => true,
-                'image' => 'card_image/xTrHUSM4j0SMJylDkTAh7BEIbN9cPuweBUTAgQMh.png',
-                'scope_id' => 7,
+                'image' => 'card_image/ZUz1OYVtqZJqq3eaGNVD0JdP5IGO5k85cQS6KWvX.png',
+                'scope_id' => 16,
                 'owner_id' => 1,
-                'created_at' => '2022-11-10 15:40:03',
-                'updated_at' => '2022-11-22 23:40:50',
+                'created_at' => '2022-11-10 23:33:23',
+                'updated_at' => '2022-11-23 21:36:15',
             ),
             11 => 
             array (
@@ -237,18 +237,6 @@ class CardsTableSeeder extends Seeder
             ),
             18 => 
             array (
-                'id' => 37,
-                'name' => '{"en":"Hero","ru":"Герой"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => 'card_image/ZUz1OYVtqZJqq3eaGNVD0JdP5IGO5k85cQS6KWvX.png',
-                'scope_id' => 16,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 23:33:23',
-                'updated_at' => '2022-11-22 23:57:51',
-            ),
-            19 => 
-            array (
                 'id' => 21,
                 'name' => '{"en":"Human","ru":"Человек"}',
                 'desc' => '{"en":null}',
@@ -259,7 +247,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:15:03',
                 'updated_at' => '2022-11-23 00:02:41',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 4,
                 'name' => '{"ru":"Место","en":"Place"}',
@@ -271,7 +259,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:56:32',
                 'updated_at' => '2022-11-23 00:06:37',
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 12,
                 'name' => '{"en":"Find"}',
@@ -283,7 +271,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:39:42',
                 'updated_at' => '2022-11-23 00:08:02',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 20,
                 'name' => '{"en":"Plant","ru":"Растение"}',
@@ -295,7 +283,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:14:35',
                 'updated_at' => '2022-11-23 00:15:28',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 13,
                 'name' => '{"en":"Encounter","ru":"Встреча"}',
@@ -307,7 +295,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 04:55:16',
                 'updated_at' => '2022-11-23 00:16:12',
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 26,
                 'name' => '{"en":"Frugivorous"}',
@@ -319,7 +307,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 04:23:13',
                 'updated_at' => '2022-11-23 00:18:20',
             ),
-            25 => 
+            24 => 
             array (
                 'id' => 25,
                 'name' => '{"en":"Herbivore"}',
@@ -331,7 +319,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:58:18',
                 'updated_at' => '2022-11-23 00:20:05',
             ),
-            26 => 
+            25 => 
             array (
                 'id' => 22,
                 'name' => '{"en":"Enemy"}',
@@ -343,7 +331,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:49:41',
                 'updated_at' => '2022-11-23 00:21:45',
             ),
-            27 => 
+            26 => 
             array (
                 'id' => 29,
                 'name' => '{"en":"Grassland"}',
@@ -355,7 +343,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:02:37',
                 'updated_at' => '2022-11-23 00:25:28',
             ),
-            28 => 
+            27 => 
             array (
                 'id' => 14,
                 'name' => '{"en":"Wilderness"}',
@@ -367,7 +355,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:24:51',
                 'updated_at' => '2022-11-23 00:29:24',
             ),
-            29 => 
+            28 => 
             array (
                 'id' => 1,
                 'name' => '{"en":"Info","ru":"Инфо"}',
@@ -379,19 +367,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:07:36',
                 'updated_at' => '2022-11-23 00:33:08',
             ),
-            30 => 
-            array (
-                'id' => 10,
-                'name' => '{"en":"Weariness"}',
-                'desc' => '{"en":"Even the heroes get tired over time. And the more weariness they accumulate, the harder it is for them to act. Weariness is removed by rest and food."}',
-                'is_public' => true,
-                'image' => 'card_image/QReWTHEz0FELexQleah1DfCeh0c4LdbQWAZian3z.png',
-                'scope_id' => 3,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 14:36:47',
-                'updated_at' => '2022-11-23 00:36:03',
-            ),
-            31 => 
+            29 => 
             array (
                 'id' => 11,
                 'name' => '{"en":"Practice"}',
@@ -403,7 +379,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:36:58',
                 'updated_at' => '2022-11-23 00:37:39',
             ),
-            32 => 
+            30 => 
             array (
                 'id' => 36,
                 'name' => '{"en":"Lanza Piya"}',
@@ -415,19 +391,19 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:31:06',
                 'updated_at' => '2022-11-23 02:42:28',
             ),
-            33 => 
+            31 => 
             array (
-                'id' => 41,
-                'name' => '{"en":"Travel"}',
-                'desc' => '{"en":"Something always happens along the way..."}',
+                'id' => 10,
+                'name' => '{"en":"Weariness","ru":"Усталость"}',
+                'desc' => '{"en":"Even the heroes get tired over time. And the more weariness they accumulate, the harder it is for them to act. Weariness is removed by rest and food.","ru":"Даже герои со временем устают. И чем больше они накапливают усталости, тем труднее им действовать.\\r\\nУсталость снимается отдыхом и едой."}',
                 'is_public' => true,
-                'image' => 'card_image/mseTJIuag5KBZ2p9aNoF7u6hcA8ZigwCTj0JzfJY.png',
-                'scope_id' => 60,
+                'image' => 'card_image/QReWTHEz0FELexQleah1DfCeh0c4LdbQWAZian3z.png',
+                'scope_id' => 3,
                 'owner_id' => 1,
-                'created_at' => '2022-11-10 13:55:09',
-                'updated_at' => '2022-11-22 22:59:09',
+                'created_at' => '2022-11-10 14:36:47',
+                'updated_at' => '2022-11-23 18:03:12',
             ),
-            34 => 
+            32 => 
             array (
                 'id' => 46,
                 'name' => '{"en":"Araki","ru":"Араки"}',
@@ -439,7 +415,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:29:38',
                 'updated_at' => '2022-11-23 03:32:45',
             ),
-            35 => 
+            33 => 
             array (
                 'id' => 48,
                 'name' => '{"en":"Zaizi","ru":"Зайзи"}',
@@ -451,7 +427,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:31:41',
                 'updated_at' => '2022-11-23 03:52:29',
             ),
-            36 => 
+            34 => 
             array (
                 'id' => 45,
                 'name' => '{"en":"Pua","ru":"Пуа"}',
@@ -463,7 +439,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:33:05',
                 'updated_at' => '2022-11-23 03:54:51',
             ),
-            37 => 
+            35 => 
             array (
                 'id' => 47,
                 'name' => '{"en":"Lilika","ru":"Лилика"}',
@@ -475,7 +451,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:36:25',
                 'updated_at' => '2022-11-23 03:59:39',
             ),
-            38 => 
+            36 => 
             array (
                 'id' => 63,
                 'name' => '{"en":"Habitat"}',
@@ -487,55 +463,55 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:29:27',
                 'updated_at' => '2022-11-13 02:29:27',
             ),
-            39 => 
-            array (
-                'id' => 68,
-                'name' => '{"en":"Morning"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => 'card_image/d4L6nB39jIdthxzqUnLzm87sgik1PLSwpYgI18F4.png',
-                'scope_id' => 57,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 02:54:10',
-                'updated_at' => '2022-11-22 23:17:07',
-            ),
-            40 => 
-            array (
-                'id' => 66,
-                'name' => '{"en":"Snake"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => 'card_image/dqkmxlLwIHVfPHxDPYHBEbercczTQoB02s7X7cfp.png',
-                'scope_id' => 19,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 02:49:38',
-                'updated_at' => '2022-11-22 23:04:51',
-            ),
-            41 => 
+            37 => 
             array (
                 'id' => 64,
-                'name' => '{"en":"Diet"}',
-                'desc' => '{"en":null}',
+                'name' => '{"en":"Diet","ru":"Диета"}',
+                'desc' => '{"ru":"Различные существа нуждаются в различной пище для жизни и роста. Какая-то пища приносит больше энергии и сил, а какая-то вообще может причинить вред.\\r\\n\\r\\nПОДСКАЗКИ: Используйте как сферу для колоды существа со всеми продуктами, которые он употребляет. Это может быть еда, животные и так далее.","en":"Different creatures need different food to live and grow. Some food brings more energy and strength, and some can do damage.\\r\\n\\r\\nTIPS: Use as a scope for a creature deck with all the foods it consumes. It could be plants, animals, dishes, and so on."}',
                 'is_public' => true,
                 'image' => 'card_image/rX1xWIWZJ0zJzXkrShZh25jQ7pMWcGOuE3sONQT0.png',
                 'scope_id' => 5,
                 'owner_id' => 1,
                 'created_at' => '2022-11-13 02:32:11',
-                'updated_at' => '2022-11-22 23:13:47',
+                'updated_at' => '2022-11-23 21:00:10',
             ),
-            42 => 
+            38 => 
             array (
-                'id' => 67,
-                'name' => '{"en":"Evening"}',
-                'desc' => '{"en":null}',
+                'id' => 60,
+                'name' => '{"en":"Action","ru":"Действие"}',
+                'desc' => '{"ru":null}',
                 'is_public' => true,
-                'image' => 'card_image/mt3ysCBSNZTwoLJ4oEFDcPrI8Z5xoB09JUpnUiUb.png',
+                'image' => 'card_image/ZZsaaHmdV5QOQd6rcwrOug6jKhm6HeQSYX4Z9pYc.png',
+                'scope_id' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:02:13',
+                'updated_at' => '2022-11-23 21:01:26',
+            ),
+            39 => 
+            array (
+                'id' => 59,
+                'name' => '{"en":"Night","ru":"Ночь"}',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'image' => 'card_image/iZcFdcfs740fG9vY4R6FnBZ6yy6dLhcxLwbsb6ds.png',
                 'scope_id' => 57,
                 'owner_id' => 1,
-                'created_at' => '2022-11-13 02:53:18',
-                'updated_at' => '2022-11-22 23:17:39',
+                'created_at' => '2022-11-13 01:56:02',
+                'updated_at' => '2022-11-23 21:02:25',
             ),
-            43 => 
+            40 => 
+            array (
+                'id' => 58,
+                'name' => '{"en":"Day","ru":"День"}',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'image' => 'card_image/x4Kw60tYOzJK5uOpX9TkYOxLntmbZer12EN9fsgX.png',
+                'scope_id' => 57,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 01:55:41',
+                'updated_at' => '2022-11-23 21:10:09',
+            ),
+            41 => 
             array (
                 'id' => 62,
                 'name' => '{"en":"Wetland"}',
@@ -547,55 +523,19 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:24:58',
                 'updated_at' => '2022-11-22 23:43:05',
             ),
-            44 => 
-            array (
-                'id' => 60,
-                'name' => '{"en":"Action"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => 'card_image/ZZsaaHmdV5QOQd6rcwrOug6jKhm6HeQSYX4Z9pYc.png',
-                'scope_id' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 02:02:13',
-                'updated_at' => '2022-11-22 23:33:47',
-            ),
-            45 => 
-            array (
-                'id' => 59,
-                'name' => '{"en":"Night"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => 'card_image/iZcFdcfs740fG9vY4R6FnBZ6yy6dLhcxLwbsb6ds.png',
-                'scope_id' => 57,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 01:56:02',
-                'updated_at' => '2022-11-22 23:35:15',
-            ),
-            46 => 
-            array (
-                'id' => 58,
-                'name' => '{"en":"Day"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => 'card_image/x4Kw60tYOzJK5uOpX9TkYOxLntmbZer12EN9fsgX.png',
-                'scope_id' => 57,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 01:55:41',
-                'updated_at' => '2022-11-22 23:37:26',
-            ),
-            47 => 
+            42 => 
             array (
                 'id' => 57,
-                'name' => '{"en":"Time"}',
-                'desc' => '{"en":null}',
+                'name' => '{"en":"Time","ru":"Время"}',
+                'desc' => '{"ru":null}',
                 'is_public' => true,
                 'image' => 'card_image/gew8IFxzDggbw2k570pdHMIAvTwKj2h5k1gNdMK9.png',
                 'scope_id' => NULL,
                 'owner_id' => 1,
                 'created_at' => '2022-11-13 01:55:13',
-                'updated_at' => '2022-11-22 23:37:55',
+                'updated_at' => '2022-11-23 21:10:44',
             ),
-            48 => 
+            43 => 
             array (
                 'id' => 51,
                 'name' => '{"en":"Jaguar"}',
@@ -607,7 +547,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 02:59:15',
                 'updated_at' => '2022-11-23 03:45:26',
             ),
-            49 => 
+            44 => 
             array (
                 'id' => 56,
                 'name' => '{"en":"Poison Dart Frog"}',
@@ -619,7 +559,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:22:08',
                 'updated_at' => '2022-11-23 03:40:03',
             ),
-            50 => 
+            45 => 
             array (
                 'id' => 54,
                 'name' => '{"en":"Mountain Gorilla"}',
@@ -631,7 +571,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 01:35:45',
                 'updated_at' => '2022-11-23 03:42:06',
             ),
-            51 => 
+            46 => 
             array (
                 'id' => 53,
                 'name' => '{"en":"Capybara"}',
@@ -643,43 +583,43 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:22:02',
                 'updated_at' => '2022-11-23 03:43:25',
             ),
-            52 => 
+            47 => 
             array (
-                'id' => 70,
-                'name' => '{"en":"Nothing"}',
-                'desc' => '{"en":"The meaning of this card depends on the context."}',
+                'id' => 68,
+                'name' => '{"en":"Morning","ru":"Утро"}',
+                'desc' => '{"ru":null}',
                 'is_public' => true,
-                'image' => NULL,
-                'scope_id' => NULL,
+                'image' => 'card_image/d4L6nB39jIdthxzqUnLzm87sgik1PLSwpYgI18F4.png',
+                'scope_id' => 57,
                 'owner_id' => 1,
-                'created_at' => '2022-11-15 17:09:47',
-                'updated_at' => '2022-11-15 17:09:47',
+                'created_at' => '2022-11-13 02:54:10',
+                'updated_at' => '2022-11-23 20:49:04',
             ),
-            53 => 
+            48 => 
             array (
-                'id' => 71,
-                'name' => '{"en":"Success"}',
-                'desc' => '{"en":"The meaning of this card depends on the context."}',
+                'id' => 67,
+                'name' => '{"en":"Evening","ru":"Вечер"}',
+                'desc' => '{"ru":null}',
                 'is_public' => true,
-                'image' => NULL,
-                'scope_id' => NULL,
+                'image' => 'card_image/mt3ysCBSNZTwoLJ4oEFDcPrI8Z5xoB09JUpnUiUb.png',
+                'scope_id' => 57,
                 'owner_id' => 1,
-                'created_at' => '2022-11-15 17:11:37',
-                'updated_at' => '2022-11-15 17:11:37',
+                'created_at' => '2022-11-13 02:53:18',
+                'updated_at' => '2022-11-23 20:49:30',
             ),
-            54 => 
+            49 => 
             array (
-                'id' => 72,
-                'name' => '{"en":"Fail"}',
-                'desc' => '{"en":"The meaning of this card depends on the context."}',
+                'id' => 66,
+                'name' => '{"en":"Snake","ru":"Змея"}',
+                'desc' => '{"ru":null}',
                 'is_public' => true,
-                'image' => NULL,
-                'scope_id' => NULL,
+                'image' => 'card_image/dqkmxlLwIHVfPHxDPYHBEbercczTQoB02s7X7cfp.png',
+                'scope_id' => 19,
                 'owner_id' => 1,
-                'created_at' => '2022-11-15 17:12:25',
-                'updated_at' => '2022-11-15 17:12:47',
+                'created_at' => '2022-11-13 02:49:38',
+                'updated_at' => '2022-11-23 20:49:59',
             ),
-            55 => 
+            50 => 
             array (
                 'id' => 78,
                 'name' => '{"en":"Omnivorous"}',
@@ -691,103 +631,79 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:19:43',
                 'updated_at' => '2022-11-16 02:19:43',
             ),
-            56 => 
+            51 => 
             array (
                 'id' => 74,
-                'name' => '{"en":"Flashback"}',
-                'desc' => '{"en":null}',
+                'name' => '{"en":"Flashback","ru":"Воспоминание"}',
+                'desc' => '{"ru":"Время от времени мы все вспоминаем разные вещи. Иногда воспоминания приходят сами, внезапно и неожиданно. Иногда они содержат необходимую помощь или важные подсказки.","en":"From time to time we all remember different things. Sometimes flashbacks come by themselves, suddenly and unexpectedly. Sometimes they contain necessary help or important hints."}',
                 'is_public' => true,
                 'image' => 'card_image/J4HLzxiwpF9dARr1hZDoUwnIKpfcb44VQkkQWz09.png',
                 'scope_id' => 3,
                 'owner_id' => 1,
                 'created_at' => '2022-11-15 17:26:20',
-                'updated_at' => '2022-11-22 23:06:36',
+                'updated_at' => '2022-11-23 18:42:02',
             ),
-            57 => 
+            52 => 
             array (
-                'id' => 83,
-                'name' => '{"en":"Weapon"}',
-                'desc' => '{"en":null}',
+                'id' => 72,
+                'name' => '{"en":"Fail","ru":"Провал"}',
+                'desc' => '{"en":"The meaning of this card depends on the context.","ru":"Значение этой карты зависит от контекста."}',
                 'is_public' => true,
-                'image' => 'card_image/qoBl8tq3XdYJFZ38nTLqivvkTPwxFyMBDScit09C.png',
-                'scope_id' => 6,
+                'image' => NULL,
+                'scope_id' => 3,
                 'owner_id' => 1,
-                'created_at' => '2022-11-16 03:07:32',
-                'updated_at' => '2022-11-22 21:41:11',
+                'created_at' => '2022-11-15 17:12:25',
+                'updated_at' => '2022-11-23 20:47:22',
             ),
-            58 => 
+            53 => 
             array (
                 'id' => 79,
-                'name' => '{"en":"Skill"}',
-                'desc' => '{"en":"Skills are the ability of a character to do something. The better the skill, the more successfully and efficiently he can perform this action.\\r\\n\\r\\nUse as a character deck scope for all his skills."}',
+                'name' => '{"en":"Skill","ru":"Навык"}',
+                'desc' => '{"en":"Skills are the ability of a character to do something. The better the skill, the more successfully and efficiently he can perform this action.\\r\\n\\r\\nTIPS: Use as a character deck scope for all his skills.","ru":"Навыки — это способность персонажа делать что-либо. Чем лучше навык, тем успешнее и эффективнее он сможет выполнить связанные с этим навыком действия.\\r\\n\\r\\nПОДСКАЗКИ: Используй в качестве сферы для колоды всех умений персонажа."}',
                 'is_public' => true,
                 'image' => 'card_image/KjUaRvY8p8Fv7awBHqCFKc12uD77zGmKkf8fcijU.png',
                 'scope_id' => 16,
                 'owner_id' => 1,
                 'created_at' => '2022-11-16 02:48:50',
-                'updated_at' => '2022-11-22 22:57:22',
+                'updated_at' => '2022-11-23 19:23:58',
             ),
-            59 => 
+            54 => 
             array (
-                'id' => 73,
-                'name' => '{"en":"Damage"}',
-                'desc' => '{"en":null}',
+                'id' => 71,
+                'name' => '{"en":"Success","ru":"Успех"}',
+                'desc' => '{"en":"The meaning of this card depends on the context.","ru":"Значение этой карты зависит от контекста."}',
                 'is_public' => true,
-                'image' => 'card_image/Yz12TOspsV6q1PCle10wtSc1vpugPFmnnC961hi0.png',
+                'image' => NULL,
                 'scope_id' => 3,
                 'owner_id' => 1,
-                'created_at' => '2022-11-15 17:16:42',
-                'updated_at' => '2022-11-22 23:01:47',
+                'created_at' => '2022-11-15 17:11:37',
+                'updated_at' => '2022-11-23 20:48:02',
             ),
-            60 => 
+            55 => 
             array (
-                'id' => 81,
-                'name' => '{"en":"Taming"}',
-                'desc' => '{"en":null}',
+                'id' => 70,
+                'name' => '{"en":"Nothing","ru":"Ничего"}',
+                'desc' => '{"en":"The meaning of this card depends on the context.","ru":"Значение этой карты зависит от контекста."}',
                 'is_public' => true,
-                'image' => 'card_image/uZlgLsjkMUXVGkOTWCqUN6pslNri1KgE5lQI2BE0.png',
-                'scope_id' => 79,
+                'image' => NULL,
+                'scope_id' => 3,
                 'owner_id' => 1,
-                'created_at' => '2022-11-16 02:56:34',
-                'updated_at' => '2022-11-22 23:08:39',
+                'created_at' => '2022-11-15 17:09:47',
+                'updated_at' => '2022-11-23 20:48:37',
             ),
-            61 => 
-            array (
-                'id' => 82,
-                'name' => '{"en":"Handling"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => 'card_image/XACk5e1HLvJcsiXepk4alZXgzYSC6rlFnRfXjFNi.png',
-                'scope_id' => 79,
-                'owner_id' => 1,
-                'created_at' => '2022-11-16 03:03:44',
-                'updated_at' => '2022-11-22 23:10:25',
-            ),
-            62 => 
-            array (
-                'id' => 80,
-                'name' => '{"en":"Survival"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => 'card_image/QFL4GNKTOOCHxKRVCprP5jK9u4KfdyQLf1lr6iFp.png',
-                'scope_id' => 79,
-                'owner_id' => 1,
-                'created_at' => '2022-11-16 02:54:14',
-                'updated_at' => '2022-11-22 23:12:04',
-            ),
-            63 => 
+            56 => 
             array (
                 'id' => 75,
-                'name' => '{"en":"Tree"}',
-                'desc' => '{"en":null}',
+                'name' => '{"en":"Tree","ru":"Дерево"}',
+                'desc' => '{"ru":null}',
                 'is_public' => true,
                 'image' => 'card_image/IbaCFQfHfY7KeSrLgyQNSZBHSoLhbGvDPL7N8eaN.png',
                 'scope_id' => 20,
                 'owner_id' => 1,
                 'created_at' => '2022-11-16 01:49:43',
-                'updated_at' => '2022-11-22 23:21:07',
+                'updated_at' => '2022-11-23 21:01:52',
             ),
-            64 => 
+            57 => 
             array (
                 'id' => 16,
                 'name' => '{"en":"Character","ru":"Персонаж"}',
@@ -799,19 +715,19 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:20:38',
                 'updated_at' => '2022-11-22 23:58:25',
             ),
-            65 => 
+            58 => 
             array (
                 'id' => 84,
-                'name' => '{"en":"Spear"}',
-                'desc' => '{"en":null}',
+                'name' => '{"en":"Spear","ru":"Копье"}',
+                'desc' => '{"ru":null}',
                 'is_public' => false,
                 'image' => 'card_image/s1xmWboKBFs0g0usGKGAe6ELgQJPCUjsM5c8PNzp.jpg',
                 'scope_id' => 83,
                 'owner_id' => 1,
                 'created_at' => '2022-11-16 03:08:36',
-                'updated_at' => '2022-11-23 03:21:52',
+                'updated_at' => '2022-11-23 18:03:43',
             ),
-            66 => 
+            59 => 
             array (
                 'id' => 69,
                 'name' => '{"en":"Armadillo"}',
@@ -823,7 +739,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 18:04:42',
                 'updated_at' => '2022-11-23 03:37:24',
             ),
-            67 => 
+            60 => 
             array (
                 'id' => 49,
                 'name' => '{"en":"Scarlet Macaw"}',
@@ -835,7 +751,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 04:20:48',
                 'updated_at' => '2022-11-23 03:49:44',
             ),
-            68 => 
+            61 => 
             array (
                 'id' => 17,
                 'name' => '{"en":"Bird","ru":"Птица"}',
@@ -847,7 +763,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:17:34',
                 'updated_at' => '2022-11-22 21:52:17',
             ),
-            69 => 
+            62 => 
             array (
                 'id' => 18,
                 'name' => '{"en":"Insect","ru":"Насекомое"}',
@@ -859,7 +775,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:18:53',
                 'updated_at' => '2022-11-23 00:22:39',
             ),
-            70 => 
+            63 => 
             array (
                 'id' => 28,
                 'name' => '{"en":"Mountains"}',
@@ -871,7 +787,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 01:57:20',
                 'updated_at' => '2022-11-23 00:23:37',
             ),
-            71 => 
+            64 => 
             array (
                 'id' => 76,
                 'name' => '{"en":"Samauma"}',
@@ -883,7 +799,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 01:57:55',
                 'updated_at' => '2022-11-21 16:42:22',
             ),
-            72 => 
+            65 => 
             array (
                 'id' => 55,
                 'name' => '{"en":"Titu","ru":"Титу"}',
@@ -895,7 +811,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:27:58',
                 'updated_at' => '2022-11-21 19:24:51',
             ),
-            73 => 
+            66 => 
             array (
                 'id' => 9,
                 'name' => '{"en":"Clan","ru":"Клан"}',
@@ -907,7 +823,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:08:04',
                 'updated_at' => '2022-11-23 00:31:42',
             ),
-            74 => 
+            67 => 
             array (
                 'id' => 8,
                 'name' => '{"en":"Legend","ru":"Легенда"}',
@@ -919,7 +835,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:07:52',
                 'updated_at' => '2022-11-23 00:34:45',
             ),
-            75 => 
+            68 => 
             array (
                 'id' => 19,
                 'name' => '{"en":"Animal","ru":"Животное"}',
@@ -931,7 +847,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:13:44',
                 'updated_at' => '2022-11-23 02:43:40',
             ),
-            76 => 
+            69 => 
             array (
                 'id' => 40,
                 'name' => '{"en":"Totem Quest","ru":"Поиски Тотема"}',
@@ -943,7 +859,19 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:41:18',
                 'updated_at' => '2022-11-23 04:01:22',
             ),
-            77 => 
+            70 => 
+            array (
+                'id' => 82,
+                'name' => '{"en":"Handling","ru":"Сноровка"}',
+                'desc' => '{"ru":"Под сноровкой здесь подразумевается умение обращаться с различными предметами, инструментами, оружием и тому подобным.\\r\\n\\r\\nЭтот навык имеет специализации для разных предметов, с которыми он применяется. Чем больше персонаж  практикует сноровку с тем, или иным предметом, тем больше растет данная специализация и весь навык в целом.\\r\\n\\r\\nПОДСКАЗКИ: Используй как сферу для колоды персонажа с различными предметами, с которыми он умеет обращаться.","en":"Handling here means the skill to handle various objects, tools, and the like.\\r\\n\\r\\nThis skill has specializations for the different items it is used with. The more a character practices handling one or another item, the more this specialization and the whole skill as a whole grows.\\r\\n\\r\\nTIPS: Use as a scope for your character\'s deck with various items that he knows how to use."}',
+                'is_public' => true,
+                'image' => 'card_image/XACk5e1HLvJcsiXepk4alZXgzYSC6rlFnRfXjFNi.png',
+                'scope_id' => 79,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 03:03:44',
+                'updated_at' => '2022-11-23 19:22:04',
+            ),
+            71 => 
             array (
                 'id' => 77,
                 'name' => '{"en":"Peccary"}',
@@ -955,7 +883,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:14:26',
                 'updated_at' => '2022-11-23 03:35:47',
             ),
-            78 => 
+            72 => 
             array (
                 'id' => 61,
                 'name' => '{"en":"Green Anaconda"}',
@@ -967,7 +895,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:21:46',
                 'updated_at' => '2022-11-23 03:39:05',
             ),
-            79 => 
+            73 => 
             array (
                 'id' => 52,
                 'name' => '{"en":"Brown Sloth"}',
@@ -979,7 +907,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 02:48:34',
                 'updated_at' => '2022-11-23 03:44:43',
             ),
-            80 => 
+            74 => 
             array (
                 'id' => 50,
                 'name' => '{"en":"Blue Morpho Butterfly"}',
@@ -991,7 +919,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 02:19:01',
                 'updated_at' => '2022-11-23 03:47:09',
             ),
-            81 => 
+            75 => 
             array (
                 'id' => 44,
                 'name' => '{"en":"Shiinhaku","ru":"Шиинхаку"}',
@@ -1002,6 +930,78 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-08 02:34:07',
                 'updated_at' => '2022-11-23 03:56:17',
+            ),
+            76 => 
+            array (
+                'id' => 80,
+                'name' => '{"en":"Survival","ru":"Выживание"}',
+                'desc' => '{"ru":"Даже в привычном окружении нужно знать как выживать, не говоря уже о том, что в незнакомых диких землях этот навык жизненно необходим буквально как воздух. Навык этот довольно обширен и многогранен, но в первую очередь он дает ключевые знания и опыт о том, как защитить себя от всяческой живности и погодных условий, с которыми можно столкнуться, а также как раздобыть себе годную пищу и воду.\\r\\n\\r\\nЭтот навык имеет специализации для каждого биома, в которых он применяется. Чем больше персонаж  практикует выживание в том, или ином биоме, тем больше растет данная специализация и весь навык в целом.","en":"Even in a familiar environment, you need to know how to survive, not to mention the fact that in an unfamiliar Wilderness this skill is literally as vital as air. This skill is quite extensive and multifaceted, but primarily it provides key knowledge and experience on how to protect yourself from all living creatures and weather conditions that you may encounter, as well as how to get yourself good food and water.\\r\\n\\r\\nThis skill has specializations for each Wilderness biome in which it is used. The more a character practices survival in a particular biome, the more this specialization and the skill as a whole grows."}',
+                'is_public' => true,
+                'image' => 'card_image/QFL4GNKTOOCHxKRVCprP5jK9u4KfdyQLf1lr6iFp.png',
+                'scope_id' => 79,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 02:54:14',
+                'updated_at' => '2022-11-23 18:34:14',
+            ),
+            77 => 
+            array (
+                'id' => 73,
+                'name' => '{"en":"Damage","ru":"Вред"}',
+                'desc' => '{"en":"Damage can be obtained in a variety of ways. And sometimes quite unexpectedly and suddenly. Often, wounds and injuries complicate the life of a hero quite a lot and bring additional difficulties. So, try to find ways to heal the damage as soon as you can.\\r\\n\\r\\nTIPS: Use as a scope for a deck of all hero or character damage.","ru":"Повреждения можно получить самыми разными способами. Иногда совершенно неожиданно и внезапно. Зачастую раны и травмы довольно сильно усложняют жизнь героя и приносят ему дополнительные трудности. Поэтому, постарайся найти способ исцелить полученный вред как можно быстрее.\\r\\n\\r\\nСОВЕТЫ: Используй как сферу для колоды всех повреждений героя или персонажа."}',
+                'is_public' => true,
+                'image' => 'card_image/Yz12TOspsV6q1PCle10wtSc1vpugPFmnnC961hi0.png',
+                'scope_id' => 3,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 17:16:42',
+                'updated_at' => '2022-11-23 18:54:50',
+            ),
+            78 => 
+            array (
+                'id' => 83,
+                'name' => '{"en":"Weapon","ru":"Оружие"}',
+                'desc' => '{"en":"Weapons are one of the most valuable and formidable tools invented by man in ancient times. Since then, innumerable kinds and types of weapons have been invented and tested. One way or another, all types of weapons are united by one of the main properties - harming your enemy or prey.","ru":"Оружие - один из ценных и грозных инструментов, изобретенных человеком уже в глубокой древности. С тех пор были придуманы и опробованы неисчислимые виды и типы оружия. Так или иначе, все виды оружия объединяет одно из главных свойств - нанесение вреда своему врагу или добыче."}',
+                'is_public' => true,
+                'image' => 'card_image/qoBl8tq3XdYJFZ38nTLqivvkTPwxFyMBDScit09C.png',
+                'scope_id' => 6,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 03:07:32',
+                'updated_at' => '2022-11-23 19:00:28',
+            ),
+            79 => 
+            array (
+                'id' => 81,
+                'name' => '{"en":"Taming","ru":"Приручение"}',
+                'desc' => '{"ru":"Умение находить общий язык с самыми различными животными и приручать их, делая верными союзниками и друзьями может очень пригодится в незнакомых диких землях.\\r\\n\\r\\nЭтот навык имеет специализации для каждого вида животных, для которых он применяется. Чем больше персонаж практикует приручение того или иного животного, тем больше растет данная специализация и весь навык в целом.\\r\\n\\r\\nПОДСКАЗКИ: Используй как сферу для колоды персонажа с различными животными, для которых персонаж имеет навык приручения.","en":"The ability to find a common language with a variety of animals and tame them, making them loyal allies and friends can be very useful in unfamiliar Wilderness.\\r\\n\\r\\nThis skill has specializations for each type of animal it is applied to. The more a character practices taming a particular animal, the more this specialization and the skill as a whole grows.\\r\\n\\r\\nTIPS: Use as a scope for your character deck with various animals for which the character has the taming skill."}',
+                'is_public' => true,
+                'image' => 'card_image/uZlgLsjkMUXVGkOTWCqUN6pslNri1KgE5lQI2BE0.png',
+                'scope_id' => 79,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 02:56:34',
+                'updated_at' => '2022-11-23 19:17:44',
+            ),
+            80 => 
+            array (
+                'id' => 42,
+                'name' => '{"en":"Knowledge","ru":"Знание"}',
+                'desc' => '{"en":"Nothing is free in this world, and the acquisition of knowledge is the most difficult of all tasks that a person can face.\\r\\n\\r\\nA character can have and accumulate knowledge about a variety of things, be it skills, legends, secrets and etc. This knowledge affects the capabilities of the character and the situations in which he finds himself.\\r\\n\\r\\nTIPS: Use as a character deck sphere for all the things that character knows about.","ru":"В этом мире нет ничего бесплатного, и получение знаний — самая трудная из всех задач, с которыми может столкнуться человек.\\r\\n\\r\\nПерсонаж может иметь и накапливать знания о самых разных вещах, будь то навыки, легенды, секреты. Эти знания влияют на возможности персонажа и на ситуации, в которые он попадает.\\r\\n\\r\\nПОДСКАЗКИ: Используй как сферу с колодой персонажа для всех вещей, о которых знает этот персонаж."}',
+                'is_public' => true,
+                'image' => 'card_image/xTrHUSM4j0SMJylDkTAh7BEIbN9cPuweBUTAgQMh.png',
+                'scope_id' => 7,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 15:40:03',
+                'updated_at' => '2022-11-23 21:18:18',
+            ),
+            81 => 
+            array (
+                'id' => 41,
+                'name' => '{"en":"Traveling","ru":"Путешествие"}',
+                'desc' => '{"en":"As a rule, the hero does not sit in one place for a long time. Most of the time he travels. Therefore, this skill is very important and useful for him.\\r\\n\\r\\nThis skill has a specialization for each biome that the hero or character travels through. The more a character wanders around a given biome, the more this specialization and this entire skill as a whole grows.\\r\\n\\r\\nTIPS:\\r\\n- Use as a scope for your character deck to list all skill specializations and their levels.\\r\\n- Use as a scope for a biome deck to list all the events that can happen while traveling through a given biome.","ru":"Как правило, герой не сидит долго на одном месте. Большую часть времени он путешествует. Поэтому этот навык для него очень важен и полезен.\\r\\n\\r\\nЭтот навык имеет специализацию для каждого биома, по которому путешествует герой или персонаж. Чем больше персонаж странствует по данному биому, тем больше растет данная специализация и весь этот навык в целом.\\r\\n\\r\\nСОВЕТЫ:\\r\\n- Используйте в качестве сферы для колоды персонажа, чтобы перечислить все специализации навыка и их уровни.\\r\\n- Используйте в качестве сферы для колоды биома, чтобы перечислить все события, которые могут произойти во время путешествия по данному биому."}',
+                'is_public' => true,
+                'image' => 'card_image/mseTJIuag5KBZ2p9aNoF7u6hcA8ZigwCTj0JzfJY.png',
+                'scope_id' => 79,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 13:55:09',
+                'updated_at' => '2022-11-23 21:32:34',
             ),
         ));
         

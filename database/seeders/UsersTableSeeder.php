@@ -40,10 +40,10 @@ class UsersTableSeeder extends Seeder
                 'email' => 'sable.lair@gmail.com',
                 'email_verified_at' => NULL,
                 'password' => '$2y$10$tqFq6LC1Vniwd30udVbFi.WzT.rsKmrVvUa6rM/4/fbbcrNEWN0hW',
-                'language_id' => 1,
+                'language_id' => 2,
                 'remember_token' => '00wBIiL4AAiyGsJsN0fxzmT5N7nXDOLfGWdY5RKE3utGTVu9L9RrtvzllXtm',
                 'created_at' => '2022-11-06 05:05:12',
-                'updated_at' => '2022-11-22 22:48:57',
+                'updated_at' => '2022-11-23 21:35:54',
             ),
         ));
         

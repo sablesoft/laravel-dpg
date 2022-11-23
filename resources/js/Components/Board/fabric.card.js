@@ -22,9 +22,6 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         this.set('centeredRotation', true);
         this.set('opened', options.opened ? options.opened : this.defaultOpened);
         this.set('tapped', options.tapped ? options.tapped : this.defaultTapped);
-        if (this.get('tapped')) {
-            this.rotate(-90);
-        }
 
         const body = new fabric.Rect({
             partType: 'body',
@@ -47,25 +44,33 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             fontWeight: 'bold',
             fill: 'black',
         });
-        const scopeName = new fabric.Text(model.scope_name, {
-            partType: 'scope_name',
-            originX: 'center',
-            top: 46,
-            fontSize: 12,
-            fontWeight: 'normal',
-            fill: 'black',
-        });
+        let items = [body, name];
 
-        this.callSuper('initialize', [body, name, scopeName], options);
+        if (model.scope_name) {
+            const scopeName = new fabric.Text(model.scope_name, {
+                partType: 'scope_name',
+                originX: 'center',
+                top: 46,
+                fontSize: 12,
+                fontWeight: 'normal',
+                fill: 'black',
+            });
+            items.push(scopeName);
+        }
+
+        this.callSuper('initialize', items, options);
 
         let self = this;
-        fabric.Image.fromURL(model.image, function(image) {
-            image.scale(0.3);
-            image.set('originX', 'center');
-            image.set('top', -37);
-            image.set('partType', 'image');
-            self.add(image);
-        });
+        if (model.image) {
+            fabric.Image.fromURL(model.image, function(image) {
+                image.scale(0.3);
+                image.set('originX', 'center');
+                image.set('top', -37);
+                image.set('partType', 'image');
+                self.add(image);
+            });
+        }
+
         fabric.Image.fromURL(model.back_image, function(back) {
             back.set('originX', 'center');
             back.set('originY', 'center');
@@ -73,7 +78,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             self.add(back);
             back.bringToFront();
             if (self.get('opened')) {
-                back.set('opacity', 1);
+                back.set('opacity', 0);
             }
         });
 

@@ -69,8 +69,9 @@ gameHandler.getCard = function(cardId) {
     let card = this.cards[cardId];
     card.name = this._locale(card.name);
     card.scope_name = this._locale(card.scope_name);
-    const scopeCard = this.getCard(card.scope_id);
-    card.scope_image = scopeCard ? scopeCard.image : null;
+    const scopeCard = this.cards[card.scope_id];
+    card.scope_image = scopeCard && scopeCard.image ?
+        '/storage/' + scopeCard.image : null;
     card.desc = this._locale(card.desc);
     card.image = '/storage/' + card.image;
     card.back_image = this.book.cards_back;

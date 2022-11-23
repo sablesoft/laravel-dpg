@@ -59,20 +59,32 @@ const getHero = (options) => {
     return getCard(gameHandler.game.hero_id, options);
 }
 const getCard = (id, options) => {
-    return new fabric.Card(gameHandler.getCard(id), options);
+    let model = gameHandler.getCard(id);
+    if (!model) {
+        console.warn('Card model not found: ' + id);
+        return;
+    }
+
+    return new fabric.Card(model, options);
 }
 
 onMounted(() => {
     gameHandler.init(props.game, locale);
     canvas.value = new fabric.Canvas(canvasRef.value);
     canvas.value.setBackgroundImage(gameHandler.getBoardImage());
-    const card = getHero({
-        left: 350,
-        top: 100,
-        tapped: false
+    const hero = getHero({
+        left: 70,
+        top: 530,
+        opened: true
     });
-    canvas.value.add(card);
-    canvas.value.centerObject(card);
+    const heroScope = getCard(hero.model.scope_id, {
+        left: 40,
+        top: 530,
+        opened: true
+    });
+    canvas.value.add(heroScope);
+    heroScope.tap();
+    canvas.value.add(hero);
     canvas.value.on({
         'selection:updated': selectCards,
         'selection:created': selectCards,

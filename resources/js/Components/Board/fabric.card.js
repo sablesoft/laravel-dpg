@@ -13,6 +13,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
     initialize: function(model, options) {
         options || (options = { });
         options.hasControls = false;
+        options.hasBorders = false;
         options.hoverCursor = 'pointer';
 
         this.set('model', model);

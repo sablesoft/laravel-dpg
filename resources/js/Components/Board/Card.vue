@@ -5,7 +5,6 @@ import { ref } from "vue";
         card: { type: Object, required: true }
     });
 
-    const tapped = ref(null);
     const tap = () => {
         if (!props.card.object) {
             return;
@@ -15,8 +14,8 @@ import { ref } from "vue";
             return;
         }
         object.tap();
-        tapped.value = true;
-    }
+        props.card.tapped = true;
+    };
     const untap = () => {
         if (!props.card.object) {
             return;
@@ -25,8 +24,30 @@ import { ref } from "vue";
         if (!object.tapped) {
             return;
         }
-        props.card.object.untap();
-        tapped.value = false;
+        object.untap();
+        props.card.tapped = false;
+    };
+    const forward = () => {
+        if (!props.card.object) {
+            return;
+        }
+        const object = props.card.object;
+        object.bringForward(true);
+        object.canvas.requestRenderAll();
+    };
+    const backward = () => {
+        if (!props.card.object) {
+            return;
+        }
+        const object = props.card.object;
+        object.sendBackwards(true);
+        object.canvas.requestRenderAll();
+    };
+    const save = () => {
+        console.log('TODO SAVE');
+    };
+    const load = () => {
+        console.log('TODO LOAD');
     }
 </script>
 <style scoped>
@@ -35,6 +56,11 @@ import { ref } from "vue";
     }
     .card-name {
         font-weight: bold;
+    }
+    .card-scope {
+        height: 80px;
+        line-height: 80px;
+        margin: 15px;
     }
     .card-content {
         margin-top: 10px;
@@ -73,7 +99,7 @@ import { ref } from "vue";
         margin-top: 0;
     }
     .card-actions>button {
-        margin-left: 10px;
+        margin-left: 15px;
     }
 </style>
 <template>
@@ -94,8 +120,14 @@ import { ref } from "vue";
             {{ card.desc }}
         </div>
         <div v-if="card.object !== null" class="card-content card-actions">
+            <button @click="forward">{{ __('Forward') + '  >  ' }}</button>
             <button v-if="!card.tapped" @click="tap">{{ __('Tap') }}</button>
             <button v-if="card.tapped" @click="untap">{{ __('Untap') }}</button>
+            <button @click="backward">{{ '  <  ' + __('Backward') }}</button>
+        </div>
+        <div v-if="!card.object" class="card-content card-actions">
+            <button @click="save">{{ __('Save') }}</button>
+            <button @click="load">{{ __('Load') }}</button>
         </div>
     </div>
 </template>

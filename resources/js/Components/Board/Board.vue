@@ -73,6 +73,7 @@ const getCard = (id, options) => {
 onMounted(() => {
     gameHandler.init(props.game, locale);
     canvas.value = new fabric.Canvas(canvasRef.value);
+    canvas.value.preserveObjectStacking = true;
     canvas.value.setBackgroundImage(gameHandler.getBoardImage());
     const hero = getHero({
         left: 70,

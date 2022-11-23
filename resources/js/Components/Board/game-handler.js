@@ -57,17 +57,20 @@ gameHandler.getGameCard = function() {
         name : this.game.name,
         desc : this.game.desc,
         scope_name : this.game.scope_name,
+        scope_image : null,
         image : this.book.image
     }
 }
 gameHandler.getCard = function(cardId) {
-    if (!this.game || !this.book) {
+    if (!this.game || !this.book || !cardId) {
         return null;
     }
 
     let card = this.cards[cardId];
     card.name = this._locale(card.name);
     card.scope_name = this._locale(card.scope_name);
+    const scopeCard = this.getCard(card.scope_id);
+    card.scope_image = scopeCard ? scopeCard.image : null;
     card.desc = this._locale(card.desc);
     card.image = '/storage/' + card.image;
     card.back_image = this.book.cards_back;

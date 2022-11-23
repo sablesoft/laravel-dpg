@@ -23,6 +23,7 @@ const card = shallowReactive({
     name: null,
     image: null,
     scope_name: null,
+    scope_image: null,
     desc: null,
     object: null
 });
@@ -31,6 +32,7 @@ const setCardInfo = function (model, object) {
     card.name = model.name;
     card.image = model.image;
     card.scope_name = model.scope_name;
+    card.scope_image = model.scope_image;
     card.desc = model.desc;
     card.object = object ? object : null;
 }

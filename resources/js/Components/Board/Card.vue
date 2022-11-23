@@ -48,10 +48,19 @@ onMounted(() => {
     .card-image {
         height: 250px;
     }
+    .scope-image {
+        height: 80px;
+        margin: 15px;
+    }
+    .scope-image>img {
+        height: 80px;
+        margin: 10px;
+    }
     .card-image>img {
         display: block;
         margin-left: auto;
         margin-right: auto;
+        border-radius: 0.5rem;
     }
     .card-desc {
         height: 320px;
@@ -72,8 +81,11 @@ onMounted(() => {
         <div class="card-content card-image">
             <img :src="card.image" alt="">
         </div>
-        <div class="card-content card-scope">
+        <div v-if="!card.scope_image" class="card-content card-scope">
             {{ card.scope_name }}
+        </div>
+        <div v-if="card.scope_image" class="card-content card-image scope-image">
+            <img :src="card.scope_image" :alt="card.scope_name" :title="card.scope_name">
         </div>
         <div class="card-content card-desc">
             {{ card.desc }}

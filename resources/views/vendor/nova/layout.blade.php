@@ -38,7 +38,7 @@
                 <a href="{{ \Laravel\Nova\Nova::path() }}">
                     <div class="absolute pin-t pin-l pin-r flex items-center w-sidebar h-header px-2 text-white"
                         style="background-color: black;">
-                        <img src="{{ asset('/img/logo.svg') }}" width="45" height="45" alt="Logo">
+                        <img src="{{ asset('/img/logo-black.svg') }}" width="45" height="45" alt="Logo">
                         <div style="text-align: center; width: 100%">
                             <h2 style="font-size: 20px;">{{ mb_strtoupper(__('Workshop')) }}</h2>
                         </div>

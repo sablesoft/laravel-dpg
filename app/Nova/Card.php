@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image as ImageManager;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
@@ -18,6 +17,8 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Intervention\Image\Constraint;
+use Intervention\Image\Facades\Image as ImageManager;
 use App\Nova\Filters\BooksFilter;
 use App\Nova\Filters\ImageFilter;
 use App\Nova\Filters\DecksFilter;
@@ -60,13 +61,22 @@ class Card extends Content
                     /** @var UploadedFile $file */
                     $file = $request->file($requestAttribute);
                     $filename = $file->hashName('card_image');
-                    $width = \App\Models\Card::IMAGE_WIDTH;
-                    $height = \App\Models\Card::IMAGE_HEIGHT;
-                    $image = ImageManager::make($file->path())
-                        ->resize($width, $height, function ($constraint) {
-                            $constraint->aspectRatio();
-                            $constraint->upsize();
-                        })->encode($file->guessExtension());
+                    // resize by biggest dimension:
+                    $width = $height = null;
+                    $image = ImageManager::make($file->path());
+                    $currentWidth = $image->width();
+                    $currentHeight = $image->height();
+                    if ($currentWidth > $currentHeight) {
+                        $width = \App\Models\Card::IMAGE_WIDTH;
+                    } else {
+                        $height = \App\Models\Card::IMAGE_HEIGHT;
+                    }
+                    if ($currentWidth == $currentHeight) {
+                        $height = \App\Models\Card::IMAGE_HEIGHT;
+                    }
+                    $image->resize($width, $height, function (Constraint $constraint) {
+                        $constraint->aspectRatio();
+                    })->encode($file->guessExtension());
                     Storage::disk('public')->put($filename, (string) $image);
 
                     return $filename;

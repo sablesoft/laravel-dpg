@@ -3,7 +3,16 @@
 @tailwind utilities;
 
 img.align-bottom.w-8.h-8 {
-    width: 4rem;
-    height: 4rem;
-    margin: 7px;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: 4px;
+    object-fit: contain !important;
+}
+
+.card.relative.border {
+    text-align: center !important;
+}
+.card.relative.border>img.block.w-full {
+    margin: auto !important;
+    width: auto !important;
 }

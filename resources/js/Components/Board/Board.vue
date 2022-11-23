@@ -25,6 +25,7 @@ const card = shallowReactive({
     scope_name: null,
     scope_image: null,
     desc: null,
+    tapped: null,
     object: null
 });
 
@@ -35,6 +36,7 @@ const setCardInfo = function (model, object) {
     card.scope_image = model.scope_image;
     card.desc = model.desc;
     card.object = object ? object : null;
+    card.tapped = object ? object.get('tapped') : null;
 }
 const setGameInfo = function() {
     setCardInfo(gameHandler.getGameCard());

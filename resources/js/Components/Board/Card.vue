@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import { ref } from "vue";
 
     const props = defineProps({
         card: { type: Object, required: true }
@@ -28,12 +28,6 @@ import {onMounted, ref} from "vue";
         props.card.object.untap();
         tapped.value = false;
     }
-onMounted(() => {
-    if (!props.card.object) {
-        return;
-    }
-    tapped.value = !!props.card.object.tapped;
-});
 </script>
 <style scoped>
     .card {
@@ -100,8 +94,8 @@ onMounted(() => {
             {{ card.desc }}
         </div>
         <div v-if="card.object !== null" class="card-content card-actions">
-            <button v-if="!tapped" @click="tap">{{ __('Tap') }}</button>
-            <button v-if="tapped" @click="untap">{{ __('Untap') }}</button>
+            <button v-if="!card.tapped" @click="tap">{{ __('Tap') }}</button>
+            <button v-if="card.tapped" @click="untap">{{ __('Untap') }}</button>
         </div>
     </div>
 </template>

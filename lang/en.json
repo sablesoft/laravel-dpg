@@ -51,5 +51,9 @@
     "Log Out": "Log Out",
     "Club": "Club",
     "Admin": "Admin",
-    "Has Image": "Has Image"
+    "Has Image": "Has Image",
+    "Forward": "Forward",
+    "Backward": "Backward",
+    "Save": "Save",
+    "Load": "Load"
 }

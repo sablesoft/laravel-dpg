@@ -63,11 +63,20 @@ onMounted(() => {
         border-radius: 0.5rem;
     }
     .card-desc {
-        height: 320px;
+        height: 250px;
         text-align: left;
         margin-left: 20px;
         margin-right: 20px;
         white-space: pre-line;
+        overflow: auto;
+    }
+    .card-actions {
+        background-color: antiquewhite;
+        font-weight: bold;
+        font-size: 18px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        margin-top: 0;
     }
     .card-actions>button {
         margin-left: 10px;
@@ -81,7 +90,7 @@ onMounted(() => {
         <div class="card-content card-image">
             <img :src="card.image" alt="">
         </div>
-        <div v-if="!card.scope_image" class="card-content card-scope">
+        <div v-if="!card.scope_image" class="card-content card-name card-scope">
             {{ card.scope_name }}
         </div>
         <div v-if="card.scope_image" class="card-content card-image scope-image">
@@ -90,9 +99,9 @@ onMounted(() => {
         <div class="card-content card-desc">
             {{ card.desc }}
         </div>
-        <div class="card-content card-actions">
-            <button v-if="card.object !== null && !tapped" @click="tap">{{ __('Tap') }}</button>
-            <button v-if="card.object !== null && tapped" @click="untap">{{ __('Untap') }}</button>
+        <div v-if="card.object !== null" class="card-content card-actions">
+            <button v-if="!tapped" @click="tap">{{ __('Tap') }}</button>
+            <button v-if="tapped" @click="untap">{{ __('Untap') }}</button>
         </div>
     </div>
 </template>

@@ -81,6 +81,7 @@ return [
         public_path('storage') => storage_path('app/public'),
         public_path('flags') => storage_path('flags'),
         public_path('img') => storage_path('img'),
+        public_path('css') => base_path('resources/css')
     ],
 
 ];

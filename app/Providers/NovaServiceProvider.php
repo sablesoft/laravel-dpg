@@ -24,6 +24,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
 
+        // override nova css:
+        Nova::theme('/css/app.css');
         Nova::serving(function (ServingNova $event) {
 
         });

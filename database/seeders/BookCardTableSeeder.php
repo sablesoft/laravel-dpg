@@ -332,94 +332,89 @@ class BookCardTableSeeder extends Seeder
             62 => 
             array (
                 'book_id' => 1,
-                'card_id' => 63,
+                'card_id' => 66,
             ),
             63 => 
             array (
                 'book_id' => 1,
-                'card_id' => 66,
+                'card_id' => 67,
             ),
             64 => 
             array (
                 'book_id' => 1,
-                'card_id' => 67,
+                'card_id' => 68,
             ),
             65 => 
             array (
                 'book_id' => 1,
-                'card_id' => 68,
+                'card_id' => 69,
             ),
             66 => 
             array (
                 'book_id' => 1,
-                'card_id' => 69,
+                'card_id' => 70,
             ),
             67 => 
             array (
                 'book_id' => 1,
-                'card_id' => 70,
+                'card_id' => 71,
             ),
             68 => 
             array (
                 'book_id' => 1,
-                'card_id' => 71,
+                'card_id' => 72,
             ),
             69 => 
             array (
                 'book_id' => 1,
-                'card_id' => 72,
+                'card_id' => 73,
             ),
             70 => 
             array (
                 'book_id' => 1,
-                'card_id' => 73,
+                'card_id' => 74,
             ),
             71 => 
             array (
                 'book_id' => 1,
-                'card_id' => 74,
+                'card_id' => 75,
             ),
             72 => 
             array (
                 'book_id' => 1,
-                'card_id' => 75,
+                'card_id' => 76,
             ),
             73 => 
             array (
                 'book_id' => 1,
-                'card_id' => 76,
+                'card_id' => 77,
             ),
             74 => 
             array (
                 'book_id' => 1,
-                'card_id' => 77,
+                'card_id' => 78,
             ),
             75 => 
             array (
                 'book_id' => 1,
-                'card_id' => 78,
+                'card_id' => 79,
             ),
             76 => 
             array (
                 'book_id' => 1,
-                'card_id' => 79,
+                'card_id' => 80,
             ),
             77 => 
             array (
                 'book_id' => 1,
-                'card_id' => 80,
+                'card_id' => 81,
             ),
             78 => 
             array (
                 'book_id' => 1,
-                'card_id' => 81,
-            ),
-            79 => 
-            array (
-                'book_id' => 1,
                 'card_id' => 82,
             ),
-            80 => 
+            79 => 
             array (
                 'book_id' => 1,
                 'card_id' => 83,

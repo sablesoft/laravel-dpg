@@ -35,6 +35,14 @@ class LanguagesTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:05:48',
                 'updated_at' => '2022-11-06 05:35:33',
             ),
+            2 => 
+            array (
+                'id' => 3,
+                'code' => 'pt',
+                'name' => '{"en":"Portugues","ru":"Португальский"}',
+                'created_at' => '2022-11-24 14:26:30',
+                'updated_at' => '2022-11-24 14:26:48',
+            ),
         ));
         
         

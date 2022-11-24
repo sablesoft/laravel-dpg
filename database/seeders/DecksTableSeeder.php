@@ -161,20 +161,6 @@ class DecksTableSeeder extends Seeder
             ),
             10 => 
             array (
-                'id' => 20,
-                'book_id' => 1,
-                'card_id' => 51,
-                'scope_id' => 63,
-                'type' => 1,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 02:59:59',
-                'updated_at' => '2022-11-16 13:03:58',
-            ),
-            11 => 
-            array (
                 'id' => 29,
                 'book_id' => 1,
                 'card_id' => 55,
@@ -187,7 +173,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:53:59',
                 'updated_at' => '2022-11-16 12:56:17',
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 28,
                 'book_id' => 1,
@@ -201,21 +187,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:44:56',
                 'updated_at' => '2022-11-16 12:56:35',
             ),
-            13 => 
-            array (
-                'id' => 19,
-                'book_id' => 1,
-                'card_id' => 53,
-                'scope_id' => 63,
-                'type' => 1,
-                'desc' => '{"en":"Capybaras have partially webbed feet, which help to propel them through the water or swampy areas. Similar to a hippopotamus, the capybara’s eyes, nose, and ears are located on the top of its head, allowing it to peek above the surface for a breath of air and a quick check for predators while the bulk of its body remains hidden beneath the water.\\r\\n\\r\\nThey are semi-aquatic and will spend most of their time in dense vegetation around rivers, lakes, ponds, marshes, and swamps."}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 02:42:02',
-                'updated_at' => '2022-11-16 13:04:24',
-            ),
-            14 => 
+            12 => 
             array (
                 'id' => 18,
                 'book_id' => 1,
@@ -229,35 +201,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:38:47',
                 'updated_at' => '2022-11-16 13:04:45',
             ),
-            15 => 
-            array (
-                'id' => 17,
-                'book_id' => 1,
-                'card_id' => 61,
-                'scope_id' => 63,
-                'type' => 1,
-                'desc' => '{"en":"Because of its large size, the green anaconda is cumbersome on land but stealthy in the water. It spends most of its time underwater waiting for prey, but on occasion waits in the trees and drops down to surprise prey. Its preferred habitats are slow-moving rivers, flooded forest floors, and swamps."}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 02:34:11',
-                'updated_at' => '2022-11-16 13:05:07',
-            ),
-            16 => 
-            array (
-                'id' => 22,
-                'book_id' => 1,
-                'card_id' => 54,
-                'scope_id' => 63,
-                'type' => 1,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 03:11:38',
-                'updated_at' => '2022-11-16 13:02:18',
-            ),
-            17 => 
+            13 => 
             array (
                 'id' => 33,
                 'book_id' => 1,
@@ -271,7 +215,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:34:21',
                 'updated_at' => '2022-11-16 13:02:35',
             ),
-            18 => 
+            14 => 
             array (
                 'id' => 24,
                 'book_id' => 1,
@@ -285,21 +229,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 19:41:38',
                 'updated_at' => '2022-11-16 13:03:07',
             ),
-            19 => 
-            array (
-                'id' => 23,
-                'book_id' => 1,
-                'card_id' => 49,
-                'scope_id' => 63,
-                'type' => 1,
-                'desc' => '{"en":"They prefer to spend their time in tall, deciduous trees in forests and near rivers, usually in large, noisy groups."}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 03:13:42',
-                'updated_at' => '2022-11-16 13:03:23',
-            ),
-            20 => 
+            15 => 
             array (
                 'id' => 21,
                 'book_id' => 1,
@@ -313,7 +243,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 03:03:22',
                 'updated_at' => '2022-11-16 13:03:40',
             ),
-            21 => 
+            16 => 
             array (
                 'id' => 10,
                 'book_id' => 1,
@@ -327,7 +257,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:53:38',
                 'updated_at' => '2022-11-16 13:05:45',
             ),
-            22 => 
+            17 => 
             array (
                 'id' => 5,
                 'book_id' => 1,
@@ -341,7 +271,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:51:37',
                 'updated_at' => '2022-11-16 13:06:07',
             ),
-            23 => 
+            18 => 
             array (
                 'id' => 4,
                 'book_id' => 1,
@@ -355,21 +285,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:51:25',
                 'updated_at' => '2022-11-16 13:06:24',
             ),
-            24 => 
-            array (
-                'id' => 27,
-                'book_id' => 1,
-                'card_id' => 55,
-                'scope_id' => 4,
-                'type' => 2,
-                'desc' => '{"en":"The place where our hero is located. Always one card."}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2022-11-15 17:39:14',
-                'updated_at' => '2022-11-16 12:59:02',
-            ),
-            25 => 
+            19 => 
             array (
                 'id' => 26,
                 'book_id' => 1,
@@ -382,6 +298,202 @@ class DecksTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-15 17:36:23',
                 'updated_at' => '2022-11-16 13:18:27',
+            ),
+            20 => 
+            array (
+                'id' => 27,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 85,
+                'type' => 2,
+                'desc' => '{"en":"The place where our hero is located. Always one card."}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 17:39:14',
+                'updated_at' => '2022-11-24 19:30:14',
+            ),
+            21 => 
+            array (
+                'id' => 39,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 86,
+                'type' => 2,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 19:33:47',
+                'updated_at' => '2022-11-24 19:33:47',
+            ),
+            22 => 
+            array (
+                'id' => 40,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 87,
+                'type' => 2,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 19:35:32',
+                'updated_at' => '2022-11-24 19:35:32',
+            ),
+            23 => 
+            array (
+                'id' => 41,
+                'book_id' => 1,
+                'card_id' => 55,
+                'scope_id' => 4,
+                'type' => 1,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 19:37:49',
+                'updated_at' => '2022-11-24 19:37:49',
+            ),
+            24 => 
+            array (
+                'id' => 23,
+                'book_id' => 1,
+                'card_id' => 49,
+                'scope_id' => 86,
+                'type' => 1,
+                'desc' => '{"en":"They prefer to spend their time in tall, deciduous trees in forests and near rivers, usually in large, noisy groups.","ru":"They prefer to spend their time in tall, deciduous trees in forests and near rivers, usually in large, noisy groups."}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 03:13:42',
+                'updated_at' => '2022-11-24 19:47:13',
+            ),
+            25 => 
+            array (
+                'id' => 42,
+                'book_id' => 1,
+                'card_id' => 49,
+                'scope_id' => 87,
+                'type' => 1,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 19:47:51',
+                'updated_at' => '2022-11-24 19:47:51',
+            ),
+            26 => 
+            array (
+                'id' => 22,
+                'book_id' => 1,
+                'card_id' => 54,
+                'scope_id' => 86,
+                'type' => 1,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 03:11:38',
+                'updated_at' => '2022-11-24 19:48:40',
+            ),
+            27 => 
+            array (
+                'id' => 43,
+                'book_id' => 1,
+                'card_id' => 54,
+                'scope_id' => 87,
+                'type' => 1,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 19:49:11',
+                'updated_at' => '2022-11-24 19:49:11',
+            ),
+            28 => 
+            array (
+                'id' => 20,
+                'book_id' => 1,
+                'card_id' => 51,
+                'scope_id' => 86,
+                'type' => 1,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:59:59',
+                'updated_at' => '2022-11-24 19:49:54',
+            ),
+            29 => 
+            array (
+                'id' => 44,
+                'book_id' => 1,
+                'card_id' => 51,
+                'scope_id' => 87,
+                'type' => 1,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 19:50:27',
+                'updated_at' => '2022-11-24 19:50:27',
+            ),
+            30 => 
+            array (
+                'id' => 19,
+                'book_id' => 1,
+                'card_id' => 53,
+                'scope_id' => 86,
+                'type' => 1,
+                'desc' => '{"en":"Capybaras have partially webbed feet, which help to propel them through the water or swampy areas. Similar to a hippopotamus, the capybara’s eyes, nose, and ears are located on the top of its head, allowing it to peek above the surface for a breath of air and a quick check for predators while the bulk of its body remains hidden beneath the water.\\r\\n\\r\\nThey are semi-aquatic and will spend most of their time in dense vegetation around rivers, lakes, ponds, marshes, and swamps."}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:42:02',
+                'updated_at' => '2022-11-24 19:51:16',
+            ),
+            31 => 
+            array (
+                'id' => 45,
+                'book_id' => 1,
+                'card_id' => 53,
+                'scope_id' => 87,
+                'type' => 1,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 19:51:50',
+                'updated_at' => '2022-11-24 19:51:50',
+            ),
+            32 => 
+            array (
+                'id' => 17,
+                'book_id' => 1,
+                'card_id' => 61,
+                'scope_id' => 86,
+                'type' => 1,
+                'desc' => '{"en":"Because of its large size, the green anaconda is cumbersome on land but stealthy in the water. It spends most of its time underwater waiting for prey, but on occasion waits in the trees and drops down to surprise prey. Its preferred habitats are slow-moving rivers, flooded forest floors, and swamps."}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 02:34:11',
+                'updated_at' => '2022-11-24 19:52:27',
+            ),
+            33 => 
+            array (
+                'id' => 46,
+                'book_id' => 1,
+                'card_id' => 61,
+                'scope_id' => 87,
+                'type' => 1,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 19:52:58',
+                'updated_at' => '2022-11-24 19:52:58',
             ),
         ));
         

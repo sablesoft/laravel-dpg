@@ -44,7 +44,7 @@ class Deck extends Content
                 ->nullable(false)->sortable()
                 ->required()->rules('required'),
             Select::make(__('Type'), 'type')->nullable(false)
-                ->required()->rules('required')
+                ->required()->rules('required')->sortable()
                 ->options(\App\Models\Deck::getTypeOptions())->displayUsingLabels(),
             Number::make(__('Size'), 'size')
                 ->nullable(true)->hideWhenCreating()->hideWhenUpdating(),

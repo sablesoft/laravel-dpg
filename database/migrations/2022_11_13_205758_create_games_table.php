@@ -25,6 +25,7 @@ return new class extends Migration
                 ->constrained('cards')->nullOnDelete();
             $table->foreignId('master_id')->nullable(false)->constrained('users')
                 ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->boolean('is_public')->nullable(false)->default(false);
             $table->string('board_image')->nullable(true);
             $table->unsignedSmallInteger('status')->nullable(false)->default(0);
 

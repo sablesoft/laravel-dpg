@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
@@ -79,6 +80,8 @@ class Game extends Resource
             Textarea::make(__('Desc'), 'desc')->nullable(true)->alwaysShow(),
             Image::make(__('Board Image'), 'board_image')
                 ->nullable(true)->hideFromIndex(),
+            Boolean::make(__('Is Public'), 'is_public')
+                ->nullable(false)->sortable(),
 
             // todo - make select:
 //            Number::make(__('Status'), 'status'),

@@ -12,7 +12,7 @@ class GamePolicy
 
     /**
      * Determine whether the user can view the model.
-     *
+     * // todo - check master, is_public, status and players
      * @param User $user
      * @return mixed
      */

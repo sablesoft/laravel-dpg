@@ -17,6 +17,7 @@ use Spatie\Translatable\HasTranslations;
  * @property int|null $hero_id
  * @property int|null $quest_id
  * @property int|null $master_id
+ * @property bool|null $is_public
  * @property string|null $board_image
  * @property int|null $status
  * @property Carbon|null $created_at

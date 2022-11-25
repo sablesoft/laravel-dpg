@@ -2,9 +2,6 @@
 
 namespace App\Nova;
 
-use App\Nova\Filters\DeckTypeFilter;
-use App\Nova\Filters\ScopesFilter;
-use App\Nova\Filters\TargetsFilter;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
@@ -13,6 +10,10 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Textarea;
+use App\Nova\Filters\ScopesFilter;
+use App\Nova\Filters\TargetsFilter;
+use App\Nova\Filters\IsPublicFilter;
+use App\Nova\Filters\DeckTypeFilter;
 
 /**
  * @mixin \App\Models\Deck
@@ -93,7 +94,8 @@ class Deck extends Content
         return [
             DeckTypeFilter::make(),
             TargetsFilter::make(),
-            ScopesFilter::make()
+            ScopesFilter::make(),
+            IsPublicFilter::make()
         ];
     }
 

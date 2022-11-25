@@ -33,7 +33,7 @@ const showingNavigationDropdown = ref(false);
                                 <a class="inline-flex items-center px-1 pt-1 text-sm
                                 font-medium leading-5 text-gray-900 focus:outline-none
                                 focus:border-indigo-700 transition duration-150 ease-in-out"
-                                   href="http://localhost/dpg">
+                                   href="/dpg">
                                     {{ __('Workshop' )}}
                                 </a>
                             </div>

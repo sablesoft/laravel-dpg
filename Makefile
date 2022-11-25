@@ -1,7 +1,7 @@
 # import ENV
-#cnf ?= .env
-#include $(cnf)
-#export $(shell sed 's/=.*//' $(cnf))
+cnf ?= .env
+include $(cnf)
+export $(shell sed 's/=.*//' $(cnf))
 
 # grep the version from the mix file
 #VERSION=$(shell ./version.sh)
@@ -18,3 +18,15 @@ help: ## This help.
 
 bash:  ## Run bash inside container
 	docker exec -it dpg bash
+
+zip: ## Zip archive with all public media files from storage
+	zip -r media.zip storage/app/public
+
+unzip: ## Unzip archive with media files to public storage
+	unzip media.zip -d .
+
+upload: ## Upload media files to remote host
+	scp media.zip root@"${REMOTE_HOST}":/root/projects/dpg
+
+remote: ## Connect to remote server by ssh
+	ssh root@"${REMOTE_HOST}"

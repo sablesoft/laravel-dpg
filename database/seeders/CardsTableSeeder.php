@@ -609,18 +609,6 @@ class CardsTableSeeder extends Seeder
             ),
             49 => 
             array (
-                'id' => 72,
-                'name' => '{"en":"Fail","ru":"Провал"}',
-                'desc' => '{"en":"The meaning of this card depends on the context.","ru":"Значение этой карты зависит от контекста."}',
-                'is_public' => true,
-                'image' => NULL,
-                'scope_id' => 3,
-                'owner_id' => 1,
-                'created_at' => '2022-11-15 17:12:25',
-                'updated_at' => '2022-11-23 20:47:22',
-            ),
-            50 => 
-            array (
                 'id' => 79,
                 'name' => '{"en":"Skill","ru":"Навык"}',
                 'desc' => '{"en":"Skills are the ability of a character to do something. The better the skill, the more successfully and efficiently he can perform this action.\\r\\n\\r\\nTIPS: Use as a character deck scope for all his skills.","ru":"Навыки — это способность персонажа делать что-либо. Чем лучше навык, тем успешнее и эффективнее он сможет выполнить связанные с этим навыком действия.\\r\\n\\r\\nПОДСКАЗКИ: Используй в качестве сферы для колоды всех умений персонажа."}',
@@ -631,19 +619,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:48:50',
                 'updated_at' => '2022-11-23 19:23:58',
             ),
-            51 => 
-            array (
-                'id' => 71,
-                'name' => '{"en":"Success","ru":"Успех"}',
-                'desc' => '{"en":"The meaning of this card depends on the context.","ru":"Значение этой карты зависит от контекста."}',
-                'is_public' => true,
-                'image' => NULL,
-                'scope_id' => 3,
-                'owner_id' => 1,
-                'created_at' => '2022-11-15 17:11:37',
-                'updated_at' => '2022-11-23 20:48:02',
-            ),
-            52 => 
+            50 => 
             array (
                 'id' => 70,
                 'name' => '{"en":"Nothing","ru":"Ничего"}',
@@ -655,7 +631,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:09:47',
                 'updated_at' => '2022-11-23 20:48:37',
             ),
-            53 => 
+            51 => 
             array (
                 'id' => 75,
                 'name' => '{"en":"Tree","ru":"Дерево"}',
@@ -667,7 +643,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 01:49:43',
                 'updated_at' => '2022-11-23 21:01:52',
             ),
-            54 => 
+            52 => 
             array (
                 'id' => 16,
                 'name' => '{"en":"Character","ru":"Персонаж"}',
@@ -679,7 +655,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:20:38',
                 'updated_at' => '2022-11-22 23:58:25',
             ),
-            55 => 
+            53 => 
             array (
                 'id' => 84,
                 'name' => '{"en":"Spear","ru":"Копье"}',
@@ -691,7 +667,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 03:08:36',
                 'updated_at' => '2022-11-23 18:03:43',
             ),
-            56 => 
+            54 => 
             array (
                 'id' => 69,
                 'name' => '{"en":"Armadillo"}',
@@ -702,6 +678,30 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-13 18:04:42',
                 'updated_at' => '2022-11-23 03:37:24',
+            ),
+            55 => 
+            array (
+                'id' => 71,
+                'name' => '{"en":"Success","ru":"Успех"}',
+                'desc' => '{"en":"The meaning of this card depends on the context.","ru":"Значение этой карты зависит от контекста."}',
+                'is_public' => true,
+                'image' => 'card_image/LEVdX5ZfGWfENMsuFnt9Q4SLOLXbTmeKU4jx14u4.png',
+                'scope_id' => 3,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 17:11:37',
+                'updated_at' => '2022-11-25 01:15:53',
+            ),
+            56 => 
+            array (
+                'id' => 72,
+                'name' => '{"en":"Fail","ru":"Провал"}',
+                'desc' => '{"en":"The meaning of this card depends on the context.","ru":"Значение этой карты зависит от контекста."}',
+                'is_public' => true,
+                'image' => 'card_image/MbRnrUlQ6ypOuIMK1xP4dgxxc8e4bxLf3qI5SkQN.png',
+                'scope_id' => 3,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 17:12:25',
+                'updated_at' => '2022-11-25 01:17:41',
             ),
             57 => 
             array (
@@ -801,6 +801,18 @@ class CardsTableSeeder extends Seeder
             ),
             65 => 
             array (
+                'id' => 28,
+                'name' => '{"en":"Mountain"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => 'card_image/uvMy6HPKX6OG37CMaEzenHFP5DCH019CL9OZklYt.png',
+                'scope_id' => 87,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 01:57:20',
+                'updated_at' => '2022-11-25 01:47:47',
+            ),
+            66 => 
+            array (
                 'id' => 9,
                 'name' => '{"en":"Clan","ru":"Клан"}',
                 'desc' => '{"en":null}',
@@ -811,7 +823,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:08:04',
                 'updated_at' => '2022-11-24 18:44:12',
             ),
-            66 => 
+            67 => 
             array (
                 'id' => 8,
                 'name' => '{"en":"Legend","ru":"Легенда"}',
@@ -822,18 +834,6 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-06 05:07:52',
                 'updated_at' => '2022-11-24 18:45:15',
-            ),
-            67 => 
-            array (
-                'id' => 28,
-                'name' => '{"en":"Mountains"}',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'image' => 'card_image/uvMy6HPKX6OG37CMaEzenHFP5DCH019CL9OZklYt.png',
-                'scope_id' => 87,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 01:57:20',
-                'updated_at' => '2022-11-24 19:19:23',
             ),
             68 => 
             array (
@@ -997,23 +997,23 @@ class CardsTableSeeder extends Seeder
                 'name' => '{"ru":"Место","en":"Place"}',
                 'desc' => '{"en":"A place is a space of the game world, with its own special properties and characteristics. Places are differentiated by geographical features, natural Biomes, and by the characteristics of the Folk who inhabit the place.\\r\\n\\r\\nHINTS:\\r\\n- Use as a scope for a hero to indicate its current location.\\r\\n- Use as a scope for creatures and items to indicate places where that creature or item can be found.","ru":"Место - это пространство игрового мира, со своими особыми свойствами и характеристиками. Места различаются по географическим особенностям, по природным Биомам, а также по особенностям Народа, населяющего это место.\\r\\n\\r\\nПОДСКАЗКИ:\\r\\n- Используйте как сферу для героя, чтобы указать его текущее местоположение.\\r\\n- Используйте как сферу для существ и предметов, чтобы указать места, в которых это существо или предмет может быть обнаружено."}',
                 'is_public' => true,
-                'image' => 'card_image/tONuq9eSxQHBkAnwNytczAnbGSbuLBNKuGRr9LU8.png',
+                'image' => 'card_image/UMREeIQTfykvx42Qw49CwLIUFGFgfU2a0zvhyfHT.png',
                 'scope_id' => NULL,
                 'owner_id' => 1,
                 'created_at' => '2022-11-08 02:56:32',
-                'updated_at' => '2022-11-24 19:03:07',
+                'updated_at' => '2022-11-25 01:19:11',
             ),
             82 => 
             array (
                 'id' => 87,
-                'name' => '{"en":"Location","ru":"Локация"}',
-                'desc' => '{"en":"A Location describes the geographical features of a particular Place in the game world.\\r\\n\\r\\nThere are the following types of Locations:\\r\\n- Mountain\\r\\n- River\\r\\n- Lake\\r\\n- etc.\\r\\n\\r\\nHINTS:\\r\\n- Use as a scope for the Hero\'s deck to indicate his current Location.\\r\\n- Use as a scope for a Creature\'s deck to specify the Locations in which that Creature may be found.","ru":"Локация характеризует географические особенности конкретного Места игрового мира.\\r\\n\\r\\nРазличают следующие виды Локаций:\\r\\n- Гора\\r\\n- Река\\r\\n- Озеро\\r\\n- и другие\\r\\n\\r\\nПОДСКАЗКИ:\\r\\n- Используй как сферу для колоды Героя, чтобы указать его текущую Локацию.\\r\\n- Используй как сферу для колоды Существа, чтобы указать Локации, в которых это Существо может быть обнаружено."}',
+                'name' => '{"en":"Area","ru":"Локация"}',
+                'desc' => '{"en":"An Area describes the geographical features of a particular Place in the game world.\\r\\n\\r\\nThere are the following types of Areas:\\r\\n- Mountain\\r\\n- River\\r\\n- Lake\\r\\n- etc.\\r\\n\\r\\nHINTS:\\r\\n- Use as a scope for the Hero\'s deck to indicate his current Area.\\r\\n- Use as a scope for a Creature\'s deck to specify the Areas in which that Creature may be found.","ru":"Локация характеризует географические особенности конкретного Места игрового мира.\\r\\n\\r\\nРазличают следующие виды Локаций:\\r\\n- Гора\\r\\n- Река\\r\\n- Озеро\\r\\n- и другие\\r\\n\\r\\nПОДСКАЗКИ:\\r\\n- Используй как сферу для колоды Героя, чтобы указать его текущую Локацию.\\r\\n- Используй как сферу для колоды Существа, чтобы указать Локации, в которых это Существо может быть обнаружено."}',
                 'is_public' => true,
                 'image' => 'card_image/w1MyZg4UpH9O6IB4h6qrFJiietI9AI1NBy7q3cO6.png',
                 'scope_id' => 4,
                 'owner_id' => 1,
                 'created_at' => '2022-11-24 19:14:00',
-                'updated_at' => '2022-11-24 19:16:21',
+                'updated_at' => '2022-11-24 23:28:27',
             ),
             83 => 
             array (
@@ -1026,6 +1026,114 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-24 18:33:40',
                 'updated_at' => '2022-11-24 19:22:07',
+            ),
+            84 => 
+            array (
+                'id' => 89,
+                'name' => '{"en":"Hut"}',
+                'desc' => '{"en":"A Place inside a certain Hut. What kind of Hut it is, who owns it, where it is located and its other characteristics depend on the context of the game."}',
+                'is_public' => true,
+                'image' => 'card_image/97qhDxjwkkPAXaxFYvL38e7axEBRUuraPzBptypw.png',
+                'scope_id' => 90,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 21:04:46',
+                'updated_at' => '2022-11-24 23:31:08',
+            ),
+            85 => 
+            array (
+                'id' => 88,
+                'name' => '{"en":"Gate"}',
+                'desc' => '{"en":"The Place in front of the Gate. Where the Gate leads depends on the context of the game. Often certain conditions must be met to be able to pass through this Gate."}',
+                'is_public' => true,
+                'image' => 'card_image/zy81J8ZRUQaMxEq5pb6Al6Uw2kCIDHN6LerRownF.png',
+                'scope_id' => 90,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 21:02:15',
+                'updated_at' => '2022-11-24 23:32:17',
+            ),
+            86 => 
+            array (
+                'id' => 90,
+                'name' => '{"en":"Scene"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => 'card_image/U8JqwjGBHernRKnTZzcuEaMwWGGDZw3bFzBxzfJt.png',
+                'scope_id' => 4,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 23:30:30',
+                'updated_at' => '2022-11-25 01:19:46',
+            ),
+            87 => 
+            array (
+                'id' => 91,
+                'name' => '{"en":"Moon"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => 'card_image/uqLHnLCHHhqTSAzyxnxTJHEGDpT69RnSxF2xDm76.png',
+                'scope_id' => 57,
+                'owner_id' => 1,
+                'created_at' => '2022-11-25 02:27:59',
+                'updated_at' => '2022-11-25 02:27:59',
+            ),
+            88 => 
+            array (
+                'id' => 92,
+                'name' => '{"en":"Waxing Moon"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => 'card_image/kZpaG1N1C3e4JmPgw5MXMxT78ofJyjTZYQleS2y7.png',
+                'scope_id' => 91,
+                'owner_id' => 1,
+                'created_at' => '2022-11-25 02:36:04',
+                'updated_at' => '2022-11-25 02:36:04',
+            ),
+            89 => 
+            array (
+                'id' => 93,
+                'name' => '{"en":"Waning Moon"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => 'card_image/9qxpmR1XCyPLboty9VIKTB63325eyn0WMrYQUR0G.png',
+                'scope_id' => 91,
+                'owner_id' => 1,
+                'created_at' => '2022-11-25 02:38:31',
+                'updated_at' => '2022-11-25 02:38:31',
+            ),
+            90 => 
+            array (
+                'id' => 94,
+                'name' => '{"en":"New Moon"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => 'card_image/9Cz86Z3d0mlOneA6cXnPxqQlstOqNBxrVbmf8XjH.png',
+                'scope_id' => 91,
+                'owner_id' => 1,
+                'created_at' => '2022-11-25 02:42:25',
+                'updated_at' => '2022-11-25 02:50:13',
+            ),
+            91 => 
+            array (
+                'id' => 95,
+                'name' => '{"en":"Full Moon"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => 'card_image/IYsgKNml5LBHrhkI1F4e19zfuI47ERxT7QMTXTdG.png',
+                'scope_id' => 91,
+                'owner_id' => 1,
+                'created_at' => '2022-11-25 02:52:29',
+                'updated_at' => '2022-11-25 02:52:29',
+            ),
+            92 => 
+            array (
+                'id' => 96,
+                'name' => '{"en":"Year"}',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'image' => 'card_image/X24HeU13Bom5zMH4dmMWrj3k2gvhAi8iG5mFuC1Z.png',
+                'scope_id' => 57,
+                'owner_id' => 1,
+                'created_at' => '2022-11-25 02:56:01',
+                'updated_at' => '2022-11-25 02:56:01',
             ),
         ));
         

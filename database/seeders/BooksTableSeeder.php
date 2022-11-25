@@ -32,6 +32,19 @@ class BooksTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:07:24',
                 'updated_at' => '2022-11-21 21:37:46',
             ),
+            1 => 
+            array (
+                'id' => 2,
+                'name' => '{"en":"Core"}',
+                'desc' => '{"en":"Book with base abstract cards and decks"}',
+                'is_public' => true,
+                'image' => 'book_image/YAgZjoKyE3lZeVxHo03hMKNKdG4e3fwf4db3kylV.png',
+                'scope_id' => NULL,
+                'cards_back' => 'card_back/2K3RgfkXM7GxyVsfm3MjO3UGZZEmqyjcazy87aYe.png',
+                'owner_id' => 1,
+                'created_at' => '2022-11-25 01:08:56',
+                'updated_at' => '2022-11-25 02:37:00',
+            ),
         ));
         
         

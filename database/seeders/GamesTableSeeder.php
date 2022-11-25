@@ -28,6 +28,7 @@ class GamesTableSeeder extends Seeder
                 'hero_id' => 55,
                 'quest_id' => 40,
                 'master_id' => 1,
+                'is_public' => false,
                 'board_image' => '2WoLdF9xdcLwuQGXct4L44JWEophP6EIbK4zJcQh.jpg',
                 'status' => 0,
                 'created_at' => '2022-11-24 19:54:09',

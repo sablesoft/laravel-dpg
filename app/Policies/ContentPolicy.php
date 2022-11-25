@@ -24,7 +24,6 @@ abstract class ContentPolicy
         return true;
     }
 
-
     /**
      * Determine whether the user can view the model.
      *
@@ -224,7 +223,6 @@ abstract class ContentPolicy
     {
         return $user->isAdmin() || $user->isOwner($content);
     }
-
 
     /**
      * Determine whether the user can detach deck from the content.

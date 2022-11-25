@@ -30,3 +30,6 @@ upload: ## Upload media files to remote host
 
 remote: ## Connect to remote server by ssh
 	ssh root@"${REMOTE_HOST}"
+
+make fresh: ## Drop database and run migrations with seeds
+	php artisan migrate:fresh --seed

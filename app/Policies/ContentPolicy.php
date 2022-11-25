@@ -101,6 +101,19 @@ abstract class ContentPolicy
     }
 
     /**
+     * Determine whether the user can attach tag to the content.
+     *
+     * @param User $user
+     * @param Content $content
+     * @param Card $tag
+     * @return bool
+     */
+    public function attachTag(User $user, Content $content, Card $tag): bool
+    {
+        return $user->isAdmin() || $user->isOwner($content);
+    }
+
+    /**
      * Determine whether the user can detach tag from the content.
      *
      * @param User $user
@@ -133,6 +146,19 @@ abstract class ContentPolicy
      * @return bool
      */
     public function attachAnyCard(User $user, Content $content): bool
+    {
+        return $user->isAdmin() || $user->isOwner($content);
+    }
+
+    /**
+     * Determine whether the user can attach card to the content.
+     *
+     * @param User $user
+     * @param Content $content
+     * @param Card $card
+     * @return bool
+     */
+    public function attachCard(User $user, Content $content, Card $card): bool
     {
         return $user->isAdmin() || $user->isOwner($content);
     }
@@ -175,6 +201,19 @@ abstract class ContentPolicy
     }
 
     /**
+     * Determine whether the user can attach deck to the content.
+     *
+     * @param User $user
+     * @param Content $content
+     * @param Deck $deck
+     * @return bool
+     */
+    public function attachDeck(User $user, Content $content, Deck $deck): bool
+    {
+        return $user->isAdmin() || $user->isOwner($content);
+    }
+
+    /**
      * Determine whether the user can add deck to the content.
      *
      * @param User $user
@@ -208,6 +247,19 @@ abstract class ContentPolicy
      * @return bool
      */
     public function attachAnyBook(User $user, Content $content): bool
+    {
+        return $user->isAdmin() || $user->isOwner($content);
+    }
+
+    /**
+     * Determine whether the user can attach book to the content.
+     *
+     * @param User $user
+     * @param Content $content
+     * @param Book $book
+     * @return bool
+     */
+    public function attachBook(User $user, Content $content, Book $book): bool
     {
         return $user->isAdmin() || $user->isOwner($content);
     }

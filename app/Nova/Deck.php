@@ -8,6 +8,7 @@ use App\Nova\Filters\TargetsFilter;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -48,6 +49,10 @@ class Deck extends Content
                 ->options(\App\Models\Deck::getTypeOptions())->displayUsingLabels(),
             Number::make(__('Size'), 'size')
                 ->nullable(true)->hideWhenCreating()->hideWhenUpdating(),
+            Boolean::make(__('Is Public'), 'is_public')
+                ->nullable(false)->required()->default(function($request) {
+                    return false;
+                }),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->fields(function () {
                     return [

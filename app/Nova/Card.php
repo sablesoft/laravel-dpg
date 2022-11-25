@@ -114,7 +114,6 @@ class Card extends Content
             BelongsToMany::make(__('Books'), 'books', Book::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')
-                ->hideFromIndex()
                 ->nullable(false)->sortable(),
             BelongsTo::make(__('Owner'), 'owner', User::class)
                 ->sortable()->hideFromIndex()

@@ -22,6 +22,7 @@ class Deck extends Content
     const TYPE_STACK = 0;
     const TYPE_SET = 1;
     const TYPE_UNIQUE = 2;
+    const TYPE_CONTROL = 3;
 
     /**
      * @return string|null
@@ -98,6 +99,7 @@ class Deck extends Content
         $data['scope'] = optional($this->scope)->name;
         $data['book'] = optional($this->book)->name;
         $data['target'] = optional($this->target)->name;
+        $data['type'] = $this->type;
         $data['cards'] = $this->cards()->get()->pluck('name')->toArray();
 
         return $data;
@@ -111,7 +113,8 @@ class Deck extends Content
         return [
             self::TYPE_STACK => __('Stack'),
             self::TYPE_SET => __('Set'),
-            self::TYPE_UNIQUE => __('Unique')
+            self::TYPE_UNIQUE => __('Unique'),
+            self::TYPE_CONTROL => __('Control')
         ];
     }
 }

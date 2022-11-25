@@ -55,5 +55,6 @@
     "Forward": "Forward",
     "Backward": "Backward",
     "Save": "Save",
-    "Load": "Load"
+    "Load": "Load",
+    "Control": "Control"
 }

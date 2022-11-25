@@ -165,6 +165,8 @@ class Game extends Model
                         case Deck::TYPE_UNIQUE:
                             Unique::createFromDeck($model, $deck);
                             break;
+                        default:
+                            break;
                     }
                 }
             }

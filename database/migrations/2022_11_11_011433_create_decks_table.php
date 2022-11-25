@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreignId('owner_id')->nullable(false)
                 ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
 
-            $table->unique(['book_id', 'card_id', 'scope_id']);
+            $table->unique(['book_id', 'card_id', 'scope_id', 'type']);
             $table->timestamps();
         });
     }

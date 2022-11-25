@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
@@ -21,6 +22,7 @@ use App\Nova\Filters\ImageFilter;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\IsPublicFilter;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 /**
  * @mixin \App\Models\Book
@@ -33,6 +35,17 @@ class Book extends Content
      * @var string
      */
     public static string $model = \App\Models\Book::class;
+
+    /**
+     * @param NovaRequest $request
+     * @param Builder $query
+     * @return Builder
+     */
+    public static function indexQuery(NovaRequest $request, $query): Builder
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        return $query->allowedToSee();
+    }
 
     /**
      * Get the fields displayed by the resource.
@@ -66,7 +79,7 @@ class Book extends Content
                 ->hideWhenUpdating()->hideWhenCreating(),
             Text::make(__('Tags'), 'tags_string')
                 ->hideFromIndex()->hideWhenCreating()->hideWhenUpdating()->asHtml(),
-            Textarea::make(__('Desc'), 'desc')->nullable(),
+            Textarea::make(__('Desc'), 'desc')->nullable()->alwaysShow(),
             HasMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
             Image::make(__('Cards Back'), 'cards_back')

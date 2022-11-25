@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
@@ -11,6 +12,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 /**
  * @mixin \App\Models\Game
@@ -46,6 +48,17 @@ class Game extends Resource
     public static $search = [
         'name',
     ];
+
+    /**
+     * @param NovaRequest $request
+     * @param Builder $query
+     * @return Builder
+     */
+    public static function indexQuery(NovaRequest $request, $query): Builder
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        return $query->allowedToSee();
+    }
 
     /**
      * Get the fields displayed by the resource.

@@ -91,9 +91,11 @@ class Book extends Content
             return $query;
         }
 
-        $query->orWhere('is_public', true)
-            ->whereHas('subscribers', function($query) use ($user) {
-                $query->orWhere('subscriber_id', $user->getKey());
+        $query->where('is_public', true)
+            ->orWhere(function($query) use ($user) {
+                return $query->whereHas('subscribers', function($query) use ($user) {
+                    $query->where('subscriber_id', $user->getKey());
+                });
             });
 
         return $query;

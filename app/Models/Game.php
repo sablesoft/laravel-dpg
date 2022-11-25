@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Translatable\HasTranslations;
+use App\Models\Traits\Subscribers;
 
 /**
  * @property int|null $id
@@ -31,18 +32,15 @@ use Spatie\Translatable\HasTranslations;
  * @property-read Card|null $hero
  * @property-read Card|null $quest
  * @property-read User|null $master
- * @property-read User[]|null $subscribers
  * @property-read Stack[]|null $stacks
  * @property-read Set[]|null $sets
  * @property-read Unique[]|null $uniques
  * @property-read Log[]|null $logs
  * @property-read Card[]|null $board
- *
- * @method Builder allowedToSee() static
  */
 class Game extends Model
 {
-    use HasTranslations;
+    use HasTranslations, Subscribers;
 
     const SUBSCRIBER_TYPE_PLAYER = 0;
     const SUBSCRIBER_TYPE_SPECTATOR = 1;
@@ -101,12 +99,7 @@ class Game extends Model
      */
     public function subscribers(): BelongsToMany
     {
-        return $this->belongsToMany(
-            User::class,
-            'game_subscriber',
-            'game_id',
-            'subscriber_id'
-        )->withPivot(['type']);
+        return $this->_subscribers('game');
     }
 
     /**
@@ -152,28 +145,6 @@ class Game extends Model
             'game_id',
             'card_id'
         );
-    }
-
-    /**
-     * @param Builder $query
-     * @return Builder
-     */
-    public function scopeAllowedToSee(Builder $query): Builder
-    {
-        /** @var User $user */
-        $user = Auth::user();
-        if ($user->isAdmin()) {
-            return $query;
-        }
-
-        $query->where('is_public', true)
-            ->orWhere(function($query) use ($user) {
-                return $query->whereHas('subscribers', function($query) use ($user) {
-                    $query->where('subscriber_id', $user->getKey());
-                });
-            });
-
-        return $query;
     }
 
     /**

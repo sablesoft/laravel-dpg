@@ -12,7 +12,6 @@ class GamePolicy
 
     /**
      * Determine whether the user can view the model.
-     * // todo - check master, is_public, status and players
      * @param User $user
      * @return mixed
      */
@@ -23,7 +22,6 @@ class GamePolicy
 
     /**
      * Determine whether the user can view the model.
-     * // todo - check status and players
      *
      * @param User $user
      * @param Game $game
@@ -32,7 +30,8 @@ class GamePolicy
     public function view(User $user, Game $game): bool
     {
         return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+            $user->getKey() == $game->master_id ||
+            $game->hasSubscriber($user);
     }
 
     /**
@@ -137,6 +136,19 @@ class GamePolicy
      * @return bool
      */
     public function detachCard(User $user, Game $game, Card $card): bool
+    {
+        return $user->isAdmin() ||
+            $user->getKey() == $game->master_id;
+    }
+
+    /**
+     * Determine whether the user can attach any subscriber to the content.
+     *
+     * @param User $user
+     * @param Game $game
+     * @return bool
+     */
+    public function attachAnySubscriber(User $user, Game $game): bool
     {
         return $user->isAdmin() ||
             $user->getKey() == $game->master_id;

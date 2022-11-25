@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('game_player', function (Blueprint $table) {
-            $table->foreignId('game_id')->nullable(false)
-                ->constrained('games')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('player_id')->nullable(false)
+        Schema::create('book_subscriber', function (Blueprint $table) {
+            $table->foreignId('book_id')->nullable(false)
+                ->constrained('books')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('subscriber_id')->nullable(false)
                 ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedSmallInteger('type')
+                ->nullable(false)->default(0);
 
-            $table->unique(['game_id', 'player_id']);
+            $table->unique(['book_id', 'subscriber_id']);
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_player');
+        Schema::dropIfExists('book_subscriber');
     }
 };

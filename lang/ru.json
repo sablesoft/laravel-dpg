@@ -59,5 +59,12 @@
     "Control": "Контроль",
     "Cards Back": "Обложка Карт",
     "Unique Cards": "Уникальных Карт",
-    "Decks Count": "Количество Колод"
+    "Decks Count": "Количество Колод",
+    "Subscriber": "Подписчик",
+    "Subscribers": "Подписчики",
+    "Type": "Тип",
+    "Public": "Публичная",
+    "Licence": "Лицензия",
+    "Player": "Игрок",
+    "Spectator": "Зритель"
 }

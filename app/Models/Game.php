@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Translatable\HasTranslations;
 
 /**
@@ -29,16 +31,21 @@ use Spatie\Translatable\HasTranslations;
  * @property-read Card|null $hero
  * @property-read Card|null $quest
  * @property-read User|null $master
- * @property-read User[]|null $players
+ * @property-read User[]|null $subscribers
  * @property-read Stack[]|null $stacks
  * @property-read Set[]|null $sets
  * @property-read Unique[]|null $uniques
  * @property-read Log[]|null $logs
  * @property-read Card[]|null $board
+ *
+ * @method Builder allowedToSee() static
  */
 class Game extends Model
 {
     use HasTranslations;
+
+    const SUBSCRIBER_TYPE_PLAYER = 0;
+    const SUBSCRIBER_TYPE_SPECTATOR = 1;
 
     /**
      * @var array|string[]
@@ -92,14 +99,14 @@ class Game extends Model
     /**
      * @return BelongsToMany
      */
-    public function players(): BelongsToMany
+    public function subscribers(): BelongsToMany
     {
         return $this->belongsToMany(
             User::class,
-            'game_player',
+            'game_subscriber',
             'game_id',
-            'player_id'
-        );
+            'subscriber_id'
+        )->withPivot(['type']);
     }
 
     /**
@@ -145,6 +152,37 @@ class Game extends Model
             'game_id',
             'card_id'
         );
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeAllowedToSee(Builder $query): Builder
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        if ($user->isAdmin()) {
+            return $query;
+        }
+
+        $query->orWhere('is_public', true)
+            ->whereHas('subscribers', function($query) use ($user) {
+                $query->orWhere('subscriber_id', $user->getKey());
+            });
+
+        return $query;
+    }
+
+    /**
+     * @return array
+     */
+    public static function subscriberTypeOptions(): array
+    {
+        return [
+            self::SUBSCRIBER_TYPE_PLAYER => __('Player'),
+            self::SUBSCRIBER_TYPE_SPECTATOR => __('Spectator'),
+        ];
     }
 
     public static function boot()

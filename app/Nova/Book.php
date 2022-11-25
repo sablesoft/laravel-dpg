@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Intervention\Image\Facades\Image as ImageManager;
@@ -94,7 +95,17 @@ class Book extends Content
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             DateTime::make(__('Updated At'), 'updated_at')
                 ->hideFromIndex()
-                ->hideWhenCreating()->hideWhenUpdating()->sortable(true)
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
+            BelongsToMany::make(__('Subscribers'), 'subscribers', User::class)
+                ->fields(function () {
+                    return [
+                        Select::make(__('Type'), 'type')
+                            ->nullable(false)->sortable()
+                            ->default(function($request) { return 0; })
+                            ->options(\App\Models\Book::subscriberTypeOptions())
+                            ->displayUsingLabels(),
+                    ];
+                })->sortable()->nullable(true),
         ];
     }
 

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class GamePlayerTableSeeder extends Seeder
+class BookSubscriberTableSeeder extends Seeder
 {
 
     /**
@@ -16,13 +16,14 @@ class GamePlayerTableSeeder extends Seeder
     {
         
 
-        \DB::table('game_player')->delete();
+        \DB::table('book_subscriber')->delete();
         
-        \DB::table('game_player')->insert(array (
+        \DB::table('book_subscriber')->insert(array (
             0 => 
             array (
-                'game_id' => 3,
-                'player_id' => 4,
+                'book_id' => 2,
+                'subscriber_id' => 4,
+                'type' => 0,
             ),
         ));
         

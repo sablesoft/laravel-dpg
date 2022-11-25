@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Textarea;
@@ -91,7 +92,16 @@ class Game extends Resource
             HasMany::make(__('Sets'), 'sets'),
             HasMany::make(__('Logs'), 'logs', Log::class),
             BelongsToMany::make(__('Board'), 'board', Card::class),
-            BelongsToMany::make(__('Players'), 'players', User::class),
+            BelongsToMany::make(__('Subscribers'), 'subscribers', User::class)
+                ->fields(function () {
+                    return [
+                        Select::make(__('Type'), 'type')
+                            ->nullable(false)->sortable()
+                            ->default(function($request) { return 0; })
+                            ->options(\App\Models\Game::subscriberTypeOptions())
+                            ->displayUsingLabels(),
+                    ];
+                })->sortable()->nullable(true),
         ];
     }
 

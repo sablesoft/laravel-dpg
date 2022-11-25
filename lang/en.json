@@ -59,5 +59,12 @@
     "Control": "Control",
     "Cards Back": "Cards Back",
     "Unique Cards": "Unique Cards",
-    "Decks Count": "Decks Count"
+    "Decks Count": "Decks Count",
+    "Subscriber": "Subscriber",
+    "Subscribers": "Subscribers",
+    "Type": "Type",
+    "Public": "Public",
+    "Licence": "Licence",
+    "Player": "Player",
+    "Spectator": "Spectator"
 }

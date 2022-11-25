@@ -37,12 +37,14 @@ abstract class Content extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query): Builder
     {
-        if ($request->user()->hasRole(\App\Models\User::ROLE_ADMIN)) {
-            return $query;
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+        if (!$user->isAdmin()) {
+            $query->where('is_public', '=', true)
+                ->orWhere('owner_id', '=', $user->getKey());
         }
 
-        return $query->where('is_public', '=', true)
-            ->orWhere('owner_id', '=', $request->user()->getKey());
+        return $query;
     }
 
 

@@ -45,6 +45,42 @@ class Card extends Content
     }
 
     /**
+     * @param NovaRequest $request
+     * @param $query
+     * @return Builder
+     */
+    public static function indexQuery(NovaRequest $request, $query): Builder
+    {
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+        if (!$user->isAdmin()) {
+            $query->where(function ($query) use ($user) {
+                $query->where('is_public', '=', true)
+                    ->orWhere('owner_id', '=', $user->getKey());
+                return static::isBookSubscriber($query, $user);
+            });
+        }
+
+        return $query;
+    }
+
+    /**
+     * @param Builder $query
+     * @param \App\Models\User $user
+     * @return Builder
+     */
+    protected static function isBookSubscriber(Builder $query, \App\Models\User $user): Builder
+    {
+        $query->orWhere(function($query) use ($user) {
+            return $query->whereHas('books.subscribers', function($query) use ($user) {
+                $query->where('subscriber_id', $user->getKey());
+            });
+        });
+
+        return $query;
+    }
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param Request $request

@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\User;
@@ -9,8 +10,11 @@ use App\Models\Content;
 
 trait Resources
 {
+    protected ?\Closure $relationshipFilter = null;
+
     /**
      * @param string $key
+     * @param string|null $resource
      * @return string|null
      */
     protected function getResourcesString(string $key, string $resource = null): ?string
@@ -40,7 +44,13 @@ trait Resources
             return $this->$key;
         }
 
-        return $this->$key()->where('is_public', '=', true)
-                    ->orWhere('owner_id', '=', $user->getKey())->get();
+        $query = $this->$key()->select(['id', 'name'])->where('is_public', '=', true)
+                    ->orWhere('owner_id', '=', $user->getKey());
+        if ($this->relationshipFilter instanceof \Closure) {
+            $closure = $this->relationshipFilter;
+            $query = $closure($query);
+        }
+        /** @var Builder $query */
+        return $query->distinct('id')->get();
     }
 }

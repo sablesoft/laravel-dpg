@@ -4,6 +4,9 @@ namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\User;
+use App\Models\Deck;
+use App\Models\Card;
+use App\Models\Book;
 use App\Models\Content;
 
 abstract class ContentPolicy
@@ -98,6 +101,19 @@ abstract class ContentPolicy
     }
 
     /**
+     * Determine whether the user can detach tag from the content.
+     *
+     * @param User $user
+     * @param Content $content
+     * @param Card $tag
+     * @return bool
+     */
+    public function detachTag(User $user, Content $content, Card $tag): bool
+    {
+        return $user->isAdmin() || $user->isOwner($content);
+    }
+
+    /**
      * Determine whether the user can add tag to the content.
      *
      * @param User $user
@@ -134,6 +150,19 @@ abstract class ContentPolicy
     }
 
     /**
+     * Determine whether the user can detach card from the content.
+     *
+     * @param User $user
+     * @param Content $content
+     * @param Card $card
+     * @return bool
+     */
+    public function detachCard(User $user, Content $content, Card $card): bool
+    {
+        return $user->isAdmin() || $user->isOwner($content);
+    }
+
+    /**
      * Determine whether the user can attach any deck to the content.
      *
      * @param User $user
@@ -153,6 +182,20 @@ abstract class ContentPolicy
      * @return bool
      */
     public function addDeck(User $user, Content $content): bool
+    {
+        return $user->isAdmin() || $user->isOwner($content);
+    }
+
+
+    /**
+     * Determine whether the user can detach deck from the content.
+     *
+     * @param User $user
+     * @param Content $content
+     * @param Deck $deck
+     * @return bool
+     */
+    public function detachDeck(User $user, Content $content, Deck $deck): bool
     {
         return $user->isAdmin() || $user->isOwner($content);
     }
@@ -177,6 +220,20 @@ abstract class ContentPolicy
      * @return bool
      */
     public function addBook(User $user, Content $content): bool
+    {
+        return $user->isAdmin() || $user->isOwner($content);
+    }
+
+
+    /**
+     * Determine whether the user can detach card from the content.
+     *
+     * @param User $user
+     * @param Content $content
+     * @param Book $book
+     * @return bool
+     */
+    public function detachBook(User $user, Content $content, Book $book): bool
     {
         return $user->isAdmin() || $user->isOwner($content);
     }

@@ -5,6 +5,9 @@ namespace App\Nova\Actions;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
@@ -42,11 +45,19 @@ class CopyCard extends Action
         /** @var Card $model */
         foreach ($models as $model) {
             if (!$model->hasAccessToScopes($user)) {
-                return Action::message(
+                return Action::danger(
                     __("You cannot copy this card. You don't have access to one of its scopes.")
                 );
             }
+            $ext = explode('.', $model->image)[1];
+            $filename = 'card_image/' . Str::random(40) .'.'. $ext;
+            if (!Storage::disk('public')->copy($model->image, $filename)) {
+                return Action::danger(
+                    __("Image copy error!")
+                );
+            }
             $newCard = $model->replicate();
+            $newCard->image = $filename;
             $newCard->created_at = Carbon::now();
             $newCard->is_public = false;
             $newCard->owner_id = Auth::user()->getKey();

@@ -97,7 +97,7 @@ class Card extends Content
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     /** @var UploadedFile $file */
                     $file = $request->file($requestAttribute);
-                    $filename = $file->hashName('card_image');
+                    $filename = $file->hashName(\App\Models\Card::STORAGE_PATH);
                     // resize by biggest dimension:
                     $width = $height = null;
                     $image = ImageManager::make($file->path());
@@ -118,7 +118,7 @@ class Card extends Content
 
                     return $filename;
                 })
-                ->disk('public')->nullable(true),
+                ->disk('public')->nullable(true)->prunable(),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
                 ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')

@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\CopyCard;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\UploadedFile;
@@ -263,6 +264,10 @@ class Card extends Content
      */
     public function actions(Request $request): array
     {
-        return [];
+        return [
+            CopyCard::make()->canRun(function () {
+                return true;
+            })
+        ];
     }
 }

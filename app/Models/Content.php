@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
@@ -22,6 +23,9 @@ use App\Models\Traits\Options;
  *
  * @property-read Card|null $scope
  * @property-read User|null $owner
+ *
+ * @method Builder isPublic(bool $isPublic = true, string $boolean = 'and')
+ * @method Builder isOwner(User $owner, string $boolean = 'and')
  */
 class Content extends Model
 {
@@ -72,6 +76,28 @@ class Content extends Model
         $data['tags'] = $this->tags()->get()->pluck('name')->toArray();
 
         return $data;
+    }
+
+    /**
+     * @param Builder $query
+     * @param bool $isPublic
+     * @param string $boolean
+     * @return Builder
+     */
+    public static function scopeIsPublic(Builder $query, bool $isPublic = true, string $boolean = 'and'): Builder
+    {
+        return $query->where('is_public', '=', $isPublic, $boolean);
+    }
+
+    /**
+     * @param Builder $query
+     * @param User $owner
+     * @param string $boolean
+     * @return Builder
+     */
+    public static function scopeIsOwner(Builder $query, User $owner, string $boolean = 'and'): Builder
+    {
+        return $query->where('owner_id', '=', $owner->getKey(), $boolean);
     }
 
     /**

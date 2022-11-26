@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use App\Models\Card;
+use App\Models\User;
 use App\Models\Book;
 
 class CopyCard extends Action
@@ -34,10 +35,17 @@ class CopyCard extends Action
      */
     public function handle(ActionFields $fields, Collection $models): array
     {
+        /** @var User $user */
+        $user = Auth::user();
         $bookId = $fields->get(static::FIELD_BOOK_ID);
 
         /** @var Card $model */
         foreach ($models as $model) {
+            if (!$model->hasAccessToScopes($user)) {
+                return Action::message(
+                    __("You cannot copy this card. You don't have access to one of its scopes.")
+                );
+            }
             $newCard = $model->replicate();
             $newCard->created_at = Carbon::now();
             $newCard->is_public = false;

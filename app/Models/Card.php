@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
@@ -44,6 +45,38 @@ class Card extends Content
             'card_id',
             'tag_id'
         );
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function hasAccess(User $user): bool
+    {
+        if ($user->isAdmin() || $this->isOwner($user) || $this->is_public) {
+            return true;
+        }
+        return $this->books()->whereHas('subscribers', function(Builder $query) use ($user) {
+            $query->where('subscriber_id', $user->getKey());
+        })->exists();
+    }
+
+    /**
+     * @param User $user
+     * @param Card|null $card
+     * @return bool
+     */
+    public function hasAccessToScopes(User $user, ?Card $card = null): bool
+    {
+        $card = $card ?: $this;
+        if (!$scope = $card->scope) {
+            return true;
+        }
+        if (!$scope->hasAccess($user)) {
+            return false;
+        }
+
+        return $this->hasAccessToScopes($user, $scope);
     }
 
     /**

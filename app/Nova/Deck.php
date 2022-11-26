@@ -64,7 +64,7 @@ class Deck extends Content
                             ->min(1)->step(1)->default(1),
                     ];
                 })->sortable()->nullable(true),
-            Image::make(__('Image'), 'image')
+            Image::make(__('Image'), 'image')->prunable()
                 ->nullable(true)->hideFromIndex(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),

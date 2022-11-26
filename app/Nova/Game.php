@@ -92,7 +92,7 @@ class Game extends Resource
                 ->nullable(true)->required(false)
                 ->hideFromIndex()->hideFromDetail(),
             Textarea::make(__('Desc'), 'desc')->nullable(true)->alwaysShow(),
-            Image::make(__('Board Image'), 'board_image')
+            Image::make(__('Board Image'), 'board_image')->prunable()
                 ->nullable(true)->hideFromIndex(),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),

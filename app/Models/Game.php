@@ -17,7 +17,7 @@ use App\Models\Traits\Subscribers;
  * @property int|null $book_id
  * @property int|null $hero_id
  * @property int|null $quest_id
- * @property int|null $master_id
+ * @property int|null $owner_id
  * @property bool|null $is_public
  * @property string|null $board_image
  * @property int|null $status
@@ -89,7 +89,7 @@ class Game extends Model
      */
     public function master(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'master_id');
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     /**

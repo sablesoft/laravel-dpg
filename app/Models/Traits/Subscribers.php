@@ -41,6 +41,7 @@ trait Subscribers
         }
 
         $query->where('is_public', true)
+            ->orWhere('owner_id', $user->getKey())
             ->orWhere(function($query) use ($user) {
                 return $query->whereHas('subscribers', function($query) use ($user) {
                     $query->where('subscriber_id', $user->getKey());

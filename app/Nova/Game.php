@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Service\ImageService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
@@ -92,8 +93,10 @@ class Game extends Resource
                 ->nullable(true)->required(false)
                 ->hideFromIndex()->hideFromDetail(),
             Textarea::make(__('Desc'), 'desc')->nullable(true)->alwaysShow(),
-            Image::make(__('Board Image'), 'board_image')->prunable()
-                ->nullable(true)->hideFromIndex(),
+            Image::make(__('Board Image'), 'board_image')
+                ->store(function (Request $request, $model, $attribute, $requestAttribute) {
+                    return ImageService::uploadBoardImage($request->file($requestAttribute));
+                })->disk(ImageService::diskName())->nullable(true)->prunable()->hideFromIndex(),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
 

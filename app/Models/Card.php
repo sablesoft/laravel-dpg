@@ -24,12 +24,6 @@ class Card extends Content
 {
     use Tags, Decks, Books;
 
-    const RATIO = 1.4;
-    const DEFAULT_WIDTH = 100;
-    const IMAGE_WIDTH = 300;
-    const IMAGE_HEIGHT = 250;
-    const STORAGE_PATH = 'card_image';
-
     /**
      * @var array|string[]
      */
@@ -165,21 +159,5 @@ class Card extends Content
         } else {
             return true;
         }
-    }
-
-    /**
-     * @return int
-     */
-    public static function width(): int
-    {
-        return (int) static::DEFAULT_WIDTH;
-    }
-
-    /**
-     * @return int
-     */
-    public static function height(): int
-    {
-        return (int) (static::width() * static::RATIO);
     }
 }

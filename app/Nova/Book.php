@@ -3,8 +3,6 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
@@ -16,7 +14,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Intervention\Image\Facades\Image as ImageManager;
+use App\Service\ImageService;
 use App\Nova\Filters\CardsFilter;
 use App\Nova\Filters\ImageFilter;
 use App\Nova\Filters\OwnersFilter;
@@ -61,21 +59,8 @@ class Book extends Content
                 ->sortable()->rules('required', 'max:30'),
             Image::make(__('Image'), 'image')
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
-                    /** @var UploadedFile $file */
-                    $file = $request->file($requestAttribute);
-                    $filename = $file->hashName('book_image');
-                    $width = \App\Models\Card::IMAGE_WIDTH;
-                    $height = \App\Models\Card::IMAGE_HEIGHT;
-                    $image = ImageManager::make($file->path())
-                        ->resize($width, $height, function ($constraint) {
-                            $constraint->aspectRatio();
-                            $constraint->upsize();
-                        })->encode($file->guessExtension());
-                    Storage::disk('public')->put($filename, (string) $image);
-
-                    return $filename;
-                })
-                ->prunable()->disk('public')->nullable(true)->hideFromIndex(),
+                    return ImageService::uploadBookImage($request->file($requestAttribute));
+                })->prunable()->disk(ImageService::diskName())->nullable(true)->hideFromIndex(),
             Number::make(__('Unique Cards'), 'cards_count')
                 ->hideWhenUpdating()->hideWhenCreating(),
             Text::make(__('Tags'), 'tags_string')
@@ -85,18 +70,9 @@ class Book extends Content
                 ->sortable()->nullable(true),
             Image::make(__('Cards Back'), 'cards_back')
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
-                    /** @var UploadedFile $file */
-                    $file = $request->file($requestAttribute);
-                    $filename = $file->hashName('card_back');
-                    $width = \App\Models\Card::width();
-                    $height = \App\Models\Card::height();
-                    $image = ImageManager::make($file->path())
-                        ->resize($width, $height)->encode($file->guessExtension());
-                    Storage::disk('public')->put($filename, (string) $image);
-
-                    return $filename;
-                })->maxWidth(\App\Models\Card::width())->disk('public')->prunable()
-                ->nullable(true)->hideFromIndex(),
+                    return ImageService::uploadCardBack($request->file($requestAttribute));
+                })->maxWidth(ImageService::backHeight())->disk(ImageService::diskName())
+                ->prunable()->nullable(true)->hideFromIndex(),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')
@@ -115,7 +91,7 @@ class Book extends Content
                     return [
                         Select::make(__('Type'), 'type')
                             ->nullable(false)->sortable()
-                            ->default(function($request) { return 0; })
+                            ->default(function() { return 0; })
                             ->options(\App\Models\Book::subscriberTypeOptions())
                             ->displayUsingLabels(),
                     ];

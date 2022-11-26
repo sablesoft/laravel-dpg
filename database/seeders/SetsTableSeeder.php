@@ -14,12 +14,12 @@ class SetsTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('sets')->delete();
-
+        
         \DB::table('sets')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 40,
                 'game_id' => 1,
@@ -30,7 +30,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 41,
                 'game_id' => 1,
@@ -41,7 +41,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 42,
                 'game_id' => 1,
@@ -52,7 +52,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 43,
                 'game_id' => 1,
@@ -63,7 +63,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 44,
                 'game_id' => 1,
@@ -74,7 +74,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 45,
                 'game_id' => 1,
@@ -85,7 +85,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 46,
                 'game_id' => 1,
@@ -96,7 +96,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 47,
                 'game_id' => 1,
@@ -107,7 +107,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 48,
                 'game_id' => 1,
@@ -120,7 +120,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 49,
                 'game_id' => 1,
@@ -131,7 +131,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            10 =>
+            10 => 
             array (
                 'id' => 50,
                 'game_id' => 1,
@@ -142,7 +142,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            11 =>
+            11 => 
             array (
                 'id' => 51,
                 'game_id' => 1,
@@ -153,7 +153,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            12 =>
+            12 => 
             array (
                 'id' => 53,
                 'game_id' => 1,
@@ -164,7 +164,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            13 =>
+            13 => 
             array (
                 'id' => 54,
                 'game_id' => 1,
@@ -175,7 +175,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            14 =>
+            14 => 
             array (
                 'id' => 55,
                 'game_id' => 1,
@@ -186,7 +186,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            15 =>
+            15 => 
             array (
                 'id' => 56,
                 'game_id' => 1,
@@ -197,7 +197,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            16 =>
+            16 => 
             array (
                 'id' => 57,
                 'game_id' => 1,
@@ -208,7 +208,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            17 =>
+            17 => 
             array (
                 'id' => 58,
                 'game_id' => 1,
@@ -219,7 +219,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            18 =>
+            18 => 
             array (
                 'id' => 59,
                 'game_id' => 1,
@@ -230,7 +230,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            19 =>
+            19 => 
             array (
                 'id' => 60,
                 'game_id' => 1,
@@ -241,7 +241,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            20 =>
+            20 => 
             array (
                 'id' => 61,
                 'game_id' => 1,
@@ -252,7 +252,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            21 =>
+            21 => 
             array (
                 'id' => 62,
                 'game_id' => 1,
@@ -263,7 +263,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            22 =>
+            22 => 
             array (
                 'id' => 63,
                 'game_id' => 1,
@@ -274,7 +274,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            23 =>
+            23 => 
             array (
                 'id' => 64,
                 'game_id' => 1,
@@ -286,7 +286,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'updated_at' => '2022-11-24 19:54:10',
             ),
         ));
-
-
+        
+        
     }
 }

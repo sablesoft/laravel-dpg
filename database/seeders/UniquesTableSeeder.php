@@ -14,15 +14,15 @@ class UniquesTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('uniques')->delete();
-        
+
         \DB::table('uniques')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 5,
-                'game_id' => 3,
+                'game_id' => 1,
                 'deck_id' => 27,
                 'card_id' => 55,
                 'scope_id' => 85,
@@ -31,10 +31,10 @@ class UniquesTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 6,
-                'game_id' => 3,
+                'game_id' => 1,
                 'deck_id' => 39,
                 'card_id' => 55,
                 'scope_id' => 86,
@@ -43,10 +43,10 @@ class UniquesTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:10',
                 'updated_at' => '2022-11-24 19:54:10',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 7,
-                'game_id' => 3,
+                'game_id' => 1,
                 'deck_id' => 40,
                 'card_id' => 55,
                 'scope_id' => 87,
@@ -56,7 +56,7 @@ class UniquesTableSeeder extends Seeder
                 'updated_at' => '2022-11-24 19:54:10',
             ),
         ));
-        
-        
+
+
     }
 }

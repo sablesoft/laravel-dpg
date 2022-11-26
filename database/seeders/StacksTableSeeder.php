@@ -14,15 +14,15 @@ class StacksTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('stacks')->delete();
-        
+
         \DB::table('stacks')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 13,
-                'game_id' => 3,
+                'game_id' => 1,
                 'deck_id' => 30,
                 'card_id' => 35,
                 'scope_id' => 13,
@@ -32,10 +32,10 @@ class StacksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 14,
-                'game_id' => 3,
+                'game_id' => 1,
                 'deck_id' => 31,
                 'card_id' => 35,
                 'scope_id' => 19,
@@ -45,10 +45,10 @@ class StacksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 15,
-                'game_id' => 3,
+                'game_id' => 1,
                 'deck_id' => 32,
                 'card_id' => 35,
                 'scope_id' => 20,
@@ -58,10 +58,10 @@ class StacksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 16,
-                'game_id' => 3,
+                'game_id' => 1,
                 'deck_id' => 34,
                 'card_id' => 35,
                 'scope_id' => 27,
@@ -71,10 +71,10 @@ class StacksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 17,
-                'game_id' => 3,
+                'game_id' => 1,
                 'deck_id' => 25,
                 'card_id' => 35,
                 'scope_id' => 41,
@@ -84,10 +84,10 @@ class StacksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:54:09',
                 'updated_at' => '2022-11-24 19:54:09',
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 18,
-                'game_id' => 3,
+                'game_id' => 1,
                 'deck_id' => 11,
                 'card_id' => 36,
                 'scope_id' => 16,
@@ -98,7 +98,7 @@ class StacksTableSeeder extends Seeder
                 'updated_at' => '2022-11-24 19:54:09',
             ),
         ));
-        
-        
+
+
     }
 }

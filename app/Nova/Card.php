@@ -154,8 +154,7 @@ class Card extends Content
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
             BelongsTo::make(__('Owner'), 'owner', User::class)
-                ->sortable()->hideFromIndex()
-                ->hideWhenUpdating()->hideWhenCreating(),
+                ->sortable()->hideWhenUpdating()->hideWhenCreating(),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),

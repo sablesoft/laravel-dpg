@@ -117,7 +117,8 @@ class Card extends Content
                     Storage::disk('public')->put($filename, (string) $image);
 
                     return $filename;
-                })->disk('public')->prunable()->nullable(true),
+                })
+                ->disk('public')->nullable(true),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
                 ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')

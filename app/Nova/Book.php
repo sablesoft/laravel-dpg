@@ -74,7 +74,7 @@ class Book extends Content
                     Storage::disk('public')->put($filename, (string) $image);
 
                     return $filename;
-                })->disk('public')->prunable()->nullable(true)->hideFromIndex(),
+                })->disk('public')->nullable(true)->hideFromIndex(),
             Number::make(__('Unique Cards'), 'cards_count')
                 ->hideWhenUpdating()->hideWhenCreating(),
             Text::make(__('Tags'), 'tags_string')
@@ -94,7 +94,7 @@ class Book extends Content
                     Storage::disk('public')->put($filename, (string) $image);
 
                     return $filename;
-                })->maxWidth(\App\Models\Card::width())->disk('public')->prunable()
+                })->maxWidth(\App\Models\Card::width())->disk('public')
                 ->nullable(true)->hideFromIndex(),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->sortable()->nullable(true),

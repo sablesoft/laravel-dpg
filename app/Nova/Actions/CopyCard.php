@@ -2,6 +2,7 @@
 
 namespace App\Nova\Actions;
 
+use App\Service\ImageService;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -49,9 +50,7 @@ class CopyCard extends Action
                     __("You cannot copy this card. You don't have access to one of its scopes.")
                 );
             }
-            $ext = explode('.', $model->image)[1];
-            $filename = 'card_image/' . Str::random(40) .'.'. $ext;
-            if (!Storage::disk('public')->copy($model->image, $filename)) {
+            if (!$filename = ImageService::copyImage($model->image)) {
                 return Action::danger(
                     __("Image copy error!")
                 );

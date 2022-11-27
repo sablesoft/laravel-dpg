@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Constraint;
@@ -22,9 +23,9 @@ class ImageService
 
     /**
      * @param UploadedFile $file
-     * @return string
+     * @return string|null
      */
-    public static function uploadCardImage(UploadedFile $file): string
+    public static function uploadCardImage(UploadedFile $file): ?string
     {
         $filename = $file->hashName(static::CARDS_STORAGE);
         // resize by biggest dimension:
@@ -43,30 +44,26 @@ class ImageService
         $image->resize($width, $height, function (Constraint $constraint) {
             $constraint->aspectRatio();
         })->encode($file->guessExtension());
-        Storage::disk(static::diskName())->put($filename, (string) $image);
-
-        return $filename;
+        return static::store($filename, (string) $image) ? $filename : null;
     }
 
     /**
      * @param UploadedFile $file
      * @return string
      */
-    public static function uploadCardBack(UploadedFile $file): string
+    public static function uploadCardBack(UploadedFile $file): ?string
     {
         $filename = $file->hashName(static::BACK_STORAGE);
         $image = Image::make($file->path())
             ->resize(static::backWidth(), static::backHeight())->encode($file->guessExtension());
-        Storage::disk(static::diskName())->put($filename, (string) $image);
-
-        return $filename;
+        return static::store($filename, (string) $image) ? $filename : null;
     }
 
     /**
      * @param UploadedFile $file
-     * @return string
+     * @return string|null
      */
-    public static function uploadBookImage(UploadedFile $file): string
+    public static function uploadBookImage(UploadedFile $file): ?string
     {
         $filename = $file->hashName(static::BOOKS_STORAGE);
         $image = Image::make($file->path())
@@ -74,21 +71,31 @@ class ImageService
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->encode($file->guessExtension());
-        Storage::disk(static::diskName())->put($filename, (string) $image);
-
-        return $filename;
+        return static::store($filename, (string) $image) ? $filename : null;
     }
 
     /**
      * @param UploadedFile $file
-     * @return string
+     * @return string|null
      */
-    public static function uploadBoardImage(UploadedFile $file): string
+    public static function uploadBoardImage(UploadedFile $file): ?string
     {
         $filename = $file->hashName(static::BOARDS_STORAGE);
-        Storage::disk(static::diskName())->put($filename, (string) $file);
+        return static::store($filename, $file->getContent()) ? $filename : null;
+    }
 
-        return $filename;
+    /**
+     * @param string $oldImage
+     * @return string|null
+     */
+    public static function copyImage(string $oldImage): ?string
+    {
+        [$path, $ext] = explode('.', $oldImage);
+        $path = explode('/', trim($path, '/'));
+        array_pop($path);
+        $newImage = implode('/', $path) .'/'. Str::random(40) .'.'. $ext;
+        return (Storage::disk(static::diskName())->copy($oldImage, $newImage))?
+            $newImage : null;
     }
 
     /**
@@ -113,5 +120,15 @@ class ImageService
     public static function backHeight(): float
     {
         return static::backWidth() * static::BACK_RATIO;
+    }
+
+    /**
+     * @param string $path
+     * @param string $content
+     * @return bool
+     */
+    protected static function store(string $path, string $content): bool
+    {
+        return Storage::disk(static::diskName())->put($path, $content);
     }
 }

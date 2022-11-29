@@ -120,8 +120,11 @@ class Deck extends Content
     public function actions(Request $request): array
     {
         return [
-            CopyDeck::make()->canRun(function () {
-                return true;
+            CopyDeck::make()->canRun(function ($request, $model) {
+                $string = $request->input('resources');
+                $ids = explode(',', $string);
+                $ids = array_map('trim', $ids);
+                return in_array($model->getKey(), $ids);
             })
         ];
     }

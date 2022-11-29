@@ -75,10 +75,10 @@ class CopyDeck extends Action
         return [
             Select::make(__('Into Book'), self::FIELD_BOOK_ID)
                 ->required(true)->nullable(false)
-                ->options($options)
+                ->options($options)->rules('required')
                 ->displayUsingLabels(),
             Boolean::make(__('Copy Cards'), self::FIELD_COPY_CARDS)
-                ->required()->nullable(false)->default(function() {return false;})
+                ->nullable(false)->default(function() {return false;})
         ];
     }
 }

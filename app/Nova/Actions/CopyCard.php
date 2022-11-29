@@ -2,13 +2,8 @@
 
 namespace App\Nova\Actions;
 
-use App\Service\ImageService;
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
@@ -50,20 +45,8 @@ class CopyCard extends Action
                     __("You cannot copy this card. You don't have access to one of its scopes.")
                 );
             }
-            if (!$filename = ImageService::copyImage($model->image)) {
-                return Action::danger(
-                    __("Image copy error!")
-                );
-            }
-            $newCard = $model->replicate();
-            $newCard->image = $filename;
-            $newCard->created_at = Carbon::now();
-            $newCard->is_public = false;
-            $newCard->owner_id = Auth::user()->getKey();
-            $newCard->name = $newCard->name . ' - COPY';
-            $newCard->save();
-            if ($bookId) {
-                $newCard->books()->attach($bookId);
+            if (!$model->makeCopy($user, $error, $bookId)) {
+                return Action::danger($error);
             }
         }
 

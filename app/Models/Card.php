@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use App\Service\ImageService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
 use App\Models\Traits\Decks;
 use App\Models\Traits\Books;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Actions\Action;
 
 /**
  * @property-read Card[]|null $tags
@@ -40,6 +44,15 @@ class Card extends Content
             'card_id',
             'tag_id'
         );
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function hasFullAccess(User $user): bool
+    {
+        return $this->hasAccess($user) && $this->hasAccessToScopes($user);
     }
 
     /**
@@ -141,6 +154,35 @@ class Card extends Content
         $data['in_decks'] = $this->inDecks()->get()->pluck('name')->toArray();
 
         return $data;
+    }
+
+    /**
+     * @param User $user
+     * @param string $error
+     * @param int|null $bookId
+     * @return Card|null
+     */
+    public function makeCopy(User $user, string &$error, ?int $bookId = null): ?Card
+    {
+        if (!$filename = ImageService::copyImage($this->image)) {
+            $error = __("Image copy error!");
+            return null;
+        }
+        $card = $this->replicate();
+        $card->image = $filename;
+        $card->created_at = Carbon::now();
+        $card->is_public = false;
+        $card->owner_id = $user->getKey();
+        $card->name = $card->name . ' - COPY';
+        if (!$card->save()) {
+            $error = __('Save error');
+            return null;
+        }
+        if ($bookId) {
+            $card->books()->attach($bookId);
+        }
+
+        return $card;
     }
 
     /**

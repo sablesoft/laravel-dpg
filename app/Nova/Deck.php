@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Textarea;
+use App\Nova\Actions\CopyDeck;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
 use App\Nova\Filters\IsPublicFilter;
@@ -118,6 +119,10 @@ class Deck extends Content
      */
     public function actions(Request $request): array
     {
-        return [];
+        return [
+            CopyDeck::make()->canRun(function () {
+                return true;
+            })
+        ];
     }
 }

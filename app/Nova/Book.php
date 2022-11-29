@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use App\Service\ImageService;
+use App\Nova\Actions\CopyBook;
 use App\Nova\Filters\CardsFilter;
 use App\Nova\Filters\ImageFilter;
 use App\Nova\Filters\OwnersFilter;
@@ -146,6 +147,14 @@ class Book extends Content
      */
     public function actions(Request $request): array
     {
-        return [];
+        return [
+            CopyBook::make()->canRun(function ($request, $model) {
+                $string = $request->input('resources');
+                $ids = explode(',', $string);
+                $ids = array_map('trim', $ids);
+
+                return in_array($model->getKey(), $ids);
+            })
+        ];
     }
 }

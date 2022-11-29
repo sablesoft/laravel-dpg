@@ -9,13 +9,13 @@ use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ActionFields;
 use App\Models\Book;
-use App\Models\Deck;
 use App\Models\User;
 
-class CopyDeck extends Action
+class CopyBook extends Action
 {
     const FIELD_BOOK_ID = 'book_id';
     const FIELD_COPY_CARDS = 'copy_cards';
+    const FIELD_COPY_DECKS = 'copy_decks';
 
     /**
      * Get the displayable name of the action.
@@ -40,22 +40,23 @@ class CopyDeck extends Action
         $user = Auth::user();
         $bookId = (int) $fields->get(static::FIELD_BOOK_ID);
         $copyCards = (bool) $fields->get(static::FIELD_COPY_CARDS);
-        /** @var Deck $model */
+        $copyDecks = (bool) $fields->get(static::FIELD_COPY_DECKS);
+        /** @var Book $model */
         foreach ($models as $model) {
             if (!$model->hasFullAccess($user)) {
                 return Action::danger(
-                    __("You cannot copy one of decks. You don't have full access to all its cards.")
+                    __("You cannot copy one of books. You don't have full access to all its cards.")
                 );
             }
         }
         $processedCards = [];
         foreach ($models as $model) {
-            if (!$model->makeCopy($user, $error, $bookId, $copyCards, $processedCards)) {
+            if (!$model->makeCopy($user, $error, $bookId, $copyDecks, $copyCards, $processedCards)) {
                 return Action::danger($error);
             }
         }
 
-        return Action::message(__('Decks Copied'));
+        return Action::message(__('Books Copied'));
     }
 
     /**
@@ -71,11 +72,11 @@ class CopyDeck extends Action
 
         return [
             Select::make(__('Into Book'), self::FIELD_BOOK_ID)
-                ->required(true)->nullable(false)
-                ->options($options)->rules('required')
-                ->displayUsingLabels(),
+                ->nullable(true)->options($options)->displayUsingLabels(),
             Boolean::make(__('Copy Cards'), self::FIELD_COPY_CARDS)
-                ->nullable(false)->default(function() {return false;})
+                ->nullable(false)->default(function() {return false;}),
+            Boolean::make(__('Copy Decks'), self::FIELD_COPY_DECKS)
+                ->nullable(false)->default(function() {return false;}),
         ];
     }
 }

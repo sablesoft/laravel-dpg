@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Service\ImageService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
+use App\Service\ImageService;
 
 /**
  * @property int|null $type
@@ -96,16 +96,27 @@ class Deck extends Content
 
     /**
      * @param User $user
-     * @param string $error
+     * @param string|null $error
      * @param int $bookId
      * @param bool $copyCards
+     * @param array $processedCards
      * @return null|Deck
      */
-    public function makeCopy(User $user, ?string &$error, int $bookId, bool $copyCards = false): ?Deck
+    public function makeCopy(
+        User $user,
+        ?string &$error,
+        int $bookId,
+        bool $copyCards = false,
+        array &$processedCards = []
+    ): ?Deck
     {
+        $cardId = array_key_exists($this->card_id, $processedCards) ?
+            $processedCards[$this->card_id] : $this->card_id;
+        $scopeId = array_key_exists($this->scope_id, $processedCards) ?
+            $processedCards[$this->scope_id] : $this->scope_id;
         $exists = Deck::query()->where('book_id', $bookId)
-            ->where('card_id', $this->card_id)
-            ->where('scope_id', $this->scope_id)->exists();
+            ->where('card_id', $cardId)
+            ->where('scope_id', $scopeId)->exists();
         if ($exists) {
             $error = __('This deck already exists in this book');
             return null;
@@ -123,27 +134,44 @@ class Deck extends Content
             $this->image = $filename;
         }
         if ($copyCards) {
-            if (!$target = $this->target->makeCopy($user, $cardError, $bookId)) {
-                $error = __('Card copy error: ') . $cardError;
-                return null;
-            }
-            if (!$scope = $this->scope->makeCopy($user, $cardError, $bookId)) {
-                $error = __('Card copy error: ') . $cardError;
-                return null;
-            }
-            $deck->card_id = $target->getKey();
-            $deck->scope_id = $scope->getKey();
-        }
-        $deck->save();
-        foreach ($this->cards as $card) {
-            if ($copyCards) {
-                $card = $card->makeCopy($user, $cardError, $bookId);
-                if (!$card) {
+            if (!array_key_exists($this->card_id, $processedCards)) {
+                if (!$target = $this->target->makeCopy($user, $cardError, $bookId)) {
                     $error = __('Card copy error: ') . $cardError;
                     return null;
                 }
+                $deck->card_id = $target->getKey();
+                $processedCards[$this->card_id] = $deck->card_id;
+            } else {
+                $deck->card_id = $processedCards[$this->card_id];
             }
-            $deck->cards()->attach($card);
+            if (!array_key_exists($this->scope_id, $processedCards)) {
+                if (!$scope = $this->scope->makeCopy($user, $cardError, $bookId)) {
+                    $error = __('Card copy error: ') . $cardError;
+                    return null;
+                }
+                $deck->scope_id = $scope->getKey();
+                $processedCards[$this->scope_id] = $deck->scope_id;
+            } else {
+                $deck->scope_id = $processedCards[$this->scope_id];
+            }
+        }
+        $deck->save();
+        foreach ($this->cards as $card) {
+            $cardId = $card->getKey();
+            if ($copyCards) {
+                if (!array_key_exists($cardId, $processedCards)) {
+                    $copy = $card->makeCopy($user, $cardError, $bookId);
+                    if (!$copy) {
+                        $error = __('Card copy error: ') . $cardError;
+                        return null;
+                    }
+                    $processedCards[$cardId] = $copy->getKey();
+                    $cardId = $copy->getKey();
+                } else {
+                    $cardId = $processedCards[$cardId];
+                }
+            }
+            $deck->cards()->attach($cardId);
         }
 
         return $deck;
@@ -152,29 +180,29 @@ class Deck extends Content
     /**
      * @param User $user
      * @return bool
-     * @noinspection PhpParamsInspection
      */
     public function hasFullAccess(User $user): bool
     {
-        return $this->checkCardsAccess($user, collect([$this->target, $this->scope])) &&
-            $this->checkCardsAccess($user, $this->cards);
-    }
-
-    /**
-     * @param User $user
-     * @param Collection $cards
-     * @return bool
-     */
-    protected function checkCardsAccess(User $user, Collection $cards): bool
-    {
         /** @var Card $card */
-        foreach ($cards as $card) {
+        foreach ($this->getRelatedCards() as $card) {
             if (!$card->hasFullAccess($user)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getRelatedCards(): Collection
+    {
+        $collection = collect($this->cards);
+        $collection->add($this->target);
+        $collection->add($this->scope);
+
+        return $collection;
     }
 
     /**

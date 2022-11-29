@@ -162,7 +162,8 @@ class Card extends Content
      */
     public function makeCopy(User $user, ?string &$error, ?int $bookId = null): ?Card
     {
-        if (!$filename = ImageService::copyImage($this->image)) {
+        $filename = null;
+        if ($this->image && (!$filename = ImageService::copyImage($this->image))) {
             $error = __("Image copy error!");
             return null;
         }

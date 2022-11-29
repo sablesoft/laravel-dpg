@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('scope_id')->nullable(false)
                 ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
             $table->unsignedSmallInteger('type')->nullable(false)->default(0);
-            $table->longText('desc')->nullable(true);
+            $table->json('desc')->nullable(true);
             $table->boolean('is_public')->nullable(false)->default(false);
             $table->string('image')->nullable(true);
             $table->foreignId('owner_id')->nullable(false)

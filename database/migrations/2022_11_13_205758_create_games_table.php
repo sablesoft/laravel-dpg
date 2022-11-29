@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(true);
-            $table->longText('desc')->nullable(true);
+            $table->json('name')->nullable(true);
+            $table->json('desc')->nullable(true);
             $table->foreignId('book_id')->nullable(false)->constrained('books')
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('hero_id')->nullable(true)

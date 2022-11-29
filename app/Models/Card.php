@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Service\ImageService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,8 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
 use App\Models\Traits\Decks;
 use App\Models\Traits\Books;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Nova\Actions\Action;
+use App\Service\ImageService;
 
 /**
  * @property-read Card[]|null $tags

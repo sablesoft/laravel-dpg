@@ -124,6 +124,7 @@ class Deck extends Content
                 $string = $request->input('resources');
                 $ids = explode(',', $string);
                 $ids = array_map('trim', $ids);
+
                 return in_array($model->getKey(), $ids);
             })
         ];

@@ -16,8 +16,8 @@ class Migration extends BaseMigration
     protected function upContent(string $tableName, callable $moreFields = null) {
         Schema::create($tableName, function (Blueprint $table) use ($moreFields){
             $table->id();
-            $table->text('name')->nullable(false);
-            $table->longText('desc')->nullable(true);
+            $table->json('name')->nullable(false);
+            $table->json('desc')->nullable(true);
             $table->boolean('is_public')->nullable(false)->default(false);
             $table->string('image')->nullable(true);
             $table->foreignId('scope_id')->nullable(true)

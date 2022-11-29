@@ -44,13 +44,20 @@ trait Resources
             return $this->$key;
         }
 
-        $query = $this->$key()->select(['id', 'name'])->where('is_public', '=', true)
-                    ->orWhere('owner_id', '=', $user->getKey());
+        $query = $this->$key()->select(['id', 'name']);
         if ($this->relationshipFilter instanceof \Closure) {
             $closure = $this->relationshipFilter;
-            $query = $closure($query);
+            /** @var Builder $query */
+            $query->where(function(Builder $query) use ($closure, $user) {
+                $query = $closure($query);
+                $query->orWhere('is_public', '=', true)
+                    ->orWhere('owner_id', '=', $user->getKey());
+                return $query;
+            });
+        } else {
+            $query->where('is_public', '=', true)
+                ->orWhere('owner_id', '=', $user->getKey());
         }
-        /** @var Builder $query */
         return $query->distinct('id')->get();
     }
 }

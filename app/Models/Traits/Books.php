@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -22,7 +23,7 @@ trait Books
         if (!$user->isAdmin()) {
             $this->relationshipFilter = function ($query) use ($user) {
                 return
-                    $query->orWhereHas('subscribers', function ($query) use ($user) {
+                    $query->whereHas('subscribers', function ($query) use ($user) {
                         return $query->where('subscriber_id', $user->getKey());
                     });
             };

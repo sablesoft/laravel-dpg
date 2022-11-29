@@ -85,11 +85,14 @@ class ImageService
     }
 
     /**
-     * @param string $oldImage
+     * @param null|string $oldImage
      * @return string|null
      */
-    public static function copyImage(string $oldImage): ?string
+    public static function copyImage(?string $oldImage): ?string
     {
+        if (!$oldImage) {
+            return null;
+        }
         [$path, $ext] = explode('.', $oldImage);
         $path = explode('/', trim($path, '/'));
         array_pop($path);

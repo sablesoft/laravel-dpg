@@ -2,12 +2,9 @@
 
 namespace App\Models;
 
-use App\Service\CopyService;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
-use App\Service\ImageService;
 
 /**
  * @property int|null $type
@@ -93,79 +90,6 @@ class Deck extends Content
     public function getSizeAttribute(): ?int
     {
         return $this->cards()->sum('count') ?: null;
-    }
-
-    /**
-     * @param User $user
-     * @param string|null $error
-     * @param int $bookId
-     * @param bool $copyCards
-     * @param array $processedCards
-     * @return null|Deck
-     */
-    public function makeCopy(
-        User $user,
-        ?string &$error,
-        int $bookId,
-        bool $copyCards = false,
-        array &$processedCards = []
-    ): ?Deck
-    {
-        $cardId = array_key_exists($this->card_id, $processedCards) ?
-            $processedCards[$this->card_id] : $this->card_id;
-        $scopeId = array_key_exists($this->scope_id, $processedCards) ?
-            $processedCards[$this->scope_id] : $this->scope_id;
-        $exists = Deck::query()->where('book_id', $bookId)
-            ->where('card_id', $cardId)
-            ->where('scope_id', $scopeId)->exists();
-        if ($exists) {
-            $error = __('This deck already exists in this book');
-            return null;
-        }
-        $deck = $this->replicate();
-        $deck->book_id = $bookId;
-        $deck->owner_id = $user->getKey();
-        $deck->created_at = Carbon::now();
-        $deck->is_public = false;
-        if ($this->image) {
-            if (!$filename = ImageService::copyImage($this->image)) {
-                $error = __("Image copy error!");
-                return null;
-            }
-            $this->image = $filename;
-        }
-        if ($copyCards) {
-            if (!array_key_exists($this->card_id, $processedCards)) {
-                $target = CopyService::copyCard($this->target, ['book_id' => $bookId, 'user' => $user]);
-                $deck->card_id = $target->getKey();
-                $processedCards[$this->card_id] = $deck->card_id;
-            } else {
-                $deck->card_id = $processedCards[$this->card_id];
-            }
-            if (!array_key_exists($this->scope_id, $processedCards)) {
-                $scope = CopyService::copyCard($this->scope, ['book_id' => $bookId, 'user' => $user]);
-                $deck->scope_id = $scope->getKey();
-                $processedCards[$this->scope_id] = $deck->scope_id;
-            } else {
-                $deck->scope_id = $processedCards[$this->scope_id];
-            }
-        }
-        $deck->save();
-        foreach ($this->cards as $card) {
-            $cardId = $card->getKey();
-            if ($copyCards) {
-                if (!array_key_exists($cardId, $processedCards)) {
-                    $copy = CopyService::copyCard($card, ['book_id' => $bookId, 'user' => $user]);
-                    $processedCards[$cardId] = $copy->getKey();
-                    $cardId = $copy->getKey();
-                } else {
-                    $cardId = $processedCards[$cardId];
-                }
-            }
-            $deck->cards()->attach($cardId);
-        }
-
-        return $deck;
     }
 
     /**

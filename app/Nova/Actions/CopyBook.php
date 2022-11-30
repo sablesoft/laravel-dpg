@@ -2,6 +2,7 @@
 
 namespace App\Nova\Actions;
 
+use App\Service\CopyService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\Select;
@@ -49,11 +50,15 @@ class CopyBook extends Action
                 );
             }
         }
+        $config = [
+            CopyService::CONFIG_USER => $user,
+            CopyService::CONFIG_BOOK_ID => $bookId,
+            CopyService::CONFIG_COPY_CARDS => $copyCards,
+            CopyService::CONFIG_COPY_DECKS => $copyDecks
+        ];
         $processedCards = [];
         foreach ($models as $model) {
-            if (!$model->makeCopy($user, $error, $bookId, $copyDecks, $copyCards, $processedCards)) {
-                return Action::danger($error);
-            }
+            CopyService::copyBook($model, $processedCards, $config);
         }
 
         return Action::message(__('Books Copied'));

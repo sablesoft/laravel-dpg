@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\ActionFields;
 use App\Models\Book;
 use App\Models\Deck;
 use App\Models\User;
+use App\Service\CopyService;
 
 class CopyDeck extends Action
 {
@@ -48,11 +49,14 @@ class CopyDeck extends Action
                 );
             }
         }
+        $config = [
+            CopyService::CONFIG_USER => $user,
+            CopyService::CONFIG_BOOK_ID => $bookId,
+            CopyService::CONFIG_COPY_CARDS => $copyCards
+        ];
         $processedCards = [];
         foreach ($models as $model) {
-            if (!$model->makeCopy($user, $error, $bookId, $copyCards, $processedCards)) {
-                return Action::danger($error);
-            }
+            CopyService::copyDeck($model, $processedCards, $config);
         }
 
         return Action::message(__('Decks Copied'));

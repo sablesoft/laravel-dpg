@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Service\CopyService;
-use App\Service\ImageService;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Translatable\HasTranslations;
@@ -52,66 +49,6 @@ class Book extends Content
     public function getCardsCountAttribute(): ?int
     {
         return $this->cards()->count() ?: null;
-    }
-
-    public function makeCopy(
-        User $user,
-        ?string &$error,
-        ?int $bookId = null,
-        bool $copyDecks = false,
-        bool $copyCards = false,
-        array &$processedCards = []
-    ): ?Book {
-        if ($bookId) {
-            if (!$book = static::find($bookId)) {
-                $error = __('Target book not found!');
-                return null;
-            }
-        } else {
-            $book = $this->replicate();
-            $book->is_public = false;
-            $book->name = $book->name . ' COPY';
-            $book->image = ImageService::copyImage($book->image);
-            $book->cards_back = ImageService::copyImage($book->cards_back);
-            $book->owner_id = $user->getKey();
-            $book->created_at = Carbon::now();
-            $book->save();
-            $bookId = $book->getKey();
-        }
-        foreach ($this->cards as $card) {
-            if (array_key_exists($card->getKey(), $processedCards)) {
-                continue;
-            }
-            if ($copyCards) {
-                $copy = CopyService::copyCard($card, ['book_id' => $bookId, 'user' => $user]);
-                $processedCards[$card->getKey()] = $copy->getKey();
-            } else {
-                $book->cards()->attach($card);
-            }
-        }
-        // fix scopes:
-        if ($copyCards) {
-            /** @var Card $card */
-            foreach ($book->cards()->get() as $card) {
-                if (array_key_exists($card->scope_id, $processedCards)) {
-                    $card->scope_id = $processedCards[$card->scope_id];
-                    $card->save();
-                }
-            }
-        }
-        if ($copyDecks) {
-            foreach ($this->decks as $deck) {
-                if (!$deck->hasFullAccess($user)) {
-                    $error = __("You cannot copy one of decks. You don't have full access to all its cards.");
-                    return null;
-                }
-                if (!$deck->makeCopy($user, $error, $book->getKey(), $copyCards, $processedCards)) {
-                    return null;
-                }
-            }
-        }
-
-        return $book;
     }
 
     /**

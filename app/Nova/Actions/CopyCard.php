@@ -38,6 +38,10 @@ class CopyCard extends Action
         /** @var User $user */
         $user = Auth::user();
         $bookId = $fields->get(static::FIELD_BOOK_ID);
+        $config = [
+            CopyService::CONFIG_USER => $user,
+            CopyService::CONFIG_BOOK_ID => $bookId
+        ];
 
         /** @var Card $model */
         foreach ($models as $model) {
@@ -46,7 +50,7 @@ class CopyCard extends Action
                     __("You cannot copy this card. You don't have access to one of its scopes.")
                 );
             }
-            CopyService::copyCard($model, ['user' => $user, 'book_id' => $bookId]);
+            CopyService::copyCard($model, $config);
         }
 
         return Action::message(__('Cards Copied'));

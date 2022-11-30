@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Tags;
 use App\Models\Traits\Decks;
 use App\Models\Traits\Books;
-use App\Service\ImageService;
 
 /**
  * @property-read Card[]|null $tags

@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Textarea;
 use App\Nova\Actions\CopyDeck;
+use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
 use App\Nova\Filters\IsPublicFilter;
@@ -55,6 +56,8 @@ class Deck extends Content
                 ->nullable(false)->required()->default(function($request) {
                     return false;
                 }),
+            BelongsTo::make(__('Owner'), 'owner', User::class)
+                ->sortable()->hideWhenUpdating()->hideWhenCreating(),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->fields(function () {
                     return [
@@ -96,6 +99,7 @@ class Deck extends Content
             DeckTypeFilter::make(),
             TargetsFilter::make(),
             ScopesFilter::make(),
+            OwnersFilter::make(),
             IsPublicFilter::make()
         ];
     }

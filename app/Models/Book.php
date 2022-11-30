@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Service\CopyService;
 use App\Service\ImageService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -82,11 +83,7 @@ class Book extends Content
                 continue;
             }
             if ($copyCards) {
-                $copy = $card->makeCopy($user, $cardError, $bookId);
-                if (!$copy) {
-                    $error = __('Card copy error: ') . $cardError;
-                    return null;
-                }
+                $copy = CopyService::copyCard($card, ['book_id' => $bookId, 'user' => $user]);
                 $processedCards[$card->getKey()] = $copy->getKey();
             } else {
                 $book->cards()->attach($card);

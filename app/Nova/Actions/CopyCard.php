@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\ActionFields;
 use App\Models\Card;
 use App\Models\User;
 use App\Models\Book;
+use App\Service\CopyService;
 
 class CopyCard extends Action
 {
@@ -45,9 +46,7 @@ class CopyCard extends Action
                     __("You cannot copy this card. You don't have access to one of its scopes.")
                 );
             }
-            if (!$model->makeCopy($user, $error, $bookId)) {
-                return Action::danger($error);
-            }
+            CopyService::copyCard($model, ['user' => $user, 'book_id' => $bookId]);
         }
 
         return Action::message(__('Cards Copied'));

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Service\CopyService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -135,20 +136,14 @@ class Deck extends Content
         }
         if ($copyCards) {
             if (!array_key_exists($this->card_id, $processedCards)) {
-                if (!$target = $this->target->makeCopy($user, $cardError, $bookId)) {
-                    $error = __('Card copy error: ') . $cardError;
-                    return null;
-                }
+                $target = CopyService::copyCard($this->target, ['book_id' => $bookId, 'user' => $user]);
                 $deck->card_id = $target->getKey();
                 $processedCards[$this->card_id] = $deck->card_id;
             } else {
                 $deck->card_id = $processedCards[$this->card_id];
             }
             if (!array_key_exists($this->scope_id, $processedCards)) {
-                if (!$scope = $this->scope->makeCopy($user, $cardError, $bookId)) {
-                    $error = __('Card copy error: ') . $cardError;
-                    return null;
-                }
+                $scope = CopyService::copyCard($this->scope, ['book_id' => $bookId, 'user' => $user]);
                 $deck->scope_id = $scope->getKey();
                 $processedCards[$this->scope_id] = $deck->scope_id;
             } else {
@@ -160,11 +155,7 @@ class Deck extends Content
             $cardId = $card->getKey();
             if ($copyCards) {
                 if (!array_key_exists($cardId, $processedCards)) {
-                    $copy = $card->makeCopy($user, $cardError, $bookId);
-                    if (!$copy) {
-                        $error = __('Card copy error: ') . $cardError;
-                        return null;
-                    }
+                    $copy = CopyService::copyCard($card, ['book_id' => $bookId, 'user' => $user]);
                     $processedCards[$cardId] = $copy->getKey();
                     $cardId = $copy->getKey();
                 } else {

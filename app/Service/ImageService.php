@@ -7,6 +7,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Constraint;
 use Intervention\Image\Facades\Image;
+use App\Exceptions\ImageException;
 
 class ImageService
 {
@@ -87,6 +88,7 @@ class ImageService
     /**
      * @param null|string $oldImage
      * @return string|null
+     * @throws ImageException
      */
     public static function copyImage(?string $oldImage): ?string
     {
@@ -97,8 +99,11 @@ class ImageService
         $path = explode('/', trim($path, '/'));
         array_pop($path);
         $newImage = implode('/', $path) .'/'. Str::random(40) .'.'. $ext;
-        return (Storage::disk(static::diskName())->copy($oldImage, $newImage))?
-            $newImage : null;
+        if (!Storage::disk(static::diskName())->copy($oldImage, $newImage)) {
+            throw new ImageException('Image copy error');
+        }
+
+        return $newImage;
     }
 
     /**

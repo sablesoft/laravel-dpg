@@ -155,36 +155,6 @@ class Card extends Content
     }
 
     /**
-     * @param User $user
-     * @param null|string $error
-     * @param int|null $bookId
-     * @return Card|null
-     */
-    public function makeCopy(User $user, ?string &$error, ?int $bookId = null): ?Card
-    {
-        $filename = null;
-        if ($this->image && (!$filename = ImageService::copyImage($this->image))) {
-            $error = __("Image copy error!");
-            return null;
-        }
-        $card = $this->replicate();
-        $card->image = $filename;
-        $card->created_at = Carbon::now();
-        $card->is_public = false;
-        $card->owner_id = $user->getKey();
-        $card->name = $card->name . ' - COPY';
-        if (!$card->save()) {
-            $error = __('Save error');
-            return null;
-        }
-        if ($bookId) {
-            $card->books()->attach($bookId);
-        }
-
-        return $card;
-    }
-
-    /**
      * @param Card $scope
      * @param Card $card
      * @return bool

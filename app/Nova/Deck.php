@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
+//use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -38,6 +39,7 @@ class Deck extends Content
     public function fields(Request $request): array
     {
         return [
+//            ID::make(__('ID'), 'id'),
             BelongsTo::make(__('Target'), 'target', Card::class)
                 ->nullable(false)->sortable()
                 ->required()->rules('required'),

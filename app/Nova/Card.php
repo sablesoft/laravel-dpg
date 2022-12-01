@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
+//use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -69,13 +70,11 @@ class Card extends Content
      */
     protected static function isBookSubscriber(Builder $query, \App\Models\User $user): Builder
     {
-        $query->orWhere(function($query) use ($user) {
+        return $query->orWhere(function($query) use ($user) {
             return $query->whereHas('books.subscribers', function($query) use ($user) {
                 $query->where('subscriber_id', $user->getKey());
             });
         });
-
-        return $query;
     }
 
     /**
@@ -87,6 +86,7 @@ class Card extends Content
     public function fields(Request $request): array
     {
         return [
+//            ID::make(__('ID'), 'id'),
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),

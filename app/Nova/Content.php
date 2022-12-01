@@ -40,8 +40,10 @@ abstract class Content extends Resource
         /** @var \App\Models\User $user */
         $user = $request->user();
         if (!$user->isAdmin()) {
-            $query->where('is_public', '=', true)
-                ->orWhere('owner_id', '=', $user->getKey());
+            $query->where(function(Builder $query) use ($user) {
+                $query->where('is_public', '=', true)
+                    ->orWhere('owner_id', '=', $user->getKey());
+            });
         }
 
         return $query;

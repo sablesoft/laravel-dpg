@@ -18,8 +18,7 @@ class BookPolicy extends ContentPolicy
     public function view(User $user, Content $content): bool
     {
         /** @var Book $content */
-        return parent::view($user, $content)
-            || $content->hasSubscriber($user);
+        return $content->canBeVisitedBy($user);
     }
 
     /**
@@ -31,8 +30,7 @@ class BookPolicy extends ContentPolicy
      */
     public function attachAnyUser(User $user, Book $book): bool
     {
-        return $user->isAdmin() ||
-            $user->isOwner($book);
+        return $user->isAdmin() || $book->isOwnedBy($user);
     }
 
     /**
@@ -45,7 +43,7 @@ class BookPolicy extends ContentPolicy
      */
     public function attachUser(User $user, Book $book, User $subscriber): bool
     {
-        return $user->isAdmin() || $user->isOwner($book);
+        return $user->isAdmin() || $book->isOwnedBy($user);
     }
 
 
@@ -59,7 +57,7 @@ class BookPolicy extends ContentPolicy
      */
     public function detachUser(User $user, Book $book, User $subscriber): bool
     {
-        return $user->isAdmin() || $user->isOwner($book);
+        return $user->isAdmin() || $book->isOwnedBy($user);
     }
 
     /**
@@ -71,6 +69,6 @@ class BookPolicy extends ContentPolicy
      */
     public function addUser(User $user, Book $book): bool
     {
-        return $user->isAdmin() || $user->isOwner($book);
+        return $user->isAdmin() || $book->isOwnedBy($user);
     }
 }

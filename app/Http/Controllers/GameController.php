@@ -10,32 +10,22 @@ use App\Service\BoardService;
 class GameController extends Controller
 {
     /**
-     * @param int $id
+     * @param Game $game
      * @return Response
      */
-    public function init(int $id): Response
+    public function init(Game $game): Response
     {
-        /** @var Game|null $game */
-        if (!$game = Game::find($id)->first()) {
-            redirect('/');
-        }
-
         return Inertia::render('Game', [
             'game' => BoardService::gameToArray($game)
         ]);
     }
 
     /**
-     * @param int $id
+     * @param Game $game
      * @return array
      */
-    public function json(int $id): array
+    public function json(Game $game): array
     {
-        /** @var Game|null $game */
-        if (!$game = Game::find($id)->first()) {
-            redirect('/');
-        }
-
         return BoardService::gameToArray($game);
     }
 }

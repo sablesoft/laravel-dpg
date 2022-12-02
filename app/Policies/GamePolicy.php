@@ -29,9 +29,7 @@ class GamePolicy
      */
     public function view(User $user, Game $game): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id ||
-            $game->hasSubscriber($user);
+        return $game->canBeVisitedBy($user);
     }
 
     /**
@@ -50,8 +48,7 @@ class GamePolicy
      */
     public function update(User $user, Game $game): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -61,8 +58,7 @@ class GamePolicy
      */
     public function delete(User $user, Game $game): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -72,8 +68,7 @@ class GamePolicy
      */
     public function restore(User $user, Game $game): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -83,8 +78,7 @@ class GamePolicy
      */
     public function forceDelete(User $user, Game $game): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -96,8 +90,7 @@ class GamePolicy
      */
     public function attachAnyCard(User $user, Game $game): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -110,8 +103,7 @@ class GamePolicy
      */
     public function attachCard(User $user, Game $game, Card $card): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -123,8 +115,7 @@ class GamePolicy
      */
     public function addCard(User $user, Game $game): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -137,8 +128,7 @@ class GamePolicy
      */
     public function detachCard(User $user, Game $game, Card $card): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -150,8 +140,7 @@ class GamePolicy
      */
     public function attachAnySubscriber(User $user, Game $game): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -163,8 +152,7 @@ class GamePolicy
      */
     public function attachAnyDeck(User $user, Game $game): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -177,8 +165,7 @@ class GamePolicy
      */
     public function attachDeck(User $user, Game $game, Deck $deck): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -190,8 +177,7 @@ class GamePolicy
      */
     public function addDeck(User $user, Game $game): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
@@ -204,7 +190,6 @@ class GamePolicy
      */
     public function detachDeck(User $user, Game $game, Deck $deck): bool
     {
-        return $user->isAdmin() ||
-            $user->getKey() == $game->master_id;
+        return $user->isAdmin() || $game->isOwnedBy($user);
     }
 }

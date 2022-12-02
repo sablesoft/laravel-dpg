@@ -34,7 +34,7 @@ abstract class ContentPolicy
     public function view(User $user, Content $content): bool
     {
         return $user->isAdmin() ||
-            $user->isOwner($content) ||
+            $content->isOwnedBy($user) ||
             $content->is_public;
     }
 
@@ -54,7 +54,7 @@ abstract class ContentPolicy
      */
     public function update(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -64,7 +64,7 @@ abstract class ContentPolicy
      */
     public function delete(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -74,7 +74,7 @@ abstract class ContentPolicy
      */
     public function restore(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -84,7 +84,7 @@ abstract class ContentPolicy
      */
     public function forceDelete(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -96,7 +96,7 @@ abstract class ContentPolicy
      */
     public function attachAnyTag(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -109,7 +109,7 @@ abstract class ContentPolicy
      */
     public function attachTag(User $user, Content $content, Card $tag): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -122,7 +122,7 @@ abstract class ContentPolicy
      */
     public function detachTag(User $user, Content $content, Card $tag): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -134,7 +134,7 @@ abstract class ContentPolicy
      */
     public function addTag(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -146,7 +146,7 @@ abstract class ContentPolicy
      */
     public function attachAnyCard(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -159,7 +159,7 @@ abstract class ContentPolicy
      */
     public function attachCard(User $user, Content $content, Card $card): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -171,7 +171,7 @@ abstract class ContentPolicy
      */
     public function addCard(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -184,7 +184,7 @@ abstract class ContentPolicy
      */
     public function detachCard(User $user, Content $content, Card $card): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -196,7 +196,7 @@ abstract class ContentPolicy
      */
     public function attachAnyDeck(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -209,7 +209,7 @@ abstract class ContentPolicy
      */
     public function attachDeck(User $user, Content $content, Deck $deck): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -221,7 +221,7 @@ abstract class ContentPolicy
      */
     public function addDeck(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -234,7 +234,7 @@ abstract class ContentPolicy
      */
     public function detachDeck(User $user, Content $content, Deck $deck): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -246,7 +246,7 @@ abstract class ContentPolicy
      */
     public function attachAnyBook(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -259,7 +259,7 @@ abstract class ContentPolicy
      */
     public function attachBook(User $user, Content $content, Book $book): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
     /**
@@ -271,7 +271,7 @@ abstract class ContentPolicy
      */
     public function addBook(User $user, Content $content): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 
 
@@ -285,6 +285,6 @@ abstract class ContentPolicy
      */
     public function detachBook(User $user, Content $content, Book $book): bool
     {
-        return $user->isAdmin() || $user->isOwner($content);
+        return $user->isAdmin() || $content->isOwnedBy($user);
     }
 }

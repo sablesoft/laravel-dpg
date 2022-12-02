@@ -39,10 +39,10 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/game/{id}', [GameController::class, 'init'])
-    ->middleware(['auth', 'verified'])->name('game');
+Route::get('/game/{game}', [GameController::class, 'init'])
+    ->middleware(['auth', 'verified', 'game.visitor'])->name('game');
 
-Route::get('/game/{id}/json', [GameController::class, 'json']);
+Route::get('/game/{game}/json', [GameController::class, 'json']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

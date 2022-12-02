@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Traits\Owner;
 use App\Models\Traits\Options;
 
 /**
@@ -25,11 +26,10 @@ use App\Models\Traits\Options;
  * @property-read User|null $owner
  *
  * @method Builder isPublic(bool $isPublic = true, string $boolean = 'and')
- * @method Builder isOwner(User $owner, string $boolean = 'and')
  */
 class Content extends Model
 {
-    use HasTranslations, Options;
+    use HasTranslations, Options, Owner;
 
     /**
      * @return BelongsTo
@@ -37,14 +37,6 @@ class Content extends Model
     public function scope(): BelongsTo
     {
         return $this->belongsTo(Card::class, 'scope_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function owner(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'owner_id');
     }
 
     /**
@@ -87,17 +79,6 @@ class Content extends Model
     public static function scopeIsPublic(Builder $query, bool $isPublic = true, string $boolean = 'and'): Builder
     {
         return $query->where('is_public', '=', $isPublic, $boolean);
-    }
-
-    /**
-     * @param Builder $query
-     * @param User $owner
-     * @param string $boolean
-     * @return Builder
-     */
-    public static function scopeIsOwner(Builder $query, User $owner, string $boolean = 'and'): Builder
-    {
-        return $query->where('owner_id', '=', $owner->getKey(), $boolean);
     }
 
     /**

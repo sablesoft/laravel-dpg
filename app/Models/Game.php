@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Translatable\HasTranslations;
+use App\Models\Traits\Owner;
 use App\Models\Traits\Subscribers;
 
 /**
@@ -29,7 +31,6 @@ use App\Models\Traits\Subscribers;
  * @property-read Book|null $book
  * @property-read Card|null $hero
  * @property-read Card|null $quest
- * @property-read User|null $master
  * @property-read Stack[]|null $stacks
  * @property-read Set[]|null $sets
  * @property-read Unique[]|null $uniques
@@ -38,7 +39,7 @@ use App\Models\Traits\Subscribers;
  */
 class Game extends Model
 {
-    use HasTranslations, Subscribers;
+    use HasTranslations, Subscribers, Owner;
 
     const SUBSCRIBER_TYPE_PLAYER = 0;
     const SUBSCRIBER_TYPE_SPECTATOR = 1;
@@ -82,14 +83,6 @@ class Game extends Model
     public function quest(): BelongsTo
     {
         return $this->belongsTo(Card::class, 'quest_id');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function master(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'owner_id');
     }
 
     /**
@@ -159,6 +152,9 @@ class Game extends Model
     public static function boot()
     {
         parent::boot();
+        static::creating(function (Content $content) {
+            $content->owner()->associate(Auth::user());
+        });
         self::created(function(Game $model) {
             $model->refresh();
             $decks = optional($model->book)->decks;

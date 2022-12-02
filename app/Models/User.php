@@ -83,15 +83,6 @@ class User extends Authenticatable
     }
 
     /**
-     * @param Content $content
-     * @return bool
-     */
-    public function isOwner(Content $content): bool
-    {
-        return $content->owner_id == $this->getKey();
-    }
-
-    /**
      * @return BelongsTo
      */
     public function language(): BelongsTo

@@ -83,9 +83,8 @@ class Game extends Resource
                 ->nullable(true)->sortable()->hideWhenCreating(),
             BelongsTo::make(__('Main Quest'), 'quest', Card::class)
                 ->nullable(true)->sortable()->hideWhenCreating(),
-            BelongsTo::make(__('Master'), 'master', User::class)
-                ->sortable()->nullable(false)->required()
-                ->rules('required')->hideWhenUpdating(),
+            BelongsTo::make(__('Master'), 'owner', User::class)
+                ->sortable()->readonly(true),
             BelongsTo::make(__('Master'), 'master', User::class)
                 ->hideWhenCreating()->hideFromIndex()->hideFromDetail()
                 ->readonly(),

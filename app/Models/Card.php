@@ -57,7 +57,7 @@ class Card extends Content
      */
     public function hasAccess(User $user): bool
     {
-        if ($user->isAdmin() || $this->isOwner($user) || $this->is_public) {
+        if ($user->isAdmin() || $this->isOwnedBy($user) || $this->is_public) {
             return true;
         }
         return $this->books()->whereHas('subscribers', function(Builder $query) use ($user) {

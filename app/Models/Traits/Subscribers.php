@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * @property-read User[]|null $subscribers
  *
- * @method Builder allowedToSee() static
+ * @method Builder allowedToSee(?User $user = null) static
  */
 trait Subscribers
 {
@@ -29,13 +29,26 @@ trait Subscribers
     }
 
     /**
+     * @param User $user
+     * @return bool
+     */
+    public function canBeVisitedBy(User $user): bool
+    {
+        return $user->isAdmin() ||
+            $this->is_public ||
+            $this->isOwnedBy($user) ||
+            $this->hasSubscriber($user);
+    }
+
+    /**
      * @param Builder $query
+     * @param User|null $user
      * @return Builder
      */
-    public function scopeAllowedToSee(Builder $query): Builder
+    public function scopeAllowedToSee(Builder $query, ?User $user = null): Builder
     {
         /** @var User $user */
-        $user = Auth::user();
+        $user = $user ?: Auth::user();
         if ($user->isAdmin()) {
             return $query;
         }

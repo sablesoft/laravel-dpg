@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
+use App\Enums\GameStatus;
 use App\Models\Traits\Owner;
 use App\Models\Traits\Subscribers;
 
@@ -22,11 +23,12 @@ use App\Models\Traits\Subscribers;
  * @property int|null $owner_id
  * @property bool|null $is_public
  * @property string|null $board_image
- * @property int|null $status
+ * @property GameStatus|null $status
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
  * @property-read string|null $prepared_name
+ * @property-read int|null $status_value
  *
  * @property-read Book|null $book
  * @property-read Card|null $hero
@@ -44,10 +46,9 @@ class Game extends Model
     const SUBSCRIBER_TYPE_PLAYER = 0;
     const SUBSCRIBER_TYPE_SPECTATOR = 1;
 
-    const STATUS_PREVIEW = 0;
-    const STATUS_INVITE = 1;
-    const STATUS_PROCESS = 2;
-    const STATUS_CLOSED = 3;
+    protected $casts = [
+        'status' => GameStatus::class
+    ];
 
     /**
      * @var array|string[]
@@ -64,6 +65,14 @@ class Game extends Model
         }
 
         return optional($this->book)->name;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getStatusValueAttribute(): ?int
+    {
+        return $this->status?->value;
     }
 
     /**

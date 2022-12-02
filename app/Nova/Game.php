@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use App\Service\ImageService;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -16,6 +15,11 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use App\Enums\GameStatus;
+use App\Service\ImageService;
+use App\Nova\Filters\OwnersFilter;
+use App\Nova\Filters\IsPublicFilter;
+use App\Nova\Filters\GameStatusFilter;
 
 /**
  * @mixin \App\Models\Game
@@ -75,6 +79,10 @@ class Game extends Resource
             Text::make(__('Name'), 'prepared_name')->sortable()
                 ->nullable(true)->required(false)
                 ->hideWhenCreating()->hideWhenUpdating(),
+            Select::make(__('Status'), 'status_value')
+                ->sortable()
+                ->nullable(false)->required(true)->rules('required')
+                ->options(GameStatus::options())->displayUsingLabels(),
             BelongsTo::make(__('Book'), 'book', Book::class)
                 ->sortable()->nullable(false)->required()
                 ->rules('required')->hideWhenUpdating(),
@@ -97,10 +105,6 @@ class Game extends Resource
                 })->disk(ImageService::diskName())->nullable(true)->prunable()->hideFromIndex(),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
-
-            // todo - make select:
-//            Number::make(__('Status'), 'status'),
-
             BelongsToMany::make(__('Subscribers'), 'subscribers', User::class)
                 ->fields(function () {
                     return [
@@ -157,7 +161,11 @@ class Game extends Resource
      */
     public function filters(Request $request): array
     {
-        return [];
+        return [
+            GameStatusFilter::make(),
+            OwnersFilter::make(),
+            IsPublicFilter::make()
+        ];
     }
 
     /**

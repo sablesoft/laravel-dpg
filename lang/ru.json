@@ -84,5 +84,10 @@
     "Discard Size": "Отбой",
     "Init Stack": "Восстановить",
     "Pull Card": "Взять Карту",
-    "Shuffle Stack": "Перемешать"
+    "Shuffle Stack": "Перемешать",
+    "Status": "Статус",
+    "Preview": "Превью",
+    "Invite": "Набор Игроков",
+    "Process": "В Процессе",
+    "Closed": "Завершена"
 }

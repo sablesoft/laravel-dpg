@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Owner;
@@ -62,5 +63,13 @@ class Set extends Model
         }
 
         return $set;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function (Set $set) {
+            $set->owner()->associate(Auth::user());
+        });
     }
 }

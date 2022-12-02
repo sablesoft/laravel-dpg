@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Service\Shuffler;
@@ -68,5 +69,13 @@ class Stack extends Model
         $stack->save();
 
         return $stack;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function (Stack $stack) {
+            $stack->owner()->associate(Auth::user());
+        });
     }
 }

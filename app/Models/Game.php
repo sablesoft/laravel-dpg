@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Translatable\HasTranslations;
 use App\Models\Traits\Owner;
 use App\Models\Traits\Subscribers;
@@ -152,8 +152,8 @@ class Game extends Model
     public static function boot()
     {
         parent::boot();
-        static::creating(function (Content $content) {
-            $content->owner()->associate(Auth::user());
+        static::creating(function (Game $game) {
+            $game->owner()->associate(Auth::user());
         });
         self::created(function(Game $model) {
             $model->refresh();

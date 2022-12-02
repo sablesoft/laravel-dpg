@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Traits\Owner;
@@ -41,5 +42,13 @@ class Unique extends Model
         $unique->save();
 
         return $unique;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function (Unique $unique) {
+            $unique->owner()->associate(Auth::user());
+        });
     }
 }

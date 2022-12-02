@@ -14,42 +14,42 @@ class StacksTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('stacks')->delete();
-        
+
         \DB::table('stacks')->insert(array (
-            0 => 
+            0 =>
             array (
-                'id' => 13,
+                'id' => 19,
                 'game_id' => 1,
                 'deck_id' => 30,
                 'card_id' => 35,
                 'scope_id' => 13,
                 'owner_id' => 1,
                 'desc' => '',
-                'pack' => '[20,16,19,19,7,20,19,21,19,19]',
+                'pack' => '[19,19,20,20,7,16,19,19,21,19]',
                 'discard' => '[]',
-                'created_at' => '2022-11-24 19:54:09',
-                'updated_at' => '2022-11-24 19:54:09',
+                'created_at' => '2022-12-02 02:39:45',
+                'updated_at' => '2022-12-02 02:39:45',
             ),
-            1 => 
+            1 =>
             array (
-                'id' => 14,
+                'id' => 20,
                 'game_id' => 1,
                 'deck_id' => 31,
                 'card_id' => 35,
                 'scope_id' => 19,
                 'owner_id' => 1,
                 'desc' => '',
-                'pack' => '[77,49,77,53,54,53,50,49,61,52,51,69,56,69]',
+                'pack' => '[69,54,51,52,50,53,49,61,56,77,69,53,77,49]',
                 'discard' => '[]',
-                'created_at' => '2022-11-24 19:54:09',
-                'updated_at' => '2022-11-24 19:54:09',
+                'created_at' => '2022-12-02 02:39:45',
+                'updated_at' => '2022-12-02 02:39:45',
             ),
-            2 => 
+            2 =>
             array (
-                'id' => 15,
+                'id' => 21,
                 'game_id' => 1,
                 'deck_id' => 32,
                 'card_id' => 35,
@@ -58,40 +58,40 @@ class StacksTableSeeder extends Seeder
                 'desc' => '',
                 'pack' => '[76]',
                 'discard' => '[]',
-                'created_at' => '2022-11-24 19:54:09',
-                'updated_at' => '2022-11-24 19:54:09',
+                'created_at' => '2022-12-02 02:39:45',
+                'updated_at' => '2022-12-02 02:39:45',
             ),
-            3 => 
+            3 =>
             array (
-                'id' => 16,
+                'id' => 22,
                 'game_id' => 1,
                 'deck_id' => 34,
                 'card_id' => 35,
                 'scope_id' => 27,
                 'owner_id' => 1,
                 'desc' => 'The spirits of the Rainforest are everywhere. You can communicate with them and get help from them. But be afraid to anger them!',
-                'pack' => '[44,43]',
+                'pack' => '[43,44]',
                 'discard' => '[]',
-                'created_at' => '2022-11-24 19:54:09',
-                'updated_at' => '2022-11-24 19:54:09',
+                'created_at' => '2022-12-02 02:39:45',
+                'updated_at' => '2022-12-02 02:39:45',
             ),
-            4 => 
+            4 =>
             array (
-                'id' => 17,
+                'id' => 23,
                 'game_id' => 1,
                 'deck_id' => 25,
                 'card_id' => 35,
                 'scope_id' => 41,
                 'owner_id' => 1,
                 'desc' => '',
-                'pack' => '[13,13,70,12,10,10,12,13,70,74,74,70,73,70,10,10,70,10]',
+                'pack' => '[12,70,10,10,10,73,74,13,70,74,70,10,70,12,13,10,70,13]',
                 'discard' => '[]',
-                'created_at' => '2022-11-24 19:54:09',
-                'updated_at' => '2022-11-24 19:54:09',
+                'created_at' => '2022-12-02 02:39:45',
+                'updated_at' => '2022-12-02 02:39:45',
             ),
-            5 => 
+            5 =>
             array (
-                'id' => 18,
+                'id' => 24,
                 'game_id' => 1,
                 'deck_id' => 11,
                 'card_id' => 36,
@@ -100,11 +100,11 @@ class StacksTableSeeder extends Seeder
                 'desc' => '',
                 'pack' => '[47,48,45]',
                 'discard' => '[]',
-                'created_at' => '2022-11-24 19:54:09',
-                'updated_at' => '2022-11-24 19:54:09',
+                'created_at' => '2022-12-02 02:39:45',
+                'updated_at' => '2022-12-02 02:39:45',
             ),
         ));
-        
-        
+
+
     }
 }

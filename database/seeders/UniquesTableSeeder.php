@@ -14,14 +14,14 @@ class UniquesTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('uniques')->delete();
-        
+
         \DB::table('uniques')->insert(array (
-            0 => 
+            0 =>
             array (
-                'id' => 5,
+                'id' => 8,
                 'game_id' => 1,
                 'deck_id' => 27,
                 'card_id' => 55,
@@ -29,12 +29,12 @@ class UniquesTableSeeder extends Seeder
                 'owner_id' => 1,
                 'desc' => 'The place where our hero is located. Always one card.',
                 'unique_id' => 36,
-                'created_at' => '2022-11-24 19:54:10',
-                'updated_at' => '2022-11-24 19:54:10',
+                'created_at' => '2022-12-02 02:39:46',
+                'updated_at' => '2022-12-02 02:39:46',
             ),
-            1 => 
+            1 =>
             array (
-                'id' => 6,
+                'id' => 9,
                 'game_id' => 1,
                 'deck_id' => 39,
                 'card_id' => 55,
@@ -42,24 +42,37 @@ class UniquesTableSeeder extends Seeder
                 'owner_id' => 1,
                 'desc' => '',
                 'unique_id' => 35,
-                'created_at' => '2022-11-24 19:54:10',
-                'updated_at' => '2022-11-24 19:54:10',
+                'created_at' => '2022-12-02 02:39:46',
+                'updated_at' => '2022-12-02 02:39:46',
             ),
-            2 => 
+            2 =>
             array (
-                'id' => 7,
+                'id' => 10,
                 'game_id' => 1,
-                'deck_id' => 40,
+                'deck_id' => 49,
                 'card_id' => 55,
                 'scope_id' => 87,
                 'owner_id' => 1,
                 'desc' => '',
-                'unique_id' => NULL,
-                'created_at' => '2022-11-24 19:54:10',
-                'updated_at' => '2022-11-24 19:54:10',
+                'unique_id' => 33,
+                'created_at' => '2022-12-02 02:39:46',
+                'updated_at' => '2022-12-02 02:39:46',
+            ),
+            3 =>
+            array (
+                'id' => 11,
+                'game_id' => 1,
+                'deck_id' => 40,
+                'card_id' => 55,
+                'scope_id' => 90,
+                'owner_id' => 1,
+                'desc' => '',
+                'unique_id' => 89,
+                'created_at' => '2022-12-02 02:39:46',
+                'updated_at' => '2022-12-02 02:39:46',
             ),
         ));
-        
-        
+
+
     }
 }

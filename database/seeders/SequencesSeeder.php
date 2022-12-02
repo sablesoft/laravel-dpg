@@ -18,7 +18,7 @@ class SequencesSeeder extends Seeder
         'games',
         'sets',
         'stacks',
-        'uniques'
+        'states'
     ];
 
     /**

@@ -6,7 +6,7 @@ use App\Models\Set;
 use App\Models\User;
 use App\Models\Game;
 use App\Models\Stack;
-use App\Models\Unique;
+use App\Models\State;
 
 class GamePolicy
 {
@@ -122,51 +122,51 @@ class GamePolicy
     }
 
     /**
-     * Determine whether the user can attach any unique to the game.
+     * Determine whether the user can attach any state to the game.
      *
      * @param User $user
      * @param Game $game
      * @return bool
      */
-    public function attachAnyUnique(User $user, Game $game): bool
+    public function attachAnyState(User $user, Game $game): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can attach unique to the game.
+     * Determine whether the user can attach state to the game.
      *
      * @param User $user
      * @param Game $game
-     * @param Unique $unique
+     * @param State $state
      * @return bool
      */
-    public function attachUnique(User $user, Game $game, Unique $unique): bool
+    public function attachState(User $user, Game $game, State $state): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can add unique to the game.
+     * Determine whether the user can add state to the game.
      *
      * @param User $user
      * @param Game $game
      * @return bool
      */
-    public function addUnique(User $user, Game $game): bool
+    public function addState(User $user, Game $game): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can detach unique from the game.
+     * Determine whether the user can detach state from the game.
      *
      * @param User $user
      * @param Game $game
-     * @param Unique $unique
+     * @param State $state
      * @return bool
      */
-    public function detachUnique(User $user, Game $game, Unique $unique): bool
+    public function detachState(User $user, Game $game, State $state): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }

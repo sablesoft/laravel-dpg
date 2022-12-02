@@ -14,12 +14,12 @@ class DecksTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('decks')->delete();
-        
+
         \DB::table('decks')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 11,
                 'book_id' => 1,
@@ -33,7 +33,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:54:20',
                 'updated_at' => '2022-11-12 16:54:20',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 25,
                 'book_id' => 1,
@@ -47,7 +47,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:05:57',
                 'updated_at' => '2022-11-15 17:05:57',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 30,
                 'book_id' => 1,
@@ -61,7 +61,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-15 21:04:44',
                 'updated_at' => '2022-11-15 21:04:44',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 31,
                 'book_id' => 1,
@@ -75,7 +75,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-15 21:42:11',
                 'updated_at' => '2022-11-15 21:42:11',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 32,
                 'book_id' => 1,
@@ -89,7 +89,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:03:36',
                 'updated_at' => '2022-11-16 02:03:36',
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 34,
                 'book_id' => 1,
@@ -103,7 +103,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:45:10',
                 'updated_at' => '2022-11-16 02:45:10',
             ),
-            6 => 
+            6 =>
             array (
                 'id' => 38,
                 'book_id' => 1,
@@ -117,7 +117,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-16 03:11:57',
                 'updated_at' => '2022-11-16 12:54:18',
             ),
-            7 => 
+            7 =>
             array (
                 'id' => 37,
                 'book_id' => 1,
@@ -131,7 +131,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-16 03:05:29',
                 'updated_at' => '2022-11-16 12:54:34',
             ),
-            8 => 
+            8 =>
             array (
                 'id' => 36,
                 'book_id' => 1,
@@ -145,7 +145,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:59:57',
                 'updated_at' => '2022-11-16 12:54:48',
             ),
-            9 => 
+            9 =>
             array (
                 'id' => 35,
                 'book_id' => 1,
@@ -159,7 +159,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:51:06',
                 'updated_at' => '2022-11-16 12:55:07',
             ),
-            10 => 
+            10 =>
             array (
                 'id' => 29,
                 'book_id' => 1,
@@ -173,7 +173,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:53:59',
                 'updated_at' => '2022-11-16 12:56:17',
             ),
-            11 => 
+            11 =>
             array (
                 'id' => 28,
                 'book_id' => 1,
@@ -187,7 +187,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:44:56',
                 'updated_at' => '2022-11-16 12:56:35',
             ),
-            12 => 
+            12 =>
             array (
                 'id' => 18,
                 'book_id' => 1,
@@ -201,7 +201,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:38:47',
                 'updated_at' => '2022-11-16 13:04:45',
             ),
-            13 => 
+            13 =>
             array (
                 'id' => 33,
                 'book_id' => 1,
@@ -215,7 +215,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:34:21',
                 'updated_at' => '2022-11-16 13:02:35',
             ),
-            14 => 
+            14 =>
             array (
                 'id' => 24,
                 'book_id' => 1,
@@ -229,7 +229,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 19:41:38',
                 'updated_at' => '2022-11-16 13:03:07',
             ),
-            15 => 
+            15 =>
             array (
                 'id' => 21,
                 'book_id' => 1,
@@ -243,7 +243,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 03:03:22',
                 'updated_at' => '2022-11-16 13:03:40',
             ),
-            16 => 
+            16 =>
             array (
                 'id' => 10,
                 'book_id' => 1,
@@ -257,7 +257,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:53:38',
                 'updated_at' => '2022-11-16 13:05:45',
             ),
-            17 => 
+            17 =>
             array (
                 'id' => 5,
                 'book_id' => 1,
@@ -271,7 +271,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:51:37',
                 'updated_at' => '2022-11-16 13:06:07',
             ),
-            18 => 
+            18 =>
             array (
                 'id' => 4,
                 'book_id' => 1,
@@ -285,7 +285,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:51:25',
                 'updated_at' => '2022-11-16 13:06:24',
             ),
-            19 => 
+            19 =>
             array (
                 'id' => 26,
                 'book_id' => 1,
@@ -299,7 +299,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:36:23',
                 'updated_at' => '2022-11-16 13:18:27',
             ),
-            20 => 
+            20 =>
             array (
                 'id' => 27,
                 'book_id' => 1,
@@ -313,7 +313,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:39:14',
                 'updated_at' => '2022-11-24 19:30:14',
             ),
-            21 => 
+            21 =>
             array (
                 'id' => 39,
                 'book_id' => 1,
@@ -327,7 +327,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:33:47',
                 'updated_at' => '2022-11-24 19:33:47',
             ),
-            22 => 
+            22 =>
             array (
                 'id' => 23,
                 'book_id' => 1,
@@ -341,7 +341,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 03:13:42',
                 'updated_at' => '2022-11-24 19:47:13',
             ),
-            23 => 
+            23 =>
             array (
                 'id' => 42,
                 'book_id' => 1,
@@ -355,7 +355,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:47:51',
                 'updated_at' => '2022-11-24 19:47:51',
             ),
-            24 => 
+            24 =>
             array (
                 'id' => 22,
                 'book_id' => 1,
@@ -369,7 +369,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 03:11:38',
                 'updated_at' => '2022-11-24 19:48:40',
             ),
-            25 => 
+            25 =>
             array (
                 'id' => 43,
                 'book_id' => 1,
@@ -383,7 +383,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:49:11',
                 'updated_at' => '2022-11-24 19:49:11',
             ),
-            26 => 
+            26 =>
             array (
                 'id' => 20,
                 'book_id' => 1,
@@ -397,7 +397,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:59:59',
                 'updated_at' => '2022-11-24 19:49:54',
             ),
-            27 => 
+            27 =>
             array (
                 'id' => 44,
                 'book_id' => 1,
@@ -411,7 +411,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:50:27',
                 'updated_at' => '2022-11-24 19:50:27',
             ),
-            28 => 
+            28 =>
             array (
                 'id' => 19,
                 'book_id' => 1,
@@ -425,7 +425,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:42:02',
                 'updated_at' => '2022-11-24 19:51:16',
             ),
-            29 => 
+            29 =>
             array (
                 'id' => 45,
                 'book_id' => 1,
@@ -439,7 +439,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:51:50',
                 'updated_at' => '2022-11-24 19:51:50',
             ),
-            30 => 
+            30 =>
             array (
                 'id' => 17,
                 'book_id' => 1,
@@ -453,7 +453,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:34:11',
                 'updated_at' => '2022-11-24 19:52:27',
             ),
-            31 => 
+            31 =>
             array (
                 'id' => 46,
                 'book_id' => 1,
@@ -467,7 +467,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:52:58',
                 'updated_at' => '2022-11-24 19:52:58',
             ),
-            32 => 
+            32 =>
             array (
                 'id' => 40,
                 'book_id' => 1,
@@ -481,7 +481,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:35:32',
                 'updated_at' => '2022-11-24 23:31:41',
             ),
-            33 => 
+            33 =>
             array (
                 'id' => 49,
                 'book_id' => 1,
@@ -495,7 +495,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-25 00:17:05',
                 'updated_at' => '2022-11-25 00:17:05',
             ),
-            34 => 
+            34 =>
             array (
                 'id' => 51,
                 'book_id' => 2,
@@ -509,7 +509,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-25 02:12:31',
                 'updated_at' => '2022-11-25 04:42:49',
             ),
-            35 => 
+            35 =>
             array (
                 'id' => 53,
                 'book_id' => 2,
@@ -523,21 +523,21 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-25 03:15:12',
                 'updated_at' => '2022-11-25 04:34:00',
             ),
-            36 => 
+            36 =>
             array (
                 'id' => 52,
                 'book_id' => 2,
                 'card_id' => 37,
                 'scope_id' => 57,
                 'type' => 3,
-                'desc' => '{"en":"This deck contains cards that describe the different cycles of the current Time of the game. Each of these cards is a scope for a special unique Hero deck containing the current phase of a given Time cycle. All cards with a Hero scope will inherit this control deck. The game algorithm will automatically check the Hero for the presence of decks of these types and assemble them into a single deck of Time.\\r\\n\\r\\nIf you need to keep track of Days, Moons, and Years, then create in your book the same deck for the Hero but with the set type.","ru":"Эта колода содержит карты, описывающие различные циклы текущего Времени игры относительно ее главного Героя. Каждая из этих карт является сферой для специальной колоды Героя, содержащей текущую фазу данного цикла Времени. Все карты с типом Героя наследуют эту управляющую колоду. Алгоритм игры будет автоматически проверять Героя на наличие колод такого типа и собирать их в единую колоду Времени.\\r\\n\\r\\nЕсли вам нужно вести учет Дней, Месяцев и Лет, то создайте в книге такую же колоду для Героя, но с типом Set."}',
+                'desc' => '{"en":"This deck contains cards that describe the different cycles of the current Time of the game. Each of these cards is a scope for a special state Hero deck containing the current phase of a given Time cycle. All cards with a Hero scope will inherit this control deck. The game algorithm will automatically check the Hero for the presence of decks of these types and assemble them into a single deck of Time.\\r\\n\\r\\nIf you need to keep track of Days, Moons, and Years, then create in your book the same deck for the Hero but with the set type.","ru":"Эта колода содержит карты, описывающие различные циклы текущего Времени игры относительно ее главного Героя. Каждая из этих карт является сферой для специальной колоды Героя, содержащей текущую фазу данного цикла Времени. Все карты с типом Героя наследуют эту управляющую колоду. Алгоритм игры будет автоматически проверять Героя на наличие колод такого типа и собирать их в единую колоду Времени.\\r\\n\\r\\nЕсли вам нужно вести учет Дней, Месяцев и Лет, то создайте в книге такую же колоду для Героя, но с типом Set."}',
                 'is_public' => true,
                 'image' => NULL,
                 'owner_id' => 1,
                 'created_at' => '2022-11-25 03:09:45',
                 'updated_at' => '2022-11-25 04:38:08',
             ),
-            37 => 
+            37 =>
             array (
                 'id' => 50,
                 'book_id' => 2,
@@ -551,7 +551,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-25 00:43:12',
                 'updated_at' => '2022-11-25 04:50:40',
             ),
-            38 => 
+            38 =>
             array (
                 'id' => 48,
                 'book_id' => 2,
@@ -565,14 +565,14 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 23:50:18',
                 'updated_at' => '2022-11-25 04:56:26',
             ),
-            39 => 
+            39 =>
             array (
                 'id' => 47,
                 'book_id' => 2,
                 'card_id' => 37,
                 'scope_id' => 4,
                 'type' => 3,
-                'desc' => '{"en":"Cards in this control deck describe the Hero\'s current location. Each of these cards is scope for Hero\'s decks with type unique, which indicate the specific current Places of these types:\\r\\n- Biome\\r\\n- Area\\r\\n- Folk\\r\\n- Scene\\r\\n\\r\\nThe current Places of these four types change during the game. They play an important role in determining the Events that can happen to the Hero.\\r\\n\\r\\nAll Heroes inherit this deck unless they have another Place deck in their scopes hierarchy. This means that the game algorithm will automatically check for cards of the Hero scope for the presence of decks of these four types and collect them into a single deck of the Place type.","ru":"Карты в этой колоде управления описывают текущее местоположение Героя. Каждая из этих карт является сферой для колоды Героя с типом Unique, которая указывает на текущее Место данного типа, в котором сейчас находится Герой.\\r\\n\\r\\nТекущие Места этих четырех типов меняются во время игры. Они играют важную роль в определении событий, которые могут произойти с героем.\\r\\n\\r\\nВсе Герои наследуют эту колоду, если в иерархии их типов нет другой управляющей колоды Мест. Это означает, что алгоритм игры будет автоматически проверять карты типа Герой на наличие колод этих четырех типов и собирать их в единую колоду Места."}',
+                'desc' => '{"en":"Cards in this control deck describe the Hero\'s current location. Each of these cards is scope for Hero\'s decks with type state, which indicate the specific current Places of these types:\\r\\n- Biome\\r\\n- Area\\r\\n- Folk\\r\\n- Scene\\r\\n\\r\\nThe current Places of these four types change during the game. They play an important role in determining the Events that can happen to the Hero.\\r\\n\\r\\nAll Heroes inherit this deck unless they have another Place deck in their scopes hierarchy. This means that the game algorithm will automatically check for cards of the Hero scope for the presence of decks of these four types and collect them into a single deck of the Place type.","ru":"Карты в этой колоде управления описывают текущее местоположение Героя. Каждая из этих карт является сферой для колоды Героя с типом Состояние, которая указывает на текущее Место данного типа, в котором сейчас находится Герой.\\r\\n\\r\\nТекущие Места этих четырех типов меняются во время игры. Они играют важную роль в определении событий, которые могут произойти с героем.\\r\\n\\r\\nВсе Герои наследуют эту колоду, если в иерархии их типов нет другой управляющей колоды Мест. Это означает, что алгоритм игры будет автоматически проверять карты типа Герой на наличие колод этих четырех типов и собирать их в единую колоду Места."}',
                 'is_public' => true,
                 'image' => NULL,
                 'owner_id' => 1,
@@ -580,7 +580,7 @@ class DecksTableSeeder extends Seeder
                 'updated_at' => '2022-11-25 05:00:18',
             ),
         ));
-        
-        
+
+
     }
 }

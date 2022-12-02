@@ -21,9 +21,10 @@ use Illuminate\Support\Collection;
  */
 class Deck extends Content
 {
+    // todo - enums
     const TYPE_STACK = 0;
     const TYPE_SET = 1;
-    const TYPE_UNIQUE = 2;
+    const TYPE_STATE = 2;
     const TYPE_CONTROL = 3;
 
     /**
@@ -143,7 +144,7 @@ class Deck extends Content
         return [
             self::TYPE_STACK => __('Stack'),
             self::TYPE_SET => __('Set'),
-            self::TYPE_UNIQUE => __('Unique'),
+            self::TYPE_STATE => __('State'),
             self::TYPE_CONTROL => __('Control')
         ];
     }

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class UniquesTableSeeder extends Seeder
+class StatesTableSeeder extends Seeder
 {
 
     /**
@@ -16,9 +16,9 @@ class UniquesTableSeeder extends Seeder
     {
 
 
-        \DB::table('uniques')->delete();
+        \DB::table('states')->delete();
 
-        \DB::table('uniques')->insert(array (
+        \DB::table('states')->insert(array (
             0 =>
             array (
                 'id' => 8,
@@ -28,7 +28,7 @@ class UniquesTableSeeder extends Seeder
                 'scope_id' => 85,
                 'owner_id' => 1,
                 'desc' => 'The place where our hero is located. Always one card.',
-                'unique_id' => 36,
+                'state_id' => 36,
                 'created_at' => '2022-12-02 02:39:46',
                 'updated_at' => '2022-12-02 02:39:46',
             ),
@@ -41,7 +41,7 @@ class UniquesTableSeeder extends Seeder
                 'scope_id' => 86,
                 'owner_id' => 1,
                 'desc' => '',
-                'unique_id' => 35,
+                'state_id' => 35,
                 'created_at' => '2022-12-02 02:39:46',
                 'updated_at' => '2022-12-02 02:39:46',
             ),
@@ -54,7 +54,7 @@ class UniquesTableSeeder extends Seeder
                 'scope_id' => 87,
                 'owner_id' => 1,
                 'desc' => '',
-                'unique_id' => 33,
+                'state_id' => 33,
                 'created_at' => '2022-12-02 02:39:46',
                 'updated_at' => '2022-12-02 02:39:46',
             ),
@@ -67,7 +67,7 @@ class UniquesTableSeeder extends Seeder
                 'scope_id' => 90,
                 'owner_id' => 1,
                 'desc' => '',
-                'unique_id' => 89,
+                'state_id' => 89,
                 'created_at' => '2022-12-02 02:39:46',
                 'updated_at' => '2022-12-02 02:39:46',
             ),

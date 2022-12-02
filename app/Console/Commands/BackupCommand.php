@@ -41,7 +41,7 @@ class BackupCommand extends Command
         'sets',
         'set_card',
         'stacks',
-        'uniques'
+        'states'
     ];
 
     protected string $lastTable = 'deck_tag';

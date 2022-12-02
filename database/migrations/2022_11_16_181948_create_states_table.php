@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        $this->upFromDeck('uniques', function(Blueprint $table) {
-            $table->foreignId('unique_id')->nullable(true)
+        $this->upFromDeck('states', function(Blueprint $table) {
+            $table->foreignId('state_id')->nullable(true)
                 ->constrained('cards')->nullOnDelete();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uniques');
+        Schema::dropIfExists('states');
     }
 };

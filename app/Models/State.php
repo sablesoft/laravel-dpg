@@ -10,30 +10,30 @@ use App\Models\Traits\Owner;
 use App\Models\Traits\FromDeck;
 
 /**
- * @property int|null $unique_id
+ * @property int|null $state_id
  *
- * @property-read string|null $unique_image
+ * @property-read string|null $state_image
  *
- * @property-read Card|null $unique
+ * @property-read Card|null $state
  */
-class Unique extends Model
+class State extends Model
 {
     use FromDeck, Owner;
 
     /**
      * @return BelongsTo
      */
-    public function unique(): BelongsTo
+    public function state(): BelongsTo
     {
-        return $this->belongsTo(Card::class, 'unique_id');
+        return $this->belongsTo(Card::class, 'state_id');
     }
 
     /**
      * @return string|null
      */
-    public function getUniqueImageAttribute(): ?string
+    public function getStateImageAttribute(): ?string
     {
-        return optional($this->unique)->image;
+        return optional($this->state)->image;
     }
 
     /**
@@ -44,21 +44,21 @@ class Unique extends Model
      */
     public static function createFromDeck(Game $game, Deck $deck): static
     {
-        /** @var Unique $unique */
-        $unique = static::prepareFromDeck($game, $deck, Deck::TYPE_UNIQUE);
+        /** @var State $state */
+        $state = static::prepareFromDeck($game, $deck, Deck::TYPE_STATE);
         /** @var Card $card */
         $card = $deck->cards()->first();
-        $unique->unique_id = $card?->getKey();
-        $unique->save();
+        $state->state_id = $card?->getKey();
+        $state->save();
 
-        return $unique;
+        return $state;
     }
 
     public static function boot()
     {
         parent::boot();
-        static::creating(function (Unique $unique) {
-            $unique->owner()->associate(Auth::user());
+        static::creating(function (State $state) {
+            $state->owner()->associate(Auth::user());
         });
     }
 }

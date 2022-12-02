@@ -35,7 +35,7 @@ use App\Models\Traits\Subscribers;
  * @property-read Card|null $quest
  * @property-read Stack[]|null $stacks
  * @property-read Set[]|null $sets
- * @property-read Unique[]|null $uniques
+ * @property-read State[]|null $states
  * @property-read Log[]|null $logs
  * @property-read Card[]|null $board
  */
@@ -126,9 +126,9 @@ class Game extends Model
     /**
      * @return HasMany
      */
-    public function uniques(): HasMany
+    public function states(): HasMany
     {
-        return $this->hasMany(Unique::class);
+        return $this->hasMany(State::class);
     }
 
     /**
@@ -182,8 +182,8 @@ class Game extends Model
                         case Deck::TYPE_SET:
                             Set::createFromDeck($model, $deck);
                             break;
-                        case Deck::TYPE_UNIQUE:
-                            Unique::createFromDeck($model, $deck);
+                        case Deck::TYPE_STATE:
+                            State::createFromDeck($model, $deck);
                             break;
                         default:
                             break;

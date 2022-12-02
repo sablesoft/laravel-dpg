@@ -11,9 +11,9 @@ use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
 
 /**
- * @mixin \App\Models\Unique
+ * @mixin \App\Models\State
  */
-class Unique extends Resource
+class State extends Resource
 {
     public static $displayInNavigation = false;
 
@@ -29,7 +29,7 @@ class Unique extends Resource
      *
      * @var string
      */
-    public static string $model = \App\Models\Unique::class;
+    public static string $model = \App\Models\State::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -66,7 +66,7 @@ class Unique extends Resource
                 ->readonly()->sortable(),
             Image::make('', 'scope_image')
                 ->disk(ImageService::diskName())->onlyOnIndex(),
-            BelongsTo::make(__('Unique'), 'unique', Card::class)
+            BelongsTo::make(__('State'), 'state', Card::class)
                 ->nullable(true)->sortable()->required(false)
                 ->rules('integer', function($attribute, $value, $fail) {
                     /** @var \App\Models\Card|null $scope */
@@ -75,11 +75,11 @@ class Unique extends Resource
                     $card = \App\Models\Card::select()->where('id', $value)->first();
                     if ($card && $scope) {
                         if (!\App\Models\Card::validateScope($scope, $card)) {
-                            return $fail('Invalid scope for unique! Must be in ' . $scope->name . '!');
+                            return $fail('Invalid scope for state! Must be in ' . $scope->name . '!');
                         }
                     }
                 }),
-            Image::make('', 'unique_image')
+            Image::make('', 'state_image')
                 ->disk(ImageService::diskName())->onlyOnIndex(),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()

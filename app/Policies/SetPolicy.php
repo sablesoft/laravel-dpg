@@ -3,8 +3,9 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Models\User;
 use App\Models\Set;
+use App\Models\User;
+use App\Models\Card;
 
 class SetPolicy
 {
@@ -18,7 +19,6 @@ class SetPolicy
      */
     public function viewAny(User $user): bool
     {
-        // todo
         return true;
     }
 
@@ -32,8 +32,7 @@ class SetPolicy
      */
     public function view(User $user, Set $set): bool
     {
-        // todo
-        return true;
+        return $user->isAdmin() || $set->isOwnedBy($user);
     }
 
     /**
@@ -52,8 +51,7 @@ class SetPolicy
      */
     public function update(User $user, Set $set): bool
     {
-        // todo
-        return true;
+        return $user->isAdmin() || $set->isOwnedBy($user);
     }
 
     /**
@@ -87,7 +85,7 @@ class SetPolicy
     }
 
     /**
-     * Determine whether the user can attach any card to the content.
+     * Determine whether the user can attach any card to the set.
      *
      * @param User $user
      * @param Set $set
@@ -95,11 +93,37 @@ class SetPolicy
      */
     public function attachAnyCard(User $user, Set $set): bool
     {
-        return true;
+        return $user->isAdmin() || $set->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can add card to the content.
+     * Determine whether the user can attach card to the set.
+     *
+     * @param User $user
+     * @param Set $set
+     * @param Card $card
+     * @return bool
+     */
+    public function attachCard(User $user, Set $set, Card $card): bool
+    {
+        return $user->isAdmin() || $set->isOwnedBy($user);
+    }
+
+    /**
+     * Determine whether the user can detach card from the set.
+     *
+     * @param User $user
+     * @param Set $set
+     * @param Card $card
+     * @return bool
+     */
+    public function detachCard(User $user, Set $set, Card $card): bool
+    {
+        return $user->isAdmin() || $set->isOwnedBy($user);
+    }
+
+    /**
+     * Determine whether the user can add card to the set.
      *
      * @param User $user
      * @param Set $set
@@ -107,6 +131,6 @@ class SetPolicy
      */
     public function addCard(User $user, Set $set): bool
     {
-        return true;
+        return $user->isAdmin() || $set->isOwnedBy($user);
     }
 }

@@ -3,10 +3,9 @@
 namespace App\Models;
 
 use Exception;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Traits\Owner;
 use App\Models\Traits\FromDeck;
 
 /**
@@ -16,7 +15,7 @@ use App\Models\Traits\FromDeck;
  */
 class Set extends Model
 {
-    use FromDeck;
+    use FromDeck, Owner;
 
     /**
      * @return string|null

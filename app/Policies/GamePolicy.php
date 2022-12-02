@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Card;
-use App\Models\Game;
-use App\Models\Deck;
+use App\Models\Set;
 use App\Models\User;
+use App\Models\Game;
+use App\Models\Stack;
+use App\Models\Unique;
 
 class GamePolicy
 {
@@ -82,113 +83,190 @@ class GamePolicy
     }
 
     /**
-     * Determine whether the user can attach any card to the content.
+     * Determine whether the user can attach any subscriber to the game.
      *
      * @param User $user
      * @param Game $game
      * @return bool
      */
-    public function attachAnyCard(User $user, Game $game): bool
+    public function attachAnyUser(User $user, Game $game): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can attach card to the content.
+     * Determine whether the user can attach subscriber to the game.
      *
      * @param User $user
      * @param Game $game
-     * @param Card $card
+     * @param User $subscriber
      * @return bool
      */
-    public function attachCard(User $user, Game $game, Card $card): bool
+    public function attachUser(User $user, Game $game, User $subscriber): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can add card to the content.
+     * Determine whether the user can detach subscriber from the game.
+     *
+     * @param User $user
+     * @param Game $game
+     * @param User $subscriber
+     * @return bool
+     */
+    public function detachUser(User $user, Game $game, User $subscriber): bool
+    {
+        return $user->isAdmin() || $game->isOwnedBy($user) ||
+            $user->getKey() === $subscriber->getKey();
+    }
+
+    /**
+     * Determine whether the user can attach any unique to the game.
      *
      * @param User $user
      * @param Game $game
      * @return bool
      */
-    public function addCard(User $user, Game $game): bool
+    public function attachAnyUnique(User $user, Game $game): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can detach card from the content.
+     * Determine whether the user can attach unique to the game.
      *
      * @param User $user
      * @param Game $game
-     * @param Card $card
+     * @param Unique $unique
      * @return bool
      */
-    public function detachCard(User $user, Game $game, Card $card): bool
+    public function attachUnique(User $user, Game $game, Unique $unique): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can attach any subscriber to the content.
+     * Determine whether the user can add unique to the game.
      *
      * @param User $user
      * @param Game $game
      * @return bool
      */
-    public function attachAnySubscriber(User $user, Game $game): bool
+    public function addUnique(User $user, Game $game): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can attach any deck to the content.
+     * Determine whether the user can detach unique from the game.
      *
      * @param User $user
      * @param Game $game
+     * @param Unique $unique
      * @return bool
      */
-    public function attachAnyDeck(User $user, Game $game): bool
+    public function detachUnique(User $user, Game $game, Unique $unique): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can attach deck to the content.
+     * Determine whether the user can attach any set to the game.
      *
      * @param User $user
      * @param Game $game
-     * @param Deck $deck
      * @return bool
      */
-    public function attachDeck(User $user, Game $game, Deck $deck): bool
+    public function attachAnySet(User $user, Game $game): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can add deck to the content.
+     * Determine whether the user can attach set to the game.
      *
      * @param User $user
      * @param Game $game
+     * @param Set $set
      * @return bool
      */
-    public function addDeck(User $user, Game $game): bool
+    public function attachSet(User $user, Game $game, Set $set): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }
 
     /**
-     * Determine whether the user can detach deck from the content.
+     * Determine whether the user can add set to the game.
      *
      * @param User $user
      * @param Game $game
-     * @param Deck $deck
      * @return bool
      */
-    public function detachDeck(User $user, Game $game, Deck $deck): bool
+    public function addSet(User $user, Game $game): bool
+    {
+        return $user->isAdmin() || $game->isOwnedBy($user);
+    }
+
+    /**
+     * Determine whether the user can detach set from the game.
+     *
+     * @param User $user
+     * @param Game $game
+     * @param Set $set
+     * @return bool
+     */
+    public function detachSet(User $user, Game $game, Set $set): bool
+    {
+        return $user->isAdmin() || $game->isOwnedBy($user);
+    }
+
+    /**
+     * Determine whether the user can attach any set to the game.
+     *
+     * @param User $user
+     * @param Game $game
+     * @return bool
+     */
+    public function attachAnyStack(User $user, Game $game): bool
+    {
+        return $user->isAdmin() || $game->isOwnedBy($user);
+    }
+
+    /**
+     * Determine whether the user can attach stack to the game.
+     *
+     * @param User $user
+     * @param Game $game
+     * @param Stack $stack
+     * @return bool
+     */
+    public function attachStack(User $user, Game $game, Stack $stack): bool
+    {
+        return $user->isAdmin() || $game->isOwnedBy($user);
+    }
+
+    /**
+     * Determine whether the user can add stack to the game.
+     *
+     * @param User $user
+     * @param Game $game
+     * @return bool
+     */
+    public function addStack(User $user, Game $game): bool
+    {
+        return $user->isAdmin() || $game->isOwnedBy($user);
+    }
+
+    /**
+     * Determine whether the user can detach stack from the game.
+     *
+     * @param User $user
+     * @param Game $game
+     * @param Stack $stack
+     * @return bool
+     */
+    public function detachStack(User $user, Game $game, Stack $stack): bool
     {
         return $user->isAdmin() || $game->isOwnedBy($user);
     }

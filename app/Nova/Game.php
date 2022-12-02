@@ -3,8 +3,10 @@
 namespace App\Nova;
 
 use App\Service\ImageService;
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
@@ -113,11 +115,26 @@ class Game extends Resource
                     ];
                 })->sortable()->nullable(true),
             HasMany::make(__('Uniques'), 'uniques'),
-            HasMany::make(__('Stacks'), 'stacks'),
-            HasMany::make(__('Sets'), 'sets'),
-            HasMany::make(__('Logs'), 'logs', Log::class),
+            HasMany::make(__('Stacks'), 'stacks')->canSee(static::isGameOwner()),
+            HasMany::make(__('Sets'), 'sets')->canSee(static::isGameOwner()),
             BelongsToMany::make(__('Board'), 'board', Card::class),
+            HasMany::make(__('Logs'), 'logs', Log::class),
         ];
+    }
+
+    /**
+     * @return Closure
+     */
+    public static function isGameOwner(): Closure
+    {
+        return function(NovaRequest $request) {
+            /** @var \App\Models\Game $game */
+            $game = $request->findModelOrFail();
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+
+            return $user->isAdmin() || $game->isOwnedBy($user);
+        };
     }
 
     /**

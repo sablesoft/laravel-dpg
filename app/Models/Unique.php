@@ -5,6 +5,7 @@ namespace App\Models;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Traits\Owner;
 use App\Models\Traits\FromDeck;
 
 /**
@@ -14,7 +15,7 @@ use App\Models\Traits\FromDeck;
  */
 class Unique extends Model
 {
-    use FromDeck;
+    use FromDeck, Owner;
 
     /**
      * @return BelongsTo

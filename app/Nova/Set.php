@@ -9,14 +9,11 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
-use App\Models\Traits\Owner;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
 
 class Set extends Resource
 {
-    use Owner;
-
     public static $displayInNavigation = false;
 
     /**

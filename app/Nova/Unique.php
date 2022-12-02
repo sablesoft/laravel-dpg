@@ -5,7 +5,6 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
-use App\Models\Traits\Owner;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
 
@@ -14,8 +13,6 @@ use App\Nova\Filters\TargetsFilter;
  */
 class Unique extends Resource
 {
-    use Owner;
-
     public static $displayInNavigation = false;
 
     /**

@@ -18,7 +18,6 @@ class UniquePolicy
      */
     public function viewAny(User $user): bool
     {
-        // todo
         return true;
     }
 
@@ -32,8 +31,7 @@ class UniquePolicy
      */
     public function view(User $user, Unique $unique): bool
     {
-        // todo
-        return true;
+        return $user->isAdmin() || $unique->isOwnedBy($user);
     }
 
     /**
@@ -52,7 +50,7 @@ class UniquePolicy
      */
     public function update(User $user, Unique $unique): bool
     {
-        return true;
+        return $user->isAdmin() || $unique->isOwnedBy($user);
     }
 
     /**

@@ -18,7 +18,6 @@ class StackPolicy
      */
     public function viewAny(User $user): bool
     {
-        // todo
         return true;
     }
 
@@ -32,8 +31,7 @@ class StackPolicy
      */
     public function view(User $user, Stack $stack): bool
     {
-        // todo
-        return true;
+        return $user->isAdmin() || $stack->isOwnedBy($user);
     }
 
     /**
@@ -52,7 +50,7 @@ class StackPolicy
      */
     public function update(User $user, Stack $stack): bool
     {
-        return true;
+        return $user->isAdmin() || $stack->isOwnedBy($user);
     }
 
     /**

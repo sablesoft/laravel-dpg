@@ -5,17 +5,20 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
+use App\Models\Traits\Owner;
 use App\Nova\Actions\PullCard;
 use App\Nova\Actions\InitStack;
 use App\Nova\Actions\ShuffleStack;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
-use Laravel\Nova\Fields\Textarea;
 
 class Stack extends Resource
 {
+    use Owner;
+
     public static $displayInNavigation = false;
 
     /**

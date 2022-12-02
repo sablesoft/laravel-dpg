@@ -47,6 +47,8 @@ class Migration extends BaseMigration
                 ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('scope_id')->nullable(false)
                 ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('owner_id')->nullable(false)
+                ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->longText('desc')->nullable(true);
             if ($moreFields) {
                 $moreFields($table);

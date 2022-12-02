@@ -111,9 +111,9 @@ class Game extends Resource
                             ->displayUsingLabels(),
                     ];
                 })->sortable()->nullable(true),
-            HasMany::make(__('Uniques'), 'uniques'),
-            HasMany::make(__('Stacks'), 'stacks')->canSee(static::isGameOwner()),
-            HasMany::make(__('Sets'), 'sets')->canSee(static::isGameOwner()),
+            HasMany::make(__('Uniques'), 'uniques', Unique::class),
+            HasMany::make(__('Stacks'), 'stacks', Stack::class)->canSee(static::isGameOwner()),
+            HasMany::make(__('Sets'), 'sets', Set::class)->canSee(static::isGameOwner()),
             BelongsToMany::make(__('Board'), 'board', Card::class),
             HasMany::make(__('Logs'), 'logs', Log::class),
         ];

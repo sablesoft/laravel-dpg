@@ -12,6 +12,8 @@ use App\Models\Traits\FromDeck;
 /**
  * @property int|null $unique_id
  *
+ * @property-read string|null $unique_image
+ *
  * @property-read Card|null $unique
  */
 class Unique extends Model
@@ -24,6 +26,14 @@ class Unique extends Model
     public function unique(): BelongsTo
     {
         return $this->belongsTo(Card::class, 'unique_id');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUniqueImageAttribute(): ?string
+    {
+        return optional($this->unique)->image;
     }
 
     /**

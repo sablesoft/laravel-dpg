@@ -3,12 +3,14 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
+use App\Service\ImageService;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
 
@@ -59,8 +61,12 @@ class Set extends Resource
                 ->readonly()->sortable(),
             BelongsTo::make(__('Target'), 'target', Card::class)
                 ->readonly()->sortable(),
+            Image::make('', 'target_image')
+                ->disk(ImageService::diskName())->onlyOnIndex(),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
                 ->readonly()->sortable(),
+            Image::make('', 'scope_image')
+                ->disk(ImageService::diskName())->onlyOnIndex(),
             Textarea::make(__('Desc'), 'desc')->alwaysShow(),
             Text::make(__('Cards'), 'cards_string')->asHtml()
                 ->hideWhenCreating()->hideWhenUpdating(),

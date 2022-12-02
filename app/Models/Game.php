@@ -44,6 +44,11 @@ class Game extends Model
     const SUBSCRIBER_TYPE_PLAYER = 0;
     const SUBSCRIBER_TYPE_SPECTATOR = 1;
 
+    const STATUS_PREVIEW = 0;
+    const STATUS_INVITE = 1;
+    const STATUS_PROCESS = 2;
+    const STATUS_CLOSED = 3;
+
     /**
      * @var array|string[]
      */

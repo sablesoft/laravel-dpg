@@ -72,5 +72,17 @@
     "Into Book": "В Книгу",
     "Make Copy": "Сделать Копию",
     "Copy Cards": "Копировать Карты",
-    "Copy Decks": "Копировать Колоды"
+    "Copy Decks": "Копировать Колоды",
+    "Target": "Цель",
+    "Unique": "Состояние",
+    "Uniques": "Состояния",
+    "Stack": "Набор",
+    "Stacks": "Наборы",
+    "Set": "Сет",
+    "Sets": "Сеты",
+    "Pack Size": "Осталось",
+    "Discard Size": "Отбой",
+    "Init Stack": "Восстановить",
+    "Pull Card": "Взять Карту",
+    "Shuffle Stack": "Перемешать"
 }

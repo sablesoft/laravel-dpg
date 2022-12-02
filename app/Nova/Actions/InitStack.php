@@ -15,6 +15,16 @@ class InitStack extends Action
     use InteractsWithQueue, Queueable;
 
     /**
+     * Get the displayable name of the action.
+     *
+     * @return string
+     */
+    public function name(): string
+    {
+        return __('Init Stack');
+    }
+
+    /**
      * Perform the action on the given models.
      *
      * @param ActionFields $fields

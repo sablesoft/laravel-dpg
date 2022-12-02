@@ -21,6 +21,8 @@ use App\Models\Game;
  * @property Carbon|null $updated_at
  *
  * @property-read string|null $name
+ * @property-read string|null $target_image
+ * @property-read string|null $scope_image
  *
  * @property-read Game|null $game
  * @property-read Deck|null $deck
@@ -66,11 +68,27 @@ trait FromDeck
     }
 
     /**
+     * @return string|null
+     */
+    public function getTargetImageAttribute(): ?string
+    {
+        return optional($this->target)->image;
+    }
+
+    /**
      * @return BelongsTo
      */
     public function scope(): BelongsTo
     {
         return $this->belongsTo(Card::class, 'scope_id');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getScopeImageAttribute(): ?string
+    {
+        return optional($this->scope)->image;
     }
 
     /**

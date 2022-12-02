@@ -3,11 +3,13 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\BelongsTo;
+use App\Service\ImageService;
 use App\Nova\Actions\PullCard;
 use App\Nova\Actions\InitStack;
 use App\Nova\Actions\ShuffleStack;
@@ -61,8 +63,12 @@ class Stack extends Resource
                 ->readonly()->sortable(),
             BelongsTo::make(__('Target'), 'target', Card::class)
                 ->readonly()->sortable(),
+            Image::make('', 'target_image')
+                ->disk(ImageService::diskName())->onlyOnIndex(),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
                 ->readonly()->sortable(),
+            Image::make('', 'scope_image')
+                ->disk(ImageService::diskName())->onlyOnIndex(),
             Textarea::make(__('Desc'), 'desc')->alwaysShow(),
             Number::make(__('Pack Size'), 'pack_size')
                 ->hideWhenCreating()->hideWhenUpdating(),

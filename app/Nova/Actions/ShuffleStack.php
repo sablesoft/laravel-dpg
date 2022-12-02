@@ -21,6 +21,16 @@ class ShuffleStack extends Action
     const FIELD_TYPE = 'type';
 
     /**
+     * Get the displayable name of the action.
+     *
+     * @return string
+     */
+    public function name(): string
+    {
+        return __('Shuffle Stack');
+    }
+
+    /**
      * Perform the action on the given models.
      *
      * @param ActionFields $fields

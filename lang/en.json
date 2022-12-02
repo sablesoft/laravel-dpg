@@ -72,5 +72,17 @@
     "Into Book": "Into Book",
     "Make Copy": "Make Copy",
     "Copy Cards": "Copy Cards",
-    "Copy Decks": "Copy Decks"
+    "Copy Decks": "Copy Decks",
+    "Target": "Target",
+    "Unique": "Unique",
+    "Uniques": "Uniques",
+    "Stack": "Stack",
+    "Stacks": "Stacks",
+    "Set": "Set",
+    "Sets": "Sets",
+    "Pack Size": "Pack Size",
+    "Discard Size": "Discard Size",
+    "Init Stack": "Init Stack",
+    "Pull Card": "Pull Card",
+    "Shuffle Stack": "Shuffle Stack"
 }

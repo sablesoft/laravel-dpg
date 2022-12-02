@@ -3,8 +3,10 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\BelongsTo;
+use App\Service\ImageService;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
 
@@ -58,8 +60,12 @@ class Unique extends Resource
                 ->readonly()->sortable(),
             BelongsTo::make(__('Target'), 'target', Card::class)
                 ->readonly()->sortable(),
+            Image::make('', 'target_image')
+                ->disk(ImageService::diskName())->onlyOnIndex(),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
                 ->readonly()->sortable(),
+            Image::make('', 'scope_image')
+                ->disk(ImageService::diskName())->onlyOnIndex(),
             BelongsTo::make(__('Unique'), 'unique', Card::class)
                 ->nullable(true)->sortable()->required(false)
                 ->rules('integer', function($attribute, $value, $fail) {
@@ -73,6 +79,8 @@ class Unique extends Resource
                         }
                     }
                 }),
+            Image::make('', 'unique_image')
+                ->disk(ImageService::diskName())->onlyOnIndex(),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),

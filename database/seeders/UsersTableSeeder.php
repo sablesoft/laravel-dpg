@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => NULL,
                 'password' => '$2y$10$z64SqlsR6xnDW9uaNGQp/OHtCjsAJg25IwFSBfeqt8jgsPLIlf9S2',
                 'language_id' => 2,
-                'remember_token' => 'DhSjGniXVdTGNIIudbI3yusYfdKcYmvXGUbV94DeqrGHI9HPvSOeT4dEqGmz',
+                'remember_token' => 'caU4Vb2uiWs4NwIqIKhzautt20M7kcan07QylsC7yeDlDjak7lUvR5sQ3oMe',
                 'created_at' => '2022-11-22 18:18:58',
                 'updated_at' => '2022-11-22 18:29:34',
             ),

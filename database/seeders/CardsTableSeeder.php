@@ -285,6 +285,30 @@ class CardsTableSeeder extends Seeder
             ),
             22 => 
             array (
+                'id' => 15,
+                'name' => '{"en":"Settlement","ru":"Поселение"}',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'image' => 'card/dgWw6Se0HB8pJ1dAndY1sbJLhD8cBe4v5Au7pNlb.png',
+                'scope_id' => 85,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 14:26:20',
+                'updated_at' => '2022-11-25 04:27:31',
+            ),
+            23 => 
+            array (
+                'id' => 12,
+                'name' => '{"en":"Find","ru":"Находка"}',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'image' => 'card/0tlgU14s6yXgkSmE2OBY1c3fbJvahnXHVnDuzPEW.png',
+                'scope_id' => 3,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 14:39:42',
+                'updated_at' => '2022-11-25 04:28:05',
+            ),
+            24 => 
+            array (
                 'id' => 47,
                 'name' => '{"en":"Lilika","ru":"Лилика"}',
                 'desc' => '{"en":"Although this young lady was nicknamed Beauty in the settlement, it should be noted that this is by no means her only virtue. Everyone is well aware of her talents for healing, especially after she began to help many of her tribe.\\r\\n\\r\\nIn addition, Lilika has always been distinguished by unprecedented seriousness and diligence in the study of plants and various healing agents. By her childhood years, she had already managed to accumulate considerable knowledge and skills in these areas.","ru":"Хотя эту молодую особу и прозвали в поселении Красавицей, нужно отметить что это вовсе не единственное ее достоинство. Всем хорошо известны ее таланты к целительству, особенно после того как она начала помогать многим из своего племени. \\r\\n\\r\\nКроме того, Лилика всегда отличалась небывалой серьезностью и старательностью в изучении растений и различных целебных средств. К своим детским годам она уже успела накопить немалые знания и навыки в этих сферах."}',
@@ -295,7 +319,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:36:25',
                 'updated_at' => '2022-11-23 03:59:39',
             ),
-            23 => 
+            25 => 
             array (
                 'id' => 48,
                 'name' => '{"en":"Zaizi","ru":"Зайзи"}',
@@ -307,7 +331,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:31:41',
                 'updated_at' => '2022-11-23 03:52:29',
             ),
-            24 => 
+            26 => 
             array (
                 'id' => 33,
                 'name' => '{"en":"River","ru":"Река"}',
@@ -319,7 +343,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:25:49',
                 'updated_at' => '2022-11-25 04:21:01',
             ),
-            25 => 
+            27 => 
             array (
                 'id' => 27,
                 'name' => '{"en":"Spirit","ru":"Дух"}',
@@ -331,7 +355,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:43:41',
                 'updated_at' => '2022-11-22 23:48:56',
             ),
-            26 => 
+            28 => 
             array (
                 'id' => 13,
                 'name' => '{"en":"Encounter","ru":"Встреча"}',
@@ -343,7 +367,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 04:55:16',
                 'updated_at' => '2022-11-23 00:16:12',
             ),
-            27 => 
+            29 => 
             array (
                 'id' => 3,
                 'name' => '{"en":"Event","ru":"Событие"}',
@@ -355,7 +379,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-09 04:51:54',
                 'updated_at' => '2022-11-22 23:54:04',
             ),
-            28 => 
+            30 => 
             array (
                 'id' => 20,
                 'name' => '{"en":"Plant","ru":"Растение"}',
@@ -367,7 +391,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:14:35',
                 'updated_at' => '2022-11-23 00:15:28',
             ),
-            29 => 
+            31 => 
             array (
                 'id' => 35,
                 'name' => '{"ru":"Джунгли","en":"Rainforest"}',
@@ -379,7 +403,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:56:49',
                 'updated_at' => '2022-11-24 18:35:31',
             ),
-            30 => 
+            32 => 
             array (
                 'id' => 34,
                 'name' => '{"en":"Marsh","ru":"Marsh"}',
@@ -391,7 +415,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:27:08',
                 'updated_at' => '2022-11-24 17:35:55',
             ),
-            31 => 
+            33 => 
             array (
                 'id' => 24,
                 'name' => '{"en":"Predator","ru":"Хищник"}',
@@ -403,7 +427,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:54:28',
                 'updated_at' => '2022-11-25 04:26:45',
             ),
-            32 => 
+            34 => 
             array (
                 'id' => 25,
                 'name' => '{"en":"Herbivore","ru":"Травоядное"}',
@@ -415,7 +439,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:58:18',
                 'updated_at' => '2022-11-25 04:26:08',
             ),
-            33 => 
+            35 => 
             array (
                 'id' => 46,
                 'name' => '{"en":"Araki","ru":"Араки"}',
@@ -427,7 +451,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:29:38',
                 'updated_at' => '2022-11-23 03:32:45',
             ),
-            34 => 
+            36 => 
             array (
                 'id' => 2,
                 'name' => '{"en":"Quest","ru":"Квест"}',
@@ -439,7 +463,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:33:42',
                 'updated_at' => '2022-11-22 23:51:44',
             ),
-            35 => 
+            37 => 
             array (
                 'id' => 43,
                 'name' => '{"en":"Airi","ru":"Айри"}',
@@ -451,7 +475,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:35:19',
                 'updated_at' => '2022-11-23 03:57:33',
             ),
-            36 => 
+            38 => 
             array (
                 'id' => 40,
                 'name' => '{"en":"Totem Quest","ru":"Поиски Тотема"}',
@@ -463,7 +487,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:41:18',
                 'updated_at' => '2022-11-23 04:01:22',
             ),
-            37 => 
+            39 => 
             array (
                 'id' => 45,
                 'name' => '{"en":"Pua","ru":"Пуа"}',
@@ -475,7 +499,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:33:05',
                 'updated_at' => '2022-11-23 03:54:51',
             ),
-            38 => 
+            40 => 
             array (
                 'id' => 36,
                 'name' => '{"en":"Lanza Piya"}',
@@ -487,7 +511,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:31:06',
                 'updated_at' => '2022-11-23 02:42:28',
             ),
-            39 => 
+            41 => 
             array (
                 'id' => 7,
                 'name' => '{"en":"Power","ru":"Сила"}',
@@ -499,7 +523,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:43:27',
                 'updated_at' => '2022-11-22 23:50:42',
             ),
-            40 => 
+            42 => 
             array (
                 'id' => 14,
                 'name' => '{"en":"Wilderness","ru":"Дикие Земли"}',
@@ -510,30 +534,6 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-10 14:24:51',
                 'updated_at' => '2022-11-25 04:27:45',
-            ),
-            41 => 
-            array (
-                'id' => 15,
-                'name' => '{"en":"Settlement","ru":"Поселение"}',
-                'desc' => '{"ru":null}',
-                'is_public' => true,
-                'image' => 'card/dgWw6Se0HB8pJ1dAndY1sbJLhD8cBe4v5Au7pNlb.png',
-                'scope_id' => 85,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 14:26:20',
-                'updated_at' => '2022-11-25 04:27:31',
-            ),
-            42 => 
-            array (
-                'id' => 12,
-                'name' => '{"en":"Find","ru":"Находка"}',
-                'desc' => '{"ru":null}',
-                'is_public' => true,
-                'image' => 'card/0tlgU14s6yXgkSmE2OBY1c3fbJvahnXHVnDuzPEW.png',
-                'scope_id' => 3,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 14:39:42',
-                'updated_at' => '2022-11-25 04:28:05',
             ),
             43 => 
             array (
@@ -909,6 +909,18 @@ class CardsTableSeeder extends Seeder
             ),
             74 => 
             array (
+                'id' => 77,
+                'name' => '{"en":"Peccary"}',
+            'desc' => '{"en":"A peccary (also javelina or skunk pig) is a medium-sized, pig-like hoofed mammal. A peccary is a medium-sized animal, with a strong resemblance to a pig. Like a pig, it has a snout ending in a cartilaginous disc, and eyes that are small relative to its head.\\r\\n\\r\\nPeccaries are social creatures that live in herds. They eat roots, grubs, and a variety of foods. They can identify each other by their strong odors. A group of peccaries that travel and live together is called a \\"squadron\\". A squadron of peccaries averages between six and nine members. Peccaries rely on their social structure to defend territory, protect against predators, regulate temperature, and interact socially.\\r\\n\\r\\nMayans kept herds of peccaries, using them in rituals and for food. They are kept as pets in many countries, in addition to being raised on farms as a source of food.\\r\\n\\r\\nPeccaries are omnivores and will eat insects, grubs, and occasionally small animals, although their preferred foods consist of roots, grasses, seeds, fruit, and cacti—particularly prickly pear. Pigs and peccaries can be differentiated by the shape of the canine tooth or tusk. In European pigs, the tusk is long and curves around itself, whereas in peccaries, the tusk is short and straight. The jaws and tusks of peccaries are adapted for crushing hard seeds and slicing them into plant roots, and they also use their tusks for defending against predators.\\r\\n\\r\\nPeccaries have scent glands below each eye and another on their backs. They use the scent to mark herd territories, which range from 30 to 280 hectares. They also mark other herd members with these scent glands by rubbing one against another. The pungent odor allows peccaries to recognize other members of their herd, despite their myopic vision. The odor is strong enough to be detected by humans, which earns the peccary the nickname of \\"skunk pig\\"."}',
+                'is_public' => false,
+                'image' => 'card/3kaGDfMeNmvrkTxqo0isNryuxkgPdA1ogkTdCRAh.jpg',
+                'scope_id' => 19,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 02:14:26',
+                'updated_at' => '2022-11-23 03:35:47',
+            ),
+            75 => 
+            array (
                 'id' => 69,
                 'name' => '{"en":"Armadillo"}',
             'desc' => '{"en":"Armadillos are characterized by a leathery armor shell and long, sharp claws for digging. They have short legs but can move quite quickly. When threatened by a predator, Tolypeutes species frequently roll up into a ball; they are the only species of armadillo capable of this.\\r\\n\\r\\nThe diets of different armadillo species vary but consist mainly of insects, grubs, and other invertebrates. Some species, however, feed almost entirely on ants and termites.\\r\\n\\r\\nThey are prolific diggers. Many species use their sharp claws to dig for food, such as grubs, and to dig dens. The nine-banded armadillo prefers to build burrows in moist soil near the creeks, streams, and arroyos around which it lives and feeds.\\r\\n\\r\\nArmadillos have very poor eyesight and use their keen sense of smell to hunt for food. They use their claws for digging and finding food, as well as for making their homes in burrows. They dig their burrows with their claws, making only a single a corridor the width of the animal\'s body.\\r\\n\\r\\nThe underside of the animal is never armored and is simply covered with soft skin and fur. This armor-like skin appears to be an important defense for many armadillos, although most escape predators by fleeing (often into thorny patches, from which their armor protects them) or digging to safety. Only the South American three-banded armadillos (Tolypeutes) rely heavily on their armor for protection.\\r\\n\\r\\nArmadillos have short legs but can move quite quickly. The nine-banded armadillo is noted for its movement through water which is accomplished via two different methods: it can walk underwater for short distances, holding its breath for as long as six minutes; also, crossing larger bodies of water, it is capable of increasing its buoyancy by swallowing air, inflating its stomach and intestines"}',
@@ -919,7 +931,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 18:04:42',
                 'updated_at' => '2022-11-23 03:37:24',
             ),
-            75 => 
+            76 => 
             array (
                 'id' => 68,
                 'name' => '{"en":"Morning","ru":"Утро"}',
@@ -931,7 +943,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:54:10',
                 'updated_at' => '2022-11-23 20:49:04',
             ),
-            76 => 
+            77 => 
             array (
                 'id' => 73,
                 'name' => '{"en":"Damage","ru":"Вред"}',
@@ -943,7 +955,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:16:42',
                 'updated_at' => '2022-11-23 18:54:50',
             ),
-            77 => 
+            78 => 
             array (
                 'id' => 71,
                 'name' => '{"en":"Success","ru":"Успех"}',
@@ -955,7 +967,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:11:37',
                 'updated_at' => '2022-11-25 01:15:53',
             ),
-            78 => 
+            79 => 
             array (
                 'id' => 61,
                 'name' => '{"en":"Green Anaconda"}',
@@ -967,7 +979,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:21:46',
                 'updated_at' => '2022-11-23 03:39:05',
             ),
-            79 => 
+            80 => 
             array (
                 'id' => 53,
                 'name' => '{"en":"Capybara"}',
@@ -979,7 +991,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:22:02',
                 'updated_at' => '2022-11-23 03:43:25',
             ),
-            80 => 
+            81 => 
             array (
                 'id' => 91,
                 'name' => '{"en":"Moon","ru":"Месяц"}',
@@ -991,7 +1003,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-25 02:27:59',
                 'updated_at' => '2022-11-25 04:16:19',
             ),
-            81 => 
+            82 => 
             array (
                 'id' => 54,
                 'name' => '{"en":"Mountain Gorilla"}',
@@ -1003,7 +1015,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 01:35:45',
                 'updated_at' => '2022-11-23 03:42:06',
             ),
-            82 => 
+            83 => 
             array (
                 'id' => 88,
                 'name' => '{"en":"Gate","ru":"Ворота"}',
@@ -1015,7 +1027,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 21:02:15',
                 'updated_at' => '2022-11-25 04:19:28',
             ),
-            83 => 
+            84 => 
             array (
                 'id' => 44,
                 'name' => '{"en":"Shiinhaku","ru":"Шиинхаку"}',
@@ -1026,18 +1038,6 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-08 02:34:07',
                 'updated_at' => '2022-11-23 03:56:17',
-            ),
-            84 => 
-            array (
-                'id' => 77,
-                'name' => '{"en":"Peccary"}',
-            'desc' => '{"en":"A peccary (also javelina or skunk pig) is a medium-sized, pig-like hoofed mammal. A peccary is a medium-sized animal, with a strong resemblance to a pig. Like a pig, it has a snout ending in a cartilaginous disc, and eyes that are small relative to its head.\\r\\n\\r\\nPeccaries are social creatures that live in herds. They eat roots, grubs, and a variety of foods. They can identify each other by their strong odors. A group of peccaries that travel and live together is called a \\"squadron\\". A squadron of peccaries averages between six and nine members. Peccaries rely on their social structure to defend territory, protect against predators, regulate temperature, and interact socially.\\r\\n\\r\\nMayans kept herds of peccaries, using them in rituals and for food. They are kept as pets in many countries, in addition to being raised on farms as a source of food.\\r\\n\\r\\nPeccaries are omnivores and will eat insects, grubs, and occasionally small animals, although their preferred foods consist of roots, grasses, seeds, fruit, and cacti—particularly prickly pear. Pigs and peccaries can be differentiated by the shape of the canine tooth or tusk. In European pigs, the tusk is long and curves around itself, whereas in peccaries, the tusk is short and straight. The jaws and tusks of peccaries are adapted for crushing hard seeds and slicing them into plant roots, and they also use their tusks for defending against predators.\\r\\n\\r\\nPeccaries have scent glands below each eye and another on their backs. They use the scent to mark herd territories, which range from 30 to 280 hectares. They also mark other herd members with these scent glands by rubbing one against another. The pungent odor allows peccaries to recognize other members of their herd, despite their myopic vision. The odor is strong enough to be detected by humans, which earns the peccary the nickname of \\"skunk pig\\"."}',
-                'is_public' => false,
-                'image' => 'card/3kaGDfMeNmvrkTxqo0isNryuxkgPdA1ogkTdCRAh.jpg',
-                'scope_id' => 19,
-                'owner_id' => 1,
-                'created_at' => '2022-11-16 02:14:26',
-                'updated_at' => '2022-11-23 03:35:47',
             ),
             85 => 
             array (

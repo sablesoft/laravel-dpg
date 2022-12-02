@@ -64,7 +64,7 @@ class CopyCard extends Action
     public function fields(): array
     {
         /** @var Collection $options */
-        $options = Book::query()->isPublic()->isOwner(Auth::user(), 'or')
+        $options = Book::query()->isPublic()->hasOwner(Auth::user(), 'or')
             ->pluck('name', 'id')->toArray();
 
         return $options ? [

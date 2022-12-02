@@ -72,7 +72,7 @@ class CopyBook extends Action
     public function fields(): array
     {
         /** @var Collection $options */
-        $options = Book::query()->isOwner(Auth::user())
+        $options = Book::query()->hasOwner(Auth::user())
             ->pluck('name', 'id')->toArray();
 
         return [

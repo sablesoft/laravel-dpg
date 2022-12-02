@@ -102,11 +102,6 @@ class Game extends Resource
             // todo - make select:
 //            Number::make(__('Status'), 'status'),
 
-            HasMany::make(__('Uniques'), 'uniques'),
-            HasMany::make(__('Stacks'), 'stacks'),
-            HasMany::make(__('Sets'), 'sets'),
-            HasMany::make(__('Logs'), 'logs', Log::class),
-            BelongsToMany::make(__('Board'), 'board', Card::class),
             BelongsToMany::make(__('Subscribers'), 'subscribers', User::class)
                 ->fields(function () {
                     return [
@@ -117,6 +112,11 @@ class Game extends Resource
                             ->displayUsingLabels(),
                     ];
                 })->sortable()->nullable(true),
+            HasMany::make(__('Uniques'), 'uniques'),
+            HasMany::make(__('Stacks'), 'stacks'),
+            HasMany::make(__('Sets'), 'sets'),
+            HasMany::make(__('Logs'), 'logs', Log::class),
+            BelongsToMany::make(__('Board'), 'board', Card::class),
         ];
     }
 

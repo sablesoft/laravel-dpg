@@ -184,7 +184,7 @@ class Card extends Content
         $name = ucfirst($requestSegment);
         /** @var \App\Models\Card|null $card */
         $card = \App\Models\Card::query()
-            ->whereRaw("name ilike '%\"$name\"%'")->first();
+            ->whereRaw("name->>'en' like '%$name%'")->first();
         if ($card && $card->name === $name) {
             $query->where('scope_id', $card->getKey());
         }

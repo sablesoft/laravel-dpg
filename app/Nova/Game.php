@@ -86,10 +86,7 @@ class Game extends Resource
             BelongsTo::make(__('Main Quest'), 'quest', Card::class)
                 ->nullable(true)->sortable()->hideWhenCreating(),
             BelongsTo::make(__('Master'), 'owner', User::class)
-                ->sortable()->readonly(true),
-            BelongsTo::make(__('Master'), 'master', User::class)
-                ->hideWhenCreating()->hideFromIndex()->hideFromDetail()
-                ->readonly(),
+                ->hideWhenCreating()->sortable()->readonly(true),
             Text::make(__('Name'), 'name')->sortable()
                 ->nullable(true)->required(false)
                 ->hideFromIndex()->hideFromDetail(),
@@ -129,7 +126,11 @@ class Game extends Resource
     {
         return function(NovaRequest $request) {
             /** @var \App\Models\Game $game */
-            $game = $request->findModelOrFail();
+            $game = $request->findModelQuery()->first();
+            if (!$game) {
+                return true;
+            }
+
             /** @var \App\Models\User $user */
             $user = Auth::user();
 

@@ -684,55 +684,55 @@ class CardsTableSeeder extends Seeder
             ),
             51 => 
             array (
-                'id' => 98,
-                'name' => '{"en":"Serpent\'s Lair"}',
-                'code' => NULL,
-                'scope_id' => 97,
-                'image' => 'card/ELT3zt2eYiaGldxfEiX7dwDbJsCIiTDn4pW6hOaP.jpg',
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-12-04 07:37:34',
-                'updated_at' => '2022-12-04 07:37:34',
-            ),
-            52 => 
-            array (
-                'id' => 33,
-                'name' => '{"en":"River of Birth","ru":"Река"}',
-                'code' => NULL,
-                'scope_id' => 87,
-                'image' => 'card/lSd8Dx9csBlUWKhA1CyiX4wF1x5SQuSCENHW4FDK.jpg',
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 03:25:49',
-                'updated_at' => '2022-12-04 07:51:43',
-            ),
-            53 => 
-            array (
-                'id' => 100,
-                'name' => '{"en":"Savanna Tract"}',
-                'code' => NULL,
-                'scope_id' => 87,
-                'image' => 'card/AZkPqM2WN5LEjgw7Z4xsuxi24XnpxWj6KU6jTt8c.jpg',
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-12-04 16:27:50',
-                'updated_at' => '2022-12-04 17:57:07',
-            ),
-            54 => 
-            array (
                 'id' => 99,
-                'name' => '{"en":"Deep Forest"}',
+                'name' => '{"en":"Deep Forest","ru":"Реликтовые Джунгли"}',
                 'code' => NULL,
                 'scope_id' => 87,
                 'image' => 'card/oXhBtbwowwjZl719wFncIr6nepLbW0z7jgbDuVgu.png',
-                'desc' => '{"en":null}',
+                'desc' => '{"ru":null}',
                 'is_public' => false,
                 'owner_id' => 1,
                 'created_at' => '2022-12-04 16:00:09',
-                'updated_at' => '2022-12-04 18:45:27',
+                'updated_at' => '2022-12-04 20:28:14',
+            ),
+            52 => 
+            array (
+                'id' => 100,
+                'name' => '{"en":"Savanna Tract","ru":"Засушливый Тракт"}',
+                'code' => NULL,
+                'scope_id' => 87,
+                'image' => 'card/AZkPqM2WN5LEjgw7Z4xsuxi24XnpxWj6KU6jTt8c.jpg',
+                'desc' => '{"ru":null}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-04 16:27:50',
+                'updated_at' => '2022-12-04 20:29:00',
+            ),
+            53 => 
+            array (
+                'id' => 98,
+                'name' => '{"en":"Serpent\'s Lair","ru":"Гнездо Змея"}',
+                'code' => NULL,
+                'scope_id' => 97,
+                'image' => 'card/ELT3zt2eYiaGldxfEiX7dwDbJsCIiTDn4pW6hOaP.jpg',
+                'desc' => '{"ru":null}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-04 07:37:34',
+                'updated_at' => '2022-12-04 20:29:37',
+            ),
+            54 => 
+            array (
+                'id' => 33,
+                'name' => '{"en":"River of Birth","ru":"Река Рождения"}',
+                'code' => NULL,
+                'scope_id' => 87,
+                'image' => 'card/lSd8Dx9csBlUWKhA1CyiX4wF1x5SQuSCENHW4FDK.jpg',
+                'desc' => '{"ru":null}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:25:49',
+                'updated_at' => '2022-12-04 20:35:01',
             ),
             55 => 
             array (
@@ -970,6 +970,19 @@ class CardsTableSeeder extends Seeder
             ),
             73 => 
             array (
+                'id' => 76,
+                'name' => '{"en":"Samauma"}',
+                'code' => NULL,
+                'scope_id' => 75,
+                'image' => 'card/mB1QZT4cJcNXxpUjnnJjBcPLSYveBKkztmcMvM4k.jpg',
+                'desc' => '{"en":"This majestic creation of nature has been nicknamed as “Queen of the Forest,” the “Tree of Life”, “Mother of All Trees”, or “Ladder of Heaven”. When it comes to the diameter of the crown and roots, the Samaúma reigns supreme, reaching up to 50 meters in diameter at her canopy and 20 meters in diameter at her roots, which spread out to support the enormous tree. This vast canopy is laced with thousands of leaves that are grouped in umbrella-shaped tassels of five to seven pointed leaves each, hanging sovereignly above the forest.\\r\\n\\r\\nThis element is core to the spiritual character of this majestic being. The Samaúma tree is sacred to the Rainforest tribes. For them, it is a spirit that brings healing, a connection between Heaven and Earth. On it, you can climb up to the crown. All the spirits of the forest are united up there, that of plants, animals, and humans. There you can feel them."}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 01:57:55',
+                'updated_at' => '2022-11-21 16:42:22',
+            ),
+            74 => 
+            array (
                 'id' => 69,
                 'name' => '{"en":"Armadillo"}',
                 'code' => NULL,
@@ -981,7 +994,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 18:04:42',
                 'updated_at' => '2022-11-23 03:37:24',
             ),
-            74 => 
+            75 => 
             array (
                 'id' => 68,
                 'name' => '{"en":"Morning","ru":"Утро"}',
@@ -994,7 +1007,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:54:10',
                 'updated_at' => '2022-11-23 20:49:04',
             ),
-            75 => 
+            76 => 
             array (
                 'id' => 73,
                 'name' => '{"en":"Damage","ru":"Вред"}',
@@ -1007,7 +1020,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:16:42',
                 'updated_at' => '2022-11-23 18:54:50',
             ),
-            76 => 
+            77 => 
             array (
                 'id' => 71,
                 'name' => '{"en":"Success","ru":"Успех"}',
@@ -1020,7 +1033,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:11:37',
                 'updated_at' => '2022-11-25 01:15:53',
             ),
-            77 => 
+            78 => 
             array (
                 'id' => 61,
                 'name' => '{"en":"Green Anaconda"}',
@@ -1033,7 +1046,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:21:46',
                 'updated_at' => '2022-11-23 03:39:05',
             ),
-            78 => 
+            79 => 
             array (
                 'id' => 53,
                 'name' => '{"en":"Capybara"}',
@@ -1046,7 +1059,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:22:02',
                 'updated_at' => '2022-11-23 03:43:25',
             ),
-            79 => 
+            80 => 
             array (
                 'id' => 91,
                 'name' => '{"en":"Moon","ru":"Месяц"}',
@@ -1059,7 +1072,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-25 02:27:59',
                 'updated_at' => '2022-11-25 04:16:19',
             ),
-            80 => 
+            81 => 
             array (
                 'id' => 54,
                 'name' => '{"en":"Mountain Gorilla"}',
@@ -1072,7 +1085,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 01:35:45',
                 'updated_at' => '2022-11-23 03:42:06',
             ),
-            81 => 
+            82 => 
             array (
                 'id' => 88,
                 'name' => '{"en":"Gate","ru":"Ворота"}',
@@ -1085,7 +1098,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 21:02:15',
                 'updated_at' => '2022-11-25 04:19:28',
             ),
-            82 => 
+            83 => 
             array (
                 'id' => 44,
                 'name' => '{"en":"Shiinhaku","ru":"Шиинхаку"}',
@@ -1097,19 +1110,6 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-08 02:34:07',
                 'updated_at' => '2022-11-23 03:56:17',
-            ),
-            83 => 
-            array (
-                'id' => 76,
-                'name' => '{"en":"Samauma"}',
-                'code' => NULL,
-                'scope_id' => 75,
-                'image' => 'card/mB1QZT4cJcNXxpUjnnJjBcPLSYveBKkztmcMvM4k.jpg',
-                'desc' => '{"en":"This majestic creation of nature has been nicknamed as “Queen of the Forest,” the “Tree of Life”, “Mother of All Trees”, or “Ladder of Heaven”. When it comes to the diameter of the crown and roots, the Samaúma reigns supreme, reaching up to 50 meters in diameter at her canopy and 20 meters in diameter at her roots, which spread out to support the enormous tree. This vast canopy is laced with thousands of leaves that are grouped in umbrella-shaped tassels of five to seven pointed leaves each, hanging sovereignly above the forest.\\r\\n\\r\\nThis element is core to the spiritual character of this majestic being. The Samaúma tree is sacred to the Rainforest tribes. For them, it is a spirit that brings healing, a connection between Heaven and Earth. On it, you can climb up to the crown. All the spirits of the forest are united up there, that of plants, animals, and humans. There you can feel them."}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-11-16 01:57:55',
-                'updated_at' => '2022-11-21 16:42:22',
             ),
             84 => 
             array (
@@ -1231,15 +1231,15 @@ class CardsTableSeeder extends Seeder
             93 => 
             array (
                 'id' => 97,
-                'name' => '{"en":"Dome"}',
+                'name' => '{"en":"Dome","ru":"Мир"}',
                 'code' => 'dome',
                 'scope_id' => 4,
                 'image' => 'card/B4NfU3toiHggUxWg7S1K39ElNfirBJkFuI65zOR1.png',
-                'desc' => '{"en":null}',
+                'desc' => '{"ru":null}',
                 'is_public' => true,
                 'owner_id' => 1,
                 'created_at' => '2022-12-04 07:22:33',
-                'updated_at' => '2022-12-04 07:22:33',
+                'updated_at' => '2022-12-04 20:30:19',
             ),
             94 => 
             array (

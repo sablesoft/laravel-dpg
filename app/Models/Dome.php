@@ -62,8 +62,10 @@ class Dome extends Content
         parent::boot();
 
         static::creating(function (Dome $dome) {
-            $dome->name = $dome->dome->name;
             $dome->owner()->associate(Auth::user());
+        });
+        static::saving(function (Dome $dome) {
+            $dome->name = $dome->dome->name;
         });
     }
 }

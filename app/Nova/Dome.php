@@ -47,7 +47,7 @@ class Dome extends Content
                 ->hideWhenCreating()->hideWhenUpdating(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
-            Image::make(__('Image'), 'image')->maxWidth('auto')
+            Image::make(__('Map'), 'image')->maxWidth('auto')
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     /** @var \App\Models\Dome $model */
                     return ImageService::uploadDomeImage($request->file($requestAttribute), $model);

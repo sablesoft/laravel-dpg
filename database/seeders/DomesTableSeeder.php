@@ -30,12 +30,12 @@ class DomesTableSeeder extends Seeder
                 'area_height' => 412,
                 'top_step' => 310,
                 'left_step' => 178,
-                'image' => NULL,
+                'image' => 'area/8DkCQyny5RNYVbhm4Dj2HMWnXjNUuBK8Ww7BH9TF.png',
                 'desc' => '{"en":null}',
                 'is_public' => false,
                 'owner_id' => 1,
                 'created_at' => '2022-12-04 07:44:40',
-                'updated_at' => '2022-12-04 07:44:40',
+                'updated_at' => '2022-12-04 15:04:29',
             ),
         ));
         

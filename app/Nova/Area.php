@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\Textarea;
 use Codebykyle\CalculatedField\BroadcasterField;
 use Codebykyle\CalculatedField\ListenerField;
 use App\Service\ImageService;
+use App\Nova\Actions\AreaImage;
 
 /**
  * @mixin \App\Models\Area
@@ -53,7 +54,7 @@ class Area extends Content
                     /** @var \App\Models\Area $model */
                     return ImageService::uploadAreaImage($request->file($requestAttribute), $model->dome);
                 })->disk(ImageService::diskName())->nullable(true)->prunable(),
-            BroadcasterField::make(__('Top Step'), 'top_step')->hideWhenCreating()
+            BroadcasterField::make(__('Top Step'), 'top_step')
                 ->broadcastTo('top'),
             ListenerField::make(__('Top'), 'top')->calculateWith(function(Collection $values) {
                 $step = 1;
@@ -62,9 +63,9 @@ class Area extends Content
                     $area = \App\Models\Area::find($id);
                     $step = $area->dome->top_step;
                 }
-                return $values->get('top_step') * $step;
-            })->hideWhenCreating()->hideFromIndex()->listensTo('top'),
-            BroadcasterField::make(__('Left Step'), 'left_step')->hideWhenCreating()
+                return (int) ($values->get('top_step') * $step);
+            })->hideFromIndex()->listensTo('top'),
+            BroadcasterField::make(__('Left Step'), 'left_step')
                 ->broadcastTo('left'),
             ListenerField::make(__('Left'), 'left')->calculateWith(function(Collection $values) {
                 $step = 1;
@@ -73,8 +74,8 @@ class Area extends Content
                     $area = \App\Models\Area::find($id);
                     $step = $area->dome->left_step;
                 }
-                return $values->get('left_step') * $step;
-            })->hideWhenCreating()->hideFromIndex()->listensTo('left'),
+                return (int) ($values->get('left_step') * $step);
+            })->hideFromIndex()->listensTo('left'),
             Code::make(__('Markers'), 'markers')->json(),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
@@ -130,6 +131,8 @@ class Area extends Content
      */
     public function actions(Request $request): array
     {
-        return [];
+        return [
+            AreaImage::make()->onlyOnDetail()
+        ];
     }
 }

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
  * @property int|null $area_height
  * @property int|null $top_step
  * @property int|null $left_step
+ * @property array|null $area_mask
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
@@ -24,6 +25,12 @@ use Illuminate\Support\Facades\Auth;
  */
 class Dome extends Content
 {
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'area_mask' => 'array'
+    ];
 
     /**
      * @return string|null

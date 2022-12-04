@@ -23,7 +23,7 @@ class ImageService
     const BOARDS_STORAGE = 'board';
     const CARDS_STORAGE = 'card';
     const AREAS_STORAGE = 'area';
-    const DOMES_STORAGE = 'area';
+    const DOMES_STORAGE = 'dome';
     const DEFAULT_DISK = 'public';
     const CONFIG_PATH = 'filesystems.image';
 
@@ -56,9 +56,23 @@ class ImageService
         if (!$dome->area_height || !$dome->area_width) {
             return null;
         }
-        $image = Image::make($map);
-        $image->crop($dome->area_width, $dome->area_height, $area->left, $area->top);
-        $image->encode();
+        if ($area->image) {
+            Storage::disk(static::diskName())->delete($area->image);
+        }
+        $data = Storage::disk(static::diskName())->get($map);
+        $image = Image::make($data);
+        $image->crop((int) $dome->area_width, (int) $dome->area_height, (int) $area->left, (int) $area->top);
+        $image->encode('png');
+        if ($dome->area_mask) {
+            $canvas = Image::canvas($dome->area_width, $dome->area_height);
+            // draw a black area mask on it
+            $canvas->polygon($dome->area_mask, function ($draw) {
+                $draw->background('#000000');
+            });
+            // Mask image with the area mask
+            $image->mask($canvas->encode('png'), true);
+            $image->encode('png');
+        }
         $filename = static::generateFilename(static::AREAS_STORAGE, $image);
 
         return static::store($filename, (string) $image) ? $filename : null;

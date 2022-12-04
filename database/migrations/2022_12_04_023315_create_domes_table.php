@@ -16,10 +16,11 @@ return new class extends Migration
         $this->upContent('domes', function (Blueprint $table) {
             $table->foreignId('card_id')->unique()->constrained('cards')
                 ->nullOnDelete();
-            $table->unsignedInteger('area_width')->nullable(true);
-            $table->unsignedInteger('area_height')->nullable(true);
-            $table->unsignedInteger('top_step')->nullable(true);
-            $table->unsignedInteger('left_step')->nullable(true);
+            $table->decimal('area_width')->nullable(true);
+            $table->decimal('area_height')->nullable(true);
+            $table->decimal('top_step')->nullable(true);
+            $table->decimal('left_step')->nullable(true);
+            $table->json('area_mask')->nullable(true);
             // todo - other domes settings
         });
     }

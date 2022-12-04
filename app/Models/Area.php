@@ -5,7 +5,6 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
-use App\Service\ImageService;
 
 /**
  * @property int|null $id
@@ -61,9 +60,6 @@ class Area extends Content
         static::saving(function (Area $area) {
             $area->name = $area->area->name;
             $area->owner()->associate(Auth::user());
-            if (!$area->image) {
-                $area->image = ImageService::createAreaFromMap($area);
-            }
         });
     }
 }

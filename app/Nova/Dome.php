@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
@@ -52,15 +53,17 @@ class Dome extends Content
                     /** @var \App\Models\Dome $model */
                     return ImageService::uploadDomeImage($request->file($requestAttribute), $model);
                 })->hideFromIndex()->disk(ImageService::diskName())
-                ->nullable(false)->required()->rules('required', 'file')->prunable(),
+                ->nullable(false)->required()->rules('file')->prunable(),
             Number::make(__('Area Width'), 'area_width')
                 ->nullable(false)->required(true)->rules('required'),
             Number::make(__('Area Height'), 'area_height')
                 ->nullable(false)->required(true)->rules('required'),
-            Number::make(__('Left Step'), 'left_step')
+            Number::make(__('Left Step'), 'left_step')->step(0.01)
                 ->nullable(false)->required(true)->rules('required'),
-            Number::make(__('Top Step'), 'top_step')
+            Number::make(__('Top Step'), 'top_step')->step(0.01)
                 ->nullable(false)->required(true)->rules('required'),
+            Code::make(__('Area Mask'), 'area_mask')->json()
+                ->nullable(true)->required(false)->hideFromIndex(),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
             BelongsTo::make(__('Owner'), 'owner', User::class)

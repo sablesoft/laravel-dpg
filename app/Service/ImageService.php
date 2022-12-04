@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Models\Area;
 use App\Models\Dome;
 use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Constraint;
 use Intervention\Image\Facades\Image;
 use App\Exceptions\ImageException;
+use Symfony\Component\Mime\MimeTypes;
 
 class ImageService
 {
@@ -35,6 +37,29 @@ class ImageService
         $filename = $file->hashName(static::DOMES_STORAGE);
         $image = Image::make($file->path());
         $image->encode($file->guessExtension());
+
+        return static::store($filename, (string) $image) ? $filename : null;
+    }
+
+    /**
+     * @param Area $area
+     * @return string|null
+     */
+    public static function createAreaFromMap(Area $area): ?string
+    {
+        if (!$dome = $area->dome) {
+            return null;
+        }
+        if (!$map = $dome->image) {
+            return null;
+        }
+        if (!$dome->area_height || !$dome->area_width) {
+            return null;
+        }
+        $image = Image::make($map);
+        $image->crop($dome->area_width, $dome->area_height, $area->left, $area->top);
+        $image->encode();
+        $filename = static::generateFilename(static::AREAS_STORAGE, $image);
 
         return static::store($filename, (string) $image) ? $filename : null;
     }
@@ -169,5 +194,20 @@ class ImageService
     protected static function store(string $path, string $content): bool
     {
         return Storage::disk(static::diskName())->put($path, $content);
+    }
+
+    /**
+     * @param string $path
+     * @param \Intervention\Image\Image $image
+     * @return string
+     */
+    protected static function generateFilename(string $path, \Intervention\Image\Image $image): string
+    {
+        $path = rtrim($path, '/').'/';
+        $hash = Str::random(40);
+        $ext = MimeTypes::getDefault()->getExtensions($image->mime())[0];
+        $ext = $ext ? ".$ext" : null;
+
+        return $path.$hash.$ext;
     }
 }

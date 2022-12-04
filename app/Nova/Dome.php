@@ -13,6 +13,9 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Textarea;
 
+/**
+ * @mixin \App\Models\Dome
+ */
 class Dome extends Content
 {
     /**
@@ -44,11 +47,12 @@ class Dome extends Content
                 ->hideWhenCreating()->hideWhenUpdating(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
-            Image::make(__('Image'), 'image')
+            Image::make(__('Image'), 'image')->maxWidth('auto')
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     /** @var \App\Models\Dome $model */
                     return ImageService::uploadDomeImage($request->file($requestAttribute), $model);
-                })->hideFromIndex()->disk(ImageService::diskName())->nullable(true)->prunable(),
+                })->hideFromIndex()->disk(ImageService::diskName())
+                ->nullable(false)->required()->rules('required', 'file')->prunable(),
             Number::make(__('Area Width'), 'area_width')
                 ->nullable(false)->required(true)->rules('required'),
             Number::make(__('Area Height'), 'area_height')

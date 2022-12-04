@@ -710,8 +710,21 @@ class CardsTableSeeder extends Seeder
             ),
             53 => 
             array (
+                'id' => 100,
+                'name' => '{"en":"Savanna Tract"}',
+                'code' => NULL,
+                'scope_id' => 87,
+                'image' => 'card/AZkPqM2WN5LEjgw7Z4xsuxi24XnpxWj6KU6jTt8c.jpg',
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-04 16:27:50',
+                'updated_at' => '2022-12-04 17:57:07',
+            ),
+            54 => 
+            array (
                 'id' => 99,
-                'name' => '{"en":"Rainforest\'s Heart"}',
+                'name' => '{"en":"Deep Forest"}',
                 'code' => NULL,
                 'scope_id' => 87,
                 'image' => 'card/oXhBtbwowwjZl719wFncIr6nepLbW0z7jgbDuVgu.png',
@@ -719,9 +732,9 @@ class CardsTableSeeder extends Seeder
                 'is_public' => false,
                 'owner_id' => 1,
                 'created_at' => '2022-12-04 16:00:09',
-                'updated_at' => '2022-12-04 16:06:15',
+                'updated_at' => '2022-12-04 18:45:27',
             ),
-            54 => 
+            55 => 
             array (
                 'id' => 49,
                 'name' => '{"en":"Scarlet Macaw"}',
@@ -734,7 +747,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 04:20:48',
                 'updated_at' => '2022-11-23 03:49:44',
             ),
-            55 => 
+            56 => 
             array (
                 'id' => 52,
                 'name' => '{"en":"Brown Sloth"}',
@@ -747,7 +760,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 02:48:34',
                 'updated_at' => '2022-11-23 03:44:43',
             ),
-            56 => 
+            57 => 
             array (
                 'id' => 75,
                 'name' => '{"en":"Tree","ru":"Дерево"}',
@@ -760,7 +773,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 01:49:43',
                 'updated_at' => '2022-11-23 21:01:52',
             ),
-            57 => 
+            58 => 
             array (
                 'id' => 89,
                 'name' => '{"en":"Hut","ru":"Хижина"}',
@@ -773,7 +786,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 21:04:46',
                 'updated_at' => '2022-11-25 04:18:24',
             ),
-            58 => 
+            59 => 
             array (
                 'id' => 96,
                 'name' => '{"en":"Year","ru":"Год"}',
@@ -786,7 +799,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-25 02:56:01',
                 'updated_at' => '2022-11-25 04:13:49',
             ),
-            59 => 
+            60 => 
             array (
                 'id' => 16,
                 'name' => '{"en":"Character","ru":"Персонаж"}',
@@ -799,7 +812,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:20:38',
                 'updated_at' => '2022-11-22 23:58:25',
             ),
-            60 => 
+            61 => 
             array (
                 'id' => 90,
                 'name' => '{"en":"Scene","ru":"Сцена"}',
@@ -812,7 +825,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 23:30:30',
                 'updated_at' => '2022-11-25 04:16:50',
             ),
-            61 => 
+            62 => 
             array (
                 'id' => 17,
                 'name' => '{"en":"Bird","ru":"Птица"}',
@@ -825,7 +838,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:17:34',
                 'updated_at' => '2022-11-22 21:52:17',
             ),
-            62 => 
+            63 => 
             array (
                 'id' => 86,
                 'name' => '{"en":"Biome","ru":"Биом"}',
@@ -838,7 +851,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 18:33:40',
                 'updated_at' => '2022-11-24 19:22:07',
             ),
-            63 => 
+            64 => 
             array (
                 'id' => 66,
                 'name' => '{"en":"Snake","ru":"Змея"}',
@@ -851,7 +864,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:49:38',
                 'updated_at' => '2022-11-23 20:49:59',
             ),
-            64 => 
+            65 => 
             array (
                 'id' => 50,
                 'name' => '{"en":"Blue Morpho Butterfly"}',
@@ -864,7 +877,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 02:19:01',
                 'updated_at' => '2022-11-23 03:47:09',
             ),
-            65 => 
+            66 => 
             array (
                 'id' => 93,
                 'name' => '{"en":"Waning Moon","ru":"Растущая Луна"}',
@@ -877,7 +890,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-25 02:38:31',
                 'updated_at' => '2022-11-25 04:15:17',
             ),
-            66 => 
+            67 => 
             array (
                 'id' => 67,
                 'name' => '{"en":"Evening","ru":"Вечер"}',
@@ -890,7 +903,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:53:18',
                 'updated_at' => '2022-11-23 20:49:30',
             ),
-            67 => 
+            68 => 
             array (
                 'id' => 81,
                 'name' => '{"en":"Taming","ru":"Приручение"}',
@@ -903,7 +916,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:56:34',
                 'updated_at' => '2022-11-23 19:17:44',
             ),
-            68 => 
+            69 => 
             array (
                 'id' => 85,
                 'name' => '{"en":"Folk","ru":"Народ"}',
@@ -916,7 +929,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 18:22:30',
                 'updated_at' => '2022-11-24 19:29:18',
             ),
-            69 => 
+            70 => 
             array (
                 'id' => 62,
                 'name' => '{"en":"Wetland","ru":"Водные Земли"}',
@@ -929,7 +942,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:24:58',
                 'updated_at' => '2022-11-24 18:34:36',
             ),
-            70 => 
+            71 => 
             array (
                 'id' => 95,
                 'name' => '{"en":"Full Moon","ru":"Полнолуние"}',
@@ -942,7 +955,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-25 02:52:29',
                 'updated_at' => '2022-11-25 04:14:23',
             ),
-            71 => 
+            72 => 
             array (
                 'id' => 77,
                 'name' => '{"en":"Peccary"}',
@@ -954,19 +967,6 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-16 02:14:26',
                 'updated_at' => '2022-11-23 03:35:47',
-            ),
-            72 => 
-            array (
-                'id' => 4,
-                'name' => '{"ru":"Место","en":"Place"}',
-                'code' => NULL,
-                'scope_id' => NULL,
-                'image' => 'card/UMREeIQTfykvx42Qw49CwLIUFGFgfU2a0zvhyfHT.png',
-                'desc' => '{"en":"A place is a space of the game world, with its own special properties and characteristics. Places are differentiated by geographical features, natural Biomes, and by the characteristics of the Folk who inhabit the place.\\r\\n\\r\\nHINTS:\\r\\n- Use as a scope for a hero to indicate its current location.\\r\\n- Use as a scope for creatures and items to indicate places where that creature or item can be found.","ru":"Место - это пространство игрового мира, со своими особыми свойствами и характеристиками. Места различаются по географическим особенностям, по природным Биомам, а также по особенностям Народа, населяющего это место.\\r\\n\\r\\nПОДСКАЗКИ:\\r\\n- Используйте как сферу для героя, чтобы указать его текущее местоположение.\\r\\n- Используйте как сферу для существ и предметов, чтобы указать места, в которых это существо или предмет может быть обнаружено."}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-08 02:56:32',
-                'updated_at' => '2022-11-25 01:19:11',
             ),
             73 => 
             array (
@@ -1243,16 +1243,16 @@ class CardsTableSeeder extends Seeder
             ),
             94 => 
             array (
-                'id' => 100,
-                'name' => '{"en":"Test"}',
+                'id' => 4,
+                'name' => '{"ru":"Место","en":"Space"}',
                 'code' => NULL,
-                'scope_id' => 87,
-                'image' => NULL,
-                'desc' => '{"en":null}',
-                'is_public' => false,
+                'scope_id' => NULL,
+                'image' => 'card/UMREeIQTfykvx42Qw49CwLIUFGFgfU2a0zvhyfHT.png',
+                'desc' => '{"en":"This is a space of the game world, with its own special properties and characteristics. Places are differentiated by geographical features, natural Biomes, and by the characteristics of the Folk who inhabit the place.\\r\\n\\r\\nHINTS:\\r\\n- Use as a scope for a hero to indicate its current location.\\r\\n- Use as a scope for creatures and items to indicate places where that creature or item can be found.","ru":"Место - это пространство игрового мира, со своими особыми свойствами и характеристиками. Места различаются по географическим особенностям, по природным Биомам, а также по особенностям Народа, населяющего это место.\\r\\n\\r\\nПОДСКАЗКИ:\\r\\n- Используйте как сферу для героя, чтобы указать его текущее местоположение.\\r\\n- Используйте как сферу для существ и предметов, чтобы указать места, в которых это существо или предмет может быть обнаружено."}',
+                'is_public' => true,
                 'owner_id' => 1,
-                'created_at' => '2022-12-04 16:27:50',
-                'updated_at' => '2022-12-04 16:27:50',
+                'created_at' => '2022-11-08 02:56:32',
+                'updated_at' => '2022-12-04 18:50:16',
             ),
         ));
         

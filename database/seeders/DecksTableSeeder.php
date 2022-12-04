@@ -511,6 +511,20 @@ class DecksTableSeeder extends Seeder
             ),
             35 => 
             array (
+                'id' => 55,
+                'book_id' => 1,
+                'card_id' => 33,
+                'scope_id' => 85,
+                'type' => 1,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-12-04 18:41:56',
+                'updated_at' => '2022-12-04 18:41:56',
+            ),
+            36 => 
+            array (
                 'id' => 53,
                 'book_id' => 2,
                 'card_id' => 5,
@@ -523,7 +537,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-25 03:15:12',
                 'updated_at' => '2022-11-25 04:34:00',
             ),
-            36 => 
+            37 => 
             array (
                 'id' => 52,
                 'book_id' => 2,
@@ -537,7 +551,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-25 03:09:45',
                 'updated_at' => '2022-11-25 04:38:08',
             ),
-            37 => 
+            38 => 
             array (
                 'id' => 50,
                 'book_id' => 2,
@@ -551,7 +565,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-25 00:43:12',
                 'updated_at' => '2022-11-25 04:50:40',
             ),
-            38 => 
+            39 => 
             array (
                 'id' => 48,
                 'book_id' => 2,
@@ -565,7 +579,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-24 23:50:18',
                 'updated_at' => '2022-11-25 04:56:26',
             ),
-            39 => 
+            40 => 
             array (
                 'id' => 47,
                 'book_id' => 2,
@@ -578,6 +592,20 @@ class DecksTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-24 23:47:11',
                 'updated_at' => '2022-11-25 05:00:18',
+            ),
+            41 => 
+            array (
+                'id' => 54,
+                'book_id' => 1,
+                'card_id' => 36,
+                'scope_id' => 87,
+                'type' => 2,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2022-12-04 18:36:31',
+                'updated_at' => '2022-12-04 18:36:31',
             ),
         ));
         

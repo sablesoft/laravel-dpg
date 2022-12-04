@@ -399,170 +399,158 @@ class DeckCardTableSeeder extends Seeder
             ),
             63 => 
             array (
-                'deck_id' => 42,
-                'card_id' => 33,
-                'count' => 1,
-            ),
-            64 => 
-            array (
-                'deck_id' => 44,
-                'card_id' => 33,
-                'count' => 1,
-            ),
-            65 => 
-            array (
-                'deck_id' => 45,
-                'card_id' => 33,
-                'count' => 1,
-            ),
-            66 => 
-            array (
-                'deck_id' => 46,
-                'card_id' => 33,
-                'count' => 1,
-            ),
-            67 => 
-            array (
                 'deck_id' => 40,
                 'card_id' => 89,
                 'count' => 1,
             ),
-            68 => 
+            64 => 
             array (
                 'deck_id' => 47,
+                'card_id' => 86,
+                'count' => 1,
+            ),
+            65 => 
+            array (
+                'deck_id' => 47,
+                'card_id' => 87,
+                'count' => 1,
+            ),
+            66 => 
+            array (
+                'deck_id' => 47,
+                'card_id' => 85,
+                'count' => 1,
+            ),
+            67 => 
+            array (
+                'deck_id' => 47,
+                'card_id' => 90,
+                'count' => 1,
+            ),
+            68 => 
+            array (
+                'deck_id' => 48,
                 'card_id' => 86,
                 'count' => 1,
             ),
             69 => 
             array (
-                'deck_id' => 47,
+                'deck_id' => 48,
                 'card_id' => 87,
                 'count' => 1,
             ),
             70 => 
             array (
-                'deck_id' => 47,
+                'deck_id' => 48,
                 'card_id' => 85,
                 'count' => 1,
             ),
             71 => 
             array (
-                'deck_id' => 47,
+                'deck_id' => 48,
                 'card_id' => 90,
                 'count' => 1,
             ),
             72 => 
             array (
-                'deck_id' => 48,
-                'card_id' => 86,
-                'count' => 1,
-            ),
-            73 => 
-            array (
-                'deck_id' => 48,
-                'card_id' => 87,
-                'count' => 1,
-            ),
-            74 => 
-            array (
-                'deck_id' => 48,
-                'card_id' => 85,
-                'count' => 1,
-            ),
-            75 => 
-            array (
-                'deck_id' => 48,
-                'card_id' => 90,
-                'count' => 1,
-            ),
-            76 => 
-            array (
                 'deck_id' => 49,
                 'card_id' => 33,
                 'count' => 1,
             ),
-            77 => 
+            73 => 
             array (
                 'deck_id' => 50,
                 'card_id' => 86,
                 'count' => 1,
             ),
-            78 => 
+            74 => 
             array (
                 'deck_id' => 50,
                 'card_id' => 87,
                 'count' => 1,
             ),
-            79 => 
+            75 => 
             array (
                 'deck_id' => 50,
                 'card_id' => 85,
                 'count' => 1,
             ),
-            80 => 
+            76 => 
             array (
                 'deck_id' => 50,
                 'card_id' => 90,
                 'count' => 1,
             ),
-            81 => 
+            77 => 
             array (
                 'deck_id' => 51,
                 'card_id' => 82,
                 'count' => 1,
             ),
-            82 => 
+            78 => 
             array (
                 'deck_id' => 51,
                 'card_id' => 80,
                 'count' => 1,
             ),
-            83 => 
+            79 => 
             array (
                 'deck_id' => 51,
                 'card_id' => 81,
                 'count' => 1,
             ),
-            84 => 
+            80 => 
             array (
                 'deck_id' => 51,
                 'card_id' => 41,
                 'count' => 1,
             ),
-            85 => 
+            81 => 
             array (
                 'deck_id' => 52,
                 'card_id' => 58,
+                'count' => 1,
+            ),
+            82 => 
+            array (
+                'deck_id' => 52,
+                'card_id' => 91,
+                'count' => 1,
+            ),
+            83 => 
+            array (
+                'deck_id' => 52,
+                'card_id' => 96,
+                'count' => 1,
+            ),
+            84 => 
+            array (
+                'deck_id' => 53,
+                'card_id' => 58,
+                'count' => 1,
+            ),
+            85 => 
+            array (
+                'deck_id' => 53,
+                'card_id' => 91,
                 'count' => 1,
             ),
             86 => 
             array (
-                'deck_id' => 52,
-                'card_id' => 91,
+                'deck_id' => 53,
+                'card_id' => 96,
                 'count' => 1,
             ),
             87 => 
             array (
-                'deck_id' => 52,
-                'card_id' => 96,
+                'deck_id' => 54,
+                'card_id' => 33,
                 'count' => 1,
             ),
             88 => 
             array (
-                'deck_id' => 53,
-                'card_id' => 58,
-                'count' => 1,
-            ),
-            89 => 
-            array (
-                'deck_id' => 53,
-                'card_id' => 91,
-                'count' => 1,
-            ),
-            90 => 
-            array (
-                'deck_id' => 53,
-                'card_id' => 96,
+                'deck_id' => 55,
+                'card_id' => 36,
                 'count' => 1,
             ),
         ));

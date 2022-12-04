@@ -112,14 +112,14 @@ class SetCardTableSeeder extends Seeder
             ),
             13 => 
             array (
-                'set_id' => 70,
-                'card_id' => 28,
+                'set_id' => 71,
+                'card_id' => 51,
                 'level' => 1,
                 'points' => 0,
             ),
             14 => 
             array (
-                'set_id' => 71,
+                'set_id' => 72,
                 'card_id' => 51,
                 'level' => 1,
                 'points' => 0,
@@ -127,186 +127,158 @@ class SetCardTableSeeder extends Seeder
             15 => 
             array (
                 'set_id' => 72,
-                'card_id' => 51,
-                'level' => 1,
-                'points' => 0,
-            ),
-            16 => 
-            array (
-                'set_id' => 72,
                 'card_id' => 61,
                 'level' => 1,
                 'points' => 0,
             ),
-            17 => 
+            16 => 
             array (
                 'set_id' => 73,
                 'card_id' => 31,
                 'level' => 1,
                 'points' => 0,
             ),
-            18 => 
+            17 => 
             array (
                 'set_id' => 73,
                 'card_id' => 30,
                 'level' => 1,
                 'points' => 0,
             ),
-            19 => 
+            18 => 
             array (
                 'set_id' => 73,
                 'card_id' => 29,
                 'level' => 1,
                 'points' => 0,
             ),
-            20 => 
+            19 => 
             array (
                 'set_id' => 73,
                 'card_id' => 35,
                 'level' => 1,
                 'points' => 0,
             ),
-            21 => 
+            20 => 
             array (
                 'set_id' => 73,
                 'card_id' => 62,
                 'level' => 1,
                 'points' => 0,
             ),
-            22 => 
-            array (
-                'set_id' => 74,
-                'card_id' => 32,
-                'level' => 1,
-                'points' => 0,
-            ),
-            23 => 
+            21 => 
             array (
                 'set_id' => 74,
                 'card_id' => 33,
                 'level' => 1,
                 'points' => 0,
             ),
-            24 => 
+            22 => 
             array (
                 'set_id' => 75,
                 'card_id' => 35,
                 'level' => 1,
                 'points' => 0,
             ),
-            25 => 
-            array (
-                'set_id' => 76,
-                'card_id' => 28,
-                'level' => 1,
-                'points' => 0,
-            ),
-            26 => 
+            23 => 
             array (
                 'set_id' => 78,
                 'card_id' => 35,
                 'level' => 5,
                 'points' => 0,
             ),
-            27 => 
+            24 => 
             array (
                 'set_id' => 78,
                 'card_id' => 19,
                 'level' => 5,
                 'points' => 0,
             ),
-            28 => 
+            25 => 
             array (
                 'set_id' => 80,
                 'card_id' => 82,
                 'level' => 3,
                 'points' => 0,
             ),
-            29 => 
+            26 => 
             array (
                 'set_id' => 80,
                 'card_id' => 81,
                 'level' => 2,
                 'points' => 0,
             ),
-            30 => 
+            27 => 
             array (
                 'set_id' => 80,
                 'card_id' => 80,
                 'level' => 3,
                 'points' => 0,
             ),
-            31 => 
+            28 => 
             array (
                 'set_id' => 81,
                 'card_id' => 35,
                 'level' => 6,
                 'points' => 0,
             ),
-            32 => 
+            29 => 
             array (
                 'set_id' => 82,
                 'card_id' => 66,
                 'level' => 3,
                 'points' => 0,
             ),
-            33 => 
+            30 => 
             array (
                 'set_id' => 83,
                 'card_id' => 84,
                 'level' => 5,
                 'points' => 0,
             ),
-            34 => 
+            31 => 
             array (
                 'set_id' => 84,
                 'card_id' => 51,
                 'level' => 1,
                 'points' => 0,
             ),
-            35 => 
+            32 => 
             array (
                 'set_id' => 84,
                 'card_id' => 53,
                 'level' => 1,
                 'points' => 0,
             ),
-            36 => 
+            33 => 
             array (
                 'set_id' => 85,
                 'card_id' => 35,
                 'level' => 1,
                 'points' => 0,
             ),
-            37 => 
+            34 => 
             array (
                 'set_id' => 85,
                 'card_id' => 62,
                 'level' => 1,
                 'points' => 0,
             ),
-            38 => 
-            array (
-                'set_id' => 86,
-                'card_id' => 32,
-                'level' => 1,
-                'points' => 0,
-            ),
-            39 => 
+            35 => 
             array (
                 'set_id' => 86,
                 'card_id' => 33,
                 'level' => 1,
                 'points' => 0,
             ),
-            40 => 
+            36 => 
             array (
                 'set_id' => 87,
                 'card_id' => 51,
                 'level' => 1,
                 'points' => 0,
             ),
-            41 => 
+            37 => 
             array (
                 'set_id' => 88,
                 'card_id' => 51,

@@ -17,14 +17,15 @@ class Migration extends BaseMigration
         Schema::create($tableName, function (Blueprint $table) use ($moreFields){
             $table->id();
             $table->json('name')->nullable(false);
-            $table->json('desc')->nullable(true);
-            $table->boolean('is_public')->nullable(false)->default(false);
-            $table->string('image')->nullable(true);
+            $table->string('code', 20)->nullable(true)->unique();
             $table->foreignId('scope_id')->nullable(true)
                 ->constrained('cards')->cascadeOnUpdate()->nullOnDelete();
             if ($moreFields) {
                 $moreFields($table);
             }
+            $table->string('image')->nullable(true)->unique();
+            $table->json('desc')->nullable(true);
+            $table->boolean('is_public')->nullable(false)->default(false);
             $table->foreignId('owner_id')->nullable(false)
                 ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

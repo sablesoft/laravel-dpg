@@ -11,6 +11,7 @@ use App\Models\Traits\Subscribers;
  * @property string|null $cards_back
  * @property-read Card[]|null $cards
  * @property-read Deck[]|null $decks
+ * @property-read Dome[]|null $domes
  *
  * @property-read int|null $cards_count
  *
@@ -73,6 +74,14 @@ class Book extends Content
     public function decks(): HasMany
     {
         return $this->hasMany(Deck::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function domes(): BelongsToMany
+    {
+        return $this->belongsToMany(Dome::class, 'book_dome');
     }
 
     /**

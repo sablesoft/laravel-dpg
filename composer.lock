@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82db76cb5721590a0ecdb92e4627d82b",
+    "content-hash": "4aa8120763a8d1d4463adc52d66d2510",
     "packages": [
         {
             "name": "binarybuilds/nova-advanced-command-runner",
@@ -233,6 +233,54 @@
                 "source": "https://github.com/cakephp/chronos"
             },
             "time": "2022-10-21T08:22:45+00:00"
+        },
+        {
+            "name": "codebykyle/calculated-field",
+            "version": "1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codebykyle/calculated-field.git",
+                "reference": "9216d02c15e0e4d8453ba79b4f1218e50e6548d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codebykyle/calculated-field/zipball/9216d02c15e0e4d8453ba79b4f1218e50e6548d4",
+                "reference": "9216d02c15e0e4d8453ba79b4f1218e50e6548d4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Codebykyle\\CalculatedField\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Codebykyle\\CalculatedField\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A server side calculated field for Laravel Nova",
+            "keywords": [
+                "calculated",
+                "field",
+                "laravel",
+                "nova",
+                "server-side"
+            ],
+            "support": {
+                "issues": "https://github.com/codebykyle/calculated-field/issues",
+                "source": "https://github.com/codebykyle/calculated-field/tree/1.1"
+            },
+            "time": "2019-10-10T15:13:58+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -1189,6 +1237,54 @@
                 "source": "https://github.com/gabrieliuga/laravel-nova-sidebar-links/tree/master"
             },
             "time": "2020-04-06T21:25:10+00:00"
+        },
+        {
+            "name": "ganyicz/nova-temporary-fields",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ganyicz/nova-temporary-fields.git",
+                "reference": "e15a5594aeeb93700af0fd5cc65397a9abf7d613"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ganyicz/nova-temporary-fields/zipball/e15a5594aeeb93700af0fd5cc65397a9abf7d613",
+                "reference": "e15a5594aeeb93700af0fd5cc65397a9abf7d613",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^3.0",
+                "php": "^7.2.5|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ganyicz\\NovaTemporaryFields\\TemporaryFieldsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ganyicz\\NovaTemporaryFields\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Ganyicz",
+                    "email": "ganyicz.filip@gmail.com"
+                }
+            ],
+            "description": "Make Laravel Nova fields temporary",
+            "support": {
+                "issues": "https://github.com/ganyicz/nova-temporary-fields/issues",
+                "source": "https://github.com/ganyicz/nova-temporary-fields/tree/1.1.1"
+            },
+            "time": "2021-07-09T16:15:54+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -9535,7 +9631,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0.2"
+        "php": "^8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

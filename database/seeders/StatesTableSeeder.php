@@ -14,12 +14,12 @@ class StatesTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('states')->delete();
-
+        
         \DB::table('states')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 8,
                 'game_id' => 1,
@@ -32,7 +32,7 @@ class StatesTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:46',
                 'updated_at' => '2022-12-02 02:39:46',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 9,
                 'game_id' => 1,
@@ -45,7 +45,7 @@ class StatesTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:46',
                 'updated_at' => '2022-12-02 02:39:46',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 10,
                 'game_id' => 1,
@@ -58,7 +58,7 @@ class StatesTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:46',
                 'updated_at' => '2022-12-02 02:39:46',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 11,
                 'game_id' => 1,
@@ -72,7 +72,7 @@ class StatesTableSeeder extends Seeder
                 'updated_at' => '2022-12-02 02:39:46',
             ),
         ));
-
-
+        
+        
     }
 }

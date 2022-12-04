@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SetCardTableSeeder::class);
         $this->call(StacksTableSeeder::class);
         $this->call(StatesTableSeeder::class);
+        $this->call(DomesTableSeeder::class);
+        $this->call(AreasTableSeeder::class);
         $this->call(SequencesSeeder::class);
     }
 }

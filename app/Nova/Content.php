@@ -5,7 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use App\Nova\Filters\TagsFilter;
+//use App\Nova\Filters\TagsFilter;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\IsPublicFilter;
 
@@ -59,7 +59,7 @@ abstract class Content extends Resource
     public function filters(Request $request): array
     {
         return [
-            new TagsFilter(),
+//            new TagsFilter(),
             new IsPublicFilter(),
             new OwnersFilter(),
         ];

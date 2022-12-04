@@ -90,6 +90,8 @@ class Card extends Content
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
+            Text::make(__('Code'), 'code')->hideFromIndex()
+                ->nullable(true)->sortable()->rules( 'max:20'),
             Image::make(__('Image'), 'image')
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     return ImageService::uploadCardImage($request->file($requestAttribute));
@@ -150,18 +152,17 @@ class Card extends Content
      */
     public static function relatableQuery(NovaRequest $request, $query): Builder
     {
-        /** @var \App\Models\Game $game */
-        $game = $request->findModelQuery($request->get('resourceId'))->first();
-        if (!is_object($game) || get_class($game) !== \App\Models\Game::class) {
-            return $query;
-        }
-        if ($bookId = $game->book_id) {
-            $query->whereHas('books', function($query) use ($bookId) {
-                $query->where('book_id', $bookId);
-            });
+        $resource = $request->findModelQuery($request->get('resourceId'))->first();
+        /** @noinspection PhpConditionCheckedByNextConditionInspection */
+        if ($resource && get_class($resource) === \App\Models\Game::class) {
+            if ($bookId = $resource->book_id) {
+                $query->whereHas('books', function($query) use ($bookId) {
+                    $query->where('book_id', $bookId);
+                });
+            }
         }
 
-        return static::setScope($request, $query);
+        return static::setScopeByCode($request, $query);
     }
 
     /**
@@ -169,26 +170,21 @@ class Card extends Content
      * @param Builder $query
      * @return Builder
      */
-    protected static function setScope(NovaRequest $request, Builder $query): Builder
+    protected static function setScopeByCode(NovaRequest $request, Builder $query): Builder
     {
-        if (!$requestSegment = strtolower($request->segment(4))) {
+        if (!$code = strtolower($request->segment(4))) {
             return $query;
         }
-        $skip = ['update-fields'];
-        if (in_array($requestSegment, $skip)) {
+        $codes = ['hero', 'area', 'dome'];
+        if (!in_array($code, $codes)) {
             return $query;
         }
 
-        $locale = App::currentLocale();
-        App::setLocale('en');
-        $name = ucfirst($requestSegment);
         /** @var \App\Models\Card|null $card */
-        $card = \App\Models\Card::query()
-            ->whereRaw("name->>'en' like '%$name%'")->first();
-        if ($card && $card->name === $name) {
+        $card = \App\Models\Card::query()->where("code", $code)->first();
+        if ($card) {
             $query->where('scope_id', $card->getKey());
         }
-        App::setLocale($locale);
 
         return $query;
     }

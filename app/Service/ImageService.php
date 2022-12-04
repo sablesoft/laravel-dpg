@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Models\Dome;
 use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -19,8 +20,38 @@ class ImageService
     const BOOKS_STORAGE = 'book';
     const BOARDS_STORAGE = 'board';
     const CARDS_STORAGE = 'card';
+    const AREAS_STORAGE = 'area';
+    const DOMES_STORAGE = 'area';
     const DEFAULT_DISK = 'public';
     const CONFIG_PATH = 'filesystems.image';
+
+    /**
+     * @param UploadedFile $file
+     * @param Dome $dome
+     * @return string|null
+     */
+    public static function uploadDomeImage(UploadedFile $file, Dome $dome): ?string
+    {
+        $filename = $file->hashName(static::DOMES_STORAGE);
+        $image = Image::make($file->path());
+        $image->encode($file->guessExtension());
+
+        return static::store($filename, (string) $image) ? $filename : null;
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @param Dome $dome
+     * @return string|null
+     */
+    public static function uploadAreaImage(UploadedFile $file, Dome $dome): ?string
+    {
+        $filename = $file->hashName(static::AREAS_STORAGE);
+        $image = Image::make($file->path());
+        $image->resize($dome->area_width, $dome->area_height)->encode($file->guessExtension());
+
+        return static::store($filename, (string) $image) ? $filename : null;
+    }
 
     /**
      * @param UploadedFile $file

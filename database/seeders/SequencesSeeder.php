@@ -18,7 +18,9 @@ class SequencesSeeder extends Seeder
         'games',
         'sets',
         'stacks',
-        'states'
+        'states',
+        'domes',
+        'areas'
     ];
 
     /**

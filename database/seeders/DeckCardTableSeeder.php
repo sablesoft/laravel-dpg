@@ -553,6 +553,12 @@ class DeckCardTableSeeder extends Seeder
                 'card_id' => 36,
                 'count' => 1,
             ),
+            89 => 
+            array (
+                'deck_id' => 50,
+                'card_id' => 97,
+                'count' => 1,
+            ),
         ));
         
         

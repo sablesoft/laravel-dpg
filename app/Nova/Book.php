@@ -67,6 +67,8 @@ class Book extends Content
             Text::make(__('Tags'), 'tags_string')
                 ->hideFromIndex()->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')->nullable()->alwaysShow(),
+            BelongsToMany::make(__('Domes'), 'domes', Dome::class),
+            BelongsToMany::make(__('Sources'), 'sources', Book::class),
             HasMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
             Image::make(__('Cards Back'), 'cards_back')
@@ -97,6 +99,7 @@ class Book extends Content
                             ->displayUsingLabels(),
                     ];
                 }),
+            BelongsToMany::make(__('Used In'), 'used', Book::class),
             BelongsToMany::make(__('Games'), 'games', Game::class)
         ];
     }

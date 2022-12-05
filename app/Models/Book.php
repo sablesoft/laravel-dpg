@@ -11,6 +11,9 @@ use App\Models\Traits\Subscribers;
  * @property string|null $cards_back
  * @property-read Card[]|null $cards
  * @property-read Deck[]|null $decks
+ * @property-read Dome[]|null $domes
+ * @property-read Book[]|null $sources
+ * @property-read Book[]|null $used
  *
  * @property-read int|null $cards_count
  *
@@ -33,6 +36,30 @@ class Book extends Content
     public function cards(): BelongsToMany
     {
         return $this->belongsToMany(Card::class, 'book_card');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function domes(): BelongsToMany
+    {
+        return $this->belongsToMany(Dome::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function sources(): BelongsToMany
+    {
+        return $this->belongsToMany(Book::class, 'book_source', 'source_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function used(): BelongsToMany
+    {
+        return $this->belongsToMany(Book::class, 'book_source', 'book_id');
     }
 
     /**

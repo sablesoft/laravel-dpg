@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Auth;
  *
  * @property-read Card|null $dome
  * @property-read Area[]|null $areas
+ * @property-read Card[]|null $cards
+ * @property-read Book[]|null $books
  */
 class Dome extends Content
 {
@@ -52,6 +55,22 @@ class Dome extends Content
     public function areas(): HasMany
     {
         return $this->hasMany(Area::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function cards(): BelongsToMany
+    {
+        return $this->belongsToMany(Card::class, 'dome_card');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function books(): BelongsToMany
+    {
+        return $this->belongsToMany(Book::class);
     }
 
     /**

@@ -100,22 +100,19 @@ class Card extends Content
                 ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
-            Text::make(__('Books'), 'books_string')
-                ->onlyOnDetail()->asHtml(),
+//            Text::make(__('Books'), 'books_string')
+//                ->onlyOnDetail()->asHtml(),
             Number::make(__('Decks Count'), 'decks_count')
                 ->hideWhenCreating()->hideWhenUpdating(),
-            Text::make(__('Tags'), 'tags_string')
-                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
-            HasMany::make(__('Decks'), 'decks', Deck::class)
-                ->sortable()->nullable(true),
-            HasMany::make(__('Scoped Cards'), 'scopedCards', Card::class)
-                ->sortable()->nullable(true),
-            HasMany::make(__('Scoped Decks'), 'scopedDecks', Deck::class)
-                ->sortable()->nullable(true),
-            BelongsToMany::make(__('Tags'), 'tags', Card::class)
-                ->sortable()->nullable(true),
-            HasMany::make(__('Tagged Cards'), 'taggedCards', Card::class)
-                ->sortable()->nullable(true),
+//            Text::make(__('Tags'), 'tags_string')
+//                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
+            BelongsToMany::make(__('Domes'), 'domes', Dome::class),
+            BelongsToMany::make(__('Books'), 'books', Book::class),
+            HasMany::make(__('Decks'), 'decks', Deck::class),
+            HasMany::make(__('Scoped Cards'), 'scopedCards', Card::class),
+            HasMany::make(__('Scoped Decks'), 'scopedDecks', Deck::class),
+            BelongsToMany::make(__('Tags'), 'tags', Card::class),
+            HasMany::make(__('Tagged Cards'), 'taggedCards', Card::class),
             BelongsToMany::make(__('In Decks'), 'inDecks', Deck::class)
                 ->fields(function () {
                     return [
@@ -125,9 +122,8 @@ class Card extends Content
                             ->rules('required')
                             ->min(1)->step(1)->default(1),
                     ];
-                })->sortable()->nullable(true),
-            BelongsToMany::make(__('Books'), 'books', Book::class)
-                ->sortable()->nullable(true),
+                }),
+
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
             BelongsTo::make(__('Owner'), 'owner', User::class)

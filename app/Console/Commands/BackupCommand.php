@@ -32,6 +32,8 @@ class BackupCommand extends Command
         'card_tag',
         'books',
         'book_card',
+        'book_dome',
+        'book_source',
         'book_subscriber',
         'decks',
         'deck_card',

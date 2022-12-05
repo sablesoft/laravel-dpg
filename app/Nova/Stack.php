@@ -80,7 +80,6 @@ class Stack extends Resource
             DateTime::make(__('Updated At'), 'updated_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
-            HasMany::make(__('Logs'), 'logs', Log::class)
         ];
     }
 

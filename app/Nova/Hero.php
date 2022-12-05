@@ -2,54 +2,42 @@
 
 namespace App\Nova;
 
-use Illuminate\Http\Request;
+use App\Service\ImageService;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
-//use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use App\Service\ImageService;
-use App\Nova\Actions\CopyCard;
-use App\Nova\Filters\BooksFilter;
-use App\Nova\Filters\ImageFilter;
-use App\Nova\Filters\DecksFilter;
-use App\Nova\Filters\ScopesFilter;
 
-/**
- * @mixin \App\Models\Card
- */
-class Card extends Content
+class Hero extends Card
 {
-    /**
-     * The model the resource corresponds to.
-     *
-     * @var string
-     */
-    public static string $model = \App\Models\Card::class;
-
     /**
      * @return string
      */
     public static function uriKey(): string
     {
-        return 'units';
+        return 'heroes';
     }
 
     /**
      * @param NovaRequest $request
      * @param $query
      * @return Builder
+     * @throws \Exception
      */
     public static function indexQuery(NovaRequest $request, $query): Builder
     {
+        if (!$hero = \App\Models\Card::getCardByCode('hero')) {
+            throw new \Exception('Hero card not found!');
+        }
+        $query->where('scope_id', $hero->getKey());
         /** @var \App\Models\User $user */
         $user = $request->user();
         if (!$user->isAdmin()) {
@@ -64,20 +52,6 @@ class Card extends Content
     }
 
     /**
-     * @param Builder $query
-     * @param \App\Models\User $user
-     * @return Builder
-     */
-    protected static function isBookSubscriber(Builder $query, \App\Models\User $user): Builder
-    {
-        return $query->orWhere(function($query) use ($user) {
-            return $query->whereHas('books.subscribers', function($query) use ($user) {
-                $query->where('subscriber_id', $user->getKey());
-            });
-        });
-    }
-
-    /**
      * Get the fields displayed by the resource.
      *
      * @param Request $request
@@ -86,18 +60,13 @@ class Card extends Content
     public function fields(Request $request): array
     {
         return [
-//            ID::make(__('ID'), 'id'),
             Text::make(__('Name'), 'name')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:30'),
-            Text::make(__('Code'), 'code')->hideFromIndex()
-                ->nullable(true)->sortable()->rules( 'max:20'),
             Image::make(__('Image'), 'image')
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     return ImageService::uploadCardImage($request->file($requestAttribute));
                 })->disk(ImageService::diskName())->nullable(true)->prunable(),
-            BelongsTo::make(__('Scope'), 'scope', Card::class)
-                ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
             Text::make(__('Books'), 'books_string')
@@ -138,98 +107,6 @@ class Card extends Content
             DateTime::make(__('Updated At'), 'updated_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true)
-        ];
-    }
-
-    /**
-     * Build a "relatable" query for the given resource.
-     *
-     * This query determines which instances of the model may be attached to other resources.
-     *
-     * @param NovaRequest $request
-     * @param  Builder  $query
-     * @return Builder
-     */
-    public static function relatableQuery(NovaRequest $request, $query): Builder
-    {
-        return static::setScopeByCode($request, $query);
-    }
-
-    /**
-     * @param NovaRequest $request
-     * @param Builder $query
-     * @return Builder
-     */
-    protected static function setScopeByCode(NovaRequest $request, Builder $query): Builder
-    {
-        if (!$code = strtolower($request->segment(4))) {
-            return $query;
-        }
-        $code = Str::singular($code);
-        $codes = ['hero', 'area', 'dome'];
-        if (!in_array($code, $codes)) {
-            return $query;
-        }
-
-        /** @var \App\Models\Card|null $card */
-        $card = \App\Models\Card::query()->where("code", $code)->first();
-        if ($card) {
-            $query->where('scope_id', $card->getKey());
-        }
-
-        return $query;
-    }
-
-    /**
-     * Get the cards available for the request.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public function cards(Request $request): array
-    {
-        return [];
-    }
-
-    /**
-     * Get the filters available for the resource.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public function filters(Request $request): array
-    {
-        return array_merge([
-            new ScopesFilter(),
-            new DecksFilter(),
-            new BooksFilter(),
-            new ImageFilter()
-        ], parent::filters($request));
-    }
-
-    /**
-     * Get the lenses available for the resource.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public function lenses(Request $request): array
-    {
-        return [];
-    }
-
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public function actions(Request $request): array
-    {
-        return [
-            CopyCard::make()->canRun(function () {
-                return true;
-            })
         ];
     }
 }

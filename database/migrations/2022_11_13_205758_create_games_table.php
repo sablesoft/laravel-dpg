@@ -17,10 +17,7 @@ return new class extends Migration
             $table->id();
             $table->json('name')->nullable(true);
             $table->json('desc')->nullable(true);
-            $table->foreignId('book_id')->nullable(false)->constrained('books')
-                ->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('hero_id')->nullable(true)
-                ->constrained('cards')->nullOnDelete();
+            $table->string('image')->nullable(true);
             $table->foreignId('quest_id')->nullable(true)
                 ->constrained('cards')->nullOnDelete();
             $table->foreignId('owner_id')->nullable(false)->constrained('users')

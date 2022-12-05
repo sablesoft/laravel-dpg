@@ -76,6 +76,14 @@ class Book extends Content
     }
 
     /**
+     * @return BelongsToMany
+     */
+    public function games(): BelongsToMany
+    {
+        return $this->belongsToMany(Game::class, 'game_book');
+    }
+
+    /**
      * @return array
      */
     public function export(): array

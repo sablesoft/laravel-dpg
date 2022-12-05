@@ -26,7 +26,7 @@ class PullCard extends Action
     }
 
     /**
-     * Perform the action on the given models.
+     * Perform the action on the given models. TODO
      *
      * @param ActionFields $fields
      * @param Collection $models
@@ -37,9 +37,9 @@ class PullCard extends Action
     {
         /** @var Stack $model */
         foreach ($models as $model) {
-            $log = Shuffler::pull($model);
+            $card = Shuffler::pull($model);
         }
-        return Action::message('Cards added to log');
+        return Action::message('Cards pulled - #TODO');
     }
 
     /**

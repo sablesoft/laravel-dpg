@@ -3,33 +3,30 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\ID;
 
-class Log extends Resource
+class Story extends Resource
 {
     /**
      * The logical group associated with the resource.
      *
      * @var string
      */
-    public static $group = 'Play';
-
-    public static $displayInNavigation = false;
+    public static $group = 'Personal';
 
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static string $model = \App\Models\Log::class;
+    public static string $model = \App\Models\Story::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -37,7 +34,7 @@ class Log extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'name',
     ];
 
     /**
@@ -49,15 +46,7 @@ class Log extends Resource
     public function fields(Request $request): array
     {
         return [
-//            BelongsTo::make(__('Game'), 'game'),
-            BelongsTo::make(__('Stack'), 'stack', Stack::class),
-            BelongsTo::make(__('Card'), 'card', Card::class),
-            DateTime::make(__('Created At'), 'created_at')
-                ->hideFromIndex()
-                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
-            DateTime::make(__('Updated At'), 'updated_at')
-                ->hideFromIndex()
-                ->hideWhenCreating()->hideWhenUpdating()->sortable(true)
+            ID::make(__('ID'), 'id')->sortable(),
         ];
     }
 

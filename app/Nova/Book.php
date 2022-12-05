@@ -96,7 +96,8 @@ class Book extends Content
                             ->options(\App\Models\Book::subscriberTypeOptions())
                             ->displayUsingLabels(),
                     ];
-                })->sortable()->nullable(true),
+                }),
+            BelongsToMany::make(__('Games'), 'games', Game::class)
         ];
     }
 

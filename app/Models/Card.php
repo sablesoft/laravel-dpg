@@ -169,4 +169,14 @@ class Card extends Content
             return true;
         }
     }
+
+    /**
+     * @param string $code
+     * @return Card|null
+     */
+    public static function getCardByCode(string $code): ?Card
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return static::query()->where('code', $code)->first();
+    }
 }

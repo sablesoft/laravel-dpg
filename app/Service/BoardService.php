@@ -17,7 +17,7 @@ class BoardService
         $game->makeHidden(['id', 'book_id', 'master_id', 'created_at', 'updated_at']);
         $data = $game->toArray();
         $data['scope_name'] = __('Game');
-        $data['book'] = static::bookToArray($game->book);
+//        $data['book'] = static::bookToArray($game->book);
 
         return $data;
     }

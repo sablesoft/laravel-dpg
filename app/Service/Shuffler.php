@@ -62,10 +62,10 @@ class Shuffler
 
     /**
      * @param Stack $stack
-     * @return Log|null
+     * @return Card|null
      * @throws Exception
      */
-    public static function pull(Stack $stack): ?Log
+    public static function pull(Stack $stack): ?Card
     {
         $pack = $stack->pack;
         if (empty($pack)) {
@@ -81,13 +81,8 @@ class Shuffler
         $stack->discard = $discard;
         $stack->save();
 
-        $log = new Log();
-        $log->game_id = $stack->game_id;
-        $log->stack_id = $stack->getKey();
-        $log->card_id = $card->getKey();
-        $log->save();
 
-        return $log;
+        return $card;
     }
 
     /**

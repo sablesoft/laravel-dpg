@@ -45,7 +45,7 @@ class Game extends Resource
      *
      * @var string
      */
-    public static $title = 'prepared_name';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -76,28 +76,18 @@ class Game extends Resource
     public function fields(Request $request): array
     {
         return [
-            Text::make(__('Name'), 'prepared_name')->sortable()
-                ->nullable(true)->required(false)
-                ->hideWhenCreating()->hideWhenUpdating(),
+            Text::make(__('Name'), 'name')->sortable()
+                ->nullable(false)->required(true)->rules('required'),
             Select::make(__('Status'), 'status_value')
                 ->sortable()
                 ->nullable(false)->required(true)->rules('required')
                 ->options(GameStatus::options())->displayUsingLabels(),
-            BelongsTo::make(__('Book'), 'book', Book::class)
-                ->sortable()->nullable(false)->required()
-                ->rules('required')->hideWhenUpdating(),
-            BelongsTo::make(__('Book'), 'book', Book::class)
-                ->hideWhenCreating()->hideFromIndex()->hideFromDetail()
-                ->readonly(),
-            BelongsTo::make(__('Hero'), 'hero', Card::class)
-                ->nullable(true)->sortable()->hideWhenCreating(),
+            BelongsToMany::make(__('Books'), 'books', Book::class),
+            BelongsToMany::make(__('Heroes'), 'heroes', Hero::class),
             BelongsTo::make(__('Main Quest'), 'quest', Card::class)
                 ->nullable(true)->sortable()->hideWhenCreating(),
             BelongsTo::make(__('Master'), 'owner', User::class)
                 ->hideWhenCreating()->sortable()->readonly(true),
-            Text::make(__('Name'), 'name')->sortable()
-                ->nullable(true)->required(false)
-                ->hideFromIndex()->hideFromDetail(),
             Textarea::make(__('Desc'), 'desc')->nullable(true)->alwaysShow(),
             Image::make(__('Board Image'), 'board_image')
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
@@ -118,8 +108,7 @@ class Game extends Resource
             HasMany::make(__('States'), 'states', State::class),
             HasMany::make(__('Stacks'), 'stacks', Stack::class)->canSee(static::isGameOwner()),
             HasMany::make(__('Sets'), 'sets', Set::class)->canSee(static::isGameOwner()),
-            BelongsToMany::make(__('Board'), 'board', Card::class),
-            HasMany::make(__('Logs'), 'logs', Log::class),
+            HasMany::make(__('Stories'), 'stories', Story::class),
         ];
     }
 

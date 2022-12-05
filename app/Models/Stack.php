@@ -16,8 +16,6 @@ use App\Models\Traits\FromDeck;
  *
  * @property-read int|null $pack_size
  * @property-read int|null $discard_size
- *
- * @property-read Log|null $logs
  */
 class Stack extends Model
 {
@@ -45,14 +43,6 @@ class Stack extends Model
     public function getDiscardSizeAttribute(): ?int
     {
         return $this->discard ? count($this->discard): null;
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function logs(): HasMany
-    {
-        return $this->hasMany(Log::class);
     }
 
     /**

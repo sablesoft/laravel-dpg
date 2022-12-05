@@ -17,8 +17,6 @@ use App\Models\Traits\Subscribers;
  * @property int|null $id
  * @property string|null $name
  * @property string|null $desc
- * @property int|null $book_id
- * @property int|null $hero_id
  * @property int|null $quest_id
  * @property int|null $owner_id
  * @property bool|null $is_public
@@ -27,17 +25,15 @@ use App\Models\Traits\Subscribers;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
- * @property-read string|null $prepared_name
  * @property-read int|null $status_value
  *
- * @property-read Book|null $book
- * @property-read Card|null $hero
+ * @property-read Book[]|null $books
+ * @property-read Card[]|null $heroes
  * @property-read Card|null $quest
  * @property-read Stack[]|null $stacks
  * @property-read Set[]|null $sets
  * @property-read State[]|null $states
- * @property-read Log[]|null $logs
- * @property-read Card[]|null $board
+ * @property-read Story[]|null $stories
  */
 class Game extends Model
 {
@@ -56,18 +52,6 @@ class Game extends Model
     public array $translatable = ['name', 'desc'];
 
     /**
-     * @return string|null
-     */
-    public function getPreparedNameAttribute(): ?string
-    {
-        if ($name = $this->name) {
-            return $name;
-        }
-
-        return optional($this->book)->name;
-    }
-
-    /**
      * @return int|null
      */
     public function getStatusValueAttribute(): ?int
@@ -76,19 +60,24 @@ class Game extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return BelongsToMany
      */
-    public function book(): BelongsTo
+    public function books(): BelongsToMany
     {
-        return $this->belongsTo(Book::class);
+        return $this->belongsToMany(Book::class, 'game_book');
     }
 
     /**
-     * @return BelongsTo
+     * @return BelongsToMany
      */
-    public function hero(): BelongsTo
+    public function heroes(): BelongsToMany
     {
-        return $this->belongsTo(Card::class, 'hero_id');
+        return $this->belongsToMany(
+            Card::class,
+            'game_hero',
+            'game_id',
+            'hero_id'
+        );
     }
 
     /**
@@ -134,22 +123,9 @@ class Game extends Model
     /**
      * @return HasMany
      */
-    public function logs(): HasMany
+    public function stories(): HasMany
     {
-        return $this->hasMany(Log::class);
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function board(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            Card::class,
-            'game_card',
-            'game_id',
-            'card_id'
-        );
+        return $this->hasMany(Story::class);
     }
 
     /**
@@ -168,28 +144,6 @@ class Game extends Model
         parent::boot();
         static::creating(function (Game $game) {
             $game->owner()->associate(Auth::user());
-        });
-        self::created(function(Game $model) {
-            $model->refresh();
-            $decks = optional($model->book)->decks;
-            if ($decks) {
-                /** @var Deck $deck */
-                foreach ($decks as $deck) {
-                    switch ($deck->type) {
-                        case Deck::TYPE_STACK:
-                            Stack::createFromDeck($model, $deck);
-                            break;
-                        case Deck::TYPE_SET:
-                            Set::createFromDeck($model, $deck);
-                            break;
-                        case Deck::TYPE_STATE:
-                            State::createFromDeck($model, $deck);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
         });
     }
 }

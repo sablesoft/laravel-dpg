@@ -14,18 +14,17 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('books')->delete();
-        
+
         \DB::table('books')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 2,
                 'name' => '{"en":"Core","ru":"Ядро"}',
                 'code' => NULL,
                 'scope_id' => NULL,
-                'cards_back' => 'back/2K3RgfkXM7GxyVsfm3MjO3UGZZEmqyjcazy87aYe.png',
                 'image' => 'book/YAgZjoKyE3lZeVxHo03hMKNKdG4e3fwf4db3kylV.png',
                 'desc' => '{"en":"Book with base abstract cards and decks","ru":"Книга с базовыми абстрактными картами и колодами"}',
                 'is_public' => true,
@@ -33,13 +32,12 @@ class BooksTableSeeder extends Seeder
                 'created_at' => '2022-11-25 01:08:56',
                 'updated_at' => '2022-11-25 04:10:39',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 1,
                 'name' => '{"en":"Rainforest Dreams","ru":"Сны Дождливых Лесов"}',
                 'code' => NULL,
                 'scope_id' => NULL,
-                'cards_back' => 'back/vgsvSjrgQW3pft9mk67LYr2oCGdsqpa29u71U2GQ.png',
                 'image' => 'book/9nMEX5TG126Xo3u4RXxB0L5JQCBib8mDCnrgNo4Y.jpg',
                 'desc' => '{"ru":null}',
                 'is_public' => false,
@@ -48,7 +46,7 @@ class BooksTableSeeder extends Seeder
                 'updated_at' => '2022-11-21 21:37:46',
             ),
         ));
-        
-        
+
+
     }
 }

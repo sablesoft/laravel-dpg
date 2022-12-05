@@ -8,7 +8,6 @@ use Spatie\Translatable\HasTranslations;
 use App\Models\Traits\Subscribers;
 
 /**
- * @property string|null $cards_back
  * @property-read Card[]|null $cards
  * @property-read Deck[]|null $decks
  * @property-read Dome[]|null $domes

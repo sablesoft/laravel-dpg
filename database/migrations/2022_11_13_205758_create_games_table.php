@@ -24,6 +24,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->boolean('is_public')->nullable(false)->default(false);
             $table->string('board_image')->nullable(true);
+            $table->string('cards_back')->nullable(true);
             $table->unsignedSmallInteger('status')->nullable(false)->default(0);
 
             $table->timestamps();

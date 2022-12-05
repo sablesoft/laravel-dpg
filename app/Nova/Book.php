@@ -71,11 +71,6 @@ class Book extends Content
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
             HasMany::make(__('Decks'), 'decks', Deck::class)
                 ->sortable()->nullable(true),
-            Image::make(__('Cards Back'), 'cards_back')
-                ->store(function (Request $request, $model, $attribute, $requestAttribute) {
-                    return ImageService::uploadCardBack($request->file($requestAttribute));
-                })->maxWidth(ImageService::backHeight())->disk(ImageService::diskName())
-                ->prunable()->nullable(true)->hideFromIndex(),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')

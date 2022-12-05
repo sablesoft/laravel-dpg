@@ -14,12 +14,12 @@ class GamesTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('games')->delete();
-        
+
         \DB::table('games')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
                 'name' => '{"ru":"DPG \\u0420\\u0430\\u0437\\u0440\\u0430\\u0431\\u043e\\u0442\\u043a\\u0430","en":"DPG Development"}',
@@ -29,12 +29,13 @@ class GamesTableSeeder extends Seeder
                 'owner_id' => 1,
                 'is_public' => false,
                 'board_image' => 'board/2WoLdF9xdcLwuQGXct4L44JWEophP6EIbK4zJcQh.jpg',
+                'cards_back' => 'back/vgsvSjrgQW3pft9mk67LYr2oCGdsqpa29u71U2GQ.png',
                 'status' => 0,
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:53:59',
             ),
         ));
-        
-        
+
+
     }
 }

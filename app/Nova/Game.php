@@ -93,6 +93,11 @@ class Game extends Resource
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     return ImageService::uploadBoardImage($request->file($requestAttribute));
                 })->disk(ImageService::diskName())->nullable(true)->prunable()->hideFromIndex(),
+            Image::make(__('Cards Back'), 'cards_back')
+                ->store(function (Request $request, $model, $attribute, $requestAttribute) {
+                    return ImageService::uploadCardBack($request->file($requestAttribute));
+                })->maxWidth(ImageService::backHeight())->disk(ImageService::diskName())
+                ->prunable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
             BelongsToMany::make(__('Subscribers'), 'subscribers', User::class)

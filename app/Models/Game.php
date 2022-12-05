@@ -21,6 +21,7 @@ use App\Models\Traits\Subscribers;
  * @property int|null $owner_id
  * @property bool|null $is_public
  * @property string|null $board_image
+ * @property string|null $cards_back
  * @property GameStatus|null $status
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at

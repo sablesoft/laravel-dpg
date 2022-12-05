@@ -26,14 +26,17 @@ class DatabaseSeeder extends Seeder
         $this->call(DeckCardTableSeeder::class);
         $this->call(DeckTagTableSeeder::class);
         $this->call(GamesTableSeeder::class);
-        $this->call(GameCardTableSeeder::class);
+        $this->call(GameHeroTableSeeder::class);
+        $this->call(GameBookTableSeeder::class);
         $this->call(GameSubscriberTableSeeder::class);
         $this->call(SetsTableSeeder::class);
         $this->call(SetCardTableSeeder::class);
         $this->call(StacksTableSeeder::class);
         $this->call(StatesTableSeeder::class);
         $this->call(DomesTableSeeder::class);
+        $this->call(DomeCardTableSeeder::class);
         $this->call(AreasTableSeeder::class);
+        $this->call(AreaCardTableSeeder::class);
         $this->call(SequencesSeeder::class);
     }
 }

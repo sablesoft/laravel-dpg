@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class GameCardTableSeeder extends Seeder
+class AreaCardTableSeeder extends Seeder
 {
 
     /**
@@ -16,7 +16,7 @@ class GameCardTableSeeder extends Seeder
     {
         
 
-        \DB::table('game_card')->delete();
+        \DB::table('area_card')->delete();
         
         
         

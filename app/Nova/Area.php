@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\DateTime;
@@ -87,6 +88,7 @@ class Area extends Content
             DateTime::make(__('Updated At'), 'updated_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
+            BelongsToMany::make(__('Cards'), 'cards')
         ];
     }
 

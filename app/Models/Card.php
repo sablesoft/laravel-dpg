@@ -14,7 +14,8 @@ use App\Models\Traits\Books;
  * @property-read Decks[]|null $decks
  * @property-read Decks[]|null $inDecks
  * @property-read Books[]|null $books
- * @property-read Domes[]|null $domes
+ * @property-read Dome[]|null $domes
+ * @property-read Area[]|null $areas
  * @property-read Card[]|null $scopedCards
  * @property-read Deck[]|null $scopedDecks
  * @property-read Card[]|null $taggedCards
@@ -119,6 +120,14 @@ class Card extends Content
     public function domes(): BelongsToMany
     {
         return $this->belongsToMany(Dome::class, 'dome_card');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function areas(): BelongsToMany
+    {
+        return $this->belongsToMany(Area::class);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Auth;
  *
  * @property-read Dome|null $dome
  * @property-read Card|null $area
+ * @property-read Card[]|null $cards
  */
 class Area extends Content
 {
@@ -48,6 +50,14 @@ class Area extends Content
     public function area(): BelongsTo
     {
         return $this->belongsTo(Card::class, 'card_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function cards(): BelongsToMany
+    {
+        return $this->belongsToMany(Card::class);
     }
 
     /**

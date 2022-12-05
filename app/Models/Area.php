@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Auth;
  * @property-read Dome|null $dome
  * @property-read Card|null $area
  * @property-read Card[]|null $cards
+ * @property-read Book[]|null $sources
  */
 class Area extends Content
 {
@@ -58,6 +59,19 @@ class Area extends Content
     public function cards(): BelongsToMany
     {
         return $this->belongsToMany(Card::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function sources(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Book::class,
+            'area_source',
+            'area_id',
+            'source_id'
+        );
     }
 
     /**

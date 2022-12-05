@@ -47,8 +47,10 @@ class BackupCommand extends Command
         'states',
         'domes',
         'dome_card',
+        'dome_source',
         'areas',
-        'area_card'
+        'area_card',
+        'area_source',
     ];
 
     protected string $lastTable = 'deck_tag';

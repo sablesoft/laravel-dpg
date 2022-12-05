@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class AreaCardTableSeeder extends Seeder
+class DomeSourceTableSeeder extends Seeder
 {
 
     /**
@@ -16,13 +16,13 @@ class AreaCardTableSeeder extends Seeder
     {
         
 
-        \DB::table('area_card')->delete();
+        \DB::table('dome_source')->delete();
         
-        \DB::table('area_card')->insert(array (
+        \DB::table('dome_source')->insert(array (
             0 => 
             array (
-                'area_id' => 2,
-                'card_id' => 36,
+                'dome_id' => 2,
+                'source_id' => 2,
             ),
         ));
         

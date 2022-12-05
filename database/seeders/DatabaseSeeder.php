@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CardTagTableSeeder::class);
         $this->call(BooksTableSeeder::class);
         $this->call(BookCardTableSeeder::class);
+        $this->call(BookSourceTableSeeder::class);
         $this->call(BookSubscriberTableSeeder::class);
         $this->call(DecksTableSeeder::class);
         $this->call(DeckCardTableSeeder::class);
@@ -35,10 +36,11 @@ class DatabaseSeeder extends Seeder
         $this->call(StatesTableSeeder::class);
         $this->call(DomesTableSeeder::class);
         $this->call(DomeCardTableSeeder::class);
+        $this->call(DomeSourceTableSeeder::class);
         $this->call(BookDomeTableSeeder::class);
-        $this->call(BookSourceTableSeeder::class);
         $this->call(AreasTableSeeder::class);
         $this->call(AreaCardTableSeeder::class);
+        $this->call(AreaSourceTableSeeder::class);
         $this->call(SequencesSeeder::class);
     }
 }

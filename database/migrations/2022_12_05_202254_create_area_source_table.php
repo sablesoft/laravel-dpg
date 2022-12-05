@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('book_source', function (Blueprint $table) {
-            $table->foreignId('book_id')->constrained('books')
+        Schema::create('area_source', function (Blueprint $table) {
+            $table->foreignId('area_id')->constrained('areas')
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('source_id')->constrained('books')
                 ->cascadeOnUpdate()->cascadeOnDelete();
 
-            $table->unique(['book_id', 'source_id']);
+            $table->unique(['area_id', 'source_id']);
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_source');
+        Schema::dropIfExists('area_source');
     }
 };

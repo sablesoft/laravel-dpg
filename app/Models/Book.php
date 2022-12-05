@@ -12,7 +12,9 @@ use App\Models\Traits\Subscribers;
  * @property-read Deck[]|null $decks
  * @property-read Dome[]|null $domes
  * @property-read Book[]|null $sources
- * @property-read Book[]|null $used
+ * @property-read Book[]|null $usedInBooks
+ * @property-read Dome[]|null $usedInDomes
+ * @property-read Area[]|null $usedInAreas
  *
  * @property-read int|null $cards_count
  *
@@ -56,9 +58,35 @@ class Book extends Content
     /**
      * @return BelongsToMany
      */
-    public function used(): BelongsToMany
+    public function usedInBooks(): BelongsToMany
     {
         return $this->belongsToMany(Book::class, 'book_source', 'book_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function usedInDomes(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Dome::class,
+            'dome_source',
+            'dome_id',
+            'source_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function usedInAreas(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Area::class,
+            'area_source',
+            'area_id',
+            'source_id'
+        );
     }
 
     /**

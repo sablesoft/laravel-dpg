@@ -74,9 +74,10 @@ class Dome extends Content
             DateTime::make(__('Updated At'), 'updated_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
+            BelongsToMany::make(__('Sources'), 'sources', Book::class),
             HasMany::make(__('Areas'), 'areas', Area::class),
             BelongsToMany::make(__('Cards'), 'cards', Card::class),
-            BelongsToMany::make(__('Books'), 'books', Book::class),
+            BelongsToMany::make(__('Used In Books'), 'books', Book::class),
         ];
     }
 

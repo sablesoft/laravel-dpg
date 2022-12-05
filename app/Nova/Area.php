@@ -88,7 +88,8 @@ class Area extends Content
             DateTime::make(__('Updated At'), 'updated_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
-            BelongsToMany::make(__('Cards'), 'cards')
+            BelongsToMany::make(__('Sources'), 'sources', Book::class),
+            BelongsToMany::make(__('Cards'), 'cards'),
         ];
     }
 

@@ -5,14 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property int|null $type
  * @property int|null $card_id
  * @property int|null $book_id
+ * @property int|null $dome_id
+ * @property int|null $area_id
  *
  * @property-read string|null $name
  * @property-read Book|null $book
+ * @property-read Dome|null $dome
+ * @property-read Area|null $area
  * @property-read Card|null $target
  * @property-read Card[]|null $tags
  * @property-read Card[]|null $cards
@@ -53,6 +58,22 @@ class Deck extends Content
     public function book(): BelongsTo
     {
         return $this->belongsTo(Book::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function dome(): BelongsTo
+    {
+        return $this->belongsTo(Dome::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function area(): BelongsTo
+    {
+        return $this->belongsTo(Area::class);
     }
 
     /**
@@ -147,5 +168,21 @@ class Deck extends Content
             self::TYPE_STATE => __('State'),
             self::TYPE_CONTROL => __('Control')
         ];
+    }
+
+    /**
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::saving(function (Deck $deck) {
+            if (($deck->area_id && $deck->dome_id) ||
+                ($deck->area_id && $deck->book_id) ||
+                ($deck->dome_id && $deck->book_id))
+                throw new \Exception(
+                    __('A deck can only be in one book, dome or area at the same time')
+                );
+        });
     }
 }

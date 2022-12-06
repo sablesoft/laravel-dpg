@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('decks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('book_id')->nullable(false)
-                ->constrained('books')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('card_id')->nullable(false)
                 ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('scope_id')->nullable(false)
@@ -27,8 +25,14 @@ return new class extends Migration
             $table->string('image')->nullable(true);
             $table->foreignId('owner_id')->nullable(false)
                 ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('book_id')->nullable(true)
+                ->constrained('books')->nullOnDelete();
+            $table->foreignId('dome_id')->nullable(true)
+                ->constrained('domes')->nullOnDelete();
+            $table->foreignId('area_id')->nullable(true)
+                ->constrained('areas')->nullOnDelete();
 
-            $table->unique(['book_id', 'card_id', 'scope_id', 'type']);
+            $table->unique(['owner_id', 'book_id', 'dome_id', 'area_id', 'card_id', 'scope_id', 'type']);
             $table->timestamps();
         });
     }

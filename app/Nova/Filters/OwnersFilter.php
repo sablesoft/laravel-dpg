@@ -16,6 +16,15 @@ class OwnersFilter extends ContentFilter
     public $name = 'Owners';
 
     /**
+     * @param string $whereInField
+     * @param bool $useWhereHas
+     */
+    public function __construct(string $whereInField = 'owner_id', bool $useWhereHas = false)
+    {
+        parent::__construct($useWhereHas, $whereInField);
+    }
+
+    /**
      * Apply the filter to the given query.
      *
      * @param Request $request
@@ -25,7 +34,7 @@ class OwnersFilter extends ContentFilter
      */
     public function apply(Request $request, $query, $value): Builder
     {
-        return $query->whereIn('owner_id', $value);
+        return $this->applyWhereHasAndWhereIn($query, $value, 'owners');
     }
 
     /**

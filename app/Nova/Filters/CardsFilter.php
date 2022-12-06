@@ -16,16 +16,12 @@ class CardsFilter extends ContentFilter
     public $name = 'Cards';
 
     /**
-     * @var string|mixed
-     */
-    protected string $whereInField = 'card_id';
-
-    /**
      * @param string $whereInField
+     * @param bool $useWhereHas
      */
-    public function __construct(string $whereInField = 'card_id')
+    public function __construct(string $whereInField = 'card_id', bool $useWhereHas = true)
     {
-        $this->whereInField = $whereInField;
+        parent::__construct($useWhereHas, $whereInField);
     }
 
     /**
@@ -38,9 +34,7 @@ class CardsFilter extends ContentFilter
      */
     public function apply(Request $request, $query, $value): Builder
     {
-        return $query->whereHas('cards', function ($query) use ($value) {
-            $query->whereIn($this->whereInField, $value);
-        });
+        return $this->applyWhereHasAndWhereIn($query, $value, 'cards');
     }
 
     /**

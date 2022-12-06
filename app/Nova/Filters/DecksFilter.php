@@ -18,6 +18,15 @@ class DecksFilter extends ContentFilter
     public $name = 'Decks';
 
     /**
+     * @param string $whereInField
+     * @param bool $useWhereHas
+     */
+    public function __construct(bool $useWhereHas = true, string $whereInField = 'deck_id')
+    {
+        parent::__construct($useWhereHas, $whereInField);
+    }
+
+    /**
      * Apply the filter to the given query.
      *
      * @param Request $request
@@ -27,9 +36,7 @@ class DecksFilter extends ContentFilter
      */
     public function apply(Request $request, $query, $value): Builder
     {
-        return $query->whereHas('decks', function ($query) use ($value) {
-            $query->whereIn('deck_id', $value);
-        });
+        return $this->applyWhereHasAndWhereIn($query, $value, 'decks');
     }
 
     /**

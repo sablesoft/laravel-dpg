@@ -2,6 +2,9 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\AreasFilter;
+use App\Nova\Filters\BooksFilter;
+use App\Nova\Filters\DomesFilter;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
@@ -47,8 +50,11 @@ class Deck extends Content
                 ->nullable(false)->sortable()
                 ->required()->rules('required'),
             BelongsTo::make(__('Book'), 'book', Book::class)
-                ->nullable(false)->sortable()
-                ->required()->rules('required'),
+                ->nullable(true)->sortable(),
+            BelongsTo::make(__('Dome'), 'dome', Dome::class)
+                ->nullable(true)->sortable(),
+            BelongsTo::make(__('Area'), 'area', Area::class)
+                ->nullable(true)->sortable(),
             Select::make(__('Type'), 'type')->nullable(false)
                 ->required()->rules('required')->sortable()
                 ->options(\App\Models\Deck::getTypeOptions())->displayUsingLabels(),
@@ -99,6 +105,9 @@ class Deck extends Content
     {
         return [
             DeckTypeFilter::make(),
+            BooksFilter::make(false),
+            DomesFilter::make(),
+            AreasFilter::make(),
             TargetsFilter::make(),
             ScopesFilter::make(),
             OwnersFilter::make(),

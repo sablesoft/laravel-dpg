@@ -16,16 +16,12 @@ class TagsFilter extends ContentFilter
     public $name = 'Tags';
 
     /**
-     * @var string|mixed
-     */
-    protected string $whereInField = 'tag_id';
-
-    /**
      * @param string $whereInField
+     * @param bool $useWhereHas
      */
-    public function __construct(string $whereInField = 'tag_id')
+    public function __construct(string $whereInField = 'tag_id', bool $useWhereHas = true)
     {
-        $this->whereInField = $whereInField;
+        parent::__construct($useWhereHas, $whereInField);
     }
 
     /**
@@ -36,9 +32,7 @@ class TagsFilter extends ContentFilter
      */
     public function apply(Request $request, $query, $value): Builder
     {
-        return $query->whereHas('tags', function ($query) use ($value) {
-            $query->whereIn($this->whereInField, $value);
-        });
+        return $this->applyWhereHasAndWhereIn($query, $value, 'tags');
     }
 
     /**

@@ -47,19 +47,6 @@ class CardsTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 31,
-                'name' => '{"en":"Savanna"}',
-                'code' => NULL,
-                'scope_id' => 86,
-                'image' => NULL,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 03:09:23',
-                'updated_at' => '2022-11-24 18:38:02',
-            ),
-            3 => 
-            array (
                 'id' => 30,
                 'name' => '{"en":"Seasonal Forest"}',
                 'code' => NULL,
@@ -71,7 +58,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:04:11',
                 'updated_at' => '2022-11-24 18:39:02',
             ),
-            4 => 
+            3 => 
             array (
                 'id' => 21,
                 'name' => '{"en":"Human","ru":"Человек"}',
@@ -84,7 +71,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:15:03',
                 'updated_at' => '2022-11-23 00:02:41',
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 29,
                 'name' => '{"en":"Grassland","ru":"Луга"}',
@@ -97,7 +84,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:02:37',
                 'updated_at' => '2022-11-25 04:24:12',
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 51,
                 'name' => '{"en":"Jaguar"}',
@@ -110,7 +97,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 02:59:15',
                 'updated_at' => '2022-11-23 03:45:26',
             ),
-            7 => 
+            6 => 
             array (
                 'id' => 59,
                 'name' => '{"en":"Night","ru":"Ночь"}',
@@ -123,7 +110,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:56:02',
                 'updated_at' => '2022-11-23 21:02:25',
             ),
-            8 => 
+            7 => 
             array (
                 'id' => 58,
                 'name' => '{"en":"Day","ru":"День"}',
@@ -136,7 +123,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:55:41',
                 'updated_at' => '2022-11-23 21:10:09',
             ),
-            9 => 
+            8 => 
             array (
                 'id' => 56,
                 'name' => '{"en":"Poison Dart Frog"}',
@@ -149,7 +136,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:22:08',
                 'updated_at' => '2022-11-23 03:40:03',
             ),
-            10 => 
+            9 => 
             array (
                 'id' => 57,
                 'name' => '{"en":"Time","ru":"Время"}',
@@ -162,7 +149,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:55:13',
                 'updated_at' => '2022-11-23 21:10:44',
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 64,
                 'name' => '{"en":"Diet","ru":"Диета"}',
@@ -175,7 +162,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:32:11',
                 'updated_at' => '2022-11-23 21:00:10',
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 60,
                 'name' => '{"en":"Action","ru":"Действие"}',
@@ -188,7 +175,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:02:13',
                 'updated_at' => '2022-11-23 21:01:26',
             ),
-            13 => 
+            12 => 
             array (
                 'id' => 78,
                 'name' => '{"en":"Omnivorous"}',
@@ -201,7 +188,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:19:43',
                 'updated_at' => '2022-11-16 02:19:43',
             ),
-            14 => 
+            13 => 
             array (
                 'id' => 70,
                 'name' => '{"en":"Nothing","ru":"Ничего"}',
@@ -214,7 +201,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:09:47',
                 'updated_at' => '2022-11-23 20:48:37',
             ),
-            15 => 
+            14 => 
             array (
                 'id' => 84,
                 'name' => '{"en":"Spear","ru":"Копье"}',
@@ -227,7 +214,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 03:08:36',
                 'updated_at' => '2022-11-23 18:03:43',
             ),
-            16 => 
+            15 => 
             array (
                 'id' => 9,
                 'name' => '{"en":"Clan","ru":"Клан"}',
@@ -240,7 +227,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:08:04',
                 'updated_at' => '2022-11-24 18:44:12',
             ),
-            17 => 
+            16 => 
             array (
                 'id' => 8,
                 'name' => '{"en":"Legend","ru":"Легенда"}',
@@ -253,7 +240,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-06 05:07:52',
                 'updated_at' => '2022-11-24 18:45:15',
             ),
-            18 => 
+            17 => 
             array (
                 'id' => 10,
                 'name' => '{"en":"Weariness","ru":"Усталость"}',
@@ -266,7 +253,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:36:47',
                 'updated_at' => '2022-11-23 18:03:12',
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 15,
                 'name' => '{"en":"Settlement","ru":"Поселение"}',
@@ -279,7 +266,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:26:20',
                 'updated_at' => '2022-11-25 04:27:31',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 12,
                 'name' => '{"en":"Find","ru":"Находка"}',
@@ -292,7 +279,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:39:42',
                 'updated_at' => '2022-11-25 04:28:05',
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 22,
                 'name' => '{"en":"Enemy","ru":"Враг"}',
@@ -305,7 +292,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:49:41',
                 'updated_at' => '2022-11-25 04:27:01',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 11,
                 'name' => '{"en":"Practice","ru":"Практика"}',
@@ -318,7 +305,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:36:58',
                 'updated_at' => '2022-11-25 04:28:25',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 1,
                 'name' => '{"en":"Info","ru":"Инфо"}',
@@ -330,6 +317,19 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-06 05:07:36',
                 'updated_at' => '2022-11-23 00:33:08',
+            ),
+            23 => 
+            array (
+                'id' => 31,
+                'name' => '{"en":"Savanna"}',
+                'code' => NULL,
+                'scope_id' => 86,
+                'image' => NULL,
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 03:09:23',
+                'updated_at' => '2022-12-06 15:40:44',
             ),
             24 => 
             array (
@@ -827,19 +827,6 @@ class CardsTableSeeder extends Seeder
             ),
             62 => 
             array (
-                'id' => 86,
-                'name' => '{"en":"Biome","ru":"Биом"}',
-                'code' => NULL,
-                'scope_id' => 4,
-                'image' => 'card/VfnN0pu6Z23vdu974UNmlQ1jAz7SvzJsKK615rGz.png',
-                'desc' => '{"en":"A Biome is an assemblage of ecosystems in the same natural and climatic zone, usually having some major vegetation type or other characteristic feature, such as in a landscape.\\r\\n\\r\\nThe main types of Biomes are as follows:\\r\\n- Wetland\\r\\n- Grassland\\r\\n- Rainforest\\r\\n- Tundra\\r\\n- Taiga\\r\\n- Savannah\\r\\n- and others.\\r\\n\\r\\nTIPS:\\r\\n- Use as a scope for the Hero\'s deck to indicate his current Biome.\\r\\n- Use as a scope for the Creature\'s deck to describe the Biomes in which it can be found.","ru":"Биом - это совокупность экосистем, находящихся в одной природно-климатической зоне, обычно с каким-либо основным типом растительности или другой характерной особенностью, например, в ландшафте.\\r\\n\\r\\nОсновные типы биомов следующие:\\r\\n- Водные Земли\\r\\n- Равнины\\r\\n- Джунгли\\r\\n- Тундра\\r\\n- Тайга\\r\\n- Саванна\\r\\n- и другие.\\r\\n\\r\\nПОДСКАЗКИ:\\r\\n- Используйте в качестве сферы для колоды существа, чтобы описать биомы, в которых его можно обнаружить."}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-24 18:33:40',
-                'updated_at' => '2022-11-24 19:22:07',
-            ),
-            63 => 
-            array (
                 'id' => 66,
                 'name' => '{"en":"Snake","ru":"Змея"}',
                 'code' => NULL,
@@ -851,7 +838,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:49:38',
                 'updated_at' => '2022-11-23 20:49:59',
             ),
-            64 => 
+            63 => 
             array (
                 'id' => 50,
                 'name' => '{"en":"Blue Morpho Butterfly"}',
@@ -864,7 +851,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 02:19:01',
                 'updated_at' => '2022-11-23 03:47:09',
             ),
-            65 => 
+            64 => 
             array (
                 'id' => 93,
                 'name' => '{"en":"Waning Moon","ru":"Растущая Луна"}',
@@ -877,7 +864,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-25 02:38:31',
                 'updated_at' => '2022-11-25 04:15:17',
             ),
-            66 => 
+            65 => 
             array (
                 'id' => 67,
                 'name' => '{"en":"Evening","ru":"Вечер"}',
@@ -890,7 +877,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:53:18',
                 'updated_at' => '2022-11-23 20:49:30',
             ),
-            67 => 
+            66 => 
             array (
                 'id' => 81,
                 'name' => '{"en":"Taming","ru":"Приручение"}',
@@ -903,7 +890,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:56:34',
                 'updated_at' => '2022-11-23 19:17:44',
             ),
-            68 => 
+            67 => 
             array (
                 'id' => 85,
                 'name' => '{"en":"Folk","ru":"Народ"}',
@@ -916,7 +903,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 18:22:30',
                 'updated_at' => '2022-11-24 19:29:18',
             ),
-            69 => 
+            68 => 
             array (
                 'id' => 62,
                 'name' => '{"en":"Wetland","ru":"Водные Земли"}',
@@ -929,7 +916,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:24:58',
                 'updated_at' => '2022-11-24 18:34:36',
             ),
-            70 => 
+            69 => 
             array (
                 'id' => 95,
                 'name' => '{"en":"Full Moon","ru":"Полнолуние"}',
@@ -942,7 +929,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-25 02:52:29',
                 'updated_at' => '2022-11-25 04:14:23',
             ),
-            71 => 
+            70 => 
             array (
                 'id' => 77,
                 'name' => '{"en":"Peccary"}',
@@ -955,7 +942,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:14:26',
                 'updated_at' => '2022-11-23 03:35:47',
             ),
-            72 => 
+            71 => 
             array (
                 'id' => 76,
                 'name' => '{"en":"Samauma"}',
@@ -968,7 +955,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 01:57:55',
                 'updated_at' => '2022-11-21 16:42:22',
             ),
-            73 => 
+            72 => 
             array (
                 'id' => 69,
                 'name' => '{"en":"Armadillo"}',
@@ -981,7 +968,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 18:04:42',
                 'updated_at' => '2022-11-23 03:37:24',
             ),
-            74 => 
+            73 => 
             array (
                 'id' => 68,
                 'name' => '{"en":"Morning","ru":"Утро"}',
@@ -994,7 +981,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:54:10',
                 'updated_at' => '2022-11-23 20:49:04',
             ),
-            75 => 
+            74 => 
             array (
                 'id' => 73,
                 'name' => '{"en":"Damage","ru":"Вред"}',
@@ -1007,7 +994,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:16:42',
                 'updated_at' => '2022-11-23 18:54:50',
             ),
-            76 => 
+            75 => 
             array (
                 'id' => 71,
                 'name' => '{"en":"Success","ru":"Успех"}',
@@ -1020,7 +1007,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:11:37',
                 'updated_at' => '2022-11-25 01:15:53',
             ),
-            77 => 
+            76 => 
             array (
                 'id' => 61,
                 'name' => '{"en":"Green Anaconda"}',
@@ -1033,7 +1020,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:21:46',
                 'updated_at' => '2022-11-23 03:39:05',
             ),
-            78 => 
+            77 => 
             array (
                 'id' => 53,
                 'name' => '{"en":"Capybara"}',
@@ -1046,7 +1033,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:22:02',
                 'updated_at' => '2022-11-23 03:43:25',
             ),
-            79 => 
+            78 => 
             array (
                 'id' => 91,
                 'name' => '{"en":"Moon","ru":"Месяц"}',
@@ -1059,7 +1046,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-25 02:27:59',
                 'updated_at' => '2022-11-25 04:16:19',
             ),
-            80 => 
+            79 => 
             array (
                 'id' => 54,
                 'name' => '{"en":"Mountain Gorilla"}',
@@ -1072,7 +1059,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 01:35:45',
                 'updated_at' => '2022-11-23 03:42:06',
             ),
-            81 => 
+            80 => 
             array (
                 'id' => 88,
                 'name' => '{"en":"Gate","ru":"Ворота"}',
@@ -1085,7 +1072,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 21:02:15',
                 'updated_at' => '2022-11-25 04:19:28',
             ),
-            82 => 
+            81 => 
             array (
                 'id' => 44,
                 'name' => '{"en":"Shiinhaku","ru":"Шиинхаку"}',
@@ -1098,7 +1085,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:34:07',
                 'updated_at' => '2022-11-23 03:56:17',
             ),
-            83 => 
+            82 => 
             array (
                 'id' => 79,
                 'name' => '{"en":"Skill","ru":"Навык"}',
@@ -1111,7 +1098,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:48:50',
                 'updated_at' => '2022-11-23 19:23:58',
             ),
-            84 => 
+            83 => 
             array (
                 'id' => 83,
                 'name' => '{"en":"Weapon","ru":"Оружие"}',
@@ -1124,7 +1111,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 03:07:32',
                 'updated_at' => '2022-11-23 19:00:28',
             ),
-            85 => 
+            84 => 
             array (
                 'id' => 6,
                 'name' => '{"en":"Item","ru":"Предмет"}',
@@ -1137,7 +1124,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:57:58',
                 'updated_at' => '2022-11-25 04:28:48',
             ),
-            86 => 
+            85 => 
             array (
                 'id' => 19,
                 'name' => '{"en":"Animal","ru":"Животное"}',
@@ -1150,7 +1137,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:13:44',
                 'updated_at' => '2022-11-23 02:43:40',
             ),
-            87 => 
+            86 => 
             array (
                 'id' => 80,
                 'name' => '{"en":"Survival","ru":"Выживание"}',
@@ -1163,7 +1150,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:54:14',
                 'updated_at' => '2022-11-23 18:34:14',
             ),
-            88 => 
+            87 => 
             array (
                 'id' => 55,
                 'name' => '{"en":"Titu","ru":"Титу"}',
@@ -1176,7 +1163,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:27:58',
                 'updated_at' => '2022-11-21 19:24:51',
             ),
-            89 => 
+            88 => 
             array (
                 'id' => 36,
                 'name' => '{"en":"Lanza Piya","ru":"Ланза Пийя"}',
@@ -1189,7 +1176,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 14:31:06',
                 'updated_at' => '2022-12-02 02:55:06',
             ),
-            90 => 
+            89 => 
             array (
                 'id' => 37,
                 'name' => '{"en":"Hero","ru":"Герой"}',
@@ -1202,7 +1189,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:33:23',
                 'updated_at' => '2022-12-04 07:05:19',
             ),
-            91 => 
+            90 => 
             array (
                 'id' => 87,
                 'name' => '{"en":"Area","ru":"Локация"}',
@@ -1215,7 +1202,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-24 19:14:00',
                 'updated_at' => '2022-12-04 07:06:08',
             ),
-            92 => 
+            91 => 
             array (
                 'id' => 97,
                 'name' => '{"en":"Dome","ru":"Мир"}',
@@ -1228,7 +1215,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-12-04 07:22:33',
                 'updated_at' => '2022-12-04 20:30:19',
             ),
-            93 => 
+            92 => 
             array (
                 'id' => 4,
                 'name' => '{"ru":"Место","en":"Space"}',
@@ -1241,7 +1228,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:56:32',
                 'updated_at' => '2022-12-04 18:50:16',
             ),
-            94 => 
+            93 => 
             array (
                 'id' => 5,
                 'name' => '{"en":"Creature","ru":"Существо"}',
@@ -1253,6 +1240,19 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-08 02:11:58',
                 'updated_at' => '2022-12-05 19:51:05',
+            ),
+            94 => 
+            array (
+                'id' => 86,
+                'name' => '{"en":"Biome","ru":"Биом"}',
+                'code' => 'biome',
+                'scope_id' => 4,
+                'image' => 'card/VfnN0pu6Z23vdu974UNmlQ1jAz7SvzJsKK615rGz.png',
+                'desc' => '{"en":"A Biome is an assemblage of ecosystems in the same natural and climatic zone, usually having some major vegetation type or other characteristic feature, such as in a landscape.\\r\\n\\r\\nThe main types of Biomes are as follows:\\r\\n- Wetland\\r\\n- Grassland\\r\\n- Rainforest\\r\\n- Tundra\\r\\n- Taiga\\r\\n- Savannah\\r\\n- and others.\\r\\n\\r\\nTIPS:\\r\\n- Use as a scope for the Hero\'s deck to indicate his current Biome.\\r\\n- Use as a scope for the Creature\'s deck to describe the Biomes in which it can be found.","ru":"Биом - это совокупность экосистем, находящихся в одной природно-климатической зоне, обычно с каким-либо основным типом растительности или другой характерной особенностью, например, в ландшафте.\\r\\n\\r\\nОсновные типы биомов следующие:\\r\\n- Водные Земли\\r\\n- Равнины\\r\\n- Джунгли\\r\\n- Тундра\\r\\n- Тайга\\r\\n- Саванна\\r\\n- и другие.\\r\\n\\r\\nПОДСКАЗКИ:\\r\\n- Используйте в качестве сферы для колоды существа, чтобы описать биомы, в которых его можно обнаружить."}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 18:33:40',
+                'updated_at' => '2022-12-06 15:43:16',
             ),
         ));
         

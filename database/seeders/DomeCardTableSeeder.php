@@ -39,6 +39,61 @@ class DomeCardTableSeeder extends Seeder
                 'dome_id' => 2,
                 'card_id' => 99,
             ),
+            4 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 76,
+            ),
+            5 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 77,
+            ),
+            6 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 69,
+            ),
+            7 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 51,
+            ),
+            8 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 54,
+            ),
+            9 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 61,
+            ),
+            10 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 56,
+            ),
+            11 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 53,
+            ),
+            12 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 52,
+            ),
+            13 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 50,
+            ),
+            14 => 
+            array (
+                'dome_id' => 2,
+                'card_id' => 49,
+            ),
         ));
         
         

@@ -69,8 +69,7 @@ class Book extends Content
             Textarea::make(__('Desc'), 'desc')->nullable()->alwaysShow(),
             BelongsToMany::make(__('Domes'), 'domes', Dome::class),
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
-            HasMany::make(__('Decks'), 'decks', Deck::class)
-                ->sortable()->nullable(true),
+            HasMany::make(__('Decks'), 'decks', Deck::class),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)
                 ->sortable()->nullable(true),
             Boolean::make(__('Is Public'), 'is_public')

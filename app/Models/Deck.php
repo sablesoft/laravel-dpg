@@ -5,20 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Traits\FromDeck;
 
 /**
  * @property int|null $type
- * @property int|null $card_id
  * @property int|null $book_id
  * @property int|null $dome_id
  * @property int|null $area_id
  *
- * @property-read string|null $name
  * @property-read Book|null $book
  * @property-read Dome|null $dome
  * @property-read Area|null $area
- * @property-read Card|null $target
  * @property-read Card[]|null $tags
  * @property-read Card[]|null $cards
  *
@@ -26,31 +23,13 @@ use Illuminate\Support\Facades\Auth;
  */
 class Deck extends Content
 {
+    use FromDeck;
+
     // todo - enums
     const TYPE_STACK = 0;
     const TYPE_SET = 1;
     const TYPE_STATE = 2;
     const TYPE_CONTROL = 3;
-
-    /**
-     * @return string|null
-     */
-    public function getNameAttribute(): ?string
-    {
-        $target = optional($this->target)->name;
-        $scope = optional($this->scope)->name;
-
-        return ($target && $scope) ?
-            $target .' - '. $scope : null;
-    }
-
-    /**
-     * @param $value
-     * @return void
-     */
-    public function setNameAttribute($value)
-    {
-    }
 
     /**
      * @return BelongsTo
@@ -74,14 +53,6 @@ class Deck extends Content
     public function area(): BelongsTo
     {
         return $this->belongsTo(Area::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function target(): BelongsTo
-    {
-        return $this->belongsTo(Card::class, 'card_id');
     }
 
     /**

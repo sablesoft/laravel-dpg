@@ -44,6 +44,14 @@ trait FromDeck
     }
 
     /**
+     * @param $value
+     * @return void
+     */
+    public function setNameAttribute($value)
+    {
+    }
+
+    /**
      * @return BelongsTo
      */
     public function game(): BelongsTo

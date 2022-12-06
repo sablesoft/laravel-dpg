@@ -24,7 +24,7 @@ abstract class Resource extends NovaResource
      *
      * @var int
      */
-    public static $perPageViaRelationship = 10;
+    public static $perPageViaRelationship = 5;
 
     /**
      * @return string

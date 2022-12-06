@@ -55,15 +55,21 @@ class Dome extends Content
                 })->hideFromIndex()->disk(ImageService::diskName())
                 ->nullable(false)->required()->rules('file')->prunable(),
             Number::make(__('Area Width'), 'area_width')
+                ->hideFromIndex()
                 ->nullable(false)->required(true)->rules('required'),
             Number::make(__('Area Height'), 'area_height')
+                ->hideFromIndex()
                 ->nullable(false)->required(true)->rules('required'),
             Number::make(__('Left Step'), 'left_step')->step(0.01)
+                ->hideFromIndex()
                 ->nullable(false)->required(true)->rules('required'),
             Number::make(__('Top Step'), 'top_step')->step(0.01)
+                ->hideFromIndex()
                 ->nullable(false)->required(true)->rules('required'),
             Code::make(__('Area Mask'), 'area_mask')->json()
                 ->nullable(true)->required(false)->hideFromIndex(),
+            Number::make(__('Decks Count'), 'decks_count')
+                ->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
             BelongsTo::make(__('Owner'), 'owner', User::class)
@@ -77,6 +83,7 @@ class Dome extends Content
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
             HasMany::make(__('Areas'), 'areas', Area::class),
             BelongsToMany::make(__('Cards'), 'cards', Card::class),
+            HasMany::make(__('Decks'), 'decks', Deck::class),
             BelongsToMany::make(__('Used In Books'), 'books', Book::class),
         ];
     }

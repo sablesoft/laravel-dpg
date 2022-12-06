@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Traits\Decks;
 
 /**
- * @property int|null $id
  * @property int|null $card_id
  * @property int|null $area_width
  * @property int|null $area_height
  * @property int|null $top_step
  * @property int|null $left_step
  * @property array|null $area_mask
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ *
+ * @property-read string|null $card_image
  *
  * @property-read Card|null $dome
  * @property-read Area[]|null $areas
@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class Dome extends Content
 {
+    use Decks;
+
     /**
      * @var string[]
      */

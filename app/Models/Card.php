@@ -11,7 +11,6 @@ use App\Models\Traits\Books;
 
 /**
  * @property-read Card[]|null $tags
- * @property-read Decks[]|null $decks
  * @property-read Decks[]|null $inDecks
  * @property-read Books[]|null $books
  * @property-read Dome[]|null $domes
@@ -139,14 +138,6 @@ class Card extends Content
             Deck::class,
             'deck_card',
         )->withPivot('count');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function decks(): HasMany
-    {
-        return $this->hasMany(Deck::class);
     }
 
     /**

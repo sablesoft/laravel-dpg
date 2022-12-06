@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Traits\Decks;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Translatable\HasTranslations;
 use App\Models\Traits\Subscribers;
 
 /**
  * @property-read Card[]|null $cards
- * @property-read Deck[]|null $decks
  * @property-read Dome[]|null $domes
  * @property-read Book[]|null $sources
  * @property-read Book[]|null $usedInBooks
@@ -21,7 +20,7 @@ use App\Models\Traits\Subscribers;
  */
 class Book extends Content
 {
-    use HasTranslations, Subscribers;
+    use HasTranslations, Subscribers, Decks;
 
     const SUBSCRIBER_TYPE_PUBLIC = 0;
     const SUBSCRIBER_TYPE_LICENCE = 1;
@@ -119,14 +118,6 @@ class Book extends Content
         }
 
         return true;
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function decks(): HasMany
-    {
-        return $this->hasMany(Deck::class);
     }
 
     /**

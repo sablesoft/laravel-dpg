@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Traits\Decks;
 
 /**
- * @property int|null $id
  * @property int|null $dome_id
  * @property int|null $card_id
  * @property string|null $filename
@@ -17,10 +16,9 @@ use Illuminate\Support\Facades\Auth;
  * @property int|null $left_step
  * @property int|null $left
  * @property array|null $markers
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
  *
  * @property-read string|null $card_image
+ * @property-read string|null $dome_image
  *
  * @property-read Dome|null $dome
  * @property-read Card|null $area
@@ -29,6 +27,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class Area extends Content
 {
+    use Decks;
+
     /**
      * @return BelongsTo
      */
@@ -43,6 +43,14 @@ class Area extends Content
     public function getCardImageAttribute(): ?string
     {
         return $this->area?->image;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDomeImageAttribute(): ?string
+    {
+        return $this->dome?->card_image;
     }
 
     /**

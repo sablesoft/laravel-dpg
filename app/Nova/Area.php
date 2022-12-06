@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\DomesFilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Fields\BelongsTo;
@@ -9,7 +10,9 @@ use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Textarea;
 use Codebykyle\CalculatedField\BroadcasterField;
 use Codebykyle\CalculatedField\ListenerField;
@@ -44,10 +47,12 @@ class Area extends Content
     public function fields(Request $request): array
     {
         return [
-            BelongsTo::make(__('Card'), 'area', Card::class),
+            BelongsTo::make(__('Dome'), 'dome', Dome::class)->sortable(),
+            Image::make(__('Dome Image'), 'dome_image')
+                ->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Card'), 'area', Card::class)->sortable(),
             Image::make(__('Card Image'), 'card_image')
                 ->hideWhenCreating()->hideWhenUpdating(),
-            BelongsTo::make(__('Dome'), 'dome', Dome::class),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
             Image::make(__('Area Image'), 'image')
@@ -55,7 +60,7 @@ class Area extends Content
                     /** @var \App\Models\Area $model */
                     return ImageService::uploadAreaImage($request->file($requestAttribute), $model->dome);
                 })->disk(ImageService::diskName())->nullable(true)->prunable(),
-            BroadcasterField::make(__('Top Step'), 'top_step')
+            BroadcasterField::make(__('Top Step'), 'top_step')->sortable()
                 ->broadcastTo('top'),
             ListenerField::make(__('Top'), 'top')->calculateWith(function(Collection $values) {
                 $step = 1;
@@ -66,7 +71,7 @@ class Area extends Content
                 }
                 return (int) ($values->get('top_step') * $step);
             })->hideFromIndex()->listensTo('top'),
-            BroadcasterField::make(__('Left Step'), 'left_step')
+            BroadcasterField::make(__('Left Step'), 'left_step')->sortable()
                 ->broadcastTo('left'),
             ListenerField::make(__('Left'), 'left')->calculateWith(function(Collection $values) {
                 $step = 1;
@@ -78,6 +83,8 @@ class Area extends Content
                 return (int) ($values->get('left_step') * $step);
             })->hideFromIndex()->listensTo('left'),
             Code::make(__('Markers'), 'markers')->json(),
+            Number::make(__('Decks Count'), 'decks_count')
+                ->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
             BelongsTo::make(__('Owner'), 'owner', User::class)
@@ -90,6 +97,7 @@ class Area extends Content
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
             BelongsToMany::make(__('Cards'), 'cards'),
+            HasMany::make(__('Decks'), 'decks', Deck::class),
         ];
     }
 
@@ -112,7 +120,9 @@ class Area extends Content
      */
     public function filters(Request $request): array
     {
-        return parent::filters($request);
+        return array_merge(parent::filters($request), [
+            DomesFilter::make()
+        ]);
     }
 
     /**

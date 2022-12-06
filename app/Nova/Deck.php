@@ -2,19 +2,20 @@
 
 namespace App\Nova;
 
-use App\Nova\Filters\AreasFilter;
-use App\Nova\Filters\BooksFilter;
-use App\Nova\Filters\DomesFilter;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\Boolean;
-//use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Http\Requests\ResourceDetailRequest;
+use App\Service\ImageService;
 use App\Nova\Actions\CopyDeck;
+use App\Nova\Filters\AreasFilter;
+use App\Nova\Filters\BooksFilter;
+use App\Nova\Filters\DomesFilter;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\ScopesFilter;
 use App\Nova\Filters\TargetsFilter;
@@ -26,6 +27,8 @@ use App\Nova\Filters\DeckTypeFilter;
  */
 class Deck extends Content
 {
+    public static $displayInNavigation = false;
+
     /**
      * The model the resource corresponds to.
      *
@@ -42,19 +45,55 @@ class Deck extends Content
     public function fields(Request $request): array
     {
         return [
-//            ID::make(__('ID'), 'id'),
+            BelongsTo::make(__('Book'), 'book', Book::class)
+                ->hideFromIndex()->hideWhenCreating()->readonly()
+                ->showOnUpdating(function(ResourceDetailRequest $request) {
+                    $resource = $request->findResourceOrFail();
+                    /** @var \App\Models\Deck $model */
+                    $model = $resource->model();
+                    return $model && !!$model->book_id;
+                })->showOnDetail(function(ResourceDetailRequest $request) {
+                    $resource = $request->findResourceOrFail();
+                    /** @var \App\Models\Deck $model */
+                    $model = $resource->model();
+                    return $model && !!$model->book_id;
+                }),
+            BelongsTo::make(__('Dome'), 'dome', Dome::class)
+                ->hideFromIndex()->hideWhenCreating()->readonly()
+                ->showOnUpdating(function(ResourceDetailRequest $request) {
+                    $resource = $request->findResourceOrFail();
+                    /** @var \App\Models\Deck $model */
+                    $model = $resource->model();
+                    return $model && !!$model->dome_id;
+                })->showOnDetail(function(ResourceDetailRequest $request) {
+                    $resource = $request->findResourceOrFail();
+                    /** @var \App\Models\Deck $model */
+                    $model = $resource->model();
+                    return $model && !!$model->dome_id;
+                }),
+            BelongsTo::make(__('Area'), 'area', Area::class)
+                ->hideFromIndex()->hideWhenCreating()->readonly()
+                ->showOnUpdating(function(ResourceDetailRequest $request) {
+                    $resource = $request->findResourceOrFail();
+                    /** @var \App\Models\Deck $model */
+                    $model = $resource->model();
+                    return $model && !!$model->area_id;
+                })->showOnDetail(function(ResourceDetailRequest $request) {
+                    $resource = $request->findResourceOrFail();
+                    /** @var \App\Models\Deck $model */
+                    $model = $resource->model();
+                    return $model && !!$model->area_id;
+                }),
             BelongsTo::make(__('Target'), 'target', Card::class)
                 ->nullable(false)->sortable()
                 ->required()->rules('required'),
+            Image::make('', 'target_image')
+                ->disk(ImageService::diskName())->onlyOnIndex(),
             BelongsTo::make(__('Scope'), 'scope', Card::class)
                 ->nullable(false)->sortable()
                 ->required()->rules('required'),
-            BelongsTo::make(__('Book'), 'book', Book::class)
-                ->nullable(true)->sortable(),
-            BelongsTo::make(__('Dome'), 'dome', Dome::class)
-                ->nullable(true)->sortable(),
-            BelongsTo::make(__('Area'), 'area', Area::class)
-                ->nullable(true)->sortable(),
+            Image::make('', 'scope_image')
+                ->disk(ImageService::diskName())->onlyOnIndex(),
             Select::make(__('Type'), 'type')->nullable(false)
                 ->required()->rules('required')->sortable()
                 ->options(\App\Models\Deck::getTypeOptions())->displayUsingLabels(),

@@ -22,7 +22,7 @@ class GameBookTableSeeder extends Seeder
             0 => 
             array (
                 'game_id' => 1,
-                'book_id' => 1,
+                'book_id' => 2,
             ),
         ));
         

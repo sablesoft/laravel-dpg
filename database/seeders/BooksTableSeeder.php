@@ -21,7 +21,7 @@ class BooksTableSeeder extends Seeder
         \DB::table('books')->insert(array (
             0 => 
             array (
-                'id' => 2,
+                'id' => 1,
                 'name' => '{"en":"Core","ru":"Ядро"}',
                 'code' => NULL,
                 'scope_id' => NULL,
@@ -34,7 +34,7 @@ class BooksTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 1,
+                'id' => 2,
                 'name' => '{"en":"Rainforest Dreams","ru":"Сны Дождливых Лесов"}',
                 'code' => NULL,
                 'scope_id' => NULL,

@@ -21,7 +21,7 @@ class BookSubscriberTableSeeder extends Seeder
         \DB::table('book_subscriber')->insert(array (
             0 => 
             array (
-                'book_id' => 2,
+                'book_id' => 1,
                 'subscriber_id' => 4,
                 'type' => 0,
             ),

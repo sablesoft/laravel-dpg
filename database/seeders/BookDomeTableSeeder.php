@@ -21,8 +21,8 @@ class BookDomeTableSeeder extends Seeder
         \DB::table('book_dome')->insert(array (
             0 => 
             array (
-                'book_id' => 1,
-                'dome_id' => 2,
+                'book_id' => 2,
+                'dome_id' => 1,
             ),
         ));
         

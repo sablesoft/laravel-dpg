@@ -21,11 +21,11 @@ class AreasTableSeeder extends Seeder
         \DB::table('areas')->insert(array (
             0 => 
             array (
-                'id' => 4,
+                'id' => 3,
                 'name' => '{"en":"Savanna Tract"}',
                 'code' => NULL,
                 'scope_id' => NULL,
-                'dome_id' => 2,
+                'dome_id' => 1,
                 'card_id' => 100,
                 'top_step' => 13,
                 'top' => 3810,
@@ -41,11 +41,11 @@ class AreasTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 3,
+                'id' => 2,
                 'name' => '{"en":"Deep Forest"}',
                 'code' => NULL,
                 'scope_id' => NULL,
-                'dome_id' => 2,
+                'dome_id' => 1,
                 'card_id' => 99,
                 'top_step' => 13,
                 'top' => 3809,
@@ -61,11 +61,11 @@ class AreasTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 2,
+                'id' => 1,
                 'name' => '{"en":"River of Birth","ru":"Река Рождения"}',
                 'code' => NULL,
                 'scope_id' => NULL,
-                'dome_id' => 2,
+                'dome_id' => 1,
                 'card_id' => 33,
                 'top_step' => 13,
                 'top' => 3809,

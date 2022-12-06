@@ -73,7 +73,7 @@ class Deck extends Content
      */
     public function cards(): BelongsToMany
     {
-        return $this->belongsToMany(Card::class, 'deck_card')
+        return $this->belongsToMany(Card::class, 'card_relation')
             ->withPivot('count');
     }
 

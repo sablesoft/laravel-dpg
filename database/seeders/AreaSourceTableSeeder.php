@@ -21,8 +21,8 @@ class AreaSourceTableSeeder extends Seeder
         \DB::table('area_source')->insert(array (
             0 => 
             array (
-                'area_id' => 2,
-                'source_id' => 2,
+                'area_id' => 1,
+                'source_id' => 1,
             ),
         ));
         

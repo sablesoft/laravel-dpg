@@ -110,7 +110,7 @@ class Card extends Content
      */
     public function books(): BelongsToMany
     {
-        return $this->belongsToMany(Book::class, 'book_card');
+        return $this->belongsToMany(Book::class, 'card_relation');
     }
 
     /**
@@ -118,7 +118,7 @@ class Card extends Content
      */
     public function domes(): BelongsToMany
     {
-        return $this->belongsToMany(Dome::class, 'dome_card');
+        return $this->belongsToMany(Dome::class, 'card_relation');
     }
 
     /**
@@ -126,7 +126,7 @@ class Card extends Content
      */
     public function areas(): BelongsToMany
     {
-        return $this->belongsToMany(Area::class);
+        return $this->belongsToMany(Area::class, 'card_relation');
     }
 
     /**
@@ -136,7 +136,7 @@ class Card extends Content
     {
         return $this->belongsToMany(
             Deck::class,
-            'deck_card',
+            'card_relation',
         )->withPivot('count');
     }
 

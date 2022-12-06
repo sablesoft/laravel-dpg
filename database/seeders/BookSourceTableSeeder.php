@@ -21,8 +21,13 @@ class BookSourceTableSeeder extends Seeder
         \DB::table('book_source')->insert(array (
             0 => 
             array (
-                'book_id' => 2,
+                'book_id' => 1,
                 'source_id' => 1,
+            ),
+            1 => 
+            array (
+                'book_id' => 1,
+                'source_id' => 2,
             ),
         ));
         

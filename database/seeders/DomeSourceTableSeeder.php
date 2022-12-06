@@ -21,8 +21,8 @@ class DomeSourceTableSeeder extends Seeder
         \DB::table('dome_source')->insert(array (
             0 => 
             array (
-                'dome_id' => 2,
-                'source_id' => 2,
+                'dome_id' => 1,
+                'source_id' => 1,
             ),
         ));
         

@@ -21,7 +21,7 @@ class DomesTableSeeder extends Seeder
         \DB::table('domes')->insert(array (
             0 => 
             array (
-                'id' => 2,
+                'id' => 1,
                 'name' => '{"en":"Serpent\'s Lair","ru":"Гнездо Змея"}',
                 'code' => NULL,
                 'scope_id' => NULL,

@@ -66,7 +66,7 @@ class Area extends Content
      */
     public function cards(): BelongsToMany
     {
-        return $this->belongsToMany(Card::class);
+        return $this->belongsToMany(Card::class, 'card_relation');
     }
 
     /**

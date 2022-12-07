@@ -14,12 +14,12 @@ class StacksTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('stacks')->delete();
-        
+
         \DB::table('stacks')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 19,
                 'game_id' => 1,
@@ -33,7 +33,7 @@ class StacksTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 20,
                 'game_id' => 1,
@@ -47,7 +47,7 @@ class StacksTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 21,
                 'game_id' => 1,
@@ -61,7 +61,7 @@ class StacksTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 22,
                 'game_id' => 1,
@@ -75,7 +75,7 @@ class StacksTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 23,
                 'game_id' => 1,
@@ -89,13 +89,13 @@ class StacksTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 24,
                 'game_id' => 1,
                 'deck_id' => 11,
                 'card_id' => 36,
-                'scope_id' => 16,
+                'scope_id' => 8,
                 'owner_id' => 1,
                 'desc' => '',
                 'pack' => '[47,48,45]',
@@ -104,7 +104,7 @@ class StacksTableSeeder extends Seeder
                 'updated_at' => '2022-12-02 02:39:45',
             ),
         ));
-        
-        
+
+
     }
 }

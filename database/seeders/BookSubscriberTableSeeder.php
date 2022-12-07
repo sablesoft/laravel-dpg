@@ -14,19 +14,19 @@ class BookSubscriberTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('book_subscriber')->delete();
-        
+
         \DB::table('book_subscriber')->insert(array (
-            0 => 
+            0 =>
             array (
                 'book_id' => 1,
-                'subscriber_id' => 4,
+                'subscriber_id' => 2,
                 'type' => 0,
             ),
         ));
-        
-        
+
+
     }
 }

@@ -97,6 +97,7 @@ class Book extends Content
                 }),
             BelongsToMany::make(__('Used In Books'), 'usedInBooks', Book::class),
             BelongsToMany::make(__('Used In Domes'), 'usedInDomes', Dome::class),
+            BelongsToMany::make(__('Used In Lands'), 'usedInLands', Land::class),
             BelongsToMany::make(__('Used In Areas'), 'usedInAreas', Area::class),
             BelongsToMany::make(__('Games'), 'games', Game::class)
         ];

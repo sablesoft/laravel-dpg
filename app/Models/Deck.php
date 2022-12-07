@@ -12,10 +12,12 @@ use App\Models\Traits\FromDeck;
  * @property int|null $type
  * @property int|null $book_id
  * @property int|null $dome_id
+ * @property int|null $land_id
  * @property int|null $area_id
  *
  * @property-read Book|null $book
  * @property-read Dome|null $dome
+ * @property-read Land|null $land
  * @property-read Area|null $area
  * @property-read Card[]|null $tags
  *
@@ -45,6 +47,14 @@ class Deck extends Content
     public function dome(): BelongsTo
     {
         return $this->belongsTo(Dome::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function land(): BelongsTo
+    {
+        return $this->belongsTo(Land::class);
     }
 
     /**

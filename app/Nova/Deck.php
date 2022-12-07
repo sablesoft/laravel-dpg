@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Http\Requests\ResourceDetailRequest;
 use App\Service\ImageService;
 use App\Nova\Actions\CopyDeck;
@@ -47,12 +48,12 @@ class Deck extends Content
         return [
             BelongsTo::make(__('Book'), 'book', Book::class)
                 ->hideFromIndex()->hideWhenCreating()->readonly()
-                ->showOnUpdating(function(ResourceDetailRequest $request) {
+                ->showOnUpdating(function(NovaRequest $request) {
                     $resource = $request->findResourceOrFail();
                     /** @var \App\Models\Deck $model */
                     $model = $resource->model();
                     return $model && !!$model->book_id;
-                })->showOnDetail(function(ResourceDetailRequest $request) {
+                })->showOnDetail(function(NovaRequest $request) {
                     $resource = $request->findResourceOrFail();
                     /** @var \App\Models\Deck $model */
                     $model = $resource->model();
@@ -60,25 +61,38 @@ class Deck extends Content
                 }),
             BelongsTo::make(__('Dome'), 'dome', Dome::class)
                 ->hideFromIndex()->hideWhenCreating()->readonly()
-                ->showOnUpdating(function(ResourceDetailRequest $request) {
+                ->showOnUpdating(function(NovaRequest $request) {
                     $resource = $request->findResourceOrFail();
                     /** @var \App\Models\Deck $model */
                     $model = $resource->model();
                     return $model && !!$model->dome_id;
-                })->showOnDetail(function(ResourceDetailRequest $request) {
+                })->showOnDetail(function(NovaRequest $request) {
                     $resource = $request->findResourceOrFail();
                     /** @var \App\Models\Deck $model */
                     $model = $resource->model();
                     return $model && !!$model->dome_id;
                 }),
+            BelongsTo::make(__('Land'), 'land', Land::class)
+                ->hideFromIndex()->hideWhenCreating()->readonly()
+                ->showOnUpdating(function(NovaRequest $request) {
+                    $resource = $request->findResourceOrFail();
+                    /** @var \App\Models\Deck $model */
+                    $model = $resource->model();
+                    return $model && !!$model->land_id;
+                })->showOnDetail(function(NovaRequest $request) {
+                    $resource = $request->findResourceOrFail();
+                    /** @var \App\Models\Deck $model */
+                    $model = $resource->model();
+                    return $model && !!$model->land_id;
+                }),
             BelongsTo::make(__('Area'), 'area', Area::class)
                 ->hideFromIndex()->hideWhenCreating()->readonly()
-                ->showOnUpdating(function(ResourceDetailRequest $request) {
+                ->showOnUpdating(function(NovaRequest $request) {
                     $resource = $request->findResourceOrFail();
                     /** @var \App\Models\Deck $model */
                     $model = $resource->model();
                     return $model && !!$model->area_id;
-                })->showOnDetail(function(ResourceDetailRequest $request) {
+                })->showOnDetail(function(NovaRequest $request) {
                     $resource = $request->findResourceOrFail();
                     /** @var \App\Models\Deck $model */
                     $model = $resource->model();

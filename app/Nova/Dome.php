@@ -83,6 +83,7 @@ class Dome extends Content
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
+            HasMany::make(__('Lands'), 'lands', Land::class),
             HasMany::make(__('Areas'), 'areas', Area::class),
             BelongsToMany::make(__('Cards'), 'cards', Card::class),
             HasMany::make(__('Decks'), 'decks', Deck::class),

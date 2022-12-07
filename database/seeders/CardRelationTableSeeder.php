@@ -1911,7 +1911,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             189 => 
             array (
-                'card_id' => 50,
+                'card_id' => 49,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1921,16 +1921,6 @@ class CardRelationTableSeeder extends Seeder
             ),
             190 => 
             array (
-                'card_id' => 49,
-                'deck_id' => NULL,
-                'book_id' => NULL,
-                'dome_id' => 1,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'count' => 1,
-            ),
-            191 => 
-            array (
                 'card_id' => 18,
                 'deck_id' => NULL,
                 'book_id' => 1,
@@ -1939,7 +1929,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            192 => 
+            191 => 
             array (
                 'card_id' => 33,
                 'deck_id' => NULL,
@@ -1949,9 +1939,29 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            193 => 
+            192 => 
             array (
                 'card_id' => 32,
+                'deck_id' => NULL,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => 1,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            193 => 
+            array (
+                'card_id' => 50,
+                'deck_id' => NULL,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => 1,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            194 => 
+            array (
+                'card_id' => 23,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => NULL,

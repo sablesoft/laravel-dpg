@@ -412,40 +412,6 @@ class DecksTableSeeder extends Seeder
             ),
             23 => 
             array (
-                'id' => 32,
-                'card_id' => 35,
-                'scope_id' => 20,
-                'type' => 0,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'book_id' => NULL,
-                'dome_id' => 1,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'created_at' => '2022-11-16 02:03:36',
-                'updated_at' => '2022-12-06 15:49:04',
-            ),
-            24 => 
-            array (
-                'id' => 31,
-                'card_id' => 35,
-                'scope_id' => 19,
-                'type' => 0,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'image' => NULL,
-                'owner_id' => 1,
-                'book_id' => NULL,
-                'dome_id' => 1,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'created_at' => '2022-11-15 21:42:11',
-                'updated_at' => '2022-12-06 15:54:19',
-            ),
-            25 => 
-            array (
                 'id' => 24,
                 'card_id' => 69,
                 'scope_id' => 22,
@@ -461,7 +427,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 19:41:38',
                 'updated_at' => '2022-12-06 15:57:00',
             ),
-            26 => 
+            24 => 
             array (
                 'id' => 18,
                 'card_id' => 61,
@@ -478,7 +444,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:38:47',
                 'updated_at' => '2022-12-06 16:08:23',
             ),
-            27 => 
+            25 => 
             array (
                 'id' => 19,
                 'card_id' => 53,
@@ -495,7 +461,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:42:02',
                 'updated_at' => '2022-12-06 16:17:48',
             ),
-            28 => 
+            26 => 
             array (
                 'id' => 4,
                 'card_id' => 52,
@@ -512,7 +478,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:51:25',
                 'updated_at' => '2022-12-06 16:17:56',
             ),
-            29 => 
+            27 => 
             array (
                 'id' => 5,
                 'card_id' => 53,
@@ -529,7 +495,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:51:37',
                 'updated_at' => '2022-12-06 16:19:27',
             ),
-            30 => 
+            28 => 
             array (
                 'id' => 21,
                 'card_id' => 51,
@@ -546,7 +512,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-13 03:03:22',
                 'updated_at' => '2022-12-06 16:20:07',
             ),
-            31 => 
+            29 => 
             array (
                 'id' => 10,
                 'card_id' => 51,
@@ -563,7 +529,7 @@ class DecksTableSeeder extends Seeder
                 'created_at' => '2022-11-12 16:53:38',
                 'updated_at' => '2022-12-06 16:22:53',
             ),
-            32 => 
+            30 => 
             array (
                 'id' => 53,
                 'card_id' => 7,
@@ -579,6 +545,40 @@ class DecksTableSeeder extends Seeder
                 'area_id' => NULL,
                 'created_at' => '2022-11-25 03:15:12',
                 'updated_at' => '2022-11-25 04:34:00',
+            ),
+            31 => 
+            array (
+                'id' => 31,
+                'card_id' => 35,
+                'scope_id' => 19,
+                'type' => 0,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => 1,
+                'area_id' => NULL,
+                'created_at' => '2022-11-15 21:42:11',
+                'updated_at' => '2022-12-06 15:54:19',
+            ),
+            32 => 
+            array (
+                'id' => 32,
+                'card_id' => 35,
+                'scope_id' => 20,
+                'type' => 0,
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'image' => NULL,
+                'owner_id' => 1,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => 1,
+                'area_id' => NULL,
+                'created_at' => '2022-11-16 02:03:36',
+                'updated_at' => '2022-12-06 15:49:04',
             ),
             33 => 
             array (

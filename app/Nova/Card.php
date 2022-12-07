@@ -107,6 +107,7 @@ class Card extends Content
 //            Text::make(__('Tags'), 'tags_string')
 //                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             BelongsToMany::make(__('Domes'), 'domes', Dome::class),
+            BelongsToMany::make(__('Lands'), 'lands', Land::class),
             BelongsToMany::make(__('Areas'), 'areas', Area::class),
             BelongsToMany::make(__('Books'), 'books', Book::class),
             HasMany::make(__('Decks'), 'decks', Deck::class),

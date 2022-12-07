@@ -21,6 +21,7 @@ use App\Models\Traits\Sources;
  * @property-read string|null $card_image
  *
  * @property-read Card|null $dome
+ * @property-read Land[]|null $lands
  * @property-read Area[]|null $areas
  * @property-read Book[]|null $books
  */
@@ -49,6 +50,14 @@ class Dome extends Content
     public function dome(): BelongsTo
     {
         return $this->belongsTo(Card::class, 'scope_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function lands(): HasMany
+    {
+        return $this->hasMany(Land::class);
     }
 
     /**

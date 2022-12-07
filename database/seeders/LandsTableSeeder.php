@@ -14,11 +14,12 @@ class LandsTableSeeder extends Seeder
      */
     public function run()
     {
+        
 
         \DB::table('lands')->delete();
-
+        
         \DB::table('lands')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'name' => '{"en":"Rainforest"}',
@@ -33,7 +34,7 @@ class LandsTableSeeder extends Seeder
                 'updated_at' => '2022-12-07 02:24:58',
             ),
         ));
-
-
+        
+        
     }
 }

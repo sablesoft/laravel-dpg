@@ -14,6 +14,7 @@ use App\Models\Traits\Subscribers;
  * @property-read Dome[]|null $domes
  * @property-read Book[]|null $usedInBooks
  * @property-read Dome[]|null $usedInDomes
+ * @property-read Dome[]|null $usedInLands
  * @property-read Area[]|null $usedInAreas
  */
 class Book extends Content
@@ -55,6 +56,18 @@ class Book extends Content
     {
         return $this->belongsToMany(
             Dome::class,
+            'source_relation',
+            'source_id',
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function usedInLands(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Land::class,
             'source_relation',
             'source_id',
         );

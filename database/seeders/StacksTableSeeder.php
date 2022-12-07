@@ -94,7 +94,7 @@ class StacksTableSeeder extends Seeder
                 'id' => 24,
                 'game_id' => 1,
                 'deck_id' => 11,
-                'card_id' => 36,
+                'card_id' => 83,
                 'scope_id' => 8,
                 'owner_id' => 1,
                 'desc' => '',

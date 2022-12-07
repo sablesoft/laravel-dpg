@@ -25,7 +25,7 @@ class DomesTableSeeder extends Seeder
                 'name' => '{"en":"Serpent\'s Lair","ru":"Гнездо Змея"}',
                 'code' => NULL,
                 'scope_id' => NULL,
-                'card_id' => 63,
+                'card_id' => 96,
                 'area_width' => '338.00',
                 'area_height' => '388.00',
                 'top_step' => '293.00',

@@ -22,7 +22,7 @@ class DecksTableSeeder extends Seeder
             0 =>
             array (
                 'id' => 11,
-                'card_id' => 36,
+                'card_id' => 83,
                 'scope_id' => 8,
                 'type' => 0,
                 'desc' => '{"en":null}',
@@ -86,8 +86,8 @@ class DecksTableSeeder extends Seeder
             4 =>
             array (
                 'id' => 38,
-                'card_id' => 55,
-                'scope_id' => 80,
+                'card_id' => 80,
+                'scope_id' => 55,
                 'type' => 1,
                 'desc' => '{"en":null}',
                 'is_public' => false,
@@ -102,7 +102,7 @@ class DecksTableSeeder extends Seeder
             5 =>
             array (
                 'id' => 37,
-                'card_id' => 55,
+                'card_id' => 80,
                 'scope_id' => 82,
                 'type' => 1,
                 'desc' => '{"en":null}',
@@ -118,7 +118,7 @@ class DecksTableSeeder extends Seeder
             6 =>
             array (
                 'id' => 36,
-                'card_id' => 55,
+                'card_id' => 80,
                 'scope_id' => 81,
                 'type' => 1,
                 'desc' => '{"en":"The skill level of taming different creatures is different."}',
@@ -134,7 +134,7 @@ class DecksTableSeeder extends Seeder
             7 =>
             array (
                 'id' => 35,
-                'card_id' => 55,
+                'card_id' => 80,
                 'scope_id' => 11,
                 'type' => 1,
                 'desc' => '{"en":null}',
@@ -150,7 +150,7 @@ class DecksTableSeeder extends Seeder
             8 =>
             array (
                 'id' => 29,
-                'card_id' => 55,
+                'card_id' => 80,
                 'scope_id' => 8,
                 'type' => 1,
                 'desc' => '{"en":"Each character has specifications. Use this card as a character scope to list them."}',
@@ -166,7 +166,7 @@ class DecksTableSeeder extends Seeder
             9 =>
             array (
                 'id' => 28,
-                'card_id' => 55,
+                'card_id' => 80,
                 'scope_id' => 73,
                 'type' => 1,
                 'desc' => '{"en":"Damage to the hero"}',
@@ -182,7 +182,7 @@ class DecksTableSeeder extends Seeder
             10 =>
             array (
                 'id' => 26,
-                'card_id' => 55,
+                'card_id' => 80,
                 'scope_id' => 42,
                 'type' => 1,
                 'desc' => '{"en":"Our hero begins his adventure with a certain set of knowledge and continues to accumulate them."}',
@@ -198,7 +198,7 @@ class DecksTableSeeder extends Seeder
             11 =>
             array (
                 'id' => 27,
-                'card_id' => 55,
+                'card_id' => 80,
                 'scope_id' => 12,
                 'type' => 2,
                 'desc' => '{"en":"The place where our hero is located. Always one card."}',
@@ -214,7 +214,7 @@ class DecksTableSeeder extends Seeder
             12 =>
             array (
                 'id' => 39,
-                'card_id' => 55,
+                'card_id' => 80,
                 'scope_id' => 14,
                 'type' => 2,
                 'desc' => '{"en":null}',
@@ -230,7 +230,7 @@ class DecksTableSeeder extends Seeder
             13 =>
             array (
                 'id' => 40,
-                'card_id' => 55,
+                'card_id' => 80,
                 'scope_id' => 16,
                 'type' => 2,
                 'desc' => '{"en":null}',
@@ -246,7 +246,7 @@ class DecksTableSeeder extends Seeder
             14 =>
             array (
                 'id' => 49,
-                'card_id' => 55,
+                'card_id' => 80,
                 'scope_id' => 15,
                 'type' => 2,
                 'desc' => '{"en":null}',
@@ -294,7 +294,7 @@ class DecksTableSeeder extends Seeder
             17 =>
             array (
                 'id' => 54,
-                'card_id' => 36,
+                'card_id' => 83,
                 'scope_id' => 15,
                 'type' => 2,
                 'desc' => '{"en":null}',
@@ -614,7 +614,7 @@ class DecksTableSeeder extends Seeder
             37 =>
             array (
                 'id' => 56,
-                'card_id' => 63,
+                'card_id' => 96,
                 'scope_id' => 14,
                 'type' => 1,
                 'desc' => '{"en":null}',

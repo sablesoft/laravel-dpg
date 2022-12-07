@@ -21,7 +21,7 @@ class CardRelationTableSeeder extends Seeder
         \DB::table('card_relation')->insert(array (
             0 =>
             array (
-                'card_id' => 36,
+                'card_id' => 83,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -57,7 +57,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             4 =>
             array (
-                'card_id' => 44,
+                'card_id' => 88,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -102,7 +102,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             9 =>
             array (
-                'card_id' => 55,
+                'card_id' => 80,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -174,7 +174,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             17 =>
             array (
-                'card_id' => 83,
+                'card_id' => 36,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -210,7 +210,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             21 =>
             array (
-                'card_id' => 80,
+                'card_id' => 55,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -534,7 +534,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             57 =>
             array (
-                'card_id' => 63,
+                'card_id' => 96,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -588,7 +588,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             63 =>
             array (
-                'card_id' => 88,
+                'card_id' => 44,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -669,7 +669,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             72 =>
             array (
-                'card_id' => 96,
+                'card_id' => 63,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -1155,7 +1155,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             126 =>
             array (
-                'card_id' => 44,
+                'card_id' => 88,
                 'deck_id' => 34,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1164,7 +1164,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             127 =>
             array (
-                'card_id' => 80,
+                'card_id' => 55,
                 'deck_id' => 35,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1227,7 +1227,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             134 =>
             array (
-                'card_id' => 36,
+                'card_id' => 83,
                 'deck_id' => 27,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1371,7 +1371,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             150 =>
             array (
-                'card_id' => 80,
+                'card_id' => 55,
                 'deck_id' => 51,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1461,7 +1461,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             160 =>
             array (
-                'card_id' => 36,
+                'card_id' => 83,
                 'deck_id' => 55,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1605,7 +1605,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             176 =>
             array (
-                'card_id' => 63,
+                'card_id' => 96,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,

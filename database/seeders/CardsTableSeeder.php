@@ -346,7 +346,7 @@ class CardsTableSeeder extends Seeder
                 ),
             58 =>
                 array (
-                    'id' => 96,
+                    'id' => 63,
                     'name' => '{"en":"Bird","ru":"Птица"}',
                     'code' => NULL,
                     'scope_id' => 19,
@@ -398,7 +398,7 @@ class CardsTableSeeder extends Seeder
                 ),
             52 =>
                 array (
-                    'id' => 63,
+                    'id' => 96,
                     'name' => '{"en":"Serpent\'s Lair","ru":"Гнездо Змея"}',
                     'code' => NULL,
                     'scope_id' => 17,
@@ -596,7 +596,7 @@ class CardsTableSeeder extends Seeder
                 'id' => 84,
                 'name' => '{"en":"Spear","ru":"Копье"}',
                 'code' => NULL,
-                'scope_id' => 83,
+                'scope_id' => 36,
                 'image' => 'card/s1xmWboKBFs0g0usGKGAe6ELgQJPCUjsM5c8PNzp.jpg',
                 'desc' => '{"ru":null}',
                 'is_public' => false,
@@ -908,7 +908,7 @@ class CardsTableSeeder extends Seeder
                 'id' => 49,
                 'name' => '{"en":"Scarlet Macaw"}',
                 'code' => NULL,
-                'scope_id' => 96,
+                'scope_id' => 63,
                 'image' => 'card/3CgQYAboppkKJh94ly2F2fayfR8Abhsr1bfW3uoj.jpg',
                 'desc' => '{"en":"Macaws are the largest parrots in the world! This beautiful macaw has a creamy white, almost featherless face, with bright red plumage covering most of its body, wings, and long tail. Brilliant blue and yellow feathers also adorn the lower wings. The bird’s strong beak is adapted to breaking hard nuts found in the rainforest.\\r\\n\\r\\nMacaws also mate for life, nesting from January through April in the holes of dead canopy trees. Mated adults lay up to two eggs per year, and preen each other and their offspring for hours, cleaning bugs from their feathers.\\r\\n\\r\\nNuts, leaves, berries and seeds from the rainforest make up the bulk of the scarlet macaw’s diet. Its strong, hooked beak is perfect for breaking nuts and seeds. Interestingly, the scarlet macaw can eat fruits toxic enough to kill other animals. This could be because they also eat large amounts of clay, which is thought to neutralize plant poisons."}',
                 'is_public' => false,
@@ -1178,7 +1178,7 @@ class CardsTableSeeder extends Seeder
             ),
             77 =>
             array (
-                'id' => 88,
+                'id' => 44,
                 'name' => '{"en":"Gate","ru":"Ворота"}',
                 'code' => NULL,
                 'scope_id' => 16,
@@ -1191,7 +1191,7 @@ class CardsTableSeeder extends Seeder
             ),
             78 =>
             array (
-                'id' => 44,
+                'id' => 88,
                 'name' => '{"en":"Shiinhaku","ru":"Шиинхаку"}',
                 'code' => NULL,
                 'scope_id' => 8,
@@ -1204,7 +1204,7 @@ class CardsTableSeeder extends Seeder
             ),
             79 =>
             array (
-                'id' => 83,
+                'id' => 36,
                 'name' => '{"en":"Weapon","ru":"Оружие"}',
                 'code' => NULL,
                 'scope_id' => 6,
@@ -1230,7 +1230,7 @@ class CardsTableSeeder extends Seeder
             ),
             82 =>
             array (
-                'id' => 80,
+                'id' => 55,
                 'name' => '{"en":"Survival","ru":"Выживание"}',
                 'code' => NULL,
                 'scope_id' => 11,
@@ -1243,7 +1243,7 @@ class CardsTableSeeder extends Seeder
             ),
             83 =>
             array (
-                'id' => 55,
+                'id' => 80,
                 'name' => '{"en":"Titu","ru":"Титу"}',
                 'code' => NULL,
                 'scope_id' => 9,
@@ -1256,7 +1256,7 @@ class CardsTableSeeder extends Seeder
             ),
             84 =>
             array (
-                'id' => 36,
+                'id' => 83,
                 'name' => '{"en":"Lanza Piya","ru":"Ланза Пийя"}',
                 'code' => NULL,
                 'scope_id' => 87,

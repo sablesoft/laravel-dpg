@@ -14,12 +14,12 @@ class SetsTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('sets')->delete();
-
+        
         \DB::table('sets')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 66,
                 'game_id' => 1,
@@ -31,7 +31,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 67,
                 'game_id' => 1,
@@ -43,7 +43,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 68,
                 'game_id' => 1,
@@ -55,7 +55,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 70,
                 'game_id' => 1,
@@ -67,7 +67,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 71,
                 'game_id' => 1,
@@ -79,7 +79,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 72,
                 'game_id' => 1,
@@ -91,7 +91,7 @@ class SetsTableSeeder extends Seeder
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 73,
                 'game_id' => 1,
@@ -105,7 +105,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 76,
                 'game_id' => 1,
@@ -117,7 +117,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 77,
                 'game_id' => 1,
@@ -129,7 +129,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 78,
                 'game_id' => 1,
@@ -141,7 +141,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            10 =>
+            10 => 
             array (
                 'id' => 79,
                 'game_id' => 1,
@@ -153,7 +153,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            11 =>
+            11 => 
             array (
                 'id' => 80,
                 'game_id' => 1,
@@ -165,7 +165,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            12 =>
+            12 => 
             array (
                 'id' => 81,
                 'game_id' => 1,
@@ -177,7 +177,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            13 =>
+            13 => 
             array (
                 'id' => 82,
                 'game_id' => 1,
@@ -189,7 +189,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            14 =>
+            14 => 
             array (
                 'id' => 83,
                 'game_id' => 1,
@@ -201,7 +201,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:45',
                 'updated_at' => '2022-12-02 02:39:45',
             ),
-            15 =>
+            15 => 
             array (
                 'id' => 84,
                 'game_id' => 1,
@@ -213,7 +213,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:46',
                 'updated_at' => '2022-12-02 02:39:46',
             ),
-            16 =>
+            16 => 
             array (
                 'id' => 86,
                 'game_id' => 1,
@@ -225,7 +225,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:46',
                 'updated_at' => '2022-12-02 02:39:46',
             ),
-            17 =>
+            17 => 
             array (
                 'id' => 87,
                 'game_id' => 1,
@@ -237,7 +237,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'created_at' => '2022-12-02 02:39:46',
                 'updated_at' => '2022-12-02 02:39:46',
             ),
-            18 =>
+            18 => 
             array (
                 'id' => 88,
                 'game_id' => 1,
@@ -250,7 +250,7 @@ They are semi-aquatic and will spend most of their time in dense vegetation arou
                 'updated_at' => '2022-12-02 02:39:46',
             ),
         ));
-
-
+        
+        
     }
 }

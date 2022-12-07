@@ -14,18 +14,17 @@ class DomesTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('domes')->delete();
-
+        
         \DB::table('domes')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'name' => '{"en":"Serpent\'s Lair","ru":"Гнездо Змея"}',
                 'code' => NULL,
-                'scope_id' => NULL,
-                'card_id' => 96,
+                'scope_id' => 96,
                 'area_width' => '338.00',
                 'area_height' => '388.00',
                 'top_step' => '293.00',
@@ -39,7 +38,7 @@ class DomesTableSeeder extends Seeder
                 'updated_at' => '2022-12-04 20:32:43',
             ),
         ));
-
-
+        
+        
     }
 }

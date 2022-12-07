@@ -31,24 +31,26 @@ class BackupCommand extends Command
         'cards',
         'card_tag',
         'books',
-        'book_dome',
         'book_subscriber',
+        'domes',
+        'book_dome',
+        'areas',
+        'lands',
+        'land_area',
         'decks',
+        'deck_tag',
+        'source_relation',
+        'card_relation',
         'games',
-        'game_book',
         'game_hero',
+        'game_book',
         'game_subscriber',
         'sets',
         'set_card',
         'stacks',
-        'states',
-        'domes',
-        'areas',
-        'card_relation',
-        'source_relation',
     ];
 
-    protected string $lastTable = 'deck_tag';
+    protected string $lastTable = 'states';
 
     /**
      * Execute the console command.

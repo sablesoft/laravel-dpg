@@ -59,7 +59,7 @@ class Area extends Content
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     /** @var \App\Models\Area $model */
                     return ImageService::uploadAreaImage($request->file($requestAttribute), $model->dome);
-                })->disk(ImageService::diskName())->nullable(true)->prunable(),
+                })->hideFromIndex()->disk(ImageService::diskName())->nullable(true)->prunable(),
             BroadcasterField::make(__('Top Step'), 'top_step')->sortable()
                 ->broadcastTo('top'),
             ListenerField::make(__('Top'), 'top')->calculateWith(function(Collection $values) {
@@ -85,6 +85,8 @@ class Area extends Content
             Code::make(__('Markers'), 'markers')->json(),
             Number::make(__('Decks Count'), 'decks_count')
                 ->hideWhenCreating()->hideWhenUpdating(),
+            Number::make(__('Cards Count'), 'cards_count')
+                ->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make(__('Is Public'), 'is_public')
                 ->nullable(false)->sortable(),
             BelongsTo::make(__('Owner'), 'owner', User::class)
@@ -96,6 +98,7 @@ class Area extends Content
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
+            BelongsToMany::make(__('Lands'), 'lands', Land::class),
             BelongsToMany::make(__('Cards'), 'cards'),
             HasMany::make(__('Decks'), 'decks', Deck::class),
         ];

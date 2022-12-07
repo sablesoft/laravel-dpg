@@ -97,6 +97,8 @@ class Deck extends Content
             Select::make(__('Type'), 'type')->nullable(false)
                 ->required()->rules('required')->sortable()
                 ->options(\App\Models\Deck::getTypeOptions())->displayUsingLabels(),
+            Number::make(__('Count'), 'cards_count')
+                ->hideWhenCreating()->hideWhenUpdating(),
             Number::make(__('Size'), 'size')
                 ->nullable(true)->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make(__('Is Public'), 'is_public')

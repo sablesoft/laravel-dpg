@@ -24,6 +24,7 @@ class SourceRelationTableSeeder extends Seeder
                 'source_id' => 1,
                 'book_id' => NULL,
                 'dome_id' => NULL,
+                'land_id' => NULL,
                 'area_id' => 1,
             ),
             1 => 
@@ -31,6 +32,7 @@ class SourceRelationTableSeeder extends Seeder
                 'source_id' => 1,
                 'book_id' => NULL,
                 'dome_id' => 1,
+                'land_id' => NULL,
                 'area_id' => NULL,
             ),
             2 => 
@@ -38,6 +40,15 @@ class SourceRelationTableSeeder extends Seeder
                 'source_id' => 1,
                 'book_id' => 2,
                 'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+            ),
+            3 => 
+            array (
+                'source_id' => 1,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => 1,
                 'area_id' => NULL,
             ),
         ));

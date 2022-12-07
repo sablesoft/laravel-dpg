@@ -2,29 +2,28 @@
 
 namespace App\Nova;
 
-use App\Service\ImageService;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Textarea;
+use App\Nova\Filters\DomesFilter;
 
 /**
- * @mixin \App\Models\Dome
+ * @mixin \App\Models\Land
  */
-class Dome extends Content
+class Land extends Content
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static string $model = \App\Models\Dome::class;
+    public static string $model = \App\Models\Land::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -32,6 +31,15 @@ class Dome extends Content
      * @var string
      */
     public static $title = 'name';
+
+    /**
+     * The columns that should be searched.
+     *
+     * @var array
+     */
+    public static $search = [
+        'name',
+    ];
 
     /**
      * Get the fields displayed by the resource.
@@ -42,32 +50,14 @@ class Dome extends Content
     public function fields(Request $request): array
     {
         return [
-            BelongsTo::make(__('Card'), 'dome', Card::class)
-                ->nullable(false)->required(true)->rules('required'),
+            BelongsTo::make(__('Dome'), 'dome', Dome::class)->sortable(),
+            Image::make(__('Dome Image'), 'dome_image')
+                ->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make(__('Card'), 'card', Card::class)->sortable(),
             Image::make(__('Card Image'), 'card_image')
                 ->hideWhenCreating()->hideWhenUpdating(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
-            Image::make(__('Map'), 'image')->maxWidth('auto')
-                ->store(function (Request $request, $model, $attribute, $requestAttribute) {
-                    /** @var \App\Models\Dome $model */
-                    return ImageService::uploadDomeImage($request->file($requestAttribute), $model);
-                })->hideFromIndex()->disk(ImageService::diskName())
-                ->nullable(false)->required()->rules('file')->prunable(),
-            Number::make(__('Area Width'), 'area_width')
-                ->hideFromIndex()
-                ->nullable(false)->required(true)->rules('required'),
-            Number::make(__('Area Height'), 'area_height')
-                ->hideFromIndex()
-                ->nullable(false)->required(true)->rules('required'),
-            Number::make(__('Left Step'), 'left_step')->step(0.01)
-                ->hideFromIndex()
-                ->nullable(false)->required(true)->rules('required'),
-            Number::make(__('Top Step'), 'top_step')->step(0.01)
-                ->hideFromIndex()
-                ->nullable(false)->required(true)->rules('required'),
-            Code::make(__('Area Mask'), 'area_mask')->json()
-                ->nullable(true)->required(false)->hideFromIndex(),
             Number::make(__('Decks Count'), 'decks_count')
                 ->hideWhenCreating()->hideWhenUpdating(),
             Number::make(__('Cards Count'), 'cards_count')
@@ -83,10 +73,9 @@ class Dome extends Content
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
-            HasMany::make(__('Areas'), 'areas', Area::class),
-            BelongsToMany::make(__('Cards'), 'cards', Card::class),
+            BelongsToMany::make(__('Areas'), 'areas', Area::class),
             HasMany::make(__('Decks'), 'decks', Deck::class),
-            BelongsToMany::make(__('Used In Books'), 'books', Book::class),
+            BelongsToMany::make(__('Cards'), 'cards'),
         ];
     }
 
@@ -109,7 +98,9 @@ class Dome extends Content
      */
     public function filters(Request $request): array
     {
-        return parent::filters($request);
+        return array_merge(parent::filters($request), [
+            DomesFilter::make()
+        ]);
     }
 
     /**

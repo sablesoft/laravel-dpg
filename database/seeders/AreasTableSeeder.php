@@ -14,19 +14,18 @@ class AreasTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('areas')->delete();
-
+        
         \DB::table('areas')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 3,
                 'name' => '{"en":"Savanna Tract"}',
                 'code' => NULL,
-                'scope_id' => NULL,
+                'scope_id' => 23,
                 'dome_id' => 1,
-                'card_id' => 23,
                 'top_step' => 13,
                 'top' => 3810,
                 'left_step' => 16,
@@ -39,14 +38,13 @@ class AreasTableSeeder extends Seeder
                 'created_at' => '2022-12-04 16:30:36',
                 'updated_at' => '2022-12-04 20:18:18',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'name' => '{"en":"Deep Forest"}',
                 'code' => NULL,
-                'scope_id' => NULL,
+                'scope_id' => 32,
                 'dome_id' => 1,
-                'card_id' => 32,
                 'top_step' => 13,
                 'top' => 3809,
                 'left_step' => 20,
@@ -59,14 +57,13 @@ class AreasTableSeeder extends Seeder
                 'created_at' => '2022-12-04 16:05:21',
                 'updated_at' => '2022-12-04 20:25:07',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 1,
                 'name' => '{"en":"River of Birth","ru":"Река Рождения"}',
                 'code' => NULL,
-                'scope_id' => NULL,
+                'scope_id' => 33,
                 'dome_id' => 1,
-                'card_id' => 33,
                 'top_step' => 13,
                 'top' => 3809,
                 'left_step' => 18,
@@ -80,7 +77,7 @@ class AreasTableSeeder extends Seeder
                 'updated_at' => '2022-12-04 20:35:34',
             ),
         ));
-
-
+        
+        
     }
 }

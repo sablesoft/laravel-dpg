@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Translatable\HasTranslations;
+use App\Models\Traits\Cards;
 use App\Models\Traits\Decks;
 use App\Models\Traits\Sources;
 use App\Models\Traits\Subscribers;
@@ -14,13 +15,10 @@ use App\Models\Traits\Subscribers;
  * @property-read Book[]|null $usedInBooks
  * @property-read Dome[]|null $usedInDomes
  * @property-read Area[]|null $usedInAreas
- *
- * @property-read int|null $cards_count
- *
  */
 class Book extends Content
 {
-    use HasTranslations, Subscribers, Decks, Sources;
+    use HasTranslations, Subscribers, Cards, Decks, Sources;
 
     const SUBSCRIBER_TYPE_PUBLIC = 0;
     const SUBSCRIBER_TYPE_LICENCE = 1;
@@ -29,14 +27,6 @@ class Book extends Content
      * @var array|string[]
      */
     public array $translatable = ['name', 'desc'];
-
-    /**
-     * @return BelongsToMany
-     */
-    public function cards(): BelongsToMany
-    {
-        return $this->belongsToMany(Card::class, 'card_relation');
-    }
 
     /**
      * @return BelongsToMany
@@ -88,14 +78,6 @@ class Book extends Content
     public function subscribers(): BelongsToMany
     {
         return $this->_subscribers('book');
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getCardsCountAttribute(): ?int
-    {
-        return $this->cards()->count() ?: null;
     }
 
     /**

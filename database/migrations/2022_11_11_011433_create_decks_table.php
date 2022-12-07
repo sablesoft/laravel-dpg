@@ -29,10 +29,12 @@ return new class extends Migration
                 ->constrained('books')->nullOnDelete();
             $table->foreignId('dome_id')->nullable(true)
                 ->constrained('domes')->nullOnDelete();
+            $table->foreignId('land_id')->nullable(true)
+                ->constrained('lands')->nullOnDelete();
             $table->foreignId('area_id')->nullable(true)
                 ->constrained('areas')->nullOnDelete();
 
-            $table->unique(['owner_id', 'book_id', 'dome_id', 'area_id', 'card_id', 'scope_id', 'type']);
+            $table->unique(['owner_id', 'book_id', 'dome_id', 'area_id', 'land_id', 'card_id', 'scope_id', 'type']);
             $table->timestamps();
         });
     }

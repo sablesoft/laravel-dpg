@@ -62,8 +62,10 @@ class Book extends Content
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     return ImageService::uploadBookImage($request->file($requestAttribute));
                 })->prunable()->disk(ImageService::diskName())->nullable(true),
-            Number::make(__('Unique Cards'), 'cards_count')
-                ->hideWhenUpdating()->hideWhenCreating(),
+            Number::make(__('Decks Count'), 'decks_count')
+                ->hideWhenCreating()->hideWhenUpdating(),
+            Number::make(__('Cards Count'), 'cards_count')
+                ->hideWhenCreating()->hideWhenUpdating(),
             Text::make(__('Tags'), 'tags_string')
                 ->hideFromIndex()->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')->nullable()->alwaysShow(),

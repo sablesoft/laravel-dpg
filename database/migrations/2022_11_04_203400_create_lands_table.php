@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        $this->upContent('domes', function (Blueprint $table) {
-            $table->decimal('area_width')->nullable(true);
-            $table->decimal('area_height')->nullable(true);
-            $table->decimal('top_step')->nullable(true);
-            $table->decimal('left_step')->nullable(true);
-            $table->json('area_mask')->nullable(true);
+        $this->upContent('lands', function (Blueprint $table) {
+            $table->foreignId('dome_id')->nullable(true)
+                ->constrained('domes')->nullOnDelete();
             $table->unique(['scope_id', 'owner_id']);
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('domes');
+        Schema::dropIfExists('lands');
     }
 };

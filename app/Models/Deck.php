@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
+use App\Models\Traits\Cards;
 use App\Models\Traits\FromDeck;
 
 /**
@@ -17,13 +18,12 @@ use App\Models\Traits\FromDeck;
  * @property-read Dome|null $dome
  * @property-read Area|null $area
  * @property-read Card[]|null $tags
- * @property-read Card[]|null $cards
  *
  * @property-read int[]|null $size
  */
 class Deck extends Content
 {
-    use FromDeck;
+    use Cards, FromDeck;
 
     // todo - enums
     const TYPE_STACK = 0;
@@ -66,15 +66,6 @@ class Deck extends Content
             'deck_id',
             'tag_id'
         );
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function cards(): BelongsToMany
-    {
-        return $this->belongsToMany(Card::class, 'card_relation')
-            ->withPivot('count');
     }
 
     /**

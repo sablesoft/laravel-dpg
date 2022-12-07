@@ -15,17 +15,16 @@ return new class extends Migration
     {
         $this->upContent('areas', function (Blueprint $table) {
             $table->foreignId('dome_id')->nullable(false)
-                ->constrained('domes')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('card_id')->nullable(false)
-                ->constrained('cards')->cascadeOnUpdate()->cascadeOnDelete();
+                ->constrained('domes')->nullOnDelete();
             $table->unsignedInteger('top_step')->nullable(true);
             $table->unsignedInteger('top')->nullable(true);
             $table->unsignedInteger('left_step')->nullable(true);
             $table->unsignedInteger('left')->nullable(true);
             $table->json('markers')->nullable(true);
 
-            $table->unique(['dome_id', 'card_id']);
-            $table->unique(['top', 'left']);
+            $table->unique(['dome_id', 'scope_id', 'owner_id']);
+            $table->unique(['dome_id', 'top', 'left', 'owner_id']);
+            $table->unique(['dome_id', 'top_step', 'left_step', 'owner_id']);
         });
     }
 

@@ -65,7 +65,7 @@ class Content extends Model
         foreach ($map as $key) {
             $data[$key] = $this->$key;
         }
-        $data['tags'] = $this->tags()->get()->pluck('name')->toArray();
+//        $data['tags'] = $this->tags()->get()->pluck('name')->toArray();
 
         return $data;
     }

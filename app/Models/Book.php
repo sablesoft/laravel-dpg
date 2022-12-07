@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Decks;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Translatable\HasTranslations;
+use App\Models\Traits\Decks;
+use App\Models\Traits\Sources;
 use App\Models\Traits\Subscribers;
 
 /**
  * @property-read Card[]|null $cards
  * @property-read Dome[]|null $domes
- * @property-read Book[]|null $sources
  * @property-read Book[]|null $usedInBooks
  * @property-read Dome[]|null $usedInDomes
  * @property-read Area[]|null $usedInAreas
@@ -20,7 +20,7 @@ use App\Models\Traits\Subscribers;
  */
 class Book extends Content
 {
-    use HasTranslations, Subscribers, Decks;
+    use HasTranslations, Subscribers, Decks, Sources;
 
     const SUBSCRIBER_TYPE_PUBLIC = 0;
     const SUBSCRIBER_TYPE_LICENCE = 1;
@@ -49,17 +49,13 @@ class Book extends Content
     /**
      * @return BelongsToMany
      */
-    public function sources(): BelongsToMany
-    {
-        return $this->belongsToMany(Book::class, 'book_source', 'source_id');
-    }
-
-    /**
-     * @return BelongsToMany
-     */
     public function usedInBooks(): BelongsToMany
     {
-        return $this->belongsToMany(Book::class, 'book_source', 'book_id');
+        return $this->belongsToMany(
+            Book::class,
+            'source_relation',
+            'source_id',
+        );
     }
 
     /**
@@ -69,9 +65,8 @@ class Book extends Content
     {
         return $this->belongsToMany(
             Dome::class,
-            'dome_source',
-            'dome_id',
-            'source_id'
+            'source_relation',
+            'source_id',
         );
     }
 
@@ -82,9 +77,8 @@ class Book extends Content
     {
         return $this->belongsToMany(
             Area::class,
-            'area_source',
-            'area_id',
-            'source_id'
+            'source_relation',
+            'source_id',
         );
     }
 

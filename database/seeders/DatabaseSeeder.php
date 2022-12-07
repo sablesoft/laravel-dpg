@@ -20,15 +20,13 @@ class DatabaseSeeder extends Seeder
         $this->call(CardsTableSeeder::class);
         $this->call(CardTagTableSeeder::class);
         $this->call(BooksTableSeeder::class);
-        $this->call(BookSourceTableSeeder::class);
         $this->call(BookSubscriberTableSeeder::class);
         $this->call(DomesTableSeeder::class);
-        $this->call(DomeSourceTableSeeder::class);
         $this->call(BookDomeTableSeeder::class);
         $this->call(AreasTableSeeder::class);
-        $this->call(AreaSourceTableSeeder::class);
         $this->call(DecksTableSeeder::class);
         $this->call(DeckTagTableSeeder::class);
+        $this->call(SourceRelationTableSeeder::class);
         $this->call(CardRelationTableSeeder::class);
         $this->call(GamesTableSeeder::class);
         $this->call(GameHeroTableSeeder::class);

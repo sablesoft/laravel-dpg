@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Traits\Decks;
+use App\Models\Traits\Sources;
 
 /**
  * @property int|null $card_id
@@ -22,12 +22,11 @@ use App\Models\Traits\Decks;
  * @property-read Card|null $dome
  * @property-read Area[]|null $areas
  * @property-read Card[]|null $cards
- * @property-read Book[]|null $sources
  * @property-read Book[]|null $books
  */
 class Dome extends Content
 {
-    use Decks;
+    use Decks, Sources;
 
     /**
      * @var string[]
@@ -66,19 +65,6 @@ class Dome extends Content
     public function cards(): BelongsToMany
     {
         return $this->belongsToMany(Card::class, 'card_relation');
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function sources(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            Book::class,
-            'dome_source',
-            'dome_id',
-            'source_id'
-        );
     }
 
     /**

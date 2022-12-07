@@ -61,7 +61,7 @@ class Book extends Content
             Image::make(__('Image'), 'image')
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     return ImageService::uploadBookImage($request->file($requestAttribute));
-                })->prunable()->disk(ImageService::diskName())->nullable(true)->hideFromIndex(),
+                })->prunable()->disk(ImageService::diskName())->nullable(true),
             Number::make(__('Unique Cards'), 'cards_count')
                 ->hideWhenUpdating()->hideWhenCreating(),
             Text::make(__('Tags'), 'tags_string')

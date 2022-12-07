@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Traits\Decks;
+use App\Models\Traits\Sources;
 
 /**
  * @property int|null $dome_id
@@ -23,11 +24,10 @@ use App\Models\Traits\Decks;
  * @property-read Dome|null $dome
  * @property-read Card|null $area
  * @property-read Card[]|null $cards
- * @property-read Book[]|null $sources
  */
 class Area extends Content
 {
-    use Decks;
+    use Decks, Sources;
 
     /**
      * @return BelongsTo
@@ -67,19 +67,6 @@ class Area extends Content
     public function cards(): BelongsToMany
     {
         return $this->belongsToMany(Card::class, 'card_relation');
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function sources(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            Book::class,
-            'area_source',
-            'area_id',
-            'source_id'
-        );
     }
 
     /**

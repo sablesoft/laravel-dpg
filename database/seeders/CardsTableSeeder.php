@@ -567,19 +567,6 @@ class CardsTableSeeder extends Seeder
             ),
             42 => 
             array (
-                'id' => 78,
-                'name' => '{"en":"Omnivorous"}',
-                'code' => NULL,
-                'scope_id' => 64,
-                'image' => NULL,
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-11-16 02:19:43',
-                'updated_at' => '2022-11-16 02:19:43',
-            ),
-            43 => 
-            array (
                 'id' => 70,
                 'name' => '{"en":"Nothing","ru":"Ничего"}',
                 'code' => NULL,
@@ -591,7 +578,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:09:47',
                 'updated_at' => '2022-11-23 20:48:37',
             ),
-            44 => 
+            43 => 
             array (
                 'id' => 84,
                 'name' => '{"en":"Spear","ru":"Копье"}',
@@ -604,7 +591,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 03:08:36',
                 'updated_at' => '2022-11-23 18:03:43',
             ),
-            45 => 
+            44 => 
             array (
                 'id' => 22,
                 'name' => '{"en":"Enemy","ru":"Враг"}',
@@ -617,7 +604,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:49:41',
                 'updated_at' => '2022-11-25 04:27:01',
             ),
-            46 => 
+            45 => 
             array (
                 'id' => 31,
                 'name' => '{"en":"Savanna"}',
@@ -630,7 +617,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:09:23',
                 'updated_at' => '2022-12-06 15:40:44',
             ),
-            47 => 
+            46 => 
             array (
                 'id' => 47,
                 'name' => '{"en":"Lilika","ru":"Лилика"}',
@@ -643,7 +630,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:36:25',
                 'updated_at' => '2022-11-23 03:59:39',
             ),
-            48 => 
+            47 => 
             array (
                 'id' => 48,
                 'name' => '{"en":"Zaizi","ru":"Зайзи"}',
@@ -656,7 +643,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:31:41',
                 'updated_at' => '2022-11-23 03:52:29',
             ),
-            49 => 
+            48 => 
             array (
                 'id' => 27,
                 'name' => '{"en":"Spirit","ru":"Дух"}',
@@ -669,7 +656,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:43:41',
                 'updated_at' => '2022-11-22 23:48:56',
             ),
-            50 => 
+            49 => 
             array (
                 'id' => 20,
                 'name' => '{"en":"Plant","ru":"Растение"}',
@@ -682,7 +669,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:14:35',
                 'updated_at' => '2022-11-23 00:15:28',
             ),
-            51 => 
+            50 => 
             array (
                 'id' => 35,
                 'name' => '{"ru":"Джунгли","en":"Rainforest"}',
@@ -695,7 +682,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:56:49',
                 'updated_at' => '2022-11-24 18:35:31',
             ),
-            52 => 
+            51 => 
             array (
                 'id' => 34,
                 'name' => '{"en":"Marsh","ru":"Marsh"}',
@@ -708,7 +695,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:27:08',
                 'updated_at' => '2022-11-24 17:35:55',
             ),
-            53 => 
+            52 => 
             array (
                 'id' => 24,
                 'name' => '{"en":"Predator","ru":"Хищник"}',
@@ -721,7 +708,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:54:28',
                 'updated_at' => '2022-11-25 04:26:45',
             ),
-            54 => 
+            53 => 
             array (
                 'id' => 25,
                 'name' => '{"en":"Herbivore","ru":"Травоядное"}',
@@ -734,7 +721,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:58:18',
                 'updated_at' => '2022-11-25 04:26:08',
             ),
-            55 => 
+            54 => 
             array (
                 'id' => 46,
                 'name' => '{"en":"Araki","ru":"Араки"}',
@@ -746,6 +733,19 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-08 02:29:38',
                 'updated_at' => '2022-11-23 03:32:45',
+            ),
+            55 => 
+            array (
+                'id' => 78,
+                'name' => '{"en":"Omnivorous"}',
+                'code' => NULL,
+                'scope_id' => 64,
+                'image' => NULL,
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 02:19:43',
+                'updated_at' => '2022-12-07 03:08:57',
             ),
             56 => 
             array (

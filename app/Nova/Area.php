@@ -25,6 +25,13 @@ use App\Nova\Actions\AreaImage;
 class Area extends Content
 {
     /**
+     * The logical group associated with the resource.
+     *
+     * @var string
+     */
+    public static $group = 'Space';
+
+    /**
      * The model the resource corresponds to.
      *
      * @var string

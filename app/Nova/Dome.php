@@ -20,6 +20,13 @@ use Laravel\Nova\Fields\Textarea;
 class Dome extends Content
 {
     /**
+     * The logical group associated with the resource.
+     *
+     * @var string
+     */
+    public static $group = 'Space';
+
+    /**
      * The model the resource corresponds to.
      *
      * @var string

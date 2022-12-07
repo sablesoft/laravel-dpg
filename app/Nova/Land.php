@@ -19,6 +19,13 @@ use App\Nova\Filters\DomesFilter;
 class Land extends Content
 {
     /**
+     * The logical group associated with the resource.
+     *
+     * @var string
+     */
+    public static $group = 'Space';
+
+    /**
      * The model the resource corresponds to.
      *
      * @var string

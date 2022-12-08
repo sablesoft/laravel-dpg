@@ -34,6 +34,11 @@ class Deck extends Content
     const TYPE_CONTROL = 3;
 
     /**
+     * @var array|string[]
+     */
+    public array $translatable = ['desc'];
+
+    /**
      * @return BelongsTo
      */
     public function book(): BelongsTo

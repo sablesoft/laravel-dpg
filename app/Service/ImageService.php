@@ -20,6 +20,7 @@ class ImageService
     const BACK_RATIO = 1.4;
     const BACK_STORAGE = 'back';
     const BOOKS_STORAGE = 'book';
+    const GAMES_STORAGE = 'game';
     const BOARDS_STORAGE = 'board';
     const CARDS_STORAGE = 'card';
     const AREAS_STORAGE = 'area';
@@ -120,7 +121,7 @@ class ImageService
 
     /**
      * @param UploadedFile $file
-     * @return string
+     * @return string|null
      */
     public static function uploadCardBack(UploadedFile $file): ?string
     {
@@ -137,6 +138,21 @@ class ImageService
     public static function uploadBookImage(UploadedFile $file): ?string
     {
         $filename = $file->hashName(static::BOOKS_STORAGE);
+        $image = Image::make($file->path())
+            ->resize(static::WIDTH, static::HEIGHT, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->encode($file->guessExtension());
+        return static::store($filename, (string) $image) ? $filename : null;
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @return string|null
+     */
+    public static function uploadGameImage(UploadedFile $file): ?string
+    {
+        $filename = $file->hashName(static::GAMES_STORAGE);
         $image = Image::make($file->path())
             ->resize(static::WIDTH, static::HEIGHT, function ($constraint) {
                 $constraint->aspectRatio();

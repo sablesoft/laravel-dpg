@@ -16,6 +16,7 @@ use App\Models\Traits\Subscribers;
 /**
  * @property int|null $id
  * @property string|null $name
+ * @property string|null $image
  * @property string|null $desc
  * @property int|null $quest_id
  * @property int|null $owner_id

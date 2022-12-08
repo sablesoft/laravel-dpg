@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Ganyicz\NovaTemporaryFields\HasTemporaryFields;
 use App\Enums\GameStatus;
 use App\Service\ImageService;
 use App\Nova\Filters\OwnersFilter;
@@ -26,6 +27,8 @@ use App\Nova\Filters\GameStatusFilter;
  */
 class Game extends Resource
 {
+    use HasTemporaryFields;
+
     /**
      * The logical group associated with the resource.
      *
@@ -78,8 +81,12 @@ class Game extends Resource
         return [
             Text::make(__('Name'), 'name')->sortable()
                 ->nullable(false)->required(true)->rules('required'),
+            Image::make(__('Image'), 'image')
+                ->store(function (Request $request, $model, $attribute, $requestAttribute) {
+                    return ImageService::uploadGameImage($request->file($requestAttribute));
+                })->disk(ImageService::diskName())->nullable(true)->prunable(),
             Select::make(__('Status'), 'status_value')
-                ->sortable()
+                ->sortable()->temporary()
                 ->nullable(false)->required(true)->rules('required')
                 ->options(GameStatus::options())->displayUsingLabels(),
             BelongsToMany::make(__('Books'), 'books', Book::class),

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\App;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Game;
-use App\Service\BoardService;
+use App\Service\GameService;
 
 class GameController extends Controller
 {
@@ -16,7 +17,7 @@ class GameController extends Controller
     public function init(Game $game): Response
     {
         return Inertia::render('Game', [
-            'game' => BoardService::gameToArray($game)
+            'data' => GameService::gameToArray($game, App::currentLocale())
         ]);
     }
 
@@ -26,6 +27,6 @@ class GameController extends Controller
      */
     public function json(Game $game): array
     {
-        return BoardService::gameToArray($game);
+        return GameService::gameToArray($game, App::currentLocale());
     }
 }

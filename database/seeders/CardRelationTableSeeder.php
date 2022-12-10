@@ -1381,7 +1381,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             136 => 
             array (
-                'card_id' => 14,
+                'card_id' => 15,
                 'deck_id' => 47,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1391,7 +1391,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             137 => 
             array (
-                'card_id' => 15,
+                'card_id' => 12,
                 'deck_id' => 47,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1401,7 +1401,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             138 => 
             array (
-                'card_id' => 12,
+                'card_id' => 16,
                 'deck_id' => 47,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1411,8 +1411,8 @@ class CardRelationTableSeeder extends Seeder
             ),
             139 => 
             array (
-                'card_id' => 16,
-                'deck_id' => 47,
+                'card_id' => 14,
+                'deck_id' => 48,
                 'book_id' => NULL,
                 'dome_id' => NULL,
                 'land_id' => NULL,
@@ -1421,7 +1421,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             140 => 
             array (
-                'card_id' => 14,
+                'card_id' => 15,
                 'deck_id' => 48,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1431,7 +1431,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             141 => 
             array (
-                'card_id' => 15,
+                'card_id' => 12,
                 'deck_id' => 48,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1441,7 +1441,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             142 => 
             array (
-                'card_id' => 12,
+                'card_id' => 16,
                 'deck_id' => 48,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1451,16 +1451,6 @@ class CardRelationTableSeeder extends Seeder
             ),
             143 => 
             array (
-                'card_id' => 16,
-                'deck_id' => 48,
-                'book_id' => NULL,
-                'dome_id' => NULL,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'count' => 1,
-            ),
-            144 => 
-            array (
                 'card_id' => 33,
                 'deck_id' => 49,
                 'book_id' => NULL,
@@ -1469,7 +1459,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            145 => 
+            144 => 
             array (
                 'card_id' => 14,
                 'deck_id' => 50,
@@ -1479,7 +1469,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            146 => 
+            145 => 
             array (
                 'card_id' => 15,
                 'deck_id' => 50,
@@ -1489,7 +1479,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            147 => 
+            146 => 
             array (
                 'card_id' => 12,
                 'deck_id' => 50,
@@ -1499,7 +1489,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            148 => 
+            147 => 
             array (
                 'card_id' => 16,
                 'deck_id' => 50,
@@ -1509,7 +1499,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            149 => 
+            148 => 
             array (
                 'card_id' => 82,
                 'deck_id' => 51,
@@ -1519,7 +1509,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            150 => 
+            149 => 
             array (
                 'card_id' => 55,
                 'deck_id' => 51,
@@ -1529,7 +1519,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            151 => 
+            150 => 
             array (
                 'card_id' => 81,
                 'deck_id' => 51,
@@ -1539,7 +1529,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            152 => 
+            151 => 
             array (
                 'card_id' => 41,
                 'deck_id' => 51,
@@ -1549,9 +1539,19 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            153 => 
+            152 => 
             array (
                 'card_id' => 58,
+                'deck_id' => 52,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            153 => 
+            array (
+                'card_id' => 91,
                 'deck_id' => 52,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1561,7 +1561,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             154 => 
             array (
-                'card_id' => 91,
+                'card_id' => 65,
                 'deck_id' => 52,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1571,16 +1571,6 @@ class CardRelationTableSeeder extends Seeder
             ),
             155 => 
             array (
-                'card_id' => 65,
-                'deck_id' => 52,
-                'book_id' => NULL,
-                'dome_id' => NULL,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'count' => 1,
-            ),
-            156 => 
-            array (
                 'card_id' => 58,
                 'deck_id' => 53,
                 'book_id' => NULL,
@@ -1589,7 +1579,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            157 => 
+            156 => 
             array (
                 'card_id' => 91,
                 'deck_id' => 53,
@@ -1599,7 +1589,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            158 => 
+            157 => 
             array (
                 'card_id' => 65,
                 'deck_id' => 53,
@@ -1609,7 +1599,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            159 => 
+            158 => 
             array (
                 'card_id' => 33,
                 'deck_id' => 54,
@@ -1619,7 +1609,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            160 => 
+            159 => 
             array (
                 'card_id' => 83,
                 'deck_id' => 55,
@@ -1629,7 +1619,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            161 => 
+            160 => 
             array (
                 'card_id' => 17,
                 'deck_id' => 50,
@@ -1639,9 +1629,19 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            162 => 
+            161 => 
             array (
                 'card_id' => 62,
+                'deck_id' => 46,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            162 => 
+            array (
+                'card_id' => 35,
                 'deck_id' => 46,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1652,7 +1652,7 @@ class CardRelationTableSeeder extends Seeder
             163 => 
             array (
                 'card_id' => 35,
-                'deck_id' => 46,
+                'deck_id' => 44,
                 'book_id' => NULL,
                 'dome_id' => NULL,
                 'land_id' => NULL,
@@ -1661,7 +1661,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             164 => 
             array (
-                'card_id' => 35,
+                'card_id' => 31,
                 'deck_id' => 44,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1671,7 +1671,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             165 => 
             array (
-                'card_id' => 31,
+                'card_id' => 30,
                 'deck_id' => 44,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1681,7 +1681,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             166 => 
             array (
-                'card_id' => 30,
+                'card_id' => 29,
                 'deck_id' => 44,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1691,8 +1691,8 @@ class CardRelationTableSeeder extends Seeder
             ),
             167 => 
             array (
-                'card_id' => 29,
-                'deck_id' => 44,
+                'card_id' => 35,
+                'deck_id' => 43,
                 'book_id' => NULL,
                 'dome_id' => NULL,
                 'land_id' => NULL,
@@ -1702,7 +1702,7 @@ class CardRelationTableSeeder extends Seeder
             168 => 
             array (
                 'card_id' => 35,
-                'deck_id' => 43,
+                'deck_id' => 42,
                 'book_id' => NULL,
                 'dome_id' => NULL,
                 'land_id' => NULL,
@@ -1711,7 +1711,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             169 => 
             array (
-                'card_id' => 35,
+                'card_id' => 62,
                 'deck_id' => 42,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1721,16 +1721,6 @@ class CardRelationTableSeeder extends Seeder
             ),
             170 => 
             array (
-                'card_id' => 62,
-                'deck_id' => 42,
-                'book_id' => NULL,
-                'dome_id' => NULL,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'count' => 1,
-            ),
-            171 => 
-            array (
                 'card_id' => 35,
                 'deck_id' => 56,
                 'book_id' => NULL,
@@ -1739,7 +1729,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            172 => 
+            171 => 
             array (
                 'card_id' => 31,
                 'deck_id' => 56,
@@ -1749,7 +1739,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            173 => 
+            172 => 
             array (
                 'card_id' => 29,
                 'deck_id' => 56,
@@ -1759,7 +1749,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            174 => 
+            173 => 
             array (
                 'card_id' => 30,
                 'deck_id' => 56,
@@ -1769,7 +1759,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            175 => 
+            174 => 
             array (
                 'card_id' => 62,
                 'deck_id' => 56,
@@ -1779,7 +1769,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            176 => 
+            175 => 
             array (
                 'card_id' => 96,
                 'deck_id' => NULL,
@@ -1789,9 +1779,19 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            177 => 
+            176 => 
             array (
                 'card_id' => 23,
+                'deck_id' => NULL,
+                'book_id' => NULL,
+                'dome_id' => 1,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            177 => 
+            array (
+                'card_id' => 33,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1801,7 +1801,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             178 => 
             array (
-                'card_id' => 33,
+                'card_id' => 32,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1811,7 +1811,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             179 => 
             array (
-                'card_id' => 32,
+                'card_id' => 76,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1821,7 +1821,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             180 => 
             array (
-                'card_id' => 76,
+                'card_id' => 77,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1831,7 +1831,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             181 => 
             array (
-                'card_id' => 77,
+                'card_id' => 69,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1841,7 +1841,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             182 => 
             array (
-                'card_id' => 69,
+                'card_id' => 51,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1851,7 +1851,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             183 => 
             array (
-                'card_id' => 51,
+                'card_id' => 54,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1861,7 +1861,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             184 => 
             array (
-                'card_id' => 54,
+                'card_id' => 61,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1871,7 +1871,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             185 => 
             array (
-                'card_id' => 61,
+                'card_id' => 56,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1881,7 +1881,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             186 => 
             array (
-                'card_id' => 56,
+                'card_id' => 53,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1891,7 +1891,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             187 => 
             array (
-                'card_id' => 53,
+                'card_id' => 52,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1901,7 +1901,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             188 => 
             array (
-                'card_id' => 52,
+                'card_id' => 49,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1911,16 +1911,6 @@ class CardRelationTableSeeder extends Seeder
             ),
             189 => 
             array (
-                'card_id' => 49,
-                'deck_id' => NULL,
-                'book_id' => NULL,
-                'dome_id' => 1,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'count' => 1,
-            ),
-            190 => 
-            array (
                 'card_id' => 18,
                 'deck_id' => NULL,
                 'book_id' => 1,
@@ -1929,7 +1919,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            191 => 
+            190 => 
             array (
                 'card_id' => 33,
                 'deck_id' => NULL,
@@ -1939,7 +1929,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            192 => 
+            191 => 
             array (
                 'card_id' => 32,
                 'deck_id' => NULL,
@@ -1949,7 +1939,7 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            193 => 
+            192 => 
             array (
                 'card_id' => 50,
                 'deck_id' => NULL,
@@ -1959,13 +1949,83 @@ class CardRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'count' => 1,
             ),
-            194 => 
+            193 => 
             array (
                 'card_id' => 23,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => NULL,
                 'land_id' => 1,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            194 => 
+            array (
+                'card_id' => 17,
+                'deck_id' => 47,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            195 => 
+            array (
+                'card_id' => 18,
+                'deck_id' => 48,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            196 => 
+            array (
+                'card_id' => 17,
+                'deck_id' => 48,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            197 => 
+            array (
+                'card_id' => 18,
+                'deck_id' => 50,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            198 => 
+            array (
+                'card_id' => 83,
+                'deck_id' => NULL,
+                'book_id' => 2,
+                'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            199 => 
+            array (
+                'card_id' => 84,
+                'deck_id' => NULL,
+                'book_id' => 2,
+                'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'count' => 1,
+            ),
+            200 => 
+            array (
+                'card_id' => 33,
+                'deck_id' => NULL,
+                'book_id' => 2,
+                'dome_id' => NULL,
+                'land_id' => NULL,
                 'area_id' => NULL,
                 'count' => 1,
             ),

@@ -22,7 +22,7 @@ class GameHeroTableSeeder extends Seeder
             0 => 
             array (
                 'game_id' => 1,
-                'hero_id' => 55,
+                'hero_id' => 80,
             ),
         ));
         

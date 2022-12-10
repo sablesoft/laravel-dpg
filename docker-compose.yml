@@ -4,11 +4,11 @@ services:
     dpg:
         container_name: dpg
         build:
-            context: ./vendor/laravel/sail/runtimes/8.1
+            context: ./docker/8.1
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: sail-8.1/app
+        image: sail-8.1/dpg
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -25,6 +25,22 @@ services:
             - sail
         depends_on:
             - pgsql
+    mongo:
+        container_name: mongodb
+        image: mongo
+        ports:
+            - "27017:27017"
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=password
+        restart: unless-stopped
+        logging:
+            driver: none
+        networks:
+            - sail
+        volumes:
+            - 'sail-pgsql:/data/db'
+
     pgsql:
         image: 'postgres:14'
         ports:
@@ -48,4 +64,6 @@ networks:
         driver: bridge
 volumes:
     sail-pgsql:
+        driver: local
+    sail-mongo:
         driver: local

@@ -55,6 +55,15 @@ class SourceRelationTableSeeder extends Seeder
                 'area_id' => NULL,
                 'scene_id' => NULL,
             ),
+            4 => 
+            array (
+                'source_id' => 2,
+                'book_id' => NULL,
+                'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'scene_id' => 1,
+            ),
         ));
         
         

@@ -1267,6 +1267,32 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:54:14',
                 'updated_at' => '2022-11-23 18:34:14',
             ),
+            96 => 
+            array (
+                'id' => 97,
+                'name' => '{"en":"Cave"}',
+                'code' => NULL,
+                'scope_id' => 16,
+                'image' => 'card/cjx2txb0UBOeiBLu7JktGrn8k3WNaCY0ZqAEgfDy.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-12-10 17:31:54',
+                'updated_at' => '2022-12-10 17:31:54',
+            ),
+            97 => 
+            array (
+                'id' => 98,
+                'name' => '{"en":"Obsidian Chasm"}',
+                'code' => NULL,
+                'scope_id' => 97,
+                'image' => 'card/nX6vSgRVaBZQ0Lgq7mjCH3oPP2HcZHMgKjH5MhzP.jpg',
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-10 17:35:18',
+                'updated_at' => '2022-12-10 17:35:18',
+            ),
         ));
         
         

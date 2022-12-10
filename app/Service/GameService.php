@@ -1,97 +1,165 @@
-<?php
+<?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+
+/** @noinspection PhpUndefinedMethodInspection */
 
 namespace App\Service;
 
+use Exception;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
+use App\Models\Area;
 use App\Models\Book;
 use App\Models\Card;
 use App\Models\Deck;
 use App\Models\Dome;
 use App\Models\Game;
-use Illuminate\Support\Facades\App;
+use App\Models\Process\AreaProcess;
+use App\Models\Process\BookProcess;
+use App\Models\Process\CardProcess;
+use App\Models\Process\DeckProcess;
+use App\Models\Process\DomeProcess;
+use App\Models\Process\GameProcess;
 
 class GameService
 {
     /**
      * @param Game $game
-     * @param string|null $locale
-     * @return array
+     * @return void
      */
-    public static function gameToArray(Game $game, ?string $locale = null): array
+    public static function dropProcess(Game $game): void
     {
+        /** @var GameProcess|null $process */
+        if (!$process = GameProcess::where('id', $game->getKey())->first()) {
+            return;
+        }
+
+        foreach(['books', 'cards', 'decks', 'domes', 'areas'] as $collection) {
+            DB::connection('mongodb')->collection($collection)
+                ->where('game_process_id', $process->getKey())
+                ->delete();
+        }
+
+        $process->delete();
+    }
+
+    /**
+     * @param Game $game
+     * @param string|null $locale
+     * @return GameProcess
+     * @throws Exception
+     */
+    public static function initProcess(Game $game, ?string $locale = null): GameProcess
+    {
+        static::dropProcess($game);
+
         if (!$locale) {
             $locale = App::currentLocale();
         }
-        $game->makeHidden(['owner_id', 'quest_id', 'created_at', 'updated_at']);
+        $game->makeHidden(['owner_id', 'quest_id', 'created_at', 'is_public', 'status', 'updated_at']);
         $data = self::translate($game->toArray(), $game->translatable, $locale);
         $data['image'] = self::image($data['image']);
         $data['scope_name'] = __('Game');
-        $data['quest'] = static::cardToArray($game->quest, $locale);
-        foreach ($game->heroes as $hero) {
-            $data['heroes'][$hero->getKey()] = static::cardToArray($hero, $locale);
-        }
-        $books = [];
-        $domes = [];
-        foreach ($game->books as $book) {
-            static::bookToArray($books, $domes, $book, $locale);
-        }
-        $data['books'] = $books;
-        $data['domes'] = $domes;
 
-        return $data;
+        /** @var GameProcess $gameProcess */
+        $gameProcess = GameProcess::create($data);
+        $gameProcess->quest_id = static::cardToProcess($gameProcess, $game->quest, $locale)->id;
+        $ids = [];
+        foreach ($game->heroes as $hero) {
+            $ids[] = static::cardToProcess($gameProcess, $hero, $locale)->id;
+        }
+        $gameProcess->hero_ids = $ids;
+        // prepare all sources:
+        /** @var Book[] $books */
+        $books = [];
+        foreach ($game->books as $book) {
+            static::prepareBooks($books, $book);
+            foreach ($book->domes as $dome) {
+                foreach ($dome->sources as $source) {
+                    static::prepareBooks($books, $source);
+                }
+                foreach ($dome->areas as $area) {
+                    foreach ($area->sources as $source) {
+                        static::prepareBooks($books, $source);
+                    }
+                }
+            }
+        }
+        // prepare books and all cards:
+        foreach ($books as $book) {
+            $gameProcess->books()->save(static::bookToProcess($gameProcess, $book, $locale));
+        }
+        // prepare decks, domes and areas:
+        foreach ($books as $book) {
+            foreach ($book->decks as $deck) {
+                static::deckToProcess($gameProcess, $deck, $locale);
+            }
+            foreach ($book->domes as $dome) {
+                static::domeToProcess($gameProcess, $dome, $locale);
+            }
+        }
+        foreach (['dome', 'area', 'deck', 'card'] as $entity) {
+            $field = "open_${entity}_ids";
+            $gameProcess->$field = null;
+        }
+
+        $gameProcess->save();
+
+        return $gameProcess;
     }
 
     /**
-     * @param array $books
-     * @param array $domes
+     * @param GameProcess $gameProcess
      * @param Book $book
      * @param string|null $locale
-     * @return void
+     * @return BookProcess
+     * @throws Exception
      */
-    public static function bookToArray(array &$books, array &$domes, Book $book, ?string $locale = null)
+    public static function bookToProcess(GameProcess $gameProcess, Book $book, ?string $locale = null): BookProcess
     {
         if (!$locale) {
             $locale = App::currentLocale();
         }
-        $book->makeHidden(['scope_id', 'owner_id', 'is_public', 'created_at', 'updated_at', 'pivot']);
+        $book->makeHidden([
+            'sources',
+            'scope_id', 'owner_id', 'is_public',
+            'created_at', 'updated_at', 'pivot'
+        ]);
         $data = self::translate($book->toArray(), $book->translatable, $locale);
         $data['image'] = self::image($data['image']);
-        $sourcesIds = [];
-        foreach ($book->sources as $source) {
-            $sourcesIds[] = $source->getKey();
-            if (empty($books[$source->getKey()])) {
-                static::bookToArray($books, $domes, $source, $locale);
-            }
-        }
-        $data['sources'] = $sourcesIds;
-        $domesIds = [];
-        foreach ($book->domes as $dome) {
-            $domesIds[] = $dome->getKey();
-            if (empty($domes[$dome->getKey()])) {
-                static::domeToArray($domes, $dome, $locale);
-            }
-        }
-        $data['domes'] = $domesIds;
-        $collection = [];
+        /** @var BookProcess $bookProcess */
+        $bookProcess = BookProcess::create($data);
+        $ids = [];
         foreach ($book->cards as $card) {
-            $collection[$card->getKey()] = static::cardToArray($card, $locale);
+            $ids[] = static::cardToProcess($gameProcess, $card, $locale)->id;
         }
-        $data['collection'] = $collection;
-        $decks = [];
+        $bookProcess->card_ids = $ids;
+        $ids = [];
         foreach ($book->decks as $deck) {
-            static::deckToArray($decks, $deck, $locale);
+            $ids[] = $deck->getKey();
         }
-        $data['decks'] = $decks;
+        $bookProcess->deck_ids = $ids;
+        $ids = [];
+        foreach ($book->sources as $source) {
+            $ids[] = $source->getKey();
+        }
+        $bookProcess->source_ids = $ids;
+        foreach ($book->domes as $dome) {
+            $ids[] = $dome->getKey();
+        }
+        $bookProcess->dome_ids = $ids;
+        $bookProcess->save();
 
-        $books[$book->getKey()] = $data;
+        return $bookProcess;
     }
 
     /**
-     * @param array $domes
+     * @param GameProcess $gameProcess
      * @param Dome $dome
-     * @param $locale
-     * @return void
+     * @param string|null $locale
+     * @return DomeProcess
+     * @throws Exception
      */
-    public static function domeToArray(array &$domes, Dome $dome, $locale)
+    public static function domeToProcess(GameProcess $gameProcess, Dome $dome, ?string $locale = null): DomeProcess
     {
         if (!$locale) {
             $locale = App::currentLocale();
@@ -107,26 +175,59 @@ class GameService
         ]);
         $data = self::translate($dome->toArray(), $dome->translatable, $locale);
         $data['image'] = self::image($data['image']);
-        $collection = [];
-        foreach ($dome->cards as $card) {
-            $collection[$card->getKey()] = static::cardToArray($card, $locale);
+        /** @var DomeProcess $domeProcess */
+        $domeProcess = DomeProcess::create($data);
+        $domeProcess = static::prepareSpaceProcess($gameProcess, $domeProcess, $dome, $locale);
+        $ids = [];
+        foreach ($dome->areas as $area) {
+            $ids[] = static::areaToProcess($gameProcess, $area, $locale)->id;
         }
-        $data['collection'] = $collection;
-        $decks = [];
-        foreach ($dome->decks as $deck) {
-            static::deckToArray($decks, $deck, $locale);
-        }
-        $data['decks'] = $decks;
-        $domes[$dome->scope_id] = $data;
+        $domeProcess->area_ids = $ids;
+        $domeProcess->save();
+        $gameProcess->domes()->save($domeProcess);
+
+        return $domeProcess;
     }
 
     /**
-     * @param array $decks
-     * @param Deck $deck
-     * @param $locale
-     * @return void
+     * @param GameProcess $gameProcess
+     * @param Area $area
+     * @param string|null $locale
+     * @return AreaProcess
+     * @throws Exception
      */
-    public static function deckToArray(array &$decks, Deck $deck, $locale)
+    public static function areaToProcess(GameProcess $gameProcess, Area $area, ?string $locale = null): AreaProcess
+    {
+        if (!$locale) {
+            $locale = App::currentLocale();
+        }
+        $area->makeHidden([
+            'code',
+            'is_public',
+            'owner_id',
+            'pivot',
+            'created_at',
+            'updated_at'
+        ]);
+        $data = self::translate($area->toArray(), $area->translatable, $locale);
+        $data['image'] = self::image($data['image']);
+        /** @var AreaProcess $areaProcess */
+        $areaProcess = AreaProcess::create($data);
+        $areaProcess = static::prepareSpaceProcess($gameProcess, $areaProcess, $area, $locale);
+        $areaProcess->save();
+        $gameProcess->areas()->save($areaProcess);
+
+        return $areaProcess;
+    }
+
+    /**
+     * @param GameProcess $gameProcess
+     * @param Deck $deck
+     * @param string|null $locale
+     * @return DeckProcess
+     * @throws Exception
+     */
+    public static function deckToProcess(GameProcess $gameProcess, Deck $deck, ?string $locale = null): DeckProcess
     {
         if (!$locale) {
             $locale = App::currentLocale();
@@ -139,24 +240,48 @@ class GameService
         ]);
         $data = self::translate($deck->toArray(), $deck->translatable, $locale);
         $data['image'] = self::image($data['image']);
-        $data['target'] = self::cardToArray($deck->target, $locale);
-        $data['scope'] = self::cardToArray($deck->scope, $locale);
+        /** @var CardProcess $target */
+        if (!$target = $gameProcess->cards()->where('id', $deck->card_id)->first()) {
+            throw new Exception(
+                'Target card for deck not found in sources! Deck ID: ' .
+                $deck->getKey() .
+            ' Card ID: ' . $deck->card_id);
+        }
+        $data['target_id'] = $target->id;
+        /** @var CardProcess $scope */
+        if (!$scope = $gameProcess->cards()->where('id', $deck->scope_id)->first()) {
+            throw new Exception(
+                'Scope card for deck not found in sources! Deck ID: ' .
+                $deck->getKey() .
+                ' Card ID: ' . $deck->scope_id);
+        }
+        $data['scope_id'] = $scope->id;
         $cards = [];
         foreach ($deck->cards as $card) {
-            $cards[$card->getKey()] = self::cardToArray($card, $locale);
-            $cards[$card->getKey()]['count'] = $card->pivot->count;
+            /** @var CardProcess $cardProcess */
+            if (!$gameProcess->cards()->where('id', $card->getKey())->first()) {
+                throw new Exception(
+                    'Card for deck not found in sources! Deck ID: ' .
+                    $deck->getKey() .
+                    ' Card ID: ' . $card->getKey());
+            }
+            $cards[$card->getKey()] = $card->pivot->count;
         }
         $data['cards'] = $cards;
+        /** @var DeckProcess */
+        $deckProcess = DeckProcess::create($data);
+        $gameProcess->decks()->save($deckProcess);
 
-        $decks[$deck->getKey()] = $data;
+        return $deckProcess;
     }
 
     /**
+     * @param GameProcess $gameProcess
      * @param Card $card
      * @param string|null $locale
-     * @return array
+     * @return CardProcess
      */
-    public static function cardToArray(Card $card, ?string $locale = null): array
+    public static function cardToProcess(GameProcess $gameProcess, Card $card, ?string $locale = null): CardProcess
     {
         if (!$locale) {
             $locale = App::currentLocale();
@@ -164,14 +289,65 @@ class GameService
         $card->makeHidden(['is_public', 'owner_id', 'created_at', 'updated_at', 'pivot']);
         $data = $card->toArray();
         $data['image'] = self::image($data['image']);
-        $scopeName = optional($card->scope)->getRawOriginal('name');
-        $scopeName = $scopeName ? json_decode($scopeName, true) : null;
-        $data['scope_name'] = $scopeName;
         $data['scope_image'] = self::image(optional($card->scope)->image);
-        $fields = $card->translatable;
-        $fields[] = 'scope_name';
+        $data = self::translate($data, $card->translatable, $locale);
+        $overrideFields = ['name', 'desc'];
+        foreach ($overrideFields as $field) {
+            $data['current_' . $field] = $data[$field];
+        }
+        /** @var CardProcess $cardProcess */
+        $cardProcess = CardProcess::create($data);
+        $gameProcess->cards()->save($cardProcess);
 
-        return self::translate($data, $fields, $locale);
+        return $cardProcess;
+    }
+
+    /**
+     * @param array $books
+     * @param Book $book
+     * @return void
+     */
+    protected static function prepareBooks(array &$books, Book $book): void
+    {
+        if (!array_key_exists($book->getKey(), $books)) {
+            $books[$book->getKey()] = $book;
+        }
+        foreach ($book->sources as $source) {
+            static::prepareBooks($books, $source);
+        }
+    }
+
+    /**
+     * @param GameProcess $gameProcess
+     * @param AreaProcess|DomeProcess $process
+     * @param Area|Dome $source
+     * @param string $locale
+     * @return AreaProcess|DomeProcess
+     * @throws Exception
+     */
+    protected static function prepareSpaceProcess(
+        GameProcess             $gameProcess,
+        AreaProcess|DomeProcess $process,
+        Dome|Area               $source,
+        string                  $locale): AreaProcess|DomeProcess
+    {
+        $ids = [];
+        foreach ($source->cards as $card) {
+            $ids[] = static::cardToProcess($gameProcess, $card, $locale)->id;
+        }
+        $process->card_ids = $ids;
+        $ids = [];
+        foreach ($source->decks as $deck) {
+            $ids[] = static::deckToProcess($gameProcess, $deck, $locale)->id;
+        }
+        $process->deck_ids = $ids;
+        $ids = [];
+        foreach ($source->sources as $source) {
+            $ids[] = $source->getKey();
+        }
+        $process->source_ids = $ids;
+
+        return $process;
     }
 
     /**

@@ -7,6 +7,7 @@ namespace App\Models\Process;
  * @property int|null $scope_id
  * @property int|null $type
  * @property string|null $image
+ * @property array|null $canvas
  * @property int[]|null $cards
  */
 class DeckProcess extends Process

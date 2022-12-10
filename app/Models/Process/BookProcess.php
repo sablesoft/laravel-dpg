@@ -8,6 +8,7 @@ namespace App\Models\Process;
  * @property int[]|null $deck_ids
  * @property int[]|null $dome_ids
  * @property int[]|null $scene_ids
+ * @property array|null $canvas
  */
 class BookProcess extends Process
 {

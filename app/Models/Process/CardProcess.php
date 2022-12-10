@@ -10,6 +10,7 @@ namespace App\Models\Process;
  * @property string|null $scope_image
  * @property string|null $current_name
  * @property string|null $current_desc
+ * @property array|null $canvas
  * @property-read CardProcess|null $scope
  */
 class CardProcess extends Process
@@ -25,6 +26,7 @@ class CardProcess extends Process
         'image',
         'desc',
         'current_desc',
+        'canvas',
         'scope_name',
         'scope_image'
     ];

@@ -6,6 +6,7 @@ namespace App\Models\Process;
  * @property string|null $image
  * @property int|null $scope_id
  * @property array|null $markers
+ * @property array|null $canvas
  */
 class SceneProcess extends Process implements SpaceProcessInterface
 {

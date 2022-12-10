@@ -24,6 +24,7 @@ use App\Models\Game;
  * @property int[]|null $open_area_ids
  * @property int[]|null $open_lands_ids
  * @property int[]|null $open_scene_ids
+ * @property array[]|null $canvas
  * @property-read Game|null $game
  * @property-read CardProcess[]|Collection|null $cards
  * @property-read BookProcess[]|Collection|null $books

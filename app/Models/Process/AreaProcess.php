@@ -10,6 +10,7 @@ namespace App\Models\Process;
  * @property int|null $left
  * @property int|null $top_step
  * @property int|null $left_step
+ * @property array|null $canvas
  * @property array|null $markers
  */
 class AreaProcess extends Process implements SpaceProcessInterface
@@ -27,6 +28,7 @@ class AreaProcess extends Process implements SpaceProcessInterface
         'left',
         'top_step',
         'left_step',
+        'canvas',
         'markers',
         'source_ids',
         'card_ids',

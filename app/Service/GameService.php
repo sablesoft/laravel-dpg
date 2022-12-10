@@ -4,8 +4,6 @@
 
 namespace App\Service;
 
-use App\Models\Process\SceneProcess;
-use App\Models\Scene;
 use Exception;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +14,10 @@ use App\Models\Deck;
 use App\Models\Dome;
 use App\Models\Game;
 use App\Models\Land;
+use App\Models\Scene;
 use App\Models\SpaceInterface;
+use App\Models\Process\Process;
+use App\Models\Process\SceneProcess;
 use App\Models\Process\AreaProcess;
 use App\Models\Process\BookProcess;
 use App\Models\Process\CardProcess;
@@ -39,9 +40,9 @@ class GameService
             return;
         }
 
-        foreach(['books', 'cards', 'decks', 'domes', 'areas', 'lands'] as $collection) {
+        foreach(Process::collections() as $collection) {
             DB::connection('mongodb')->collection($collection)
-                ->where('game_process_id', $process->getKey())
+                ->where(Process::GAME_FOREIGN_KEY, $process->getKey())
                 ->delete();
         }
 

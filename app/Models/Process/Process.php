@@ -13,6 +13,8 @@ use Jenssegers\Mongodb\Relations\BelongsTo;
  */
 abstract class Process extends Model
 {
+    const GAME_FOREIGN_KEY = 'game_process_id';
+
     protected $connection = 'mongodb';
 
     protected $hidden = [
@@ -20,7 +22,7 @@ abstract class Process extends Model
         'created_at',
         'updated_at',
         'game',
-        'game_process_id'
+        self::GAME_FOREIGN_KEY
     ];
 
     /**
@@ -28,6 +30,16 @@ abstract class Process extends Model
      */
     public function game(): BelongsTo
     {
-        return $this->belongsTo(GameProcess::class, 'game_process_id');
+        return $this->belongsTo(GameProcess::class, static::GAME_FOREIGN_KEY);
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function collections(): array
+    {
+        return [
+            'books', 'cards', 'decks', 'domes', 'areas', 'lands', 'scenes'
+        ];
     }
 }

@@ -4,6 +4,8 @@ namespace App\Enums;
 
 enum GameStatus: int
 {
+    use EnumTrait;
+
     case Preview = 0;
     case Invite = 1;
     case Process = 2;
@@ -20,18 +22,5 @@ enum GameStatus: int
             GameStatus::Process => __('Process'),
             GameStatus::Closed => __('Closed')
         };
-    }
-
-    /**
-     * @return array
-     */
-    public static function options(): array
-    {
-        $options = [];
-        foreach (static::cases() as $case) {
-            $options[$case->value] = $case->label();
-        }
-
-        return $options;
     }
 }

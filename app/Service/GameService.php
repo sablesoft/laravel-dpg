@@ -55,7 +55,11 @@ class GameService
         if (!$locale) {
             $locale = App::currentLocale();
         }
-        $game->makeHidden(['owner_id', 'quest_id', 'created_at', 'is_public', 'status', 'updated_at']);
+        $game->makeHidden([
+            'process_id',
+            'owner_id', 'quest_id', 'created_at',
+            'is_public', 'status', 'updated_at'
+        ]);
         $data = self::translate($game->toArray(), $game->translatable, $locale);
         $data['image'] = self::image($data['image']);
         $data['scope_name'] = __('Game');
@@ -103,6 +107,7 @@ class GameService
         }
 
         $gameProcess->save();
+        $gameProcess->game()->save($game);
 
         return $gameProcess;
     }

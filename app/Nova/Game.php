@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Enums\GameSubscribe;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -112,8 +113,8 @@ class Game extends Resource
                     return [
                         Select::make(__('Type'), 'type')
                             ->nullable(false)->sortable()
-                            ->default(function($request) { return 0; })
-                            ->options(\App\Models\Game::subscriberTypeOptions())
+                            ->default(function($request) { return GameSubscribe::Spectator->value; })
+                            ->options(GameSubscribe::options())
                             ->displayUsingLabels(),
                     ];
                 })->sortable()->nullable(true),

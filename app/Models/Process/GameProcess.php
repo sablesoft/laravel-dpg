@@ -3,8 +3,10 @@
 namespace App\Models\Process;
 
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Jenssegers\Mongodb\Relations\HasMany;
+use App\Models\Game;
 
 /**
  * @property int|null $id
@@ -20,6 +22,7 @@ use Jenssegers\Mongodb\Relations\HasMany;
  * @property int[]|null $open_deck_ids
  * @property int[]|null $open_dome_ids
  * @property int[]|null $open_area_ids
+ * @property-read Game|null $game
  * @property-read CardProcess[]|Collection|null $cards
  * @property-read BookProcess[]|Collection|null $books
  * @property-read BookProcess[]|Collection|null $decks
@@ -48,6 +51,14 @@ class GameProcess extends Model
         'created_at',
         'updated_at'
     ];
+
+    /**
+     * @return HasOne
+     */
+    public function game(): HasOne
+    {
+        return $this->hasOne(Game::class, 'process_id');
+    }
 
     /**
      * @return HasMany

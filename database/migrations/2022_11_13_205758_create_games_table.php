@@ -22,6 +22,7 @@ return new class extends Migration
                 ->constrained('cards')->nullOnDelete();
             $table->foreignId('owner_id')->nullable(false)->constrained('users')
                 ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('process_id')->nullable(true);
             $table->boolean('is_public')->nullable(false)->default(false);
             $table->string('board_image')->nullable(true);
             $table->string('cards_back')->nullable(true);

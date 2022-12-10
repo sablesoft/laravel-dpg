@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
+use Jenssegers\Mongodb\Eloquent\HybridRelations;
 use App\Enums\GameStatus;
 use App\Models\Traits\Owner;
 use App\Models\Traits\Subscribers;
+use App\Models\Process\GameProcess;
 
 /**
  * @property int|null $id
@@ -36,13 +38,11 @@ use App\Models\Traits\Subscribers;
  * @property-read Set[]|null $sets
  * @property-read State[]|null $states
  * @property-read Story[]|null $stories
+ * @property-read GameProcess|null $process
  */
 class Game extends Model
 {
-    use HasTranslations, Subscribers, Owner;
-
-    const SUBSCRIBER_TYPE_PLAYER = 0;
-    const SUBSCRIBER_TYPE_SPECTATOR = 1;
+    use HasTranslations, Subscribers, Owner, HybridRelations;
 
     protected $casts = [
         'status' => GameStatus::class
@@ -59,6 +59,14 @@ class Game extends Model
     public function getStatusValueAttribute(): ?int
     {
         return $this->status?->value;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function process(): BelongsTo
+    {
+        return $this->belongsTo(GameProcess::class, 'process_id');
     }
 
     /**
@@ -128,17 +136,6 @@ class Game extends Model
     public function stories(): HasMany
     {
         return $this->hasMany(Story::class);
-    }
-
-    /**
-     * @return array
-     */
-    public static function subscriberTypeOptions(): array
-    {
-        return [
-            self::SUBSCRIBER_TYPE_PLAYER => __('Player'),
-            self::SUBSCRIBER_TYPE_SPECTATOR => __('Spectator'),
-        ];
     }
 
     public static function boot()

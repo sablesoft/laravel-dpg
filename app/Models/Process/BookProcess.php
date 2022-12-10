@@ -7,6 +7,7 @@ namespace App\Models\Process;
  * @property int[]|null $source_ids
  * @property int[]|null $deck_ids
  * @property int[]|null $dome_ids
+ * @property int[]|null $scene_ids
  */
 class BookProcess extends Process
 {
@@ -19,6 +20,7 @@ class BookProcess extends Process
         'desc',
         'source_ids',
         'dome_ids',
-        'deck_ids'
+        'deck_ids',
+        'scene_ids'
     ];
 }

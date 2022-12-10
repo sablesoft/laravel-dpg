@@ -4,6 +4,8 @@
 
 namespace App\Service;
 
+use App\Models\Process\SceneProcess;
+use App\Models\Scene;
 use Exception;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -96,6 +98,11 @@ class GameService
                     }
                 }
             }
+            foreach ($book->scenes as $scene) {
+                foreach ($scene->sources as $source) {
+                    static::prepareBooks($books, $source);
+                }
+            }
         }
         // prepare books and all cards:
         foreach ($books as $book) {
@@ -110,7 +117,7 @@ class GameService
                 static::domeToProcess($gameProcess, $dome, $locale);
             }
         }
-        foreach (['dome', 'area', 'land', 'deck', 'card'] as $entity) {
+        foreach (['dome', 'area', 'land', 'deck', 'card', 'scene'] as $entity) {
             $field = "open_${entity}_ids";
             $gameProcess->$field = null;
         }
@@ -147,6 +154,11 @@ class GameService
             $ids[] = static::cardToProcess($gameProcess, $card, $locale)->id;
         }
         $bookProcess->card_ids = $ids;
+        $ids = [];
+        foreach ($book->scenes as $scene) {
+            $ids[] = static::sceneToProcess($gameProcess, $scene, $locale)->id;
+        }
+        $bookProcess->scene_ids = $ids;
         $ids = [];
         foreach ($book->decks as $deck) {
             $ids[] = $deck->getKey();
@@ -274,6 +286,35 @@ class GameService
         $gameProcess->areas()->save($areaProcess);
 
         return $areaProcess;
+    }
+
+    /**
+     * @param GameProcess $gameProcess
+     * @param Scene $scene
+     * @param string|null $locale
+     * @return SceneProcess
+     */
+    public static function sceneToProcess(GameProcess $gameProcess, Scene $scene, ?string $locale = null): SceneProcess
+    {
+        if (!$locale) {
+            $locale = App::currentLocale();
+        }
+        $scene->makeHidden([
+            'code',
+            'is_public',
+            'owner_id',
+            'pivot',
+            'created_at',
+            'updated_at'
+        ]);
+        $data = self::translate($scene->toArray(), $scene->translatable, $locale);
+        $data['image'] = self::image($data['image']);
+        /** @var SceneProcess $sceneProcess */
+        $sceneProcess = SceneProcess::create($data);
+        $sceneProcess->save();
+        $gameProcess->scenes()->save($sceneProcess);
+
+        return $sceneProcess;
     }
 
     /**

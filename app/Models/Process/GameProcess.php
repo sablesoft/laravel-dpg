@@ -23,6 +23,7 @@ use App\Models\Game;
  * @property int[]|null $open_dome_ids
  * @property int[]|null $open_area_ids
  * @property int[]|null $open_lands_ids
+ * @property int[]|null $open_scene_ids
  * @property-read Game|null $game
  * @property-read CardProcess[]|Collection|null $cards
  * @property-read BookProcess[]|Collection|null $books
@@ -30,6 +31,7 @@ use App\Models\Game;
  * @property-read DomeProcess[]|Collection|null $domes
  * @property-read AreaProcess[]|Collection|null $areas
  * @property-read LandProcess[]|Collection|null $lands
+ * @property-read SceneProcess[]|Collection|null $scenes
  */
 class GameProcess extends Model
 {
@@ -107,6 +109,14 @@ class GameProcess extends Model
         return $this->hasMany(LandProcess::class);
     }
 
+    /**
+     * @return HasMany
+     */
+    public function scenes(): HasMany
+    {
+        return $this->hasMany(SceneProcess::class);
+    }
+
     public function toArray(): array
     {
         $this->setRelation('books', $this->books->keyBy('id'));
@@ -115,6 +125,7 @@ class GameProcess extends Model
         $this->setRelation('domes', $this->domes->keyBy('id'));
         $this->setRelation('areas', $this->areas->keyBy('id'));
         $this->setRelation('lands', $this->lands->keyBy('id'));
+        $this->setRelation('scenes', $this->scenes->keyBy('id'));
         return parent::toArray();
     }
 }

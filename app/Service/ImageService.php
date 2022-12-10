@@ -25,15 +25,15 @@ class ImageService
     const CARDS_STORAGE = 'card';
     const AREAS_STORAGE = 'area';
     const DOMES_STORAGE = 'dome';
+    const SCENES_STORAGE = 'scene';
     const DEFAULT_DISK = 'public';
     const CONFIG_PATH = 'filesystems.image';
 
     /**
      * @param UploadedFile $file
-     * @param Dome $dome
      * @return string|null
      */
-    public static function uploadDomeImage(UploadedFile $file, Dome $dome): ?string
+    public static function uploadDomeImage(UploadedFile $file): ?string
     {
         $filename = $file->hashName(static::DOMES_STORAGE);
         $image = Image::make($file->path());
@@ -89,6 +89,19 @@ class ImageService
         $filename = $file->hashName(static::AREAS_STORAGE);
         $image = Image::make($file->path());
         $image->resize($dome->area_width, $dome->area_height)->encode($file->guessExtension());
+
+        return static::store($filename, (string) $image) ? $filename : null;
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @return string|null
+     */
+    public static function uploadSceneImage(UploadedFile $file): ?string
+    {
+        $filename = $file->hashName(static::SCENES_STORAGE);
+        $image = Image::make($file->path());
+        $image->encode($file->guessExtension());
 
         return static::store($filename, (string) $image) ? $filename : null;
     }

@@ -30,6 +30,10 @@ class Area extends Content
 {
     use Cards, Decks, Sources;
 
+    protected $casts = [
+        'markers' => 'array'
+    ];
+
     /**
      * @return BelongsTo
      */
@@ -77,9 +81,11 @@ class Area extends Content
     {
         parent::boot();
 
+        static::creating(function(Area $area) {
+            $area->owner()->associate(Auth::user());
+        });
         static::saving(function (Area $area) {
             $area->name = $area->area->name;
-            $area->owner()->associate(Auth::user());
         });
     }
 }

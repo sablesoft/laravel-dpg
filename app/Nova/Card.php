@@ -100,21 +100,18 @@ class Card extends Content
                 ->nullable(true)->sortable(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
-//            Text::make(__('Books'), 'books_string')
-//                ->onlyOnDetail()->asHtml(),
             Number::make(__('Decks Count'), 'decks_count')
                 ->hideWhenCreating()->hideWhenUpdating(),
-//            Text::make(__('Tags'), 'tags_string')
-//                ->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             BelongsToMany::make(__('Domes'), 'domes', Dome::class),
             BelongsToMany::make(__('Lands'), 'lands', Land::class),
             BelongsToMany::make(__('Areas'), 'areas', Area::class),
+            BelongsToMany::make(__('Scenes'), 'scenes', Scene::class),
             BelongsToMany::make(__('Books'), 'books', Book::class),
             HasMany::make(__('Decks'), 'decks', Deck::class),
             HasMany::make(__('Scoped Cards'), 'scopedCards', Card::class),
             HasMany::make(__('Scoped Decks'), 'scopedDecks', Deck::class),
-            BelongsToMany::make(__('Tags'), 'tags', Card::class),
-            HasMany::make(__('Tagged Cards'), 'taggedCards', Card::class),
+//            BelongsToMany::make(__('Tags'), 'tags', Card::class),
+//            HasMany::make(__('Tagged Cards'), 'taggedCards', Card::class),
             BelongsToMany::make(__('In Decks'), 'inDecks', Deck::class)
                 ->fields(function () {
                     return [

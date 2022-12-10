@@ -32,6 +32,11 @@ class Content extends Model
     use HasTranslations, Options, Owner;
 
     /**
+     * @var array|string[]
+     */
+    public array $translatable = ['name', 'desc'];
+
+    /**
      * @return BelongsTo
      */
     public function scope(): BelongsTo
@@ -49,11 +54,6 @@ class Content extends Model
     {
         return json_encode($value, JSON_UNESCAPED_UNICODE);
     }
-
-    /**
-     * @var array|string[]
-     */
-    public array $translatable = ['name', 'desc'];
 
     /**
      * @return array

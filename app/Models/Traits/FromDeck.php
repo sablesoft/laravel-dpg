@@ -84,14 +84,6 @@ trait FromDeck
     }
 
     /**
-     * @return BelongsTo
-     */
-    public function scope(): BelongsTo
-    {
-        return $this->belongsTo(Card::class, 'scope_id');
-    }
-
-    /**
      * @return string|null
      */
     public function getScopeImageAttribute(): ?string

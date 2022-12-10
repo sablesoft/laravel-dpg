@@ -23,7 +23,7 @@ class GameController extends Controller
     {
         /** @var User|null $subscriber */
         if (!$subscriber = $game->subscribers()->where('subscriber_id', Auth::id())->first()) {
-            if (!$game->owner_id !== Auth::id()) {
+            if ($game->owner_id !== Auth::id()) {
                 throw new Exception(__('Unknown game user!'));
             }
             $role = GameSubscribe::Master->value;

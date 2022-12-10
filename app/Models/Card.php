@@ -141,6 +141,14 @@ class Card extends Content
     /**
      * @return BelongsToMany
      */
+    public function scenes(): BelongsToMany
+    {
+        return $this->belongsToMany(Scene::class, 'card_relation');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
     public function inDecks(): BelongsToMany
     {
         return $this->belongsToMany(

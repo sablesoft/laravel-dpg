@@ -44,13 +44,9 @@ class BackupCommand extends Command
         'games',
         'game_hero',
         'game_book',
-        'game_subscriber',
-        'sets',
-        'set_card',
-        'stacks',
     ];
 
-    protected string $lastTable = 'states';
+    protected string $lastTable = 'game_subscriber';
 
     /**
      * Execute the console command.

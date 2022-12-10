@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use App\Enums\GameSubscribe;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -18,6 +17,7 @@ use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Ganyicz\NovaTemporaryFields\HasTemporaryFields;
 use App\Enums\GameStatus;
+use App\Enums\GameSubscribe;
 use App\Service\ImageService;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\IsPublicFilter;
@@ -118,9 +118,6 @@ class Game extends Resource
                             ->displayUsingLabels(),
                     ];
                 })->sortable()->nullable(true),
-            HasMany::make(__('States'), 'states', State::class),
-            HasMany::make(__('Stacks'), 'stacks', Stack::class)->canSee(static::isGameOwner()),
-            HasMany::make(__('Sets'), 'sets', Set::class)->canSee(static::isGameOwner()),
             HasMany::make(__('Stories'), 'stories', Story::class),
         ];
     }

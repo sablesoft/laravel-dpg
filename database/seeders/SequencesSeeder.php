@@ -16,9 +16,6 @@ class SequencesSeeder extends Seeder
         'books',
         'decks',
         'games',
-        'sets',
-        'stacks',
-        'states',
         'domes',
         'areas'
     ];

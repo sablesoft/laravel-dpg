@@ -34,9 +34,6 @@ use App\Models\Process\GameProcess;
  * @property-read Book[]|null $books
  * @property-read Card[]|null $heroes
  * @property-read Card|null $quest
- * @property-read Stack[]|null $stacks
- * @property-read Set[]|null $sets
- * @property-read State[]|null $states
  * @property-read Story[]|null $stories
  * @property-read GameProcess|null $process
  */
@@ -104,30 +101,6 @@ class Game extends Model
     public function subscribers(): BelongsToMany
     {
         return $this->_subscribers('game');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function stacks(): HasMany
-    {
-        return $this->hasMany(Stack::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function sets(): HasMany
-    {
-        return $this->hasMany(Set::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function states(): HasMany
-    {
-        return $this->hasMany(State::class);
     }
 
     /**

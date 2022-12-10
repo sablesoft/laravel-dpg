@@ -76,6 +76,7 @@ class Scene extends Content
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
             BelongsToMany::make(__('Cards'), 'cards'),
             HasMany::make(__('Decks'), 'decks', Deck::class),
+            BelongsToMany::make(__('Used In Books'), 'books', Book::class),
         ];
     }
 

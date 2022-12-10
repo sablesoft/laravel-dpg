@@ -12,6 +12,7 @@ use App\Models\Traits\Subscribers;
 /**
  * @property-read Card[]|null $cards
  * @property-read Dome[]|null $domes
+ * @property-read Scene[]|null $scenes
  * @property-read Book[]|null $usedInBooks
  * @property-read Dome[]|null $usedInDomes
  * @property-read Dome[]|null $usedInLands
@@ -35,6 +36,14 @@ class Book extends Content
     public function domes(): BelongsToMany
     {
         return $this->belongsToMany(Dome::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function scenes(): BelongsToMany
+    {
+        return $this->belongsToMany(Scene::class);
     }
 
     /**

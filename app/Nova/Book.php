@@ -70,6 +70,7 @@ class Book extends Content
                 ->hideFromIndex()->hideWhenCreating()->hideWhenUpdating()->asHtml(),
             Textarea::make(__('Desc'), 'desc')->nullable()->alwaysShow(),
             BelongsToMany::make(__('Domes'), 'domes', Dome::class),
+            BelongsToMany::make(__('Scenes'), 'scenes', Scene::class),
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
             HasMany::make(__('Decks'), 'decks', Deck::class),
             BelongsToMany::make(__('Cards'), 'cards', Card::class)

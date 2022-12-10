@@ -13,12 +13,16 @@ use App\Models\Card;
 use App\Models\Deck;
 use App\Models\Dome;
 use App\Models\Game;
+use App\Models\Land;
+use App\Models\SpaceInterface;
 use App\Models\Process\AreaProcess;
 use App\Models\Process\BookProcess;
 use App\Models\Process\CardProcess;
 use App\Models\Process\DeckProcess;
 use App\Models\Process\DomeProcess;
 use App\Models\Process\GameProcess;
+use App\Models\Process\LandProcess;
+use App\Models\Process\SpaceProcessInterface;
 
 class GameService
 {
@@ -33,7 +37,7 @@ class GameService
             return;
         }
 
-        foreach(['books', 'cards', 'decks', 'domes', 'areas'] as $collection) {
+        foreach(['books', 'cards', 'decks', 'domes', 'areas', 'lands'] as $collection) {
             DB::connection('mongodb')->collection($collection)
                 ->where('game_process_id', $process->getKey())
                 ->delete();
@@ -86,6 +90,11 @@ class GameService
                         static::prepareBooks($books, $source);
                     }
                 }
+                foreach ($dome->lands as $land) {
+                    foreach ($land->sources as $source) {
+                        static::prepareBooks($books, $source);
+                    }
+                }
             }
         }
         // prepare books and all cards:
@@ -101,7 +110,7 @@ class GameService
                 static::domeToProcess($gameProcess, $dome, $locale);
             }
         }
-        foreach (['dome', 'area', 'deck', 'card'] as $entity) {
+        foreach (['dome', 'area', 'land', 'deck', 'card'] as $entity) {
             $field = "open_${entity}_ids";
             $gameProcess->$field = null;
         }
@@ -182,16 +191,58 @@ class GameService
         $data['image'] = self::image($data['image']);
         /** @var DomeProcess $domeProcess */
         $domeProcess = DomeProcess::create($data);
-        $domeProcess = static::prepareSpaceProcess($gameProcess, $domeProcess, $dome, $locale);
+        static::prepareSpaceProcess($gameProcess, $domeProcess, $dome, $locale);
         $ids = [];
         foreach ($dome->areas as $area) {
             $ids[] = static::areaToProcess($gameProcess, $area, $locale)->id;
         }
         $domeProcess->area_ids = $ids;
+        $ids = [];
+        foreach ($dome->lands as $land) {
+            $ids[] = static::landToProcess($gameProcess, $land, $locale)->id;
+        }
+        $domeProcess->land_ids = $ids;
         $domeProcess->save();
         $gameProcess->domes()->save($domeProcess);
 
         return $domeProcess;
+    }
+
+    /**
+     * @param GameProcess $gameProcess
+     * @param Land $land
+     * @param string|null $locale
+     * @return LandProcess
+     * @throws Exception
+     */
+    public static function landToProcess(GameProcess $gameProcess, Land $land, ?string $locale = null): LandProcess
+    {
+        if (!$locale) {
+            $locale = App::currentLocale();
+        }
+        $land->makeHidden([
+            'code',
+            'is_public',
+            'owner_id',
+            'pivot',
+            'sources',
+            'created_at',
+            'updated_at'
+        ]);
+        $data = self::translate($land->toArray(), $land->translatable, $locale);
+        $data['image'] = self::image($data['image']);
+        $landProcess = LandProcess::create($data);
+        /** @var LandProcess $landProcess */
+        static::prepareSpaceProcess($gameProcess, $landProcess, $land, $locale);
+        $ids = [];
+        foreach ($land->areas as $area) {
+            $ids[] = $area->getKey();
+        }
+        $landProcess->area_ids = $ids;
+        $landProcess->save();
+        $gameProcess->lands()->save($landProcess);
+
+        return $landProcess;
     }
 
     /**
@@ -218,7 +269,7 @@ class GameService
         $data['image'] = self::image($data['image']);
         /** @var AreaProcess $areaProcess */
         $areaProcess = AreaProcess::create($data);
-        $areaProcess = static::prepareSpaceProcess($gameProcess, $areaProcess, $area, $locale);
+        static::prepareSpaceProcess($gameProcess, $areaProcess, $area, $locale);
         $areaProcess->save();
         $gameProcess->areas()->save($areaProcess);
 
@@ -324,35 +375,33 @@ class GameService
 
     /**
      * @param GameProcess $gameProcess
-     * @param AreaProcess|DomeProcess $process
-     * @param Area|Dome $source
+     * @param SpaceProcessInterface $process
+     * @param SpaceInterface $space
      * @param string $locale
-     * @return AreaProcess|DomeProcess
+     * @return void
      * @throws Exception
      */
     protected static function prepareSpaceProcess(
-        GameProcess             $gameProcess,
-        AreaProcess|DomeProcess $process,
-        Dome|Area               $source,
-        string                  $locale): AreaProcess|DomeProcess
+        GameProcess           $gameProcess,
+        SpaceProcessInterface $process,
+        SpaceInterface        $space,
+        string                $locale)
     {
         $ids = [];
-        foreach ($source->cards as $card) {
+        foreach ($space->cards as $card) {
             $ids[] = static::cardToProcess($gameProcess, $card, $locale)->id;
         }
         $process->card_ids = $ids;
         $ids = [];
-        foreach ($source->decks as $deck) {
+        foreach ($space->decks as $deck) {
             $ids[] = static::deckToProcess($gameProcess, $deck, $locale)->id;
         }
         $process->deck_ids = $ids;
         $ids = [];
-        foreach ($source->sources as $source) {
-            $ids[] = $source->getKey();
+        foreach ($space->sources as $space) {
+            $ids[] = $space->getKey();
         }
         $process->source_ids = $ids;
-
-        return $process;
     }
 
     /**

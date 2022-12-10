@@ -22,12 +22,14 @@ use App\Models\Game;
  * @property int[]|null $open_deck_ids
  * @property int[]|null $open_dome_ids
  * @property int[]|null $open_area_ids
+ * @property int[]|null $open_lands_ids
  * @property-read Game|null $game
  * @property-read CardProcess[]|Collection|null $cards
  * @property-read BookProcess[]|Collection|null $books
  * @property-read BookProcess[]|Collection|null $decks
  * @property-read DomeProcess[]|Collection|null $domes
  * @property-read AreaProcess[]|Collection|null $areas
+ * @property-read LandProcess[]|Collection|null $lands
  */
 class GameProcess extends Model
 {
@@ -97,6 +99,14 @@ class GameProcess extends Model
         return $this->hasMany(AreaProcess::class);
     }
 
+    /**
+     * @return HasMany
+     */
+    public function lands(): HasMany
+    {
+        return $this->hasMany(LandProcess::class);
+    }
+
     public function toArray(): array
     {
         $this->setRelation('books', $this->books->keyBy('id'));
@@ -104,6 +114,7 @@ class GameProcess extends Model
         $this->setRelation('decks', $this->decks->keyBy('id'));
         $this->setRelation('domes', $this->domes->keyBy('id'));
         $this->setRelation('areas', $this->areas->keyBy('id'));
+        $this->setRelation('lands', $this->lands->keyBy('id'));
         return parent::toArray();
     }
 }

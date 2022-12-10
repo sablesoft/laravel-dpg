@@ -17,7 +17,7 @@ use App\Models\Traits\Sources;
  *
  * @property-read string|null $card_image
  */
-class Scene extends Content
+class Scene extends Content implements SpaceInterface
 {
     use Sources, Decks, Cards;
 

@@ -16,7 +16,7 @@ use App\Models\Traits\Sources;
  * @property-read Dome|null $dome
  * @property-read Area[]|null $areas
  */
-class Land extends Content
+class Land extends Content implements SpaceInterface
 {
     use Cards, Decks, Sources;
 

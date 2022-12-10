@@ -11,11 +11,8 @@ namespace App\Models\Process;
  * @property int|null $top_step
  * @property int|null $left_step
  * @property array|null $markers
- * @property int[]|null $card_ids
- * @property int[]|null $source_ids
- * @property int[]|null $deck_ids
  */
-class AreaProcess extends Process
+class AreaProcess extends Process implements SpaceProcessInterface
 {
     protected $collection = 'areas';
 

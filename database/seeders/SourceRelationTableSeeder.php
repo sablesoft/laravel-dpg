@@ -26,6 +26,7 @@ class SourceRelationTableSeeder extends Seeder
                 'dome_id' => NULL,
                 'land_id' => NULL,
                 'area_id' => 1,
+                'scene_id' => NULL,
             ),
             1 => 
             array (
@@ -34,6 +35,7 @@ class SourceRelationTableSeeder extends Seeder
                 'dome_id' => 1,
                 'land_id' => NULL,
                 'area_id' => NULL,
+                'scene_id' => NULL,
             ),
             2 => 
             array (
@@ -42,6 +44,7 @@ class SourceRelationTableSeeder extends Seeder
                 'dome_id' => NULL,
                 'land_id' => NULL,
                 'area_id' => NULL,
+                'scene_id' => NULL,
             ),
             3 => 
             array (
@@ -50,6 +53,7 @@ class SourceRelationTableSeeder extends Seeder
                 'dome_id' => NULL,
                 'land_id' => 1,
                 'area_id' => NULL,
+                'scene_id' => NULL,
             ),
         ));
         

@@ -26,9 +26,14 @@ return new class extends Migration
                 ->constrained('lands')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('area_id')->nullable(true)
                 ->constrained('areas')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('scene_id')->nullable(true)
+                ->constrained('scenes')->cascadeOnUpdate()->cascadeOnDelete();
             $table->unsignedSmallInteger('count')->nullable(false)->default(1);
 
-            $table->unique(['card_id', 'deck_id', 'book_id', 'dome_id', 'land_id', 'area_id']);
+            $table->unique([
+                'card_id', 'deck_id', 'book_id', 'dome_id',
+                'land_id', 'area_id', 'scene_id'
+            ]);
         });
     }
 

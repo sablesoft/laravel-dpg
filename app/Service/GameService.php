@@ -118,6 +118,16 @@ class GameService
                 static::domeToProcess($gameProcess, $dome, $locale);
             }
         }
+        $ids = [];
+        foreach ($game->cards as $card) {
+            $ids[] = static::cardToProcess($gameProcess, $card, $locale)->id;
+        }
+        $gameProcess->card_ids = $ids;
+        $ids = [];
+        foreach ($game->decks as $deck) {
+            $ids[] = static::deckToProcess($gameProcess, $deck, $locale)->id;
+        }
+        $gameProcess->deck_ids = $ids;
         foreach (['dome', 'area', 'land', 'deck', 'card', 'scene'] as $entity) {
             $field = "open_${entity}_ids";
             $gameProcess->$field = null;

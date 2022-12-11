@@ -18,6 +18,8 @@ use App\Models\Game;
  * @property string|null $scope_name
  * @property int|null $quest_id
  * @property int[]|null $hero_ids
+ * @property int[]|null $card_ids
+ * @property int[]|null $deck_ids
  * @property int[]|null $open_card_ids
  * @property int[]|null $open_deck_ids
  * @property int[]|null $open_dome_ids
@@ -49,6 +51,14 @@ class GameProcess extends Model
         'scope_name',
         'quest_id',
         'hero_ids',
+        'card_ids',
+        'deck_ids',
+        'open_card_ids',
+        'open_deck_ids',
+        'open_dome_ids',
+        'open_land_ids',
+        'open_area_ids',
+        'open_scene_ids'
     ];
 
     protected $hidden = [

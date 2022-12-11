@@ -10,6 +10,7 @@ use App\Models\Traits\Decks;
 use App\Models\Traits\Books;
 
 /**
+ * @property string|null $info
  * @property-read Card[]|null $tags
  * @property-read Decks[]|null $inDecks
  * @property-read Books[]|null $books
@@ -29,7 +30,7 @@ class Card extends Content
     /**
      * @var array|string[]
      */
-    public array $translatable = ['name', 'desc'];
+    public array $translatable = ['name', 'desc', 'info'];
 
     /**
      * @return BelongsToMany

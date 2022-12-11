@@ -94,6 +94,8 @@ class Game extends Resource
             BelongsToMany::make(__('Heroes'), 'heroes', Hero::class),
             BelongsTo::make(__('Main Quest'), 'quest', Card::class)
                 ->nullable(true)->sortable()->hideWhenCreating(),
+            BelongsToMany::make(__('Cards'), 'cards', Card::class),
+            BelongsToMany::make(__('Decks'), 'decks', Deck::class),
             BelongsTo::make(__('Master'), 'owner', User::class)
                 ->hideWhenCreating()->sortable()->readonly(true),
             Textarea::make(__('Desc'), 'desc')->nullable(true)->alwaysShow(),

@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 use Jenssegers\Mongodb\Eloquent\HybridRelations;
 use App\Enums\GameStatus;
+use App\Models\Traits\Cards;
+use App\Models\Traits\Decks;
 use App\Models\Traits\Owner;
 use App\Models\Traits\Subscribers;
 use App\Models\Process\GameProcess;
@@ -39,7 +41,8 @@ use App\Models\Process\GameProcess;
  */
 class Game extends Model
 {
-    use HasTranslations, Subscribers, Owner, HybridRelations;
+    use HasTranslations, Subscribers,
+        Owner, HybridRelations, Cards, Decks;
 
     protected $casts = [
         'status' => GameStatus::class

@@ -49,54 +49,44 @@ class Deck extends Content
             BelongsTo::make(__('Book'), 'book', Book::class)
                 ->hideFromIndex()->hideWhenCreating()->readonly()
                 ->showOnUpdating(function(NovaRequest $request) {
-                    $resource = $request->findResourceOrFail();
-                    /** @var \App\Models\Deck $model */
-                    $model = $resource->model();
-                    return $model && !!$model->book_id;
+                    return $this->checkDeckType($request, 'book_id');
                 })->showOnDetail(function(NovaRequest $request) {
-                    $resource = $request->findResourceOrFail();
-                    /** @var \App\Models\Deck $model */
-                    $model = $resource->model();
-                    return $model && !!$model->book_id;
+                    return $this->checkDeckType($request, 'book_id');
                 }),
             BelongsTo::make(__('Dome'), 'dome', Dome::class)
                 ->hideFromIndex()->hideWhenCreating()->readonly()
                 ->showOnUpdating(function(NovaRequest $request) {
-                    $resource = $request->findResourceOrFail();
-                    /** @var \App\Models\Deck $model */
-                    $model = $resource->model();
-                    return $model && !!$model->dome_id;
+                    return $this->checkDeckType($request, 'dome_id');
                 })->showOnDetail(function(NovaRequest $request) {
-                    $resource = $request->findResourceOrFail();
-                    /** @var \App\Models\Deck $model */
-                    $model = $resource->model();
-                    return $model && !!$model->dome_id;
+                    return $this->checkDeckType($request, 'dome_id');
                 }),
             BelongsTo::make(__('Land'), 'land', Land::class)
                 ->hideFromIndex()->hideWhenCreating()->readonly()
                 ->showOnUpdating(function(NovaRequest $request) {
-                    $resource = $request->findResourceOrFail();
-                    /** @var \App\Models\Deck $model */
-                    $model = $resource->model();
-                    return $model && !!$model->land_id;
+                    return $this->checkDeckType($request, 'land_id');
                 })->showOnDetail(function(NovaRequest $request) {
-                    $resource = $request->findResourceOrFail();
-                    /** @var \App\Models\Deck $model */
-                    $model = $resource->model();
-                    return $model && !!$model->land_id;
+                    return $this->checkDeckType($request, 'land_id');
                 }),
             BelongsTo::make(__('Area'), 'area', Area::class)
                 ->hideFromIndex()->hideWhenCreating()->readonly()
                 ->showOnUpdating(function(NovaRequest $request) {
-                    $resource = $request->findResourceOrFail();
-                    /** @var \App\Models\Deck $model */
-                    $model = $resource->model();
-                    return $model && !!$model->area_id;
+                    return $this->checkDeckType($request, 'area_id');
                 })->showOnDetail(function(NovaRequest $request) {
-                    $resource = $request->findResourceOrFail();
-                    /** @var \App\Models\Deck $model */
-                    $model = $resource->model();
-                    return $model && !!$model->area_id;
+                    return $this->checkDeckType($request, 'area_id');
+                }),
+            BelongsTo::make(__('Game'), 'game', Game::class)
+                ->hideFromIndex()->hideWhenCreating()->readonly()
+                ->showOnUpdating(function(NovaRequest $request) {
+                    return $this->checkDeckType($request, 'game_id');
+                })->showOnDetail(function(NovaRequest $request) {
+                    return $this->checkDeckType($request, 'game_id');
+                }),
+            BelongsTo::make(__('Scene'), 'scene', Scene::class)
+                ->hideFromIndex()->hideWhenCreating()->readonly()
+                ->showOnUpdating(function(NovaRequest $request) {
+                    return $this->checkDeckType($request, 'scene_id');
+                })->showOnDetail(function(NovaRequest $request) {
+                    return $this->checkDeckType($request, 'scene_id');
                 }),
             BelongsTo::make(__('Target'), 'target', Card::class)
                 ->nullable(false)->sortable()
@@ -137,6 +127,19 @@ class Deck extends Content
                 ->nullable()->alwaysShow(),
             BelongsToMany::make(__('Tags'), 'tags', Card::class)
         ];
+    }
+
+    /**
+     * @param NovaRequest $request
+     * @param $field
+     * @return bool
+     */
+    public function checkDeckType(NovaRequest $request, $field): bool
+    {
+        $resource = $request->findResourceOrFail();
+        /** @var \App\Models\Deck $model */
+        $model = $resource->model();
+        return $model && !!$model->$field;
     }
 
     /**

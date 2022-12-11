@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('card_relation', function (Blueprint $table) {
             $table->foreignId('card_id')->constrained('cards')->nullable(false)
                 ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('game_id')->nullable(true)
+                ->constrained('games')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('deck_id')->nullable(true)
                 ->constrained('decks')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('book_id')->nullable(true)
@@ -32,7 +34,7 @@ return new class extends Migration
 
             $table->unique([
                 'card_id', 'deck_id', 'book_id', 'dome_id',
-                'land_id', 'area_id', 'scene_id'
+                'land_id', 'area_id', 'scene_id', 'game_id'
             ]);
         });
     }

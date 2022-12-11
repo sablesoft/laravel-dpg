@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 use App\Models\Traits\Cards;
-use App\Models\Traits\FromDeck;
 
 /**
  * @property int|null $type
@@ -14,18 +13,26 @@ use App\Models\Traits\FromDeck;
  * @property int|null $dome_id
  * @property int|null $land_id
  * @property int|null $area_id
+ * @property int|null $card_id
+ * @property int|null $game_id
+ * @property int|null $scene_id
  *
  * @property-read Book|null $book
  * @property-read Dome|null $dome
  * @property-read Land|null $land
  * @property-read Area|null $area
+ * @property-read Scene|null $scene
+ * @property-read Game|null $game
+ * @property-read Card|null $target
  * @property-read Card[]|null $tags
  *
  * @property-read int[]|null $size
+ * @property-read string|null $target_image
+ * @property-read string|null $scope_image
  */
 class Deck extends Content
 {
-    use Cards, FromDeck;
+    use Cards;
 
     // todo - enums
     const TYPE_STACK = 0;
@@ -37,6 +44,49 @@ class Deck extends Content
      * @var array|string[]
      */
     public array $translatable = ['desc'];
+
+    /**
+     * @return string|null
+     */
+    public function getNameAttribute(): ?string
+    {
+        $target = optional($this->target)->name;
+        $scope = optional($this->scope)->name;
+
+        return ($target && $scope) ?
+            $target .' - '. $scope : null;
+    }
+
+    /**
+     * @param $value
+     * @return void
+     */
+    public function setNameAttribute($value)
+    {
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function target(): BelongsTo
+    {
+        return $this->belongsTo(Card::class, 'card_id');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTargetImageAttribute(): ?string
+    {
+        return optional($this->target)->image;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getScopeImageAttribute(): ?string
+    {
+        return optional($this->scope)->image;
+    }
 
     /**
      * @return BelongsTo
@@ -68,6 +118,22 @@ class Deck extends Content
     public function area(): BelongsTo
     {
         return $this->belongsTo(Area::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function scene(): BelongsTo
+    {
+        return $this->belongsTo(Scene::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function game(): BelongsTo
+    {
+        return $this->belongsTo(Game::class);
     }
 
     /**

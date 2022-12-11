@@ -17,6 +17,7 @@ use App\Models\Traits\Books;
  * @property-read Dome[]|null $domes
  * @property-read Land[]|null $lands
  * @property-read Area[]|null $areas
+ * @property-read Game[]|null $games
  * @property-read Card[]|null $scopedCards
  * @property-read Deck[]|null $scopedDecks
  * @property-read Card[]|null $taggedCards
@@ -145,6 +146,14 @@ class Card extends Content
     public function scenes(): BelongsToMany
     {
         return $this->belongsToMany(Scene::class, 'card_relation');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function games(): BelongsToMany
+    {
+        return $this->belongsToMany(Land::class, 'card_relation');
     }
 
     /**

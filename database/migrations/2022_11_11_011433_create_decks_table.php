@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('image')->nullable(true);
             $table->foreignId('owner_id')->nullable(false)
                 ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('game_id')->nullable(true)
+                ->constrained('games')->nullOnDelete();
             $table->foreignId('book_id')->nullable(true)
                 ->constrained('books')->nullOnDelete();
             $table->foreignId('dome_id')->nullable(true)
@@ -39,7 +41,7 @@ return new class extends Migration
             $table->unique([
                 'book_id', 'dome_id', 'scene_id',
                 'area_id', 'land_id', 'card_id',
-                'scope_id', 'owner_id', 'type'
+                'game_id', 'scope_id', 'owner_id', 'type'
             ]);
             $table->timestamps();
         });

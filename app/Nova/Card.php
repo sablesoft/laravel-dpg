@@ -108,6 +108,7 @@ class Card extends Content
             BelongsToMany::make(__('Areas'), 'areas', Area::class),
             BelongsToMany::make(__('Scenes'), 'scenes', Scene::class),
             BelongsToMany::make(__('Books'), 'books', Book::class),
+            BelongsToMany::make(__('Games'), 'games', Game::class),
             HasMany::make(__('Decks'), 'decks', Deck::class),
             HasMany::make(__('Scoped Cards'), 'scopedCards', Card::class),
             HasMany::make(__('Scoped Decks'), 'scopedDecks', Deck::class),

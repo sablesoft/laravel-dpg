@@ -4,6 +4,7 @@ namespace App\Models\Process;
 
 /**
  * @property string|null $code
+ * @property string|null $info
  * @property int|null $scope_id
  * @property string|null $image
  * @property string|null $scope_name
@@ -25,6 +26,7 @@ class CardProcess extends Process
         'scope_id',
         'image',
         'desc',
+        'info',
         'current_desc',
         'canvas',
         'scope_name',

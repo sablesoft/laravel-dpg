@@ -101,7 +101,21 @@ class ImageService
     {
         $filename = $file->hashName(static::SCENES_STORAGE);
         $image = Image::make($file->path());
-        $image->encode($file->guessExtension());
+        $currentWidth = $image->width();
+        $currentHeight = $image->height();
+        // resize by biggest dimension - todo:
+        $width = $height = null;
+        if ($currentWidth > $currentHeight) {
+            $width = 986;
+        } else {
+            $height = 690;
+        }
+        if ($currentWidth == $currentHeight) {
+            $height = 690;
+        }
+        $image->resize($width, $height, function (Constraint $constraint) {
+            $constraint->aspectRatio();
+        })->encode($file->guessExtension());
 
         return static::store($filename, (string) $image) ? $filename : null;
     }

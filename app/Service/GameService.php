@@ -5,8 +5,9 @@
 namespace App\Service;
 
 use Exception;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use App\Models\Area;
 use App\Models\Book;
 use App\Models\Card;
@@ -63,22 +64,30 @@ class GameService
             $locale = App::currentLocale();
         }
         $game->makeHidden([
-            'process_id',
+            'id',
+            'process_id', 'board_image', 'cards_back',
             'owner_id', 'quest_id', 'created_at',
             'is_public', 'status', 'updated_at'
         ]);
-        $data = self::translate($game->toArray(), $game->translatable, $locale);
-        $data['image'] = self::image($data['image']);
-        $data['scope_name'] = __('Game');
+        $info = self::translate($game->toArray(), $game->translatable, $locale);
+        $info['image'] = self::image($info['image']);
+        $info['scopeName'] = __('Game');
+        $info['scopeImage'] = null;
+        $data = [
+            'id' => $game->getKey(),
+            'info' => $info,
+            'boardImage' => self::image($game->board_image),
+            'cardsBack' => self::image($game->cards_back),
+        ];
 
         /** @var GameProcess $gameProcess */
         $gameProcess = GameProcess::create($data);
-        $gameProcess->quest_id = static::cardToProcess($gameProcess, $game->quest, $locale)->id;
+        $gameProcess->questId = static::cardToProcess($gameProcess, $game->quest, $locale)->id;
         $ids = [];
         foreach ($game->heroes as $hero) {
             $ids[] = static::cardToProcess($gameProcess, $hero, $locale)->id;
         }
-        $gameProcess->hero_ids = $ids;
+        $gameProcess->heroIds = $ids;
         // prepare all sources:
         /** @var Book[] $books */
         $books = [];
@@ -122,14 +131,15 @@ class GameService
         foreach ($game->cards as $card) {
             $ids[] = static::cardToProcess($gameProcess, $card, $locale)->id;
         }
-        $gameProcess->card_ids = $ids;
+        $gameProcess->cardIds = $ids;
         $ids = [];
         foreach ($game->decks as $deck) {
             $ids[] = static::deckToProcess($gameProcess, $deck, $locale)->id;
         }
-        $gameProcess->deck_ids = $ids;
-        foreach (['dome', 'area', 'land', 'deck', 'card', 'scene'] as $entity) {
-            $field = "open_${entity}_ids";
+        $gameProcess->deckIds = $ids;
+        foreach (Process::collections() as $collection) {
+            $key = ucfirst(Str::singular($collection));
+            $field = "open${key}Ids";
             $gameProcess->$field = null;
         }
 

@@ -10,22 +10,18 @@ use App\Models\Game;
 
 /**
  * @property int|null $id
- * @property string|null $name
- * @property string|null $desc
- * @property string|null $image
- * @property string|null $board_image
- * @property string|null $cards_back
- * @property string|null $scope_name
- * @property int|null $quest_id
- * @property int[]|null $hero_ids
- * @property int[]|null $card_ids
- * @property int[]|null $deck_ids
- * @property int[]|null $open_card_ids
- * @property int[]|null $open_deck_ids
- * @property int[]|null $open_dome_ids
- * @property int[]|null $open_area_ids
- * @property int[]|null $open_lands_ids
- * @property int[]|null $open_scene_ids
+ * @property string|null $boardImage
+ * @property string|null $cardsBack
+ * @property int|null $questId
+ * @property int[]|null $heroIds
+ * @property int[]|null $cardIds
+ * @property int[]|null $deckIds
+ * @property int[]|null $openCardIds
+ * @property int[]|null $openDeckIds
+ * @property int[]|null $openDomeIds
+ * @property int[]|null $openAreaIds
+ * @property int[]|null $openLandsIds
+ * @property int[]|null $openSceneSds
  * @property array[]|null $canvas
  * @property-read Game|null $game
  * @property-read CardProcess[]|Collection|null $cards
@@ -43,22 +39,19 @@ class GameProcess extends Model
 
     protected $fillable = [
         'id',
-        'name',
-        'desc',
-        'image',
-        'board_image',
-        'cards_back',
-        'scope_name',
-        'quest_id',
-        'hero_ids',
-        'card_ids',
-        'deck_ids',
-        'open_card_ids',
-        'open_deck_ids',
-        'open_dome_ids',
-        'open_land_ids',
-        'open_area_ids',
-        'open_scene_ids'
+        'info',
+        'boardImage',
+        'cardsBack',
+        'questId',
+        'heroIds',
+        'cardIds',
+        'deckIds',
+        'openCardIds',
+        'openDeckIds',
+        'openDomeIds',
+        'openLandIds',
+        'openAreaIds',
+        'openSceneIds'
     ];
 
     protected $hidden = [

@@ -48,26 +48,32 @@ const zoomResetScene = () => {
     console.log('Reset Zoom');
 }
 const zoomScene = () => {
-    game.sceneCanvas.setDimensions({ width: game.width * scaleRatio.value, height: game.height * scaleRatio.value });
+    game.sceneCanvas.setDimensions({ width: game.sceneWidth * scaleRatio.value, height: game.sceneHeight * scaleRatio.value });
     game.sceneCanvas.setZoom(scaleRatio.value);
 }
 onMounted(() => {
     // todo
     setTimeout(function() {
-        game.sceneCanvas = new fabric.Canvas(canvasRef.value);
         let scene = game.scenes[1];
         let options = scene.markers ? scene.markers.background : null;
         options = options ? options : {
             originX : 'left',
             originY : 'top',
         };
-        game.sceneCanvas.setBackgroundImage(scene.image, game.sceneCanvas.renderAll.bind(game.sceneCanvas), options);
-        game.sceneCanvas.renderAll();
-        game.sceneCanvas.on({
-            'selection:updated': log,
-            'selection:created': log,
-            'selection:cleared': log,
-            'mouse:dblclick': log
+        fabric.Image.fromURL(scene.image, function(myImg) {
+            console.log(myImg);
+            game.sceneHeight = myImg.height;
+            game.sceneWidth = myImg.width;
+            console.log(game);
+            game.sceneCanvas = new fabric.Canvas(canvasRef.value);
+            game.sceneCanvas.setBackgroundImage(myImg, game.sceneCanvas.renderAll.bind(game.sceneCanvas), options);
+            game.sceneCanvas.renderAll();
+            game.sceneCanvas.on({
+                'selection:updated': log,
+                'selection:created': log,
+                'selection:cleared': log,
+                'mouse:dblclick': log
+            });
         });
     }, 100);
 });
@@ -83,6 +89,6 @@ onMounted(() => {
     <button @click="canvasMoveLeft">Left</button> <button @click="canvasMoveRight">Right</button>
     <button @click="canvasMoveTop">Top</button> <button @click="canvasMoveBottom">Bottom</button>
     <div id="scene-canvas" :style="{ height: game.height + 'px' }">
-        <canvas ref="canvasRef" :width="game.width" :height="game.height"></canvas>
+        <canvas ref="canvasRef" :width="game.sceneWidth" :height="game.sceneHeight"></canvas>
     </div>
 </template>

@@ -14,6 +14,8 @@ use App\Models\Traits\Sources;
  * @property int|null $card_id
  * @property int|null $area_width
  * @property int|null $area_height
+ * @property int|null $map_width
+ * @property int|null $map_height
  * @property int|null $top_step
  * @property int|null $left_step
  * @property array|null $area_mask

@@ -55,10 +55,14 @@ class Dome extends Content
                 ->hideWhenCreating()->hideWhenUpdating(),
             Textarea::make(__('Desc'), 'desc')
                 ->nullable()->alwaysShow(),
+            Number::make(__('Map Width'), 'map_width')
+                ->hideFromIndex()->nullable(true),
+            Number::make(__('Map Height'), 'map_height')
+                ->hideFromIndex()->nullable(true),
             Image::make(__('Map'), 'image')->maxWidth('auto')
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     /** @var \App\Models\Dome $model */
-                    return ImageService::uploadDomeImage($request->file($requestAttribute));
+                    return ImageService::uploadDomeImage($request->file($requestAttribute), $model);
                 })->hideFromIndex()->disk(ImageService::diskName())
                 ->nullable(false)->required()->rules('file')->prunable(),
             Number::make(__('Area Width'), 'area_width')

@@ -16,6 +16,8 @@ return new class extends Migration
         $this->upContent('domes', function (Blueprint $table) {
             $table->decimal('area_width')->nullable(true);
             $table->decimal('area_height')->nullable(true);
+            $table->decimal('map_width')->nullable(true);
+            $table->decimal('map_height')->nullable(true);
             $table->decimal('top_step')->nullable(true);
             $table->decimal('left_step')->nullable(true);
             $table->json('area_mask')->nullable(true);

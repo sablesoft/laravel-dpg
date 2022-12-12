@@ -31,15 +31,26 @@ class ImageService
 
     /**
      * @param UploadedFile $file
+     * @param Dome $dome
      * @return string|null
      */
-    public static function uploadDomeImage(UploadedFile $file): ?string
+    public static function uploadDomeImage(UploadedFile $file, Dome $dome): ?string
     {
         $filename = $file->hashName(static::DOMES_STORAGE);
         $image = Image::make($file->path());
         $image->encode($file->guessExtension());
 
-        return static::store($filename, (string) $image) ? $filename : null;
+        if ($result = static::store($filename, (string) $image)) {
+            if (!$dome->map_width) {
+                $dome->map_width = $image->width();
+            }
+            if (!$dome->map_height) {
+                $dome->map_height = $image->height();
+            }
+            $dome->save();
+        }
+
+        return $result ? $filename : null;
     }
 
     /**

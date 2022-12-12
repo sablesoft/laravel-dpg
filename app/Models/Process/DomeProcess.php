@@ -23,6 +23,8 @@ class DomeProcess extends Process implements SpaceProcessInterface
         'scope_id',
         'area_width',
         'area_height',
+        'map_width',
+        'map_height',
         'top_step',
         'left_step',
         'desc',

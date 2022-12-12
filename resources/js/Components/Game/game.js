@@ -47,13 +47,17 @@ export const game = reactive({
     sceneCanvas: null,
     mainTab: 'Board',
     asideTab: 'Card',
-    init(data) {
+    width: null,
+    height: null,
+    init(data, options) {
         for (const [key, value] of Object.entries(data)) {
             this[key] = value;
         }
         this.activeCard = this.info;
         this.activeCard.id = null;
         this.activeCard.tapped = false;
+        this.width = options.width;
+        this.height = options.height;
     },
     setActiveCard(id = null) {
         if (!id) {

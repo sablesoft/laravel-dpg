@@ -80,6 +80,6 @@ onMounted(() => {
 
 <template>
     <div id="board-canvas">
-        <canvas ref="canvasRef" :width="canvasSize.width" :height="canvasSize.height"></canvas>
+        <canvas ref="canvasRef" :width="game.width" :height="game.height"></canvas>
     </div>
 </template>

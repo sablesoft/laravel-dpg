@@ -12,7 +12,9 @@ import Book from '@/Components/Game/Book.vue';
 
 import { Head } from '@inertiajs/inertia-vue3';
 import { game } from "@/Components/Game/game";
-import { onMounted } from "vue";
+import {onMounted, shallowRef} from "vue";
+
+const boardRef = shallowRef(null);
 
 const props = defineProps({
     data: {
@@ -31,7 +33,11 @@ const mainTabs = {
 }
 
 onMounted(() => {
-    game.init(props.data);
+    let options = {
+        width: boardRef.value.offsetWidth,
+        height: window.innerHeight - 100,
+    }
+    game.init(props.data, options);
     console.debug(game);
 });
 </script>
@@ -66,7 +72,7 @@ onMounted(() => {
 
     <GameLayout>
         <div class="mx-auto sm:px-6 lg:px-8 row">
-            <div class="board-column bg-white overflow-hidden shadow-lg sm:rounded-lg">
+            <div ref="boardRef" class="board-column bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <component :is="mainTabs[game.mainTab]"></component>
             </div>
             <div class="action-column">

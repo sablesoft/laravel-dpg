@@ -2,14 +2,14 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Http\RedirectResponse;
-use App\Models\Game;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use App\Models\User;
+use App\Models\Process\GameProcess;
+use App\Providers\RouteServiceProvider;
 
 class GameVisitor
 {
@@ -20,10 +20,11 @@ class GameVisitor
      */
     public function handle(Request $request, Closure $next): Response|RedirectResponse
     {
-        /** @var Game $game */
-        $game = $request->route('game');
+        /** @var GameProcess $process */
+        $process = $request->route('process');
         /** @var User $user */
         $user = Auth::user();
+        $game = $process->getGame();
         if (!$game->canBeVisitedBy($user)) {
             return redirect(RouteServiceProvider::HOME);
         }

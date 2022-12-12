@@ -11,16 +11,18 @@ use App\Models\User;
 use App\Models\Game;
 use App\Enums\GameSubscribe;
 use App\Service\GameService;
+use App\Models\Process\GameProcess;
 
 class GameController extends Controller
 {
     /**
-     * @param Game $game
+     * @param GameProcess $process
      * @return Response
      * @throws Exception
      */
-    public function init(Game $game): Response
+    public function process(GameProcess $process): Response
     {
+        $game = $process->getGame();
         /** @var User|null $subscriber */
         if (!$subscriber = $game->subscribers()->where('subscriber_id', Auth::id())->first()) {
             if ($game->owner_id !== Auth::id()) {
@@ -32,7 +34,7 @@ class GameController extends Controller
         }
 
         return Inertia::render('Game', [
-            'data' => $game->process ?: GameService::initProcess($game, App::currentLocale()),
+            'data' => $process,
             'user_role' => $role
         ]);
     }

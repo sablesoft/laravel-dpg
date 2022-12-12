@@ -2,26 +2,29 @@
 
 namespace App\Nova;
 
+
 use Closure;
+use Ganyicz\NovaTemporaryFields\HasTemporaryFields;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Ganyicz\NovaTemporaryFields\HasTemporaryFields;
 use App\Enums\GameStatus;
 use App\Enums\GameSubscribe;
 use App\Service\ImageService;
 use App\Nova\Filters\OwnersFilter;
 use App\Nova\Filters\IsPublicFilter;
 use App\Nova\Filters\GameStatusFilter;
+use App\Nova\Actions\Game\InitProcess;
+use App\Nova\Actions\Game\InviteSubscribers;
 
 /**
  * @mixin \App\Models\Game
@@ -95,7 +98,7 @@ class Game extends Resource
             BelongsTo::make(__('Main Quest'), 'quest', Card::class)
                 ->nullable(true)->sortable()->hideWhenCreating(),
             BelongsToMany::make(__('Cards'), 'cards', Card::class),
-            BelongsToMany::make(__('Decks'), 'decks', Deck::class),
+            HasMany::make(__('Decks'), 'decks', Deck::class),
             BelongsTo::make(__('Master'), 'owner', User::class)
                 ->hideWhenCreating()->sortable()->readonly(true),
             Textarea::make(__('Desc'), 'desc')->nullable(true)->alwaysShow(),
@@ -188,6 +191,9 @@ class Game extends Resource
      */
     public function actions(Request $request): array
     {
-        return [];
+        return [
+            InviteSubscribers::make()->onlyOnDetail(true),
+            InitProcess::make()->onlyOnDetail(true),
+        ];
     }
 }

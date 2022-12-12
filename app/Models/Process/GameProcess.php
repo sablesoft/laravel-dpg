@@ -69,6 +69,14 @@ class GameProcess extends Model
     }
 
     /**
+     * @return Game
+     */
+    public function getGame(): Game
+    {
+        return Game::where('process_id', $this->getKey())->first();
+    }
+
+    /**
      * @return HasMany
      */
     public function books(): HasMany

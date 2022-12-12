@@ -69,6 +69,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
                 image.set('top', -37);
                 image.set('partType', 'image');
                 self.add(image);
+                // self.canvas.renderAll.bind(self.canvas);
             });
         }
 
@@ -113,22 +114,24 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
 
     tap: function () {
         if (this.get('tapped')) {
-            return;
+            return false;
         }
         this.set('tapped', true);
         this.rotate(-90);
         this.set('dirty', true);
         this.canvas.requestRenderAll();
+        return true;
     },
 
     untap: function() {
         if (!this.get('tapped')) {
-            return;
+            return false;
         }
         this.set('tapped', false);
         this.rotate(0);
         this.set('dirty', true);
         this.canvas.requestRenderAll();
+        return true;
     },
 
     toObject: function() {
@@ -137,6 +140,8 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             width: this.get('width'),
             height: this.get('height'),
             ratio: this.get('ratio'),
+            tapped: this.get('tapped'),
+            opened: this.get('opened')
         });
     },
 

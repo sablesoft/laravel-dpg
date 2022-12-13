@@ -41,14 +41,18 @@ export const game = reactive({
     lands: null,
     areas: null,
     scenes: null,
-    // canvases:
-    boardCanvas: null,
-    mapCanvas: null,
-    sceneCanvas: null,
+    // fabric canvases:
+    fabricBoard: null,
+    fabricMap: null,
+    fabricScene: null,
+    // tabs:
     mainTab: 'Board',
     asideTab: 'Card',
+    // main tab size:
     width: null,
     height: null,
+    canvasMoveStep: 20,
+    canvasScaleStep: 0.1,
     init(data, options) {
         for (const [key, value] of Object.entries(data)) {
             this[key] = value;
@@ -119,6 +123,93 @@ export const game = reactive({
     },
     showBoard() {
         this.mainTab = 'Board';
+    },
+    moveLeft() {
+        for (const canvas of this._canvases()) {
+            this._canvasMoveX(-this.canvasMoveStep, canvas);
+        }
+    },
+    moveRight() {
+        for (const canvas of this._canvases()) {
+            this._canvasMoveX(this.canvasMoveStep, canvas);
+        }
+    },
+    moveTop() {
+        for (const canvas of this._canvases()) {
+            this._canvasMoveY(-this.canvasMoveStep, canvas);
+        }
+    },
+    moveBottom() {
+        for (const canvas of this._canvases()) {
+            this._canvasMoveY(this.canvasMoveStep, canvas);
+        }
+    },
+    fabricWidth() {
+        let fabric = this.fabric();
+        if (!fabric || !fabric.fullWidth) {
+            return this.width;
+        }
+        return fabric.fullWidth;
+    },
+    fabricHeight() {
+        let fabric = this.fabric();
+        if (!fabric || !fabric.fullHeight) {
+            return this.height;
+        }
+        return fabric.fullHeight;
+    },
+    canvasWrapperStyle() {
+        return {
+            height: game.height + 'px',
+            width: game.width + 'px',
+            overflow: 'hidden !important'
+        }
+    },
+    fabric() {
+        let fabric = 'fabric' + this.mainTab;
+        return this[fabric];
+    },
+    zoomIn() {
+        this._scaleRatio(1 + this.canvasScaleStep);
+        this._zoom();
+    },
+    zoomOut() {
+        this._scaleRatio(1 - this.canvasScaleStep);
+        this._zoom();
+    },
+    zoomReset() {
+        this._scaleRatio();
+        this._zoom();
+    },
+    _zoom() {
+        let fabric = this.fabric();
+        fabric.setDimensions({
+            width: fabric.fullWidth * fabric.scaleRatio,
+            height: fabric.fullHeight * fabric.scaleRatio
+        });
+        fabric.setZoom(fabric.scaleRatio);
+    },
+    _canvasMoveX(value, canvas) {
+        let current = Number(canvas.style.left.slice(0, -2));
+        canvas.style.left = current + value + 'px';
+    },
+    _canvasMoveY(value, canvas) {
+        let current = Number(canvas.style.top.slice(0, -2));
+        canvas.style.top = current + value + 'px';
+    },
+    _canvases() {
+        return document.getElementsByTagName('canvas');
+    },
+    _scaleRatio(multiplier = null) {
+        if (!multiplier) {
+           this.fabric().scaleRatio = 1;
+           return;
+        }
+        let ratio = this.fabric().scaleRatio;
+        if (!ratio) {
+            ratio = 1;
+        }
+        this.fabric().scaleRatio = ratio * multiplier;
     },
     _cardObject(id) {
         if (!this.cards[id]) {

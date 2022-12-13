@@ -1,14 +1,9 @@
 <!--suppress JSUnresolvedVariable -->
 <script setup>
-import {onMounted, shallowRef} from 'vue';
+import {onMounted} from 'vue';
 import { fabric } from 'fabric';
 import { game } from "@/Components/Game/game";
-
-const canvasRef = shallowRef(null);
-const canvasSize = {
-    width: 986,
-    height: 690
-};
+import Canvas from '@/Components/Game/Canvas.vue';
 
 const selectCards = (data) => {
     let object = data.selected[0];
@@ -31,55 +26,60 @@ const getHero = (options) => {
     return game.createCardObject(id, options);
 }
 onMounted(() => {
+    // todo - draw current board with cards and decks
     setTimeout(function() {
-        game.boardCanvas = new fabric.Canvas(canvasRef.value);
-        game.boardCanvas.preserveObjectStacking = true;
-        game.boardCanvas.setBackgroundImage(game.boardImage, game.boardCanvas.renderAll.bind(game.boardCanvas), {
+        let options = game.markers ? game.markers.background : null;
+        options = options ? options : {
             originX : 'left',
             originY : 'top',
-            width : game.boardCanvas.width,
-            height : game.boardCanvas.height
-        });
-        const hero = getHero({
-            left: 70,
-            top: 530,
-            opened: true
-        });
-        const heroScope = game.createCardObject(hero.model.scope_id, {
-            left: 40,
-            top: 530,
-            opened: true
-        });
-        game.boardCanvas.add(heroScope);
-        heroScope.tap();
-        game.boardCanvas.add(hero);
+        };
+        fabric.Image.fromURL(game.boardImage, function(myImg) {
+            let canvas = document.getElementsByTagName('canvas')[0];
+            game.fabricBoard = new fabric.Canvas(canvas);
+            game.fabricBoard.fullHeight = myImg.height;
+            game.fabricBoard.fullWidth = myImg.width;
+            game.fabricBoard.setBackgroundImage(myImg, game.fabricBoard.renderAll.bind(game.fabricBoard), options);
+            game.fabricBoard.preserveObjectStacking = true;
+            const hero = getHero({
+                left: 70,
+                top: 530,
+                opened: true
+            });
+            const heroScope = game.createCardObject(hero.model.scope_id, {
+                left: 40,
+                top: 530,
+                opened: true
+            });
+            game.fabricBoard.add(heroScope);
+            heroScope.tap();
+            game.fabricBoard.add(hero);
 
-        game.boardCanvas.on({
-            'selection:updated': selectCards,
-            'selection:created': selectCards,
-            'selection:cleared': unselectCards,
-            'mouse:dblclick': function(event) {
-                if (!event.target) {
-                    return;
-                }
-                if (event.target.type === 'card') {
-                    let card = event.target;
-                    card.flip();
-                    if (card.opened) {
-                        game.setActiveCard(card.model.id);
-                    } else {
-                        game.setActiveCard();
+            game.fabricBoard.on({
+                'selection:updated': selectCards,
+                'selection:created': selectCards,
+                'selection:cleared': unselectCards,
+                'mouse:dblclick': function(event) {
+                    if (!event.target) {
+                        return;
+                    }
+                    if (event.target.type === 'card') {
+                        let card = event.target;
+                        card.flip();
+                        if (card.opened) {
+                            game.setActiveCard(card.model.id);
+                        } else {
+                            game.setActiveCard();
+                        }
                     }
                 }
-            }
+            });
+            game.fabricBoard.renderAll();
         });
-        game.boardCanvas.renderAll();
+        console.log('Board mounted');
     }, 100);
 });
 </script>
 
 <template>
-    <div id="board-canvas">
-        <canvas ref="canvasRef" :width="game.width" :height="game.height"></canvas>
-    </div>
+    <Canvas/>
 </template>

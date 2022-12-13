@@ -1,58 +1,14 @@
 <script setup>
-import {onMounted, shallowRef} from "vue";
+import {onMounted} from "vue";
 import { fabric } from 'fabric';
 import { game } from "@/Components/Game/game";
+import Canvas from '@/Components/Game/Canvas.vue';
 
-const scaleRatio = shallowRef(1);
-const canvasRef = shallowRef(null);
-const canvasSize = {
-    width: 986,
-    height: 690
-};
 const log = (e) => {
     console.log(e);
 };
-const canvasMoveX = (value) => {
-    let current = Number(canvasRef.value.style.left.slice(0, -2));
-    canvasRef.value.style.left = current + value + 'px';
-}
-const canvasMoveY = (value) => {
-    let current = Number(canvasRef.value.style.top.slice(0, -2));
-    canvasRef.value.style.top = current + value + 'px';
-}
-const canvasMoveLeft = () => {
-    canvasMoveX(-20);
-}
-const canvasMoveRight = () => {
-    canvasMoveX(20);
-}
-const canvasMoveTop = () => {
-    canvasMoveY(-20);
-}
-const canvasMoveBottom = () => {
-    canvasMoveY(20);
-}
-const zoomInScene = () => {
-    scaleRatio.value = scaleRatio.value * 1.1;
-    zoomScene();
-    console.log('Zoom In');
-}
-const zoomOutScene = () => {
-    scaleRatio.value = scaleRatio.value * 0.9;
-    zoomScene();
-    console.log('Zoom Out');
-}
-const zoomResetScene = () => {
-    scaleRatio.value = 1;
-    zoomScene();
-    console.log('Reset Zoom');
-}
-const zoomScene = () => {
-    game.sceneCanvas.setDimensions({ width: game.sceneWidth * scaleRatio.value, height: game.sceneHeight * scaleRatio.value });
-    game.sceneCanvas.setZoom(scaleRatio.value);
-}
 onMounted(() => {
-    // todo
+    // todo - draw current scene with markers
     setTimeout(function() {
         let scene = game.scenes[1];
         let options = scene.markers ? scene.markers.background : null;
@@ -61,34 +17,23 @@ onMounted(() => {
             originY : 'top',
         };
         fabric.Image.fromURL(scene.image, function(myImg) {
-            console.log(myImg);
-            game.sceneHeight = myImg.height;
-            game.sceneWidth = myImg.width;
-            console.log(game);
-            game.sceneCanvas = new fabric.Canvas(canvasRef.value);
-            game.sceneCanvas.setBackgroundImage(myImg, game.sceneCanvas.renderAll.bind(game.sceneCanvas), options);
-            game.sceneCanvas.renderAll();
-            game.sceneCanvas.on({
+            let canvas = document.getElementsByTagName('canvas')[0];
+            game.fabricScene = new fabric.Canvas(canvas);
+            game.fabricScene.fullHeight = myImg.height;
+            game.fabricScene.fullWidth = myImg.width;
+            game.fabricScene.setBackgroundImage(myImg, game.fabricScene.renderAll.bind(game.fabricScene), options);
+            game.fabricScene.on({
                 'selection:updated': log,
                 'selection:created': log,
                 'selection:cleared': log,
                 'mouse:dblclick': log
             });
         });
+        console.log('Scene mounted');
     }, 100);
 });
 </script>
-<style scoped>
-    #scene-canvas {
-        overflow: hidden !important;
-    }
-</style>
 
 <template>
-    <button @click="zoomInScene">In</button> <button @click="zoomResetScene">Reset</button> <button @click="zoomOutScene">Out</button>
-    <button @click="canvasMoveLeft">Left</button> <button @click="canvasMoveRight">Right</button>
-    <button @click="canvasMoveTop">Top</button> <button @click="canvasMoveBottom">Bottom</button>
-    <div id="scene-canvas" :style="{ height: game.height + 'px' }">
-        <canvas ref="canvasRef" :width="game.sceneWidth" :height="game.sceneHeight"></canvas>
-    </div>
+    <Canvas/>
 </template>

@@ -49,6 +49,7 @@ onMounted(() => {
 }
 .board-column {
     flex: 70%;
+    position: relative;
 }
 .action-column {
     flex: 6%;

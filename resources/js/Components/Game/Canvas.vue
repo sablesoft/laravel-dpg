@@ -5,8 +5,10 @@
 <style scoped>
     .control-wrap {
         position: absolute;
-        top:10px; left:10px;
+        top:16px;
+        left:16px;
         display:flex;
+        gap:4px
     }
     .control-btn {
         flex-shrink:0;
@@ -16,7 +18,13 @@
         padding:.25em;
         display:flex;
         justify-content:center;
-        align-items:center
+        align-items:center;
+        border-radius:8px;
+        background:rgba(255,255,255,.8);
+        transition:.5s all;
+    }
+    .control-btn:hover {
+        background:rgba(255,255,255,1);
     }
     .control-btn .material-icons {
         font-size:1em;

@@ -22,6 +22,7 @@ class CardRelationTableSeeder extends Seeder
             0 => 
             array (
                 'card_id' => 83,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -33,6 +34,7 @@ class CardRelationTableSeeder extends Seeder
             1 => 
             array (
                 'card_id' => 39,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -44,6 +46,7 @@ class CardRelationTableSeeder extends Seeder
             2 => 
             array (
                 'card_id' => 40,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -55,6 +58,7 @@ class CardRelationTableSeeder extends Seeder
             3 => 
             array (
                 'card_id' => 43,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -66,6 +70,7 @@ class CardRelationTableSeeder extends Seeder
             4 => 
             array (
                 'card_id' => 88,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -77,6 +82,7 @@ class CardRelationTableSeeder extends Seeder
             5 => 
             array (
                 'card_id' => 45,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -88,6 +94,7 @@ class CardRelationTableSeeder extends Seeder
             6 => 
             array (
                 'card_id' => 46,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -99,6 +106,7 @@ class CardRelationTableSeeder extends Seeder
             7 => 
             array (
                 'card_id' => 47,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -110,6 +118,7 @@ class CardRelationTableSeeder extends Seeder
             8 => 
             array (
                 'card_id' => 48,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -121,6 +130,7 @@ class CardRelationTableSeeder extends Seeder
             9 => 
             array (
                 'card_id' => 80,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -132,6 +142,7 @@ class CardRelationTableSeeder extends Seeder
             10 => 
             array (
                 'card_id' => 71,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -143,6 +154,7 @@ class CardRelationTableSeeder extends Seeder
             11 => 
             array (
                 'card_id' => 4,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -154,6 +166,7 @@ class CardRelationTableSeeder extends Seeder
             12 => 
             array (
                 'card_id' => 16,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -165,6 +178,7 @@ class CardRelationTableSeeder extends Seeder
             13 => 
             array (
                 'card_id' => 15,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -176,6 +190,7 @@ class CardRelationTableSeeder extends Seeder
             14 => 
             array (
                 'card_id' => 14,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -187,6 +202,7 @@ class CardRelationTableSeeder extends Seeder
             15 => 
             array (
                 'card_id' => 12,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -198,6 +214,7 @@ class CardRelationTableSeeder extends Seeder
             16 => 
             array (
                 'card_id' => 86,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -209,6 +226,7 @@ class CardRelationTableSeeder extends Seeder
             17 => 
             array (
                 'card_id' => 36,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -220,6 +238,7 @@ class CardRelationTableSeeder extends Seeder
             18 => 
             array (
                 'card_id' => 82,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -231,6 +250,7 @@ class CardRelationTableSeeder extends Seeder
             19 => 
             array (
                 'card_id' => 6,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -242,6 +262,7 @@ class CardRelationTableSeeder extends Seeder
             20 => 
             array (
                 'card_id' => 81,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -253,6 +274,7 @@ class CardRelationTableSeeder extends Seeder
             21 => 
             array (
                 'card_id' => 55,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -264,6 +286,7 @@ class CardRelationTableSeeder extends Seeder
             22 => 
             array (
                 'card_id' => 11,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -275,6 +298,7 @@ class CardRelationTableSeeder extends Seeder
             23 => 
             array (
                 'card_id' => 41,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -286,6 +310,7 @@ class CardRelationTableSeeder extends Seeder
             24 => 
             array (
                 'card_id' => 73,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -297,6 +322,7 @@ class CardRelationTableSeeder extends Seeder
             25 => 
             array (
                 'card_id' => 72,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -308,6 +334,7 @@ class CardRelationTableSeeder extends Seeder
             26 => 
             array (
                 'card_id' => 70,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -319,6 +346,7 @@ class CardRelationTableSeeder extends Seeder
             27 => 
             array (
                 'card_id' => 62,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -330,6 +358,7 @@ class CardRelationTableSeeder extends Seeder
             28 => 
             array (
                 'card_id' => 59,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -341,6 +370,7 @@ class CardRelationTableSeeder extends Seeder
             29 => 
             array (
                 'card_id' => 58,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -352,6 +382,7 @@ class CardRelationTableSeeder extends Seeder
             30 => 
             array (
                 'card_id' => 10,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -363,6 +394,7 @@ class CardRelationTableSeeder extends Seeder
             31 => 
             array (
                 'card_id' => 68,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -374,6 +406,7 @@ class CardRelationTableSeeder extends Seeder
             32 => 
             array (
                 'card_id' => 67,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -385,6 +418,7 @@ class CardRelationTableSeeder extends Seeder
             33 => 
             array (
                 'card_id' => 9,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -396,6 +430,7 @@ class CardRelationTableSeeder extends Seeder
             34 => 
             array (
                 'card_id' => 35,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -407,6 +442,7 @@ class CardRelationTableSeeder extends Seeder
             35 => 
             array (
                 'card_id' => 29,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -418,6 +454,7 @@ class CardRelationTableSeeder extends Seeder
             36 => 
             array (
                 'card_id' => 21,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -429,6 +466,7 @@ class CardRelationTableSeeder extends Seeder
             37 => 
             array (
                 'card_id' => 20,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -440,6 +478,7 @@ class CardRelationTableSeeder extends Seeder
             38 => 
             array (
                 'card_id' => 19,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -451,6 +490,7 @@ class CardRelationTableSeeder extends Seeder
             39 => 
             array (
                 'card_id' => 8,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -462,6 +502,7 @@ class CardRelationTableSeeder extends Seeder
             40 => 
             array (
                 'card_id' => 7,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -473,6 +514,7 @@ class CardRelationTableSeeder extends Seeder
             41 => 
             array (
                 'card_id' => 64,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -484,6 +526,7 @@ class CardRelationTableSeeder extends Seeder
             42 => 
             array (
                 'card_id' => 22,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -495,6 +538,7 @@ class CardRelationTableSeeder extends Seeder
             43 => 
             array (
                 'card_id' => 87,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -506,6 +550,7 @@ class CardRelationTableSeeder extends Seeder
             44 => 
             array (
                 'card_id' => 13,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -517,6 +562,7 @@ class CardRelationTableSeeder extends Seeder
             45 => 
             array (
                 'card_id' => 85,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -528,6 +574,7 @@ class CardRelationTableSeeder extends Seeder
             46 => 
             array (
                 'card_id' => 57,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -539,6 +586,7 @@ class CardRelationTableSeeder extends Seeder
             47 => 
             array (
                 'card_id' => 3,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -550,6 +598,7 @@ class CardRelationTableSeeder extends Seeder
             48 => 
             array (
                 'card_id' => 2,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -561,6 +610,7 @@ class CardRelationTableSeeder extends Seeder
             49 => 
             array (
                 'card_id' => 1,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -572,6 +622,7 @@ class CardRelationTableSeeder extends Seeder
             50 => 
             array (
                 'card_id' => 91,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -583,6 +634,7 @@ class CardRelationTableSeeder extends Seeder
             51 => 
             array (
                 'card_id' => 92,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -594,6 +646,7 @@ class CardRelationTableSeeder extends Seeder
             52 => 
             array (
                 'card_id' => 93,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -605,6 +658,7 @@ class CardRelationTableSeeder extends Seeder
             53 => 
             array (
                 'card_id' => 94,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -616,6 +670,7 @@ class CardRelationTableSeeder extends Seeder
             54 => 
             array (
                 'card_id' => 95,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -627,6 +682,7 @@ class CardRelationTableSeeder extends Seeder
             55 => 
             array (
                 'card_id' => 65,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -638,6 +694,7 @@ class CardRelationTableSeeder extends Seeder
             56 => 
             array (
                 'card_id' => 17,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -649,6 +706,7 @@ class CardRelationTableSeeder extends Seeder
             57 => 
             array (
                 'card_id' => 96,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -660,6 +718,7 @@ class CardRelationTableSeeder extends Seeder
             58 => 
             array (
                 'card_id' => 66,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -671,6 +730,7 @@ class CardRelationTableSeeder extends Seeder
             59 => 
             array (
                 'card_id' => 74,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -682,6 +742,7 @@ class CardRelationTableSeeder extends Seeder
             60 => 
             array (
                 'card_id' => 75,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -693,6 +754,7 @@ class CardRelationTableSeeder extends Seeder
             61 => 
             array (
                 'card_id' => 60,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -704,6 +766,7 @@ class CardRelationTableSeeder extends Seeder
             62 => 
             array (
                 'card_id' => 89,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -715,6 +778,7 @@ class CardRelationTableSeeder extends Seeder
             63 => 
             array (
                 'card_id' => 44,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -726,6 +790,7 @@ class CardRelationTableSeeder extends Seeder
             64 => 
             array (
                 'card_id' => 42,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -737,6 +802,7 @@ class CardRelationTableSeeder extends Seeder
             65 => 
             array (
                 'card_id' => 34,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -748,6 +814,7 @@ class CardRelationTableSeeder extends Seeder
             66 => 
             array (
                 'card_id' => 31,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -759,6 +826,7 @@ class CardRelationTableSeeder extends Seeder
             67 => 
             array (
                 'card_id' => 30,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -770,6 +838,7 @@ class CardRelationTableSeeder extends Seeder
             68 => 
             array (
                 'card_id' => 26,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -781,6 +850,7 @@ class CardRelationTableSeeder extends Seeder
             69 => 
             array (
                 'card_id' => 25,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -792,6 +862,7 @@ class CardRelationTableSeeder extends Seeder
             70 => 
             array (
                 'card_id' => 24,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -803,6 +874,7 @@ class CardRelationTableSeeder extends Seeder
             71 => 
             array (
                 'card_id' => 28,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -814,6 +886,7 @@ class CardRelationTableSeeder extends Seeder
             72 => 
             array (
                 'card_id' => 63,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -825,6 +898,7 @@ class CardRelationTableSeeder extends Seeder
             73 => 
             array (
                 'card_id' => 5,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -836,6 +910,7 @@ class CardRelationTableSeeder extends Seeder
             74 => 
             array (
                 'card_id' => 79,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -847,6 +922,7 @@ class CardRelationTableSeeder extends Seeder
             75 => 
             array (
                 'card_id' => 27,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -858,6 +934,7 @@ class CardRelationTableSeeder extends Seeder
             76 => 
             array (
                 'card_id' => 37,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -869,6 +946,7 @@ class CardRelationTableSeeder extends Seeder
             77 => 
             array (
                 'card_id' => 90,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -880,6 +958,7 @@ class CardRelationTableSeeder extends Seeder
             78 => 
             array (
                 'card_id' => 78,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -891,6 +970,7 @@ class CardRelationTableSeeder extends Seeder
             79 => 
             array (
                 'card_id' => 38,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -902,6 +982,7 @@ class CardRelationTableSeeder extends Seeder
             80 => 
             array (
                 'card_id' => 47,
+                'game_id' => NULL,
                 'deck_id' => 11,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -913,6 +994,7 @@ class CardRelationTableSeeder extends Seeder
             81 => 
             array (
                 'card_id' => 45,
+                'game_id' => NULL,
                 'deck_id' => 11,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -924,6 +1006,7 @@ class CardRelationTableSeeder extends Seeder
             82 => 
             array (
                 'card_id' => 48,
+                'game_id' => NULL,
                 'deck_id' => 11,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -935,6 +1018,7 @@ class CardRelationTableSeeder extends Seeder
             83 => 
             array (
                 'card_id' => 52,
+                'game_id' => NULL,
                 'deck_id' => 10,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -946,6 +1030,7 @@ class CardRelationTableSeeder extends Seeder
             84 => 
             array (
                 'card_id' => 53,
+                'game_id' => NULL,
                 'deck_id' => 10,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -957,6 +1042,7 @@ class CardRelationTableSeeder extends Seeder
             85 => 
             array (
                 'card_id' => 21,
+                'game_id' => NULL,
                 'deck_id' => 10,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -968,6 +1054,7 @@ class CardRelationTableSeeder extends Seeder
             86 => 
             array (
                 'card_id' => 51,
+                'game_id' => NULL,
                 'deck_id' => 5,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -979,6 +1066,7 @@ class CardRelationTableSeeder extends Seeder
             87 => 
             array (
                 'card_id' => 51,
+                'game_id' => NULL,
                 'deck_id' => 4,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -990,6 +1078,7 @@ class CardRelationTableSeeder extends Seeder
             88 => 
             array (
                 'card_id' => 53,
+                'game_id' => NULL,
                 'deck_id' => 18,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1001,6 +1090,7 @@ class CardRelationTableSeeder extends Seeder
             89 => 
             array (
                 'card_id' => 51,
+                'game_id' => NULL,
                 'deck_id' => 18,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1012,6 +1102,7 @@ class CardRelationTableSeeder extends Seeder
             90 => 
             array (
                 'card_id' => 29,
+                'game_id' => NULL,
                 'deck_id' => 19,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1023,6 +1114,7 @@ class CardRelationTableSeeder extends Seeder
             91 => 
             array (
                 'card_id' => 35,
+                'game_id' => NULL,
                 'deck_id' => 19,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1034,6 +1126,7 @@ class CardRelationTableSeeder extends Seeder
             92 => 
             array (
                 'card_id' => 31,
+                'game_id' => NULL,
                 'deck_id' => 19,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1045,6 +1138,7 @@ class CardRelationTableSeeder extends Seeder
             93 => 
             array (
                 'card_id' => 30,
+                'game_id' => NULL,
                 'deck_id' => 19,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1056,6 +1150,7 @@ class CardRelationTableSeeder extends Seeder
             94 => 
             array (
                 'card_id' => 62,
+                'game_id' => NULL,
                 'deck_id' => 19,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1067,6 +1162,7 @@ class CardRelationTableSeeder extends Seeder
             95 => 
             array (
                 'card_id' => 61,
+                'game_id' => NULL,
                 'deck_id' => 5,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1078,6 +1174,7 @@ class CardRelationTableSeeder extends Seeder
             96 => 
             array (
                 'card_id' => 61,
+                'game_id' => NULL,
                 'deck_id' => 21,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1089,6 +1186,7 @@ class CardRelationTableSeeder extends Seeder
             97 => 
             array (
                 'card_id' => 69,
+                'game_id' => NULL,
                 'deck_id' => 10,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1100,6 +1198,7 @@ class CardRelationTableSeeder extends Seeder
             98 => 
             array (
                 'card_id' => 51,
+                'game_id' => NULL,
                 'deck_id' => 24,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1111,6 +1210,7 @@ class CardRelationTableSeeder extends Seeder
             99 => 
             array (
                 'card_id' => 73,
+                'game_id' => NULL,
                 'deck_id' => 25,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1122,6 +1222,7 @@ class CardRelationTableSeeder extends Seeder
             100 => 
             array (
                 'card_id' => 57,
+                'game_id' => NULL,
                 'deck_id' => 25,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1133,6 +1234,7 @@ class CardRelationTableSeeder extends Seeder
             101 => 
             array (
                 'card_id' => 13,
+                'game_id' => NULL,
                 'deck_id' => 25,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1144,6 +1246,7 @@ class CardRelationTableSeeder extends Seeder
             102 => 
             array (
                 'card_id' => 70,
+                'game_id' => NULL,
                 'deck_id' => 25,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1155,6 +1258,7 @@ class CardRelationTableSeeder extends Seeder
             103 => 
             array (
                 'card_id' => 74,
+                'game_id' => NULL,
                 'deck_id' => 25,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1166,6 +1270,7 @@ class CardRelationTableSeeder extends Seeder
             104 => 
             array (
                 'card_id' => 85,
+                'game_id' => NULL,
                 'deck_id' => 25,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1177,6 +1282,7 @@ class CardRelationTableSeeder extends Seeder
             105 => 
             array (
                 'card_id' => 35,
+                'game_id' => NULL,
                 'deck_id' => 26,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1188,6 +1294,7 @@ class CardRelationTableSeeder extends Seeder
             106 => 
             array (
                 'card_id' => 19,
+                'game_id' => NULL,
                 'deck_id' => 26,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1199,6 +1306,7 @@ class CardRelationTableSeeder extends Seeder
             107 => 
             array (
                 'card_id' => 19,
+                'game_id' => NULL,
                 'deck_id' => 30,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1210,6 +1318,7 @@ class CardRelationTableSeeder extends Seeder
             108 => 
             array (
                 'card_id' => 8,
+                'game_id' => NULL,
                 'deck_id' => 30,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1221,6 +1330,7 @@ class CardRelationTableSeeder extends Seeder
             109 => 
             array (
                 'card_id' => 21,
+                'game_id' => NULL,
                 'deck_id' => 30,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1232,6 +1342,7 @@ class CardRelationTableSeeder extends Seeder
             110 => 
             array (
                 'card_id' => 5,
+                'game_id' => NULL,
                 'deck_id' => 30,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1243,6 +1354,7 @@ class CardRelationTableSeeder extends Seeder
             111 => 
             array (
                 'card_id' => 20,
+                'game_id' => NULL,
                 'deck_id' => 30,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1254,6 +1366,7 @@ class CardRelationTableSeeder extends Seeder
             112 => 
             array (
                 'card_id' => 50,
+                'game_id' => NULL,
                 'deck_id' => 31,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1265,6 +1378,7 @@ class CardRelationTableSeeder extends Seeder
             113 => 
             array (
                 'card_id' => 52,
+                'game_id' => NULL,
                 'deck_id' => 31,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1276,6 +1390,7 @@ class CardRelationTableSeeder extends Seeder
             114 => 
             array (
                 'card_id' => 61,
+                'game_id' => NULL,
                 'deck_id' => 31,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1287,6 +1402,7 @@ class CardRelationTableSeeder extends Seeder
             115 => 
             array (
                 'card_id' => 51,
+                'game_id' => NULL,
                 'deck_id' => 31,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1298,6 +1414,7 @@ class CardRelationTableSeeder extends Seeder
             116 => 
             array (
                 'card_id' => 56,
+                'game_id' => NULL,
                 'deck_id' => 31,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1309,6 +1426,7 @@ class CardRelationTableSeeder extends Seeder
             117 => 
             array (
                 'card_id' => 49,
+                'game_id' => NULL,
                 'deck_id' => 31,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1320,6 +1438,7 @@ class CardRelationTableSeeder extends Seeder
             118 => 
             array (
                 'card_id' => 53,
+                'game_id' => NULL,
                 'deck_id' => 31,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1331,6 +1450,7 @@ class CardRelationTableSeeder extends Seeder
             119 => 
             array (
                 'card_id' => 69,
+                'game_id' => NULL,
                 'deck_id' => 31,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1342,6 +1462,7 @@ class CardRelationTableSeeder extends Seeder
             120 => 
             array (
                 'card_id' => 76,
+                'game_id' => NULL,
                 'deck_id' => 32,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1353,6 +1474,7 @@ class CardRelationTableSeeder extends Seeder
             121 => 
             array (
                 'card_id' => 77,
+                'game_id' => NULL,
                 'deck_id' => 31,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1364,6 +1486,7 @@ class CardRelationTableSeeder extends Seeder
             122 => 
             array (
                 'card_id' => 77,
+                'game_id' => NULL,
                 'deck_id' => 10,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1375,6 +1498,7 @@ class CardRelationTableSeeder extends Seeder
             123 => 
             array (
                 'card_id' => 51,
+                'game_id' => NULL,
                 'deck_id' => 33,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1386,6 +1510,7 @@ class CardRelationTableSeeder extends Seeder
             124 => 
             array (
                 'card_id' => 54,
+                'game_id' => NULL,
                 'deck_id' => 31,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1397,6 +1522,7 @@ class CardRelationTableSeeder extends Seeder
             125 => 
             array (
                 'card_id' => 43,
+                'game_id' => NULL,
                 'deck_id' => 34,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1408,6 +1534,7 @@ class CardRelationTableSeeder extends Seeder
             126 => 
             array (
                 'card_id' => 88,
+                'game_id' => NULL,
                 'deck_id' => 34,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1419,6 +1546,7 @@ class CardRelationTableSeeder extends Seeder
             127 => 
             array (
                 'card_id' => 55,
+                'game_id' => NULL,
                 'deck_id' => 35,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1430,6 +1558,7 @@ class CardRelationTableSeeder extends Seeder
             128 => 
             array (
                 'card_id' => 81,
+                'game_id' => NULL,
                 'deck_id' => 35,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1441,6 +1570,7 @@ class CardRelationTableSeeder extends Seeder
             129 => 
             array (
                 'card_id' => 66,
+                'game_id' => NULL,
                 'deck_id' => 36,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1452,6 +1582,7 @@ class CardRelationTableSeeder extends Seeder
             130 => 
             array (
                 'card_id' => 82,
+                'game_id' => NULL,
                 'deck_id' => 35,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1463,6 +1594,7 @@ class CardRelationTableSeeder extends Seeder
             131 => 
             array (
                 'card_id' => 84,
+                'game_id' => NULL,
                 'deck_id' => 37,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1474,6 +1606,7 @@ class CardRelationTableSeeder extends Seeder
             132 => 
             array (
                 'card_id' => 35,
+                'game_id' => NULL,
                 'deck_id' => 38,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1485,6 +1618,7 @@ class CardRelationTableSeeder extends Seeder
             133 => 
             array (
                 'card_id' => 35,
+                'game_id' => NULL,
                 'deck_id' => 39,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1496,6 +1630,7 @@ class CardRelationTableSeeder extends Seeder
             134 => 
             array (
                 'card_id' => 83,
+                'game_id' => NULL,
                 'deck_id' => 27,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1507,6 +1642,7 @@ class CardRelationTableSeeder extends Seeder
             135 => 
             array (
                 'card_id' => 89,
+                'game_id' => NULL,
                 'deck_id' => 40,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1518,6 +1654,7 @@ class CardRelationTableSeeder extends Seeder
             136 => 
             array (
                 'card_id' => 15,
+                'game_id' => NULL,
                 'deck_id' => 47,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1529,6 +1666,7 @@ class CardRelationTableSeeder extends Seeder
             137 => 
             array (
                 'card_id' => 12,
+                'game_id' => NULL,
                 'deck_id' => 47,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1540,6 +1678,7 @@ class CardRelationTableSeeder extends Seeder
             138 => 
             array (
                 'card_id' => 16,
+                'game_id' => NULL,
                 'deck_id' => 47,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1551,6 +1690,7 @@ class CardRelationTableSeeder extends Seeder
             139 => 
             array (
                 'card_id' => 14,
+                'game_id' => NULL,
                 'deck_id' => 48,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1562,6 +1702,7 @@ class CardRelationTableSeeder extends Seeder
             140 => 
             array (
                 'card_id' => 15,
+                'game_id' => NULL,
                 'deck_id' => 48,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1573,6 +1714,7 @@ class CardRelationTableSeeder extends Seeder
             141 => 
             array (
                 'card_id' => 12,
+                'game_id' => NULL,
                 'deck_id' => 48,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1584,6 +1726,7 @@ class CardRelationTableSeeder extends Seeder
             142 => 
             array (
                 'card_id' => 16,
+                'game_id' => NULL,
                 'deck_id' => 48,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1595,6 +1738,7 @@ class CardRelationTableSeeder extends Seeder
             143 => 
             array (
                 'card_id' => 33,
+                'game_id' => NULL,
                 'deck_id' => 49,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1606,6 +1750,7 @@ class CardRelationTableSeeder extends Seeder
             144 => 
             array (
                 'card_id' => 14,
+                'game_id' => NULL,
                 'deck_id' => 50,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1617,6 +1762,7 @@ class CardRelationTableSeeder extends Seeder
             145 => 
             array (
                 'card_id' => 15,
+                'game_id' => NULL,
                 'deck_id' => 50,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1628,6 +1774,7 @@ class CardRelationTableSeeder extends Seeder
             146 => 
             array (
                 'card_id' => 12,
+                'game_id' => NULL,
                 'deck_id' => 50,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1639,6 +1786,7 @@ class CardRelationTableSeeder extends Seeder
             147 => 
             array (
                 'card_id' => 16,
+                'game_id' => NULL,
                 'deck_id' => 50,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1650,6 +1798,7 @@ class CardRelationTableSeeder extends Seeder
             148 => 
             array (
                 'card_id' => 82,
+                'game_id' => NULL,
                 'deck_id' => 51,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1661,6 +1810,7 @@ class CardRelationTableSeeder extends Seeder
             149 => 
             array (
                 'card_id' => 55,
+                'game_id' => NULL,
                 'deck_id' => 51,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1672,6 +1822,7 @@ class CardRelationTableSeeder extends Seeder
             150 => 
             array (
                 'card_id' => 81,
+                'game_id' => NULL,
                 'deck_id' => 51,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1683,6 +1834,7 @@ class CardRelationTableSeeder extends Seeder
             151 => 
             array (
                 'card_id' => 41,
+                'game_id' => NULL,
                 'deck_id' => 51,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1694,6 +1846,7 @@ class CardRelationTableSeeder extends Seeder
             152 => 
             array (
                 'card_id' => 58,
+                'game_id' => NULL,
                 'deck_id' => 52,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1705,6 +1858,7 @@ class CardRelationTableSeeder extends Seeder
             153 => 
             array (
                 'card_id' => 91,
+                'game_id' => NULL,
                 'deck_id' => 52,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1716,6 +1870,7 @@ class CardRelationTableSeeder extends Seeder
             154 => 
             array (
                 'card_id' => 65,
+                'game_id' => NULL,
                 'deck_id' => 52,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1727,6 +1882,7 @@ class CardRelationTableSeeder extends Seeder
             155 => 
             array (
                 'card_id' => 58,
+                'game_id' => NULL,
                 'deck_id' => 53,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1738,6 +1894,7 @@ class CardRelationTableSeeder extends Seeder
             156 => 
             array (
                 'card_id' => 91,
+                'game_id' => NULL,
                 'deck_id' => 53,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1749,6 +1906,7 @@ class CardRelationTableSeeder extends Seeder
             157 => 
             array (
                 'card_id' => 65,
+                'game_id' => NULL,
                 'deck_id' => 53,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1760,6 +1918,7 @@ class CardRelationTableSeeder extends Seeder
             158 => 
             array (
                 'card_id' => 33,
+                'game_id' => NULL,
                 'deck_id' => 54,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1771,6 +1930,7 @@ class CardRelationTableSeeder extends Seeder
             159 => 
             array (
                 'card_id' => 83,
+                'game_id' => NULL,
                 'deck_id' => 55,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1782,6 +1942,7 @@ class CardRelationTableSeeder extends Seeder
             160 => 
             array (
                 'card_id' => 17,
+                'game_id' => NULL,
                 'deck_id' => 50,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1793,6 +1954,7 @@ class CardRelationTableSeeder extends Seeder
             161 => 
             array (
                 'card_id' => 62,
+                'game_id' => NULL,
                 'deck_id' => 46,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1804,6 +1966,7 @@ class CardRelationTableSeeder extends Seeder
             162 => 
             array (
                 'card_id' => 35,
+                'game_id' => NULL,
                 'deck_id' => 46,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1815,6 +1978,7 @@ class CardRelationTableSeeder extends Seeder
             163 => 
             array (
                 'card_id' => 35,
+                'game_id' => NULL,
                 'deck_id' => 44,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1826,6 +1990,7 @@ class CardRelationTableSeeder extends Seeder
             164 => 
             array (
                 'card_id' => 31,
+                'game_id' => NULL,
                 'deck_id' => 44,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1837,6 +2002,7 @@ class CardRelationTableSeeder extends Seeder
             165 => 
             array (
                 'card_id' => 30,
+                'game_id' => NULL,
                 'deck_id' => 44,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1848,6 +2014,7 @@ class CardRelationTableSeeder extends Seeder
             166 => 
             array (
                 'card_id' => 29,
+                'game_id' => NULL,
                 'deck_id' => 44,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1859,6 +2026,7 @@ class CardRelationTableSeeder extends Seeder
             167 => 
             array (
                 'card_id' => 35,
+                'game_id' => NULL,
                 'deck_id' => 43,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1870,6 +2038,7 @@ class CardRelationTableSeeder extends Seeder
             168 => 
             array (
                 'card_id' => 35,
+                'game_id' => NULL,
                 'deck_id' => 42,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1881,6 +2050,7 @@ class CardRelationTableSeeder extends Seeder
             169 => 
             array (
                 'card_id' => 62,
+                'game_id' => NULL,
                 'deck_id' => 42,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1892,6 +2062,7 @@ class CardRelationTableSeeder extends Seeder
             170 => 
             array (
                 'card_id' => 35,
+                'game_id' => NULL,
                 'deck_id' => 56,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1903,6 +2074,7 @@ class CardRelationTableSeeder extends Seeder
             171 => 
             array (
                 'card_id' => 31,
+                'game_id' => NULL,
                 'deck_id' => 56,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1914,6 +2086,7 @@ class CardRelationTableSeeder extends Seeder
             172 => 
             array (
                 'card_id' => 29,
+                'game_id' => NULL,
                 'deck_id' => 56,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1925,6 +2098,7 @@ class CardRelationTableSeeder extends Seeder
             173 => 
             array (
                 'card_id' => 30,
+                'game_id' => NULL,
                 'deck_id' => 56,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1936,6 +2110,7 @@ class CardRelationTableSeeder extends Seeder
             174 => 
             array (
                 'card_id' => 62,
+                'game_id' => NULL,
                 'deck_id' => 56,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -1947,6 +2122,7 @@ class CardRelationTableSeeder extends Seeder
             175 => 
             array (
                 'card_id' => 96,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1958,6 +2134,7 @@ class CardRelationTableSeeder extends Seeder
             176 => 
             array (
                 'card_id' => 23,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1969,6 +2146,7 @@ class CardRelationTableSeeder extends Seeder
             177 => 
             array (
                 'card_id' => 33,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1980,6 +2158,7 @@ class CardRelationTableSeeder extends Seeder
             178 => 
             array (
                 'card_id' => 32,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -1991,6 +2170,7 @@ class CardRelationTableSeeder extends Seeder
             179 => 
             array (
                 'card_id' => 76,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -2002,6 +2182,7 @@ class CardRelationTableSeeder extends Seeder
             180 => 
             array (
                 'card_id' => 77,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -2013,6 +2194,7 @@ class CardRelationTableSeeder extends Seeder
             181 => 
             array (
                 'card_id' => 69,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -2024,6 +2206,7 @@ class CardRelationTableSeeder extends Seeder
             182 => 
             array (
                 'card_id' => 51,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -2035,6 +2218,7 @@ class CardRelationTableSeeder extends Seeder
             183 => 
             array (
                 'card_id' => 54,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -2046,6 +2230,7 @@ class CardRelationTableSeeder extends Seeder
             184 => 
             array (
                 'card_id' => 61,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -2057,6 +2242,7 @@ class CardRelationTableSeeder extends Seeder
             185 => 
             array (
                 'card_id' => 56,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -2068,6 +2254,7 @@ class CardRelationTableSeeder extends Seeder
             186 => 
             array (
                 'card_id' => 53,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -2079,6 +2266,7 @@ class CardRelationTableSeeder extends Seeder
             187 => 
             array (
                 'card_id' => 52,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -2090,6 +2278,7 @@ class CardRelationTableSeeder extends Seeder
             188 => 
             array (
                 'card_id' => 49,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
@@ -2101,6 +2290,7 @@ class CardRelationTableSeeder extends Seeder
             189 => 
             array (
                 'card_id' => 18,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -2112,6 +2302,7 @@ class CardRelationTableSeeder extends Seeder
             190 => 
             array (
                 'card_id' => 33,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -2123,6 +2314,7 @@ class CardRelationTableSeeder extends Seeder
             191 => 
             array (
                 'card_id' => 32,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -2134,6 +2326,7 @@ class CardRelationTableSeeder extends Seeder
             192 => 
             array (
                 'card_id' => 50,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -2145,6 +2338,7 @@ class CardRelationTableSeeder extends Seeder
             193 => 
             array (
                 'card_id' => 23,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -2156,6 +2350,7 @@ class CardRelationTableSeeder extends Seeder
             194 => 
             array (
                 'card_id' => 17,
+                'game_id' => NULL,
                 'deck_id' => 47,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -2167,6 +2362,7 @@ class CardRelationTableSeeder extends Seeder
             195 => 
             array (
                 'card_id' => 18,
+                'game_id' => NULL,
                 'deck_id' => 48,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -2178,6 +2374,7 @@ class CardRelationTableSeeder extends Seeder
             196 => 
             array (
                 'card_id' => 17,
+                'game_id' => NULL,
                 'deck_id' => 48,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -2189,6 +2386,7 @@ class CardRelationTableSeeder extends Seeder
             197 => 
             array (
                 'card_id' => 18,
+                'game_id' => NULL,
                 'deck_id' => 50,
                 'book_id' => NULL,
                 'dome_id' => NULL,
@@ -2200,6 +2398,7 @@ class CardRelationTableSeeder extends Seeder
             198 => 
             array (
                 'card_id' => 83,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -2211,6 +2410,7 @@ class CardRelationTableSeeder extends Seeder
             199 => 
             array (
                 'card_id' => 84,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -2222,6 +2422,7 @@ class CardRelationTableSeeder extends Seeder
             200 => 
             array (
                 'card_id' => 33,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,
@@ -2233,6 +2434,7 @@ class CardRelationTableSeeder extends Seeder
             201 => 
             array (
                 'card_id' => 97,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 1,
                 'dome_id' => NULL,
@@ -2244,6 +2446,7 @@ class CardRelationTableSeeder extends Seeder
             202 => 
             array (
                 'card_id' => 98,
+                'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
                 'dome_id' => NULL,

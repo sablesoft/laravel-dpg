@@ -26,7 +26,7 @@ class ScenesTableSeeder extends Seeder
                 'code' => NULL,
                 'scope_id' => 98,
                 'markers' => NULL,
-                'image' => 'scene/WGDzMINqXdliIv7BTSQmrI1AXJvB2HGJs91wBV9L.png',
+                'image' => 'scene/8fxcGvsz9Q7YJIZex5CHHJlMXHwsJsQje4WKPCYJ.png',
                 'desc' => '{"en":"It was here, in the depths of this dangerous cave, that ancient tablets with the history of ancestors were hidden."}',
                 'is_public' => false,
                 'owner_id' => 1,

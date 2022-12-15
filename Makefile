@@ -20,7 +20,7 @@ bash:  ## Run bash inside container
 	docker exec -it dpg bash
 
 zip: ## Zip archive with all public media files from storage
-	zip -r media.zip storage/app/public
+	zip -r media.zip storage/app/public storage/img
 
 unzip: ## Unzip archive with media files to public storage
 	unzip media.zip -d .

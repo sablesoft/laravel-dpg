@@ -3,49 +3,80 @@
     import { game } from "@/Components/Game/game";
 </script>
 <style scoped>
-    .material-icons {
-        /*width: 25px;*/
-        /*height: 25px;*/
+    .control-wrap {
         position: absolute;
-        top: 10px;
-        cursor: pointer;
+        top:10px; left:10px;
+        display:flex;
     }
-    .control-out {
-        left: 10px;
+    .control-btn {
+        flex-shrink:0;
+        width:1.5em;
+        height:1.5em;
+        font-size:24px;
+        padding:.25em;
+        display:flex;
+        justify-content:center;
+        align-items:center
     }
-    .control-reset {
-        left: 45px;
+    .control-btn .material-icons {
+        font-size:1em;
+        line-height:1em
     }
-    .control-in {
-        left: 80px;
-    }
-    .control-left {
-        left: 115px;
-    }
-    .control-right {
-        left: 150px;
-    }
-    .control-top {
-        left: 185px;
-    }
-    .control-down {
-        left: 220px;
-    }
-    .control-save {
-        right: 10px;
-    }
+
+    /*.control-out {*/
+    /*    left: 10px;*/
+    /*}*/
+    /*.control-reset {*/
+    /*    left: 45px;*/
+    /*}*/
+    /*.control-in {*/
+    /*    left: 80px;*/
+    /*}*/
+    /*.control-left {*/
+    /*    left: 115px;*/
+    /*}*/
+    /*.control-right {*/
+    /*    left: 150px;*/
+    /*}*/
+    /*.control-top {*/
+    /*    left: 185px;*/
+    /*}*/
+    /*.control-down {*/
+    /*    left: 220px;*/
+    /*}*/
+    /*.control-save {*/
+    /*    right: 10px;*/
+    /*}*/
 </style>
 <template>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <div :style="game.canvasWrapperStyle()">
         <canvas :width="game.fabricWidth()" :height="game.fabricHeight()"></canvas>
     </div>
-    <span class="material-icons control-out" @click="game.scaleOut()">close_fullscreen</span>
-    <span class="material-icons control-reset" @click="game.scaleReset()">restore</span>
-    <span class="material-icons control-in" @click="game.scaleIn()">open_in_full</span>
-    <span class="material-icons control-left" @click="game.moveLeft()">arrow_back</span>
-    <span class="material-icons control-right" @click="game.moveRight()">arrow_forward</span>
-    <span class="material-icons control-top" @click="game.moveTop()">arrow_upward</span>
-    <span class="material-icons control-down" @click="game.moveBottom()">arrow_downward</span>
-    <span class="material-icons control-save" @click="game.saveCanvas()">save</span>
+    <div class="control-wrap">
+        <button class="control-btn control-out">
+            <span class="material-icons" @click="game.scaleOut()">close_fullscreen</span>
+        </button>
+        <button class="control-btn control-reset">
+            <span class="material-icons" @click="game.scaleReset()">restore</span>
+        </button>
+        <button class="control-btn control-in">
+            <span class="material-icons" @click="game.scaleIn()">open_in_full</span>
+        </button>
+        <button class="control-btn control-left">
+            <span class="material-icons" @click="game.moveLeft()">arrow_back</span>
+        </button>
+        <button class="control-btn control-right">
+            <span class="material-icons" @click="game.moveRight()">arrow_forward</span>
+        </button>
+        <button class="control-btn control-top">
+            <span class="material-icons" @click="game.moveTop()">arrow_upward</span>
+        </button>
+        <button class="control-btn control-down">
+            <span class="material-icons" @click="game.moveBottom()">arrow_downward</span>
+        </button>
+        <button class="control-btn control-save">
+            <span class="material-icons" @click="game.saveCanvas()">save</span>
+        </button>
+    </div>
 </template>

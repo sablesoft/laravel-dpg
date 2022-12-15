@@ -70,7 +70,6 @@ onMounted(() => {
 <template>
     <!--suppress HtmlRequiredTitleElement -->
     <Head :title="data.info.name" />
-
     <GameLayout>
         <div class="mx-auto sm:px-6 lg:px-8 row">
             <div ref="boardRef" class="board-column bg-white overflow-hidden shadow-lg sm:rounded-lg">

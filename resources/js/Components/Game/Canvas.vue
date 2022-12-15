@@ -3,48 +3,49 @@
     import { game } from "@/Components/Game/game";
 </script>
 <style scoped>
-    img.canvas-control {
-        width: 25px;
-        height: 25px;
-        top: 10px;
+    .material-icons {
+        /*width: 25px;*/
+        /*height: 25px;*/
         position: absolute;
+        top: 10px;
         cursor: pointer;
     }
-    img.control-out {
+    .control-out {
         left: 10px;
     }
-    img.control-reset {
+    .control-reset {
         left: 45px;
     }
-    img.control-in {
+    .control-in {
         left: 80px;
     }
-    img.control-left {
+    .control-left {
         left: 115px;
     }
-    img.control-right {
+    .control-right {
         left: 150px;
     }
-    img.control-top {
+    .control-top {
         left: 185px;
     }
-    img.control-down {
+    .control-down {
         left: 220px;
     }
-    img.control-save {
+    .control-save {
         right: 10px;
     }
 </style>
 <template>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <div :style="game.canvasWrapperStyle()">
         <canvas :width="game.fabricWidth()" :height="game.fabricHeight()"></canvas>
     </div>
-    <img class="canvas-control control-out" src="/img/control/out.svg" @click="game.scaleOut()" alt="Zoom Out"/>
-    <img class="canvas-control control-reset" src="/img/control/reset.png" @click="game.scaleReset()" alt="Reset Scale"/>
-    <img class="canvas-control control-in" src="/img/control/in.svg" @click="game.scaleIn()" alt="Zoom In"/>
-    <img class="canvas-control control-left" src="/img/control/left.png" @click="game.moveLeft()" alt="Move Left"/>
-    <img class="canvas-control control-right" src="/img/control/right.png" @click="game.moveRight()" alt="Move Right"/>
-    <img class="canvas-control control-top" src="/img/control/top.png" @click="game.moveTop()" alt="Move Top"/>
-    <img class="canvas-control control-down" src="/img/control/down.png" @click="game.moveBottom()" alt="Move Down"/>
-    <img class="canvas-control control-save" src="/img/control/save.png" @click="game.saveCanvas()" alt="Save"/>
+    <span class="material-icons control-out" @click="game.scaleOut()">close_fullscreen</span>
+    <span class="material-icons control-reset" @click="game.scaleReset()">restore</span>
+    <span class="material-icons control-in" @click="game.scaleIn()">open_in_full</span>
+    <span class="material-icons control-left" @click="game.moveLeft()">arrow_back</span>
+    <span class="material-icons control-right" @click="game.moveRight()">arrow_forward</span>
+    <span class="material-icons control-top" @click="game.moveTop()">arrow_upward</span>
+    <span class="material-icons control-down" @click="game.moveBottom()">arrow_downward</span>
+    <span class="material-icons control-save" @click="game.saveCanvas()">save</span>
 </template>

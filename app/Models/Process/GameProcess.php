@@ -51,7 +51,10 @@ class GameProcess extends Model
         'openDomeIds',
         'openLandIds',
         'openAreaIds',
-        'openSceneIds'
+        'openSceneIds',
+        'canvas',
+        'activeDomeId',
+        'activeSceneId'
     ];
 
     protected $hidden = [

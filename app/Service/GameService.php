@@ -76,6 +76,8 @@ class GameService
         $data = [
             'id' => $game->getKey(),
             'info' => $info,
+            'activeDomeId' => null,
+            'activeSceneId' => null,
             'boardImage' => self::image($game->board_image),
             'cardsBack' => self::image($game->cards_back),
         ];

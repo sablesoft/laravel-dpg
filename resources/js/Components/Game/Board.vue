@@ -28,10 +28,9 @@ const getHero = (options) => {
 onMounted(() => {
     // todo - draw current board with cards and decks
     setTimeout(function() {
-        let options = game.markers ? game.markers.background : null;
-        options = options ? options : {
+        let options = {
             originX : 'left',
-            originY : 'top',
+            originY : 'top'
         };
         fabric.Image.fromURL(game.boardImage, function(myImg) {
             let canvas = document.getElementsByTagName('canvas')[0];
@@ -73,6 +72,7 @@ onMounted(() => {
                     }
                 }
             });
+            game.setCanvasConfig(game.canvas);
             game.fabricBoard.renderAll();
         });
         console.log('Board mounted');

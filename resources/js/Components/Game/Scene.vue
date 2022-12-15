@@ -8,20 +8,26 @@ const log = (e) => {
     console.log(e);
 };
 onMounted(() => {
-    // todo - draw current scene with markers
+    // todo - draw active scene with markers
     setTimeout(function() {
-        let scene = game.scenes[1];
-        let options = scene.markers ? scene.markers.background : null;
-        options = options ? options : {
-            originX : 'left',
-            originY : 'top',
-        };
+        if (!game.activeSceneId) {
+            throw new Error('Active scene id not set!');
+        }
+        let scene = game.scenes[game.activeSceneId];
+        if (!scene) {
+            throw new Error('Active scene not found!');
+        }
         fabric.Image.fromURL(scene.image, function(myImg) {
             let canvas = document.getElementsByTagName('canvas')[0];
+            let options = {
+                originX : 'left',
+                originY : 'top',
+            };
             game.fabricScene = new fabric.Canvas(canvas);
             game.fabricScene.fullHeight = myImg.height;
             game.fabricScene.fullWidth = myImg.width;
             game.fabricScene.setBackgroundImage(myImg, game.fabricScene.renderAll.bind(game.fabricScene), options);
+            game.setCanvasConfig(scene.canvas);
             game.fabricScene.on({
                 'selection:updated': log,
                 'selection:created': log,

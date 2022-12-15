@@ -3,6 +3,8 @@ import './fabric.card';
 import {fabric} from "fabric";
 
 export const game = reactive({
+    // game id:
+    id: null,
     // game info:
     info: null,
     // active card data:
@@ -26,6 +28,9 @@ export const game = reactive({
     cardIds: null,
     // game custom decks:
     deckIds: null,
+    // active dome and scene on tabs:
+    activeDomeId: null,
+    activeSceneId: null,
     // open entities:
     openDomeIds: null,
     openLandIds: null,
@@ -51,6 +56,8 @@ export const game = reactive({
     // main tab size:
     width: null,
     height: null,
+    // board canvas config:
+    canvas: null,
     canvasMoveStep: 20,
     canvasScaleStep: 0.1,
     init(data, options) {
@@ -119,7 +126,7 @@ export const game = reactive({
         this.mainTab = 'Map';
     },
     showScene() {
-        this.mainTab = 'Scene'
+        this.mainTab = 'Scene';
     },
     showBoard() {
         this.mainTab = 'Board';
@@ -143,6 +150,42 @@ export const game = reactive({
         for (const canvas of this._canvases()) {
             this._canvasMoveY(this.canvasMoveStep, canvas);
         }
+    },
+    saveCanvas() {
+        let canvas = this._canvases()[0];
+        let style = {
+            left: canvas.style.left,
+            top: canvas.style.top
+        }
+        let data = {
+            gameId : this.id,
+            fields: ['canvas'],
+            canvas : {
+                style: style,
+                scale: this.getScale()
+            },
+        }
+        switch(this.mainTab) {
+            case 'Map':
+                data['process'] = 'dome';
+                data['processId'] = 1; // todo
+                break;
+            case 'Scene':
+                data['process'] = 'scene';
+                data['processId'] = 1; // todo
+                break;
+            case 'Board':
+                data['process'] = 'game';
+                break;
+            default:
+                throw new Error('Invalid main tab');
+        }
+        axios.patch('/game', data)
+            .then(res => {
+                console.log(res.data);
+            }).catch(err => {
+                console.error(err);
+            });
     },
     fabricWidth() {
         let fabric = this.fabric();
@@ -169,17 +212,47 @@ export const game = reactive({
         let fabric = 'fabric' + this.mainTab;
         return this[fabric];
     },
-    zoomIn() {
-        this._scaleRatio(1 + this.canvasScaleStep);
+    scaleIn() {
+        this.scale(1 + this.canvasScaleStep);
+    },
+    scaleOut() {
+        this.scale(1 - this.canvasScaleStep);
+    },
+    scaleReset() {
+        this.scale();
+    },
+    getScale() {
+        return this.fabric().scaleRatio ?
+            this.fabric().scaleRatio : 1;
+    },
+    scale(multiplier = null) {
+        this.fabric().scaleRatio = multiplier ?
+            this.getScale() * multiplier : 1;
         this._zoom();
     },
-    zoomOut() {
-        this._scaleRatio(1 - this.canvasScaleStep);
+    setCanvasConfig(config) {
+        if (!config) {
+            return;
+        }
+        setTimeout(function() {
+            game.setCanvasStyle(config.style);
+            game.setScale(config.scale);
+        }, 100);
+    },
+    setScale(scale = null) {
+        scale = scale || 1;
+        this.fabric().scaleRatio = scale;
         this._zoom();
     },
-    zoomReset() {
-        this._scaleRatio();
-        this._zoom();
+    setCanvasStyle(style) {
+        if (!style instanceof Object) {
+            return;
+        }
+        for (const [key, value] of Object.entries(style)) {
+            for (const canvas of this._canvases()) {
+                canvas.style[key] = value;
+            }
+        }
     },
     _zoom() {
         let fabric = this.fabric();
@@ -199,17 +272,6 @@ export const game = reactive({
     },
     _canvases() {
         return document.getElementsByTagName('canvas');
-    },
-    _scaleRatio(multiplier = null) {
-        if (!multiplier) {
-           this.fabric().scaleRatio = 1;
-           return;
-        }
-        let ratio = this.fabric().scaleRatio;
-        if (!ratio) {
-            ratio = 1;
-        }
-        this.fabric().scaleRatio = ratio * multiplier;
     },
     _cardObject(id) {
         if (!this.cards[id]) {

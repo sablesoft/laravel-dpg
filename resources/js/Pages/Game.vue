@@ -78,8 +78,8 @@ onMounted(() => {
             </div>
             <div class="action-column">
                 <img @click="game.showBoard()" src="/img/svg/card-play.svg" alt="Open Board">
-                <img @click="game.showMap()" src="/img/svg/treasure-map.svg" alt="Open Map">
-                <img @click="game.showScene()" src="/img/svg/magnifying-glass.svg" alt="Open Scene">
+                <img v-if="game.activeDomeId" @click="game.showMap()" src="/img/svg/treasure-map.svg" alt="Open Map">
+                <img v-if="game.activeSceneId" @click="game.showScene()" src="/img/svg/magnifying-glass.svg" alt="Open Scene">
             </div>
             <div class="info-column bg-white shadow-sm sm:rounded-lg">
                 <component :is="asideTabs[game.asideTab]"></component>

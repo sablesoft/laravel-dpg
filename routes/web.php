@@ -42,6 +42,8 @@ Route::get('/dashboard', function () {
 Route::get('/game/{process}', [GameController::class, 'process'])
     ->middleware(['auth', 'verified', 'game.visitor'])->name('game');
 
+Route::patch('/game', [GameController::class, 'update']);
+
 Route::get('/game/{game}/json', [GameController::class, 'json']);
 
 Route::middleware('auth')->group(function () {

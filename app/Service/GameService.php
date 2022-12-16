@@ -317,6 +317,7 @@ class GameService
      * @param Scene $scene
      * @param string|null $locale
      * @return SceneProcess
+     * @throws Exception
      */
     public static function sceneToProcess(GameProcess $gameProcess, Scene $scene, ?string $locale = null): SceneProcess
     {
@@ -335,6 +336,7 @@ class GameService
         $data['image'] = self::image($data['image']);
         /** @var SceneProcess $sceneProcess */
         $sceneProcess = SceneProcess::create($data);
+        static::prepareSpaceProcess($gameProcess, $sceneProcess, $scene, $locale);
         $sceneProcess->save();
         $gameProcess->scenes()->save($sceneProcess);
 

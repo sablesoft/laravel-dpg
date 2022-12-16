@@ -32,10 +32,11 @@ onMounted(() => {
             originY : 'top'
         };
         fabric.Image.fromURL(game.boardImage, function(myImg) {
-            let canvas = document.getElementsByTagName('canvas')[0];
-            game.fabricBoard = new fabric.Canvas(canvas);
-            game.fabricBoard.fullHeight = myImg.height;
-            game.fabricBoard.fullWidth = myImg.width;
+            // noinspection JSValidateTypes
+            game.fabricBoard = game.initFabric({
+                fullHeight: myImg.height,
+                fullWidth: myImg.width
+            });
             game.fabricBoard.setBackgroundImage(myImg, game.fabricBoard.renderAll.bind(game.fabricBoard), options);
             game.fabricBoard.preserveObjectStacking = true;
             const hero = getHero({

@@ -137,7 +137,7 @@ export const game = reactive({
         this.setActiveCard();
     },
     showMap() {
-        // this.saveCanvas(); todo
+        this.saveCanvas();
         this.mainTab = 'Map';
         let dome = this.domes[this.activeDomeId];
         if (!dome) {
@@ -251,6 +251,9 @@ export const game = reactive({
         this.scale();
     },
     getScale() {
+        if (!this.fabric()) {
+            return 1;
+        }
         return this.fabric().scaleRatio ?
             this.fabric().scaleRatio : 1;
     },

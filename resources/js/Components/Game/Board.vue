@@ -75,6 +75,7 @@ onMounted(() => {
             game.fabricBoard.renderAll();
         });
     }, 100);
+    console.debug('Board mounted');
 });
 </script>
 

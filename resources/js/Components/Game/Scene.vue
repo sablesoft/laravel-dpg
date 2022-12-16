@@ -35,7 +35,7 @@ onMounted(() => {
                 'mouse:dblclick': log
             });
         });
-        console.log('Scene mounted');
+        console.debug('Scene mounted');
     }, 100);
 });
 </script>

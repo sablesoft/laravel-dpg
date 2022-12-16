@@ -131,7 +131,13 @@ export const game = reactive({
 
         return this.cards[id].obj = new fabric.Card(this.cards[id], options);
     },
+    showBoard() {
+        this.saveCanvas();
+        this.mainTab = 'Board';
+        this.setActiveCard();
+    },
     showMap() {
+        this.saveCanvas();
         this.mainTab = 'Map';
         let dome = this.domes[this.activeDomeId];
         if (!dome) {
@@ -140,16 +146,13 @@ export const game = reactive({
         this.setActiveCard(dome.scope_id);
     },
     showScene() {
+        this.saveCanvas();
         this.mainTab = 'Scene';
         let scene = this.scenes[this.activeSceneId];
         if (!scene) {
             throw new Error('Active scene not found!');
         }
         this.setActiveCard(scene.scope_id);
-    },
-    showBoard() {
-        this.mainTab = 'Board';
-        this.setActiveCard();
     },
     moveLeft() {
         for (const canvas of this._canvases()) {
@@ -172,6 +175,7 @@ export const game = reactive({
         }
     },
     saveCanvas() {
+        console.log('Save canvas...');
         let canvas = this._canvases()[0];
         let style = {
             left: canvas.style.left,
@@ -203,12 +207,14 @@ export const game = reactive({
             default:
                 throw new Error('Invalid main tab');
         }
-        axios.patch('/game', data)
-            .then(res => {
-                console.log(res.data);
-            }).catch(err => {
+        if (this.isMaster()) {
+            axios.patch('/game', data)
+                .then(res => {
+                    console.log(res.data);
+                }).catch(err => {
                 console.error(err);
             });
+        }
     },
     fabricWidth() {
         let fabric = this.fabric();

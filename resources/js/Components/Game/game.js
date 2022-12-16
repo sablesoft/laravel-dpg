@@ -188,14 +188,17 @@ export const game = reactive({
         switch(this.mainTab) {
             case 'Map':
                 data['process'] = 'dome';
-                data['processId'] = 1; // todo
+                data['processId'] = this.activeDomeId;
+                this.domes[this.activeDomeId].canvas = data['canvas'];
                 break;
             case 'Scene':
                 data['process'] = 'scene';
-                data['processId'] = 1; // todo
+                data['processId'] = this.activeSceneId;
+                this.scenes[this.activeSceneId].canvas = data['canvas'];
                 break;
             case 'Board':
                 data['process'] = 'game';
+                this.canvas = data['canvas'];
                 break;
             default:
                 throw new Error('Invalid main tab');

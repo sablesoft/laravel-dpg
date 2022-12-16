@@ -137,7 +137,7 @@ export const game = reactive({
         this.setActiveCard();
     },
     showMap() {
-        this.saveCanvas();
+        // this.saveCanvas(); todo
         this.mainTab = 'Map';
         let dome = this.domes[this.activeDomeId];
         if (!dome) {

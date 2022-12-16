@@ -409,11 +409,17 @@ class GameService
         $card->makeHidden(['is_public', 'owner_id', 'created_at', 'updated_at', 'pivot']);
         $data = $card->toArray();
         $data['image'] = self::image($data['image']);
-        $data['scope_image'] = self::image(optional($card->scope)->image);
         $data = self::translate($data, $card->translatable, $locale);
+        $data['scopeImage'] = null;
+        $data['scopeName'] = null;
+        if ($scope = $card->scope) {
+            $data['scopeImage'] = self::image($scope->image);
+            $data['scopeName'] = json_decode($scope->getRawOriginal('name'), true);
+            $data = self::translate($data, ['scopeName'], $locale);
+        }
         $overrideFields = ['name', 'desc'];
         foreach ($overrideFields as $field) {
-            $data['current_' . $field] = $data[$field];
+            $data['current' . ucfirst($field)] = $data[$field];
         }
         /** @var CardProcess $cardProcess */
         $cardProcess = CardProcess::create($data);

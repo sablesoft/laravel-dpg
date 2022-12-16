@@ -132,12 +132,23 @@ export const game = reactive({
     },
     showMap() {
         this.mainTab = 'Map';
+        let dome = this.domes[this.activeDomeId];
+        if (!dome) {
+            throw new Error('Active scene not found!');
+        }
+        this.setActiveCard(dome.scope_id);
     },
     showScene() {
         this.mainTab = 'Scene';
+        let scene = this.scenes[this.activeSceneId];
+        if (!scene) {
+            throw new Error('Active scene not found!');
+        }
+        this.setActiveCard(scene.scope_id);
     },
     showBoard() {
         this.mainTab = 'Board';
+        this.setActiveCard();
     },
     moveLeft() {
         for (const canvas of this._canvases()) {

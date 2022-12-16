@@ -20,11 +20,11 @@
         height: 250px;
     }
     .scope-image {
-        height: 80px;
+        height: 40px;
         margin: 15px;
     }
     .scope-image>img {
-        height: 80px;
+        height: 40px;
         margin: 10px;
     }
     .card-image>img {

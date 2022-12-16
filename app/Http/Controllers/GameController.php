@@ -37,14 +37,14 @@ class GameController extends Controller
             if ($game->owner_id !== Auth::id()) {
                 throw new Exception(__('Unknown game user!'));
             }
-            $role = GameSubscribe::Master->value;
+            $role = GameSubscribe::Master->code();
         } else {
-            $role = $subscriber->pivot->type;
+            $role = GameSubscribe::from($subscriber->pivot->type)->code();
         }
 
         return Inertia::render('Game', [
             'data' => $process,
-            'user_role' => $role
+            'role' => $role
         ]);
     }
 

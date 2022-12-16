@@ -21,4 +21,13 @@ enum GameSubscribe: int
             GameSubscribe::Master => __('Master'),
         };
     }
+
+    public function code(): string
+    {
+        return match($this) {
+            GameSubscribe::Spectator => 'spectator',
+            GameSubscribe::Player => 'player',
+            GameSubscribe::Master => 'master',
+        };
+    }
 }

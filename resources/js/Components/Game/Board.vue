@@ -17,7 +17,6 @@ const selectCards = (data) => {
     }
 }
 const unselectCards = () => {
-    console.debug('Unselect cards');
     return game.setActiveCard();
 }
 
@@ -75,7 +74,6 @@ onMounted(() => {
             game.setCanvasConfig(game.canvas);
             game.fabricBoard.renderAll();
         });
-        console.log('Board mounted');
     }, 100);
 });
 </script>

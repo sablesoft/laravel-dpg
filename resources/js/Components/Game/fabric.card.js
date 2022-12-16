@@ -11,7 +11,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
     // initialize can be of type function(options) or function(property, options), like for text.
     // no other signatures allowed.
     initialize: function(model, options) {
-        options || (options = { });
+        options || (options = {});
         options.hasControls = false;
         options.hasBorders = false;
         options.hoverCursor = 'pointer';
@@ -69,11 +69,10 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
                 image.set('top', -37);
                 image.set('partType', 'image');
                 self.add(image);
-                // self.canvas.renderAll.bind(self.canvas);
             });
         }
 
-        fabric.Image.fromURL(model.back_image, function(back) {
+        fabric.Image.fromURL(options.back_image, function(back) {
             back.set('originX', 'center');
             back.set('originY', 'center');
             back.set('partType', 'back');
@@ -104,6 +103,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         this.set('opened', !opened);
         this.forEachObject(function(item) {
             if (item.partType === 'back') {
+                console.log('Back', item);
                 item.set('opacity', opened ? 1 : 0);
                 item.bringToFront();
             }

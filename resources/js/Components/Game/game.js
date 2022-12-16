@@ -7,6 +7,8 @@ export const game = reactive({
     id: null,
     // game info:
     info: null,
+    // user role code:
+    role: null,
     // active card data:
     activeCard: {
         id: null,
@@ -69,6 +71,10 @@ export const game = reactive({
         this.activeCard.tapped = false;
         this.width = options.width;
         this.height = options.height;
+        this.role = options.role;
+    },
+    isMaster() {
+        return this.role === 'master';
     },
     setActiveCard(id = null) {
         if (!id) {
@@ -119,6 +125,8 @@ export const game = reactive({
         if (!this.cards[id]) {
             throw new Error('Card not found: ' + id);
         }
+        options || (options = {});
+        options.back_image = this.cardsBack;
 
         return this.cards[id].obj = new fabric.Card(this.cards[id], options);
     },

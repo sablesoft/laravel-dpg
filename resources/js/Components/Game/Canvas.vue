@@ -1,4 +1,3 @@
-<!--suppress HtmlUnknownTarget -->
 <script setup>
     import { game } from "@/Components/Game/game";
 </script>
@@ -30,34 +29,8 @@
         font-size:1em;
         line-height:1em
     }
-
-    /*.control-out {*/
-    /*    left: 10px;*/
-    /*}*/
-    /*.control-reset {*/
-    /*    left: 45px;*/
-    /*}*/
-    /*.control-in {*/
-    /*    left: 80px;*/
-    /*}*/
-    /*.control-left {*/
-    /*    left: 115px;*/
-    /*}*/
-    /*.control-right {*/
-    /*    left: 150px;*/
-    /*}*/
-    /*.control-top {*/
-    /*    left: 185px;*/
-    /*}*/
-    /*.control-down {*/
-    /*    left: 220px;*/
-    /*}*/
-    /*.control-save {*/
-    /*    right: 10px;*/
-    /*}*/
 </style>
 <template>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <div :style="game.canvasWrapperStyle()">
         <canvas :width="game.fabricWidth()" :height="game.fabricHeight()"></canvas>
     </div>
@@ -83,7 +56,7 @@
         <button class="control-btn control-down">
             <span class="material-icons" @click="game.moveBottom()">arrow_downward</span>
         </button>
-        <button class="control-btn control-save">
+        <button v-if="game.isMaster()" class="control-btn control-save">
             <span class="material-icons" @click="game.saveCanvas()">save</span>
         </button>
     </div>

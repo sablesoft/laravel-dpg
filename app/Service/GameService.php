@@ -78,6 +78,7 @@ class GameService
             'info' => $info,
             'activeDomeId' => null,
             'activeSceneId' => null,
+            'activeAreaId' => null,
             'boardImage' => self::image($game->board_image),
             'cardsBack' => self::image($game->cards_back),
         ];

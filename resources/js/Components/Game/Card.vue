@@ -17,7 +17,7 @@
         margin-top: 10px;
     }
     .card-image {
-        height: 250px;
+        max-height: 250px;
     }
     .scope-image {
         height: 40px;

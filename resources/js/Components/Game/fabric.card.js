@@ -103,7 +103,6 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         this.set('opened', !opened);
         this.forEachObject(function(item) {
             if (item.partType === 'back') {
-                console.log('Back', item);
                 item.set('opacity', opened ? 1 : 0);
                 item.bringToFront();
             }

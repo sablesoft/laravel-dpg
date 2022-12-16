@@ -30,8 +30,9 @@ export const game = reactive({
     cardIds: null,
     // game custom decks:
     deckIds: null,
-    // active dome and scene on tabs:
+    // active space ids:
     activeDomeId: null,
+    activeAreaId: null,
     activeSceneId: null,
     // open entities:
     openDomeIds: null,

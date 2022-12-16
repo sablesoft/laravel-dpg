@@ -35,28 +35,28 @@
         <canvas :width="game.fabricWidth()" :height="game.fabricHeight()"></canvas>
     </div>
     <div class="control-wrap">
-        <button class="control-btn control-out">
+        <button class="control-btn control-out" :title="__('Scale Out')">
             <span class="material-icons" @click="game.scaleOut()">close_fullscreen</span>
         </button>
-        <button class="control-btn control-reset">
+        <button class="control-btn control-reset" :title="__('Reset')">
             <span class="material-icons" @click="game.scaleReset()">restore</span>
         </button>
-        <button class="control-btn control-in">
+        <button class="control-btn control-in" :title="__('Scale In')">
             <span class="material-icons" @click="game.scaleIn()">open_in_full</span>
         </button>
-        <button class="control-btn control-left">
+        <button class="control-btn control-left" :title="__('Move Left')">
             <span class="material-icons" @click="game.moveLeft()">arrow_back</span>
         </button>
-        <button class="control-btn control-right">
+        <button class="control-btn control-right" :title="__('Move Right')">
             <span class="material-icons" @click="game.moveRight()">arrow_forward</span>
         </button>
-        <button class="control-btn control-top">
+        <button class="control-btn control-top" :title="__('Move Top')">
             <span class="material-icons" @click="game.moveTop()">arrow_upward</span>
         </button>
-        <button class="control-btn control-down">
+        <button class="control-btn control-down" :title="__('Move Down')">
             <span class="material-icons" @click="game.moveBottom()">arrow_downward</span>
         </button>
-        <button v-if="game.isMaster()" class="control-btn control-save">
+        <button v-if="game.isMaster()" class="control-btn control-save" :title="__('Save')">
             <span class="material-icons" @click="game.saveCanvas()">save</span>
         </button>
     </div>

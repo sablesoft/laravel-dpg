@@ -22,6 +22,9 @@ use App\Models\Game;
  * @property int[]|null $openAreaIds
  * @property int[]|null $openLandsIds
  * @property int[]|null $openSceneSds
+ * @property int|null $activeDomeId
+ * @property int|null $activeAreaId
+ * @property int|null $activeSceneId
  * @property array[]|null $canvas
  * @property-read Game|null $game
  * @property-read CardProcess[]|Collection|null $cards
@@ -54,7 +57,8 @@ class GameProcess extends Model
         'openSceneIds',
         'canvas',
         'activeDomeId',
-        'activeSceneId'
+        'activeAreaId',
+        'activeSceneId',
     ];
 
     protected $hidden = [

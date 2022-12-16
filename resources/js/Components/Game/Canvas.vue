@@ -19,8 +19,9 @@
         justify-content:center;
         align-items:center;
         border-radius:8px;
-        background:rgba(255,255,255,.8);
+        background:rgba(255,255,255,.1);
         transition:.5s all;
+        backdrop-filter: brightness(1.2) blur(10px);
     }
     .control-btn:hover {
         background:rgba(255,255,255,1);

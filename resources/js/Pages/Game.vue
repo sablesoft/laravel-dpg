@@ -12,7 +12,7 @@ import Book from '@/Components/Game/Book.vue';
 
 import { Head } from '@inertiajs/inertia-vue3';
 import { game } from "@/Components/Game/game";
-import {onMounted, shallowRef} from "vue";
+import {onMounted, shallowRef, toRaw} from "vue";
 
 const boardRef = shallowRef(null);
 
@@ -43,7 +43,7 @@ onMounted(() => {
         role: props.role
     }
     game.init(props.data, options);
-    console.debug(game);
+    console.debug('INITIAL DATA', toRaw(game));
 });
 </script>
 

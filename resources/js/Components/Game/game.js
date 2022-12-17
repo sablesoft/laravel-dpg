@@ -1,6 +1,7 @@
-import { reactive } from 'vue';
-import {fabric} from "fabric";
+import {shallowReactive, toRaw} from 'vue';
+import {fabric} from "fabric-with-erasing";
 import './fabric.card';
+import './fabric.area';
 
 /**
  * @typedef {Object} CanvasConfig
@@ -27,7 +28,7 @@ import './fabric.card';
  */
 
 /**
- * @typedef {Object} Card
+ * @typedef {Object} GameCard
  * @property {number} id
  * @property {number} scope_id
  * @property {string} name
@@ -90,10 +91,11 @@ import './fabric.card';
  * @property {?CanvasConfig} canvas
  * @property {number} area_height
  * @property {number} area_width
+ * @property {?number[]} area_mask
  * @property {number} top_step
  * @property {number} left_step
- * @property {number} map_width
- * @property {number} map_height
+ * @property {number|string} map_width
+ * @property {number|string} map_height
  * @property {number[]} land_ids
  * @property {number[]} area_ids
  * @property {number[]} card_ids
@@ -117,7 +119,7 @@ import './fabric.card';
  */
 
 /**
- * @typedef {Object} Area
+ * @typedef {Object} GameArea
  * @property {number} id
  * @property {number} scope_id
  * @property {string} name
@@ -132,6 +134,7 @@ import './fabric.card';
  * @property {number[]} card_ids
  * @property {number[]} deck_ids
  * @property {number[]} source_ids
+ * @property {?fabric.Card} fabricObject
  */
 
 /**
@@ -147,7 +150,7 @@ import './fabric.card';
  * @property {number[]} source_ids
  */
 
-export const game = reactive({
+export const game = shallowReactive({
     /**
      * @member {?number} - game id
      */
@@ -238,7 +241,7 @@ export const game = reactive({
      */
     books: null,
     /**
-     * @member {Object.<number, Card>}
+     * @member {Object.<number, GameCard>}
      */
     cards: null,
     /**
@@ -254,7 +257,7 @@ export const game = reactive({
      */
     lands: null,
     /**
-     * @member {Object.<number, Area>}
+     * @member {Object.<number, GameArea>}
      */
     areas: null,
     /**
@@ -301,13 +304,17 @@ export const game = reactive({
      * @member {number}
      */
     canvasScaleStep: 0.1,
+    isEraseMode: false,
+    isEraseUndoMode: false,
+    fogColor: '#ffffff',
+    brushWidth: 50,
     /**
      * @param {Object.<string, any>} data
      * @param {GameOptions} options
      */
     init(data, options) {
         for (const [key, value] of Object.entries(data)) {
-            this[key] = value;
+            this[key] = toRaw(value);
         }
         this.activeCard = this.info;
         this.activeCard.id = null;
@@ -321,7 +328,7 @@ export const game = reactive({
     },
     /**
      * @param {?number} id
-     * @return {boolean}
+     * @return {void}
      */
     setActiveCard(id = null) {
         if (!id) {
@@ -333,8 +340,6 @@ export const game = reactive({
         }
         this.activeCard = this.cards[id];
         console.debug('Active card: ', this.activeCard);
-
-        return true;
     },
     activeCardTap() {
         this.activeCard.tapped = this.cardTap(this.activeCard.id);
@@ -384,14 +389,58 @@ export const game = reactive({
         co.sendBackwards(true);
         co.canvas.requestRenderAll();
     },
-    createCardObject(id, options) {
+    /**
+     * @param {number} id
+     * @param {Object.<string, any>} options
+     * @param {?boolean} add
+     * @return {fabric.Card}
+     */
+    createCardFabric(id, options, add = true) {
         if (!this.cards[id]) {
             throw new Error('Card not found: ' + id);
         }
         options || (options = {});
-        options.back_image = this.cardsBack;
+        options.back_image = toRaw(this.cardsBack);
+        let o = new fabric.Card(toRaw(this.cards[id]), options);
+        if (add) {
+            this.fabric().add(o);
+            this.fabric().requestRenderAll();
+        }
 
-        return this.cards[id].fabricObject = new fabric.Card(this.cards[id], options);
+        return this.cards[id].fabricObject = o;
+    },
+    /**
+     * @param {number} id
+     * @param {?Object.<string, any>} options
+     * @param {?boolean} add
+     * @return {fabric.Area}
+     */
+    createAreaFabric(id, options, add = true) {
+        /**
+         * @type {GameArea}
+         */
+        let area = toRaw(this.areas[id]);
+        if (!area) {
+            throw new Error('Area not found: ' + id);
+        }
+        options || (options = {});
+        let dome = toRaw(this.domes[area.dome_id]);
+        if (!dome) {
+            throw new Error('Dome for area not found: ' + id);
+        }
+        options.width = dome.area_width;
+        options.height = dome.area_height;
+        options.mask = Array.from(dome.area_mask);
+        options.fogColor = toRaw(this.fogColor);
+        options.fogOpacity = this.isMaster() ? 0.4 : 1;
+        // options.fogOpacity = this.isMaster() ? 1 : 1;
+        let o = new fabric.Area(area, options);
+        if (add) {
+            this.fabric().add(o);
+            this.fabric().requestRenderAll();
+        }
+
+        return this.areas[id].fabricObject = o;
     },
     showBoard() {
         this.saveCanvas();
@@ -423,7 +472,7 @@ export const game = reactive({
         return this.domes[this.activeDomeId] || null;
     },
     /**
-     * @returns {?Area}
+     * @returns {?GameArea}
      */
     activeArea() {
         return this.areas[this.activeAreaId] || null;
@@ -454,8 +503,32 @@ export const game = reactive({
             this._canvasMoveY(this.canvasMoveStep, canvas);
         }
     },
+    eraseMode() {
+        this.isEraseMode = !this.isEraseMode;
+        let canvas = this.fabric();
+        if (this.isEraseMode) {
+            this.isEraseUndoMode = false;
+            canvas.freeDrawingBrush = new fabric.EraserBrush(canvas);
+            canvas.freeDrawingBrush.width = this.brushWidth;
+            canvas.isDrawingMode = true;
+        } else {
+            canvas.isDrawingMode = false;
+        }
+    },
+    eraseUndoMode() {
+        this.isEraseUndoMode = !this.isEraseUndoMode;
+        let canvas = this.fabric();
+        if (this.isEraseUndoMode) {
+            this.isEraseMode = false;
+            canvas.freeDrawingBrush = new fabric.EraserBrush(canvas);
+            canvas.freeDrawingBrush.width = this.brushWidth;
+            canvas.freeDrawingBrush.inverted = true;
+            canvas.isDrawingMode = true;
+        } else {
+            canvas.isDrawingMode = false;
+        }
+    },
     saveCanvas() {
-        console.log('Save canvas...');
         let canvas = this._canvases()[0];
         let style = {
             left: canvas.style.left,
@@ -466,7 +539,8 @@ export const game = reactive({
             fields: ['canvas'],
             canvas : {
                 style: style,
-                scale: this.getScale()
+                scale: this.getScale(),
+                json: this.fabric().toDatalessJSON()
             },
         }
         switch(this.mainTab) {
@@ -528,11 +602,15 @@ export const game = reactive({
     },
     /**
      * @param {Object.<string, any>} options
+     * @param {?Object.<string, any>} json
      * @return {FabricCanvas}
      */
-    initFabric(options = {}) {
+    initFabric(options = {}, json = null) {
         let canvas = document.getElementsByTagName('canvas')[0];
         let fabricCanvas = new fabric.Canvas(canvas);
+        if (json) {
+            fabricCanvas.loadFromJSON(json, fabricCanvas.renderAll.bind(fabricCanvas));
+        }
         for (const [key, value] of Object.entries(options)) {
             fabricCanvas[key] = value;
         }
@@ -546,6 +624,12 @@ export const game = reactive({
     fabric() {
         let fabric = 'fabric' + this.mainTab;
         return this[fabric] || null;
+    },
+    renderAll() {
+        this.fabric().renderAll();
+    },
+    requestRenderAll() {
+        this.fabric().requestRenderAll();
     },
     scaleIn() {
         this.scale(1 + this.canvasScaleStep);

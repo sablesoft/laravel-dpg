@@ -26,6 +26,9 @@
     .control-btn:hover {
         background:rgba(255,255,255,1);
     }
+    .control-active {
+        border: 3px solid #ff00ea;
+    }
     .control-btn .material-icons {
         font-size:1em;
         line-height:1em
@@ -56,6 +59,16 @@
         </button>
         <button class="control-btn control-down" :title="__('Move Down')">
             <span class="material-icons" @click="game.moveBottom()">arrow_downward</span>
+        </button>
+        <button v-if="game.isMaster()"  class="control-btn control-erase"
+                :class="{'control-active' : game.isEraseMode}"
+                :title="__('Erase Mode')">
+            <span class="material-icons" @click="game.eraseMode()">visibility</span>
+        </button>
+        <button v-if="game.isMaster()"  class="control-btn control-erase-undo"
+                :class="{'control-active' : game.isEraseUndoMode}"
+                :title="__('Erase Undo Mode')">
+            <span class="material-icons" @click="game.eraseUndoMode()">visibility_off</span>
         </button>
         <button v-if="game.isMaster()" class="control-btn control-save" :title="__('Save')">
             <span class="material-icons" @click="game.saveCanvas()">save</span>

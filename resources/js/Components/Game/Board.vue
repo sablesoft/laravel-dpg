@@ -11,7 +11,7 @@ const selectCards = (data) => {
         return game.setActiveCard();
     }
     if (object.opened) {
-        return game.setActiveCard(object.model.id);
+        return game.setActiveCard(object.card_id);
     } else {
         return game.setActiveCard();
     }
@@ -22,7 +22,7 @@ const unselectCards = () => {
 
 const getHero = (options) => {
     let id = game.heroIds[0];
-    return game.createCardObject(id, options);
+    return game.createCardFabric(id, options);
 }
 onMounted(() => {
     // todo - draw current board with cards and decks
@@ -44,14 +44,13 @@ onMounted(() => {
                 top: 530,
                 opened: true
             });
-            const heroScope = game.createCardObject(hero.model.scope_id, {
+            game.createCardFabric(hero.scope_id, {
                 left: 40,
                 top: 530,
-                opened: true
+                opened: true,
+                tapped: true
             });
-            game.fabricBoard.add(heroScope);
-            heroScope.tap();
-            game.fabricBoard.add(hero);
+            hero.bringForward(true);
 
             game.fabricBoard.on({
                 'selection:updated': selectCards,
@@ -62,10 +61,10 @@ onMounted(() => {
                         return;
                     }
                     if (event.target.type === 'card') {
-                        let card = event.target;
-                        card.flip();
-                        if (card.opened) {
-                            game.setActiveCard(card.model.id);
+                        let fabricCard = event.target;
+                        fabricCard.flip();
+                        if (fabricCard.opened) {
+                            game.setActiveCard(fabricCard.card_id);
                         } else {
                             game.setActiveCard();
                         }

@@ -216,7 +216,6 @@ class GameService
         }
         $dome->makeHidden([
             'code',
-            'area_mask',
             'is_public',
             'owner_id',
             'pivot',

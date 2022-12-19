@@ -25,10 +25,8 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         options.top = options.top || model.top;
         options.area_id = options.area_id || model.id;
         options.card_id = options.card_id || model.scope_id;
-        options.fogOpacity = options.fogOpacity || 1;
-        options.fogColor = options.fogColor || options.defaultFogColor;
         if (!options.width || !options.height) {
-            throw new Error('Area width and height required for fabric object!');
+            throw new Error('Area width and height required for fb object!');
         }
         options.width = parseInt(options.width);
         options.height = parseInt(options.height);
@@ -58,23 +56,6 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
             self.add(name);
             name.bringToFront();
             self.showName(false);
-            if (self.mask) {
-                let pair = [];
-                let tail = Array.from(self.mask);
-                let points = [];
-                while (tail.length) {
-                    pair = tail.splice(0, 2);
-                    points.push({x: pair[0] - self.width/2, y: pair[1] - self.height/2});
-                }
-                let fog = new fabric.Polygon(points, {
-                    opacity: self.fogOpacity,
-                    fill: self.fogColor,
-                    stroke: self.fogColor,
-                    strokeWidth: 3,
-                    erasable: true,
-                });
-                self.add(fog);
-            }
         });
     },
 
@@ -102,8 +83,6 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         return fabric.util.object.extend(this.callSuper('toObject'), {
             area_id: this.get('area_id'),
             card_id: this.get('card_id'),
-            fogOpacity: this.get('fogOpacity'),
-            fogColor: this.get('fogColor'),
             mask: this.get('mask'),
         });
     },

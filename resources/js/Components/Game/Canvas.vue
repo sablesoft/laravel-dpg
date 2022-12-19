@@ -33,6 +33,17 @@
         font-size:1em;
         line-height:1em
     }
+    .control-range {
+        height:1.5em;
+        font-size:24px;
+        border-radius:8px;
+        background:rgba(255,255,255,.1);
+        transition:.5s all;
+        backdrop-filter: brightness(1.2) blur(10px);
+    }
+    .control-range input {
+        min-width: 8em;
+    }
 </style>
 <template>
     <div :style="game.canvasWrapperStyle()">
@@ -48,29 +59,46 @@
         <button class="control-btn control-in" :title="__('Scale In')">
             <span class="material-icons" @click="game.scaleIn()">open_in_full</span>
         </button>
-        <button class="control-btn control-left" :title="__('Move Left')">
-            <span class="material-icons" @click="game.moveLeft()">arrow_back</span>
+
+        <!-- Move Mode -->
+        <button class="control-btn control-position"
+                :class="{'control-active' : game.modeMove}"
+                :title="__('Move Mode')">
+            <span class="material-icons" @click="game.moveMode()">open_with</span>
         </button>
-        <button class="control-btn control-right" :title="__('Move Right')">
-            <span class="material-icons" @click="game.moveRight()">arrow_forward</span>
-        </button>
-        <button class="control-btn control-top" :title="__('Move Top')">
-            <span class="material-icons" @click="game.moveTop()">arrow_upward</span>
-        </button>
-        <button class="control-btn control-down" :title="__('Move Down')">
-            <span class="material-icons" @click="game.moveBottom()">arrow_downward</span>
-        </button>
+        <div class="control-range" v-if="game.modeMove" >
+            <label for="move-top">{{ __('Top') }}</label>
+            <input id="move-top" class="control-btn"
+                   type="range" :min="game.minTop" :max="game.maxTop" step="1"
+                   :value="game.top" @input="event => game.setCanvasTop(event.target.value)">
+        </div>
+        <div class="control-range" v-if="game.modeMove" >
+            <label for="move-left">{{ __('Left') }}</label>
+            <input id="move-left" class="control-btn" style="width: 5em;"
+                   type="range" :min="game.minLeft" :max="game.maxLeft" step="1"
+                   :value="game.left" @input="event => game.setCanvasLeft(event.target.value)">
+        </div>
+
+        <!-- Erase Mode -->
         <button v-if="game.isMaster()"  class="control-btn control-erase"
-                :class="{'control-active' : game.isEraseMode}"
+                :class="{'control-active' : game.modeErase}"
                 :title="__('Erase Mode')">
             <span class="material-icons" @click="game.eraseMode()">visibility</span>
         </button>
         <button v-if="game.isMaster()"  class="control-btn control-erase-undo"
-                :class="{'control-active' : game.isEraseUndoMode}"
+                :class="{'control-active' : game.modeEraseUndo}"
                 :title="__('Erase Undo Mode')">
             <span class="material-icons" @click="game.eraseUndoMode()">visibility_off</span>
         </button>
-        <button v-if="game.isMaster()" class="control-btn control-save" :title="__('Save')">
+        <div class="control-range" v-if="game.modeErase || game.modeEraseUndo" >
+            <label for="brush-width">{{ __('Brush Width') }}</label>
+            <input id="brush-width" class="control-btn"
+                   type="range" min="1" max="200" step="1"
+                   :value="game.brushWidth" @input="event => game.setBrushWidth(event.target.value)">
+        </div>
+
+        <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase && !game.modeMove"
+                class="control-btn control-save" :title="__('Save')">
             <span class="material-icons" @click="game.saveCanvas()">save</span>
         </button>
     </div>

@@ -1,7 +1,7 @@
 <!--suppress JSUnresolvedVariable -->
 <script setup>
 import {onMounted} from 'vue';
-import { fabric } from 'fabric';
+import { fabric } from 'fabric-with-erasing';
 import { game } from "@/Components/Game/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 
@@ -21,24 +21,25 @@ const unselectCards = () => {
 }
 
 const getHero = (options) => {
+    // todo
     let id = game.heroIds[0];
     return game.createCardFabric(id, options);
 }
 onMounted(() => {
     // todo - draw current board with cards and decks
     setTimeout(function() {
-        let options = {
-            originX : 'left',
-            originY : 'top'
-        };
-        fabric.Image.fromURL(game.boardImage, function(myImg) {
+        fabric.Image.fromURL(game.boardImage, function(image) {
+            let options = {
+                originX : 'left',
+                originY : 'top',
+                erasable: false
+            };
             // noinspection JSValidateTypes
-            game.fabricBoard = game.initFabric({
-                fullHeight: myImg.height,
-                fullWidth: myImg.width
+            game.initFabric({
+                fullHeight: image.height,
+                fullWidth: image.width
             });
-            game.fabricBoard.setBackgroundImage(myImg, game.fabricBoard.renderAll.bind(game.fabricBoard), options);
-            game.fabricBoard.preserveObjectStacking = true;
+            game.fb().setBackgroundImage(image, game.renderAll.bind(game), options);
             const hero = getHero({
                 left: 70,
                 top: 530,
@@ -52,7 +53,7 @@ onMounted(() => {
             });
             hero.bringForward(true);
 
-            game.fabricBoard.on({
+            game.fb().on({
                 'selection:updated': selectCards,
                 'selection:created': selectCards,
                 'selection:cleared': unselectCards,
@@ -72,10 +73,10 @@ onMounted(() => {
                 }
             });
             game.setCanvasConfig(game.canvas);
-            game.fabricBoard.renderAll();
+            game.renderAll();
+            console.debug('Board mounted', game.fb());
         });
     }, 100);
-    console.debug('Board mounted');
 });
 </script>
 

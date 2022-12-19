@@ -2,6 +2,7 @@
 import { game } from "@/Components/Game/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 import {onMounted} from "vue";
+import {fabric} from "fabric-with-erasing";
 // todo - draw current map with areas and markers
 onMounted(() => {
     let dome = game.activeDome();
@@ -13,11 +14,28 @@ onMounted(() => {
         fullHeight: dome.map_height,
         fullWidth: dome.map_width,
     }, json);
-    if (!json) { // todo
-        game.fabric().setBackgroundColor(game.fogColor, undefined);
+    if (!json) {
+        game.fb().setBackgroundColor(game.fogColor, undefined);
+        game.fb().add(new fabric.Rect({
+            originX: 'left',
+            originY: 'top',
+            fill: 'white',
+            width: dome.map_height,
+            height: dome.map_width,
+            stroke: null,
+            hasControls: false,
+            hasBorders: false,
+            lockMovementX: true,
+            lockMovementY: true,
+            lockScalingX: true,
+            lockScalingY: true,
+            lockRotation: true,
+            hoverCursor: 'default',
+            opacity: game.isMaster() ? 0.5 : 1,
+        }));
         game.createAreaFabric(game.activeAreaId);
     }
-    game.fabric().on({
+    game.fb().on({
         'mouse:over': function(event) {
             if (!event.target) {
                 return;
@@ -39,18 +57,23 @@ onMounted(() => {
             }
         },
         'selection:created': function(event) {
-            console.log(event);
-            let fabricObject = event.selected[0];
-            fabricObject.selected(true);
-            game.setActiveCard(fabricObject.card_id);
+            console.log('selection:created', event);
+            let o = event.selected[0];
+            if (o.type === 'area') {
+                o.selected(true);
+                game.setActiveCard(o.card_id);
+            }
         },
         'selection:updated': function(event) {
-            console.log('selection:created', event);
+            console.log('selection:updated', event);
         },
         'selection:cleared': function(event) {
-            let fabricObject = event.deselected[0];
-            fabricObject.selected(false);
-            game.setActiveCard(dome.scope_id);
+            console.log('selection:cleared', event);
+            let o = event.deselected[0];
+            if (o.type === 'area') {
+                o.selected(false);
+                game.setActiveCard(dome.scope_id);
+            }
         }
     });
     game.setCanvasConfig(dome.canvas);

@@ -285,13 +285,21 @@ export const game = shallowReactive({
      */
     asideTab: 'Card',
     /**
+     * Screen width
      * @member {?number}
      */
     width: null,
     /**
+     * Screen height
      * @member {?number}
      */
     height: null,
+    minLeft: null,
+    maxLeft: null,
+    minTop: null,
+    maxTop: null,
+    top: null,
+    left: null,
     /**
      * @member {?CanvasConfig}
      */
@@ -299,13 +307,10 @@ export const game = shallowReactive({
     /**
      * @member {number}
      */
-    canvasMoveStep: 20,
-    /**
-     * @member {number}
-     */
     canvasScaleStep: 0.1,
-    isEraseMode: false,
-    isEraseUndoMode: false,
+    modeErase: false,
+    modeEraseUndo: false,
+    modeMove: false,
     fogColor: '#ffffff',
     brushWidth: 50,
     /**
@@ -403,8 +408,8 @@ export const game = shallowReactive({
         options.back_image = toRaw(this.cardsBack);
         let o = new fabric.Card(toRaw(this.cards[id]), options);
         if (add) {
-            this.fabric().add(o);
-            this.fabric().requestRenderAll();
+            this.fb().add(o);
+            this.fb().requestRenderAll();
         }
 
         return this.cards[id].fabricObject = o;
@@ -415,7 +420,7 @@ export const game = shallowReactive({
      * @param {?boolean} add
      * @return {fabric.Area}
      */
-    createAreaFabric(id, options, add = true) {
+    createAreaFabric(id, options = null, add = true) {
         /**
          * @type {GameArea}
          */
@@ -436,18 +441,30 @@ export const game = shallowReactive({
         // options.fogOpacity = this.isMaster() ? 1 : 1;
         let o = new fabric.Area(area, options);
         if (add) {
-            this.fabric().add(o);
-            this.fabric().requestRenderAll();
+            this.fb().add(o);
+            this.fb().requestRenderAll();
         }
 
         return this.areas[id].fabricObject = o;
     },
     showBoard() {
+        if (this.modeErase) {
+            this.eraseMode();
+        }
+        if (this.modeEraseUndo) {
+            this.eraseUndoMode();
+        }
         this.saveCanvas();
         this.mainTab = 'Board';
         this.setActiveCard();
     },
     showMap() {
+        if (this.modeErase) {
+            this.eraseMode();
+        }
+        if (this.modeEraseUndo) {
+            this.eraseUndoMode();
+        }
         this.saveCanvas();
         this.mainTab = 'Map';
         let dome = this.domes[this.activeDomeId];
@@ -457,6 +474,12 @@ export const game = shallowReactive({
         this.setActiveCard(dome.scope_id);
     },
     showScene() {
+        if (this.modeErase) {
+            this.eraseMode();
+        }
+        if (this.modeEraseUndo) {
+            this.eraseUndoMode();
+        }
         this.saveCanvas();
         this.mainTab = 'Scene';
         let scene = this.scenes[this.activeSceneId];
@@ -483,49 +506,72 @@ export const game = shallowReactive({
     activeScene() {
         return this.scenes[this.activeSceneId] || null;
     },
-    moveLeft() {
-        for (const canvas of this._canvases()) {
-            this._canvasMoveX(-this.canvasMoveStep, canvas);
+    moveMode() {
+        if (this.modeErase) {
+            this.eraseMode();
         }
+        if (this.modeEraseUndo) {
+            this.eraseUndoMode();
+        }
+        if (this.modeMove) {
+            this.minTop = null;
+            this.maxTop = null;
+            this.minLeft = null;
+            this.maxLeft = null;
+            this.top = null;
+            this.left = null;
+        } else {
+            this.minTop = -this.fb().fullHeight + this.height;
+            this.maxTop = 0;
+            this.minLeft = -this.fb().fullWidth + this.width;
+            this.maxLeft = 0;
+            this.left = Number(this._canvases()[0].style.left.slice(0, -2));
+            this.top = Number(this._canvases()[0].style.top.slice(0, -2));
+        }
+        this.modeMove = !this.modeMove;
     },
-    moveRight() {
-        for (const canvas of this._canvases()) {
-            this._canvasMoveX(this.canvasMoveStep, canvas);
+    setBrushWidth(width = null) {
+        this.brushWidth = width ? width : this.brushWidth;
+        if (!this.fb().freeDrawingBrush) {
+            throw new Error('Drawing brush did not initiated!');
         }
-    },
-    moveTop() {
-        for (const canvas of this._canvases()) {
-            this._canvasMoveY(-this.canvasMoveStep, canvas);
-        }
-    },
-    moveBottom() {
-        for (const canvas of this._canvases()) {
-            this._canvasMoveY(this.canvasMoveStep, canvas);
-        }
+        this.fb().freeDrawingBrush.width = this.brushWidth;
+        this.requestRenderAll();
+        console.debug('Brush width updated!', this.fb().freeDrawingBrush.width);
     },
     eraseMode() {
-        this.isEraseMode = !this.isEraseMode;
-        let canvas = this.fabric();
-        if (this.isEraseMode) {
-            this.isEraseUndoMode = false;
+        if (this.modeMove) {
+            this.moveMode();
+        }
+        this.modeErase = !this.modeErase;
+        let canvas = this.fb();
+        if (this.modeErase) {
+            this.modeEraseUndo = false;
             canvas.freeDrawingBrush = new fabric.EraserBrush(canvas);
-            canvas.freeDrawingBrush.width = this.brushWidth;
+            this.setBrushWidth();
             canvas.isDrawingMode = true;
+            console.debug('Erase mode enabled');
         } else {
             canvas.isDrawingMode = false;
+            console.debug('Erase mode disabled');
         }
     },
     eraseUndoMode() {
-        this.isEraseUndoMode = !this.isEraseUndoMode;
-        let canvas = this.fabric();
-        if (this.isEraseUndoMode) {
-            this.isEraseMode = false;
+        if (this.modeMove) {
+            this.moveMode();
+        }
+        this.modeEraseUndo = !this.modeEraseUndo;
+        let canvas = this.fb();
+        if (this.modeEraseUndo) {
+            this.modeErase = false;
             canvas.freeDrawingBrush = new fabric.EraserBrush(canvas);
-            canvas.freeDrawingBrush.width = this.brushWidth;
+            this.setBrushWidth();
             canvas.freeDrawingBrush.inverted = true;
             canvas.isDrawingMode = true;
+            console.debug('Erase undo mode enabled');
         } else {
             canvas.isDrawingMode = false;
+            console.debug('Erase undo mode disabled');
         }
     },
     saveCanvas() {
@@ -540,7 +586,7 @@ export const game = shallowReactive({
             canvas : {
                 style: style,
                 scale: this.getScale(),
-                json: this.fabric().toDatalessJSON()
+                json: this.fb().toDatalessJSON()
             },
         }
         switch(this.mainTab) {
@@ -574,7 +620,7 @@ export const game = shallowReactive({
      * @returns {?number}
      */
     fabricWidth() {
-        let fabric = this.fabric();
+        let fabric = this.fb();
         if (!fabric || !fabric.fullWidth) {
             return this.width;
         }
@@ -584,7 +630,7 @@ export const game = shallowReactive({
      * @returns {?number}
      */
     fabricHeight() {
-        let fabric = this.fabric();
+        let fabric = this.fb();
         if (!fabric || !fabric.fullHeight) {
             return this.height;
         }
@@ -611,6 +657,7 @@ export const game = shallowReactive({
         if (json) {
             fabricCanvas.loadFromJSON(json, fabricCanvas.renderAll.bind(fabricCanvas));
         }
+        options['preserveObjectStacking'] = true;
         for (const [key, value] of Object.entries(options)) {
             fabricCanvas[key] = value;
         }
@@ -621,15 +668,21 @@ export const game = shallowReactive({
     /**
      * @returns {?FabricCanvas}
      */
-    fabric() {
-        let fabric = 'fabric' + this.mainTab;
-        return this[fabric] || null;
+    fb() {
+        let fabricName = 'fabric' + this.mainTab;
+        return this[fabricName] || null;
     },
     renderAll() {
-        this.fabric().renderAll();
+        if (!this.fb()) {
+            throw new Error('Fabric canvas is not initiated!')
+        }
+        return this.fb().renderAll();
     },
     requestRenderAll() {
-        this.fabric().requestRenderAll();
+        if (!this.fb()) {
+            throw new Error('Fabric canvas is not initiated!')
+        }
+        return this.fb().requestRenderAll();
     },
     scaleIn() {
         this.scale(1 + this.canvasScaleStep);
@@ -641,17 +694,17 @@ export const game = shallowReactive({
         this.scale();
     },
     getScale() {
-        if (!this.fabric()) {
+        if (!this.fb()) {
             return 1;
         }
-        return this.fabric().scaleRatio ?
-            this.fabric().scaleRatio : 1;
+        return this.fb().scaleRatio ?
+            this.fb().scaleRatio : 1;
     },
     /**
      * @param {?number} multiplier
      */
     scale(multiplier = null) {
-        this.fabric().scaleRatio = multiplier ?
+        this.fb().scaleRatio = multiplier ?
             this.getScale() * multiplier : 1;
         this._zoom();
     },
@@ -672,7 +725,7 @@ export const game = shallowReactive({
      */
     setScale(scale = null) {
         scale = scale || 1;
-        this.fabric().scaleRatio = scale;
+        this.fb().scaleRatio = scale;
         this._zoom();
     },
     /**
@@ -688,31 +741,29 @@ export const game = shallowReactive({
             }
         }
     },
+    /**
+     * @param {number} value
+     * @private
+     */
+    setCanvasLeft(value) {
+        this.left = value;
+        this.setCanvasStyle({left : value + 'px'});
+    },
+    /**
+     * @param {number} value
+     * @private
+     */
+    setCanvasTop(value) {
+        this.top = value;
+        this.setCanvasStyle({top : value + 'px'});
+    },
     _zoom() {
-        let fabric = this.fabric();
+        let fabric = this.fb();
         fabric.setDimensions({
             width: fabric.fullWidth * fabric.scaleRatio,
             height: fabric.fullHeight * fabric.scaleRatio
         });
         fabric.setZoom(fabric.scaleRatio);
-    },
-    /**
-     * @param {number} value
-     * @param {HTMLCanvasElement} canvas
-     * @private
-     */
-    _canvasMoveX(value, canvas) {
-        let current = Number(canvas.style.left.slice(0, -2));
-        canvas.style.left = current + value + 'px';
-    },
-    /**
-     * @param {number} value
-     * @param {HTMLCanvasElement} canvas
-     * @private
-     */
-    _canvasMoveY(value, canvas) {
-        let current = Number(canvas.style.top.slice(0, -2));
-        canvas.style.top = current + value + 'px';
     },
     /**
      * @return {HTMLCollectionOf<HTMLCanvasElement>}

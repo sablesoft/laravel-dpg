@@ -72,8 +72,8 @@ onMounted(() => {
                     }
                 }
             });
-            game.setCanvasConfig(game.canvas);
             game.renderAll();
+            game.setCanvasConfig(game.canvas);
             console.debug('Board mounted', game.fb());
         });
     }, 100);

@@ -304,15 +304,18 @@ export const game = shallowReactive({
      * @member {?CanvasConfig}
      */
     canvas: null,
-    /**
-     * @member {number}
-     */
-    canvasScaleStep: 0.1,
+
+    // canvas control modes:
     modeErase: false,
     modeEraseUndo: false,
     modeMove: false,
+    modeScale: false,
+    modeSave: false,
     fogColor: '#ffffff',
     brushWidth: 50,
+    scaleRatio: 1,
+    minRatio: 1,
+    maxRatio: 1,
     /**
      * @param {Object.<string, any>} data
      * @param {GameOptions} options
@@ -436,9 +439,6 @@ export const game = shallowReactive({
         options.width = dome.area_width;
         options.height = dome.area_height;
         options.mask = Array.from(dome.area_mask);
-        options.fogColor = toRaw(this.fogColor);
-        options.fogOpacity = this.isMaster() ? 0.4 : 1;
-        // options.fogOpacity = this.isMaster() ? 1 : 1;
         let o = new fabric.Area(area, options);
         if (add) {
             this.fb().add(o);
@@ -448,22 +448,40 @@ export const game = shallowReactive({
         return this.areas[id].fabricObject = o;
     },
     showBoard() {
+        if (this.mainTab === 'Board') {
+            return;
+        }
         if (this.modeErase) {
             this.eraseMode();
         }
         if (this.modeEraseUndo) {
             this.eraseUndoMode();
+        }
+        if (this.modeMove) {
+            this.moveMode();
+        }
+        if (this.modeScale) {
+            this.scaleMode();
         }
         this.saveCanvas();
         this.mainTab = 'Board';
         this.setActiveCard();
     },
     showMap() {
+        if (this.mainTab === 'Map') {
+            return;
+        }
         if (this.modeErase) {
             this.eraseMode();
         }
         if (this.modeEraseUndo) {
             this.eraseUndoMode();
+        }
+        if (this.modeMove) {
+            this.moveMode();
+        }
+        if (this.modeScale) {
+            this.scaleMode();
         }
         this.saveCanvas();
         this.mainTab = 'Map';
@@ -474,11 +492,20 @@ export const game = shallowReactive({
         this.setActiveCard(dome.scope_id);
     },
     showScene() {
+        if (this.mainTab === 'Scene') {
+            return;
+        }
         if (this.modeErase) {
             this.eraseMode();
         }
         if (this.modeEraseUndo) {
             this.eraseUndoMode();
+        }
+        if (this.modeMove) {
+            this.moveMode();
+        }
+        if (this.modeScale) {
+            this.scaleMode();
         }
         this.saveCanvas();
         this.mainTab = 'Scene';
@@ -506,12 +533,39 @@ export const game = shallowReactive({
     activeScene() {
         return this.scenes[this.activeSceneId] || null;
     },
+    scaleMode() {
+        if (this.modeErase) {
+            this.eraseMode();
+        }
+        if (this.modeEraseUndo) {
+            this.eraseUndoMode();
+        }
+        if (this.modeMove) {
+            this.moveMode();
+        }
+        if (!this.modeScale) {
+            this.scaleRatio = this.getScale();
+            let fullWidth = this.fb().fullWidth;
+            let fullHeight = this.fb().fullHeight;
+            this.minRatio = this.width / fullWidth > this.height / fullHeight ?
+                this.width / fullWidth : this.height / fullHeight;
+            this.maxRatio = 1.5;
+        } else {
+            this.scaleRatio = 1;
+            this.minRatio = 1;
+            this.maxRatio = 1;
+        }
+        this.modeScale = !this.modeScale;
+    },
     moveMode() {
         if (this.modeErase) {
             this.eraseMode();
         }
         if (this.modeEraseUndo) {
             this.eraseUndoMode();
+        }
+        if (this.modeScale) {
+            this.scaleMode();
         }
         if (this.modeMove) {
             this.minTop = null;
@@ -521,60 +575,64 @@ export const game = shallowReactive({
             this.top = null;
             this.left = null;
         } else {
-            this.minTop = -this.fb().fullHeight + this.height;
+            this.minTop = -this.fb().fullHeight * this.getScale() + this.height;
+            // console.log('minTop: -' + this.fb().fullHeight + ' * '
+            //     + this.getScale() + ' + ' + this.height + ' = ', this.minTop);
             this.maxTop = 0;
-            this.minLeft = -this.fb().fullWidth + this.width;
+            this.minLeft = -this.fb().fullWidth * this.getScale() + this.width;
+            // console.log('minLeft: -' + this.fb().fullWidth + ' * '
+            //     + this.getScale() + ' + ' + this.width + ' = ', this.minLeft);
             this.maxLeft = 0;
-            this.left = Number(this._canvases()[0].style.left.slice(0, -2));
-            this.top = Number(this._canvases()[0].style.top.slice(0, -2));
+            this.left = Number(this.getCanvasStyle('left').slice(0, -2));
+            this.top = Number(this.getCanvasStyle('top').slice(0, -2));
         }
         this.modeMove = !this.modeMove;
-    },
-    setBrushWidth(width = null) {
-        this.brushWidth = width ? width : this.brushWidth;
-        if (!this.fb().freeDrawingBrush) {
-            throw new Error('Drawing brush did not initiated!');
-        }
-        this.fb().freeDrawingBrush.width = this.brushWidth;
-        this.requestRenderAll();
-        console.debug('Brush width updated!', this.fb().freeDrawingBrush.width);
     },
     eraseMode() {
         if (this.modeMove) {
             this.moveMode();
         }
+        if (this.modeScale) {
+            this.scaleMode();
+        }
+        if (this.modeEraseUndo) {
+            this.eraseUndoMode();
+        }
         this.modeErase = !this.modeErase;
         let canvas = this.fb();
         if (this.modeErase) {
-            this.modeEraseUndo = false;
             canvas.freeDrawingBrush = new fabric.EraserBrush(canvas);
             this.setBrushWidth();
             canvas.isDrawingMode = true;
-            console.debug('Erase mode enabled');
         } else {
             canvas.isDrawingMode = false;
-            console.debug('Erase mode disabled');
         }
     },
     eraseUndoMode() {
         if (this.modeMove) {
             this.moveMode();
         }
+        if (this.modeScale) {
+            this.scaleMode();
+        }
+        if (this.modeErase) {
+            this.eraseMode();
+        }
         this.modeEraseUndo = !this.modeEraseUndo;
         let canvas = this.fb();
         if (this.modeEraseUndo) {
-            this.modeErase = false;
             canvas.freeDrawingBrush = new fabric.EraserBrush(canvas);
             this.setBrushWidth();
             canvas.freeDrawingBrush.inverted = true;
             canvas.isDrawingMode = true;
-            console.debug('Erase undo mode enabled');
+            this.setFogOpacity(1);
         } else {
             canvas.isDrawingMode = false;
-            console.debug('Erase undo mode disabled');
+            this.setFogOpacity(0.5);
         }
     },
     saveCanvas() {
+        this.modeSave = true;
         let canvas = this._canvases()[0];
         let style = {
             left: canvas.style.left,
@@ -586,7 +644,7 @@ export const game = shallowReactive({
             canvas : {
                 style: style,
                 scale: this.getScale(),
-                json: this.fb().toDatalessJSON()
+                json: this.fb().toObject()
             },
         }
         switch(this.mainTab) {
@@ -608,12 +666,16 @@ export const game = shallowReactive({
                 throw new Error('Invalid main tab');
         }
         if (this.isMaster()) {
+            let self = this;
             axios.patch('/game', data)
                 .then(res => {
-                    console.log(res.data);
+                    self.modeSave = false;
                 }).catch(err => {
-                console.error(err);
-            });
+                    self.modeSave = false;
+                    console.error(err);
+                });
+        } else {
+            this.modeSave = false;
         }
     },
     /**
@@ -653,17 +715,16 @@ export const game = shallowReactive({
      */
     initFabric(options = {}, json = null) {
         let canvas = document.getElementsByTagName('canvas')[0];
-        let fabricCanvas = new fabric.Canvas(canvas);
+        let fc = new fabric.Canvas(canvas);
         if (json) {
-            fabricCanvas.loadFromJSON(json, fabricCanvas.renderAll.bind(fabricCanvas));
+            fc.loadFromJSON(json, fc.renderAll.bind(fc));
         }
         options['preserveObjectStacking'] = true;
         for (const [key, value] of Object.entries(options)) {
-            fabricCanvas[key] = value;
+            fc[key] = value;
         }
         let name = 'fabric' + this.mainTab;
-
-        return game[name] = fabricCanvas;
+        return this[name] = fc;
     },
     /**
      * @returns {?FabricCanvas}
@@ -684,12 +745,6 @@ export const game = shallowReactive({
         }
         return this.fb().requestRenderAll();
     },
-    scaleIn() {
-        this.scale(1 + this.canvasScaleStep);
-    },
-    scaleOut() {
-        this.scale(1 - this.canvasScaleStep);
-    },
     scaleReset() {
         this.scale();
     },
@@ -701,12 +756,60 @@ export const game = shallowReactive({
             this.fb().scaleRatio : 1;
     },
     /**
-     * @param {?number} multiplier
+     * @param {?number} ratio
      */
-    scale(multiplier = null) {
-        this.fb().scaleRatio = multiplier ?
-            this.getScale() * multiplier : 1;
-        this._zoom();
+    scale(ratio = null) {
+        ratio = ratio ? ratio : 1;
+        let fabric = this.fb();
+        fabric.setDimensions({
+            width: fabric.fullWidth * ratio,
+            height: fabric.fullHeight * ratio
+        });
+        fabric.setZoom(ratio);
+        // todo - keep center of screen
+        fabric.scaleRatio = ratio;
+        this.scaleRatio = ratio;
+    },
+    freezeFog() {
+        this.fb().getObjects().forEach(function(o) {
+            if (o.type === 'rect') {
+                o.set('hasControls', false);
+                o.set('hasBorders', false);
+                o.set('lockMovementX', true);
+                o.set('lockMovementY', true);
+                o.set('lockScalingX', true);
+                o.set('lockScalingY', true);
+                o.set('lockRotation', true);
+                o.set('selectable', false);
+                o.set('hoverCursor', 'default');
+                o.bringForward();
+                console.debug('Fog freeze!');
+            }
+        });
+    },
+    addFog(width, height) {
+        let self = this;
+        setTimeout(function() {
+            console.debug('Add fog');
+            let fog = new fabric.Rect({
+                originX: 'left',
+                originY: 'top',
+                fill: 'white',
+                width: width,
+                height: height,
+                stroke: null,
+                opacity: self.isMaster() ? 0.5 : 1,
+            });
+            self.fb().add(fog);
+            self.freezeFog();
+        }, 1000);
+    },
+    setFogOpacity(value) {
+        this.fb().getObjects().forEach(function(o) {
+            if (o.type === 'rect') {
+                o.set('opacity', value);
+            }
+        });
     },
     /**
      * @param {CanvasConfig} config
@@ -715,18 +818,17 @@ export const game = shallowReactive({
         if (!config) {
             return;
         }
-        setTimeout(function() {
-            game.setCanvasStyle(config.style);
-            game.setScale(config.scale);
-        }, 100);
+        let self = this;
+        setTimeout(function () {
+            self.setCanvasStyle(config.style);
+            self.scale(config.scale);
+        }, 300);
     },
     /**
-     * @param {?number} scale
+     * @param {string} name
      */
-    setScale(scale = null) {
-        scale = scale || 1;
-        this.fb().scaleRatio = scale;
-        this._zoom();
+    getCanvasStyle(name) {
+        return this._canvases()[0].style[name];
     },
     /**
      * @param {Object.<string, string>} style
@@ -743,7 +845,6 @@ export const game = shallowReactive({
     },
     /**
      * @param {number} value
-     * @private
      */
     setCanvasLeft(value) {
         this.left = value;
@@ -751,19 +852,21 @@ export const game = shallowReactive({
     },
     /**
      * @param {number} value
-     * @private
      */
     setCanvasTop(value) {
         this.top = value;
         this.setCanvasStyle({top : value + 'px'});
     },
-    _zoom() {
-        let fabric = this.fb();
-        fabric.setDimensions({
-            width: fabric.fullWidth * fabric.scaleRatio,
-            height: fabric.fullHeight * fabric.scaleRatio
-        });
-        fabric.setZoom(fabric.scaleRatio);
+    /**
+     * @param {?number} width
+     */
+    setBrushWidth(width = null) {
+        this.brushWidth = width ? width : this.brushWidth;
+        if (!this.fb().freeDrawingBrush) {
+            throw new Error('Drawing brush did not initiated!');
+        }
+        this.fb().freeDrawingBrush.width = this.brushWidth;
+        this.requestRenderAll();
     },
     /**
      * @return {HTMLCollectionOf<HTMLCanvasElement>}

@@ -16,24 +16,8 @@ onMounted(() => {
     }, json);
     if (!json) {
         game.fb().setBackgroundColor(game.fogColor, undefined);
-        game.fb().add(new fabric.Rect({
-            originX: 'left',
-            originY: 'top',
-            fill: 'white',
-            width: dome.map_height,
-            height: dome.map_width,
-            stroke: null,
-            hasControls: false,
-            hasBorders: false,
-            lockMovementX: true,
-            lockMovementY: true,
-            lockScalingX: true,
-            lockScalingY: true,
-            lockRotation: true,
-            hoverCursor: 'default',
-            opacity: game.isMaster() ? 0.5 : 1,
-        }));
         game.createAreaFabric(game.activeAreaId);
+        game.addFog(dome.map_width, dome.map_height);
     }
     game.fb().on({
         'mouse:over': function(event) {
@@ -76,10 +60,12 @@ onMounted(() => {
             }
         }
     });
-    game.setCanvasConfig(dome.canvas);
     setTimeout(function () {
         game.renderAll();
-    }, 1000);
+        game.freezeFog();
+        game.setCanvasConfig(dome.canvas);
+        console.debug('Map mounted', game.fb());
+    }, 300);
 });
 </script>
 

@@ -50,15 +50,22 @@
         <canvas :width="game.fabricWidth()" :height="game.fabricHeight()"></canvas>
     </div>
     <div class="control-wrap">
-        <button class="control-btn control-out" :title="__('Scale Out')">
-            <span class="material-icons" @click="game.scaleOut()">close_fullscreen</span>
-        </button>
         <button class="control-btn control-reset" :title="__('Reset')">
             <span class="material-icons" @click="game.scaleReset()">restore</span>
         </button>
-        <button class="control-btn control-in" :title="__('Scale In')">
-            <span class="material-icons" @click="game.scaleIn()">open_in_full</span>
+
+        <!-- Scale Mode -->
+        <button class="control-btn control-scale"
+                :class="{'control-active' : game.modeScale}"
+                :title="__('Scale Mode')">
+            <span class="material-icons" @click="game.scaleMode()">crop_free</span>
         </button>
+        <div class="control-range" v-if="game.modeScale" >
+            <label for="scale-range">{{ __('Scale Ratio') }}</label>
+            <input id="scale-range" class="control-btn"
+                   type="range" :min="game.minRatio" :max="game.maxRatio" step="0.001"
+                   :value="game.scaleRatio" @input="event => game.scale(event.target.value)">
+        </div>
 
         <!-- Move Mode -->
         <button class="control-btn control-position"
@@ -91,14 +98,18 @@
             <span class="material-icons" @click="game.eraseUndoMode()">visibility_off</span>
         </button>
         <div class="control-range" v-if="game.modeErase || game.modeEraseUndo" >
-            <label for="brush-width">{{ __('Brush Width') }}</label>
+            <label for="brush-width">{{ __('Brush Width') + ' ' + game.brushWidth }}</label>
             <input id="brush-width" class="control-btn"
                    type="range" min="1" max="200" step="1"
                    :value="game.brushWidth" @input="event => game.setBrushWidth(event.target.value)">
         </div>
 
-        <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase && !game.modeMove"
-                class="control-btn control-save" :title="__('Save')">
+        <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase &&
+                        !game.modeMove && !game.modeScale"
+                class="control-btn control-save"
+                :class="{'control-active' : game.modeSave}"
+                :disabled="game.modeSave"
+                :title="__('Save')">
             <span class="material-icons" @click="game.saveCanvas()">save</span>
         </button>
     </div>

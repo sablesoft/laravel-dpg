@@ -350,9 +350,11 @@ export const game = shallowReactive({
                     this.activeCardTapped = false;
                     return;
                 case 'Map':
-                    return this.setActiveCard(this.activeDomeId);
+                    let dome = this.domes[this.activeDomeId];
+                    return this.setActiveCard(dome.scope_id);
                 case 'Scene':
-                    return this.setActiveCard(this.activeSceneId);
+                    let scene = this.scenes[this.activeSceneId];
+                    return this.setActiveCard(scene.scope_id);
                 default:
                     throw new Error('Invalid tab type: ' + this.mainTab);
             }

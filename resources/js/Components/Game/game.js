@@ -746,7 +746,7 @@ export const game = shallowReactive({
         return this.fb().requestRenderAll();
     },
     scaleReset() {
-        this.scale();
+        this.scale(1, true);
     },
     getScale() {
         if (!this.fb()) {
@@ -757,17 +757,21 @@ export const game = shallowReactive({
     },
     /**
      * @param {?number} ratio
+     * @param {?boolean} aroundCenter
      */
-    scale(ratio = null) {
+    scale(ratio = null, aroundCenter = false) {
         ratio = ratio ? ratio : 1;
-        let fabric = this.fb();
-        fabric.setDimensions({
-            width: fabric.fullWidth * ratio,
-            height: fabric.fullHeight * ratio
+        let fb = this.fb();
+        fb.setDimensions({
+            width: fb.fullWidth * ratio,
+            height: fb.fullHeight * ratio
         });
-        fabric.setZoom(ratio);
-        // todo - keep center of screen
-        fabric.scaleRatio = ratio;
+        if (aroundCenter) {
+            fb.zoomToPoint(this._viewCenter(), ratio);
+        } else {
+            fb.setZoom(ratio);
+        }
+        fb.scaleRatio = ratio;
         this.scaleRatio = ratio;
     },
     freezeFog() {
@@ -888,5 +892,14 @@ export const game = shallowReactive({
         }
 
         return this.cards[id].fabricObject;
+    },
+    /**
+     * @return {fabric.Point}
+     * @private
+     */
+    _viewCenter() {
+        let x = parseInt(this.width / 2 - Number(this.getCanvasStyle('left').slice(0, -2)));
+        let y = parseInt(this.height / 2 - Number(this.getCanvasStyle('top').slice(0, -2)));
+        return new fabric.Point(x, y);
     }
 });

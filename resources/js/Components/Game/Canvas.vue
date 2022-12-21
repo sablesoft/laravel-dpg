@@ -64,7 +64,7 @@
             <label for="scale-range">{{ __('Scale Ratio') }}</label>
             <input id="scale-range" class="control-btn"
                    type="range" :min="game.minRatio" :max="game.maxRatio" step="0.001"
-                   :value="game.scaleRatio" @input="event => game.scale(event.target.value)">
+                   :value="game.scaleRatio" @input="event => game.scale(event.target.value, true)">
         </div>
 
         <!-- Move Mode -->

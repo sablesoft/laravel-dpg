@@ -20,25 +20,8 @@ onMounted(() => {
         game.addFog(dome.map_width, dome.map_height);
     }
     game.fb().on({
-        'mouse:over': function(event) {
-            if (!event.target) {
-                return;
-            }
-            let target = event.target;
-            if (target.type === 'area') {
-                console.log('Mouse over area');
-                target.showName(true);
-            }
-        },
-        'mouse:out': function(event) {
-            if (!event.target) {
-                return;
-            }
-            let target = event.target;
-            if (target.type === 'area') {
-                console.log('Mouse out area');
-                target.showName(false);
-            }
+        'mouse:move': function(event) {
+            // console.log('mouse:move', event);
         },
         'selection:created': function(event) {
             console.log('selection:created', event);

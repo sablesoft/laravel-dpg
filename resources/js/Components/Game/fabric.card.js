@@ -87,12 +87,18 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             });
         }
         fabric.Image.fromURL(options.back_image, function(back) {
+            back.set('partName', 'back')
             back.set('originX', 'center');
             back.set('originY', 'center');
             self.add(back);
             back.bringToFront();
             if (self.get('opened')) {
                 back.set('opacity', 0);
+            }
+            back.toObject = function() {
+                return fabric.util.object.extend(back.callSuper('toObject'), {
+                    partName: back.get('partName'),
+                });
             }
         });
     },

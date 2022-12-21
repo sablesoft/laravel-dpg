@@ -17,9 +17,27 @@ onMounted(() => {
     if (!json) {
         game.fb().setBackgroundColor(game.fogColor, undefined);
         game.createAreaFabric(game.activeAreaId);
+        setTimeout(function() {
+            game.createMarker(80, {
+                left: 3160,
+                top: 3900
+            });
+            game.createMarker(83, {
+                left: 3260,
+                top: 4000
+            });
+        }, 300);
         game.addFog(dome.map_width, dome.map_height);
     }
     setTimeout(function () {
+        game.fb().getObjects().forEach(function(o) {
+            if (o.type === 'area') {
+                o.sendBackwards(true);
+            }
+            if (o.type === 'marker' && game.isMaster()) {
+                o.unlockMovement();
+            }
+        });
         game.renderAll();
         game.freezeFog();
         game.setCanvasConfig();

@@ -2,6 +2,7 @@ import {shallowReactive, toRaw} from 'vue';
 import {fabric} from "fabric-with-erasing";
 import './fabric.card';
 import './fabric.area';
+import './fabric.marker';
 
 /**
  * @typedef {Object} CanvasConfig
@@ -308,7 +309,6 @@ export const game = shallowReactive({
      * @member {?CanvasConfig}
      */
     canvas: null,
-
     // canvas control modes:
     modeErase: false,
     modeEraseUndo: false,
@@ -344,8 +344,18 @@ export const game = shallowReactive({
      */
     setActiveCard(id = null) {
         if (!id) {
-            this.activeCard = this.info;
-            return true;
+            switch (this.mainTab) {
+                case 'Board':
+                    this.activeCard = this.info;
+                    this.activeCardTapped = false;
+                    return;
+                case 'Map':
+                    return this.setActiveCard(this.activeDomeId);
+                case 'Scene':
+                    return this.setActiveCard(this.activeSceneId);
+                default:
+                    throw new Error('Invalid tab type: ' + this.mainTab);
+            }
         }
         if (!this.cards[id]) {
             throw new Error('Card not found: ' + id);
@@ -373,7 +383,6 @@ export const game = shallowReactive({
      * @return {boolean}
      */
     cardTap(id) {
-        console.debug('Tap card: ' + id);
         return this._cardObject(id).tap();
     },
     /**
@@ -381,7 +390,6 @@ export const game = shallowReactive({
      * @return {boolean}
      */
     cardUntap(id) {
-        console.debug('Untap card: ' + id);
         return this._cardObject(id).untap();
     },
     /**
@@ -389,20 +397,16 @@ export const game = shallowReactive({
      * @return {void}
      */
     cardForward(id) {
-        let co = this._cardObject(id);
-        console.debug('Forward card: ' + id);
-        co.bringForward(true);
-        co.canvas.requestRenderAll();
+        this._cardObject(id).bringForward(true);
+        this.fb().requestRenderAll();
     },
     /**
      * @param {number} id
      * @return {void}
      */
     cardBackward(id) {
-        let co = this._cardObject(id);
-        console.debug('Backward card: ' + id);
-        co.sendBackwards(true);
-        co.canvas.requestRenderAll();
+        this._cardObject(id).sendBackwards(true);
+        this.fb().requestRenderAll();
     },
     /**
      * @param {number} id
@@ -449,10 +453,29 @@ export const game = shallowReactive({
         let o = new fabric.Area(area, options);
         if (add) {
             this.fb().add(o);
+            o.sendBackwards(true);
             this.fb().requestRenderAll();
         }
 
         return this.areas[id].fabricObject = o;
+    },
+    /**
+     * @param id
+     * @param options
+     * @param add
+     * @return {fabric.Marker}
+     */
+    createMarker(id, options = null, add = true) {
+        if (!this.cards[id]) {
+            throw new Error('Card not found: ' + id);
+        }
+        let o = new fabric.Marker(toRaw(this.cards[id]), options);
+        if (add) {
+            this.fb().add(o);
+            this.fb().requestRenderAll();
+        }
+
+        return o;
     },
     showBoard() {
         if (this.mainTab === 'Board') {

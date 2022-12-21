@@ -5,21 +5,6 @@ import { fabric } from 'fabric-with-erasing';
 import { game } from "@/Components/Game/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 
-const selectCards = (data) => {
-    let object = data.selected[0];
-    if (object.type !== 'card') {
-        return game.setActiveCard();
-    }
-    if (object.opened) {
-        return game.setActiveCard(object.card_id);
-    } else {
-        return game.setActiveCard();
-    }
-}
-const unselectCards = () => {
-    return game.setActiveCard();
-}
-
 const getHero = (options) => {
     // todo
     let id = game.heroIds[0];
@@ -56,9 +41,6 @@ onMounted(() => {
                 hero.bringForward(true);
             }
             game.fb().on({
-                'selection:updated': selectCards,
-                'selection:created': selectCards,
-                'selection:cleared': unselectCards,
                 'mouse:dblclick': function(event) {
                     if (!event.target) {
                         return;

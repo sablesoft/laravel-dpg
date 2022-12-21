@@ -19,36 +19,6 @@ onMounted(() => {
         game.createAreaFabric(game.activeAreaId);
         game.addFog(dome.map_width, dome.map_height);
     }
-    game.fb().on({
-        'mouse:over': function(event) {
-            console.log('mouse:over', event);
-        },
-        'mouse:out': function(event) {
-            console.log('mouse:out', event);
-        },
-        'mouse:move': function(event) {
-            // console.log('mouse:move', event);
-        },
-        'selection:created': function(event) {
-            console.log('selection:created', event);
-            let o = event.selected[0];
-            if (o.type === 'area') {
-                o.selected(true);
-                game.setActiveCard(o.card_id);
-            }
-        },
-        'selection:updated': function(event) {
-            console.log('selection:updated', event);
-        },
-        'selection:cleared': function(event) {
-            console.log('selection:cleared', event);
-            let o = event.deselected[0];
-            if (o.type === 'area') {
-                o.selected(false);
-                game.setActiveCard(dome.scope_id);
-            }
-        }
-    });
     setTimeout(function () {
         game.renderAll();
         game.freezeFog();

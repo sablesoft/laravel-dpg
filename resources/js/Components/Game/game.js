@@ -732,6 +732,53 @@ export const game = shallowReactive({
         for (const [key, value] of Object.entries(options)) {
             fc[key] = value;
         }
+        let self = this;
+        fc.on({
+            'selection:created': function(event) {
+                let o = event.selected[0];
+                if (!o || !o.card_id) {
+                    self.setActiveCard();
+                } else {
+                    if (o.type === 'card' && !o.opened) {
+                        self.setActiveCard();
+                    } else {
+                        self.setActiveCard(o.card_id);
+                    }
+                }
+                console.debug('selection:created', event);
+            },
+            'selection:updated': function(event) {
+                let o = event.selected[0];
+                if (!o || !o.card_id) {
+                    self.setActiveCard();
+                } else {
+                    if (o.type === 'card' && !o.opened) {
+                        self.setActiveCard();
+                    } else {
+                        self.setActiveCard(o.card_id);
+                    }
+                }
+                console.debug('selection:updated', event);
+            },
+            'selection:cleared': function(event) {
+                self.setActiveCard();
+                console.log('selection:cleared', event);
+            },
+            'mouse:move': function(event) {
+                let target = event.target;
+                if (!target || !target.card_id) {
+                    self.cursorCardName = null;
+                    self.cursorCardScope = null;
+                    return;
+                }
+                let card = self.cards[target.card_id];
+                self.cursorCardName = card.name;
+                self.cursorCardScope = card.scopeName;
+            },
+            'drop': function(event) {
+                console.log('drop', event);
+            }
+        });
         config.options = options;
         this.fabricConfig = config;
         let name = 'fabric' + this.mainTab;

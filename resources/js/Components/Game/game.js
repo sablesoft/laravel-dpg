@@ -276,6 +276,7 @@ export const game = shallowReactive({
      * @member {?FabricCanvas}
      */
     fabricScene: null,
+    fabricConfig: null,
     /**
      * @member {string}
      */
@@ -709,20 +710,26 @@ export const game = shallowReactive({
         }
     },
     /**
-     * @param {Object.<string, any>} options
-     * @param {?Object.<string, any>} json
+     * @param {?Object.<string, any>} options
+     * @param {?Object.<string, any>} config
      * @return {FabricCanvas}
      */
-    initFabric(options = {}, json = null) {
+    initFabric(options = null, config = null) {
         let canvas = document.getElementsByTagName('canvas')[0];
         let fc = new fabric.Canvas(canvas);
-        if (json) {
-            fc.loadFromJSON(json, fc.renderAll.bind(fc));
+        config = config ? config : {};
+        if (config.json) {
+            fc.loadFromJSON(config.json, fc.renderAll.bind(fc));
+        }
+        if (!options) {
+            options = config.options || {};
         }
         options['preserveObjectStacking'] = true;
         for (const [key, value] of Object.entries(options)) {
             fc[key] = value;
         }
+        config.options = options;
+        this.fabricConfig = config;
         let name = 'fabric' + this.mainTab;
         return this[name] = fc;
     },
@@ -745,7 +752,8 @@ export const game = shallowReactive({
         }
         return this.fb().requestRenderAll();
     },
-    scaleReset() {
+    resetCanvas() {
+        // todo
         this.scale(1, true);
     },
     getScale() {
@@ -802,6 +810,7 @@ export const game = shallowReactive({
                 width: width,
                 height: height,
                 stroke: null,
+                evented: false,
                 opacity: self.isMaster() ? 0.5 : 1,
             });
             self.fb().add(fog);
@@ -815,17 +824,14 @@ export const game = shallowReactive({
             }
         });
     },
-    /**
-     * @param {CanvasConfig} config
-     */
-    setCanvasConfig(config) {
-        if (!config) {
+    setCanvasConfig() {
+        if (!this.fabricConfig) {
             return;
         }
         let self = this;
         setTimeout(function () {
-            self.setCanvasStyle(config.style);
-            self.scale(config.scale);
+            self.setCanvasStyle(self.fabricConfig.style);
+            self.scale(self.fabricConfig.scale);
         }, 300);
     },
     /**
@@ -838,7 +844,7 @@ export const game = shallowReactive({
      * @param {Object.<string, string>} style
      */
     setCanvasStyle(style) {
-        if (!style instanceof Object) {
+        if (!style) {
             return;
         }
         for (const [key, value] of Object.entries(style)) {

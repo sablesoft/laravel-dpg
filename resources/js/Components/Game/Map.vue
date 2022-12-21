@@ -9,17 +9,23 @@ onMounted(() => {
     if (!dome) {
         throw new Error('Active dome not found!');
     }
-    let json = dome.canvas ? dome.canvas.json : null;
     game.initFabric({
         fullHeight: dome.map_height,
         fullWidth: dome.map_width,
-    }, json);
+    }, dome.canvas);
+    let json = dome.canvas ? dome.canvas.json : null;
     if (!json) {
         game.fb().setBackgroundColor(game.fogColor, undefined);
         game.createAreaFabric(game.activeAreaId);
         game.addFog(dome.map_width, dome.map_height);
     }
     game.fb().on({
+        'mouse:over': function(event) {
+            console.log('mouse:over', event);
+        },
+        'mouse:out': function(event) {
+            console.log('mouse:out', event);
+        },
         'mouse:move': function(event) {
             // console.log('mouse:move', event);
         },
@@ -46,7 +52,7 @@ onMounted(() => {
     setTimeout(function () {
         game.renderAll();
         game.freezeFog();
-        game.setCanvasConfig(dome.canvas);
+        game.setCanvasConfig();
         console.debug('Map mounted', game.fb());
     }, 300);
 });

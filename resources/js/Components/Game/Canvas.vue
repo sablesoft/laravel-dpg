@@ -50,10 +50,6 @@
         <canvas :width="game.fabricWidth()" :height="game.fabricHeight()"></canvas>
     </div>
     <div class="control-wrap">
-        <button class="control-btn control-reset" :title="__('Reset')">
-            <span class="material-icons" @click="game.scaleReset()">restore</span>
-        </button>
-
         <!-- Scale Mode -->
         <button class="control-btn control-scale"
                 :class="{'control-active' : game.modeScale}"
@@ -103,6 +99,10 @@
                    type="range" min="1" max="200" step="1"
                    :value="game.brushWidth" @input="event => game.setBrushWidth(event.target.value)">
         </div>
+        <button v-if="game.modeEraseUndo || game.modeErase || game.modeMove || game.modeScale"
+                class="control-btn control-reset" :title="__('Reset')">
+            <span class="material-icons" @click="game.resetCanvas()">restore</span>
+        </button>
 
         <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase &&
                         !game.modeMove && !game.modeScale"

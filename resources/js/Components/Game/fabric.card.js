@@ -17,16 +17,20 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         options.hasControls = false;
         options.hasBorders = false;
         options.hoverCursor = 'pointer';
+        options.centeredRotation = true;
         options.opened = options.opened !== undefined ? options.opened : this.defaultOpened;
         options.tapped = options.tapped !== undefined ? options.tapped : this.defaultTapped;
         options.width = options.width || this.defaultWidth;
         options.ratio = options.ratio || this.defaultRatio;
         options.height = options.width * options.ratio;
-        options.centeredRotation = true;
-        options.card_id = model.id;
-        options.scope_id = model.scope_id;
+        options.card_id = options.card_id || model.id;
+        options.scope_id = options.scope_id || model.scope_id;
 
         this.callSuper('initialize', [], options);
+
+        if (!model) {
+            return;
+        }
 
         this.add(new fabric.Rect({
             partType: 'body',
@@ -135,6 +139,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
             card_id: this.get('card_id'),
+            scope_id: this.get('scope_id'),
             ratio: this.get('ratio'),
             tapped: this.get('tapped'),
             opened: this.get('opened')
@@ -145,3 +150,18 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         this.callSuper('_render', ctx);
     }
 });
+
+fabric.Card.fromObject = function(object, callback) {
+    let objects = object.objects || [],
+        options = fabric.util.object.clone(object, true);
+    delete options.objects;
+    let cardObject = new fabric.Card(undefined, options);
+    fabric.util.enlivenObjects(objects,function(fO) {
+        fO.forEach(function(o) {
+            cardObject.add(o);
+        });
+    });
+    callback(cardObject);
+
+    return cardObject;
+}

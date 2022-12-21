@@ -14,11 +14,11 @@ onMounted(() => {
         throw new Error('Active scene not found!');
     }
     fabric.Image.fromURL(scene.image, function(image) {
-        let json = scene.canvas ? scene.canvas.json : null;
         game.initFabric({
             fullHeight: image.height,
             fullWidth: image.width
-        }, json);
+        }, scene.canvas);
+        let json = scene.canvas ? scene.canvas.json : null;
         if (!json) {
             let options = {
                 originX : 'left',
@@ -40,7 +40,7 @@ onMounted(() => {
         setTimeout(function () {
             game.renderAll();
             game.freezeFog();
-            game.setCanvasConfig(scene.canvas);
+            game.setCanvasConfig();
             console.debug('Scene mounted', game.fb());
         }, 300);
     });

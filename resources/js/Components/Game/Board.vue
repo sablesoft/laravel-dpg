@@ -38,21 +38,23 @@ onMounted(() => {
             game.initFabric({
                 fullHeight: image.height,
                 fullWidth: image.width
-            });
-            game.fb().setBackgroundImage(image, game.renderAll.bind(game), options);
-            const hero = getHero({
-                left: 70,
-                top: 530,
-                opened: true
-            });
-            game.createCardFabric(hero.scope_id, {
-                left: 40,
-                top: 530,
-                opened: true,
-                tapped: true
-            });
-            hero.bringForward(true);
-
+            }, game.canvas);
+            let json = game.canvas ? game.canvas.json : null;
+            if (!json) {
+                game.fb().setBackgroundImage(image, game.renderAll.bind(game), options);
+                const hero = getHero({
+                    left: 70,
+                    top: 530,
+                    opened: true
+                });
+                game.createCardFabric(hero.scope_id, {
+                    left: 40,
+                    top: 530,
+                    opened: true,
+                    tapped: true
+                });
+                hero.bringForward(true);
+            }
             game.fb().on({
                 'selection:updated': selectCards,
                 'selection:created': selectCards,
@@ -73,7 +75,7 @@ onMounted(() => {
                 }
             });
             game.renderAll();
-            game.setCanvasConfig(game.canvas);
+            game.setCanvasConfig();
             console.debug('Board mounted', game.fb());
         });
     }, 100);

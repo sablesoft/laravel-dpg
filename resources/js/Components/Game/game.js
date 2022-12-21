@@ -163,6 +163,8 @@ export const game = shallowReactive({
      * @member {?string} - user role code
      */
     role: null,
+    cursorCardName: null,
+    cursorCardScope: null,
     activeCardTapped: false,
     /**
      * State of card component

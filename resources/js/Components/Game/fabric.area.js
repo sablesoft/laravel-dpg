@@ -33,57 +33,17 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
 
         this.callSuper('initialize', [], options);
 
-        let self = this;
-        this.on('mouseover', function() {
-            self.showName(true);
-        });
-        this.on('mouseout', function() {
-            self.showName(false);
-        });
-
         if (!model) {
             return;
         }
 
+        let self = this;
         fabric.Image.fromURL(model.image, function(image) {
             image.set('originX', 'center');
             image.set('originY', 'center');
             image.set('erasable', false);
             self.add(image);
-            image.sendBackwards();
-            const name = new fabric.Text(model.name, {
-                originX: 'center',
-                originY: 'center',
-                fontSize: 36,
-                fontWeight: 'bold',
-                opacity: 0.7,
-                fill: 'black',
-                erasable: false,
-            });
-            self.add(name);
-            name.bringToFront();
-            self.showName(false);
         });
-    },
-
-    showName: function(show = true) {
-        let self = this;
-        if (self.isSelected) {
-            show = false;
-        }
-        this.forEachObject(function(item) {
-            if (item.type === 'text') {
-                item.set('opacity', show ? 0.7 : 0);
-                if (self.canvas) {
-                    self.canvas.requestRenderAll();
-                }
-            }
-        });
-    },
-
-    selected: function(selected = true) {
-        this.isSelected = selected;
-        this.showName(false);
     },
 
     toObject: function() {

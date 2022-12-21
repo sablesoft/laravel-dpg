@@ -44,6 +44,19 @@
     .control-range input {
         min-width: 8em;
     }
+    .info-wrap {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-weight: normal;
+    }
+    .info-wrap p {
+        padding: 5px;
+        border-radius: 8px;
+        background: rgba(255,255,255,.1);
+        transition:.5s all;
+        backdrop-filter: brightness(1.2) blur(10px);
+    }
 </style>
 <template>
     <div :style="game.canvasWrapperStyle()">
@@ -112,5 +125,10 @@
                 :title="__('Save')">
             <span class="material-icons" @click="game.saveCanvas()">save</span>
         </button>
+    </div>
+    <div class="info-wrap">
+        <p v-if="game.cursorCardName">
+            <span v-if="game.cursorCardScope">{{ game.cursorCardScope }} : </span>{{ game.cursorCardName }}
+        </p>
     </div>
 </template>

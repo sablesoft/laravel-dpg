@@ -28,12 +28,28 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
 
         this.callSuper('initialize', [], options);
 
+        let self = this;
+        this.on('mousedown', function() {
+            const shadow = new fabric.Shadow({
+                color: "rgba(0,0,0,0.8)",
+                blur: 15,
+                offsetX: 5,
+                offsetY: 5
+            });
+            self.set('shadow', shadow);
+        });
+        this.on('mouseup', function() {
+            self.set('shadow', null);
+        });
+        if (this.get('tapped')) {
+            this.tap(true);
+        }
+
         if (!model) {
             return;
         }
 
         this.add(new fabric.Rect({
-            partType: 'body',
             originX: 'center',
             originY: 'center',
             fill: 'white',
@@ -46,7 +62,6 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             strokeLineJoin: 'round',
         }));
         this.add(new fabric.Text(model.name, {
-            partType: 'name',
             originX: 'center',
             top: -60,
             fontSize: 12,
@@ -55,7 +70,6 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         }));
         if (model.scopeName) {
             this.add(new fabric.Text(model.scopeName, {
-                partType: 'scopeName',
                 originX: 'center',
                 top: 46,
                 fontSize: 12,
@@ -64,58 +78,39 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             }));
         }
 
-        let self = this;
         if (model.image) {
             fabric.Image.fromURL(model.image, function(image) {
                 image.scale(0.3);
                 image.set('originX', 'center');
                 image.set('top', -37);
-                image.set('partType', 'image');
                 self.add(image);
             });
         }
         fabric.Image.fromURL(options.back_image, function(back) {
             back.set('originX', 'center');
             back.set('originY', 'center');
-            back.set('partType', 'back');
             self.add(back);
             back.bringToFront();
             if (self.get('opened')) {
                 back.set('opacity', 0);
             }
         });
-        this.on('mousedown', function() {
-            const shadow = new fabric.Shadow({
-                color: "rgba(0,0,0,0.8)",
-                blur: 15,
-                offsetX: 5,
-                offsetY: 5
-            });
-            this.set('shadow', shadow);
-        });
-        this.on('mouseup', function() {
-            this.set('shadow', null);
-        });
-        if (this.get('tapped')) {
-            this.tap(true);
-        }
     },
 
     flip: function () {
         let opened = this.get('opened');
         this.set('opened', !opened);
-        this.forEachObject(function(item) {
-            if (item.partType === 'back') {
-                item.set('opacity', opened ? 1 : 0);
-                item.bringToFront();
-            }
-        });
+        let item = this._objects[4];
+        console.log(item);
+        item.set('opacity', opened ? 1 : 0);
+        item.bringToFront();
         this.set('dirty', true);
         this.canvas && this.canvas.requestRenderAll();
     },
 
     tap: function (force = false) {
         if (this.get('tapped') && !force) {
+            console.log('Already tapped! Skip!');
             return false;
         }
         this.set('tapped', true);
@@ -127,6 +122,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
 
     untap: function() {
         if (!this.get('tapped')) {
+            console.log('Already untapped! Skip!');
             return false;
         }
         this.set('tapped', false);

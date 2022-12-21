@@ -98,8 +98,8 @@
             <button class="control-btn control-forward" :title="__('Forward')">
                 <span class="material-icons" @click="game.activeCardForward()">upload</span>
             </button>
-            <button class="control-text" v-if="!game.activeCard.tapped" @click="game.activeCardTap()">{{ __('Tap') }}</button>
-            <button class="control-text" v-if="game.activeCard.tapped" @click="game.activeCardUntap()">{{ __('Untap') }}</button>
+            <button class="control-text" v-if="!game.activeCardTapped" @click="game.activeCardTap()">{{ __('Tap') }}</button>
+            <button class="control-text" v-if="game.activeCardTapped" @click="game.activeCardUntap()">{{ __('Untap') }}</button>
             <button class="control-btn control-forward" :title="__('Backward')">
                 <span class="material-icons" @click="game.activeCardBackward()">download</span>
             </button>

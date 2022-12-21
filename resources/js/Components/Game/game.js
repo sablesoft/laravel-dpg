@@ -163,6 +163,7 @@ export const game = shallowReactive({
      * @member {?string} - user role code
      */
     role: null,
+    activeCardTapped: false,
     /**
      * State of card component
      * @member {ActiveCard}
@@ -348,13 +349,16 @@ export const game = shallowReactive({
             throw new Error('Card not found: ' + id);
         }
         this.activeCard = this.cards[id];
+        this.activeCardTapped = this.activeCard.tapped;
         console.debug('Active card: ', this.activeCard);
     },
     activeCardTap() {
         this.activeCard.tapped = this.cardTap(this.activeCard.id);
+        this.activeCardTapped = this.activeCard.tapped;
     },
     activeCardUntap() {
         this.activeCard.tapped = !this.cardUntap(this.activeCard.id);
+        this.activeCardTapped = this.activeCard.tapped;
     },
     activeCardForward() {
         return this.cardForward(this.activeCard.id);
@@ -793,6 +797,7 @@ export const game = shallowReactive({
                 o.set('lockScalingY', true);
                 o.set('lockRotation', true);
                 o.set('selectable', false);
+                o.set('evented', false);
                 o.set('hoverCursor', 'default');
                 o.bringForward();
                 console.debug('Fog freeze!');
@@ -887,16 +892,28 @@ export const game = shallowReactive({
     },
     /**
      * @param {number} id
-     * @return {?fabric.Card}
+     * @return {fabric.Card}
      */
     _cardObject(id) {
         if (!this.cards[id]) {
             throw new Error('Card not found: ' + id);
         }
         if (!this.cards[id].fabricObject) {
-            throw new Error('Fabric object for card not found: ' + id);
+            let found = false;
+            let self = this;
+            this.fb().forEachObject(function(o) {
+                if (found) {
+                    return;
+                }
+                if (o.get('card_id') === Number(id)) {
+                    self.cards[id].fabricObject = o;
+                    found = true;
+                }
+            });
+            if (!found) {
+                throw new Error('Fabric object for card not found: ' + id);
+            }
         }
-
         return this.cards[id].fabricObject;
     },
     /**

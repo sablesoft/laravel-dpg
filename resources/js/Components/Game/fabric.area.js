@@ -33,11 +33,18 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
 
         this.callSuper('initialize', [], options);
 
+        let self = this;
+        this.on('mouseover', function() {
+            self.showName(true);
+        });
+        this.on('mouseout', function() {
+            self.showName(false);
+        });
+
         if (!model) {
             return;
         }
 
-        let self = this;
         fabric.Image.fromURL(model.image, function(image) {
             image.set('originX', 'center');
             image.set('originY', 'center');

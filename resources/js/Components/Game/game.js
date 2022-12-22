@@ -385,8 +385,7 @@ export const game = shallowReactive({
     remove(type) {
         let o = this._findObject(this.activeCard.id, 'cards', type);
         console.debug('Remove object for', this.activeCard.name,  o);
-        this.fb().remove(o);
-        this.fb().renderAll();
+        this.fb().remove(o, this.fb().renderAll.bind(this.fb()));
         this.setActiveCard();
     },
     /**
@@ -690,6 +689,18 @@ export const game = shallowReactive({
             fc[key] = value;
         }
         let self = this;
+        setTimeout(function() {
+            fc.getObjects().forEach(function(o) {
+                if (o.type === 'area') {
+                    o.sendBackwards(true);
+                }
+                if (o.type === 'marker' && self.isMaster()) {
+                    o.unlockMovement();
+                }
+            });
+        }, 500);
+        let name = 'fabric' + this.mainTab;
+        this[name] = fc;
         fc.on({
             'selection:created': function(event) {
                 self._selection(event);
@@ -745,27 +756,28 @@ export const game = shallowReactive({
             // console.debug('mouse:wheel', opt);
             if (self.modeTransform) {
                 let delta = opt.e.deltaY;
-                let zoom = fc.getZoom();
-                zoom *= 0.999 ** delta;
-                if (zoom > 20) zoom = 20;
-                if (zoom < 0.01) zoom = 0.01;
-                fc.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+                if (self.activeObjectType === 'marker') {
+                    let o = self._findObject(self.activeCard.id, 'cards', 'marker');
+                    let scale = o.get('scaleX');
+                    scale *= 0.999 ** delta;
+                    if (scale > 20) scale = 20;
+                    if (scale < 0.01) scale = 0.01;
+                    o.scale(scale);
+                    fc.requestRenderAll();
+                    console.debug('scale marker', o);
+                } else {
+                    let zoom = fc.getZoom();
+                    zoom *= 0.999 ** delta;
+                    if (zoom > 20) zoom = 20;
+                    if (zoom < 0.01) zoom = 0.01;
+                    fc.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+                }
                 opt.e.preventDefault();
                 opt.e.stopPropagation();
             }
         });
-        setTimeout(function() {
-            self.fb().getObjects().forEach(function(o) {
-                if (o.type === 'area') {
-                    o.sendBackwards(true);
-                }
-                if (o.type === 'marker' && self.isMaster()) {
-                    o.unlockMovement();
-                }
-            });
-        }, 500);
-        let name = 'fabric' + this.mainTab;
-        return this[name] = fc;
+
+        return fc;
     },
     /**
      * @returns {?fabric.Canvas}
@@ -873,12 +885,12 @@ export const game = shallowReactive({
                 if (found) {
                     return;
                 }
-                if (o.type === type && o.get('card_id') === Number(id)) {
+                if (o.type === type && Number(o.get('card_id')) === Number(id)) {
                     found = o;
                 }
             });
             if (!found) {
-                throw new Error('Fabric object for entity not found: ' + entity + ' : ' + id);
+                throw new Error('Fabric object in '+ entity +' not found: ' + type + ' : ' + id);
             }
             model[type] = found;
             this[entity][id] = model;
@@ -892,8 +904,9 @@ export const game = shallowReactive({
      * @private
      */
     _forward(id, entity, type) {
+        console.debug('Forward for', entity, type, id);
         this._findObject(id, entity, type).bringForward(true);
-        this.fb().requestRenderAll();
+        this.fb().renderAll();
     },
     /**
      * @param {number} id
@@ -902,8 +915,9 @@ export const game = shallowReactive({
      * @private
      */
     _backward(id, entity, type) {
+        console.debug('Backward for', entity, type, id);
         this._findObject(id, entity, type).sendBackwards(true);
-        this.fb().requestRenderAll();
+        this.fb().renderAll();
     },
     /**
      * @param {number} id

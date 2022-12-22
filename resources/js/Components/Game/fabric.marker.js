@@ -2,7 +2,7 @@ import { fabric } from 'fabric-with-erasing';
 
 fabric.Marker = fabric.util.createClass(fabric.Group, {
     type: 'marker',
-    defaultScale: 0.15,
+    defaultScale: 0.3,
 
     /**
      * @param {GameCard} model

@@ -42,7 +42,8 @@ import './fabric.marker';
  * @property {?string} image
  * @property {?string} scopeImage
  * @property {?string} scopeName
- * @property {?fabric.Card} fabricObject
+ * @property {?fabric.Card} card
+ * @property {?fabric.Marker} marker
  */
 
 /**
@@ -69,17 +70,6 @@ import './fabric.marker';
  * @property {number[]} card_ids
  * @property {number[]} deck_ids
  * @property {number[]} source_ids
- */
-
-/**
- * @typedef {Object} FabricCanvasProps
- * @property {?number} fullWidth
- * @property {?number} fullHeight
- * @property {?number} scaleRatio
- */
-
-/**
- * @typedef {fabric.Canvas & FabricCanvasProps} FabricCanvas
  */
 
 /**
@@ -135,7 +125,8 @@ import './fabric.marker';
  * @property {number[]} card_ids
  * @property {number[]} deck_ids
  * @property {number[]} source_ids
- * @property {?fabric.Card} fabricObject
+ * @property {?fabric.Card} card
+ * @property {?fabric.Marker} marker
  */
 
 /**
@@ -167,6 +158,9 @@ export const game = shallowReactive({
     cursorCardName: null,
     cursorCardScope: null,
     activeCardTapped: false,
+    activeObjectType: null,
+    activeObjectHidden: false,
+    selectedCardId: null,
     /**
      * State of card component
      * @member {ActiveCard}
@@ -269,18 +263,17 @@ export const game = shallowReactive({
      */
     scenes: null,
     /**
-     * @member {?FabricCanvas}
+     * @member {?fabric.Canvas}
      */
     fabricBoard: null,
     /**
-     * @member {?FabricCanvas}
+     * @member {?fabric.Canvas}
      */
     fabricMap: null,
     /**
-     * @member {?FabricCanvas}
+     * @member {?fabric.Canvas}
      */
     fabricScene: null,
-    fabricConfig: null,
     /**
      * @member {string}
      */
@@ -299,12 +292,6 @@ export const game = shallowReactive({
      * @member {?number}
      */
     height: null,
-    minLeft: null,
-    maxLeft: null,
-    minTop: null,
-    maxTop: null,
-    top: null,
-    left: null,
     /**
      * @member {?CanvasConfig}
      */
@@ -312,14 +299,12 @@ export const game = shallowReactive({
     // canvas control modes:
     modeErase: false,
     modeEraseUndo: false,
-    modeMove: false,
-    modeScale: false,
+    modeTransform: false,
     modeSave: false,
+    modeMarkers: false,
+    hideOpacity: 0.5,
     fogColor: '#ffffff',
     brushWidth: 50,
-    scaleRatio: 1,
-    minRatio: 1,
-    maxRatio: 1,
     /**
      * @param {Object.<string, any>} data
      * @param {GameOptions} options
@@ -328,9 +313,10 @@ export const game = shallowReactive({
         for (const [key, value] of Object.entries(data)) {
             this[key] = toRaw(value);
         }
+        this.info.id = null;
+        this.info.tapped = false;
+        this.info.isMarker = false;
         this.activeCard = this.info;
-        this.activeCard.id = null;
-        this.activeCard.tapped = false;
         this.width = options.width;
         this.height = options.height;
         this.role = options.role;
@@ -340,10 +326,12 @@ export const game = shallowReactive({
     },
     /**
      * @param {?number} id
+     * @param {boolean} hidden
      * @return {void}
      */
-    setActiveCard(id = null) {
+    setActiveCard(id = null, hidden = false) {
         if (!id) {
+            this.activeObjectType = null;
             switch (this.mainTab) {
                 case 'Board':
                     this.activeCard = this.info;
@@ -363,52 +351,43 @@ export const game = shallowReactive({
             throw new Error('Card not found: ' + id);
         }
         this.activeCard = this.cards[id];
+        this.activeObjectHidden = hidden;
         this.activeCardTapped = this.activeCard.tapped;
         console.debug('Active card: ', this.activeCard);
     },
     activeCardTap() {
-        this.activeCard.tapped = this.cardTap(this.activeCard.id);
+        this.activeCard.tapped = this._findObject(this.activeCard.id, 'cards', 'card').tap();
         this.activeCardTapped = this.activeCard.tapped;
     },
     activeCardUntap() {
-        this.activeCard.tapped = !this.cardUntap(this.activeCard.id);
+        this.activeCard.tapped = !this._findObject(this.activeCard.id, 'cards', 'card').untap();
         this.activeCardTapped = this.activeCard.tapped;
     },
-    activeCardForward() {
-        return this.cardForward(this.activeCard.id);
-    },
-    activeCardBackward() {
-        return this.cardBackward(this.activeCard.id);
+    /**
+     * @param {string} type
+     * @param {boolean} hide
+     */
+    opacity(type, hide = false) {
+        this._opacity(this.activeCard.id, 'cards', type, hide);
     },
     /**
-     * @param {number} id
-     * @return {boolean}
+     * @param {string} type
      */
-    cardTap(id) {
-        return this._cardObject(id).tap();
+    forward(type) {
+        this._forward(this.activeCard.id, 'cards', type);
     },
     /**
-     * @param {number} id
-     * @return {boolean}
+     * @param {string} type
      */
-    cardUntap(id) {
-        return this._cardObject(id).untap();
+    backward(type) {
+        this._backward(this.activeCard.id, 'cards', type);
     },
-    /**
-     * @param {number} id
-     * @return {void}
-     */
-    cardForward(id) {
-        this._cardObject(id).bringForward(true);
-        this.fb().requestRenderAll();
-    },
-    /**
-     * @param {number} id
-     * @return {void}
-     */
-    cardBackward(id) {
-        this._cardObject(id).sendBackwards(true);
-        this.fb().requestRenderAll();
+    remove(type) {
+        let o = this._findObject(this.activeCard.id, 'cards', type);
+        console.debug('Remove object for', this.activeCard.name,  o);
+        this.fb().remove(o);
+        this.fb().renderAll();
+        this.setActiveCard();
     },
     /**
      * @param {number} id
@@ -428,7 +407,7 @@ export const game = shallowReactive({
             this.fb().requestRenderAll();
         }
 
-        return this.cards[id].fabricObject = o;
+        return this.cards[id].cardObject = o;
     },
     /**
      * @param {number} id
@@ -459,7 +438,7 @@ export const game = shallowReactive({
             this.fb().requestRenderAll();
         }
 
-        return this.areas[id].fabricObject = o;
+        return this.areas[id].cardObject = o;
     },
     /**
      * @param id
@@ -489,11 +468,11 @@ export const game = shallowReactive({
         if (this.modeEraseUndo) {
             this.eraseUndoMode();
         }
-        if (this.modeMove) {
-            this.moveMode();
+        if (this.modeTransform) {
+            this.transformMode();
         }
-        if (this.modeScale) {
-            this.scaleMode();
+        if (this.modeMarkers) {
+            this.markersMode();
         }
         this.saveCanvas();
         this.mainTab = 'Board';
@@ -509,11 +488,11 @@ export const game = shallowReactive({
         if (this.modeEraseUndo) {
             this.eraseUndoMode();
         }
-        if (this.modeMove) {
-            this.moveMode();
+        if (this.modeTransform) {
+            this.transformMode();
         }
-        if (this.modeScale) {
-            this.scaleMode();
+        if (this.modeMarkers) {
+            this.markersMode();
         }
         this.saveCanvas();
         this.mainTab = 'Map';
@@ -533,11 +512,11 @@ export const game = shallowReactive({
         if (this.modeEraseUndo) {
             this.eraseUndoMode();
         }
-        if (this.modeMove) {
-            this.moveMode();
+        if (this.modeTransform) {
+            this.transformMode();
         }
-        if (this.modeScale) {
-            this.scaleMode();
+        if (this.modeMarkers) {
+            this.markersMode();
         }
         this.saveCanvas();
         this.mainTab = 'Scene';
@@ -565,70 +544,27 @@ export const game = shallowReactive({
     activeScene() {
         return this.scenes[this.activeSceneId] || null;
     },
-    scaleMode() {
+    transformMode() {
         if (this.modeErase) {
             this.eraseMode();
         }
         if (this.modeEraseUndo) {
             this.eraseUndoMode();
         }
-        if (this.modeMove) {
-            this.moveMode();
+        if (this.modeMarkers) {
+            this.markersMode();
         }
-        if (!this.modeScale) {
-            this.scaleRatio = this.getScale();
-            let fullWidth = this.fb().fullWidth;
-            let fullHeight = this.fb().fullHeight;
-            this.minRatio = this.width / fullWidth > this.height / fullHeight ?
-                this.width / fullWidth : this.height / fullHeight;
-            this.maxRatio = 1.5;
-        } else {
-            this.scaleRatio = 1;
-            this.minRatio = 1;
-            this.maxRatio = 1;
-        }
-        this.modeScale = !this.modeScale;
-    },
-    moveMode() {
-        if (this.modeErase) {
-            this.eraseMode();
-        }
-        if (this.modeEraseUndo) {
-            this.eraseUndoMode();
-        }
-        if (this.modeScale) {
-            this.scaleMode();
-        }
-        if (this.modeMove) {
-            this.minTop = null;
-            this.maxTop = null;
-            this.minLeft = null;
-            this.maxLeft = null;
-            this.top = null;
-            this.left = null;
-        } else {
-            this.minTop = -this.fb().fullHeight * this.getScale() + this.height;
-            // console.log('minTop: -' + this.fb().fullHeight + ' * '
-            //     + this.getScale() + ' + ' + this.height + ' = ', this.minTop);
-            this.maxTop = 0;
-            this.minLeft = -this.fb().fullWidth * this.getScale() + this.width;
-            // console.log('minLeft: -' + this.fb().fullWidth + ' * '
-            //     + this.getScale() + ' + ' + this.width + ' = ', this.minLeft);
-            this.maxLeft = 0;
-            this.left = Number(this.getCanvasStyle('left').slice(0, -2));
-            this.top = Number(this.getCanvasStyle('top').slice(0, -2));
-        }
-        this.modeMove = !this.modeMove;
+        this.modeTransform = !this.modeTransform;
     },
     eraseMode() {
-        if (this.modeMove) {
-            this.moveMode();
-        }
-        if (this.modeScale) {
-            this.scaleMode();
+        if (this.modeTransform) {
+            this.transformMode();
         }
         if (this.modeEraseUndo) {
             this.eraseUndoMode();
+        }
+        if (this.modeMarkers) {
+            this.markersMode();
         }
         this.modeErase = !this.modeErase;
         let canvas = this.fb();
@@ -641,14 +577,14 @@ export const game = shallowReactive({
         }
     },
     eraseUndoMode() {
-        if (this.modeMove) {
-            this.moveMode();
-        }
-        if (this.modeScale) {
-            this.scaleMode();
+        if (this.modeTransform) {
+            this.transformMode();
         }
         if (this.modeErase) {
             this.eraseMode();
+        }
+        if (this.modeMarkers) {
+            this.markersMode();
         }
         this.modeEraseUndo = !this.modeEraseUndo;
         let canvas = this.fb();
@@ -663,21 +599,38 @@ export const game = shallowReactive({
             this.setFogOpacity(0.5);
         }
     },
+    markersMode() {
+        if (this.modeTransform) {
+            this.transformMode();
+        }
+        if (this.modeErase) {
+            this.eraseMode();
+        }
+        if (this.modeEraseUndo) {
+            this.eraseUndoMode();
+        }
+        this.modeMarkers = !this.modeMarkers;
+        this.selectedCardId = null;
+        this.setActiveCard();
+    },
+    addMarker() {
+        console.debug('Add marker for: ', this.activeCard.name);
+        let center = this._center();
+        let o = this.createMarker(this.selectedCardId, {
+            left: center.x,
+            top: center.y
+        });
+        this.fb().renderAll();
+        if (this.isMaster()) {
+            o.unlockMovement();
+        }
+    },
     saveCanvas() {
         this.modeSave = true;
-        let canvas = this._canvases()[0];
-        let style = {
-            left: canvas.style.left,
-            top: canvas.style.top
-        }
         let data = {
             gameId : this.id,
             fields: ['canvas'],
-            canvas : {
-                style: style,
-                scale: this.getScale(),
-                json: this.fb().toObject()
-            },
+            canvas : this.fb().toObject(['viewportTransform'])
         }
         switch(this.mainTab) {
             case 'Map':
@@ -711,26 +664,6 @@ export const game = shallowReactive({
         }
     },
     /**
-     * @returns {?number}
-     */
-    fabricWidth() {
-        let fabric = this.fb();
-        if (!fabric || !fabric.fullWidth) {
-            return this.width;
-        }
-        return fabric.fullWidth;
-    },
-    /**
-     * @returns {?number}
-     */
-    fabricHeight() {
-        let fabric = this.fb();
-        if (!fabric || !fabric.fullHeight) {
-            return this.height;
-        }
-        return fabric.fullHeight;
-    },
-    /**
      * @returns {{overflow: string, width: string, height: string}}
      */
     canvasWrapperStyle() {
@@ -743,18 +676,15 @@ export const game = shallowReactive({
     /**
      * @param {?Object.<string, any>} options
      * @param {?Object.<string, any>} config
-     * @return {FabricCanvas}
+     * @return {fabric.Canvas}
      */
     initFabric(options = null, config = null) {
         let canvas = document.getElementsByTagName('canvas')[0];
         let fc = new fabric.Canvas(canvas);
-        config = config ? config : {};
-        if (config.json) {
-            fc.loadFromJSON(config.json, fc.renderAll.bind(fc));
+        if (config) {
+            fc.loadFromJSON(config, fc.renderAll.bind(fc));
         }
-        if (!options) {
-            options = config.options || {};
-        }
+        options = options || {};
         options['preserveObjectStacking'] = true;
         for (const [key, value] of Object.entries(options)) {
             fc[key] = value;
@@ -762,57 +692,83 @@ export const game = shallowReactive({
         let self = this;
         fc.on({
             'selection:created': function(event) {
-                let o = event.selected[0];
-                if (!o || !o.card_id) {
-                    self.setActiveCard();
-                } else {
-                    if (o.type === 'card' && !o.opened) {
-                        self.setActiveCard();
-                    } else {
-                        self.setActiveCard(o.card_id);
-                    }
-                }
+                self._selection(event);
                 console.debug('selection:created', event);
             },
             'selection:updated': function(event) {
-                let o = event.selected[0];
-                if (!o || !o.card_id) {
-                    self.setActiveCard();
-                } else {
-                    if (o.type === 'card' && !o.opened) {
-                        self.setActiveCard();
-                    } else {
-                        self.setActiveCard(o.card_id);
-                    }
-                }
+                self._selection(event);
                 console.debug('selection:updated', event);
             },
             'selection:cleared': function(event) {
-                self.setActiveCard();
+                self._selection();
                 console.log('selection:cleared', event);
             },
-            'mouse:move': function(event) {
-                let target = event.target;
-                if (!target || !target.card_id) {
-                    self.cursorCardName = null;
-                    self.cursorCardScope = null;
-                    return;
-                }
-                let card = self.cards[target.card_id];
-                self.cursorCardName = card.name;
-                self.cursorCardScope = card.scopeName;
-            },
-            'drop': function(event) {
-                console.log('drop', event);
+        });
+        fc.on('mouse:down', function(opt) {
+            // console.debug('mouse:down', opt);
+            let evt = opt.e;
+            if (self.modeTransform === true) {
+                this.isDragging = true;
+                this.selection = false;
+                this.lastPosX = evt.clientX;
+                this.lastPosY = evt.clientY;
             }
         });
-        config.options = options;
-        this.fabricConfig = config;
+        fc.on('mouse:move', function(opt) {
+            // console.debug('mouse:move', opt);
+            if (this.isDragging) {
+                var e = opt.e;
+                var vpt = this.viewportTransform;
+                vpt[4] += e.clientX - this.lastPosX;
+                vpt[5] += e.clientY - this.lastPosY;
+                this.requestRenderAll();
+                this.lastPosX = e.clientX;
+                this.lastPosY = e.clientY;
+            }
+            let target = opt.target;
+            if (!target || !target.card_id) {
+                self.cursorCardName = null;
+                self.cursorCardScope = null;
+                return;
+            }
+            let card = self.cards[target.card_id];
+            self.cursorCardName = card.name;
+            self.cursorCardScope = card.scopeName;
+        });
+        fc.on('mouse:up', function(opt) {
+            // console.debug('mouse:up', opt);
+            this.setViewportTransform(this.viewportTransform);
+            this.isDragging = false;
+            this.selection = true;
+        });
+        fc.on('mouse:wheel', function(opt) {
+            // console.debug('mouse:wheel', opt);
+            if (self.modeTransform) {
+                let delta = opt.e.deltaY;
+                let zoom = fc.getZoom();
+                zoom *= 0.999 ** delta;
+                if (zoom > 20) zoom = 20;
+                if (zoom < 0.01) zoom = 0.01;
+                fc.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+                opt.e.preventDefault();
+                opt.e.stopPropagation();
+            }
+        });
+        setTimeout(function() {
+            self.fb().getObjects().forEach(function(o) {
+                if (o.type === 'area') {
+                    o.sendBackwards(true);
+                }
+                if (o.type === 'marker' && self.isMaster()) {
+                    o.unlockMovement();
+                }
+            });
+        }, 500);
         let name = 'fabric' + this.mainTab;
         return this[name] = fc;
     },
     /**
-     * @returns {?FabricCanvas}
+     * @returns {?fabric.Canvas}
      */
     fb() {
         let fabricName = 'fabric' + this.mainTab;
@@ -832,33 +788,7 @@ export const game = shallowReactive({
     },
     resetCanvas() {
         // todo
-        this.scale(1, true);
-    },
-    getScale() {
-        if (!this.fb()) {
-            return 1;
-        }
-        return this.fb().scaleRatio ?
-            this.fb().scaleRatio : 1;
-    },
-    /**
-     * @param {?number} ratio
-     * @param {?boolean} aroundCenter
-     */
-    scale(ratio = null, aroundCenter = false) {
-        ratio = ratio ? ratio : 1;
-        let fb = this.fb();
-        fb.setDimensions({
-            width: fb.fullWidth * ratio,
-            height: fb.fullHeight * ratio
-        });
-        if (aroundCenter) {
-            fb.zoomToPoint(this._viewCenter(), ratio);
-        } else {
-            fb.setZoom(ratio);
-        }
-        fb.scaleRatio = ratio;
-        this.scaleRatio = ratio;
+        console.log('RESET IS TODO');
     },
     freezeFog() {
         this.fb().getObjects().forEach(function(o) {
@@ -903,49 +833,6 @@ export const game = shallowReactive({
             }
         });
     },
-    setCanvasConfig() {
-        if (!this.fabricConfig) {
-            return;
-        }
-        let self = this;
-        setTimeout(function () {
-            self.setCanvasStyle(self.fabricConfig.style);
-            self.scale(self.fabricConfig.scale);
-        }, 300);
-    },
-    /**
-     * @param {string} name
-     */
-    getCanvasStyle(name) {
-        return this._canvases()[0].style[name];
-    },
-    /**
-     * @param {Object.<string, string>} style
-     */
-    setCanvasStyle(style) {
-        if (!style) {
-            return;
-        }
-        for (const [key, value] of Object.entries(style)) {
-            for (const canvas of this._canvases()) {
-                canvas.style[key] = value;
-            }
-        }
-    },
-    /**
-     * @param {number} value
-     */
-    setCanvasLeft(value) {
-        this.left = value;
-        this.setCanvasStyle({left : value + 'px'});
-    },
-    /**
-     * @param {number} value
-     */
-    setCanvasTop(value) {
-        this.top = value;
-        this.setCanvasStyle({top : value + 'px'});
-    },
     /**
      * @param {?number} width
      */
@@ -957,6 +844,9 @@ export const game = shallowReactive({
         this.fb().freeDrawingBrush.width = this.brushWidth;
         this.requestRenderAll();
     },
+    selectCard(event) {
+        this.activeCard = this.cards[event.target.value];
+    },
     /**
      * @return {HTMLCollectionOf<HTMLCanvasElement>}
      * @private
@@ -965,38 +855,98 @@ export const game = shallowReactive({
         return document.getElementsByTagName('canvas');
     },
     /**
+     *
      * @param {number} id
-     * @return {fabric.Card}
+     * @param {string} entity
+     * @param {string} type
+     * @return {*}
+     * @private
      */
-    _cardObject(id) {
-        if (!this.cards[id]) {
-            throw new Error('Card not found: ' + id);
+    _findObject(id, entity, type) {
+        if (!this[entity][id]) {
+            throw new Error('Entity not found: ' + entity + ' : ' + id);
         }
-        if (!this.cards[id].fabricObject) {
-            let found = false;
-            let self = this;
+        let model = this[entity][id];
+        if (!model[type]) {
+            let found = null;
             this.fb().forEachObject(function(o) {
                 if (found) {
                     return;
                 }
-                if (o.get('card_id') === Number(id)) {
-                    self.cards[id].fabricObject = o;
-                    found = true;
+                if (o.type === type && o.get('card_id') === Number(id)) {
+                    found = o;
                 }
             });
             if (!found) {
-                throw new Error('Fabric object for card not found: ' + id);
+                throw new Error('Fabric object for entity not found: ' + entity + ' : ' + id);
             }
+            model[type] = found;
+            this[entity][id] = model;
         }
-        return this.cards[id].fabricObject;
+        return model[type];
     },
     /**
-     * @return {fabric.Point}
+     * @param {number} id
+     * @param {string} entity
+     * @param {string} type
      * @private
      */
-    _viewCenter() {
-        let x = parseInt(this.width / 2 - Number(this.getCanvasStyle('left').slice(0, -2)));
-        let y = parseInt(this.height / 2 - Number(this.getCanvasStyle('top').slice(0, -2)));
-        return new fabric.Point(x, y);
+    _forward(id, entity, type) {
+        this._findObject(id, entity, type).bringForward(true);
+        this.fb().requestRenderAll();
+    },
+    /**
+     * @param {number} id
+     * @param {string} entity
+     * @param {string} type
+     * @private
+     */
+    _backward(id, entity, type) {
+        this._findObject(id, entity, type).sendBackwards(true);
+        this.fb().requestRenderAll();
+    },
+    /**
+     * @param {number} id
+     * @param {string} entity
+     * @param {string} type
+     * @param {boolean} hide
+     * @private
+     */
+    _opacity(id, entity, type, hide = false) {
+        let opacity = 1;
+        if (hide) {
+            opacity = this.isMaster() ? this.hideOpacity : 0;
+        }
+        this._findObject(id, entity, type).set('opacity', opacity);
+        this.fb().requestRenderAll();
+        this.activeObjectHidden = hide;
+    },
+    _selection(event = null) {
+        if (this.modeMarkers) {
+            return;
+        }
+        if (!event) {
+            this.setActiveCard();
+            return;
+        }
+        let o = event.selected[0];
+        if (!o || !o.card_id) {
+            this.setActiveCard();
+        } else {
+            this.activeObjectType = o.type;
+            if (o.type === 'card' && !o.opened) {
+                this.setActiveCard(null);
+            } else {
+                let hidden = Number(o.get('opacity')) < 1;
+                this.setActiveCard(o.card_id, hidden);
+            }
+        }
+    },
+    _center() {
+        let port = this.fb().calcViewportBoundaries();
+        return {
+            x: parseInt(port.tl.x + (port.br.x - port.tl.x)/2),
+            y: parseInt(port.tl.y + (port.br.y - port.tl.y)/2)
+        }
     }
 });

@@ -33,7 +33,8 @@
         font-size:1em;
         line-height:1em
     }
-    .control-range {
+    .control-more {
+        min-width: 8em;
         height:1.5em;
         font-size:24px;
         border-radius:8px;
@@ -41,8 +42,14 @@
         transition:.5s all;
         backdrop-filter: brightness(1.2) blur(10px);
     }
-    .control-range input {
+    .control-more .control-range {
         min-width: 8em;
+    }
+    .control-more label {
+        display: inline;
+    }
+    .control-more .control-checkbox {
+        margin-left: 20px;
     }
     .info-wrap {
         position: absolute;
@@ -60,40 +67,15 @@
 </style>
 <template>
     <div :style="game.canvasWrapperStyle()">
-        <canvas :width="game.fabricWidth()" :height="game.fabricHeight()"></canvas>
+        <canvas :width="game.width" :height="game.height"></canvas>
     </div>
     <div class="control-wrap">
-        <!-- Scale Mode -->
-        <button class="control-btn control-scale"
-                :class="{'control-active' : game.modeScale}"
-                :title="__('Scale Mode')">
-            <span class="material-icons" @click="game.scaleMode()">crop_free</span>
-        </button>
-        <div class="control-range" v-if="game.modeScale" >
-            <label for="scale-range">{{ __('Scale Ratio') }}</label>
-            <input id="scale-range" class="control-btn"
-                   type="range" :min="game.minRatio" :max="game.maxRatio" step="0.001"
-                   :value="game.scaleRatio" @input="event => game.scale(event.target.value, true)">
-        </div>
-
-        <!-- Move Mode -->
+        <!-- Transform Mode -->
         <button class="control-btn control-position"
-                :class="{'control-active' : game.modeMove}"
-                :title="__('Move Mode')">
-            <span class="material-icons" @click="game.moveMode()">open_with</span>
+                :class="{'control-active' : game.modeTransform}"
+                :title="__('Transform Mode')">
+            <span class="material-icons" @click="game.transformMode()">open_with</span>
         </button>
-        <div class="control-range" v-if="game.modeMove" >
-            <label for="move-top">{{ __('Top') }}</label>
-            <input id="move-top" class="control-btn"
-                   type="range" :min="game.minTop" :max="game.maxTop" step="1"
-                   :value="game.top" @input="event => game.setCanvasTop(event.target.value)">
-        </div>
-        <div class="control-range" v-if="game.modeMove" >
-            <label for="move-left">{{ __('Left') }}</label>
-            <input id="move-left" class="control-btn" style="width: 5em;"
-                   type="range" :min="game.minLeft" :max="game.maxLeft" step="1"
-                   :value="game.left" @input="event => game.setCanvasLeft(event.target.value)">
-        </div>
 
         <!-- Erase Mode -->
         <button v-if="game.isMaster()"  class="control-btn control-erase"
@@ -106,19 +88,24 @@
                 :title="__('Erase Undo Mode')">
             <span class="material-icons" @click="game.eraseUndoMode()">visibility_off</span>
         </button>
-        <div class="control-range" v-if="game.modeErase || game.modeEraseUndo" >
+        <div class="control-more" v-if="game.modeErase || game.modeEraseUndo" >
             <label for="brush-width">{{ __('Brush Width') + ' ' + game.brushWidth }}</label>
-            <input id="brush-width" class="control-btn"
+            <input id="brush-width" class="control-btn control-range"
                    type="range" min="1" max="200" step="1"
                    :value="game.brushWidth" @input="event => game.setBrushWidth(event.target.value)">
         </div>
-        <button v-if="game.modeEraseUndo || game.modeErase || game.modeMove || game.modeScale"
+        <button v-if="game.modeEraseUndo || game.modeErase || game.modeTransform"
                 class="control-btn control-reset" :title="__('Reset')">
             <span class="material-icons" @click="game.resetCanvas()">restore</span>
         </button>
+        <button v-if="game.isMaster() && game.mainTab !== 'Board'"
+                class="control-btn control-markers"
+                :class="{'control-active' : game.modeMarkers}"
+                :title="__('Markers')">
+            <span class="material-icons" @click="game.markersMode()">place</span>
+        </button>
 
-        <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase &&
-                        !game.modeMove && !game.modeScale"
+        <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase && !game.modeTransform"
                 class="control-btn control-save"
                 :class="{'control-active' : game.modeSave}"
                 :disabled="game.modeSave"

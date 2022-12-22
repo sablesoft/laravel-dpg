@@ -24,8 +24,7 @@ onMounted(() => {
                 fullHeight: image.height,
                 fullWidth: image.width
             }, game.canvas);
-            let json = game.canvas ? game.canvas.json : null;
-            if (!json) {
+            if (!game.canvas) {
                 game.fb().setBackgroundImage(image, game.renderAll.bind(game), options);
                 const hero = getHero({
                     left: 70,
@@ -57,7 +56,6 @@ onMounted(() => {
                 }
             });
             game.renderAll();
-            game.setCanvasConfig();
             console.debug('Board mounted', game.fb());
         });
     }, 100);

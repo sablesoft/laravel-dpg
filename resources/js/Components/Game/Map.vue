@@ -13,8 +13,8 @@ onMounted(() => {
         fullHeight: dome.map_height,
         fullWidth: dome.map_width,
     }, dome.canvas);
-    let json = dome.canvas ? dome.canvas.json : null;
-    if (!json) {
+    if (!dome.canvas) {
+        // todo - create from scratch
         game.fb().setBackgroundColor(game.fogColor, undefined);
         game.createAreaFabric(game.activeAreaId);
         setTimeout(function() {
@@ -23,24 +23,19 @@ onMounted(() => {
                 top: 3900
             });
             game.createMarker(83, {
-                left: 3260,
-                top: 4000
+                left: 3298,
+                top: 3941
+            });
+            game.createMarker(98, {
+                left: 3100,
+                top: 3850
             });
         }, 300);
         game.addFog(dome.map_width, dome.map_height);
     }
     setTimeout(function () {
-        game.fb().getObjects().forEach(function(o) {
-            if (o.type === 'area') {
-                o.sendBackwards(true);
-            }
-            if (o.type === 'marker' && game.isMaster()) {
-                o.unlockMovement();
-            }
-        });
         game.renderAll();
         game.freezeFog();
-        game.setCanvasConfig();
         console.debug('Map mounted', game.fb());
     }, 300);
 });

@@ -76,7 +76,16 @@
     }
 </style>
 <template>
-    <div v-if="game.activeCard" class="card shadow-sm sm:rounded-lg">
+    <div v-if="game.modeMarkers" class="card shadow-sm sm:rounded-lg">
+        <div class="card-content">
+            <select v-model="game.selectedCardId" @change="game.selectCard($event)">
+                <option v-for="card in game.cards" :value="card.id">
+                    {{ card.name }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="card shadow-sm sm:rounded-lg">
         <div class="card-content card-name">
             {{ game.activeCard.name }}
         </div>
@@ -94,14 +103,35 @@
         <div class="card-content card-desc">
             {{ game.activeCard.desc }}
         </div>
+        <div v-if="game.modeMarkers && game.selectedCardId" class="card-content card-actions">
+            <button class="control-text" @click="game.addMarker()">{{ __('Add Marker') }}</button>
+        </div>
         <div v-if="game.activeCard.id !== null && game.mainTab === 'Board'" class="card-content card-actions">
             <button class="control-btn control-forward" :title="__('Forward')">
-                <span class="material-icons" @click="game.activeCardForward()">upload</span>
+                <span class="material-icons" @click="game.forward('card')">upload</span>
             </button>
             <button class="control-text" v-if="!game.activeCardTapped" @click="game.activeCardTap()">{{ __('Tap') }}</button>
             <button class="control-text" v-if="game.activeCardTapped" @click="game.activeCardUntap()">{{ __('Untap') }}</button>
             <button class="control-btn control-forward" :title="__('Backward')">
-                <span class="material-icons" @click="game.activeCardBackward()">download</span>
+                <span class="material-icons" @click="game.backward('card')">download</span>
+            </button>
+        </div>
+        <div v-if="game.activeCard.id !== null && game.activeObjectType === 'marker' && !game.modeMarkers"
+             class="card-content card-actions">
+            <button class="control-btn control-forward" :title="__('Forward')">
+                <span class="material-icons" @click="game.forward('marker')">upload</span>
+            </button>
+            <button v-if="game.activeObjectHidden" class="control-btn control-forward" :title="__('Show')">
+                <span class="material-icons" @click="game.opacity('marker')">visibility</span>
+            </button>
+            <button v-if="!game.activeObjectHidden" class="control-btn control-forward" :title="__('Hide')">
+                <span class="material-icons" @click="game.opacity('marker', true)">visibility_off</span>
+            </button>
+            <button class="control-btn control-remove" :title="__('Delete')">
+                <span class="material-icons" @click="game.remove('marker')">delete</span>
+            </button>
+            <button class="control-btn control-forward" :title="__('Backward')">
+                <span class="material-icons" @click="game.backward('marker')">download</span>
             </button>
         </div>
     </div>

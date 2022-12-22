@@ -15,20 +15,23 @@ onMounted(() => {
             fullHeight: image.height,
             fullWidth: image.width
         }, scene.canvas);
-        let json = scene.canvas ? scene.canvas.json : null;
-        if (!json) {
+        if (!scene.canvas) {
             let options = {
                 originX : 'left',
                 originY : 'top',
                 erasable: false,
             };
             game.fb().setBackgroundImage(image, game.renderAll.bind(game), options);
+            game.createMarker(48, {
+                left: image.width / 2 + 200,
+                top: image.height - 900,
+                imageScale: 0.5
+            });
             game.addFog(image.width, image.height);
         }
         setTimeout(function () {
             game.renderAll();
             game.freezeFog();
-            game.setCanvasConfig();
             console.debug('Scene mounted', game.fb());
         }, 300);
     });

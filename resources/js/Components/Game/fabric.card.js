@@ -87,7 +87,6 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             });
         }
         fabric.Image.fromURL(options.back_image, function(back) {
-            back.set('partName', 'back')
             back.set('originX', 'center');
             back.set('originY', 'center');
             self.add(back);
@@ -95,23 +94,21 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             if (self.get('opened')) {
                 back.set('opacity', 0);
             }
-            back.toObject = function() {
-                return fabric.util.object.extend(back.callSuper('toObject'), {
-                    partName: back.get('partName'),
-                });
-            }
         });
     },
 
     flip: function () {
         let opened = this.get('opened');
         this.set('opened', !opened);
-        let item = this._objects[4];
-        console.log(item);
-        item.set('opacity', opened ? 1 : 0);
-        item.bringToFront();
-        this.set('dirty', true);
-        this.canvas && this.canvas.requestRenderAll();
+        let self = this;
+        this.getObjects().forEach(function(o) {
+            if (o.type === 'image' && Number(o.get('scaleX')) === 1) {
+                o.set('opacity', opened ? 1 : 0);
+                o.bringToFront();
+                self.set('dirty', true);
+                self.canvas && self.canvas.requestRenderAll();
+            }
+        });
     },
 
     tap: function (force = false) {

@@ -344,7 +344,6 @@ export const game = shallowReactive({
         return this.role === 'master';
     },
     setActiveBook(id) {
-        this.fb().discardActiveObject();
         let book = this.books[id];
         console.debug('Select Book', book);
         if (!book) {
@@ -364,7 +363,6 @@ export const game = shallowReactive({
      * @return {void}
      */
     setActiveCard(id = null, hidden = false) {
-        this.fb().discardActiveObject();
         console.debug('Select Card', id);
         if (!id) {
             this.activeObjectType = null;
@@ -1011,23 +1009,27 @@ export const game = shallowReactive({
     },
     selectDome(event) {
         this.selectedId = null;
+        this.fb().discardActiveObject();
         let dome = this.domes[event.target.value];
         console.debug('Selected Dome', dome);
         // todo
     },
     selectScene(event) {
         this.selectedId = null;
+        this.fb().discardActiveObject();
         let scene = this.scenes[event.target.value];
         console.debug('Selected Scene', scene);
         // todo
     },
     selectDeck(event) {
         this.selectedId = null;
+        this.fb().discardActiveObject();
         let deck = this.decks[event.target.value];
         console.debug('Selected Deck', deck);
     },
     selectCard(event) {
         this.selectedId = null;
+        this.fb().discardActiveObject();
         this.setActiveCard(event.target.value);
     },
     /**

@@ -61,7 +61,7 @@ onMounted(() => {
 .action-column {
     flex: 4%;
 }
-.info-column {
+.aside-column {
     flex: 24%;
     text-align: center;
 }
@@ -124,7 +124,7 @@ onMounted(() => {
                     <span class="material-icons" @click="game.showScene()">my_location</span>
                 </button>
             </div>
-            <div class="info-column bg-white shadow-sm sm:rounded-lg">
+            <div class="aside-column bg-white shadow-sm sm:rounded-lg">
                 <component :is="asideTabs[game.asideTab]"></component>
             </div>
         </div>

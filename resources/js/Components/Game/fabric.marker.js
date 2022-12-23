@@ -19,7 +19,7 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
         options.lockRotation = true;
         options.erasable = false;
         options.hoverCursor = 'pointer';
-        options.card_id = options.card_id || model.id;
+        options.marker_id = options.marker_id || model.id;
         options.scope_id = options.scope_id || model.scope_id;
         options.imageScale = options.imageScale || this.defaultScale;
         this.callSuper('initialize', [], options);
@@ -53,7 +53,7 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
             scope_id: this.get('scope_id'),
-            card_id: this.get('card_id'),
+            marker_id: this.get('marker_id'),
             imageScale: this.get('imageScale')
         });
     },

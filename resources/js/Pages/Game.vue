@@ -7,6 +7,7 @@ import Map from '@/Components/Game/Map.vue';
 import Scene from '@/Components/Game/Scene.vue';
 
 // aside tabs:
+import Info from '@/Components/Game/Info.vue';
 import Card from '@/Components/Game/Card.vue';
 import Book from '@/Components/Game/Book.vue';
 
@@ -27,6 +28,7 @@ const props = defineProps({
     }
 });
 const asideTabs = {
+    Info,
     Card,
     Book
 }

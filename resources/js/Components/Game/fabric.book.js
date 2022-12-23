@@ -36,6 +36,10 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         }
         this.callSuper('initialize', [], options);
 
+        if (!model) {
+            return;
+        }
+
         this.add(new fabric.Polygon([
             { x: 0, y: 0 },
             { x: options.width - options.depth - 3, y: 0 },

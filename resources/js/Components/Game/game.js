@@ -19,6 +19,17 @@ import './fabric.book';
  */
 
 /**
+ * @typedef {Object} ActiveInfo
+ * @property {?number} id
+ * @property {?string} type
+ * @property {?string} name
+ * @property {?string} scopeName
+ * @property {?string} desc
+ * @property {?string} image
+ * @property {?string} scopeImage
+ */
+
+/**
  * @typedef {Object} ActiveCard
  * @property {?number} id
  * @property {?string} name
@@ -26,7 +37,6 @@ import './fabric.book';
  * @property {?string} desc
  * @property {?string} image
  * @property {?string} scopeImage
- * @property {boolean} tapped
  */
 
 /**
@@ -157,9 +167,17 @@ export const game = shallowReactive({
      */
     id: null,
     /**
-     * @member {?ActiveCard} - game info
+     * @member {?ActiveInfo} - game info
      */
-    info: null,
+    info: {
+        id: null,
+        type: null,
+        name: null,
+        desc: null,
+        image: null,
+        scopeImage: null,
+        scopeName: null
+    },
     /**
      * @member {?string} - user role code
      */
@@ -171,6 +189,22 @@ export const game = shallowReactive({
     activeObjectHidden: false,
     selectedId: null,
     /**
+     * @member {?fabric.Object}
+     */
+    activeObject: null,
+    /**
+     * @member {?ActiveInfo} - mainTab info
+     */
+    activeInfo: {
+        id: null,
+        type: null,
+        name: null,
+        desc: null,
+        image: null,
+        scopeImage: null,
+        scopeName: null
+    },
+    /**
      * State of Card component
      * @member {ActiveCard}
      */
@@ -181,7 +215,6 @@ export const game = shallowReactive({
         image: null,
         scopeImage: null,
         scopeName: null,
-        tapped: false
     },
     /**
      * State of Book component
@@ -300,7 +333,7 @@ export const game = shallowReactive({
     /**
      * @member {string}
      */
-    asideTab: 'Card',
+    asideTab: 'Info',
     /**
      * Screen width
      * @member {?number}
@@ -333,12 +366,11 @@ export const game = shallowReactive({
             this[key] = toRaw(value);
         }
         this.info.id = null;
-        this.info.tapped = false;
-        this.info.isMarker = false;
-        this.activeCard = this.info;
+        this.info.type = 'game';
         this.width = options.width;
         this.height = options.height;
         this.role = options.role;
+        this.showInfo();
     },
     /**
      * @param {?Object.<string, any>} options
@@ -392,8 +424,9 @@ export const game = shallowReactive({
                 this.lastPosX = evt.clientX;
                 this.lastPosY = evt.clientY;
             }
+            // clear aside if no target:
             if (!opt.target) {
-                self.setActiveCard();
+                self.showInfo();
             }
         });
         fc.on('mouse:move', function(opt) {
@@ -459,9 +492,91 @@ export const game = shallowReactive({
     isMaster() {
         return this.role === 'master';
     },
-    setActiveBook(id) {
+    setActiveObject(o = null) {
+        if (!o) {
+            this.activeObject = null;
+            this.activeObjectHidden = null;
+            this.activeObjectType = null;
+            this.fb().discardActiveObject();
+        } else {
+            this.activeObject = o;
+            this.activeObjectHidden = o.get('opacity') < 1;
+            this.activeObjectType = o.type;
+            this.fb().setActiveObject(o);
+        }
+    },
+    showInfo() {
+        this.asideTab = 'Info';
+        if (this.fb()) {
+            this.fb().discardActiveObject();
+        }
+        switch (this.mainTab) {
+            case 'Board':
+                this.activeInfo = this.info;
+                return;
+            case 'Map':
+                let dome = this.activeDome();
+                let domeCard = this.cards[dome.scope_id];
+                this.activeInfo = {
+                    id: dome.id,
+                    type: 'dome',
+                    name: dome.name,
+                    desc: dome.desc,
+                    image: domeCard.image,
+                    scopeImage: domeCard.scopeImage,
+                    scopeName: domeCard.scopeName
+                };
+                return;
+            case 'Scene':
+                let scene = this.activeScene();
+                let sceneCard = this.cards[scene.scope_id];
+                this.activeInfo = {
+                    id: scene.id,
+                    type: 'scene',
+                    name: scene.name,
+                    desc: scene.desc,
+                    image: sceneCard.image,
+                    scopeImage: sceneCard.scopeImage,
+                    scopeName: sceneCard.scopeName
+                };
+                return;
+            default:
+                throw new Error('Invalid main tab: ' + this.mainTab);
+        }
+    },
+    /**
+     * @param {?fabric.Object|number} o
+     * @param {?string} type
+     * @return {void}
+     */
+    showAside(o = null, type = null) {
+        if (!o) {
+            return this.showInfo();
+        }
+        let id = null;
+        if (typeof o === 'object') {
+            type = o.type;
+            let field = type + '_id';
+            id = o[field];
+        } else {
+            id = o;
+        }
+        if (!id || !type) {
+            return this.showInfo();
+        }
+        switch (type) {
+            case 'book':
+                return this.showBook(id);
+            case 'card':
+            case 'marker':
+                return this.showCard(id);
+            default:
+                throw new Error('Unknown object type: ' + type);
+        }
+    },
+    showBook(id) {
         let book = this.books[id];
-        console.debug('Select Book', book);
+        console.debug('Show Book', book);
         if (!book) {
             throw new Error('Book not found: ' + id);
         }
@@ -473,38 +588,81 @@ export const game = shallowReactive({
         };
         this.asideTab = 'Book';
     },
-    /**
-     * @param {?number} id
-     * @param {boolean} hidden
-     * @return {void}
-     */
-    setActiveCard(id = null, hidden = false) {
-        console.debug('Select Card', id);
-        this.asideTab = 'Card';
-        if (!id) {
-            this.activeObjectType = null;
-            switch (this.mainTab) {
-                case 'Board':
-                    this.activeCard = this.info;
-                    this.activeCardTapped = false;
-                    return;
-                case 'Map':
-                    let dome = this.domes[this.activeDomeId];
-                    return this.setActiveCard(dome.scope_id);
-                case 'Scene':
-                    let scene = this.scenes[this.activeSceneId];
-                    return this.setActiveCard(scene.scope_id);
-                default:
-                    throw new Error('Invalid tab type: ' + this.mainTab);
-            }
-        }
-        if (!this.cards[id]) {
+    showCard(id) {
+        let card = this.cards[id];
+        console.debug('Show Card', card);
+        if (!card) {
             throw new Error('Card not found: ' + id);
         }
-        this.activeCard = this.cards[id];
-        this.activeObjectHidden = hidden;
-        this.activeCardTapped = this.activeCard.tapped;
-        console.debug('Active card: ', this.activeCard);
+        this.activeCard = {
+            id: card.id,
+            name: card.name,
+            desc: card.desc,
+            image: card.image,
+            scopeImage: card.scopeImage,
+            scopeName: card.scopeName,
+        };
+        this.asideTab = 'Card';
+    },
+    showBoard() {
+        if (this.mainTab === 'Board') {
+            return;
+        }
+        if (this.modeErase) {
+            this.eraseMode();
+        }
+        if (this.modeEraseUndo) {
+            this.eraseUndoMode();
+        }
+        if (this.modeTransform) {
+            this.transformMode();
+        }
+        if (this.modeMarkers) {
+            this.markersMode();
+        }
+        this.saveCanvas();
+        this.mainTab = 'Board';
+        this.showInfo();
+    },
+    showMap() {
+        if (this.mainTab === 'Map') {
+            return;
+        }
+        if (this.modeErase) {
+            this.eraseMode();
+        }
+        if (this.modeEraseUndo) {
+            this.eraseUndoMode();
+        }
+        if (this.modeTransform) {
+            this.transformMode();
+        }
+        if (this.modeMarkers) {
+            this.markersMode();
+        }
+        this.saveCanvas();
+        this.mainTab = 'Map';
+        this.showInfo();
+    },
+    showScene() {
+        if (this.mainTab === 'Scene') {
+            return;
+        }
+        if (this.modeErase) {
+            this.eraseMode();
+        }
+        if (this.modeEraseUndo) {
+            this.eraseUndoMode();
+        }
+        if (this.modeTransform) {
+            this.transformMode();
+        }
+        if (this.modeMarkers) {
+            this.markersMode();
+        }
+        this.saveCanvas();
+        this.mainTab = 'Scene';
+        this.showInfo();
     },
     activeCardTap() {
         this.activeCard.tapped = this._findObject(this.activeCard.id, 'cards', 'card').tap();
@@ -515,11 +673,16 @@ export const game = shallowReactive({
         this.activeCardTapped = this.activeCard.tapped;
     },
     /**
-     * @param {string} type
-     * @param {boolean} hide
+     * @param {boolean} show
      */
-    opacity(type, hide = false) {
-        this._opacity(this.activeCard.id, 'cards', type, hide);
+    opacity(show = true) {
+        if (!this.activeObject) {
+            throw new Error('Active object not found for opacity!');
+        }
+        this.activeObjectHidden = !show;
+        let opacity = show ? 1 : (this.isMaster() ? this.hideOpacity : 0);
+        this.activeObject.set('opacity', opacity);
+        this.fb().requestRenderAll();
     },
     /**
      * @param {string} type
@@ -537,7 +700,7 @@ export const game = shallowReactive({
         let o = this._findObject(this.activeCard.id, 'cards', type);
         console.debug('Remove object for', this.activeCard.name,  o);
         this.fb().remove(o, this.fb().renderAll.bind(this.fb()));
-        this.setActiveCard();
+        this.showInfo();
     },
     /**
      * @param {number} id
@@ -630,91 +793,38 @@ export const game = shallowReactive({
 
         return this.books[id].book = o;
     },
-    showBoard() {
-        if (this.mainTab === 'Board') {
-            return;
-        }
-        if (this.modeErase) {
-            this.eraseMode();
-        }
-        if (this.modeEraseUndo) {
-            this.eraseUndoMode();
-        }
-        if (this.modeTransform) {
-            this.transformMode();
-        }
-        if (this.modeMarkers) {
-            this.markersMode();
-        }
-        this.saveCanvas();
-        this.mainTab = 'Board';
-        this.setActiveCard();
-    },
-    showMap() {
-        if (this.mainTab === 'Map') {
-            return;
-        }
-        if (this.modeErase) {
-            this.eraseMode();
-        }
-        if (this.modeEraseUndo) {
-            this.eraseUndoMode();
-        }
-        if (this.modeTransform) {
-            this.transformMode();
-        }
-        if (this.modeMarkers) {
-            this.markersMode();
-        }
-        this.saveCanvas();
-        this.mainTab = 'Map';
+    /**
+     * @returns {Dome}
+     */
+    activeDome() {
         let dome = this.domes[this.activeDomeId];
         if (!dome) {
-            throw new Error('Active scene not found!');
+            throw new Error('Active dome not found!')
         }
-        this.setActiveCard(dome.scope_id);
+
+        return dome;
     },
-    showScene() {
-        if (this.mainTab === 'Scene') {
-            return;
+    /**
+     * @returns {GameArea}
+     */
+    activeArea() {
+        let area = this.areas[this.activeAreaId];
+        if (!area) {
+            throw new Error('Active area not found!');
         }
-        if (this.modeErase) {
-            this.eraseMode();
-        }
-        if (this.modeEraseUndo) {
-            this.eraseUndoMode();
-        }
-        if (this.modeTransform) {
-            this.transformMode();
-        }
-        if (this.modeMarkers) {
-            this.markersMode();
-        }
-        this.saveCanvas();
-        this.mainTab = 'Scene';
+
+        return area;
+    },
+    /**
+     * @return {Scene}
+     */
+    activeScene() {
         let scene = this.scenes[this.activeSceneId];
         if (!scene) {
             throw new Error('Active scene not found!');
         }
-        this.setActiveCard(scene.scope_id);
-    },
-    /**
-     * @returns {?Dome}
-     */
-    activeDome() {
-        return this.domes[this.activeDomeId] || null;
-    },
-    /**
-     * @returns {?GameArea}
-     */
-    activeArea() {
-        return this.areas[this.activeAreaId] || null;
-    },
-    /**
-     * @return {?Scene}
-     */
-    activeScene() {
-        return this.scenes[this.activeSceneId] || null;
+
+        return scene;
     },
     transformMode() {
         if (this.modeErase) {
@@ -783,7 +893,7 @@ export const game = shallowReactive({
         }
         this.modeMarkers = !this.modeMarkers;
         this.selectedId = null;
-        this.setActiveCard();
+        this.showInfo();
     },
     addMarker() {
         console.debug('Add marker for: ', this.activeCard.name);
@@ -1034,7 +1144,7 @@ export const game = shallowReactive({
     selectCard(event) {
         this.selectedId = null;
         this.fb().discardActiveObject();
-        this.setActiveCard(event.target.value);
+        this.showCard(event.target.value);
     },
     /**
      * @return {HTMLCollectionOf<HTMLCanvasElement>}
@@ -1114,28 +1224,17 @@ export const game = shallowReactive({
     },
     _selection(event = null) {
         if (this.modeMarkers) {
+            this.setActiveObject();
             return;
         }
         if (!event) {
-            this.setActiveCard();
+            this.setActiveObject();
+            this.showAside();
             return;
         }
         let o = event.selected[0];
-        if (!o) {
-            this.setActiveCard();
-        } else if (o.card_id) {
-            this.activeObjectType = o.type;
-            if (o.type === 'card' && !o.opened) {
-                this.setActiveCard();
-            } else {
-                let hidden = Number(o.get('opacity')) < 1;
-                this.setActiveCard(o.card_id, hidden);
-            }
-        } else if (o.book_id) {
-            this.setActiveBook(o.book_id);
-        } else {
-            this.setActiveCard();
-        }
+        this.setActiveObject(o);
+        this.showAside(o);
     },
     _center() {
         let port = this.fb().calcViewportBoundaries();

@@ -2,13 +2,9 @@
 import { game } from "@/Components/Game/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 import {onMounted} from "vue";
-import {fabric} from "fabric-with-erasing";
 // todo - draw current map with areas and markers
 onMounted(() => {
     let dome = game.activeDome();
-    if (!dome) {
-        throw new Error('Active dome not found!');
-    }
     game.initFabric({
         fullHeight: dome.map_height,
         fullWidth: dome.map_width,

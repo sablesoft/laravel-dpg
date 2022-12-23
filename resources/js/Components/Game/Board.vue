@@ -53,12 +53,12 @@ onMounted(() => {
                         return;
                     }
                     if (event.target.type === 'card') {
-                        let fabricCard = event.target;
-                        fabricCard.flip();
-                        if (fabricCard.opened) {
-                            game.setActiveCard(fabricCard.card_id);
+                        let o = event.target;
+                        o.flip();
+                        if (o.opened) {
+                            game.showAside(o);
                         } else {
-                            game.setActiveCard();
+                            game.showInfo();
                         }
                     }
                 }

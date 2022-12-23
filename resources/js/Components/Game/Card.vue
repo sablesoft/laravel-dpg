@@ -78,7 +78,7 @@
 <template>
     <div v-if="game.modeMarkers" class="card shadow-sm sm:rounded-lg">
         <div class="card-content">
-            <select v-model="game.selectedCardId" @change="game.selectCard($event)">
+            <select v-model="game.selectedId" @change="game.selectCard($event)">
                 <option v-for="card in game.cards" :value="card.id">
                     {{ card.name }}
                 </option>
@@ -103,7 +103,7 @@
         <div class="card-content card-desc">
             {{ game.activeCard.desc }}
         </div>
-        <div v-if="game.modeMarkers && game.selectedCardId" class="card-content card-actions">
+        <div v-if="game.modeMarkers && game.selectedId" class="card-content card-actions">
             <button class="control-text" @click="game.addMarker()">{{ __('Add Marker') }}</button>
         </div>
         <div v-if="game.activeCard.id !== null && game.mainTab === 'Board'" class="card-content card-actions">

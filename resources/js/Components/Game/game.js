@@ -340,6 +340,122 @@ export const game = shallowReactive({
         this.height = options.height;
         this.role = options.role;
     },
+    /**
+     * @param {?Object.<string, any>} options
+     * @param {?Object.<string, any>} config
+     * @return {fabric.Canvas}
+     */
+    initFabric(options = null, config = null) {
+        let canvas = document.getElementsByTagName('canvas')[0];
+        let fc = new fabric.Canvas(canvas);
+        if (config) {
+            fc.loadFromJSON(config, fc.renderAll.bind(fc));
+        }
+        options = options || {};
+        options['preserveObjectStacking'] = true;
+        for (const [key, value] of Object.entries(options)) {
+            fc[key] = value;
+        }
+        let self = this;
+        setTimeout(function() {
+            fc.getObjects().forEach(function(o) {
+                if (o.type === 'area') {
+                    o.sendBackwards(true);
+                }
+                if (o.type === 'marker' && self.isMaster()) {
+                    o.unlockMovement();
+                }
+            });
+        }, 500);
+        let name = 'fabric' + this.mainTab;
+        this[name] = fc;
+        fc.on({
+            'selection:created': function(event) {
+                self._selection(event);
+                console.debug('selection:created', event);
+            },
+            'selection:updated': function(event) {
+                self._selection(event);
+                console.debug('selection:updated', event);
+            },
+            'selection:cleared': function(event) {
+                self._selection();
+                console.log('selection:cleared', event);
+            },
+        });
+        fc.on('mouse:down', function(opt) {
+            // console.debug('mouse:down', opt);
+            let evt = opt.e;
+            if (self.modeTransform === true) {
+                this.isDragging = true;
+                this.selection = false;
+                this.lastPosX = evt.clientX;
+                this.lastPosY = evt.clientY;
+            }
+            if (!opt.target) {
+                self.setActiveCard();
+            }
+        });
+        fc.on('mouse:move', function(opt) {
+            // console.debug('mouse:move', opt);
+            if (this.isDragging) {
+                let e = opt.e;
+                let vpt = this.viewportTransform;
+                vpt[4] += e.clientX - this.lastPosX;
+                vpt[5] += e.clientY - this.lastPosY;
+                this.requestRenderAll();
+                this.lastPosX = e.clientX;
+                this.lastPosY = e.clientY;
+            }
+            let target = opt.target;
+            if (!target) {
+                self.cursorName = null;
+                self.cursorScope = null;
+                return;
+            }
+            if (target.card_id) {
+                let card = self.cards[target.card_id];
+                self.cursorName = card.name;
+                self.cursorScope = card.scopeName;
+            } else if (target.book_id) {
+                let book = self.books[target.book_id];
+                self.cursorName = book.name;
+                self.cursorScope = 'Book'; // todo - add translate
+            }
+        });
+        fc.on('mouse:up', function(opt) {
+            // console.debug('mouse:up', opt);
+            this.setViewportTransform(this.viewportTransform);
+            this.isDragging = false;
+            this.selection = true;
+        });
+        fc.on('mouse:wheel', function(opt) {
+            // console.debug('mouse:wheel', opt);
+            if (self.modeTransform) {
+                let delta = opt.e.deltaY;
+                if (self.activeObjectType === 'marker') {
+                    let o = self._findObject(self.activeCard.id, 'cards', 'marker');
+                    let scale = o.get('scaleX');
+                    scale *= 0.999 ** delta;
+                    if (scale > 20) scale = 20;
+                    if (scale < 0.01) scale = 0.01;
+                    o.scale(scale);
+                    fc.requestRenderAll();
+                    console.debug('scale marker', o);
+                } else {
+                    let zoom = fc.getZoom();
+                    zoom *= 0.999 ** delta;
+                    if (zoom > 20) zoom = 20;
+                    if (zoom < 0.01) zoom = 0.01;
+                    fc.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+                }
+                opt.e.preventDefault();
+                opt.e.stopPropagation();
+            }
+        });
+
+        return fc;
+    },
     isMaster() {
         return this.role === 'master';
     },
@@ -364,6 +480,7 @@ export const game = shallowReactive({
      */
     setActiveCard(id = null, hidden = false) {
         console.debug('Select Card', id);
+        this.asideTab = 'Card';
         if (!id) {
             this.activeObjectType = null;
             switch (this.mainTab) {
@@ -387,7 +504,6 @@ export const game = shallowReactive({
         this.activeCard = this.cards[id];
         this.activeObjectHidden = hidden;
         this.activeCardTapped = this.activeCard.tapped;
-        this.asideTab = 'Card';
         console.debug('Active card: ', this.activeCard);
     },
     activeCardTap() {
@@ -730,119 +846,6 @@ export const game = shallowReactive({
         }
     },
     /**
-     * @param {?Object.<string, any>} options
-     * @param {?Object.<string, any>} config
-     * @return {fabric.Canvas}
-     */
-    initFabric(options = null, config = null) {
-        let canvas = document.getElementsByTagName('canvas')[0];
-        let fc = new fabric.Canvas(canvas);
-        if (config) {
-            fc.loadFromJSON(config, fc.renderAll.bind(fc));
-        }
-        options = options || {};
-        options['preserveObjectStacking'] = true;
-        for (const [key, value] of Object.entries(options)) {
-            fc[key] = value;
-        }
-        let self = this;
-        setTimeout(function() {
-            fc.getObjects().forEach(function(o) {
-                if (o.type === 'area') {
-                    o.sendBackwards(true);
-                }
-                if (o.type === 'marker' && self.isMaster()) {
-                    o.unlockMovement();
-                }
-            });
-        }, 500);
-        let name = 'fabric' + this.mainTab;
-        this[name] = fc;
-        fc.on({
-            'selection:created': function(event) {
-                self._selection(event);
-                console.debug('selection:created', event);
-            },
-            'selection:updated': function(event) {
-                self._selection(event);
-                console.debug('selection:updated', event);
-            },
-            'selection:cleared': function(event) {
-                self._selection();
-                console.log('selection:cleared', event);
-            },
-        });
-        fc.on('mouse:down', function(opt) {
-            // console.debug('mouse:down', opt);
-            let evt = opt.e;
-            if (self.modeTransform === true) {
-                this.isDragging = true;
-                this.selection = false;
-                this.lastPosX = evt.clientX;
-                this.lastPosY = evt.clientY;
-            }
-        });
-        fc.on('mouse:move', function(opt) {
-            // console.debug('mouse:move', opt);
-            if (this.isDragging) {
-                let e = opt.e;
-                let vpt = this.viewportTransform;
-                vpt[4] += e.clientX - this.lastPosX;
-                vpt[5] += e.clientY - this.lastPosY;
-                this.requestRenderAll();
-                this.lastPosX = e.clientX;
-                this.lastPosY = e.clientY;
-            }
-            let target = opt.target;
-            if (!target) {
-                self.cursorName = null;
-                self.cursorScope = null;
-                return;
-            }
-            if (target.card_id) {
-                let card = self.cards[target.card_id];
-                self.cursorName = card.name;
-                self.cursorScope = card.scopeName;
-            } else if (target.book_id) {
-                let book = self.books[target.book_id];
-                self.cursorName = book.name;
-                self.cursorScope = 'Book'; // todo - add translate
-            }
-        });
-        fc.on('mouse:up', function(opt) {
-            // console.debug('mouse:up', opt);
-            this.setViewportTransform(this.viewportTransform);
-            this.isDragging = false;
-            this.selection = true;
-        });
-        fc.on('mouse:wheel', function(opt) {
-            // console.debug('mouse:wheel', opt);
-            if (self.modeTransform) {
-                let delta = opt.e.deltaY;
-                if (self.activeObjectType === 'marker') {
-                    let o = self._findObject(self.activeCard.id, 'cards', 'marker');
-                    let scale = o.get('scaleX');
-                    scale *= 0.999 ** delta;
-                    if (scale > 20) scale = 20;
-                    if (scale < 0.01) scale = 0.01;
-                    o.scale(scale);
-                    fc.requestRenderAll();
-                    console.debug('scale marker', o);
-                } else {
-                    let zoom = fc.getZoom();
-                    zoom *= 0.999 ** delta;
-                    if (zoom > 20) zoom = 20;
-                    if (zoom < 0.01) zoom = 0.01;
-                    fc.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
-                }
-                opt.e.preventDefault();
-                opt.e.stopPropagation();
-            }
-        });
-
-        return fc;
-    },
-    /**
      * @returns {?fabric.Canvas}
      */
     fb() {
@@ -1026,6 +1029,7 @@ export const game = shallowReactive({
         this.fb().discardActiveObject();
         let deck = this.decks[event.target.value];
         console.debug('Selected Deck', deck);
+        // todo
     },
     selectCard(event) {
         this.selectedId = null;

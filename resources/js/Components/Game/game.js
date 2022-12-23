@@ -401,19 +401,19 @@ export const game = shallowReactive({
         }, 500);
         let name = 'fb' + this.mainTab;
         this[name] = fb;
-        fb.on('selection:created', opt => {
+        fb.on('selection:created', function(opt) {
             // console.debug('selection:created', opt);
             self._selection(opt);
         });
-        fb.on('selection:updated', opt => {
+        fb.on('selection:updated', function(opt) {
             // console.debug('selection:updated', opt);
             self._selection(opt);
         });
-        fb.on('selection:cleared', () => {
+        fb.on('selection:cleared', function() {
             // console.debug('selection:cleared', opt);
             self._selection();
         });
-        fb.on('mouse:down', opt => {
+        fb.on('mouse:down', function(opt) {
             // console.debug('mouse:down', opt);
             let evt = opt.e;
             if (self.modeTransform === true) {
@@ -427,7 +427,7 @@ export const game = shallowReactive({
                 self.showInfo();
             }
         });
-        fb.on('mouse:move', opt => {
+        fb.on('mouse:move', function(opt) {
             // console.debug('mouse:move', opt);
             if (this.isDragging) {
                 let e = opt.e;
@@ -440,17 +440,17 @@ export const game = shallowReactive({
             }
             self._cursor(opt.target);
         });
-        fb.on('mouse:out', () => {
+        fb.on('mouse:out', function() {
             // console.debug('mouse:out', opt);
             self._cursor();
         });
-        fb.on('mouse:up', () => {
-            // console.debug('mouse:up', opt);
+        fb.on('mouse:up', function() {
+            console.debug('mouse:up', this);
             this.setViewportTransform(this.viewportTransform);
             this.isDragging = false;
             this.selection = true;
         });
-        fb.on('mouse:wheel', opt => {
+        fb.on('mouse:wheel', function(opt) {
             // console.debug('mouse:wheel', opt);
             if (self.modeTransform) {
                 let delta = opt.e.deltaY;

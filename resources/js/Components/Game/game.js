@@ -156,8 +156,8 @@ export const game = shallowReactive({
      * @member {?string} - user role code
      */
     role: null,
-    cursorCardName: null,
-    cursorCardScope: null,
+    cursorName: null,
+    cursorScope: null,
     activeCardTapped: false,
     activeObjectType: null,
     activeObjectHidden: false,
@@ -760,14 +760,20 @@ export const game = shallowReactive({
                 this.lastPosY = e.clientY;
             }
             let target = opt.target;
-            if (!target || !target.card_id) {
-                self.cursorCardName = null;
-                self.cursorCardScope = null;
+            if (!target) {
+                self.cursorName = null;
+                self.cursorScope = null;
                 return;
             }
-            let card = self.cards[target.card_id];
-            self.cursorCardName = card.name;
-            self.cursorCardScope = card.scopeName;
+            if (target.card_id) {
+                let card = self.cards[target.card_id];
+                self.cursorName = card.name;
+                self.cursorScope = card.scopeName;
+            } else if (target.book_id) {
+                let book = self.books[target.book_id];
+                self.cursorName = book.name;
+                self.cursorScope = 'Book'; // todo - add translate
+            }
         });
         fc.on('mouse:up', function(opt) {
             // console.debug('mouse:up', opt);

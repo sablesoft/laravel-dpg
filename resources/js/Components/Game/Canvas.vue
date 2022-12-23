@@ -114,8 +114,8 @@
         </button>
     </div>
     <div class="info-wrap">
-        <p v-if="game.cursorCardName">
-            <span v-if="game.cursorCardScope">{{ game.cursorCardScope }} : </span>{{ game.cursorCardName }}
+        <p v-if="game.cursorName">
+            <span v-if="game.cursorScope">{{ game.cursorScope }} : </span>{{ game.cursorName }}
         </p>
     </div>
 </template>

@@ -109,19 +109,19 @@ onMounted(() => {
                         class="control-btn control-board"
                         :disabled="game.mainTab === 'Board'"
                         :title="__('Board')">
-                    <span class="material-icons" @click="game.showBoard()">local_library</span>
+                    <span class="material-icons" @click="game.showMain('Board')">local_library</span>
                 </button>
                 <button v-if="game.mainTab !== 'Map' && game.activeDomeId"
                         class="control-btn control-map"
                         :disabled="game.mainTab === 'Map'"
                         :title="__('Map')">
-                    <span class="material-icons" @click="game.showMap()">map</span>
+                    <span class="material-icons" @click="game.showMain('Map')">map</span>
                 </button>
                 <button v-if="game.mainTab !== 'Scene' && game.activeSceneId"
                         class="control-btn control-scene"
                         :disabled="game.mainTab === 'Scene'"
                         :title="__('Scene')">
-                    <span class="material-icons" @click="game.showScene()">my_location</span>
+                    <span class="material-icons" @click="game.showMain('Scene')">my_location</span>
                 </button>
             </div>
             <div class="aside-column bg-white shadow-sm sm:rounded-lg">

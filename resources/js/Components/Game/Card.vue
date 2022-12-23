@@ -48,10 +48,10 @@
                 <span class="material-icons" @click="game.forward('marker')">upload</span>
             </button>
             <button v-if="game.activeObjectHidden" class="control-btn control-forward" :title="__('Show')">
-                <span class="material-icons" @click="game.opacity('marker')">visibility</span>
+                <span class="material-icons" @click="game.opacity()">visibility</span>
             </button>
             <button v-if="!game.activeObjectHidden" class="control-btn control-forward" :title="__('Hide')">
-                <span class="material-icons" @click="game.opacity('marker', true)">visibility_off</span>
+                <span class="material-icons" @click="game.opacity(false)">visibility_off</span>
             </button>
             <button class="control-btn control-remove" :title="__('Delete')">
                 <span class="material-icons" @click="game.remove('marker')">delete</span>

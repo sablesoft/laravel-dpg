@@ -27,7 +27,7 @@ onMounted(() => {
                 top: 3850
             });
         }, 300);
-        game.addFog(dome.map_width, dome.map_height);
+        game.createFog(dome.map_width, dome.map_height);
     }
     setTimeout(function () {
         game.renderAll();

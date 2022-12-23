@@ -27,7 +27,7 @@ onMounted(() => {
                 top: image.height - 900,
                 imageScale: 0.5
             });
-            game.addFog(image.width, image.height);
+            game.createFog(image.width, image.height);
         }
         setTimeout(function () {
             game.renderAll();

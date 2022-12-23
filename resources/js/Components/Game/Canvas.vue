@@ -74,19 +74,19 @@
         <button class="control-btn control-position"
                 :class="{'control-active' : game.modeTransform}"
                 :title="__('Transform Mode')">
-            <span class="material-icons" @click="game.transformMode()">open_with</span>
+            <span class="material-icons" @click="game.switchTransform()">open_with</span>
         </button>
 
         <!-- Erase Mode -->
         <button v-if="game.isMaster()"  class="control-btn control-erase"
                 :class="{'control-active' : game.modeErase}"
                 :title="__('Erase Mode')">
-            <span class="material-icons" @click="game.eraseMode()">visibility</span>
+            <span class="material-icons" @click="game.switchErase()">visibility</span>
         </button>
         <button v-if="game.isMaster()"  class="control-btn control-erase-undo"
                 :class="{'control-active' : game.modeEraseUndo}"
                 :title="__('Erase Undo Mode')">
-            <span class="material-icons" @click="game.eraseUndoMode()">visibility_off</span>
+            <span class="material-icons" @click="game.switchEraseUndo()">visibility_off</span>
         </button>
         <div class="control-more" v-if="game.modeErase || game.modeEraseUndo" >
             <label for="brush-width">{{ __('Brush Width') + ' ' + game.brushWidth }}</label>
@@ -102,7 +102,7 @@
                 class="control-btn control-markers"
                 :class="{'control-active' : game.modeMarkers}"
                 :title="__('Markers')">
-            <span class="material-icons" @click="game.markersMode()">place</span>
+            <span class="material-icons" @click="game.switchMarkers()">place</span>
         </button>
 
         <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase && !game.modeTransform"

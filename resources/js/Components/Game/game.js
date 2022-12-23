@@ -317,15 +317,15 @@ export const game = shallowReactive({
     /**
      * @member {?fabric.Canvas}
      */
-    fabricBoard: null,
+    fbBoard: null,
     /**
      * @member {?fabric.Canvas}
      */
-    fabricMap: null,
+    fbMap: null,
     /**
      * @member {?fabric.Canvas}
      */
-    fabricScene: null,
+    fbScene: null,
     /**
      * @member {string}
      */
@@ -399,7 +399,7 @@ export const game = shallowReactive({
                 }
             });
         }, 500);
-        let name = 'fabric' + this.mainTab;
+        let name = 'fb' + this.mainTab;
         this[name] = fc;
         fc.on({
             'selection:created': function(event) {
@@ -440,23 +440,9 @@ export const game = shallowReactive({
                 this.lastPosX = e.clientX;
                 this.lastPosY = e.clientY;
             }
-            let target = opt.target;
-            if (!target) {
-                self.cursorName = null;
-                self.cursorScope = null;
-                return;
-            }
-            if (target.card_id) {
-                let card = self.cards[target.card_id];
-                self.cursorName = card.name;
-                self.cursorScope = card.scopeName;
-            } else if (target.book_id) {
-                let book = self.books[target.book_id];
-                self.cursorName = book.name;
-                self.cursorScope = 'Book'; // todo - add translate
-            }
+            self._cursor(opt.target);
         });
-        fc.on('mouse:up', function(opt) {
+        fc.on('mouse:up', function() {
             // console.debug('mouse:up', opt);
             this.setViewportTransform(this.viewportTransform);
             this.isDragging = false;
@@ -504,6 +490,10 @@ export const game = shallowReactive({
             this.activeObjectType = o.type;
             this.fb().setActiveObject(o);
         }
+        console.debug('Active Object', o, {
+            hidden: this.activeObjectHidden,
+            type: this.activeObjectType
+        });
     },
     showInfo() {
         this.asideTab = 'Info';
@@ -543,6 +533,18 @@ export const game = shallowReactive({
             default:
                 throw new Error('Invalid main tab: ' + this.mainTab);
         }
+    },
+    /**
+     * @param {string} tab
+     */
+    showMain(tab) {
+        if (this.mainTab === tab) {
+            return;
+        }
+        this._offModes();
+        this.saveCanvas();
+        this.mainTab = tab;
+        this.showInfo();
     },
     /**
      * @param {?fabric.Object|number} o
@@ -604,66 +606,6 @@ export const game = shallowReactive({
         };
         this.asideTab = 'Card';
     },
-    showBoard() {
-        if (this.mainTab === 'Board') {
-            return;
-        }
-        if (this.modeErase) {
-            this.eraseMode();
-        }
-        if (this.modeEraseUndo) {
-            this.eraseUndoMode();
-        }
-        if (this.modeTransform) {
-            this.transformMode();
-        }
-        if (this.modeMarkers) {
-            this.markersMode();
-        }
-        this.saveCanvas();
-        this.mainTab = 'Board';
-        this.showInfo();
-    },
-    showMap() {
-        if (this.mainTab === 'Map') {
-            return;
-        }
-        if (this.modeErase) {
-            this.eraseMode();
-        }
-        if (this.modeEraseUndo) {
-            this.eraseUndoMode();
-        }
-        if (this.modeTransform) {
-            this.transformMode();
-        }
-        if (this.modeMarkers) {
-            this.markersMode();
-        }
-        this.saveCanvas();
-        this.mainTab = 'Map';
-        this.showInfo();
-    },
-    showScene() {
-        if (this.mainTab === 'Scene') {
-            return;
-        }
-        if (this.modeErase) {
-            this.eraseMode();
-        }
-        if (this.modeEraseUndo) {
-            this.eraseUndoMode();
-        }
-        if (this.modeTransform) {
-            this.transformMode();
-        }
-        if (this.modeMarkers) {
-            this.markersMode();
-        }
-        this.saveCanvas();
-        this.mainTab = 'Scene';
-        this.showInfo();
-    },
     activeCardTap() {
         this.activeCard.tapped = this._findObject(this.activeCard.id, 'cards', 'card').tap();
         this.activeCardTapped = this.activeCard.tapped;
@@ -682,7 +624,7 @@ export const game = shallowReactive({
         this.activeObjectHidden = !show;
         let opacity = show ? 1 : (this.isMaster() ? this.hideOpacity : 0);
         this.activeObject.set('opacity', opacity);
-        this.fb().requestRenderAll();
+        this.fb().renderAll();
     },
     /**
      * @param {string} type
@@ -793,6 +735,24 @@ export const game = shallowReactive({
 
         return this.books[id].book = o;
     },
+    createFog(width, height) {
+        let self = this;
+        setTimeout(function() {
+            console.debug('Add fog');
+            let fog = new fabric.Rect({
+                originX: 'left',
+                originY: 'top',
+                fill: 'white',
+                width: width,
+                height: height,
+                stroke: null,
+                evented: false,
+                opacity: self.isMaster() ? 0.5 : 1,
+            });
+            self.fb().add(fog);
+            self.freezeFog();
+        }, 1000);
+    },
     /**
      * @returns {Dome}
      */
@@ -826,28 +786,12 @@ export const game = shallowReactive({
 
         return scene;
     },
-    transformMode() {
-        if (this.modeErase) {
-            this.eraseMode();
-        }
-        if (this.modeEraseUndo) {
-            this.eraseUndoMode();
-        }
-        if (this.modeMarkers) {
-            this.markersMode();
-        }
+    switchTransform() {
+        this._offModes('Transform');
         this.modeTransform = !this.modeTransform;
     },
-    eraseMode() {
-        if (this.modeTransform) {
-            this.transformMode();
-        }
-        if (this.modeEraseUndo) {
-            this.eraseUndoMode();
-        }
-        if (this.modeMarkers) {
-            this.markersMode();
-        }
+    switchErase() {
+        this._offModes('Erase');
         this.modeErase = !this.modeErase;
         let canvas = this.fb();
         if (this.modeErase) {
@@ -858,16 +802,8 @@ export const game = shallowReactive({
             canvas.isDrawingMode = false;
         }
     },
-    eraseUndoMode() {
-        if (this.modeTransform) {
-            this.transformMode();
-        }
-        if (this.modeErase) {
-            this.eraseMode();
-        }
-        if (this.modeMarkers) {
-            this.markersMode();
-        }
+    switchEraseUndo() {
+        this._offModes('EraseUndo');
         this.modeEraseUndo = !this.modeEraseUndo;
         let canvas = this.fb();
         if (this.modeEraseUndo) {
@@ -875,22 +811,14 @@ export const game = shallowReactive({
             this.setBrushWidth();
             canvas.freeDrawingBrush.inverted = true;
             canvas.isDrawingMode = true;
-            this.setFogOpacity(1);
+            this.opacityFog();
         } else {
             canvas.isDrawingMode = false;
-            this.setFogOpacity(0.5);
+            this.opacityFog(false);
         }
     },
-    markersMode() {
-        if (this.modeTransform) {
-            this.transformMode();
-        }
-        if (this.modeErase) {
-            this.eraseMode();
-        }
-        if (this.modeEraseUndo) {
-            this.eraseUndoMode();
-        }
+    switchMarkers() {
+        this._offModes('Markers');
         this.modeMarkers = !this.modeMarkers;
         this.selectedId = null;
         this.showInfo();
@@ -935,7 +863,7 @@ export const game = shallowReactive({
         if (this.isMaster()) {
             let self = this;
             axios.patch('/game', data)
-                .then(res => {
+                .then(() => {
                     self.modeSave = false;
                 }).catch(err => {
                     self.modeSave = false;
@@ -959,7 +887,7 @@ export const game = shallowReactive({
      * @returns {?fabric.Canvas}
      */
     fb() {
-        let fabricName = 'fabric' + this.mainTab;
+        let fabricName = 'fb' + this.mainTab;
         return this[fabricName] || null;
     },
     renderAll() {
@@ -1084,30 +1012,15 @@ export const game = shallowReactive({
 
         return filtered;
     },
-    addFog(width, height) {
-        let self = this;
-        setTimeout(function() {
-            console.debug('Add fog');
-            let fog = new fabric.Rect({
-                originX: 'left',
-                originY: 'top',
-                fill: 'white',
-                width: width,
-                height: height,
-                stroke: null,
-                evented: false,
-                opacity: self.isMaster() ? 0.5 : 1,
-            });
-            self.fb().add(fog);
-            self.freezeFog();
-        }, 1000);
-    },
-    setFogOpacity(value) {
-        this.fb().getObjects().forEach(function(o) {
-            if (o.type === 'rect') {
-                o.set('opacity', value);
-            }
-        });
+    opacityFog(show = true) {
+        let fog = this._fog();
+        if (!fog) {
+            return;
+        }
+        let o = this.activeObject;
+        this.activeObject = fog;
+        this.opacity(show);
+        this.activeObject = o;
     },
     /**
      * @param {?number} width
@@ -1206,22 +1119,6 @@ export const game = shallowReactive({
         this._findObject(id, entity, type).sendBackwards(true);
         this.fb().renderAll();
     },
-    /**
-     * @param {number} id
-     * @param {string} entity
-     * @param {string} type
-     * @param {boolean} hide
-     * @private
-     */
-    _opacity(id, entity, type, hide = false) {
-        let opacity = 1;
-        if (hide) {
-            opacity = this.isMaster() ? this.hideOpacity : 0;
-        }
-        this._findObject(id, entity, type).set('opacity', opacity);
-        this.fb().requestRenderAll();
-        this.activeObjectHidden = hide;
-    },
     _selection(event = null) {
         if (this.modeMarkers) {
             this.setActiveObject();
@@ -1242,5 +1139,52 @@ export const game = shallowReactive({
             x: parseInt(port.tl.x + (port.br.x - port.tl.x)/2),
             y: parseInt(port.tl.y + (port.br.y - port.tl.y)/2)
         }
+    },
+    /**
+     * @param {?fabric.Object} o
+     * @private
+     */
+    _cursor(o = null) {
+        if (!o) {
+            this.cursorName = null;
+            this.cursorScope = null;
+            return;
+        }
+        if (o.get('card_id')) {
+            let card = this.cards[o.get('card_id')];
+            this.cursorName = card.name;
+            this.cursorScope = card.scopeName;
+        }
+        if (o.get('marker_id')) {
+            let card = this.cards[o.get('marker_id')];
+            this.cursorName = card.name;
+            this.cursorScope = card.scopeName;
+        }
+        if (o.get('book_id')) {
+            let book = this.books[o.get('book_id')];
+            this.cursorName = book.name;
+            this.cursorScope = 'Book';
+        }
+    },
+    _fog() {
+        return this.fb().getObjects('rect')[0]; // todo - create fog object
+    },
+    /**
+     * @param {?string} skip
+     * @private
+     */
+    _offModes(skip = null) {
+        let modes = ['Erase', 'EraseUndo', 'Markers', 'Transform'];
+        modes = modes.filter(function(mode) {
+            return mode !== skip;
+        });
+        let self = this;
+        modes.forEach(function(mode) {
+           let modeFlag = 'mode' + mode;
+           let modeSwitcher = 'switch' + mode;
+           if (self[modeFlag]) {
+               self[modeSwitcher]();
+           }
+        });
     }
 });

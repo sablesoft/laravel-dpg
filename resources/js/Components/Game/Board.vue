@@ -26,14 +26,22 @@ onMounted(() => {
             }, game.canvas);
             if (!game.canvas) {
                 game.fb().setBackgroundImage(image, game.renderAll.bind(game), options);
+                game.createBookFabric(1, {
+                    left: 30,
+                    top: 70
+                });
+                game.createBookFabric(2, {
+                    left: 170,
+                    top: 70
+                });
                 const hero = getHero({
                     left: 70,
-                    top: 530,
+                    top: 630,
                     opened: true
                 });
                 game.createCardFabric(hero.scope_id, {
                     left: 40,
-                    top: 530,
+                    top: 630,
                     opened: true,
                     tapped: true
                 });

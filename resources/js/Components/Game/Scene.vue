@@ -22,7 +22,7 @@ onMounted(() => {
                 erasable: false,
             };
             game.fb().setBackgroundImage(image, game.renderAll.bind(game), options);
-            game.createMarker(48, {
+            game.createMarkerFabric(48, {
                 left: image.width / 2 + 200,
                 top: image.height - 900,
                 imageScale: 0.5

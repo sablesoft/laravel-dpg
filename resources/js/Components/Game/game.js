@@ -3,6 +3,7 @@ import {fabric} from "fabric-with-erasing";
 import './fabric.card';
 import './fabric.area';
 import './fabric.marker';
+import './fabric.book';
 
 /**
  * @typedef {Object} CanvasConfig
@@ -70,6 +71,7 @@ import './fabric.marker';
  * @property {number[]} card_ids
  * @property {number[]} deck_ids
  * @property {number[]} source_ids
+ * @property {?fabric.Book} book
  */
 
 /**
@@ -125,8 +127,7 @@ import './fabric.marker';
  * @property {number[]} card_ids
  * @property {number[]} deck_ids
  * @property {number[]} source_ids
- * @property {?fabric.Card} card
- * @property {?fabric.Marker} marker
+ * @property {?fabric.Area} area
  */
 
 /**
@@ -406,7 +407,7 @@ export const game = shallowReactive({
             this.fb().requestRenderAll();
         }
 
-        return this.cards[id].cardObject = o;
+        return this.cards[id].card = o;
     },
     /**
      * @param {number} id
@@ -437,15 +438,15 @@ export const game = shallowReactive({
             this.fb().requestRenderAll();
         }
 
-        return this.areas[id].cardObject = o;
+        return this.areas[id].area = o;
     },
     /**
-     * @param id
-     * @param options
-     * @param add
+     * @param {number} id
+     * @param {?Object.<string, any>} options
+     * @param {?boolean} add
      * @return {fabric.Marker}
      */
-    createMarker(id, options = null, add = true) {
+    createMarkerFabric(id, options = null, add = true) {
         if (!this.cards[id]) {
             throw new Error('Card not found: ' + id);
         }
@@ -455,7 +456,29 @@ export const game = shallowReactive({
             this.fb().requestRenderAll();
         }
 
-        return o;
+        return this.cards[id].marker = o;
+    },
+    /**
+     * @param {number} id
+     * @param {?Object.<string, any>} options
+     * @param {?boolean} add
+     * @return {fabric.Book}
+     */
+    createBookFabric(id, options = null, add = true) {
+        if (!this.books[id]) {
+            throw new Error('Card not found: ' + id);
+        }
+        options = options || {};
+        options.back_image = options.back_image || this.cardsBack;
+        options.scopeName = 'Book'; // todo - add dictionary from backend
+        let o = new fabric.Book(toRaw(this.books[id]), options);
+        if (add) {
+            this.fb().add(o);
+            this.fb().requestRenderAll();
+        }
+        console.debug('Book object', o);
+
+        return this.books[id].book = o;
     },
     showBoard() {
         if (this.mainTab === 'Board') {
@@ -615,7 +638,7 @@ export const game = shallowReactive({
     addMarker() {
         console.debug('Add marker for: ', this.activeCard.name);
         let center = this._center();
-        let o = this.createMarker(this.selectedCardId, {
+        let o = this.createMarkerFabric(this.selectedCardId, {
             left: center.x,
             top: center.y
         });

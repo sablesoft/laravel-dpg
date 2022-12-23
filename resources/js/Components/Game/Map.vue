@@ -18,15 +18,15 @@ onMounted(() => {
         game.fb().setBackgroundColor(game.fogColor, undefined);
         game.createAreaFabric(game.activeAreaId);
         setTimeout(function() {
-            game.createMarker(80, {
+            game.createMarkerFabric(80, {
                 left: 3160,
                 top: 3900
             });
-            game.createMarker(83, {
+            game.createMarkerFabric(83, {
                 left: 3298,
                 top: 3941
             });
-            game.createMarker(98, {
+            game.createMarkerFabric(98, {
                 left: 3100,
                 top: 3850
             });

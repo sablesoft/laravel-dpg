@@ -1,4 +1,5 @@
 import { fabric } from 'fabric-with-erasing';
+import { game } from "@/Components/Game/game";
 
 fabric.Card = fabric.util.createClass(fabric.Group, {
 
@@ -7,6 +8,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
     defaultRatio: 1.4,
     defaultOpened: false,
     defaultTapped: false,
+    isMaster: false,
 
     /**
      * @param {GameCard} model
@@ -44,6 +46,8 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         if (this.get('tapped')) {
             this.tap(true);
         }
+
+        this.isMaster = game.isMaster();
 
         if (!model) {
             return;
@@ -98,6 +102,10 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
     },
 
     flip: function () {
+        if (!this.isMaster) {
+            console.log('Flip cards can only master!');
+            return;
+        }
         let opened = this.get('opened');
         this.set('opened', !opened);
         let self = this;

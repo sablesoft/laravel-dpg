@@ -25,26 +25,18 @@ use App\Models\Process\SceneProcess;
 class GameController extends Controller
 {
     /**
+     * @param Request $request
      * @param GameProcess $process
      * @return Response
      * @throws Exception
      */
-    public function process(GameProcess $process): Response
+    public function process(Request $request, GameProcess $process): Response
     {
-        $game = $process->getGame();
-        /** @var User|null $subscriber */
-        if (!$subscriber = $game->subscribers()->where('subscriber_id', Auth::id())->first()) {
-            if ($game->owner_id !== Auth::id()) {
-                throw new Exception(__('Unknown game user!'));
-            }
-            $role = GameSubscribe::Master->code();
-        } else {
-            $role = GameSubscribe::from($subscriber->pivot->type)->code();
-        }
 
         return Inertia::render('Game', [
             'data' => $process,
-            'role' => $role
+            // todo - remove role test:
+            'role' => $request->query('role') ?: $this->_role($process->getGame())
         ]);
     }
 
@@ -110,6 +102,24 @@ class GameController extends Controller
         }
 
         return $process;
+    }
+
+    /**
+     * @param Game $game
+     * @return string
+     * @throws Exception
+     */
+    protected function _role(Game $game): string
+    {
+        /** @var User|null $subscriber */
+        if (!$subscriber = $game->subscribers()->where('subscriber_id', Auth::id())->first()) {
+            if ($game->owner_id !== Auth::id()) {
+                throw new Exception(__('Unknown game user!'));
+            }
+            return GameSubscribe::Master->code();
+        }
+
+        return GameSubscribe::from($subscriber->pivot->type)->code();
     }
 
     /**

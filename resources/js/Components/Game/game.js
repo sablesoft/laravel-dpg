@@ -413,6 +413,30 @@ export const game = shallowReactive({
             // console.debug('selection:cleared', opt);
             self._selection();
         });
+        fb.on('mouse:wheel', function(opt) {
+            // console.debug('mouse:wheel', opt);
+            if (self.modeTransform) {
+                let delta = opt.e.deltaY;
+                if (self.activeObjectType === 'marker') {
+                    let o = self._findObject(self.activeCard.id, 'cards', 'marker');
+                    let scale = o.get('scaleX');
+                    scale *= 0.999 ** delta;
+                    if (scale > 20) scale = 20;
+                    if (scale < 0.01) scale = 0.01;
+                    o.scale(scale);
+                    fb.requestRenderAll();
+                    console.debug('scale marker', o);
+                } else {
+                    let zoom = fb.getZoom();
+                    zoom *= 0.999 ** delta;
+                    if (zoom > 20) zoom = 20;
+                    if (zoom < 0.01) zoom = 0.01;
+                    fb.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+                }
+                opt.e.preventDefault();
+                opt.e.stopPropagation();
+            }
+        });
         fb.on('mouse:down', function(opt) {
             // console.debug('mouse:down', opt);
             let evt = opt.e;
@@ -445,34 +469,10 @@ export const game = shallowReactive({
             self._cursor();
         });
         fb.on('mouse:up', function() {
-            console.debug('mouse:up', this);
+            // console.debug('mouse:up', this);
             this.setViewportTransform(this.viewportTransform);
             this.isDragging = false;
             this.selection = true;
-        });
-        fb.on('mouse:wheel', function(opt) {
-            // console.debug('mouse:wheel', opt);
-            if (self.modeTransform) {
-                let delta = opt.e.deltaY;
-                if (self.activeObjectType === 'marker') {
-                    let o = self._findObject(self.activeCard.id, 'cards', 'marker');
-                    let scale = o.get('scaleX');
-                    scale *= 0.999 ** delta;
-                    if (scale > 20) scale = 20;
-                    if (scale < 0.01) scale = 0.01;
-                    o.scale(scale);
-                    fb.requestRenderAll();
-                    console.debug('scale marker', o);
-                } else {
-                    let zoom = fb.getZoom();
-                    zoom *= 0.999 ** delta;
-                    if (zoom > 20) zoom = 20;
-                    if (zoom < 0.01) zoom = 0.01;
-                    fb.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
-                }
-                opt.e.preventDefault();
-                opt.e.stopPropagation();
-            }
         });
 
         return fb;

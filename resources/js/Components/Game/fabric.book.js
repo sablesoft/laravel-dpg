@@ -1,4 +1,5 @@
 import { fabric } from 'fabric-with-erasing';
+import { game } from "@/Components/Game/game";
 
 fabric.Book = fabric.util.createClass(fabric.Group, {
 
@@ -27,13 +28,18 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         options.depth = options.depth || this.defaultDepth;
         options.width = options.width || this.defaultWidth;
         options.ratio = options.ratio || this.defaultRatio;
-        options.height = options.width * options.ratio + options.depth;
-        options.width = options.width + options.depth;
+        options.height = options.height || options.width * options.ratio + options.depth;
+        options.width = model ? options.width + options.depth : options.width;
         options.image = options.image || model.image;
         options.book_id = options.book_id || model.id;
         if (!options.back_image) {
             throw new Error('Back image required for book canvas object');
         }
+        if (!game.isMaster()) {
+            options.lockMovementX = true;
+            options.lockMovementY = true;
+        }
+
         this.callSuper('initialize', [], options);
 
         if (!model) {

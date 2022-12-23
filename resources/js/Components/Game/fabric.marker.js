@@ -1,4 +1,5 @@
 import { fabric } from 'fabric-with-erasing';
+import { game } from "@/Components/Game/game";
 
 fabric.Marker = fabric.util.createClass(fabric.Group, {
     type: 'marker',
@@ -12,8 +13,6 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
         options || (options = {});
         options.hasControls = false;
         options.hasBorders = false;
-        options.lockMovementX = true;
-        options.lockMovementY = true;
         options.lockScalingX = true;
         options.lockScalingY = true;
         options.lockRotation = true;
@@ -22,17 +21,23 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
         options.marker_id = options.marker_id || model.id;
         options.scope_id = options.scope_id || model.scope_id;
         options.imageScale = options.imageScale || this.defaultScale;
-        this.callSuper('initialize', [], options);
 
-        let self = this;
+        if (!game.isMaster()) {
+            options.lockMovementX = true;
+            options.lockMovementY = true;
+        }
+
+        this.callSuper('initialize', [], options);
 
         if (!model) {
             return;
         }
+
         if (!model.scopeImage) {
             throw new Error('Required model scope image missed!');
         }
 
+        let self = this;
         fabric.Image.fromURL(model.scopeImage, function(image) {
             image.set('originX', 'center');
             let scale = Number(self.get('imageScale'));

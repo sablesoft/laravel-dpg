@@ -379,18 +379,18 @@ export const game = shallowReactive({
      */
     initFabric(options = null, config = null) {
         let canvas = document.getElementsByTagName('canvas')[0];
-        let fc = new fabric.Canvas(canvas);
+        let fb = new fabric.Canvas(canvas);
         if (config) {
-            fc.loadFromJSON(config, fc.renderAll.bind(fc));
+            fb.loadFromJSON(config, fb.renderAll.bind(fb));
         }
         options = options || {};
         options['preserveObjectStacking'] = true;
         for (const [key, value] of Object.entries(options)) {
-            fc[key] = value;
+            fb[key] = value;
         }
         let self = this;
         setTimeout(function() {
-            fc.getObjects().forEach(function(o) {
+            fb.getObjects().forEach(function(o) {
                 if (o.type === 'area') {
                     o.sendBackwards(true);
                 }
@@ -400,22 +400,20 @@ export const game = shallowReactive({
             });
         }, 500);
         let name = 'fb' + this.mainTab;
-        this[name] = fc;
-        fc.on({
-            'selection:created': function(event) {
-                self._selection(event);
-                console.debug('selection:created', event);
-            },
-            'selection:updated': function(event) {
-                self._selection(event);
-                console.debug('selection:updated', event);
-            },
-            'selection:cleared': function(event) {
-                self._selection();
-                console.log('selection:cleared', event);
-            },
+        this[name] = fb;
+        fb.on('selection:created', opt => {
+            // console.debug('selection:created', opt);
+            self._selection(opt);
         });
-        fc.on('mouse:down', function(opt) {
+        fb.on('selection:updated', opt => {
+            // console.debug('selection:updated', opt);
+            self._selection(opt);
+        });
+        fb.on('selection:cleared', () => {
+            // console.debug('selection:cleared', opt);
+            self._selection();
+        });
+        fb.on('mouse:down', opt => {
             // console.debug('mouse:down', opt);
             let evt = opt.e;
             if (self.modeTransform === true) {
@@ -429,7 +427,7 @@ export const game = shallowReactive({
                 self.showInfo();
             }
         });
-        fc.on('mouse:move', function(opt) {
+        fb.on('mouse:move', opt => {
             // console.debug('mouse:move', opt);
             if (this.isDragging) {
                 let e = opt.e;
@@ -442,13 +440,17 @@ export const game = shallowReactive({
             }
             self._cursor(opt.target);
         });
-        fc.on('mouse:up', function() {
+        fb.on('mouse:out', () => {
+            // console.debug('mouse:out', opt);
+            self._cursor();
+        });
+        fb.on('mouse:up', () => {
             // console.debug('mouse:up', opt);
             this.setViewportTransform(this.viewportTransform);
             this.isDragging = false;
             this.selection = true;
         });
-        fc.on('mouse:wheel', function(opt) {
+        fb.on('mouse:wheel', opt => {
             // console.debug('mouse:wheel', opt);
             if (self.modeTransform) {
                 let delta = opt.e.deltaY;
@@ -459,21 +461,21 @@ export const game = shallowReactive({
                     if (scale > 20) scale = 20;
                     if (scale < 0.01) scale = 0.01;
                     o.scale(scale);
-                    fc.requestRenderAll();
+                    fb.requestRenderAll();
                     console.debug('scale marker', o);
                 } else {
-                    let zoom = fc.getZoom();
+                    let zoom = fb.getZoom();
                     zoom *= 0.999 ** delta;
                     if (zoom > 20) zoom = 20;
                     if (zoom < 0.01) zoom = 0.01;
-                    fc.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+                    fb.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
                 }
                 opt.e.preventDefault();
                 opt.e.stopPropagation();
             }
         });
 
-        return fc;
+        return fb;
     },
     isMaster() {
         return this.role === 'master';
@@ -1186,5 +1188,6 @@ export const game = shallowReactive({
                self[modeSwitcher]();
            }
         });
+        this._cursor();
     }
 });

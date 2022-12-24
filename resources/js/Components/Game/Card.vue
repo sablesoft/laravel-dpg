@@ -32,7 +32,8 @@
         <div v-if="game.modeMarkers && game.selectedId" class="aside-content aside-actions">
             <button class="control-text" @click="game.addMarker()">{{ __('Add Marker') }}</button>
         </div>
-        <div v-if="game.activeObject && !game.modeMarkers" class="aside-content aside-actions">
+        <div v-if="game.activeObject && !game.modeMarkers && (game.isMaster() || game.mainTab === 'Board')"
+             class="aside-content aside-actions">
             <button class="control-btn control-forward" :title="__('Forward')">
                 <span class="material-icons" @click="game.forward()">upload</span>
             </button>

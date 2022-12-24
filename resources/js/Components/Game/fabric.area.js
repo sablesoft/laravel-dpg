@@ -1,16 +1,18 @@
 import { fabric } from 'fabric-with-erasing';
+import { game } from "@/Components/Game/game";
 
 fabric.Area = fabric.util.createClass(fabric.Group, {
 
     type: 'area',
-    isSelected: false,
-    defaultFogColor: '#ffffff',
+    isMaster: false,
+    defaultShowOpacity: 0.7,
 
     /**
      * @param {GameArea} model
      * @param {?Object.<string, any>} options
      */
     initialize: function(model, options) {
+        this.isMaster = game.isMaster();
         options || (options = {});
         options.hasControls = false;
         options.hasBorders = false;
@@ -31,7 +33,12 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         options.width = parseInt(options.width);
         options.height = parseInt(options.height);
 
+        options.showOpacity = options.showOpacity || this.defaultShowOpacity;
+        options.show = options.show === undefined ? true : options.show;
+
         this.callSuper('initialize', [], options);
+
+        this.visibility(this.show);
 
         if (!model) {
             return;
@@ -46,8 +53,21 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         });
     },
 
+    visibility: function(show = true) {
+        this.show = show;
+        if (show) {
+            this.opacity = 1;
+        } else {
+            this.opacity = this.isMaster ? this.showOpacity : 0;
+        }
+        if (this.canvas) {
+            this.canvas.requestRenderAll();
+        }
+    },
+
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
+            show: this.get('show'),
             area_id: this.get('area_id'),
             card_id: this.get('card_id'),
             mask: this.get('mask'),

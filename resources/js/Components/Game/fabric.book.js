@@ -11,12 +11,15 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
     imageScale: 0.3,
     imageHeight: 75,
     textLine: 30,
+    isMaster: false,
+    defaultShowOpacity: 0.7,
 
     /**
      * @param {Book} model
      * @param {Object.<string, any>} options
      */
     initialize: function (model, options) {
+        this.isMaster = game.isMaster();
         options.hasControls = false;
         options.hasBorders = false;
         options.hoverCursor = 'pointer';
@@ -35,10 +38,13 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         if (!options.back_image) {
             throw new Error('Back image required for book canvas object');
         }
-        if (!game.isMaster()) {
+        if (!this.isMaster) {
             options.lockMovementX = true;
             options.lockMovementY = true;
         }
+
+        options.showOpacity = options.showOpacity || this.defaultShowOpacity;
+        options.show = options.show === undefined ? true : options.show;
 
         this.callSuper('initialize', [], options);
 
@@ -119,8 +125,21 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         });
     },
 
+    visibility: function(show = true) {
+        this.show = show;
+        if (show) {
+            this.opacity = 1;
+        } else {
+            this.opacity = this.isMaster ? this.showOpacity : 0;
+        }
+        if (this.canvas) {
+            this.canvas.requestRenderAll();
+        }
+    },
+
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
+            show: this.get('show'),
             book_id: this.get('book_id'),
             ratio: this.get('ratio'),
             depth: this.get('depth'),

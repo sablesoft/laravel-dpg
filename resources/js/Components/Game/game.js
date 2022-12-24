@@ -4,6 +4,7 @@ import './fabric.card';
 import './fabric.area';
 import './fabric.marker';
 import './fabric.book';
+import './fabric.fog';
 
 /**
  * @typedef {Object} CanvasConfig
@@ -355,7 +356,6 @@ export const game = shallowReactive({
     modeSave: false,
     modeMarkers: false,
     hideOpacity: 0.5,
-    fogColor: '#ffffff',
     brushWidth: 50,
     /**
      * @param {Object.<string, any>} data
@@ -394,9 +394,6 @@ export const game = shallowReactive({
                 if (o.type === 'area') {
                     o.sendBackwards(true);
                 }
-                if (o.type === 'marker' && self.isMaster()) {
-                    o.unlockMovement();
-                }
             });
         }, 500);
         let name = 'fb' + this.mainTab;
@@ -418,7 +415,7 @@ export const game = shallowReactive({
             if (self.modeTransform) {
                 let delta = opt.e.deltaY;
                 if (self.activeObjectType === 'marker') {
-                    let o = self._findObject(self.activeCard.id, 'cards', 'marker');
+                    let o = this.activeObject;
                     let scale = o.get('scaleX');
                     scale *= 0.999 ** delta;
                     if (scale > 20) scale = 20;
@@ -568,10 +565,14 @@ export const game = shallowReactive({
         if (!id || !type) {
             return this.showInfo();
         }
+        // noinspection FallThroughInSwitchStatementJS
         switch (type) {
             case 'book':
                 return this.showBook(id);
             case 'card':
+                if (o) {
+                    this.activeCardTapped = Boolean(o.get('tapped'));
+                }
             case 'marker':
                 return this.showCard(id);
             default:
@@ -609,41 +610,54 @@ export const game = shallowReactive({
         this.asideTab = 'Card';
     },
     activeCardTap() {
-        this.activeCard.tapped = this._findObject(this.activeCard.id, 'cards', 'card').tap();
-        this.activeCardTapped = this.activeCard.tapped;
+        this.activeCardTapped = this.activeObject.tap();
     },
     activeCardUntap() {
-        this.activeCard.tapped = !this._findObject(this.activeCard.id, 'cards', 'card').untap();
-        this.activeCardTapped = this.activeCard.tapped;
+        this.activeCardTapped = !this.activeObject.untap();
     },
     /**
      * @param {boolean} show
      */
-    opacity(show = true) {
+    visibility(show = true) {
         if (!this.activeObject) {
             throw new Error('Active object not found for opacity!');
         }
         this.activeObjectHidden = !show;
-        let opacity = show ? 1 : (this.isMaster() ? this.hideOpacity : 0);
-        this.activeObject.set('opacity', opacity);
+        if (typeof this.activeObject.visibility === 'function') {
+            this.activeObject.visibility(show);
+        } else {
+            let opacity = show ? 1 : (this.isMaster() ? this.hideOpacity : 0);
+            this.activeObject.set('opacity', opacity);
+            this.activeObjectHidden = opacity < 1;
+            this.fb().renderAll();
+        }
+    },
+    forward() {
+        let o = this.activeObject;
+        if (!o) {
+            throw new Error('Active object for forward not found!');
+        }
+        console.debug('Forward object', o);
+        o.bringForward(true);
         this.fb().renderAll();
     },
-    /**
-     * @param {string} type
-     */
-    forward(type) {
-        this._forward(this.activeCard.id, 'cards', type);
+    backward() {
+        let o = this.activeObject;
+        if (!o) {
+            throw new Error('Active object for backward not found!');
+        }
+        console.debug('Backward object', o);
+        o.sendBackwards(true);
+        this.fb().renderAll();
     },
-    /**
-     * @param {string} type
-     */
-    backward(type) {
-        this._backward(this.activeCard.id, 'cards', type);
-    },
-    remove(type) {
-        let o = this._findObject(this.activeCard.id, 'cards', type);
-        console.debug('Remove object for', this.activeCard.name,  o);
+    remove() {
+        let o = this.activeObject;
+        if (!o) {
+            throw new Error('Active object for removing not found!');
+        }
+        console.debug('Remove object', o);
         this.fb().remove(o, this.fb().renderAll.bind(this.fb()));
+        this.setActiveObject();
         this.showInfo();
     },
     /**
@@ -741,19 +755,11 @@ export const game = shallowReactive({
         let self = this;
         setTimeout(function() {
             console.debug('Add fog');
-            let fog = new fabric.Rect({
-                originX: 'left',
-                originY: 'top',
-                fill: 'white',
+            self.fb().add(new fabric.Fog({
                 width: width,
-                height: height,
-                stroke: null,
-                evented: false,
-                opacity: self.isMaster() ? 0.5 : 1,
-            });
-            self.fb().add(fog);
-            self.freezeFog();
-        }, 1000);
+                height: height
+            }));
+        }, 500);
     },
     /**
      * @returns {Dome}
@@ -813,10 +819,10 @@ export const game = shallowReactive({
             this.setBrushWidth();
             canvas.freeDrawingBrush.inverted = true;
             canvas.isDrawingMode = true;
-            this.opacityFog();
+            this.previewFog();
         } else {
             canvas.isDrawingMode = false;
-            this.opacityFog(false);
+            this.previewFog(false);
         }
     },
     switchMarkers() {
@@ -828,14 +834,11 @@ export const game = shallowReactive({
     addMarker() {
         console.debug('Add marker for: ', this.activeCard.name);
         let center = this._center();
-        let o = this.createMarkerFabric(this.selectedId, {
+        this.createMarkerFabric(this.selectedId, {
             left: center.x,
             top: center.y
         });
         this.fb().renderAll();
-        if (this.isMaster()) {
-            o.unlockMovement();
-        }
     },
     saveCanvas() {
         this.modeSave = true;
@@ -907,24 +910,6 @@ export const game = shallowReactive({
     resetCanvas() {
         // todo
         console.log('RESET IS TODO');
-    },
-    freezeFog() {
-        this.fb().getObjects().forEach(function(o) {
-            if (o.type === 'rect') {
-                o.set('hasControls', false);
-                o.set('hasBorders', false);
-                o.set('lockMovementX', true);
-                o.set('lockMovementY', true);
-                o.set('lockScalingX', true);
-                o.set('lockScalingY', true);
-                o.set('lockRotation', true);
-                o.set('selectable', false);
-                o.set('evented', false);
-                o.set('hoverCursor', 'default');
-                o.bringForward();
-                console.debug('Fog freeze!');
-            }
-        });
     },
     /**
      * @param {number} id
@@ -1014,15 +999,15 @@ export const game = shallowReactive({
 
         return filtered;
     },
-    opacityFog(show = true) {
+    /**
+     * @param {boolean} enable
+     */
+    previewFog(enable = true) {
         let fog = this._fog();
         if (!fog) {
             return;
         }
-        let o = this.activeObject;
-        this.activeObject = fog;
-        this.opacity(show);
-        this.activeObject = o;
+        fog.preview(enable);
     },
     /**
      * @param {?number} width
@@ -1067,59 +1052,6 @@ export const game = shallowReactive({
      */
     _canvases() {
         return document.getElementsByTagName('canvas');
-    },
-    /**
-     *
-     * @param {number} id
-     * @param {string} entity
-     * @param {string} type
-     * @return {*}
-     * @private
-     */
-    _findObject(id, entity, type) {
-        if (!this[entity][id]) {
-            throw new Error('Entity not found: ' + entity + ' : ' + id);
-        }
-        let model = this[entity][id];
-        if (!model[type]) {
-            let found = null;
-            this.fb().forEachObject(function(o) {
-                if (found) {
-                    return;
-                }
-                if (o.type === type && Number(o.get('card_id')) === Number(id)) {
-                    found = o;
-                }
-            });
-            if (!found) {
-                throw new Error('Fabric object in '+ entity +' not found: ' + type + ' : ' + id);
-            }
-            model[type] = found;
-            this[entity][id] = model;
-        }
-        return model[type];
-    },
-    /**
-     * @param {number} id
-     * @param {string} entity
-     * @param {string} type
-     * @private
-     */
-    _forward(id, entity, type) {
-        console.debug('Forward for', entity, type, id);
-        this._findObject(id, entity, type).bringForward(true);
-        this.fb().renderAll();
-    },
-    /**
-     * @param {number} id
-     * @param {string} entity
-     * @param {string} type
-     * @private
-     */
-    _backward(id, entity, type) {
-        console.debug('Backward for', entity, type, id);
-        this._findObject(id, entity, type).sendBackwards(true);
-        this.fb().renderAll();
     },
     _selection(event = null) {
         if (this.modeMarkers) {
@@ -1168,8 +1100,11 @@ export const game = shallowReactive({
             this.cursorScope = 'Book';
         }
     },
+    /**
+     * @returns {?fabric.Fog}
+     */
     _fog() {
-        return this.fb().getObjects('rect')[0]; // todo - create fog object
+        return this.fb().getObjects('fog')[0];
     },
     /**
      * @param {?string} skip

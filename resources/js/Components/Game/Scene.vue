@@ -31,7 +31,6 @@ onMounted(() => {
         }
         setTimeout(function () {
             game.renderAll();
-            game.freezeFog();
             console.debug('Scene mounted', game.fb());
         }, 300);
     });

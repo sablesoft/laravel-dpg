@@ -32,32 +32,27 @@
         <div v-if="game.modeMarkers && game.selectedId" class="aside-content aside-actions">
             <button class="control-text" @click="game.addMarker()">{{ __('Add Marker') }}</button>
         </div>
-        <div v-if="game.activeCard.id !== null && game.mainTab === 'Board'" class="aside-content aside-actions">
+        <div v-if="game.activeObject && !game.modeMarkers" class="aside-content aside-actions">
             <button class="control-btn control-forward" :title="__('Forward')">
-                <span class="material-icons" @click="game.forward('card')">upload</span>
+                <span class="material-icons" @click="game.forward()">upload</span>
             </button>
-            <button class="control-text" v-if="!game.activeCardTapped" @click="game.activeCardTap()">{{ __('Tap') }}</button>
-            <button class="control-text" v-if="game.activeCardTapped" @click="game.activeCardUntap()">{{ __('Untap') }}</button>
-            <button class="control-btn control-forward" :title="__('Backward')">
-                <span class="material-icons" @click="game.backward('card')">download</span>
+            <button class="control-text" v-if="game.activeObjectType === 'card' && !game.activeCardTapped"
+                    @click="game.activeCardTap()">{{ __('Tap') }}</button>
+            <button class="control-text" v-if="game.activeObjectType === 'card' && game.activeCardTapped"
+                    @click="game.activeCardUntap()">{{ __('Untap') }}</button>
+            <button v-if="game.isMaster() && game.activeObjectHidden"
+                    class="control-btn control-forward" :title="__('Show')">
+                <span class="material-icons" @click="game.visibility()">visibility</span>
             </button>
-        </div>
-        <div v-if="game.activeCard.id !== null && game.activeObjectType === 'marker' && !game.modeMarkers"
-             class="aside-content aside-actions">
-            <button class="control-btn control-forward" :title="__('Forward')">
-                <span class="material-icons" @click="game.forward('marker')">upload</span>
+            <button v-if="game.isMaster() && !game.activeObjectHidden"
+                    class="control-btn control-forward" :title="__('Hide')">
+                <span class="material-icons" @click="game.visibility(false)">visibility_off</span>
             </button>
-            <button v-if="game.activeObjectHidden" class="control-btn control-forward" :title="__('Show')">
-                <span class="material-icons" @click="game.opacity()">visibility</span>
-            </button>
-            <button v-if="!game.activeObjectHidden" class="control-btn control-forward" :title="__('Hide')">
-                <span class="material-icons" @click="game.opacity(false)">visibility_off</span>
-            </button>
-            <button class="control-btn control-remove" :title="__('Delete')">
-                <span class="material-icons" @click="game.remove('marker')">delete</span>
+            <button v-if="game.isMaster()" class="control-btn control-remove" :title="__('Remove')">
+                <span class="material-icons" @click="game.remove()">delete</span>
             </button>
             <button class="control-btn control-forward" :title="__('Backward')">
-                <span class="material-icons" @click="game.backward('marker')">download</span>
+                <span class="material-icons" @click="game.backward()">download</span>
             </button>
         </div>
     </div>

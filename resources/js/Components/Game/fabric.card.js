@@ -8,6 +8,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
     defaultRatio: 1.4,
     defaultOpened: false,
     defaultTapped: false,
+    defaultShowOpacity: 0.7,
     isMaster: false,
 
     /**
@@ -15,6 +16,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
      * @param {?Object.<string, any>} options
      */
     initialize: function(model, options) {
+        this.isMaster = game.isMaster();
         options || (options = {});
         options.hasControls = false;
         options.hasBorders = false;
@@ -27,6 +29,9 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         options.height = options.width * options.ratio;
         options.card_id = options.card_id || model.id;
         options.scope_id = options.scope_id || model.scope_id;
+
+        options.showOpacity = options.showOpacity || this.defaultShowOpacity;
+        options.show = options.show === undefined ? true : options.show;
 
         this.callSuper('initialize', [], options);
 
@@ -47,7 +52,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             this.tap(true);
         }
 
-        this.isMaster = game.isMaster();
+        this.visibility(this.show);
 
         if (!model) {
             return;
@@ -101,6 +106,18 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         });
     },
 
+    visibility: function(show = true) {
+        this.show = show;
+        if (show) {
+            this.opacity = 1;
+        } else {
+            this.opacity = this.isMaster ? this.showOpacity : 0;
+        }
+        if (this.canvas) {
+            this.canvas.requestRenderAll();
+        }
+    },
+
     flip: function () {
         if (!this.isMaster) {
             console.log('Flip cards can only master!');
@@ -145,6 +162,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
 
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
+            show: this.get('show'),
             card_id: this.get('card_id'),
             scope_id: this.get('scope_id'),
             ratio: this.get('ratio'),

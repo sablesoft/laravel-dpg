@@ -11,7 +11,6 @@ onMounted(() => {
     }, dome.canvas);
     if (!dome.canvas) {
         // todo - create from scratch
-        game.fb().setBackgroundColor(game.fogColor, undefined);
         game.createAreaFabric(game.activeAreaId);
         setTimeout(function() {
             game.createMarkerFabric(80, {
@@ -31,7 +30,6 @@ onMounted(() => {
     }
     setTimeout(function () {
         game.renderAll();
-        game.freezeFog();
         console.debug('Map mounted', game.fb());
     }, 300);
 });

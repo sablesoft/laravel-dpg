@@ -4,6 +4,8 @@ import { game } from "@/Components/Game/game";
 fabric.Marker = fabric.util.createClass(fabric.Group, {
     type: 'marker',
     defaultScale: 0.3,
+    defaultShowOpacity: 0.5,
+    isMaster: false,
 
     /**
      * @param {GameCard} model
@@ -11,6 +13,7 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
      */
     initialize: function(model, options) {
         options || (options = {});
+        this.isMaster = game.isMaster();
         options.hasControls = false;
         options.hasBorders = false;
         options.lockScalingX = true;
@@ -22,12 +25,17 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
         options.scope_id = options.scope_id || model.scope_id;
         options.imageScale = options.imageScale || this.defaultScale;
 
-        if (!game.isMaster()) {
+        options.showOpacity = options.showOpacity || this.defaultShowOpacity;
+        options.show = options.show === undefined ? true : options.show;
+
+        if (!this.isMaster) {
             options.lockMovementX = true;
             options.lockMovementY = true;
         }
 
         this.callSuper('initialize', [], options);
+
+        this.visibility(this.show);
 
         if (!model) {
             return;
@@ -50,13 +58,21 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
         });
     },
 
-    unlockMovement() {
-        this.set('lockMovementX', false);
-        this.set('lockMovementY', false);
+    visibility: function(show = true) {
+        this.show = show;
+        if (show) {
+            this.opacity = 1;
+        } else {
+            this.opacity = this.isMaster ? this.showOpacity : 0;
+        }
+        if (this.canvas) {
+            this.canvas.requestRenderAll();
+        }
     },
 
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
+            show: this.get('show'),
             scope_id: this.get('scope_id'),
             marker_id: this.get('marker_id'),
             imageScale: this.get('imageScale')

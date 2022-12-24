@@ -91,7 +91,6 @@ class Area extends Content
                     return null;
                 }
             })->hideFromIndex()->listensTo('left'),
-            Code::make(__('Markers'), 'markers')->json(),
             Number::make(__('Decks Count'), 'decks_count')
                 ->hideWhenCreating()->hideWhenUpdating(),
             Number::make(__('Cards Count'), 'cards_count')

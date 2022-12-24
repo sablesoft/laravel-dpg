@@ -58,7 +58,6 @@ class Scene extends Content
                 ->store(function (Request $request, $model, $attribute, $requestAttribute) {
                     return ImageService::uploadSceneImage($request->file($requestAttribute));
                 })->hideFromIndex()->disk(ImageService::diskName())->nullable(true)->prunable(),
-            Code::make(__('Markers'), 'markers')->json(),
             Number::make(__('Decks Count'), 'decks_count')
                 ->hideWhenCreating()->hideWhenUpdating(),
             Number::make(__('Cards Count'), 'cards_count')

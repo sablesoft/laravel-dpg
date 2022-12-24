@@ -5,7 +5,7 @@ import { game } from "@/Components/Game/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 
 onMounted(() => {
-    let scene = game.activeScene();
+    let scene = game.getActiveScene();
     if (!scene) {
         throw new Error('Active scene not found!');
     }

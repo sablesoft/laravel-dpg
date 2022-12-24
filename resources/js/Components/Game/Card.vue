@@ -4,21 +4,21 @@
 <template>
     <div class="aside shadow-sm sm:rounded-lg">
         <div class="aside-content aside-name">
-            {{ game.activeCard.name }}
+            {{ game.activeInfo.name }}
         </div>
         <div class="aside-content aside-image">
-            <img :src="game.activeCard.image" alt="">
+            <img :src="game.activeInfo.image" alt="">
         </div>
-        <div v-if="!game.activeCard.scopeImage" class="aside-content aside-name aside-scope">
-            {{ game.activeCard.scopeName }}
+        <div v-if="!game.activeInfo.scopeImage" class="aside-content aside-name aside-scope">
+            {{ game.activeInfo.scopeName }}
         </div>
-        <div v-if="game.activeCard.scopeImage" class="aside-content aside-image scope-image">
-            <img :src="game.activeCard.scopeImage"
-                 :alt="game.activeCard.scopeName"
-                 :title="game.activeCard.scopeName">
+        <div v-if="game.activeInfo.scopeImage" class="aside-content aside-image scope-image">
+            <img :src="game.activeInfo.scopeImage"
+                 :alt="game.activeInfo.scopeName"
+                 :title="game.activeInfo.scopeName">
         </div>
         <div class="aside-content aside-desc">
-            {{ game.activeCard.desc }}
+            {{ game.activeInfo.desc }}
         </div>
         <div v-if="game.isMaster() || game.mainTab === 'Board'"
              class="aside-content aside-actions">

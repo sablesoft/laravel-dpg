@@ -3,11 +3,14 @@ import { game } from "@/Components/Game/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 import {onMounted} from "vue";
 onMounted(() => {
-    let dome = game.activeDome();
+    let dome = game.getActiveDome();
     game.initCanvas(dome.canvas);
     if (!dome.canvas) {
         // todo - create from scratch
-        game.createAreaFabric(game.activeAreaId);
+        dome.area_ids.forEach(function(id) {
+            game.createAreaFabric(id);
+        });
+        // game.createAreaFabric(game.activeAreaId);
         setTimeout(function() {
             game.createMarkerFabric(80, {
                 left: 3160,

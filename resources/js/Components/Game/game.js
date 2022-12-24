@@ -49,6 +49,14 @@ import './fabric.fog';
  */
 
 /**
+ * @typedef {Object} ActiveArea
+ * @property {?number} id
+ * @property {?string} name
+ * @property {?string} desc
+ * @property {?string} image
+ */
+
+/**
  * @typedef {Object} GameCard
  * @property {number} id
  * @property {number} scope_id
@@ -204,28 +212,6 @@ export const game = shallowReactive({
         image: null,
         scopeImage: null,
         scopeName: null
-    },
-    /**
-     * State of Card component
-     * @member {ActiveCard}
-     */
-    activeCard: {
-        id: null,
-        name: null,
-        desc: null,
-        image: null,
-        scopeImage: null,
-        scopeName: null,
-    },
-    /**
-     * State of Book component
-     * @member {ActiveBook}
-     */
-    activeBook: {
-        id: null,
-        name: null,
-        desc: null,
-        image: null,
     },
     /**
      * @member {?string} - board image
@@ -498,7 +484,7 @@ export const game = shallowReactive({
                 this.activeInfo = this.info;
                 return;
             case 'Map':
-                let dome = this.activeDome();
+                let dome = this.getActiveDome();
                 let domeCard = this.cards[dome.scope_id];
                 this.activeInfo = {
                     id: dome.id,
@@ -511,7 +497,7 @@ export const game = shallowReactive({
                 };
                 return;
             case 'Scene':
-                let scene = this.activeScene();
+                let scene = this.getActiveScene();
                 let sceneCard = this.cards[scene.scope_id];
                 this.activeInfo = {
                     id: scene.id,
@@ -572,6 +558,8 @@ export const game = shallowReactive({
                 }
             case 'marker':
                 return this.showCard(id);
+            case 'area':
+                return this.showArea(id);
             default:
                 throw new Error('Unknown object type: ' + type);
         }
@@ -582,11 +570,14 @@ export const game = shallowReactive({
         if (!book) {
             throw new Error('Book not found: ' + id);
         }
-        this.activeBook = {
+        this.activeInfo = {
             id: book.id,
+            type: 'book',
             name: book.name,
             desc: book.desc,
-            image: book.image
+            image: book.image,
+            scopeImage: null,
+            scopeName: null
         };
         let self = this;
         this.fb().getObjects('book').forEach(function(o) {
@@ -602,8 +593,9 @@ export const game = shallowReactive({
         if (!card) {
             throw new Error('Card not found: ' + id);
         }
-        this.activeCard = {
+        this.activeInfo = {
             id: card.id,
+            type: 'card',
             name: card.name,
             desc: card.desc,
             image: card.image,
@@ -611,6 +603,27 @@ export const game = shallowReactive({
             scopeName: card.scopeName,
         };
         this.asideTab = 'Card';
+    },
+    showArea(id) {
+        let area = this.areas[id];
+        console.debug('Show Area', area);
+        if (!area) {
+            throw new Error('Area not found: ' + id);
+        }
+        let areaCard = this.cards[area.scope_id];
+        if (!areaCard) {
+            throw new Error('Area card not found: ' + area.scope_id);
+        }
+        this.activeInfo = {
+            id: area.id,
+            type: 'area',
+            name: areaCard.name,
+            desc: areaCard.desc,
+            image: areaCard.image,
+            scopeImage: areaCard.scopeImage,
+            scopeName: areaCard.scopeName,
+        };
+        this.asideTab = 'Area';
     },
     activeCardTap() {
         this.activeCardTapped = this.activeObject.tap();
@@ -778,34 +791,34 @@ export const game = shallowReactive({
     },
     addBook() {
         let center = this._center();
-        this.createBookFabric(this.activeBook.id, {
+        this.createBookFabric(this.activeInfo.id, {
             left: center.x,
             top: center.y
         });
-        this.showBook(this.activeBook.id);
+        this.showBook(this.activeInfo.id);
     },
     addCard() {
         let center = this._center();
-        let o = this.createCardFabric(this.activeCard.id, {
+        let o = this.createCardFabric(this.activeInfo.id, {
             left: center.x,
             top: center.y
         });
         this.setActiveObject(o);
-        this.showCard(this.activeCard.id);
+        this.showCard(this.activeInfo.id);
     },
     addMarker() {
         let center = this._center();
-        let o = this.createMarkerFabric(this.activeCard.id, {
+        let o = this.createMarkerFabric(this.activeInfo.id, {
             left: center.x,
             top: center.y
         });
         this.setActiveObject(o);
-        this.showCard(this.activeCard.id);
+        this.showCard(this.activeInfo.id);
     },
     /**
      * @returns {Dome}
      */
-    activeDome() {
+    getActiveDome() {
         let dome = this.domes[this.activeDomeId];
         if (!dome) {
             throw new Error('Active dome not found!')
@@ -816,7 +829,7 @@ export const game = shallowReactive({
     /**
      * @returns {GameArea}
      */
-    activeArea() {
+    getActiveArea() {
         let area = this.areas[this.activeAreaId];
         if (!area) {
             throw new Error('Active area not found!');
@@ -827,7 +840,7 @@ export const game = shallowReactive({
     /**
      * @return {Scene}
      */
-    activeScene() {
+    getActiveScene() {
         let scene = this.scenes[this.activeSceneId];
         if (!scene) {
             throw new Error('Active scene not found!');
@@ -1215,14 +1228,19 @@ export const game = shallowReactive({
             switch (filter) {
                 case 'book':
                     filter = {
-                        books: this.activeBook.id
+                        books: this.activeInfo.id
+                    }
+                    break;
+                case 'area':
+                    filter = {
+                        areas: this.activeInfo.id
                     }
                     break;
                 default:
                     throw new Error('Unknown filter code');
             }
         }
-        console.log('Filtering...', ids, filter, idsField);
+        // console.log('Filtering...', ids, filter, idsField);
         let filteredIds = [];
         for (let source in filter) {
             if (!this[source]) {
@@ -1235,16 +1253,17 @@ export const game = shallowReactive({
             }
             let entityIds = entity[idsField];
             if (!entityIds) {
-                throw new Error('Filter entity doesnt contain ids: ' + idsField);
+                filteredIds = [];
+            } else {
+                ids.forEach(function(id) {
+                    if (entityIds.includes(Number(id))) {
+                        filteredIds.push(Number(id));
+                    }
+                });
             }
-            ids.forEach(function(id) {
-                if (entityIds.includes(Number(id))) {
-                    filteredIds.push(Number(id));
-                }
-            });
             ids = filteredIds;
         }
-        console.debug('Filtering result', ids);
+        // console.debug('Filtering result', ids);
         return ids;
     },
     _deckType(number) {

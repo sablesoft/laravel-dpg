@@ -10,6 +10,7 @@ import Scene from '@/Components/Game/Scene.vue';
 import Info from '@/Components/Game/Info.vue';
 import Card from '@/Components/Game/Card.vue';
 import Book from '@/Components/Game/Book.vue';
+import Area from '@/Components/Game/Area.vue';
 
 import { Head } from '@inertiajs/inertia-vue3';
 import { game } from "@/Components/Game/game";
@@ -30,7 +31,8 @@ const props = defineProps({
 const asideTabs = {
     Info,
     Card,
-    Book
+    Book,
+    Area
 }
 const mainTabs = {
     Board,

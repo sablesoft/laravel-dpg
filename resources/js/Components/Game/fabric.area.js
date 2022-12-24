@@ -16,8 +16,6 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         options || (options = {});
         options.hasControls = false;
         options.hasBorders = false;
-        options.lockMovementX = true;
-        options.lockMovementY = true;
         options.lockScalingX = true;
         options.lockScalingY = true;
         options.lockRotation = true;
@@ -34,6 +32,9 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         }
         options.width = parseInt(options.width);
         options.height = parseInt(options.height);
+
+        options.lockMovementX = !this.isMaster;
+        options.lockMovementY = !this.isMaster;
 
         this.callSuper('initialize', [], options);
 

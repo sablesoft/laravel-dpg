@@ -264,33 +264,33 @@ export const game = shallowReactive({
      */
     activeSceneId: null,
     /**
-     * @member {?number[]} - open book ids
+     * @member {number[]} - open book ids
      */
-    openBookIds: null,
+    visibleBookIds: [],
     /**
-     * @member {?number[]} - open dome ids
+     * @member {number[]} - open dome ids
      */
-    openDomeIds: null,
+    visibleDomeIds: [],
     /**
-     * @member {?number[]} - open land ids
+     * @member {number[]} - open land ids
      */
-    openLandIds: null,
+    visibleLandIds: [],
     /**
-     * @member {?number[]} - open area ids
+     * @member {number[]} - open area ids
      */
-    openAreaIds: null,
+    visibleAreaIds: [],
     /**
-     * @member {?number[]} - open scene ids
+     * @member {number[]} - open scene ids
      */
-    openSceneIds: null,
+    visibleSceneIds: [],
     /**
-     * @member {?number[]} - open deck ids
+     * @member {number[]} - open deck ids
      */
-    openDeckIds: null,
+    visibleDeckIds: [],
     /**
-     * @member {?number[]} - open card ids
+     * @member {number[]} - open card ids
      */
-    openCardIds: null,
+    visibleCardIds: [],
     /**
      * @member {Object.<number, Book>}
      */
@@ -528,7 +528,7 @@ export const game = shallowReactive({
             return;
         }
         this._offModes();
-        this.saveCanvas();
+        this.save();
         this.mainTab = tab;
         this.showInfo();
     },
@@ -612,17 +612,29 @@ export const game = shallowReactive({
      * @param {boolean} show
      */
     visibility(show = true) {
-        if (!this.activeObject) {
+        let o = this.activeObject;
+        if (!o) {
             throw new Error('Active object not found for opacity!');
         }
         this.activeObjectHidden = !show;
-        if (typeof this.activeObject.visibility === 'function') {
-            this.activeObject.visibility(show);
+        if (typeof o.visibility === 'function') {
+            o.visibility(show);
         } else {
             let opacity = show ? 1 : (this.isMaster() ? this.hideOpacity : 0);
-            this.activeObject.set('opacity', opacity);
+            o.set('opacity', opacity);
             this.activeObjectHidden = opacity < 1;
             this.fb().renderAll();
+        }
+        switch (o.type) {
+            case 'card':
+                this._visibility('card', o.get('card_id'), show);
+                break;
+            case 'marker':
+                this._visibility('card', o.get('marker_id'), show);
+                break;
+            case 'book':
+                this._visibility('book', o.get('book_id'), show);
+                break;
         }
     },
     forward() {
@@ -671,7 +683,7 @@ export const game = shallowReactive({
             this.fb().requestRenderAll();
         }
 
-        return this.cards[id].card = o;
+        return o;
     },
     /**
      * @param {number} id
@@ -702,7 +714,7 @@ export const game = shallowReactive({
             this.fb().requestRenderAll();
         }
 
-        return this.areas[id].area = o;
+        return o;
     },
     /**
      * @param {number} id
@@ -720,7 +732,7 @@ export const game = shallowReactive({
             this.fb().requestRenderAll();
         }
 
-        return this.cards[id].marker = o;
+        return o;
     },
     /**
      * @param {number} id
@@ -742,7 +754,7 @@ export const game = shallowReactive({
         }
         console.debug('Book object', o);
 
-        return this.books[id].book = o;
+        return o;
     },
     createFog(width, height) {
         let self = this;
@@ -835,34 +847,51 @@ export const game = shallowReactive({
         });
         this.fb().renderAll();
     },
-    saveCanvas() {
+    save() {
         this.modeSave = true;
-        let data = {
-            gameId : this.id,
-            fields: ['canvas'],
-            canvas : this.fb().toObject(['viewportTransform'])
-        }
+        let request = {};
+        let canvas = this.fb().toObject(['viewportTransform']);
         switch(this.mainTab) {
             case 'Map':
-                data['process'] = 'dome';
-                data['processId'] = this.activeDomeId;
-                this.domes[this.activeDomeId].canvas = data['canvas'];
+                this.domes[this.activeDomeId].canvas = canvas;
+                request['dome'] = {
+                    id : this.activeDomeId,
+                }
                 break;
             case 'Scene':
-                data['process'] = 'scene';
-                data['processId'] = this.activeSceneId;
-                this.scenes[this.activeSceneId].canvas = data['canvas'];
+                this.scenes[this.activeSceneId].canvas = canvas;
+                request['scene'] = {
+                    id : this.activeSceneId,
+                }
                 break;
             case 'Board':
-                data['process'] = 'game';
-                this.canvas = data['canvas'];
+                this.canvas = canvas;
+                request['game'] = {
+                    id : this.id,
+                }
                 break;
             default:
                 throw new Error('Invalid main tab');
         }
         if (this.isMaster()) {
+            Object.keys(request).forEach(function(process) {
+                request[process]['data'] = {
+                    canvas : canvas
+                }
+            });
             let self = this;
-            axios.patch('/game', data)
+            let data = this._data();
+            if (request['game']) {
+                request['game']['data'] = data;
+                request['game']['data']['canvas'] = canvas;
+            } else {
+                request['game'] = {
+                    id : this.id,
+                    data: data
+                }
+            }
+            console.debug('Save request', request);
+            axios.patch('/game', request)
                 .then(() => {
                     self.modeSave = false;
                 }).catch(err => {
@@ -912,7 +941,7 @@ export const game = shallowReactive({
      */
     filteredSources(filter = null) {
         let ids = this.isMaster() ?
-            Object.keys(this.books) : Array.from(this.openBookIds || []);
+            Object.keys(this.books) : Array.from(this.visibleBookIds);
         if (filter) {
             ids = this._filter(ids, filter, 'source_ids');
         }
@@ -930,7 +959,7 @@ export const game = shallowReactive({
      */
     filteredDomes(filter = null) {
         let ids = this.isMaster() ?
-            Object.keys(this.domes) : Array.from(this.openDomeIds || []);
+            Object.keys(this.domes) : Array.from(this.visibleDomeIds);
         if (filter) {
             ids = this._filter(ids, filter, 'dome_ids');
         }
@@ -948,7 +977,7 @@ export const game = shallowReactive({
      */
     filteredScenes(filter = null) {
         let ids = this.isMaster() ?
-            Object.keys(this.scenes) : Array.from(this.openSceneIds || []);
+            Object.keys(this.scenes) : Array.from(this.visibleSceneIds);
         if (filter) {
             ids = this._filter(ids, filter, 'scene_ids');
         }
@@ -966,7 +995,7 @@ export const game = shallowReactive({
      */
     filteredDecks(filter = null) {
         let ids = this.isMaster() ?
-            Object.keys(this.decks) : Array.from(this.openDeckIds || []);
+            Object.keys(this.decks) : Array.from(this.visibleDeckIds);
         if (filter) {
             ids = this._filter(ids, filter, 'deck_ids');
         }
@@ -992,7 +1021,7 @@ export const game = shallowReactive({
      */
     filteredCards(filter = null) {
         let ids = this.isMaster() ?
-            Object.keys(this.cards) : Array.from(this.openCardIds || []);
+            Object.keys(this.cards) : Array.from(this.visibleCardIds);
         if (filter) {
             ids = this._filter(ids, filter, 'card_ids');
         }
@@ -1197,4 +1226,40 @@ export const game = shallowReactive({
 
         return labels[number];
     },
+    /**
+     * @param {string} type
+     * @param {number} id
+     * @param {boolean} show
+     * @private
+     */
+    _visibility(type, id, show) {
+        id = Number(id);
+        console.debug('Set visibility', type, id, show);
+        let idsField = 'visible' + type.charAt(0).toUpperCase() + type.slice(1) + 'Ids';
+        if (show) {
+            if (!this[idsField].includes(id)) {
+                this[idsField].push(id);
+            }
+        } else {
+            let index = this[idsField].indexOf(id);
+            if (index !== -1) {
+                this[idsField].splice(index, 1);
+            }
+        }
+    },
+    _data() {
+        let fields = [
+            'activeDomeId', 'activeSceneId', 'activeAreaId',
+            'visibleDomeIds', 'visibleLandIds', 'visibleAreaIds', 'visibleSceneIds',
+            'visibleBookIds','visibleDeckIds', 'visibleCardIds',
+            'domes', 'lands', 'areas', 'scenes', 'books', 'decks', 'cards'
+        ];
+        let data = {};
+        let self = this;
+        fields.forEach(function(field) {
+            data[field] = toRaw(self[field]);
+        });
+
+        return data;
+    }
 });

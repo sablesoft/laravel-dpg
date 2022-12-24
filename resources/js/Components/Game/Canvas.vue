@@ -104,7 +104,7 @@
                 :class="{'control-active' : game.modeSave}"
                 :disabled="game.modeSave"
                 :title="__('Save')">
-            <span class="material-icons" @click="game.saveCanvas()">save</span>
+            <span class="material-icons" @click="game.save()">save</span>
         </button>
     </div>
     <div class="info-wrap">

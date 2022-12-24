@@ -2,13 +2,9 @@
 import { game } from "@/Components/Game/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 import {onMounted} from "vue";
-// todo - draw current map with areas and markers
 onMounted(() => {
     let dome = game.activeDome();
-    game.initFabric({
-        fullHeight: dome.map_height,
-        fullWidth: dome.map_width,
-    }, dome.canvas);
+    game.initCanvas(dome.canvas);
     if (!dome.canvas) {
         // todo - create from scratch
         game.createAreaFabric(game.activeAreaId);
@@ -27,11 +23,11 @@ onMounted(() => {
             });
         }, 300);
         game.createFog(dome.map_width, dome.map_height);
+        setTimeout(function () {
+            game.renderAll();
+        }, 300);
     }
-    setTimeout(function () {
-        game.renderAll();
-        console.debug('Map mounted', game.fb());
-    }, 300);
+    console.debug('Map mounted', game.fb());
 });
 </script>
 

@@ -105,19 +105,19 @@ onMounted(() => {
                 <component :is="mainTabs[game.mainTab]"></component>
             </div>
             <div class="action-column">
-                <button v-if="game.mainTab !== 'Board' && (game.activeDomeId || game.activeSceneId)"
+                <button v-if="game.canMap || game.canScene"
                         class="control-btn control-board"
                         :disabled="game.mainTab === 'Board'"
                         :title="__('Board')">
                     <span class="material-icons" @click="game.showMain('Board')">local_library</span>
                 </button>
-                <button v-if="game.mainTab !== 'Map' && game.activeDomeId"
+                <button v-if="game.canMap"
                         class="control-btn control-map"
                         :disabled="game.mainTab === 'Map'"
                         :title="__('Map')">
                     <span class="material-icons" @click="game.showMain('Map')">map</span>
                 </button>
-                <button v-if="game.mainTab !== 'Scene' && game.activeSceneId"
+                <button v-if="game.canScene"
                         class="control-btn control-scene"
                         :disabled="game.mainTab === 'Scene'"
                         :title="__('Scene')">

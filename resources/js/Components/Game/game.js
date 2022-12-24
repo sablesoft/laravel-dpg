@@ -331,6 +331,8 @@ export const game = shallowReactive({
      * @member {?fabric.Canvas}
      */
     fbScene: null,
+    canMap: false,
+    canScene: false,
     /**
      * @member {string}
      */
@@ -374,18 +376,23 @@ export const game = shallowReactive({
         this.height = options.height;
         this.role = options.role;
         this.showInfo();
+        this.canScene = this.isMaster() ? !!game.activeSceneId :
+            game.activeSceneId && this.visibleSceneIds.contains(game.activeSceneId);
+        this.canMap = this.isMaster() ? !!game.activeDomeId :
+            game.activeDomeId && this.visibleDomeIds.contains(game.activeDomeId);
+
         console.debug('Game initiated', this);
     },
     /**
      * @param {?Object.<string, any>} options
-     * @param {?Object.<string, any>} config
+     * @param {?Object.<string, any>} json
      * @return {fabric.Canvas}
      */
-    initFabric(options = null, config = null) {
+    initCanvas(json = null, options = null) {
         let canvas = document.getElementsByTagName('canvas')[0];
         let fb = new fabric.Canvas(canvas);
-        if (config) {
-            fb.loadFromJSON(config, fb.renderAll.bind(fb));
+        if (json) {
+            fb.loadFromJSON(json, fb.renderAll.bind(fb));
         }
         options = options || {};
         options['preserveObjectStacking'] = true;
@@ -774,6 +781,24 @@ export const game = shallowReactive({
         });
         this.showBook(this.activeBook.id);
     },
+    addCard() {
+        let center = this._center();
+        let o = this.createCardFabric(this.activeCard.id, {
+            left: center.x,
+            top: center.y
+        });
+        this.setActiveObject(o);
+        this.showCard(this.activeCard.id);
+    },
+    addMarker() {
+        let center = this._center();
+        let o = this.createMarkerFabric(this.activeCard.id, {
+            left: center.x,
+            top: center.y
+        });
+        this.setActiveObject(o);
+        this.showCard(this.activeCard.id);
+    },
     /**
      * @returns {Dome}
      */
@@ -837,15 +862,6 @@ export const game = shallowReactive({
             canvas.isDrawingMode = false;
             this.previewFog(false);
         }
-    },
-    addMarker() {
-        console.debug('Add marker for: ', this.activeCard.name);
-        let center = this._center();
-        this.createMarkerFabric(this.activeCard.id, {
-            left: center.x,
-            top: center.y
-        });
-        this.fb().renderAll();
     },
     save() {
         this.modeSave = true;

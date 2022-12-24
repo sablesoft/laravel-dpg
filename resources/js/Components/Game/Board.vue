@@ -1,72 +1,38 @@
 <!--suppress JSUnresolvedVariable -->
 <script setup>
 import {onMounted} from 'vue';
-import { fabric } from 'fabric-with-erasing';
 import { game } from "@/Components/Game/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 
-const getHero = (options) => {
-    // todo
-    let id = game.heroIds[0];
-    return game.createCardFabric(id, options);
-}
 onMounted(() => {
-    // todo - draw current board with cards and decks
     setTimeout(function() {
-        fabric.Image.fromURL(game.boardImage, function(image) {
+        game.initCanvas(game.canvas);
+        if (!game.canvas) {
             let options = {
                 originX : 'left',
                 originY : 'top',
                 erasable: false
             };
-            // noinspection JSValidateTypes
-            game.initFabric({
-                fullHeight: image.height,
-                fullWidth: image.width
-            }, game.canvas);
-            if (!game.canvas) {
-                game.fb().setBackgroundImage(image, game.renderAll.bind(game), options);
-                game.createBookFabric(1, {
-                    left: 30,
-                    top: 70
-                });
-                game.createBookFabric(2, {
-                    left: 170,
-                    top: 70
-                });
-                const hero = getHero({
-                    left: 70,
-                    top: 630,
-                    opened: true
-                });
-                game.createCardFabric(hero.scope_id, {
-                    left: 40,
-                    top: 630,
-                    opened: true,
-                    tapped: true
-                });
-                hero.bringForward(true);
-            }
-            game.fb().on({
-                'mouse:dblclick': function(event) {
-                    if (!event.target) {
-                        return;
-                    }
-                    if (event.target.type === 'card') {
-                        let o = event.target;
-                        o.flip();
-                        if (o.opened) {
-                            game.showAside(o);
-                        } else {
-                            game.showInfo();
-                        }
+            game.fb().setBackgroundImage(game.boardImage, game.renderAll.bind(game), options);
+        }
+        game.fb().on({
+            'mouse:dblclick': function(event) {
+                if (!event.target) {
+                    return;
+                }
+                if (event.target.type === 'card') {
+                    let o = event.target;
+                    o.flip();
+                    if (o.opened) {
+                        game.showAside(o);
+                    } else {
+                        game.showInfo();
                     }
                 }
-            });
-            game.renderAll();
-            console.debug('Board mounted', game.fb());
+            }
         });
-    }, 100);
+        console.debug('Board mounted', game.fb());
+    }, 200);
 });
 </script>
 

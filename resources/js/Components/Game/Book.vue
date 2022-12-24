@@ -47,7 +47,7 @@
                 </option>
             </select>
         </div>
-        <div v-if="game.isMaster() || game.mainTab === 'Board'"
+        <div v-if="game.isMaster() && game.mainTab === 'Board'"
              class="aside-content aside-actions">
             <button v-if="!game.activeObject"
                     class="control-btn control-remove" :title="__('Add')">

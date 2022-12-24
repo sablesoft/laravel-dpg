@@ -565,6 +565,9 @@ export const game = shallowReactive({
                 return this.showBook(id);
             case 'card':
                 if (o) {
+                    if (!o.get('opened') && !this.isMaster()) {
+                        return this.showInfo();
+                    }
                     this.activeCardTapped = Boolean(o.get('tapped'));
                 }
             case 'marker':
@@ -1151,6 +1154,13 @@ export const game = shallowReactive({
             this.cursorName = null;
             this.cursorScope = null;
             return;
+        }
+        if (o.type === 'card') {
+            if (!o.get('opened') && !this.isMaster()) {
+                this.cursorName = '???';
+                this.cursorScope = '???';
+                return;
+            }
         }
         if (o.get('card_id')) {
             let card = this.cards[o.get('card_id')];

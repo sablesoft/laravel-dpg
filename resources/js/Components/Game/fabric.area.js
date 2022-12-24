@@ -34,7 +34,7 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         options.height = parseInt(options.height);
 
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
-        options.show = options.show === undefined ? true : options.show;
+        options.show = options.show === undefined ? false : options.show;
 
         this.callSuper('initialize', [], options);
 

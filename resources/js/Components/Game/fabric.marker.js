@@ -26,7 +26,7 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
         options.imageScale = options.imageScale || this.defaultScale;
 
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
-        options.show = options.show === undefined ? true : options.show;
+        options.show = options.show === undefined ? false : options.show;
 
         if (!this.isMaster) {
             options.lockMovementX = true;

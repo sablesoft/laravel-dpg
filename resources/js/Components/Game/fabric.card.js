@@ -31,7 +31,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         options.scope_id = options.scope_id || model.scope_id;
 
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
-        options.show = options.show === undefined ? true : options.show;
+        options.show = options.show === undefined ? false : options.show;
 
         this.callSuper('initialize', [], options);
 

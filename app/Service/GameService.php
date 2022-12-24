@@ -76,9 +76,6 @@ class GameService
         $data = [
             'id' => $game->getKey(),
             'info' => $info,
-            'activeDomeId' => null,
-            'activeSceneId' => null,
-            'activeAreaId' => null,
             'boardImage' => self::image($game->board_image),
             'cardsBack' => self::image($game->cards_back),
         ];
@@ -140,11 +137,6 @@ class GameService
             $ids[] = static::deckToProcess($gameProcess, $deck, $locale)->id;
         }
         $gameProcess->deckIds = $ids;
-        foreach (Process::collections() as $collection) {
-            $key = ucfirst(Str::singular($collection));
-            $field = "open${key}Ids";
-            $gameProcess->$field = null;
-        }
 
         $gameProcess->save();
         $gameProcess->game()->save($game);

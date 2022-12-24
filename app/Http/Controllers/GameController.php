@@ -47,26 +47,30 @@ class GameController extends Controller
      */
     public function update(Request $request): array
     {
+        $processes = $request->json()->all();
+
         /** @var GameProcess $gameProcess */
-        $gameProcess = GameProcess::where('id', $request->json('gameId'))->first();
+        $gameProcess = GameProcess::where('id', $processes['game']['id'])->first();
         if (!$gameProcess) {
             throw new Exception('Process not found!');
         }
-        /** @var Process|GameProcess $process */
-        $process = $this->_process(
-            $gameProcess,
-            $request->json('process'),
-            $request->json('processId')
-        );
-        $fields = $request->json('fields');
-        if (!$fields || !is_array($fields)) {
-            throw new Exception('Fields list must be array!');
-        }
-        foreach ($fields as $field) {
-            $process->$field = $request->json($field);
+
+        foreach ($processes as $processName => $processRequest) {
+            /** @var Process|GameProcess $process */
+            $process = $this->_process(
+                $gameProcess,
+                $processName,
+                $processRequest['id']
+            );
+            foreach ($processRequest['data'] as $field => $value) {
+                $process->$field = $value;
+            }
+            if (!$process->save()) {
+                throw new Exception('Process saving error - ' . $processName);
+            }
         }
 
-        return ['success' => $process->save()];
+        return ['success' => true];
     }
 
     /**

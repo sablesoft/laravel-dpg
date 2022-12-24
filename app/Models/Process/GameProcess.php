@@ -16,10 +16,10 @@ use App\Models\Game;
  * @property int[]|null $heroIds
  * @property int[]|null $cardIds
  * @property int[]|null $deckIds
- * @property int[]|null $openCardIds
- * @property int[]|null $openDeckIds
- * @property int[]|null $openDomeIds
- * @property int[]|null $openAreaIds
+ * @property int[]|null $visibleCardIds
+ * @property int[]|null $visibleDeckIds
+ * @property int[]|null $visibleDomeIds
+ * @property int[]|null $visibleAreaIds
  * @property int[]|null $openLandsIds
  * @property int[]|null $openSceneSds
  * @property int|null $activeDomeId
@@ -49,12 +49,12 @@ class GameProcess extends Model
         'heroIds',
         'cardIds',
         'deckIds',
-        'openCardIds',
-        'openDeckIds',
-        'openDomeIds',
-        'openLandIds',
-        'openAreaIds',
-        'openSceneIds',
+        'visibleCardIds',
+        'visibleDeckIds',
+        'visibleDomeIds',
+        'visibleLandIds',
+        'visibleAreaIds',
+        'visibleSceneIds',
         'canvas',
         'activeDomeId',
         'activeAreaId',

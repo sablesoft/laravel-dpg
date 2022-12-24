@@ -98,12 +98,6 @@
                 class="control-btn control-reset" :title="__('Reset')">
             <span class="material-icons" @click="game.resetCanvas()">restore</span>
         </button>
-        <button v-if="game.isMaster() && game.mainTab !== 'Board'"
-                class="control-btn control-markers"
-                :class="{'control-active' : game.modeMarkers}"
-                :title="__('Markers')">
-            <span class="material-icons" @click="game.switchMarkers()">place</span>
-        </button>
 
         <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase && !game.modeTransform"
                 class="control-btn control-save"

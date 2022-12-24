@@ -264,6 +264,10 @@ export const game = shallowReactive({
      */
     activeSceneId: null,
     /**
+     * @member {?number[]} - open book ids
+     */
+    openBookIds: null,
+    /**
      * @member {?number[]} - open dome ids
      */
     openDomeIds: null,
@@ -354,7 +358,6 @@ export const game = shallowReactive({
     modeEraseUndo: false,
     modeTransform: false,
     modeSave: false,
-    modeMarkers: false,
     hideOpacity: 0.5,
     brushWidth: 50,
     /**
@@ -371,6 +374,7 @@ export const game = shallowReactive({
         this.height = options.height;
         this.role = options.role;
         this.showInfo();
+        console.debug('Game initiated', this);
     },
     /**
      * @param {?Object.<string, any>} options
@@ -415,7 +419,7 @@ export const game = shallowReactive({
             if (self.modeTransform) {
                 let delta = opt.e.deltaY;
                 if (self.activeObjectType === 'marker') {
-                    let o = this.activeObject;
+                    let o = self.activeObject;
                     let scale = o.get('scaleX');
                     scale *= 0.999 ** delta;
                     if (scale > 20) scale = 20;
@@ -476,23 +480,6 @@ export const game = shallowReactive({
     },
     isMaster() {
         return this.role === 'master';
-    },
-    setActiveObject(o = null) {
-        if (!o) {
-            this.activeObject = null;
-            this.activeObjectHidden = null;
-            this.activeObjectType = null;
-            this.fb().discardActiveObject();
-        } else {
-            this.activeObject = o;
-            this.activeObjectHidden = o.get('opacity') < 1;
-            this.activeObjectType = o.type;
-            this.fb().setActiveObject(o);
-        }
-        console.debug('Active Object', o, {
-            hidden: this.activeObjectHidden,
-            type: this.activeObjectType
-        });
     },
     showInfo() {
         this.asideTab = 'Info';
@@ -591,6 +578,12 @@ export const game = shallowReactive({
             desc: book.desc,
             image: book.image
         };
+        let self = this;
+        this.fb().getObjects('book').forEach(function(o) {
+            if (o.get('book_id') === Number(id)) {
+                self.setActiveObject(o);
+            }
+        });
         this.asideTab = 'Book';
     },
     showCard(id) {
@@ -761,6 +754,14 @@ export const game = shallowReactive({
             }));
         }, 500);
     },
+    addBook() {
+        let center = this._center();
+        this.createBookFabric(this.activeBook.id, {
+            left: center.x,
+            top: center.y
+        });
+        this.showBook(this.activeBook.id);
+    },
     /**
      * @returns {Dome}
      */
@@ -825,16 +826,10 @@ export const game = shallowReactive({
             this.previewFog(false);
         }
     },
-    switchMarkers() {
-        this._offModes('Markers');
-        this.modeMarkers = !this.modeMarkers;
-        this.selectedId = null;
-        this.showInfo();
-    },
     addMarker() {
         console.debug('Add marker for: ', this.activeCard.name);
         let center = this._center();
-        this.createMarkerFabric(this.selectedId, {
+        this.createMarkerFabric(this.activeCard.id, {
             left: center.x,
             top: center.y
         });
@@ -912,88 +907,98 @@ export const game = shallowReactive({
         console.log('RESET IS TODO');
     },
     /**
-     * @param {number} id
+     * @param {?Object|string} filter
      * @return {Object<number, any>}
      */
-    bookDomes(id) {
-        let book = this.books[id];
-        if (!book) {
-            throw new Error('Book not exists: ' + id);
+    filteredSources(filter = null) {
+        let ids = this.isMaster() ?
+            Object.keys(this.books) : Array.from(this.openBookIds || []);
+        if (filter) {
+            ids = this._filter(ids, filter, 'source_ids');
         }
-        let filtered = {};
         let self = this;
+        let filtered = {};
+        ids.forEach(function(id) {
+            filtered[id] = toRaw(self.books[id]);
+        });
 
-        // todo - filter by openDomeIds if no master
-
-        book.dome_ids.forEach(function(id) {
+        return filtered;
+    },
+    /**
+     * @param {?Object|string} filter
+     * @return {Object<number, any>}
+     */
+    filteredDomes(filter = null) {
+        let ids = this.isMaster() ?
+            Object.keys(this.domes) : Array.from(this.openDomeIds || []);
+        if (filter) {
+            ids = this._filter(ids, filter, 'dome_ids');
+        }
+        let self = this;
+        let filtered = {};
+        ids.forEach(function(id) {
             filtered[id] = toRaw(self.domes[id]);
         });
 
         return filtered;
     },
     /**
-     * @param {number} id
+     * @param {?Object|string} filter
      * @return {Object<number, any>}
      */
-    bookScenes(id) {
-        let book = this.books[id];
-        if (!book) {
-            throw new Error('Book not exists: ' + id);
+    filteredScenes(filter = null) {
+        let ids = this.isMaster() ?
+            Object.keys(this.scenes) : Array.from(this.openSceneIds || []);
+        if (filter) {
+            ids = this._filter(ids, filter, 'scene_ids');
         }
-        let filtered = {};
         let self = this;
-
-        // todo - filter by openSceneIds if no master
-
-        book.scene_ids.forEach(function(id) {
+        let filtered = {};
+        ids.forEach(function(id) {
             filtered[id] = toRaw(self.scenes[id]);
         });
 
         return filtered;
     },
     /**
-     * @param {number} id
+     * @param {?Object|string} filter
      * @return {Object<number, any>}
      */
-    bookDecks(id) {
-        let book = this.books[id];
-        if (!book) {
-            throw new Error('Book not exists: ' + id);
+    filteredDecks(filter = null) {
+        let ids = this.isMaster() ?
+            Object.keys(this.decks) : Array.from(this.openDeckIds || []);
+        if (filter) {
+            ids = this._filter(ids, filter, 'deck_ids');
         }
-        let filtered = {};
         let self = this;
-
-        // todo - filter by openDeckIds if no master
-
-        book.deck_ids.forEach(function(id) {
+        let filtered = {};
+        ids.forEach(function(id) {
             let deck = toRaw(self.decks[id]);
             let scope = self.cards[deck.scope_id];
             let target = self.cards[deck.target_id];
             filtered[id] = {
-                id: id,
+                id: deck.id,
+                type: self._deckType(deck.type),
                 scope: scope.name,
                 target: target.name
             }
         });
-        console.log('Decks', filtered);
 
         return filtered;
     },
     /**
-     * @param {number} id
+     * @param {?Object|string} filter
      * @return {Object<number, any>}
      */
-    bookCards(id) {
-        let book = this.books[id];
-        if (!book) {
-            throw new Error('Book not exists: ' + id);
+    filteredCards(filter = null) {
+        let ids = this.isMaster() ?
+            Object.keys(this.cards) : Array.from(this.openCardIds || []);
+        if (filter) {
+            ids = this._filter(ids, filter, 'card_ids');
         }
-        let filtered = {};
         let self = this;
-
-        // todo - filter by openCardIds if no master
-
-        book.card_ids.forEach(function(id) {
+        let filtered = {};
+        ids.forEach(function(id) {
             filtered[id] = toRaw(self.cards[id]);
         });
 
@@ -1019,6 +1024,28 @@ export const game = shallowReactive({
         }
         this.fb().freeDrawingBrush.width = this.brushWidth;
         this.requestRenderAll();
+    },
+    setActiveObject(o = null) {
+        if (!o) {
+            this.activeObject = null;
+            this.activeObjectHidden = null;
+            this.activeObjectType = null;
+            this.fb().discardActiveObject();
+        } else {
+            this.activeObject = o;
+            this.activeObjectHidden = o.get('opacity') < 1;
+            this.activeObjectType = o.type;
+            this.fb().setActiveObject(o);
+        }
+        console.debug('Active Object', o, {
+            hidden: this.activeObjectHidden,
+            type: this.activeObjectType
+        });
+    },
+    selectBook(event) {
+        this.selectedId = null;
+        this.fb().discardActiveObject();
+        this.showBook(event.target.value);
     },
     selectDome(event) {
         this.selectedId = null;
@@ -1054,10 +1081,6 @@ export const game = shallowReactive({
         return document.getElementsByTagName('canvas');
     },
     _selection(event = null) {
-        if (this.modeMarkers) {
-            this.setActiveObject();
-            return;
-        }
         if (!event) {
             this.setActiveObject();
             this.showAside();
@@ -1111,7 +1134,7 @@ export const game = shallowReactive({
      * @private
      */
     _offModes(skip = null) {
-        let modes = ['Erase', 'EraseUndo', 'Markers', 'Transform'];
+        let modes = ['Erase', 'EraseUndo', 'Transform'];
         modes = modes.filter(function(mode) {
             return mode !== skip;
         });
@@ -1124,5 +1147,54 @@ export const game = shallowReactive({
            }
         });
         this._cursor();
-    }
+    },
+    /**
+     * @param {Array} ids
+     * @param {Object<string, number>|string} filter
+     * @param {string} idsField
+     * @return {Array}
+     * @private
+     */
+    _filter(ids, filter, idsField) {
+        if (typeof filter === 'string') {
+            switch (filter) {
+                case 'book':
+                    filter = {
+                        books: this.activeBook.id
+                    }
+                    break;
+                default:
+                    throw new Error('Unknown filter code');
+            }
+        }
+        console.log('Filtering...', ids, filter, idsField);
+        let filteredIds = [];
+        for (let source in filter) {
+            if (!this[source]) {
+                throw new Error('Unknown filter source: ' + source);
+            }
+            let id = filter[source];
+            let entity = this[source][id];
+            if (!entity) {
+                throw new Error('Filter entity not found!');
+            }
+            let entityIds = entity[idsField];
+            if (!entityIds) {
+                throw new Error('Filter entity doesnt contain ids: ' + idsField);
+            }
+            ids.forEach(function(id) {
+                if (entityIds.includes(Number(id))) {
+                    filteredIds.push(Number(id));
+                }
+            });
+            ids = filteredIds;
+        }
+        console.debug('Filtering result', ids);
+        return ids;
+    },
+    _deckType(number) {
+        let labels = ['Stack','Set','State','Control'];
+
+        return labels[number];
+    },
 });

@@ -32,7 +32,7 @@ onMounted(() => {
             }
         });
         console.debug('Board mounted', game.fb());
-    }, 200);
+    }, 500);
 });
 </script>
 

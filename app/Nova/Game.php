@@ -25,13 +25,14 @@ use App\Nova\Filters\IsPublicFilter;
 use App\Nova\Filters\GameStatusFilter;
 use App\Nova\Actions\Game\InitProcess;
 use App\Nova\Actions\Game\InviteSubscribers;
+use App\Models\Traits\Subscribers;
 
 /**
  * @mixin \App\Models\Game
  */
 class Game extends Resource
 {
-    use HasTemporaryFields;
+    use HasTemporaryFields, Subscribers;
 
     /**
      * The logical group associated with the resource.
@@ -70,8 +71,7 @@ class Game extends Resource
      */
     public static function indexQuery(NovaRequest $request, $query): Builder
     {
-        /** @noinspection PhpUndefinedMethodInspection */
-        return $query->allowedToSee();
+        return static::staticAllowedToSee($query);
     }
 
     /**

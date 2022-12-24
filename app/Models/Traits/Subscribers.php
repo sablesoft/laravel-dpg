@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * @property-read User[]|null $subscribers
- *
- * @method Builder allowedToSee(?User $user = null) static
  */
 trait Subscribers
 {
@@ -46,6 +44,30 @@ trait Subscribers
      * @return Builder
      */
     public function scopeAllowedToSee(Builder $query, ?User $user = null): Builder
+    {
+        /** @var User $user */
+        $user = $user ?: Auth::user();
+        if ($user->isAdmin()) {
+            return $query;
+        }
+
+        return $query->where(function(Builder $query) use ($user) {
+            return $query->where('is_public', true)
+                ->orWhere('owner_id', $user->getKey())
+                ->orWhere(function($query) use ($user) {
+                    return $query->whereHas('subscribers', function($query) use ($user) {
+                        $query->where('subscriber_id', $user->getKey());
+                    });
+                });
+        });
+    }
+
+    /**
+     * @param Builder $query
+     * @param User|null $user
+     * @return Builder
+     */
+    public static function staticAllowedToSee(Builder $query, ?User $user = null): Builder
     {
         /** @var User $user */
         $user = $user ?: Auth::user();

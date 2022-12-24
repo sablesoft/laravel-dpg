@@ -70,24 +70,26 @@ class Area extends Content
             BroadcasterField::make(__('Top Step'), 'top_step')->sortable()
                 ->broadcastTo('top'),
             ListenerField::make(__('Top'), 'top')->calculateWith(function(Collection $values) {
-                $step = 1;
                 if ($id = $values->get('resourceId')) {
                     /** @var \App\Models\Area $area */
                     $area = \App\Models\Area::find($id);
                     $step = $area->dome->top_step;
+                    return (int) ($values->get('top_step') * $step);
+                } else {
+                    return null;
                 }
-                return (int) ($values->get('top_step') * $step);
             })->hideFromIndex()->listensTo('top'),
             BroadcasterField::make(__('Left Step'), 'left_step')->sortable()
                 ->broadcastTo('left'),
             ListenerField::make(__('Left'), 'left')->calculateWith(function(Collection $values) {
-                $step = 1;
                 if ($id = $values->get('resourceId')) {
                     /** @var \App\Models\Area $area */
                     $area = \App\Models\Area::find($id);
                     $step = $area->dome->left_step;
+                    return (int) ($values->get('left_step') * $step);
+                } else {
+                    return null;
                 }
-                return (int) ($values->get('left_step') * $step);
             })->hideFromIndex()->listensTo('left'),
             Code::make(__('Markers'), 'markers')->json(),
             Number::make(__('Decks Count'), 'decks_count')

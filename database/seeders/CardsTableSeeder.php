@@ -1267,20 +1267,6 @@ class CardsTableSeeder extends Seeder
             ),
             89 => 
             array (
-                'id' => 98,
-                'name' => '{"en":"Obsidian Chasm"}',
-                'code' => NULL,
-                'scope_id' => 97,
-                'info' => NULL,
-                'image' => 'card/nX6vSgRVaBZQ0Lgq7mjCH3oPP2HcZHMgKjH5MhzP.jpg',
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-12-10 17:35:18',
-                'updated_at' => '2022-12-10 17:35:18',
-            ),
-            90 => 
-            array (
                 'id' => 4,
                 'name' => '{"ru":"Место","en":"Space"}',
                 'code' => 'space',
@@ -1293,7 +1279,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:56:32',
                 'updated_at' => '2022-12-10 23:43:34',
             ),
-            91 => 
+            90 => 
             array (
                 'id' => 15,
                 'name' => '{"en":"Area","ru":"Локация"}',
@@ -1306,6 +1292,20 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-24 19:14:00',
                 'updated_at' => '2022-12-10 23:59:42',
+            ),
+            91 => 
+            array (
+                'id' => 98,
+                'name' => '{"en":"Obsidian Chasm"}',
+                'code' => NULL,
+                'scope_id' => 97,
+                'info' => '{"en":null}',
+                'image' => 'card/nX6vSgRVaBZQ0Lgq7mjCH3oPP2HcZHMgKjH5MhzP.jpg',
+                'desc' => '{"en":"It was here, in the depths of this dangerous cave, that ancient tablets with the history of ancestors were hidden."}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-10 17:35:18',
+                'updated_at' => '2022-12-16 01:47:32',
             ),
             92 => 
             array (
@@ -1390,6 +1390,20 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-16 02:56:34',
                 'updated_at' => '2022-12-11 00:13:11',
+            ),
+            98 => 
+            array (
+                'id' => 99,
+                'name' => '{"en":"The Lost Tribes"}',
+                'code' => NULL,
+                'scope_id' => 15,
+                'info' => '{"en":null}',
+                'image' => 'card/ITPbsUyWhkFwBab3NXkJfgTrSjsZ1CUohmMYCBbm.jpg',
+                'desc' => '{"en":"Once upon a time, powerful clans lived in this area, but one day, for unknown reasons, they all disappeared, as if they had vanished into thin air. There are still many legends about the paths they left behind."}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-24 21:47:02',
+                'updated_at' => '2022-12-24 23:02:45',
             ),
         ));
         

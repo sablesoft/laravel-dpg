@@ -2455,6 +2455,30 @@ class CardRelationTableSeeder extends Seeder
                 'scene_id' => NULL,
                 'count' => 1,
             ),
+            203 => 
+            array (
+                'card_id' => 99,
+                'game_id' => NULL,
+                'deck_id' => NULL,
+                'book_id' => 2,
+                'dome_id' => NULL,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'scene_id' => NULL,
+                'count' => 1,
+            ),
+            204 => 
+            array (
+                'card_id' => 99,
+                'game_id' => NULL,
+                'deck_id' => NULL,
+                'book_id' => NULL,
+                'dome_id' => 1,
+                'land_id' => NULL,
+                'area_id' => NULL,
+                'scene_id' => NULL,
+                'count' => 1,
+            ),
         ));
         
         

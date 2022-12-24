@@ -76,6 +76,25 @@ class AreasTableSeeder extends Seeder
                 'created_at' => '2022-12-04 07:56:45',
                 'updated_at' => '2022-12-04 20:35:34',
             ),
+            3 => 
+            array (
+                'id' => 4,
+                'name' => '{"en":"The Lost Tribes"}',
+                'code' => NULL,
+                'scope_id' => 99,
+                'dome_id' => 1,
+                'top_step' => 12,
+                'top' => 3516,
+                'left_step' => 17,
+                'left' => 2872,
+                'markers' => NULL,
+                'image' => 'area/pTfTMYtmySo5iXWVvbVhksdM3SL0gJFWFu9rBR0F.png',
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-24 23:16:34',
+                'updated_at' => '2022-12-24 23:22:07',
+            ),
         ));
         
         

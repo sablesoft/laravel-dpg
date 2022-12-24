@@ -27,14 +27,13 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         options.top = options.top || model.top;
         options.area_id = options.area_id || model.id;
         options.card_id = options.card_id || model.scope_id;
+        options.showOpacity = options.showOpacity || this.defaultShowOpacity;
+        options.show = options.show === undefined ? false : options.show;
         if (!options.width || !options.height) {
             throw new Error('Area width and height required for fb object!');
         }
         options.width = parseInt(options.width);
         options.height = parseInt(options.height);
-
-        options.showOpacity = options.showOpacity || this.defaultShowOpacity;
-        options.show = options.show === undefined ? false : options.show;
 
         this.callSuper('initialize', [], options);
 
@@ -57,8 +56,13 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         this.show = show;
         if (show) {
             this.opacity = 1;
+            this.visible = true;
         } else {
-            this.opacity = this.isMaster ? this.showOpacity : 0;
+            if (this.isMaster) {
+                this.opacity = this.showOpacity;
+            } else {
+                this.visible = false;
+            }
         }
         if (this.canvas) {
             this.canvas.requestRenderAll();

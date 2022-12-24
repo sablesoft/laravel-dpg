@@ -29,11 +29,12 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         options.height = options.width * options.ratio;
         options.card_id = options.card_id || model.id;
         options.scope_id = options.scope_id || model.scope_id;
-
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
         options.show = options.show === undefined ? false : options.show;
 
         this.callSuper('initialize', [], options);
+
+        this.visibility(this.show);
 
         let self = this;
         this.on('mousedown', function() {
@@ -110,8 +111,13 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         this.show = show;
         if (show) {
             this.opacity = 1;
+            this.visible = true;
         } else {
-            this.opacity = this.isMaster ? this.showOpacity : 0;
+            if (this.isMaster) {
+                this.opacity = this.showOpacity;
+            } else {
+                this.visible = false;
+            }
         }
         if (this.canvas) {
             this.canvas.requestRenderAll();

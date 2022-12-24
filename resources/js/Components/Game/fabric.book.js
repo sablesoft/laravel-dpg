@@ -35,6 +35,8 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         options.width = model ? options.width + options.depth : options.width;
         options.image = options.image || model.image;
         options.book_id = options.book_id || model.id;
+        options.showOpacity = options.showOpacity || this.defaultShowOpacity;
+        options.show = options.show === undefined ? false : options.show;
         if (!options.back_image) {
             throw new Error('Back image required for book canvas object');
         }
@@ -43,10 +45,9 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
             options.lockMovementY = true;
         }
 
-        options.showOpacity = options.showOpacity || this.defaultShowOpacity;
-        options.show = options.show === undefined ? false : options.show;
-
         this.callSuper('initialize', [], options);
+
+        this.visibility(this.show);
 
         if (!model) {
             return;
@@ -129,8 +130,13 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         this.show = show;
         if (show) {
             this.opacity = 1;
+            this.visible = true;
         } else {
-            this.opacity = this.isMaster ? this.showOpacity : 0;
+            if (this.isMaster) {
+                this.opacity = this.showOpacity;
+            } else {
+                this.visible = false;
+            }
         }
         if (this.canvas) {
             this.canvas.requestRenderAll();

@@ -24,7 +24,6 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
         options.marker_id = options.marker_id || model.id;
         options.scope_id = options.scope_id || model.scope_id;
         options.imageScale = options.imageScale || this.defaultScale;
-
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
         options.show = options.show === undefined ? false : options.show;
 
@@ -62,8 +61,13 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
         this.show = show;
         if (show) {
             this.opacity = 1;
+            this.visible = true;
         } else {
-            this.opacity = this.isMaster ? this.showOpacity : 0;
+            if (this.isMaster) {
+                this.opacity = this.showOpacity;
+            } else {
+                this.visible = false;
+            }
         }
         if (this.canvas) {
             this.canvas.requestRenderAll();

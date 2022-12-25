@@ -39,6 +39,11 @@ class LandAreaTableSeeder extends Seeder
                 'land_id' => 1,
                 'area_id' => 4,
             ),
+            4 => 
+            array (
+                'land_id' => 1,
+                'area_id' => 5,
+            ),
         ));
         
         

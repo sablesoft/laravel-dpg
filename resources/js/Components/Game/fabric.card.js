@@ -1,4 +1,7 @@
 import { fabric } from 'fabric-with-erasing';
+import './fabric.back';
+import './fabric.name';
+import './fabric.scope-name';
 import { game } from "@/Components/Game/game";
 
 fabric.Card = fabric.util.createClass(fabric.Group, {
@@ -12,10 +15,10 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
     isMaster: false,
 
     /**
-     * @param {GameCard} model
+     * @param {number} id
      * @param {?Object.<string, any>} options
      */
-    initialize: function(model, options) {
+    initialize: function(id, options) {
         this.isMaster = game.isMaster();
         options || (options = {});
         options.hasControls = false;
@@ -27,8 +30,10 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         options.width = options.width || this.defaultWidth;
         options.ratio = options.ratio || this.defaultRatio;
         options.height = options.width * options.ratio;
-        options.card_id = options.card_id || model.id;
-        options.scope_id = options.scope_id || (model ? model.scope_id : null);
+        let card = id ? game.findCard(id) : game.findCard(options.card_id);
+
+        options.card_id = options.card_id || card.id;
+        options.scope_id = card.scope_id;
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
         options.show = options.show === undefined ? false : options.show;
 
@@ -55,7 +60,8 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
 
         this.visibility(this.show);
 
-        if (!model) {
+        if (!id) {
+            this.updateContent();
             return;
         }
 
@@ -71,15 +77,15 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             strokeLineCap: 'round',
             strokeLineJoin: 'round',
         }));
-        this.add(new fabric.Text(model.name, {
+        this.add(new fabric.Name(card.currentName, {
             originX: 'center',
             top: -60,
             fontSize: 12,
             fontWeight: 'bold',
             fill: 'black',
         }));
-        if (model.scopeName) {
-            this.add(new fabric.Text(model.scopeName, {
+        if (card.scopeName) {
+            this.add(new fabric.Text(game.getCardName(card.scope_id), {
                 originX: 'center',
                 top: 46,
                 fontSize: 12,
@@ -88,15 +94,15 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             }));
         }
 
-        if (model.image) {
-            fabric.Image.fromURL(model.image, function(image) {
+        if (card.image) {
+            fabric.Image.fromURL(card.image, function(image) {
                 image.scale(0.3);
                 image.set('originX', 'center');
                 image.set('top', -37);
                 self.add(image);
             });
         }
-        fabric.Image.fromURL(options.back_image, function(back) {
+        fabric.Back.fromURL(game.cardsBack, function(back) {
             back.set('originX', 'center');
             back.set('originY', 'center');
             self.add(back);
@@ -105,6 +111,36 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
                 back.set('opacity', 0);
             }
         });
+    },
+
+    updateContent() {
+        let card = game.findCard(this.get('card_id'));
+        // update back image:
+        let back = this.getObjects('back')[0];
+        back.setSrc(game.cardsBack, function(img) {
+            if (img.canvas) {
+                img.canvas.requestRenderAll();
+            }
+        });
+        // update image:
+        let image = this.getObjects('image')[0];
+        if (image) {
+            image.setSrc(card.image, function(img) {
+                if (img.canvas) {
+                    img.canvas.requestRenderAll();
+                }
+            });
+        }
+        // update name:
+        let name = this.getObjects('name')[0];
+        name.setText(card.currentName);
+        // update scope name:
+        let scope = this.getObjects('scopeName')[0];
+        if (scope) {
+            scope.setText(game.getCardName(card.scope_id));
+        }
+
+        return this;
     },
 
     visibility: function(show = true) {
@@ -131,15 +167,11 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         }
         let opened = this.get('opened');
         this.set('opened', !opened);
-        let self = this;
-        this.getObjects().forEach(function(o) {
-            if (o.type === 'image' && Number(o.get('scaleX')) === 1) {
-                o.set('opacity', opened ? 1 : 0);
-                o.bringToFront();
-                self.set('dirty', true);
-                self.canvas && self.canvas.requestRenderAll();
-            }
-        });
+        let back = this.getObjects('back')[0];
+        back.set('opacity', opened ? 1 : 0);
+        back.bringToFront();
+        this.set('dirty', true);
+        this.canvas && this.canvas.requestRenderAll();
     },
 
     tap: function (force = false) {

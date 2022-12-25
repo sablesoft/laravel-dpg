@@ -743,12 +743,7 @@ export const game = shallowReactive({
      * @return {fabric.Card}
      */
     createCardFabric(id, options, add = true) {
-        if (!this.cards[id]) {
-            throw new Error('Card not found: ' + id);
-        }
-        options || (options = {});
-        options.back_image = toRaw(this.cardsBack);
-        let o = new fabric.Card(toRaw(this.cards[id]), options);
+        let o = new fabric.Card(id, options);
         if (add) {
             this.fb().add(o);
             this.fb().requestRenderAll();
@@ -764,22 +759,7 @@ export const game = shallowReactive({
      * @return {fabric.Area}
      */
     createAreaFabric(id, options = null, add = true) {
-        /**
-         * @type {GameArea}
-         */
-        let area = toRaw(this.areas[id]);
-        if (!area) {
-            throw new Error('Area not found: ' + id);
-        }
-        options || (options = {});
-        let dome = toRaw(this.domes[area.dome_id]);
-        if (!dome) {
-            throw new Error('Dome for area not found: ' + id);
-        }
-        options.width = dome.area_width;
-        options.height = dome.area_height;
-        options.mask = Array.from(dome.area_mask);
-        let o = new fabric.Area(area, options);
+        let o = new fabric.Area(id, options);
         if (add) {
             this.fb().add(o);
             o.sendBackwards(true);
@@ -898,6 +878,15 @@ export const game = shallowReactive({
         });
         this.setActiveObject(o);
         this.showCard(this.activeInfo.id);
+    },
+    getCardName(id, current = true) {
+        let card = this.cards[id];
+        if (!card) {
+            console.error('Card for name not found', id);
+            return null;
+        }
+        return current ? card.currentName : card.name;
+
     },
     /**
      * @returns {Dome}
@@ -1384,6 +1373,24 @@ export const game = shallowReactive({
         let labels = ['Stack','Set','State','Control'];
 
         return labels[number];
+    },
+    findCard(id) {
+        if (!this.cards[id]) {
+            throw new Error('Card not found: ' + id);
+        }
+        return toRaw(this.cards[id]);
+    },
+    findArea(id) {
+        if (!this.areas[id]) {
+            throw new Error('Area not found: ' + id);
+        }
+        return toRaw(this.areas[id]);
+    },
+    findDome(id) {
+        if (!this.domes[id]) {
+            throw new Error('Dome not found: ' + id);
+        }
+        return toRaw(this.domes[id]);
     },
     /**
      * @param {string} type

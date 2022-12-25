@@ -2,16 +2,15 @@ import { fabric } from 'fabric-with-erasing';
 import { game } from "@/Components/Game/game";
 
 fabric.Area = fabric.util.createClass(fabric.Group, {
-
     type: 'area',
     isMaster: false,
     defaultShowOpacity: 0.7,
 
     /**
-     * @param {GameArea} model
+     * @param {number} id
      * @param {?Object.<string, any>} options
      */
-    initialize: function(model, options) {
+    initialize: function(id, options) {
         this.isMaster = game.isMaster();
         options || (options = {});
         options.hasControls = false;
@@ -21,17 +20,21 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         options.lockRotation = true;
         options.erasable = false;
         options.hoverCursor = 'pointer';
-        options.left = options.left || model.left;
-        options.top = options.top || model.top;
-        options.area_id = options.area_id || model.id;
-        options.card_id = options.card_id || model.scope_id;
+
+        let area = id ? game.findArea(id) : game.findArea(options.area_id);
+        let dome = game.findDome(area.dome_id);
+        options.width = parseInt(dome.area_width);
+        options.height = parseInt(dome.area_height);
+        options.mask = Array.from(dome.area_mask || []);
+        options.left = options.left || area.left;
+        options.top = options.top || area.top;
+        options.area_id = options.area_id || area.id;
+        options.card_id = options.card_id || area.scope_id;
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
         options.show = options.show === undefined ? false : options.show;
         if (!options.width || !options.height) {
             throw new Error('Area width and height required for fb object!');
         }
-        options.width = parseInt(options.width);
-        options.height = parseInt(options.height);
 
         options.lockMovementX = !this.isMaster;
         options.lockMovementY = !this.isMaster;
@@ -40,17 +43,32 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
 
         this.visibility(this.show);
 
-        if (!model) {
+        if (!id) {
+            this.updateContent();
             return;
         }
 
+        let areaCard = game.cards[area.scope_id];
+
         let self = this;
-        fabric.Image.fromURL(model.image, function(image) {
+        // todo update images for created objects
+        fabric.Image.fromURL(areaCard.image, function(image) {
             image.set('originX', 'center');
             image.set('originY', 'center');
             image.set('erasable', false);
             self.add(image);
         });
+    },
+
+    updateContent() {
+        let area = game.findArea(this.get('area_id'));
+        let image = this.getObjects('image')[0];
+        image.setSrc(area.image, function(img) {
+            if (img.canvas) {
+                img.canvas.requestRenderAll();
+            }
+        });
+        // todo - update mask polygone
     },
 
     visibility: function(show = true) {
@@ -75,7 +93,7 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
             show: this.get('show'),
             area_id: this.get('area_id'),
             card_id: this.get('card_id'),
-            mask: this.get('mask'),
+            mask: this.get('mask'), // todo - mask for checking cursor
         });
     },
 

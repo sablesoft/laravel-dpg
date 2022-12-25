@@ -32,7 +32,15 @@
             <select v-model="game.selectedId" @change="game.selectDome($event)">
                 <option :value="null" disabled>{{ __('Domes') }}</option>
                 <option v-for="dome in game.filteredDomes()" :value="dome.id">
-                    {{ dome.name }}
+                    {{ game.cards[dome.scope_id].name }}
+                </option>
+            </select>
+        </div>
+        <div class="aside-content" v-if="game.mainTab === 'Map'">
+            <select v-model="game.selectedId" @change="game.selectArea($event)">
+                <option :value="null" disabled>{{ __('Areas') }}</option>
+                <option v-for="area in game.filteredAreas()" :value="area.id">
+                    {{ game.cards[area.scope_id].name }}
                 </option>
             </select>
         </div>
@@ -40,7 +48,7 @@
             <select v-model="game.selectedId" @change="game.selectScene($event)">
                 <option :value="null" disabled>{{ __('Scenes') }}</option>
                 <option v-for="scene in game.filteredScenes()" :value="scene.id">
-                    {{ scene.name }}
+                    {{ game.cards[scene.scope_id].name }}
                 </option>
             </select>
         </div>

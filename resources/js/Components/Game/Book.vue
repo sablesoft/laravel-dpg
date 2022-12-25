@@ -18,7 +18,7 @@
         <div class="aside-content">
             <select v-model="game.selectedId" @change="game.selectDome($event)">
                 <option :value="null" disabled>{{ __('Domes') }}</option>
-                <option v-for="dome in game.filteredDomes('book')" :value="dome.id">
+                <option v-for="dome in game.filteredDomes('books')" :value="dome.id">
                     {{ dome.name }}
                 </option>
             </select>
@@ -26,7 +26,7 @@
         <div class="aside-content">
             <select v-model="game.selectedId" @change="game.selectScene($event)">
                 <option :value="null" disabled>{{ __('Scenes') }}</option>
-                <option v-for="scene in game.filteredScenes('book')" :value="scene.id">
+                <option v-for="scene in game.filteredScenes('books')" :value="scene.id">
                     {{ scene.name }}
                 </option>
             </select>
@@ -34,7 +34,7 @@
         <div class="aside-content">
             <select v-model="game.selectedId" @change="game.selectDeck($event)">
                 <option :value="null" disabled>{{ __('Decks') }}</option>
-                <option v-for="deck in game.filteredDecks('book')" :value="deck.id">
+                <option v-for="deck in game.filteredDecks('books')" :value="deck.id">
                     {{ deck.type + ' : ' + deck.target + ' - ' + deck.scope }}
                 </option>
             </select>
@@ -42,7 +42,7 @@
         <div class="aside-content">
             <select v-model="game.selectedId" @change="game.selectCard($event)">
                 <option :value="null" disabled>{{ __('Cards') }}</option>
-                <option v-for="card in game.filteredCards('book')" :value="card.id">
+                <option v-for="card in game.filteredCards('books')" :value="card.id">
                     {{ card.name }}
                 </option>
             </select>

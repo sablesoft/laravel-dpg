@@ -28,7 +28,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         options.ratio = options.ratio || this.defaultRatio;
         options.height = options.width * options.ratio;
         options.card_id = options.card_id || model.id;
-        options.scope_id = options.scope_id || model.scope_id;
+        options.scope_id = options.scope_id || (model ? model.scope_id : null);
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
         options.show = options.show === undefined ? false : options.show;
 

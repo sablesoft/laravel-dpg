@@ -4,6 +4,7 @@ import './fabric.card';
 import './fabric.area';
 import './fabric.marker';
 import './fabric.book';
+import './fabric.dome';
 import './fabric.fog';
 
 /**
@@ -22,6 +23,7 @@ import './fabric.fog';
 /**
  * @typedef {Object} ActiveInfo
  * @property {?number} id
+ * @property {?number} scopeId
  * @property {?string} type
  * @property {?string} name
  * @property {?string} scopeName
@@ -180,6 +182,7 @@ export const game = shallowReactive({
      */
     info: {
         id: null,
+        scopeId: null,
         type: null,
         name: null,
         desc: null,
@@ -206,6 +209,7 @@ export const game = shallowReactive({
      */
     activeInfo: {
         id: null,
+        scopeId: null,
         type: null,
         name: null,
         desc: null,
@@ -363,9 +367,9 @@ export const game = shallowReactive({
         this.role = options.role;
         this.showInfo();
         this.canScene = this.isMaster() ? !!game.activeSceneId :
-            game.activeSceneId && this.visibleSceneIds.contains(game.activeSceneId);
+            game.activeSceneId && this.visibleSceneIds.includes(Number(game.activeSceneId));
         this.canMap = this.isMaster() ? !!game.activeDomeId :
-            game.activeDomeId && this.visibleDomeIds.contains(game.activeDomeId);
+            game.activeDomeId && this.visibleDomeIds.includes(Number(game.activeDomeId));
 
         console.debug('Game initiated', this);
     },
@@ -488,6 +492,7 @@ export const game = shallowReactive({
                 let domeCard = this.cards[dome.scope_id];
                 this.activeInfo = {
                     id: dome.id,
+                    scopeId: dome.scope_id,
                     type: 'dome',
                     name: dome.name,
                     desc: dome.desc,
@@ -501,6 +506,7 @@ export const game = shallowReactive({
                 let sceneCard = this.cards[scene.scope_id];
                 this.activeInfo = {
                     id: scene.id,
+                    scopeId: scene.scope_id,
                     type: 'scene',
                     name: scene.name,
                     desc: scene.desc,
@@ -560,6 +566,8 @@ export const game = shallowReactive({
                 return this.showCard(id);
             case 'area':
                 return this.showArea(id);
+            case 'dome':
+                return this.showDome(id);
             default:
                 throw new Error('Unknown object type: ' + type);
         }
@@ -587,6 +595,34 @@ export const game = shallowReactive({
         });
         this.asideTab = 'Book';
     },
+    showDome(id) {
+        let dome = this.domes[id];
+        console.debug('Show Dome', dome);
+        if (!dome) {
+            throw new Error('Dome not found: ' + id);
+        }
+        let domeCard = this.cards[dome.scope_id];
+        if (!domeCard) {
+            throw new Error('Dome card not found: ' + dome.scope_id);
+        }
+        this.activeInfo = {
+            id: dome.id,
+            scopeId: dome.scope_id,
+            type: 'dome',
+            name: domeCard.name,
+            desc: domeCard.desc,
+            image: domeCard.image,
+            scopeImage: null,
+            scopeName: null
+        };
+        let self = this;
+        this.fb().getObjects('dome').forEach(function(o) {
+            if (o.get('dome_id') === Number(id)) {
+                self.setActiveObject(o);
+            }
+        });
+        this.asideTab = 'Dome';
+    },
     showCard(id) {
         let card = this.cards[id];
         console.debug('Show Card', card);
@@ -595,6 +631,7 @@ export const game = shallowReactive({
         }
         this.activeInfo = {
             id: card.id,
+            scopeId: card.scope_id,
             type: 'card',
             name: card.name,
             desc: card.desc,
@@ -603,6 +640,8 @@ export const game = shallowReactive({
             scopeName: card.scopeName,
         };
         this.asideTab = 'Card';
+
+        return this;
     },
     showArea(id) {
         let area = this.areas[id];
@@ -616,6 +655,7 @@ export const game = shallowReactive({
         }
         this.activeInfo = {
             id: area.id,
+            scopeId: area.scope_id,
             type: 'area',
             name: areaCard.name,
             desc: areaCard.desc,
@@ -655,9 +695,17 @@ export const game = shallowReactive({
             case 'marker':
                 this._visibility('card', o.get('marker_id'), show);
                 break;
+            case 'dome':
+                this._visibility('dome', o.get('dome_id'), show);
+                break;
+            case 'area':
+                this._visibility('area', o.get('area_id'), show);
+                break;
             case 'book':
                 this._visibility('book', o.get('book_id'), show);
                 break;
+            default:
+                console.warn('Unknown object for visibility: ', o);
         }
     },
     forward() {
@@ -705,6 +753,7 @@ export const game = shallowReactive({
             this.fb().add(o);
             this.fb().requestRenderAll();
         }
+        // console.debug('Created card object', o);
 
         return o;
     },
@@ -736,6 +785,7 @@ export const game = shallowReactive({
             o.sendBackwards(true);
             this.fb().requestRenderAll();
         }
+        // console.debug('Created area object', o);
 
         return o;
     },
@@ -754,6 +804,7 @@ export const game = shallowReactive({
             this.fb().add(o);
             this.fb().requestRenderAll();
         }
+        // console.debug('Created marker object', o);
 
         return o;
     },
@@ -765,7 +816,7 @@ export const game = shallowReactive({
      */
     createBookFabric(id, options = null, add = true) {
         if (!this.books[id]) {
-            throw new Error('Card not found: ' + id);
+            throw new Error('Book not found: ' + id);
         }
         options = options || {};
         options.back_image = options.back_image || this.cardsBack;
@@ -775,7 +826,32 @@ export const game = shallowReactive({
             this.fb().add(o);
             this.fb().requestRenderAll();
         }
-        console.debug('Book object', o);
+        // console.debug('Created book object', o);
+
+        return o;
+    },
+    /**
+     * @param {number} id
+     * @param {?Object.<string, any>} options
+     * @param {?boolean} add
+     * @return {fabric.Book}
+     */
+    createDomeFabric(id, options = null, add = true) {
+        let dome = this.domes[id];
+        if (!dome) {
+            throw new Error('Dome not found: ' + id);
+        }
+        options = options || {};
+        let domeCard = this.cards[dome.scope_id];
+        options.image = domeCard.image;
+        options.back_image = options.back_image || this.cardsBack;
+        options.scopeName = 'Dome'; // todo - add dictionary from backend
+        let o = new fabric.Dome(toRaw(dome), options);
+        if (add) {
+            this.fb().add(o);
+            this.fb().requestRenderAll();
+        }
+        console.debug('Created dome object', o);
 
         return o;
     },
@@ -788,6 +864,14 @@ export const game = shallowReactive({
                 height: height
             }));
         }, 500);
+    },
+    addDome() {
+        let center = this._center();
+        this.createDomeFabric(this.activeInfo.id, {
+            left: center.x,
+            top: center.y
+        });
+        this.showDome(this.activeInfo.id);
     },
     addBook() {
         let center = this._center();
@@ -1007,6 +1091,24 @@ export const game = shallowReactive({
      * @param {?Object|string} filter
      * @return {Object<number, any>}
      */
+    filteredAreas(filter = null) {
+        let ids = this.isMaster() ?
+            Object.keys(this.areas) : Array.from(this.visibleAreaIds);
+        if (filter) {
+            ids = this._filter(ids, filter, 'area_ids');
+        }
+        let self = this;
+        let filtered = {};
+        ids.forEach(function(id) {
+            filtered[id] = toRaw(self.areas[id]);
+        });
+
+        return filtered;
+    },
+    /**
+     * @param {?Object|string} filter
+     * @return {Object<number, any>}
+     */
     filteredScenes(filter = null) {
         let ids = this.isMaster() ?
             Object.keys(this.scenes) : Array.from(this.visibleSceneIds);
@@ -1102,6 +1204,8 @@ export const game = shallowReactive({
             hidden: this.activeObjectHidden,
             type: this.activeObjectType
         });
+
+        return this;
     },
     selectBook(event) {
         this.selectedId = null;
@@ -1111,9 +1215,12 @@ export const game = shallowReactive({
     selectDome(event) {
         this.selectedId = null;
         this.fb().discardActiveObject();
-        let dome = this.domes[event.target.value];
-        console.debug('Selected Dome', dome);
-        // todo
+        this.showDome(event.target.value);
+    },
+    selectArea(event) {
+        this.selectedId = null;
+        this.fb().discardActiveObject();
+        this.showArea(event.target.value);
     },
     selectScene(event) {
         this.selectedId = null;
@@ -1133,6 +1240,10 @@ export const game = shallowReactive({
         this.selectedId = null;
         this.fb().discardActiveObject();
         this.showCard(event.target.value);
+    },
+    switchCard(id) {
+        this.setActiveObject();
+        this.showCard(id);
     },
     /**
      * @return {HTMLCollectionOf<HTMLCanvasElement>}
@@ -1168,27 +1279,41 @@ export const game = shallowReactive({
             this.cursorScope = null;
             return;
         }
-        if (o.type === 'card') {
-            if (!o.get('opened') && !this.isMaster()) {
-                this.cursorName = '???';
-                this.cursorScope = '???';
-                return;
-            }
-        }
-        if (o.get('card_id')) {
-            let card = this.cards[o.get('card_id')];
-            this.cursorName = card.name;
-            this.cursorScope = card.scopeName;
-        }
-        if (o.get('marker_id')) {
-            let card = this.cards[o.get('marker_id')];
-            this.cursorName = card.name;
-            this.cursorScope = card.scopeName;
-        }
-        if (o.get('book_id')) {
-            let book = this.books[o.get('book_id')];
-            this.cursorName = book.name;
-            this.cursorScope = 'Book';
+        switch (o.type) {
+            case 'card':
+                if (!o.get('opened') && !this.isMaster()) {
+                    this.cursorName = '???';
+                    this.cursorScope = '???';
+                    return;
+                }
+                let card = this.cards[o.get('card_id')];
+                this.cursorName = card.name;
+                this.cursorScope = card.scopeName;
+                break;
+            case 'marker':
+                let marker = this.cards[o.get('marker_id')];
+                this.cursorName = marker.name;
+                this.cursorScope = marker.scopeName;
+                break;
+            case 'book':
+                let book = this.books[o.get('book_id')];
+                this.cursorName = book.name;
+                this.cursorScope = 'Book'; // todo - localization
+                break;
+            case 'dome':
+                let dome = this.domes[o.get('dome_id')];
+                let domeCard = this.cards[dome.scope_id];
+                this.cursorName = domeCard.name;
+                this.cursorScope = 'Dome'; // todo - localization
+                break;
+            case 'area':
+                let area = this.areas[o.get('area_id')];
+                let areaCard = this.cards[area.scope_id];
+                this.cursorName = areaCard.name;
+                this.cursorScope = 'Area'; // todo - localization
+                break;
+            default:
+                console.error('Unknown object for cursor!', o);
         }
     },
     /**
@@ -1225,22 +1350,11 @@ export const game = shallowReactive({
      */
     _filter(ids, filter, idsField) {
         if (typeof filter === 'string') {
-            switch (filter) {
-                case 'book':
-                    filter = {
-                        books: this.activeInfo.id
-                    }
-                    break;
-                case 'area':
-                    filter = {
-                        areas: this.activeInfo.id
-                    }
-                    break;
-                default:
-                    throw new Error('Unknown filter code');
-            }
+            let temp = {}
+            temp[filter] = this.activeInfo.id;
+            filter = temp;
         }
-        // console.log('Filtering...', ids, filter, idsField);
+        // console.log('Filtering...', filter, idsField);
         let filteredIds = [];
         for (let source in filter) {
             if (!this[source]) {

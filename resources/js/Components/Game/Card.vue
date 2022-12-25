@@ -23,7 +23,7 @@
         <div v-if="game.isMaster() || game.mainTab === 'Board'"
              class="aside-content aside-actions">
             <button v-if="game.isMaster() && game.mainTab === 'Board'"
-                    class="control-btn control-remove" :title="__('Add')">
+                    class="control-btn control-remove" :title="__('Add Card')">
                 <span class="material-icons" @click="game.addCard()">add</span>
             </button>
             <button v-if="game.isMaster() && game.mainTab !== 'Board'"
@@ -36,10 +36,14 @@
             <button v-if="game.activeObject" class="control-btn control-forward" :title="__('Backward')">
                 <span class="material-icons" @click="game.backward()">download</span>
             </button>
-            <button class="control-text" v-if="game.activeObjectType === 'card' && !game.activeCardTapped"
-                    @click="game.activeCardTap()">{{ __('Tap') }}</button>
-            <button class="control-text" v-if="game.activeObjectType === 'card' && game.activeCardTapped"
-                    @click="game.activeCardUntap()">{{ __('Untap') }}</button>
+            <button v-if="game.activeObject && game.mainTab === 'Board' && !game.activeCardTapped"
+                    class="control-text" :title="__('Tap')" >
+                <span class="material-icons" @click="game.activeCardTap()">swipe_down</span>
+            </button>
+            <button v-if="game.activeObject && game.mainTab === 'Board' && game.activeCardTapped"
+                    class="control-text" :title="__('Untap')">
+                <span class="material-icons" @click="game.activeCardUntap()">pinch</span>
+            </button>
             <button v-if="game.activeObject && game.isMaster() && game.activeObjectHidden"
                     class="control-btn control-forward" :title="__('Show')">
                 <span class="material-icons" @click="game.visibility()">visibility</span>

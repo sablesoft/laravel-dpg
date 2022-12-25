@@ -10,6 +10,7 @@ import Scene from '@/Components/Game/Scene.vue';
 import Info from '@/Components/Game/Info.vue';
 import Card from '@/Components/Game/Card.vue';
 import Book from '@/Components/Game/Book.vue';
+import Dome from '@/Components/Game/Dome.vue';
 import Area from '@/Components/Game/Area.vue';
 
 import { Head } from '@inertiajs/inertia-vue3';
@@ -32,6 +33,7 @@ const asideTabs = {
     Info,
     Card,
     Book,
+    Dome,
     Area
 }
 const mainTabs = {

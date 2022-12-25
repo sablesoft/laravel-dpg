@@ -24,8 +24,6 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         options.hasBorders = false;
         options.hoverCursor = 'pointer';
         options.centeredRotation = true;
-        options.lockScalingX = true;
-        options.lockScalingY = true;
         options.lockRotation = true;
         options.erasable = false;
         options.depth = options.depth || this.defaultDepth;
@@ -40,10 +38,8 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         if (!options.back_image) {
             throw new Error('Back image required for book canvas object');
         }
-        if (!this.isMaster) {
-            options.lockMovementX = true;
-            options.lockMovementY = true;
-        }
+        options.lockMovementX = !this.isMaster;
+        options.lockMovementY = !this.isMaster;
 
         this.callSuper('initialize', [], options);
 
@@ -158,7 +154,6 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         this.callSuper('_render', ctx);
     }
 });
-
 
 fabric.Book.fromObject = function(object, callback) {
     let objects = object.objects || [],

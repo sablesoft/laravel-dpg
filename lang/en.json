@@ -93,5 +93,18 @@
     "Dome": "Dome",
     "Domes": "Domes",
     "Area": "Area",
-    "Areas": "Areas"
+    "Areas": "Areas",
+    "Scene": "Scene",
+    "Scenes": "Scenes",
+    "Board": "Board",
+    "Map": "Map",
+    "Hide": "Hide",
+    "Show": "Show",
+    "Remove": "Remove",
+    "Add": "Add",
+    "Show Card": "Show Card",
+    "Transform Mode": "Transform Mode",
+    "Erase Mode": "Erase Mode",
+    "Erase Undo Mode": "Erase Undo Mode",
+    "Brush Size": "Brush Size"
 }

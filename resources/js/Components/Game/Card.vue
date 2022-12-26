@@ -23,11 +23,11 @@
         <div v-if="game.isMaster() || game.mainTab === 'Board'"
              class="aside-content aside-actions">
             <button v-if="game.isMaster() && game.mainTab === 'Board'"
-                    class="control-btn control-remove" :title="__('Add Card')">
+                    class="control-btn control-remove" :title="__('Add')">
                 <span class="material-icons" @click="game.addCard()">add</span>
             </button>
             <button v-if="game.isMaster() && game.mainTab !== 'Board'"
-                    class="control-btn control-marker" :title="__('Add Marker')" >
+                    class="control-btn control-marker" :title="__('Add')" >
                 <span class="material-icons" @click="game.addMarker()">place</span>
             </button>
             <button v-if="game.activeObject" class="control-btn control-forward" :title="__('Forward')">

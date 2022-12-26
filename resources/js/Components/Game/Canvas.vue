@@ -78,25 +78,29 @@
         </button>
 
         <!-- Erase Mode -->
-        <button v-if="game.isMaster()"  class="control-btn control-erase"
+        <button v-if="game.isMaster() && game.mainTab !== 'Board'"  class="control-btn control-erase"
                 :class="{'control-active' : game.modeErase}"
                 :title="__('Erase Mode')">
             <span class="material-icons" @click="game.switchErase()">visibility</span>
         </button>
-        <button v-if="game.isMaster()"  class="control-btn control-erase-undo"
+        <button v-if="game.isMaster() && game.mainTab !== 'Board'"  class="control-btn control-erase-undo"
                 :class="{'control-active' : game.modeEraseUndo}"
                 :title="__('Erase Undo Mode')">
             <span class="material-icons" @click="game.switchEraseUndo()">visibility_off</span>
         </button>
         <div class="control-more" v-if="game.modeErase || game.modeEraseUndo" >
-            <label for="brush-width">{{ __('Brush Width') + ' ' + game.brushWidth }}</label>
+            <label for="brush-width">{{ __('Brush Size')}}</label>
             <input id="brush-width" class="control-btn control-range"
                    type="range" min="1" max="200" step="1"
                    :value="game.brushWidth" @input="event => game.setBrushWidth(event.target.value)">
         </div>
         <button v-if="game.modeEraseUndo || game.modeErase || game.modeTransform"
-                class="control-btn control-reset" :title="__('Reset')">
-            <span class="material-icons" @click="game.resetCanvas()">restore</span>
+                class="control-btn control-reset" :title="__('Undo')">
+            <span class="material-icons" @click="game.canvasUndo()">undo</span>
+        </button>
+        <button v-if="game.modeEraseUndo || game.modeErase || game.modeTransform"
+                class="control-btn control-reset" :title="__('Redo')">
+            <span class="material-icons" @click="game.canvasRedo()">redo</span>
         </button>
 
         <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase && !game.modeTransform"

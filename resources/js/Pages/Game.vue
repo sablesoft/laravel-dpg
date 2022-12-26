@@ -13,7 +13,7 @@ import Book from '@/Components/Game/Book.vue';
 import Dome from '@/Components/Game/Dome.vue';
 import Area from '@/Components/Game/Area.vue';
 
-import { Head } from '@inertiajs/inertia-vue3';
+import {Head, usePage} from '@inertiajs/inertia-vue3';
 import { game } from "@/Components/Game/game";
 import {onMounted, shallowRef, toRaw} from "vue";
 
@@ -46,7 +46,9 @@ onMounted(() => {
     let options = {
         width: boardRef.value.offsetWidth,
         height: window.innerHeight - 100,
-        role: props.role
+        role: props.role,
+        locale: usePage().props.value.locale,
+        dictionary: usePage().props.value.language
     }
     game.init(props.data, options);
     console.debug('INITIAL DATA', toRaw(game));

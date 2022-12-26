@@ -18,6 +18,8 @@ import './fabric.fog';
  * @property {number} width
  * @property {number} height
  * @property {string} role
+ * @property {string} locale
+ * @property {Object} dictionary
  */
 
 /**
@@ -190,11 +192,8 @@ export const game = shallowReactive({
         scopeImage: null,
         scopeName: null
     },
-    // todo - load dictionary from backend:
-    dictionary: {
-        'Dome': 'Dome',
-        'Book': 'Book'
-    },
+    locale: 'en',
+    dictionary: {},
     /**
      * @member {?string} - user role code
      */
@@ -370,6 +369,8 @@ export const game = shallowReactive({
         this.width = options.width;
         this.height = options.height;
         this.role = options.role;
+        this.locale = options.locale;
+        this.dictionary = options.dictionary;
         this.showInfo();
         this.canScene = this.isMaster() ? !!game.activeSceneId :
             game.activeSceneId && this.visibleSceneIds.includes(Number(game.activeSceneId));
@@ -998,9 +999,13 @@ export const game = shallowReactive({
         }
         return this.fb().requestRenderAll();
     },
-    resetCanvas() {
+    canvasUndo() {
         // todo
-        console.log('RESET IS TODO');
+        console.log('TODO - canvas undo');
+    },
+    canvasRedo() {
+        // todo
+        console.log('TODO - canvas redo');
     },
     /**
      * @param {?Object|string} filter
@@ -1283,19 +1288,19 @@ export const game = shallowReactive({
             case 'book':
                 let book = this.books[o.get('book_id')];
                 this.cursorName = book.name;
-                this.cursorScope = 'Book'; // todo - localization
+                this.cursorScope = this.trans('Book');
                 break;
             case 'dome':
                 let dome = this.domes[o.get('dome_id')];
                 let domeCard = this.cards[dome.scope_id];
                 this.cursorName = domeCard.name;
-                this.cursorScope = 'Dome'; // todo - localization
+                this.cursorScope = this.trans('Dome');
                 break;
             case 'area':
                 let area = this.areas[o.get('area_id')];
                 let areaCard = this.cards[area.scope_id];
                 this.cursorName = areaCard.name;
-                this.cursorScope = 'Area'; // todo - localization
+                this.cursorScope = this.trans('Area');
                 break;
             default:
                 console.error('Unknown object for cursor!', o);

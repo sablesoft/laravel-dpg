@@ -10,7 +10,7 @@
             <img :src="game.activeInfo.image" alt="">
         </div>
         <div v-if="!game.activeInfo.scopeImage" class="aside-content aside-name">
-            {{ game.activeInfo.scopeName }}
+            {{ __(game.activeInfo.scopeName) }}
         </div>
         <div v-if="game.activeInfo.scopeImage" class="aside-content aside-image scope-image">
             <img :src="game.activeInfo.scopeImage"

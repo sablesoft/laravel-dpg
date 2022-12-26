@@ -71,6 +71,12 @@
             <button class="control-btn control-forward" :title="__('Show Card')">
                 <span class="material-icons" @click="game.showCard(game.activeInfo.scopeId)">content_copy</span>
             </button>
+            <button v-if="!game.isActivated()" class="control-btn control-public" :title="__('Activate')">
+                <span class="material-icons" @click="game.activateSpace()">public</span>
+            </button>
+            <button v-if="game.isActivated()" class="control-btn control-public" :title="__('Deactivate')">
+                <span class="material-icons" @click="game.activateSpace(false)">public_off</span>
+            </button>
             <button v-if="game.activeObject"
                     class="control-btn control-remove" :title="__('Remove')">
                 <span class="material-icons" @click="game.remove()">delete</span>

@@ -372,12 +372,15 @@ export const game = shallowReactive({
         this.locale = options.locale;
         this.dictionary = options.dictionary;
         this.showInfo();
+        this.updateCanSee();
+
+        console.debug('Game initiated', this);
+    },
+    updateCanSee() {
         this.canScene = this.isMaster() ? !!game.activeSceneId :
             game.activeSceneId && this.visibleSceneIds.includes(Number(game.activeSceneId));
         this.canMap = this.isMaster() ? !!game.activeDomeId :
             game.activeDomeId && this.visibleDomeIds.includes(Number(game.activeDomeId));
-
-        console.debug('Game initiated', this);
     },
     /**
      * @param {?Object.<string, any>} options
@@ -491,6 +494,41 @@ export const game = shallowReactive({
     },
     isMaster() {
         return this.role === 'master';
+    },
+    activateSpace(activate = true) {
+        let id = Number(this.activeInfo.id);
+        switch(this.activeInfo.type) {
+            case 'dome':
+                this.activeDomeId = activate ? id : null;
+                break;
+            case 'area':
+                this.activeAreaId = activate ? id : null;
+                break;
+            case 'scene':
+                this.activeSceneId = activate ? id : null;
+                break;
+            default:
+                console.error('Invalid active info for makeActive', this.activeInfo);
+                throw new Error('Invalid active info for makeActive');
+        }
+        this.updateCanSee();
+    },
+    isActivated() {
+        let id = Number(this.activeInfo.id);
+        switch(this.activeInfo.type) {
+            case 'dome':
+                console.debug('Active dome', this.activeDomeId);
+                return this.activeDomeId === id;
+            case 'area':
+                console.debug('Active area', this.activeAreaId);
+                return this.activeAreaId === id;
+            case 'scene':
+                console.debug('Active scene', this.activeSceneId);
+                return this.activeSceneId === id;
+            default:
+                console.error('Invalid active info for isActivated', this.activeInfo);
+                throw new Error('Invalid active info for isActivated');
+        }
     },
     showInfo() {
         this.asideTab = 'Info';

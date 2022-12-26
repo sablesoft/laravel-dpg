@@ -20,10 +20,10 @@
         <div class="aside-content aside-desc">
             {{ game.activeInfo.desc }}
         </div>
-        <div class="aside-content">
+        <div class="aside-content" v-if="game.mainTab !== 'MainBoard'">
             <select v-model="game.selectedId" @change="game.selectBook($event)">
-                <option :value="null" disabled>{{ __('Books') }}</option>
-                <option v-for="book in game.filteredSources()" :value="book.id">
+                <option :value="null" disabled>{{ __('All Books') }}</option>
+                <option v-for="book in game.filteredSources('all')" :value="book.id">
                     {{ book.name }}
                 </option>
             </select>
@@ -49,6 +49,14 @@
                 <option :value="null" disabled>{{ __('Scenes') }}</option>
                 <option v-for="scene in game.filteredScenes()" :value="scene.id">
                     {{ game.cards[scene.scope_id].name }}
+                </option>
+            </select>
+        </div>
+        <div class="aside-content">
+            <select v-model="game.selectedId" @change="game.selectBook($event)">
+                <option :value="null" disabled>{{ __('Books') }}</option>
+                <option v-for="book in game.filteredSources()" :value="book.id">
+                    {{ book.name }}
                 </option>
             </select>
         </div>

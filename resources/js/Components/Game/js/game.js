@@ -500,12 +500,28 @@ export const game = shallowReactive({
         switch(this.activeInfo.type) {
             case 'dome':
                 this.activeDomeId = activate ? id : null;
+                if (this.mainTab === 'MainDome') {
+                    if (!this.activeDomeId) {
+                        this.mainTab = 'MainBoard';
+                    } else {
+                        this.mainTab = 'MainBoard';
+                        this.mainTab = 'MainDome';
+                    }
+                }
                 break;
             case 'area':
                 this.activeAreaId = activate ? id : null;
                 break;
             case 'scene':
                 this.activeSceneId = activate ? id : null;
+                if (this.mainTab === 'MainScene') {
+                    if (!this.activeSceneId) {
+                        this.mainTab = 'MainBoard';
+                    } else {
+                        this.mainTab = 'MainBoard';
+                        this.mainTab = 'MainScene';
+                    }
+                }
                 break;
             default:
                 console.error('Invalid active info for makeActive', this.activeInfo);
@@ -533,7 +549,7 @@ export const game = shallowReactive({
     showInfo() {
         this.asideTab = 'AsideInfo';
         if (this.fb()) {
-            this.fb().discardActiveObject();
+            this.setActiveObject();
         }
         switch (this.mainTab) {
             case 'MainBoard':
@@ -625,11 +641,8 @@ export const game = shallowReactive({
         }
     },
     showBook(id) {
-        let book = this.books[id];
-        console.debug('Show Book', book);
-        if (!book) {
-            throw new Error('Book not found: ' + id);
-        }
+        let book = this.findBook(id);
+        // console.debug('Show Book', book);
         this.activeInfo = {
             id: book.id,
             type: 'book',
@@ -650,15 +663,9 @@ export const game = shallowReactive({
         return this;
     },
     showDome(id) {
-        let dome = this.domes[id];
-        console.debug('Show Dome', dome);
-        if (!dome) {
-            throw new Error('Dome not found: ' + id);
-        }
-        let domeCard = this.cards[dome.scope_id];
-        if (!domeCard) {
-            throw new Error('Dome card not found: ' + dome.scope_id);
-        }
+        let dome = this.findDome(id);
+        // console.debug('Show Dome', dome);
+        let domeCard = this.findCard(dome.scope_id);
         this.activeInfo = {
             id: dome.id,
             scopeId: dome.scope_id,
@@ -680,11 +687,8 @@ export const game = shallowReactive({
         return this;
     },
     showCard(id) {
-        let card = this.cards[id];
-        console.debug('Show Card', card);
-        if (!card) {
-            throw new Error('Card not found: ' + id);
-        }
+        let card = this.findCard(id);
+        // console.debug('Show Card', card);
         this.activeInfo = {
             id: card.id,
             scopeId: card.scope_id,
@@ -700,15 +704,9 @@ export const game = shallowReactive({
         return this;
     },
     showArea(id) {
-        let area = this.areas[id];
-        console.debug('Show Area', area);
-        if (!area) {
-            throw new Error('Area not found: ' + id);
-        }
-        let areaCard = this.cards[area.scope_id];
-        if (!areaCard) {
-            throw new Error('Area card not found: ' + area.scope_id);
-        }
+        let area = this.findArea(id);
+        // console.debug('Show Area', area);
+        let areaCard = this.findCard(area.scope_id);
         this.activeInfo = {
             id: area.id,
             scopeId: area.scope_id,
@@ -720,6 +718,24 @@ export const game = shallowReactive({
             scopeName: areaCard.scopeName,
         };
         this.asideTab = 'AsideArea';
+
+        return this;
+    },
+    showScene(id) {
+        let scene = this.findScene(id);
+        // console.debug('Show Scene', scene);
+        let sceneCard = this.findCard(scene.scope_id);
+        this.activeInfo = {
+            id: scene.id,
+            scopeId: scene.scope_id,
+            type: 'scene',
+            name: sceneCard.name,
+            desc: sceneCard.desc,
+            image: sceneCard.image,
+            scopeImage: sceneCard.scopeImage,
+            scopeName: sceneCard.scopeName,
+        };
+        this.asideTab = 'AsideScene';
 
         return this;
     },
@@ -1058,7 +1074,22 @@ export const game = shallowReactive({
     filteredSources(filter = null) {
         let ids = this.isMaster() ?
             Object.keys(this.books) : Array.from(this.visibleBookIds);
-        if (filter) {
+        if (!filter) {
+            switch (this.mainTab) {
+                case 'MainBoard':
+                    break;
+                case 'MainDome':
+                    filter = 'domes';
+                    break;
+                case 'MainScene':
+                    filter = 'scenes';
+                    break;
+                default:
+                    console.error('Unknown main tab!', this.mainTab);
+                    throw new Error('Unknown main tab!');
+            }
+        }
+        if (filter && filter !== 'all') {
             ids = this._filter(ids, filter, 'source_ids');
         }
         let self = this;
@@ -1094,6 +1125,20 @@ export const game = shallowReactive({
     filteredAreas(filter = null) {
         let ids = this.isMaster() ?
             Object.keys(this.areas) : Array.from(this.visibleAreaIds);
+        if (!filter) {
+            switch (this.mainTab) {
+                case 'MainBoard':
+                    break;
+                case 'MainDome':
+                    filter = 'domes';
+                    break;
+                case 'MainScene':
+                    break;
+                default:
+                    console.error('Unknown main tab!', this.mainTab);
+                    throw new Error('Unknown main tab!');
+            }
+        }
         if (filter) {
             ids = this._filter(ids, filter, 'area_ids');
         }
@@ -1112,6 +1157,20 @@ export const game = shallowReactive({
     filteredScenes(filter = null) {
         let ids = this.isMaster() ?
             Object.keys(this.scenes) : Array.from(this.visibleSceneIds);
+        if (!filter) {
+            switch (this.mainTab) {
+                case 'MainBoard':
+                    break;
+                case 'MainDome':
+                    filter = 'domes';
+                    break;
+                case 'MainScene':
+                    break;
+                default:
+                    console.error('Unknown main tab!', this.mainTab);
+                    throw new Error('Unknown main tab!');
+            }
+        }
         if (filter) {
             ids = this._filter(ids, filter, 'scene_ids');
         }
@@ -1130,6 +1189,21 @@ export const game = shallowReactive({
     filteredDecks(filter = null) {
         let ids = this.isMaster() ?
             Object.keys(this.decks) : Array.from(this.visibleDeckIds);
+        if (!filter) {
+            switch (this.mainTab) {
+                case 'MainBoard':
+                    break;
+                case 'MainDome':
+                    filter = 'domes';
+                    break;
+                case 'MainScene':
+                    filter = 'scenes';
+                    break;
+                default:
+                    console.error('Unknown main tab!', this.mainTab);
+                    throw new Error('Unknown main tab!');
+            }
+        }
         if (filter) {
             ids = this._filter(ids, filter, 'deck_ids');
         }
@@ -1156,6 +1230,21 @@ export const game = shallowReactive({
     filteredCards(filter = null) {
         let ids = this.isMaster() ?
             Object.keys(this.cards) : Array.from(this.visibleCardIds);
+        if (!filter) {
+            switch (this.mainTab) {
+                case 'MainBoard':
+                    break;
+                case 'MainDome':
+                    filter = 'domes';
+                    break;
+                case 'MainScene':
+                    filter = 'scenes';
+                    break;
+                default:
+                    console.error('Unknown main tab!', this.mainTab);
+                    throw new Error('Unknown main tab!');
+            }
+        }
         if (filter) {
             ids = this._filter(ids, filter, 'card_ids');
         }
@@ -1193,7 +1282,9 @@ export const game = shallowReactive({
             this.activeObject = null;
             this.activeObjectHidden = null;
             this.activeObjectType = null;
-            this.fb().discardActiveObject();
+            if (this.fb()) {
+                this.fb().discardActiveObject();
+            }
         } else {
             this.activeObject = o;
             this.activeObjectHidden = o.get('opacity') < 1;
@@ -1225,9 +1316,7 @@ export const game = shallowReactive({
     selectScene(event) {
         this.selectedId = null;
         this.fb().discardActiveObject();
-        let scene = this.scenes[event.target.value];
-        console.debug('Selected Scene', scene);
-        // todo
+        this.showScene(event.target.value);
     },
     selectDeck(event) {
         this.selectedId = null;

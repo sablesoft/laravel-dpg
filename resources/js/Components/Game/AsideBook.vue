@@ -31,7 +31,7 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content">
+        <div class="aside-content" v-if="game.mainTab === 'MainBoard'">
             <select v-model="game.selectedId" @change="game.selectDeck($event)">
                 <option :value="null" disabled>{{ __('Decks') }}</option>
                 <option v-for="deck in game.filteredDecks('books')" :value="deck.id">

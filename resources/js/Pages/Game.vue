@@ -12,6 +12,7 @@ import AsideCard from '@/Components/Game/AsideCard.vue';
 import AsideBook from '@/Components/Game/AsideBook.vue';
 import AsideDome from '@/Components/Game/AsideDome.vue';
 import AsideArea from '@/Components/Game/AsideArea.vue';
+import AsideScene from '@/Components/Game/AsideScene.vue';
 
 import {Head, usePage} from '@inertiajs/inertia-vue3';
 import { game } from "@/Components/Game/js/game";
@@ -34,7 +35,8 @@ const asideTabs = {
     AsideCard,
     AsideBook,
     AsideDome,
-    AsideArea
+    AsideArea,
+    AsideScene
 }
 const mainTabs = {
     MainBoard,

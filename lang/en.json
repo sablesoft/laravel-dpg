@@ -106,5 +106,8 @@
     "Transform Mode": "Transform Mode",
     "Erase Mode": "Erase Mode",
     "Erase Undo Mode": "Erase Undo Mode",
-    "Brush Size": "Brush Size"
+    "Brush Size": "Brush Size",
+    "All Books": "All Books",
+    "Activate": "Activate",
+    "Deactivate": "Deactivate"
 }

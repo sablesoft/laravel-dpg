@@ -106,5 +106,8 @@
     "Transform Mode": "Изменить Экран",
     "Erase Mode": "Удаление Тумана",
     "Erase Undo Mode": "Добавление Тумана",
-    "Brush Size": "Размер Кисти"
+    "Brush Size": "Размер Кисти",
+    "All Books": "Все Книги",
+    "Activate": "Активировать",
+    "Deactivate": "Деактивировать"
 }

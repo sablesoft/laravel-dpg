@@ -2,19 +2,19 @@
 import GameLayout from '@/Layouts/GameLayout.vue';
 
 // main tabs:
-import Board from '@/Components/Game/Board.vue';
-import Map from '@/Components/Game/Map.vue';
-import Scene from '@/Components/Game/Scene.vue';
+import MainBoard from '@/Components/Game/MainBoard.vue';
+import MainDome from '@/Components/Game/MainDome.vue';
+import MainScene from '@/Components/Game/MainScene.vue';
 
 // aside tabs:
-import Info from '@/Components/Game/Info.vue';
-import Card from '@/Components/Game/Card.vue';
-import Book from '@/Components/Game/Book.vue';
-import Dome from '@/Components/Game/Dome.vue';
-import Area from '@/Components/Game/Area.vue';
+import AsideInfo from '@/Components/Game/AsideInfo.vue';
+import AsideCard from '@/Components/Game/AsideCard.vue';
+import AsideBook from '@/Components/Game/AsideBook.vue';
+import AsideDome from '@/Components/Game/AsideDome.vue';
+import AsideArea from '@/Components/Game/AsideArea.vue';
 
 import {Head, usePage} from '@inertiajs/inertia-vue3';
-import { game } from "@/Components/Game/game";
+import { game } from "@/Components/Game/js/game";
 import {onMounted, shallowRef, toRaw} from "vue";
 
 const boardRef = shallowRef(null);
@@ -30,16 +30,16 @@ const props = defineProps({
     }
 });
 const asideTabs = {
-    Info,
-    Card,
-    Book,
-    Dome,
-    Area
+    AsideInfo,
+    AsideCard,
+    AsideBook,
+    AsideDome,
+    AsideArea
 }
 const mainTabs = {
-    Board,
-    Map,
-    Scene
+    MainBoard,
+    MainDome,
+    MainScene
 }
 
 onMounted(() => {
@@ -113,21 +113,21 @@ onMounted(() => {
             <div class="action-column">
                 <button v-if="game.canMap || game.canScene"
                         class="control-btn control-board"
-                        :disabled="game.mainTab === 'Board'"
+                        :disabled="game.mainTab === 'MainBoard'"
                         :title="__('Board')">
-                    <span class="material-icons" @click="game.showMain('Board')">local_library</span>
+                    <span class="material-icons" @click="game.showMain('MainBoard')">local_library</span>
                 </button>
                 <button v-if="game.canMap"
-                        class="control-btn control-map"
-                        :disabled="game.mainTab === 'Map'"
-                        :title="__('Map')">
-                    <span class="material-icons" @click="game.showMain('Map')">map</span>
+                        class="control-btn control-dome"
+                        :disabled="game.mainTab === 'MainDome'"
+                        :title="__('Dome')">
+                    <span class="material-icons" @click="game.showMain('MainDome')">map</span>
                 </button>
                 <button v-if="game.canScene"
                         class="control-btn control-scene"
-                        :disabled="game.mainTab === 'Scene'"
+                        :disabled="game.mainTab === 'MainScene'"
                         :title="__('Scene')">
-                    <span class="material-icons" @click="game.showMain('Scene')">my_location</span>
+                    <span class="material-icons" @click="game.showMain('MainScene')">my_location</span>
                 </button>
             </div>
             <div class="aside-column bg-white shadow-sm sm:rounded-lg">

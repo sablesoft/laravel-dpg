@@ -1,5 +1,5 @@
 <script setup>
-    import { game } from "@/Components/Game/game";
+    import { game } from "@/Components/Game/js/game";
 </script>
 <template>
     <div class="aside shadow-sm sm:rounded-lg">
@@ -20,13 +20,13 @@
         <div class="aside-content aside-desc">
             {{ game.activeInfo.desc }}
         </div>
-        <div v-if="game.isMaster() || game.mainTab === 'Board'"
+        <div v-if="game.isMaster() || game.mainTab === 'MainBoard'"
              class="aside-content aside-actions">
-            <button v-if="game.isMaster() && game.mainTab === 'Board'"
+            <button v-if="game.isMaster() && game.mainTab === 'MainBoard'"
                     class="control-btn control-remove" :title="__('Add')">
                 <span class="material-icons" @click="game.addCard()">add</span>
             </button>
-            <button v-if="game.isMaster() && game.mainTab !== 'Board'"
+            <button v-if="game.isMaster() && game.mainTab !== 'MainBoard'"
                     class="control-btn control-marker" :title="__('Add')" >
                 <span class="material-icons" @click="game.addMarker()">place</span>
             </button>
@@ -36,11 +36,11 @@
             <button v-if="game.activeObject" class="control-btn control-forward" :title="__('Backward')">
                 <span class="material-icons" @click="game.backward()">download</span>
             </button>
-            <button v-if="game.activeObject && game.mainTab === 'Board' && !game.activeCardTapped"
+            <button v-if="game.activeObject && game.mainTab === 'MainBoard' && !game.activeCardTapped"
                     class="control-text" :title="__('Tap')" >
                 <span class="material-icons" @click="game.activeCardTap()">swipe_down</span>
             </button>
-            <button v-if="game.activeObject && game.mainTab === 'Board' && game.activeCardTapped"
+            <button v-if="game.activeObject && game.mainTab === 'MainBoard' && game.activeCardTapped"
                     class="control-text" :title="__('Untap')">
                 <span class="material-icons" @click="game.activeCardUntap()">pinch</span>
             </button>

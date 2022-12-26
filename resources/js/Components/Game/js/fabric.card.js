@@ -3,7 +3,7 @@ import './fabric.custom';
 import './fabric.back';
 import './fabric.name';
 import './fabric.scope-name';
-import { game } from "@/Components/Game/game";
+import { game } from "@/Components/Game/js/game";
 
 fabric.Card = fabric.util.createClass(fabric.Group, {
 

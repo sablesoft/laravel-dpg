@@ -330,11 +330,11 @@ export const game = shallowReactive({
     /**
      * @member {string}
      */
-    mainTab: 'Board',
+    mainTab: 'MainBoard',
     /**
      * @member {string}
      */
-    asideTab: 'Info',
+    asideTab: 'AsideInfo',
     /**
      * Screen width
      * @member {?number}
@@ -531,15 +531,15 @@ export const game = shallowReactive({
         }
     },
     showInfo() {
-        this.asideTab = 'Info';
+        this.asideTab = 'AsideInfo';
         if (this.fb()) {
             this.fb().discardActiveObject();
         }
         switch (this.mainTab) {
-            case 'Board':
+            case 'MainBoard':
                 this.activeInfo = this.info;
                 return;
-            case 'Map':
+            case 'MainDome':
                 let dome = this.findDome(this.activeDomeId);
                 let domeCard = this.cards[dome.scope_id];
                 this.activeInfo = {
@@ -553,7 +553,7 @@ export const game = shallowReactive({
                     scopeName: domeCard.scopeName
                 };
                 return;
-            case 'Scene':
+            case 'MainScene':
                 let scene = this.findScene(this.activeSceneId);
                 let sceneCard = this.cards[scene.scope_id];
                 this.activeInfo = {
@@ -586,7 +586,7 @@ export const game = shallowReactive({
     /**
      * @param {?fabric.Object|number} o
      * @param {?string} type
-     * @return {void}
+     * @return {Object}
      */
     showAside(o = null, type = null) {
         if (!o) {
@@ -645,7 +645,9 @@ export const game = shallowReactive({
                 self.setActiveObject(o);
             }
         });
-        this.asideTab = 'Book';
+        this.asideTab = 'AsideBook';
+
+        return this;
     },
     showDome(id) {
         let dome = this.domes[id];
@@ -673,7 +675,9 @@ export const game = shallowReactive({
                 self.setActiveObject(o);
             }
         });
-        this.asideTab = 'Dome';
+        this.asideTab = 'AsideDome';
+
+        return this;
     },
     showCard(id) {
         let card = this.cards[id];
@@ -691,7 +695,7 @@ export const game = shallowReactive({
             scopeImage: card.scopeImage,
             scopeName: card.scopeName,
         };
-        this.asideTab = 'Card';
+        this.asideTab = 'AsideCard';
 
         return this;
     },
@@ -715,7 +719,9 @@ export const game = shallowReactive({
             scopeImage: areaCard.scopeImage,
             scopeName: areaCard.scopeName,
         };
-        this.asideTab = 'Area';
+        this.asideTab = 'AsideArea';
+
+        return this;
     },
     activeCardTap() {
         this.activeCardTapped = this.activeObject.tap();
@@ -958,19 +964,19 @@ export const game = shallowReactive({
         let request = {};
         let canvas = this.fb().toObject(['viewportTransform']);
         switch(this.mainTab) {
-            case 'Map':
+            case 'MainDome':
                 this.domes[this.activeDomeId].canvas = canvas;
                 request['dome'] = {
                     id : this.activeDomeId,
                 }
                 break;
-            case 'Scene':
+            case 'MainScene':
                 this.scenes[this.activeSceneId].canvas = canvas;
                 request['scene'] = {
                     id : this.activeSceneId,
                 }
                 break;
-            case 'Board':
+            case 'MainBoard':
                 this.canvas = canvas;
                 request['game'] = {
                     id : this.id,

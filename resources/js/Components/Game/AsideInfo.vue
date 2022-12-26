@@ -1,5 +1,5 @@
 <script setup>
-    import { game } from "@/Components/Game/game";
+    import { game } from "@/Components/Game/js/game";
 </script>
 <template>
     <div class="aside shadow-sm sm:rounded-lg">
@@ -28,7 +28,7 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content" v-if="game.mainTab !== 'Scene'">
+        <div class="aside-content" v-if="game.mainTab !== 'MainScene'">
             <select v-model="game.selectedId" @change="game.selectDome($event)">
                 <option :value="null" disabled>{{ __('Domes') }}</option>
                 <option v-for="dome in game.filteredDomes()" :value="dome.id">
@@ -36,7 +36,7 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content" v-if="game.mainTab === 'Map'">
+        <div class="aside-content" v-if="game.mainTab === 'MainDome'">
             <select v-model="game.selectedId" @change="game.selectArea($event)">
                 <option :value="null" disabled>{{ __('Areas') }}</option>
                 <option v-for="area in game.filteredAreas()" :value="area.id">
@@ -52,7 +52,7 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content" v-if="game.mainTab === 'Board'">
+        <div class="aside-content" v-if="game.mainTab === 'MainBoard'">
             <select v-model="game.selectedId" @change="game.selectDeck($event)">
                 <option :value="null" disabled>{{ __('Decks') }}</option>
                 <option v-for="deck in game.filteredDecks()" :value="deck.id">

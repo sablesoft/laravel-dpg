@@ -1,5 +1,5 @@
 import { fabric } from 'fabric-with-erasing';
-import { game } from "@/Components/Game/game";
+import { game } from "@/Components/Game/js/game";
 
 fabric.Group.prototype._item = function(type, required = true) {
     let item = this.getObjects(type)[0];

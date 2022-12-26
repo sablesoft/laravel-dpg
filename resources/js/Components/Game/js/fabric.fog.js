@@ -1,5 +1,5 @@
 import { fabric } from 'fabric-with-erasing';
-import { game } from "@/Components/Game/game";
+import { game } from "@/Components/Game/js/game";
 
 fabric.Fog = fabric.util.createClass(fabric.Rect, {
     type: 'fog',

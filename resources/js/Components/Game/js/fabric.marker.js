@@ -1,10 +1,11 @@
 import { fabric } from 'fabric-with-erasing';
 import './fabric.custom';
-import { game } from "@/Components/Game/game";
+import { game } from "@/Components/Game/js/game";
 
-fabric.Area = fabric.util.createClass(fabric.Group, {
-    type: 'area',
-    defaultShowOpacity: 0.7,
+fabric.Marker = fabric.util.createClass(fabric.Group, {
+    type: 'marker',
+    defaultScale: 0.3,
+    defaultShowOpacity: 0.5,
 
     /**
      * @param {number} id
@@ -19,21 +20,13 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         options.lockRotation = true;
         options.erasable = false;
         options.hoverCursor = 'pointer';
+        let card = id ? game.findCard(id) : game.findCard(options.marker_id);
 
-        let area = id ? game.findArea(id) : game.findArea(options.area_id);
-        let dome = game.findDome(area.dome_id);
-        options.width = parseInt(dome.area_width);
-        options.height = parseInt(dome.area_height);
-        options.mask = Array.from(dome.area_mask || []);
-        options.left = options.left || area.left;
-        options.top = options.top || area.top;
-        options.area_id = options.area_id || area.id;
-        options.card_id = options.card_id || area.scope_id;
+        options.marker_id = options.marker_id || card.id;
+        options.scope_id = options.scope_id || card.scope_id;
+        options.imageScale = options.imageScale || this.defaultScale;
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
         options.show = options.show === undefined ? false : options.show;
-        if (!options.width || !options.height) {
-            throw new Error('Area width and height required for fb object!');
-        }
 
         options.lockMovementX = !game.isMaster();
         options.lockMovementY = !game.isMaster();
@@ -45,53 +38,64 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         if (!id) {
             return;
         }
-
         let self = this;
-        // todo update images for created objects
-        fabric.Image.fromURL(area.image, function(image) {
+        fabric.Image.fromURL(this._src(), function(image) {
             image.set('originX', 'center');
-            image.set('originY', 'center');
-            image.set('erasable', false);
+            let scale = Number(self.get('imageScale'));
+            let width = Number(image.get('width'));
+            let height = Number(image.get('height'));
+            self.set('width', width * scale);
+            self.set('height', height * scale);
+            image.scale(scale);
             self.add(image);
         });
     },
     update() {
-        let area = game.findArea(this.get('area_id'));
-        this._item('image').setSrc(area.image, function(img) {
+        // console.debug('Marker update', this);
+        this._item('image').setSrc(this._src(), function(img) {
             if (img.canvas) {
                 img.canvas.requestRenderAll();
             }
         });
-        this.sendBackwards(true);
-        // todo - update mask polygone
-        if (this.canvas) {
-            this.canvas.requestRenderAll();
-        }
+
+        return this;
     },
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
             show: this.get('show'),
-            area_id: this.get('area_id'),
-            card_id: this.get('card_id'),
-            mask: this.get('mask'), // todo - mask for checking cursor
+            scope_id: this.get('scope_id'),
+            marker_id: this.get('marker_id'),
+            imageScale: this.get('imageScale')
         });
     },
     _render: function(ctx) {
         this.callSuper('_render', ctx);
+    },
+    _src: function() {
+        let card = game.findCard(this.get('marker_id'));
+        let src = card.image;
+        if (card.scope_id) {
+            src = game.findCard(card.scope_id).image;
+        }
+        if (!src) {
+            throw new Error('Required image not found!');
+        }
+
+        return src;
     }
 });
 
-fabric.Area.fromObject = function(object, callback) {
+fabric.Marker.fromObject = function(object, callback) {
     let objects = object.objects || [],
         options = fabric.util.object.clone(object, true);
     delete options.objects;
-    let areaObject = new fabric.Area(undefined, options);
+    let markerObject = new fabric.Marker(undefined, options);
     fabric.util.enlivenObjects(objects,function(fO) {
         fO.forEach(function(o) {
-           areaObject.add(o);
+            markerObject.add(o);
         });
     });
-    callback(areaObject);
+    callback(markerObject);
 
-    return areaObject;
+    return markerObject;
 }

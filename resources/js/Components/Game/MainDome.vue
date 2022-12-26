@@ -1,5 +1,5 @@
 <script setup>
-import { game } from "@/Components/Game/game";
+import { game } from "@/Components/Game/js/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 import {onMounted} from "vue";
 onMounted(() => {

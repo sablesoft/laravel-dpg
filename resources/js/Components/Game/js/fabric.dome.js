@@ -1,7 +1,7 @@
 import { fabric } from 'fabric-with-erasing';
 import './fabric.custom';
 import './fabric.book';
-import {game} from "@/Components/Game/game";
+import {game} from "@/Components/Game/js/game";
 
 fabric.Dome = fabric.util.createClass(fabric.Book, {
     type: 'dome',

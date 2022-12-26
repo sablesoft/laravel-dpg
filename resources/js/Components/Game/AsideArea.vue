@@ -1,5 +1,5 @@
 <script setup>
-    import { game } from "@/Components/Game/game";
+    import { game } from "@/Components/Game/js/game";
 </script>
 <template>
     <div class="aside shadow-sm sm:rounded-lg">
@@ -39,7 +39,7 @@
                 </option>
             </select>
         </div>
-        <div v-if="game.isMaster() && game.mainTab === 'Map'"
+        <div v-if="game.isMaster() && game.mainTab === 'MainDome'"
              class="aside-content aside-actions">
             <button v-if="game.activeObject" class="control-btn control-forward" :title="__('Forward')">
                 <span class="material-icons" @click="game.forward()">upload</span>
@@ -63,7 +63,7 @@
                 <span class="material-icons" @click="game.activateSpace(false)">public_off</span>
             </button>
         </div>
-        <div v-if="game.mainTab === 'Board'" class="aside-content aside-actions">
+        <div v-if="game.mainTab === 'MainBoard'" class="aside-content aside-actions">
             <button v-if="game.isMaster() || game.visibleCardIds.includes(game.activeInfo.scopeId)"
                     class="control-btn control-forward" :title="__('Show Card')">
                 <span class="material-icons"

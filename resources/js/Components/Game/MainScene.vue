@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from "vue";
 import { fabric } from 'fabric-with-erasing';
-import { game } from "@/Components/Game/game";
+import { game } from "@/Components/Game/js/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 
 onMounted(() => {

@@ -1,5 +1,5 @@
 <script setup>
-    import { game } from "@/Components/Game/game";
+    import { game } from "@/Components/Game/js/game";
 </script>
 <style scoped>
     .control-wrap {
@@ -48,9 +48,6 @@
     .control-more label {
         display: inline;
     }
-    .control-more .control-checkbox {
-        margin-left: 20px;
-    }
     .info-wrap {
         position: absolute;
         bottom: 10px;
@@ -78,12 +75,12 @@
         </button>
 
         <!-- Erase Mode -->
-        <button v-if="game.isMaster() && game.mainTab !== 'Board'"  class="control-btn control-erase"
+        <button v-if="game.isMaster() && game.mainTab !== 'MainBoard'"  class="control-btn control-erase"
                 :class="{'control-active' : game.modeErase}"
                 :title="__('Erase Mode')">
             <span class="material-icons" @click="game.switchErase()">visibility</span>
         </button>
-        <button v-if="game.isMaster() && game.mainTab !== 'Board'"  class="control-btn control-erase-undo"
+        <button v-if="game.isMaster() && game.mainTab !== 'MainBoard'"  class="control-btn control-erase-undo"
                 :class="{'control-active' : game.modeEraseUndo}"
                 :title="__('Erase Undo Mode')">
             <span class="material-icons" @click="game.switchEraseUndo()">visibility_off</span>

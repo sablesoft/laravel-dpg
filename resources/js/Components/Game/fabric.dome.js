@@ -37,7 +37,7 @@ fabric.Dome = fabric.util.createClass(fabric.Book, {
             });
         }
         // update scope name:
-        this._item('scopeName').set('text', game.trans('Book'))
+        this._item('scopeName').set('text', game.trans('Dome'))
         if (this.canvas) {
             this.canvas.requestRenderAll();
         }

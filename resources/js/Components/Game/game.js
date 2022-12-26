@@ -768,11 +768,11 @@ export const game = shallowReactive({
     },
     /**
      * @param {number} id
-     * @param {Object.<string, any>} options
+     * @param {?Object.<string, any>} options
      * @param {?boolean} add
      * @return {fabric.Area}
      */
-    createAreaFabric(id, options, add = true) {
+    createAreaFabric(id, options = null, add = true) {
         let o = new fabric.Area(id, options);
         if (add) {
             this.fb().add(o);

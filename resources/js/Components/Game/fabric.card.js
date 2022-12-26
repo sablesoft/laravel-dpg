@@ -1,4 +1,5 @@
 import { fabric } from 'fabric-with-erasing';
+import './fabric.custom';
 import './fabric.back';
 import './fabric.name';
 import './fabric.scope-name';
@@ -12,14 +13,12 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
     defaultOpened: false,
     defaultTapped: false,
     defaultShowOpacity: 0.7,
-    isMaster: false,
 
     /**
      * @param {number} id
      * @param {?Object.<string, any>} options
      */
     initialize: function(id, options) {
-        this.isMaster = game.isMaster();
         options || (options = {});
         options.hasControls = false;
         options.hasBorders = false;
@@ -61,7 +60,6 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         this.visibility(this.show);
 
         if (!id) {
-            this.updateContent();
             return;
         }
 
@@ -85,7 +83,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             fill: 'black',
         }));
         if (card.scopeName) {
-            this.add(new fabric.Text(game.getCardName(card.scope_id), {
+            this.add(new fabric.ScopeName(game.getCardName(card.scope_id), {
                 originX: 'center',
                 top: 46,
                 fontSize: 12,
@@ -112,18 +110,17 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             }
         });
     },
-
-    updateContent() {
+    update() {
+        console.debug('Card update', this);
         let card = game.findCard(this.get('card_id'));
         // update back image:
-        let back = this.getObjects('back')[0];
-        back.setSrc(game.cardsBack, function(img) {
+        this._item('back').setSrc(game.cardsBack, function(img) {
             if (img.canvas) {
                 img.canvas.requestRenderAll();
             }
         });
         // update image:
-        let image = this.getObjects('image')[0];
+        let image = this._item('image');
         if (image) {
             image.setSrc(card.image, function(img) {
                 if (img.canvas) {
@@ -132,39 +129,24 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             });
         }
         // update name:
-        let name = this.getObjects('name')[0];
-        name.setText(card.currentName);
+        this._item('name').set('text', card.currentName);
         // update scope name:
-        let scope = this.getObjects('scopeName')[0];
+        let scope = this._item('scopeName');
         if (scope) {
-            scope.setText(game.getCardName(card.scope_id));
-        }
-
-        return this;
-    },
-
-    visibility: function(show = true) {
-        this.show = show;
-        if (show) {
-            this.opacity = 1;
-            this.visible = true;
-        } else {
-            if (this.isMaster) {
-                this.opacity = this.showOpacity;
-            } else {
-                this.visible = false;
-            }
+            scope.set('text', game.getCardName(card.scope_id));
         }
         if (this.canvas) {
             this.canvas.requestRenderAll();
         }
-    },
 
+        return this;
+    },
     flip: function () {
-        if (!this.isMaster) {
+        if (!game.isMaster()) {
             console.log('Flip cards can only master!');
             return;
         }
+        console.debug('Flip card', this);
         let opened = this.get('opened');
         this.set('opened', !opened);
         let back = this.getObjects('back')[0];
@@ -173,7 +155,6 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         this.set('dirty', true);
         this.canvas && this.canvas.requestRenderAll();
     },
-
     tap: function (force = false) {
         if (this.get('tapped') && !force) {
             console.log('Already tapped! Skip!');
@@ -185,7 +166,6 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         this.canvas && this.canvas.requestRenderAll();
         return true;
     },
-
     untap: function() {
         if (!this.get('tapped')) {
             console.log('Already untapped! Skip!');
@@ -197,7 +177,6 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         this.canvas.requestRenderAll();
         return true;
     },
-
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
             show: this.get('show'),
@@ -208,10 +187,9 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             opened: this.get('opened')
         });
     },
-
     _render: function(ctx) {
         this.callSuper('_render', ctx);
-    }
+    },
 });
 
 fabric.Card.fromObject = function(object, callback) {

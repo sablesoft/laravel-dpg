@@ -1,9 +1,9 @@
 import { fabric } from 'fabric-with-erasing';
+import './fabric.custom';
 import { game } from "@/Components/Game/game";
 
 fabric.Area = fabric.util.createClass(fabric.Group, {
     type: 'area',
-    isMaster: false,
     defaultShowOpacity: 0.7,
 
     /**
@@ -11,7 +11,6 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
      * @param {?Object.<string, any>} options
      */
     initialize: function(id, options) {
-        this.isMaster = game.isMaster();
         options || (options = {});
         options.hasControls = false;
         options.hasBorders = false;
@@ -36,58 +35,39 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
             throw new Error('Area width and height required for fb object!');
         }
 
-        options.lockMovementX = !this.isMaster;
-        options.lockMovementY = !this.isMaster;
+        options.lockMovementX = !game.isMaster();
+        options.lockMovementY = !game.isMaster();
 
         this.callSuper('initialize', [], options);
 
         this.visibility(this.show);
 
         if (!id) {
-            this.updateContent();
             return;
         }
 
-        let areaCard = game.cards[area.scope_id];
-
         let self = this;
         // todo update images for created objects
-        fabric.Image.fromURL(areaCard.image, function(image) {
+        fabric.Image.fromURL(area.image, function(image) {
             image.set('originX', 'center');
             image.set('originY', 'center');
             image.set('erasable', false);
             self.add(image);
         });
     },
-
-    updateContent() {
+    update() {
         let area = game.findArea(this.get('area_id'));
-        let image = this.getObjects('image')[0];
-        image.setSrc(area.image, function(img) {
+        this._item('image').setSrc(area.image, function(img) {
             if (img.canvas) {
                 img.canvas.requestRenderAll();
             }
         });
+        this.sendBackwards(true);
         // todo - update mask polygone
-    },
-
-    visibility: function(show = true) {
-        this.show = show;
-        if (show) {
-            this.opacity = 1;
-            this.visible = true;
-        } else {
-            if (this.isMaster) {
-                this.opacity = this.showOpacity;
-            } else {
-                this.visible = false;
-            }
-        }
         if (this.canvas) {
             this.canvas.requestRenderAll();
         }
     },
-
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
             show: this.get('show'),
@@ -96,7 +76,6 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
             mask: this.get('mask'), // todo - mask for checking cursor
         });
     },
-
     _render: function(ctx) {
         this.callSuper('_render', ctx);
     }

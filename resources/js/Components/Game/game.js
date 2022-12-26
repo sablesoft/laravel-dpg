@@ -376,42 +376,36 @@ export const game = shallowReactive({
     /**
      * @param {?Object.<string, any>} options
      * @param {?Object.<string, any>} json
+     * @param {?number} timeout
      * @return {fabric.Canvas}
      */
-    initCanvas(json = null, options = null) {
+    initCanvas(json = null, options = null, timeout) {
         let canvas = document.getElementsByTagName('canvas')[0];
-        let fb = new fabric.Canvas(canvas);
+        let fc = new fabric.Canvas(canvas);
         if (json) {
-            fb.loadFromJSON(json, fb.renderAll.bind(fb));
+            fc.loadFromJSON(json, fc.renderAll.bind(fc));
         }
         options = options || {};
         options['preserveObjectStacking'] = true;
         for (const [key, value] of Object.entries(options)) {
-            fb[key] = value;
+            fc[key] = value;
         }
-        let self = this;
-        setTimeout(function() {
-            fb.getObjects().forEach(function(o) {
-                if (o.type === 'area') {
-                    o.sendBackwards(true);
-                }
-            });
-        }, 500);
         let name = 'fb' + this.mainTab;
-        this[name] = fb;
-        fb.on('selection:created', function(opt) {
+        this[name] = fc;
+        let self = this;
+        fc.on('selection:created', function(opt) {
             // console.debug('selection:created', opt);
             self._selection(opt);
         });
-        fb.on('selection:updated', function(opt) {
+        fc.on('selection:updated', function(opt) {
             // console.debug('selection:updated', opt);
             self._selection(opt);
         });
-        fb.on('selection:cleared', function() {
+        fc.on('selection:cleared', function() {
             // console.debug('selection:cleared', opt);
             self._selection();
         });
-        fb.on('mouse:wheel', function(opt) {
+        fc.on('mouse:wheel', function(opt) {
             // console.debug('mouse:wheel', opt);
             if (self.modeTransform) {
                 let delta = opt.e.deltaY;
@@ -422,20 +416,20 @@ export const game = shallowReactive({
                     if (scale > 20) scale = 20;
                     if (scale < 0.01) scale = 0.01;
                     o.scale(scale);
-                    fb.requestRenderAll();
+                    fc.requestRenderAll();
                     console.debug('scale marker', o);
                 } else {
-                    let zoom = fb.getZoom();
+                    let zoom = fc.getZoom();
                     zoom *= 0.999 ** delta;
                     if (zoom > 20) zoom = 20;
                     if (zoom < 0.01) zoom = 0.01;
-                    fb.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+                    fc.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
                 }
                 opt.e.preventDefault();
                 opt.e.stopPropagation();
             }
         });
-        fb.on('mouse:down', function(opt) {
+        fc.on('mouse:down', function(opt) {
             // console.debug('mouse:down', opt);
             let evt = opt.e;
             if (self.modeTransform === true) {
@@ -449,7 +443,7 @@ export const game = shallowReactive({
                 self.showInfo();
             }
         });
-        fb.on('mouse:move', function(opt) {
+        fc.on('mouse:move', function(opt) {
             // console.debug('mouse:move', opt);
             if (this.isDragging) {
                 let e = opt.e;
@@ -462,18 +456,32 @@ export const game = shallowReactive({
             }
             self._cursor(opt.target);
         });
-        fb.on('mouse:out', function() {
+        fc.on('mouse:out', function() {
             // console.debug('mouse:out', opt);
             self._cursor();
         });
-        fb.on('mouse:up', function() {
+        fc.on('mouse:up', function() {
             // console.debug('mouse:up', this);
             this.setViewportTransform(this.viewportTransform);
             this.isDragging = false;
             this.selection = true;
         });
+        this.updateCanvas(timeout);
 
-        return fb;
+        return fc;
+    },
+    updateCanvas(timeout = 3000) {
+        let fc = this.fb();
+        setTimeout(function() {
+            // console.debug('=== Update canvas objects ===', fc.getObjects());
+            fc.getObjects().forEach(function(o) {
+                // console.debug('Check object update', o);
+                // console.debug('Type of update', typeof o.update);
+                if (typeof o.update === 'function') {
+                    o.update();
+                }
+            });
+        }, timeout);
     },
     isMaster() {
         return this.role === 'master';
@@ -488,7 +496,7 @@ export const game = shallowReactive({
                 this.activeInfo = this.info;
                 return;
             case 'Map':
-                let dome = this.getActiveDome();
+                let dome = this.findDome(this.activeDomeId);
                 let domeCard = this.cards[dome.scope_id];
                 this.activeInfo = {
                     id: dome.id,
@@ -502,7 +510,7 @@ export const game = shallowReactive({
                 };
                 return;
             case 'Scene':
-                let scene = this.getActiveScene();
+                let scene = this.findScene(this.activeSceneId);
                 let sceneCard = this.cards[scene.scope_id];
                 this.activeInfo = {
                     id: scene.id,
@@ -888,39 +896,6 @@ export const game = shallowReactive({
         return current ? card.currentName : card.name;
 
     },
-    /**
-     * @returns {Dome}
-     */
-    getActiveDome() {
-        let dome = this.domes[this.activeDomeId];
-        if (!dome) {
-            throw new Error('Active dome not found!')
-        }
-
-        return dome;
-    },
-    /**
-     * @returns {GameArea}
-     */
-    getActiveArea() {
-        let area = this.areas[this.activeAreaId];
-        if (!area) {
-            throw new Error('Active area not found!');
-        }
-
-        return area;
-    },
-    /**
-     * @return {Scene}
-     */
-    getActiveScene() {
-        let scene = this.scenes[this.activeSceneId];
-        if (!scene) {
-            throw new Error('Active scene not found!');
-        }
-
-        return scene;
-    },
     switchTransform() {
         this._offModes('Transform');
         this.modeTransform = !this.modeTransform;
@@ -1234,6 +1209,30 @@ export const game = shallowReactive({
         this.setActiveObject();
         this.showCard(id);
     },
+    findCard(id) {
+        if (!this.cards[id]) {
+            throw new Error('Card not found: ' + id);
+        }
+        return toRaw(this.cards[id]);
+    },
+    findScene(id) {
+        if (!this.scenes[id]) {
+            throw new Error('Scene not found: ' + id);
+        }
+        return toRaw(this.scenes[id]);
+    },
+    findArea(id) {
+        if (!this.areas[id]) {
+            throw new Error('Area not found: ' + id);
+        }
+        return toRaw(this.areas[id]);
+    },
+    findDome(id) {
+        if (!this.domes[id]) {
+            throw new Error('Dome not found: ' + id);
+        }
+        return toRaw(this.domes[id]);
+    },
     /**
      * @return {HTMLCollectionOf<HTMLCanvasElement>}
      * @private
@@ -1373,24 +1372,6 @@ export const game = shallowReactive({
         let labels = ['Stack','Set','State','Control'];
 
         return labels[number];
-    },
-    findCard(id) {
-        if (!this.cards[id]) {
-            throw new Error('Card not found: ' + id);
-        }
-        return toRaw(this.cards[id]);
-    },
-    findArea(id) {
-        if (!this.areas[id]) {
-            throw new Error('Area not found: ' + id);
-        }
-        return toRaw(this.areas[id]);
-    },
-    findDome(id) {
-        if (!this.domes[id]) {
-            throw new Error('Dome not found: ' + id);
-        }
-        return toRaw(this.domes[id]);
     },
     /**
      * @param {string} type

@@ -3,14 +3,13 @@ import { game } from "@/Components/Game/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 import {onMounted} from "vue";
 onMounted(() => {
-    let dome = game.getActiveDome();
-    game.initCanvas(dome.canvas);
+    let dome = game.findDome(game.activeDomeId);
+    game.initCanvas(dome.canvas, {}, 5000);
     if (!dome.canvas) {
         // todo - create from scratch
         dome.area_ids.forEach(function(id) {
             game.createAreaFabric(id);
         });
-        // game.createAreaFabric(game.activeAreaId);
         setTimeout(function() {
             game.createMarkerFabric(80, {
                 left: 3160,
@@ -28,7 +27,7 @@ onMounted(() => {
         game.createFog(dome.map_width, dome.map_height);
         setTimeout(function () {
             game.renderAll();
-        }, 300);
+        }, 1000);
     }
     console.debug('Map mounted', game.fb());
 });

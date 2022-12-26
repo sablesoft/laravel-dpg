@@ -20,6 +20,8 @@
         <div class="aside-content aside-desc">
             {{ game.activeInfo.desc }}
         </div>
+
+        <!-- selects -->
         <div class="aside-content"
              v-if="game.mainTab !== 'MainBoard' && Object.keys(game.filteredSources('all')).length">
             <select v-model="game.selectedId" @change="game.selectBook($event)">

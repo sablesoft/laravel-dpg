@@ -15,7 +15,9 @@
         <div class="aside-content aside-desc">
             {{ game.activeInfo.desc }}
         </div>
-        <div class="aside-content">
+
+        <!-- selects -->
+        <div v-if="Object.keys(game.filteredScenes('areas')).length" class="aside-content">
             <select v-model="game.selectedId" @change="game.selectScene($event)">
                 <option :value="null" disabled>{{ __('Scenes') }}</option>
                 <option v-for="scene in game.filteredScenes('areas')" :value="scene.id">
@@ -23,7 +25,7 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content">
+        <div v-if="Object.keys(game.filteredDecks('areas')).length" class="aside-content">
             <select v-model="game.selectedId" @change="game.selectDeck($event)">
                 <option :value="null" disabled>{{ __('Decks') }}</option>
                 <option v-for="deck in game.filteredDecks('areas')" :value="deck.id">
@@ -31,7 +33,7 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content">
+        <div v-if="Object.keys(game.filteredCards('areas')).length" class="aside-content">
             <select v-model="game.selectedId" @change="game.selectCard($event)">
                 <option :value="null" disabled>{{ __('Cards') }}</option>
                 <option v-for="card in game.filteredCards('areas')" :value="card.id">
@@ -39,6 +41,8 @@
                 </option>
             </select>
         </div>
+
+        <!-- actions -->
         <div v-if="game.isMaster() && game.mainTab === 'MainDome'"
              class="aside-content aside-actions">
             <button v-if="game.activeObject" class="control-btn control-forward" :title="__('Forward')">

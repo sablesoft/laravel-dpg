@@ -15,7 +15,9 @@
         <div class="aside-content aside-desc">
             {{ game.activeInfo.desc }}
         </div>
-        <div class="aside-content">
+
+        <!-- selects -->
+        <div v-if="Object.keys(game.filteredDomes('books')).length" class="aside-content">
             <select v-model="game.selectedId" @change="game.selectDome($event)">
                 <option :value="null" disabled>{{ __('Domes') }}</option>
                 <option v-for="dome in game.filteredDomes('books')" :value="dome.id">
@@ -23,7 +25,7 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content">
+        <div v-if="Object.keys(game.filteredScenes('books')).length" class="aside-content">
             <select v-model="game.selectedId" @change="game.selectScene($event)">
                 <option :value="null" disabled>{{ __('Scenes') }}</option>
                 <option v-for="scene in game.filteredScenes('books')" :value="scene.id">
@@ -31,7 +33,8 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content" v-if="game.mainTab === 'MainBoard'">
+        <div v-if="game.mainTab === 'MainBoard' && Object.keys(game.filteredDecks('books')).length"
+             class="aside-content">
             <select v-model="game.selectedId" @change="game.selectDeck($event)">
                 <option :value="null" disabled>{{ __('Decks') }}</option>
                 <option v-for="deck in game.filteredDecks('books')" :value="deck.id">
@@ -39,7 +42,7 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content">
+        <div v-if="Object.keys(game.filteredCards('books')).length" class="aside-content">
             <select v-model="game.selectedId" @change="game.selectCard($event)">
                 <option :value="null" disabled>{{ __('Cards') }}</option>
                 <option v-for="card in game.filteredCards('books')" :value="card.id">
@@ -47,6 +50,8 @@
                 </option>
             </select>
         </div>
+
+        <!-- actions -->
         <div v-if="game.isMaster() && game.mainTab === 'MainBoard'"
              class="aside-content aside-actions">
             <button v-if="!game.activeObject"

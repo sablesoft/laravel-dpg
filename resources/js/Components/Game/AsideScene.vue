@@ -15,7 +15,9 @@
         <div class="aside-content aside-desc">
             {{ game.activeInfo.desc }}
         </div>
-        <div class="aside-content" v-if="game.mainTab === 'MainScene'">
+
+        <!-- selects -->
+        <div v-if="game.mainTab === 'MainScene'" class="aside-content">
             <select v-model="game.selectedId" @change="game.selectScene($event)">
                 <option :value="null" disabled>{{ __('Scenes') }}</option>
                 <option v-for="scene in game.filteredScenes()" :value="scene.id">
@@ -23,7 +25,8 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content">
+        <div v-if="game.mainTab === 'MainBoard' && Object.keys(game.filteredDecks('scenes')).length"
+             class="aside-content">
             <select v-model="game.selectedId" @change="game.selectDeck($event)">
                 <option :value="null" disabled>{{ __('Decks') }}</option>
                 <option v-for="deck in game.filteredDecks('scenes')" :value="deck.id">
@@ -31,7 +34,7 @@
                 </option>
             </select>
         </div>
-        <div class="aside-content">
+        <div v-if="Object.keys(game.filteredCards('scenes')).length" class="aside-content">
             <select v-model="game.selectedId" @change="game.selectCard($event)">
                 <option :value="null" disabled>{{ __('Cards') }}</option>
                 <option v-for="card in game.filteredCards('scenes')" :value="card.id">
@@ -39,6 +42,8 @@
                 </option>
             </select>
         </div>
+
+        <!-- actions -->
         <div v-if="game.isMaster() && game.mainTab !== 'MainBoard'"
              class="aside-content aside-actions">
             <button v-if="!game.isActivated()" class="control-btn control-public" :title="__('Activate')">

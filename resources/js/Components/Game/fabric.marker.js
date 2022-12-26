@@ -1,19 +1,18 @@
 import { fabric } from 'fabric-with-erasing';
+import './fabric.custom';
 import { game } from "@/Components/Game/game";
 
 fabric.Marker = fabric.util.createClass(fabric.Group, {
     type: 'marker',
     defaultScale: 0.3,
     defaultShowOpacity: 0.5,
-    isMaster: false,
 
     /**
-     * @param {GameCard} model
+     * @param {number} id
      * @param {?Object.<string, any>} options
      */
-    initialize: function(model, options) {
+    initialize: function(id, options) {
         options || (options = {});
-        this.isMaster = game.isMaster();
         options.hasControls = false;
         options.hasBorders = false;
         options.lockScalingX = true;
@@ -21,29 +20,26 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
         options.lockRotation = true;
         options.erasable = false;
         options.hoverCursor = 'pointer';
-        options.marker_id = options.marker_id || model.id;
-        options.scope_id = options.scope_id || model.scope_id;
+        let card = id ? game.findCard(id) : game.findCard(options.marker_id);
+
+        options.marker_id = options.marker_id || card.id;
+        options.scope_id = options.scope_id || card.scope_id;
         options.imageScale = options.imageScale || this.defaultScale;
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
         options.show = options.show === undefined ? false : options.show;
 
-        options.lockMovementX = !this.isMaster;
-        options.lockMovementY = !this.isMaster;
+        options.lockMovementX = !game.isMaster();
+        options.lockMovementY = !game.isMaster();
 
         this.callSuper('initialize', [], options);
 
         this.visibility(this.show);
 
-        if (!model) {
+        if (!id) {
             return;
         }
-
-        if (!model.scopeImage) {
-            throw new Error('Required model scope image missed!');
-        }
-
         let self = this;
-        fabric.Image.fromURL(model.scopeImage, function(image) {
+        fabric.Image.fromURL(this._src(), function(image) {
             image.set('originX', 'center');
             let scale = Number(self.get('imageScale'));
             let width = Number(image.get('width'));
@@ -54,24 +50,16 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
             self.add(image);
         });
     },
-
-    visibility: function(show = true) {
-        this.show = show;
-        if (show) {
-            this.opacity = 1;
-            this.visible = true;
-        } else {
-            if (this.isMaster) {
-                this.opacity = this.showOpacity;
-            } else {
-                this.visible = false;
+    update() {
+        // console.debug('Marker update', this);
+        this._item('image').setSrc(this._src(), function(img) {
+            if (img.canvas) {
+                img.canvas.requestRenderAll();
             }
-        }
-        if (this.canvas) {
-            this.canvas.requestRenderAll();
-        }
-    },
+        });
 
+        return this;
+    },
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
             show: this.get('show'),
@@ -80,9 +68,20 @@ fabric.Marker = fabric.util.createClass(fabric.Group, {
             imageScale: this.get('imageScale')
         });
     },
-
     _render: function(ctx) {
         this.callSuper('_render', ctx);
+    },
+    _src: function() {
+        let card = game.findCard(this.get('marker_id'));
+        let src = card.image;
+        if (card.scope_id) {
+            src = game.findCard(card.scope_id).image;
+        }
+        if (!src) {
+            throw new Error('Required image not found!');
+        }
+
+        return src;
     }
 });
 

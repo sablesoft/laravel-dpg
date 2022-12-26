@@ -767,11 +767,11 @@ export const game = shallowReactive({
     },
     /**
      * @param {number} id
-     * @param {?Object.<string, any>} options
+     * @param {Object.<string, any>} options
      * @param {?boolean} add
      * @return {fabric.Area}
      */
-    createAreaFabric(id, options = null, add = true) {
+    createAreaFabric(id, options, add = true) {
         let o = new fabric.Area(id, options);
         if (add) {
             this.fb().add(o);
@@ -784,15 +784,12 @@ export const game = shallowReactive({
     },
     /**
      * @param {number} id
-     * @param {?Object.<string, any>} options
+     * @param {Object.<string, any>} options
      * @param {?boolean} add
      * @return {fabric.Marker}
      */
-    createMarkerFabric(id, options = null, add = true) {
-        if (!this.cards[id]) {
-            throw new Error('Card not found: ' + id);
-        }
-        let o = new fabric.Marker(toRaw(this.cards[id]), options);
+    createMarkerFabric(id, options, add = true) {
+        let o = new fabric.Marker(id, options);
         if (add) {
             this.fb().add(o);
             this.fb().requestRenderAll();
@@ -803,40 +800,33 @@ export const game = shallowReactive({
     },
     /**
      * @param {number} id
-     * @param {?Object.<string, any>} options
+     * @param {Object.<string, any>} options
      * @param {?boolean} add
      * @return {fabric.Book}
      */
-    createBookFabric(id, options = null, add = true) {
-        let book = this.findBook(id);
-        options = options || {};
-        options.scopeName = 'Book'; // todo - add dictionary from backend
-        let o = new fabric.Book(book.id, options);
+    createBookFabric(id, options, add = true) {
+        let o = new fabric.Book(id, options);
         if (add) {
             this.fb().add(o);
             this.fb().requestRenderAll();
         }
+        // console.debug('Created book object', o);
 
         return o;
     },
     /**
      * @param {number} id
-     * @param {?Object.<string, any>} options
+     * @param {Object.<string, any>} options
      * @param {?boolean} add
      * @return {fabric.Book}
      */
-    createDomeFabric(id, options = null, add = true) {
-        let dome = this.findDome(id);
-        options = options || {};
-        let domeCard = this.cards[dome.scope_id];
-        options.image = domeCard.image;
-        options.scopeName = 'Dome'; // todo - add dictionary from backend
-        let o = new fabric.Dome(dome.id, options);
+    createDomeFabric(id, options, add = true) {
+        let o = new fabric.Dome(id, options);
         if (add) {
             this.fb().add(o);
             this.fb().requestRenderAll();
         }
-        console.debug('Created dome object', o);
+        // console.debug('Created dome object', o);
 
         return o;
     },

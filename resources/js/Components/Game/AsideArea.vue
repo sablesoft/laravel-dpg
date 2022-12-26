@@ -49,22 +49,33 @@
                 <span class="material-icons" @click="game.forward()">upload</span>
             </button>
             <button v-if="game.activeObject"
-                    class="control-btn control-forward" :title="__('Backward')">
+                    class="control-btn control-backward" :title="__('Backward')">
                 <span class="material-icons" @click="game.backward()">download</span>
             </button>
             <button v-if="game.activeObject && game.activeObjectHidden"
-                    class="control-btn control-forward" :title="__('Show')">
+                    class="control-btn control-show" :title="__('Show')">
                 <span class="material-icons" @click="game.visibility()">visibility</span>
             </button>
             <button v-if="game.activeObject && !game.activeObjectHidden"
-                    class="control-btn control-forward" :title="__('Hide')">
+                    class="control-btn control-hide" :title="__('Hide')">
                 <span class="material-icons" @click="game.visibility(false)">visibility_off</span>
             </button>
-            <button v-if="!game.isActivated()" class="control-btn control-public" :title="__('Activate')">
+            <button v-if="game.activeObject"
+                    class="control-btn control-center" :title="__('Center')">
+                <span class="material-icons" @click="game.zoomTo()">filter_center_focus</span>
+            </button>
+            <button v-if="!game.isActivated()" class="control-btn control-activate" :title="__('Activate')">
                 <span class="material-icons" @click="game.activateSpace()">public</span>
             </button>
-            <button v-if="game.isActivated()" class="control-btn control-public" :title="__('Deactivate')">
+            <button v-if="game.isActivated()" class="control-btn control-deactivate" :title="__('Deactivate')">
                 <span class="material-icons" @click="game.activateSpace(false)">public_off</span>
+            </button>
+        </div>
+        <div v-if="!game.isMaster() && game.mainTab === 'MainDome'"
+             class="aside-content aside-actions">
+            <button v-if="game.activeObject"
+                    class="control-btn control-center" :title="__('Center')">
+                <span class="material-icons" @click="game.zoomTo()">filter_center_focus</span>
             </button>
         </div>
         <div v-if="game.mainTab === 'MainBoard'" class="aside-content aside-actions">

@@ -810,6 +810,25 @@ export const game = shallowReactive({
         this.setActiveObject();
         this.showInfo();
     },
+    zoomTo(o = null) {
+        o = o ? o : this.activeObject;
+        if (!o) {
+            throw new Error('Active object not found for zoomTo!');
+        }
+        let fc = this.fb();
+        let zoom = fc.getZoom();
+        fc.setZoom(1);
+        let vpw = fc.width / zoom;
+        let vph = fc.height / zoom;
+        let p = o.getCenterPoint();
+        p.x = p.x - vpw / 2;
+        p.y = p.y - vph / 2;
+        fc.absolutePan(p);
+        fc.setZoom(zoom);
+        this.fb().requestRenderAll();
+
+        return this;
+    },
     /**
      * @param {number} id
      * @param {Object.<string, any>} options

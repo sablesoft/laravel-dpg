@@ -190,6 +190,11 @@ export const game = shallowReactive({
         scopeImage: null,
         scopeName: null
     },
+    // todo - load dictionary from backend:
+    dictionary: {
+        'Dome': 'Dome',
+        'Book': 'Book'
+    },
     /**
      * @member {?string} - user role code
      */
@@ -803,18 +808,14 @@ export const game = shallowReactive({
      * @return {fabric.Book}
      */
     createBookFabric(id, options = null, add = true) {
-        if (!this.books[id]) {
-            throw new Error('Book not found: ' + id);
-        }
+        let book = this.findBook(id);
         options = options || {};
-        options.back_image = options.back_image || this.cardsBack;
         options.scopeName = 'Book'; // todo - add dictionary from backend
-        let o = new fabric.Book(toRaw(this.books[id]), options);
+        let o = new fabric.Book(book.id, options);
         if (add) {
             this.fb().add(o);
             this.fb().requestRenderAll();
         }
-        // console.debug('Created book object', o);
 
         return o;
     },
@@ -825,16 +826,12 @@ export const game = shallowReactive({
      * @return {fabric.Book}
      */
     createDomeFabric(id, options = null, add = true) {
-        let dome = this.domes[id];
-        if (!dome) {
-            throw new Error('Dome not found: ' + id);
-        }
+        let dome = this.findDome(id);
         options = options || {};
         let domeCard = this.cards[dome.scope_id];
         options.image = domeCard.image;
-        options.back_image = options.back_image || this.cardsBack;
         options.scopeName = 'Dome'; // todo - add dictionary from backend
-        let o = new fabric.Dome(toRaw(dome), options);
+        let o = new fabric.Dome(dome.id, options);
         if (add) {
             this.fb().add(o);
             this.fb().requestRenderAll();
@@ -1232,6 +1229,16 @@ export const game = shallowReactive({
             throw new Error('Dome not found: ' + id);
         }
         return toRaw(this.domes[id]);
+    },
+    findBook(id) {
+        if (!this.books[id]) {
+            throw new Error('Book not found: ' + id);
+        }
+        return toRaw(this.books[id]);
+    },
+    trans(string) {
+        return this.dictionary[string] ?
+            this.dictionary[string] : string;
     },
     /**
      * @return {HTMLCollectionOf<HTMLCanvasElement>}

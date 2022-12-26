@@ -1,25 +1,53 @@
 import { fabric } from 'fabric-with-erasing';
+import './fabric.custom';
 import './fabric.book';
+import {game} from "@/Components/Game/game";
 
 fabric.Dome = fabric.util.createClass(fabric.Book, {
     type: 'dome',
 
     /**
-     * @param {Dome} model
+     * @param {number} id
      * @param {Object.<string, any>} options
      */
-    initialize: function (model, options) {
-        this.callSuper('initialize', model, options);
-        this.dome_id = options.dome_id || model.id;
+    initialize: function (id, options) {
+        options = options || {};
+        let dome = id ? game.findDome(id) : game.findDome(options.dome_id);
+        options.image = game.findCard(dome.scope_id).image;
+        options.scopeName = options.scopeName || game.trans('Dome');
+        this.callSuper('initialize', id, options);
+        this.dome_id = options.dome_id || dome.id;
     },
+    update() {
+        // console.debug('Dome update', this);
+        let dome = game.findDome(this.get('dome_id'));
+        // update back image:
+        this._item('back').setSrc(game.cardsBack, function(img) {
+            if (img.canvas) {
+                img.canvas.requestRenderAll();
+            }
+        });
+        // update image:
+        let image = this._item('image', false);
+        if (image) {
+            image.setSrc(game.findCard(dome.scope_id).image, function(img) {
+                if (img.canvas) {
+                    img.canvas.requestRenderAll();
+                }
+            });
+        }
+        // update scope name:
+        this._item('scopeName').set('text', game.trans('Book'))
+        if (this.canvas) {
+            this.canvas.requestRenderAll();
+        }
 
+        return this;
+    },
     toObject: function() {
-        let result = fabric.util.object.extend(this.callSuper('toObject'), {
+        return fabric.util.object.extend(this.callSuper('toObject'), {
             dome_id: this.get('dome_id'),
         });
-        console.debug('Dome to object', result);
-
-        return result;
     },
 });
 

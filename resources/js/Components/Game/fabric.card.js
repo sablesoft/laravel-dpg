@@ -38,8 +38,6 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
 
         this.callSuper('initialize', [], options);
 
-        this.visibility(this.show);
-
         let self = this;
         this.on('mousedown', function() {
             const shadow = new fabric.Shadow({
@@ -111,7 +109,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         });
     },
     update() {
-        console.debug('Card update', this);
+        // console.debug('Card update', this);
         let card = game.findCard(this.get('card_id'));
         // update back image:
         this._item('back').setSrc(game.cardsBack, function(img) {

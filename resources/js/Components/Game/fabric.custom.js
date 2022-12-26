@@ -1,9 +1,9 @@
 import { fabric } from 'fabric-with-erasing';
 import { game } from "@/Components/Game/game";
 
-fabric.Group.prototype._item = function(type) {
+fabric.Group.prototype._item = function(type, required = true) {
     let item = this.getObjects(type)[0];
-    if (!item) {
+    if (!item && required) {
         console.error('Group item not found!', this, type);
         throw new Error('Group item not found!');
     }

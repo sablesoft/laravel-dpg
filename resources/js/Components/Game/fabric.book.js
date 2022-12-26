@@ -1,4 +1,6 @@
 import { fabric } from 'fabric-with-erasing';
+import './fabric.custom';
+import './fabric.scope-name';
 import { game } from "@/Components/Game/game";
 
 fabric.Book = fabric.util.createClass(fabric.Group, {
@@ -11,15 +13,14 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
     imageScale: 0.3,
     imageHeight: 75,
     textLine: 30,
-    isMaster: false,
     defaultShowOpacity: 0.7,
 
     /**
-     * @param {Book} model
+     * @param {number} id
      * @param {Object.<string, any>} options
      */
-    initialize: function (model, options) {
-        this.isMaster = game.isMaster();
+    initialize: function (id, options) {
+        options = options || {};
         options.hasControls = false;
         options.hasBorders = false;
         options.hoverCursor = 'pointer';
@@ -30,22 +31,23 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         options.width = options.width || this.defaultWidth;
         options.ratio = options.ratio || this.defaultRatio;
         options.height = options.height || options.width * options.ratio + options.depth;
-        options.width = model ? options.width + options.depth : options.width;
-        options.image = options.image || model.image;
-        options.book_id = options.book_id || model.id;
+        let book = id ? game.findBook(id) : game.findBook(options.book_id);
+
+        options.image = options.image || book.image;
+        options.width = id ? options.width + options.depth : options.width;
+        options.book_id = options.book_id || book.id;
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
         options.show = options.show === undefined ? false : options.show;
-        if (!options.back_image) {
-            throw new Error('Back image required for book canvas object');
-        }
-        options.lockMovementX = !this.isMaster;
-        options.lockMovementY = !this.isMaster;
+        options.scopeName = options.scopeName || game.trans('Book');
+
+        options.lockMovementX = !game.isMaster();
+        options.lockMovementY = !game.isMaster();
 
         this.callSuper('initialize', [], options);
 
         this.visibility(this.show);
 
-        if (!model) {
+        if (!id) {
             return;
         }
 
@@ -70,7 +72,7 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
         }));
 
         let self = this;
-        fabric.Image.fromURL(options.back_image, function(back) {
+        fabric.Back.fromURL(game.cardsBack, function(back) {
             back.set('originX', 'center');
             back.set('originY', 'center');
             back.set('left', -options.depth + 1);
@@ -109,7 +111,7 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
                 });
             }
             if (options.scopeName) {
-                self.add(new fabric.Text(options.scopeName, {
+                self.add(new fabric.ScopeName(options.scopeName, {
                     originX: 'center',
                     originY: 'center',
                     top: (self.imageHeight + options.depth - self.textLine)/2,
@@ -121,24 +123,32 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
             }
         });
     },
-
-    visibility: function(show = true) {
-        this.show = show;
-        if (show) {
-            this.opacity = 1;
-            this.visible = true;
-        } else {
-            if (this.isMaster) {
-                this.opacity = this.showOpacity;
-            } else {
-                this.visible = false;
+    update() {
+        // console.debug('Book update', this);
+        let book = game.findBook(this.get('book_id'));
+        // update back image:
+        this._item('back').setSrc(game.cardsBack, function(img) {
+            if (img.canvas) {
+                img.canvas.requestRenderAll();
             }
+        });
+        // update image:
+        let image = this._item('image', false);
+        if (image) {
+            image.setSrc(book.image, function(img) {
+                if (img.canvas) {
+                    img.canvas.requestRenderAll();
+                }
+            });
         }
+        // update scope name:
+        this._item('scopeName').set('text', game.trans('Book'))
         if (this.canvas) {
             this.canvas.requestRenderAll();
         }
-    },
 
+        return this;
+    },
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
             show: this.get('show'),
@@ -149,7 +159,6 @@ fabric.Book = fabric.util.createClass(fabric.Group, {
             back_image: this.get('back_image'),
         });
     },
-
     _render: function(ctx) {
         this.callSuper('_render', ctx);
     }

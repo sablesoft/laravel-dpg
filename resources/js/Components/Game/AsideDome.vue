@@ -87,6 +87,14 @@
                 <span class="material-icons" @click="game.remove()">delete</span>
             </button>
         </div>
+        <div v-if="game.isMaster() && game.mainTab === 'MainDome'" class="aside-content aside-actions">
+            <button v-if="!game.isActivated()" class="control-btn control-public" :title="__('Activate')">
+                <span class="material-icons" @click="game.activateSpace()">public</span>
+            </button>
+            <button v-if="game.isActivated()" class="control-btn control-public" :title="__('Deactivate')">
+                <span class="material-icons" @click="game.activateSpace(false)">public_off</span>
+            </button>
+        </div>
         <div v-if="!game.isMaster() && game.mainTab === 'MainBoard'" class="aside-content aside-actions">
             <button v-if="game.visibleCardIds.includes(game.activeInfo.scopeId)"
                     class="control-btn control-forward" :title="__('Show Card')">

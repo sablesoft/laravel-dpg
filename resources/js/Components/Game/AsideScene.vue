@@ -46,6 +46,10 @@
         <!-- actions -->
         <div v-if="game.isMaster() && game.mainTab !== 'MainBoard'"
              class="aside-content aside-actions">
+            <button class="control-btn control-forward" :title="__('Show Card')">
+                <span class="material-icons"
+                      @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
+            </button>
             <button v-if="!game.isActivated()" class="control-btn control-public" :title="__('Activate')">
                 <span class="material-icons" @click="game.activateSpace()">public</span>
             </button>

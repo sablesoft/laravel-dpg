@@ -324,8 +324,6 @@ export const game = shallowReactive({
      * @member {?fabric.Canvas}
      */
     fbScene: null,
-    canMap: false,
-    canScene: false,
     /**
      * @member {string}
      */
@@ -369,15 +367,8 @@ export const game = shallowReactive({
         this.locale = options.locale;
         this.dictionary = options.dictionary;
         this.showInfo();
-        this.updateCanSee();
 
         console.debug('Game initiated', this);
-    },
-    updateCanSee() {
-        this.canScene = this.isMaster() ? !!game.activeSceneId :
-            game.activeSceneId && this.visibleSceneIds.includes(Number(game.activeSceneId));
-        this.canMap = this.isMaster() ? !!game.activeDomeId :
-            game.activeDomeId && this.visibleDomeIds.includes(Number(game.activeDomeId));
     },
     /**
      * @param {?Object.<string, any>} options
@@ -524,7 +515,6 @@ export const game = shallowReactive({
                 console.error('Invalid active info for makeActive', this.activeInfo);
                 throw new Error('Invalid active info for makeActive');
         }
-        this.updateCanSee();
     },
     isActivated() {
         let id = Number(this.activeInfo.id);

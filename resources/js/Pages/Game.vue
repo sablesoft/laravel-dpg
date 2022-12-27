@@ -118,19 +118,19 @@ let pageName = function() {
                 <component :is="mainTabs[game.mainTab]"></component>
             </div>
             <div class="action-column">
-                <button v-if="game.canMap || game.canScene"
+                <button v-if="game.activeDomeId || game.activeSceneId"
                         class="control-btn control-board"
                         :disabled="game.mainTab === 'MainBoard'"
                         :title="__('Board')">
                     <span class="material-icons" @click="game.showMain('MainBoard')">local_library</span>
                 </button>
-                <button v-if="game.canMap"
+                <button v-if="game.activeDomeId"
                         class="control-btn control-dome"
                         :disabled="game.mainTab === 'MainDome'"
                         :title="__('Dome')">
                     <span class="material-icons" @click="game.showMain('MainDome')">map</span>
                 </button>
-                <button v-if="game.canScene"
+                <button v-if="game.activeSceneId"
                         class="control-btn control-scene"
                         :disabled="game.mainTab === 'MainScene'"
                         :title="__('Scene')">

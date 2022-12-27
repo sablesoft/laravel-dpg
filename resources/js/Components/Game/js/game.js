@@ -353,6 +353,7 @@ export const game = shallowReactive({
     modeSave: false,
     hideOpacity: 0.5,
     brushWidth: 50,
+    initiated: false,
     /**
      * @param {Object.<string, any>} data
      * @param {GameOptions} options
@@ -367,29 +368,33 @@ export const game = shallowReactive({
         this.locale = options.locale;
         this.dictionary = options.dictionary;
         this.showInfo();
+        this.initiated = true;
 
         console.debug('Game initiated', this);
     },
     /**
-     * @param {?Object.<string, any>} options
      * @param {?Object.<string, any>} json
-     * @param {?number} timeout
+     * @param {?function} callback
      * @return {fabric.Canvas}
      */
-    initCanvas(json = null, options = null, timeout) {
+    initCanvas(json = null, callback = null) {
         let canvas = document.getElementsByTagName('canvas')[0];
         let fc = new fabric.Canvas(canvas);
+        let self = this;
         if (json) {
-            fc.loadFromJSON(json, fc.renderAll.bind(fc));
+            fc.loadFromJSON(json, function () {
+                fc.renderAll.bind(fc);
+                setTimeout(function() {
+                    self.updateCanvas(fc);
+                }, 3000);
+                if (typeof callback === 'function') {
+                    callback(fc);
+                }
+            });
         }
-        options = options || {};
-        options['preserveObjectStacking'] = true;
-        for (const [key, value] of Object.entries(options)) {
-            fc[key] = value;
-        }
+        fc['preserveObjectStacking'] = true;
         let name = 'fb' + this.mainTab;
         this[name] = fc;
-        let self = this;
         fc.on('selection:created', function(opt) {
             // console.debug('selection:created', opt);
             self._selection(opt);
@@ -463,22 +468,21 @@ export const game = shallowReactive({
             this.isDragging = false;
             this.selection = true;
         });
-        this.updateCanvas(timeout);
+        if (!json && typeof callback === 'function') {
+            callback(fc);
+        }
 
         return fc;
     },
-    updateCanvas(timeout = 3000) {
-        let fc = this.fb();
-        setTimeout(function() {
-            // console.debug('=== Update canvas objects ===', fc.getObjects());
-            fc.getObjects().forEach(function(o) {
-                // console.debug('Check object update', o);
-                // console.debug('Type of update', typeof o.update);
-                if (typeof o.update === 'function') {
-                    o.update();
-                }
-            });
-        }, timeout);
+    updateCanvas(fc) {
+        fc = fc ? fc: this.fb();
+        fc.getObjects().forEach(function(o) {
+            // console.debug('Check object update', o);
+            // console.debug('Type of update', typeof o.update);
+            if (typeof o.update === 'function') {
+                o.update();
+            }
+        });
     },
     isMaster() {
         return this.role === 'master';

@@ -1,22 +1,23 @@
 <!--suppress JSUnresolvedVariable -->
 <script setup>
-import {onMounted} from 'vue';
+import { onMounted } from 'vue';
 import { game } from "@/Components/Game/js/game";
 import Canvas from '@/Components/Game/Canvas.vue';
 
 onMounted(() => {
+    let timeout = game.initiated ? 0 : 1000;
     setTimeout(function() {
-        game.initCanvas(game.canvas);
-        if (!game.canvas) {
-            let options = {
-                originX : 'left',
-                originY : 'top',
-                erasable: false
-            };
-            game.fb().setBackgroundImage(game.boardImage, game.renderAll.bind(game), options);
-        }
-        game.fb().on({
-            'mouse:dblclick': function(event) {
+        game.initCanvas(game.canvas, function(fc) {
+            if (!game.canvas) {
+                let options = {
+                    originX : 'left',
+                    originY : 'top',
+                    erasable: false
+                };
+                fc.setBackgroundImage(game.boardImage, fc.renderAll.bind(fc), options);
+                fc.requestRenderAll();
+            }
+            fc.on('mouse:dblclick', function(event) {
                 if (!event.target) {
                     return;
                 }
@@ -29,13 +30,12 @@ onMounted(() => {
                         game.showInfo();
                     }
                 }
-            }
+            });
+            console.debug('Board mounted', fc);
         });
-        console.debug('Board mounted', game.fb());
-    }, 500);
+    }, timeout);
 });
 </script>
-
 <template>
     <Canvas/>
 </template>

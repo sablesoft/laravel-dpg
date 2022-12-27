@@ -21,6 +21,7 @@ class AreaProcess extends Process implements SpaceProcessInterface
         'name',
         'currentName',
         'desc',
+        'currentDesc',
         'image',
         'scope_id',
         'dome_id',

@@ -1246,7 +1246,7 @@ export const game = shallowReactive({
                     throw new Error('Unknown main tab!');
             }
         }
-        if (filter) {
+        if (filter && filter !== 'all') {
             ids = this._filter(ids, filter, 'scene_ids');
         }
         let self = this;

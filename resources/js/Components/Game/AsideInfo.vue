@@ -32,6 +32,15 @@
             </select>
         </div>
         <div class="aside-content"
+             v-if="game.mainTab === 'MainDome' && Object.keys(game.filteredScenes('all')).length">
+            <select v-model="game.selectedId" @change="game.selectScene($event)">
+                <option :value="null" disabled>{{ __('All Scenes') }}</option>
+                <option v-for="scene in game.filteredScenes('all')" :value="scene.id">
+                    {{ game.getSceneName(scene) }}
+                </option>
+            </select>
+        </div>
+        <div class="aside-content"
              v-if="game.mainTab !== 'MainScene' && Object.keys(game.filteredDomes()).length">
             <select v-model="game.selectedId" @change="game.selectDome($event)">
                 <option :value="null" disabled>{{ __('Domes') }}</option>

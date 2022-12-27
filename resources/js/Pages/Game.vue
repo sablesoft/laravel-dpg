@@ -55,6 +55,11 @@ onMounted(() => {
     game.init(props.data, options);
     console.debug('INITIAL DATA', toRaw(game));
 });
+let pageName = function() {
+    let raw = props.data.info.name;
+    return raw[usePage().props.value.locale] ?
+        raw[usePage().props.value.locale] : raw['en'];
+}
 </script>
 
 <style scoped>
@@ -105,7 +110,7 @@ onMounted(() => {
 
 <template>
     <!--suppress HtmlRequiredTitleElement -->
-    <Head :title="data.info.name" />
+    <Head :title="pageName()" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <GameLayout>
         <div class="mx-auto sm:px-6 lg:px-8 row">

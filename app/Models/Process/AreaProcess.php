@@ -19,6 +19,7 @@ class AreaProcess extends Process implements SpaceProcessInterface
     protected $fillable = [
         'id',
         'name',
+        'currentName',
         'desc',
         'image',
         'scope_id',

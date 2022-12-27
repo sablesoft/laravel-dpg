@@ -21,7 +21,7 @@
             <select v-model="game.selectedId" @change="game.selectScene($event)">
                 <option :value="null" disabled>{{ __('Scenes') }}</option>
                 <option v-for="scene in game.filteredScenes()" :value="scene.id">
-                    {{ scene.name }}
+                    {{ game.getSceneName(scene) }}
                 </option>
             </select>
         </div>
@@ -38,7 +38,7 @@
             <select v-model="game.selectedId" @change="game.selectCard($event)">
                 <option :value="null" disabled>{{ __('Cards') }}</option>
                 <option v-for="card in game.filteredCards('scenes')" :value="card.id">
-                    {{ card.name }}
+                    {{ game.getCardName(card) }}
                 </option>
             </select>
         </div>

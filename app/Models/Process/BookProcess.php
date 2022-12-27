@@ -17,8 +17,10 @@ class BookProcess extends Process
     protected $fillable = [
         'id',
         'name',
+        'currentName',
         'image',
         'desc',
+        'currentDesc',
         'source_ids',
         'dome_ids',
         'deck_ids',

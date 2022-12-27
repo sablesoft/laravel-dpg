@@ -21,7 +21,7 @@
             <select v-model="game.selectedId" @change="game.selectArea($event)">
                 <option :value="null" disabled>{{ __('Areas') }}</option>
                 <option v-for="area in game.filteredAreas('domes')" :value="area.id">
-                    {{ area.name }}
+                    {{ game.getAreaName(area) }}
                 </option>
             </select>
         </div>
@@ -29,7 +29,7 @@
             <select v-model="game.selectedId" @change="game.selectBook($event)">
                 <option :value="null" disabled>{{ __('Books') }}</option>
                 <option v-for="book in game.filteredSources('domes')" :value="book.id">
-                    {{ book.name }}
+                    {{ game.getBookName(book) }}
                 </option>
             </select>
         </div>
@@ -46,7 +46,7 @@
             <select v-model="game.selectedId" @change="game.selectCard($event)">
                 <option :value="null" disabled>{{ __('Cards') }}</option>
                 <option v-for="card in game.filteredCards('domes')" :value="card.id">
-                    {{ card.name }}
+                    {{ game.getCardName(card) }}
                 </option>
             </select>
         </div>

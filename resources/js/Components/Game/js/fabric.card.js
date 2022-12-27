@@ -73,14 +73,14 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             strokeLineCap: 'round',
             strokeLineJoin: 'round',
         }));
-        this.add(new fabric.Name(card.currentName, {
+        this.add(new fabric.Name(game.getCardName(card.id), {
             originX: 'center',
             top: -60,
             fontSize: 12,
             fontWeight: 'bold',
             fill: 'black',
         }));
-        if (card.scopeName) {
+        if (card.scope_id) {
             this.add(new fabric.ScopeName(game.getCardName(card.scope_id), {
                 originX: 'center',
                 top: 46,
@@ -127,7 +127,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
             });
         }
         // update name:
-        this._item('name').set('text', card.currentName);
+        this._item('name').set('text', game.getCardName(card.id));
         // update scope name:
         let scope = this._item('scopeName');
         if (scope) {

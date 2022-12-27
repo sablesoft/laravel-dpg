@@ -27,7 +27,7 @@
             <select v-model="game.selectedId" @change="game.selectBook($event)">
                 <option :value="null" disabled>{{ __('All Books') }}</option>
                 <option v-for="book in game.filteredSources('all')" :value="book.id">
-                    {{ book.name }}
+                    {{ game.getBookName(book) }}
                 </option>
             </select>
         </div>
@@ -36,7 +36,7 @@
             <select v-model="game.selectedId" @change="game.selectDome($event)">
                 <option :value="null" disabled>{{ __('Domes') }}</option>
                 <option v-for="dome in game.filteredDomes()" :value="dome.id">
-                    {{ game.cards[dome.scope_id].name }}
+                    {{ game.getDomeName(dome) }}
                 </option>
             </select>
         </div>
@@ -45,7 +45,7 @@
             <select v-model="game.selectedId" @change="game.selectArea($event)">
                 <option :value="null" disabled>{{ __('Areas') }}</option>
                 <option v-for="area in game.filteredAreas()" :value="area.id">
-                    {{ game.cards[area.scope_id].name }}
+                    {{ game.getAreaName(area) }}
                 </option>
             </select>
         </div>
@@ -53,7 +53,7 @@
             <select v-model="game.selectedId" @change="game.selectScene($event)">
                 <option :value="null" disabled>{{ __('Scenes') }}</option>
                 <option v-for="scene in game.filteredScenes()" :value="scene.id">
-                    {{ game.cards[scene.scope_id].name }}
+                    {{ game.getSceneName(scene) }}
                 </option>
             </select>
         </div>
@@ -61,7 +61,7 @@
             <select v-model="game.selectedId" @change="game.selectBook($event)">
                 <option :value="null" disabled>{{ __('Books') }}</option>
                 <option v-for="book in game.filteredSources()" :value="book.id">
-                    {{ book.name }}
+                    {{ game.getBookName(book) }}
                 </option>
             </select>
         </div>
@@ -78,7 +78,7 @@
             <select v-model="game.selectedId" @change="game.selectCard($event)">
                 <option :value="null" disabled>{{ __('Cards') }}</option>
                 <option v-for="card in game.filteredCards()" :value="card.id">
-                    {{ card.name }}
+                    {{ game.getCardName(card) }}
                 </option>
             </select>
         </div>

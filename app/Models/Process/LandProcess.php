@@ -15,7 +15,9 @@ class LandProcess extends Process implements SpaceProcessInterface
     protected $fillable = [
         'id',
         'name',
+        'currentName',
         'desc',
+        'currentDesc',
         'image',
         'scope_id',
         'dome_id',

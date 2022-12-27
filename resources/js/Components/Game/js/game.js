@@ -64,16 +64,14 @@ import './fabric.fog';
  * @typedef {Object} GameCard
  * @property {number} id
  * @property {number} scope_id
- * @property {string} name
- * @property {?string} desc
+ * @property {?Object.<string, string>} name
+ * @property {?Object.<string, string>} desc
  * @property {?string} info
  * @property {?string} code
- * @property {string} currentName
- * @property {?string} currentDesc
+ * @property {?Object.<string, string>} currentName
+ * @property {?Object.<string, string>} currentDesc
  * @property {?CanvasConfig} canvas
  * @property {?string} image
- * @property {?string} scopeImage
- * @property {?string} scopeName
  * @property {?fabric.Card} card
  * @property {?fabric.Marker} marker
  */
@@ -193,6 +191,7 @@ export const game = shallowReactive({
         scopeName: null
     },
     locale: 'en',
+    fallbackLocale: 'en',
     dictionary: {},
     /**
      * @member {?string} - user role code
@@ -364,8 +363,6 @@ export const game = shallowReactive({
         for (const [key, value] of Object.entries(data)) {
             this[key] = toRaw(value);
         }
-        this.info.id = null;
-        this.info.type = 'game';
         this.width = options.width;
         this.height = options.height;
         this.role = options.role;
@@ -551,36 +548,48 @@ export const game = shallowReactive({
         if (this.fb()) {
             this.setActiveObject();
         }
+        let scopeCard = null;
         switch (this.mainTab) {
             case 'MainBoard':
-                this.activeInfo = this.info;
+                this.activeInfo = {
+                    id: null,
+                    scopeId: null,
+                    type: 'game',
+                    name: this._toLocale(this.info.name),
+                    desc: this._toLocale(this.info.desc),
+                    image: this.info.image,
+                    scopeImage: null,
+                    scopeName: this.trans('Game')
+                };
                 return;
             case 'MainDome':
                 let dome = this.findDome(this.activeDomeId);
-                let domeCard = this.cards[dome.scope_id];
+                let domeCard = this.findCard(dome.scope_id);
+                scopeCard = this.findCard(domeCard.scope_id, false);
                 this.activeInfo = {
                     id: dome.id,
                     scopeId: dome.scope_id,
                     type: 'dome',
-                    name: dome.name,
-                    desc: dome.desc,
+                    name: this._toLocale(dome.name),
+                    desc: this._toLocale(dome.desc),
                     image: domeCard.image,
-                    scopeImage: domeCard.scopeImage,
-                    scopeName: domeCard.scopeName
+                    scopeImage: scopeCard ? scopeCard.image : null,
+                    scopeName: scopeCard ? this._toLocale(scopeCard.name) : null
                 };
                 return;
             case 'MainScene':
                 let scene = this.findScene(this.activeSceneId);
-                let sceneCard = this.cards[scene.scope_id];
+                let sceneCard = this.findCard(scene.scope_id);
+                scopeCard = this.findCard(scene.scope_id, false);
                 this.activeInfo = {
                     id: scene.id,
                     scopeId: scene.scope_id,
                     type: 'scene',
-                    name: scene.name,
-                    desc: scene.desc,
+                    name: this._toLocale(sceneCard.name),
+                    desc: this._toLocale(sceneCard.desc),
                     image: sceneCard.image,
-                    scopeImage: sceneCard.scopeImage,
-                    scopeName: sceneCard.scopeName
+                    scopeImage: scopeCard ? scopeCard.image : null,
+                    scopeName: scopeCard ? this._toLocale(scopeCard.name) : null
                 };
                 return;
             default:
@@ -646,8 +655,8 @@ export const game = shallowReactive({
         this.activeInfo = {
             id: book.id,
             type: 'book',
-            name: book.name,
-            desc: book.desc,
+            name: this._toLocale(book.name),
+            desc: this._toLocale(book.desc),
             image: book.image,
             scopeImage: null,
             scopeName: null
@@ -670,8 +679,8 @@ export const game = shallowReactive({
             id: dome.id,
             scopeId: dome.scope_id,
             type: 'dome',
-            name: domeCard.name,
-            desc: domeCard.desc,
+            name: this._toLocale(domeCard.name),
+            desc: this._toLocale(domeCard.desc),
             image: domeCard.image,
             scopeImage: null,
             scopeName: null
@@ -688,16 +697,17 @@ export const game = shallowReactive({
     },
     showCard(id) {
         let card = this.findCard(id);
+        let scopeCard = this.findCard(card.scope_id, false);
         // console.debug('Show Card', card);
         this.activeInfo = {
             id: card.id,
             scopeId: card.scope_id,
             type: 'card',
-            name: card.name,
-            desc: card.desc,
+            name: this._toLocale(card.name),
+            desc: this._toLocale(card.desc),
             image: card.image,
-            scopeImage: card.scopeImage,
-            scopeName: card.scopeName,
+            scopeImage: scopeCard ? scopeCard.image : null,
+            scopeName: scopeCard ? this._toLocale(scopeCard.name) : null,
         };
         this.asideTab = 'AsideCard';
 
@@ -707,15 +717,16 @@ export const game = shallowReactive({
         let area = this.findArea(id);
         // console.debug('Show Area', area);
         let areaCard = this.findCard(area.scope_id);
+        let scopeCard = this.findCard(areaCard.scope_id);
         this.activeInfo = {
             id: area.id,
             scopeId: area.scope_id,
             type: 'area',
-            name: areaCard.name,
-            desc: areaCard.desc,
+            name: this._toLocale(areaCard.name),
+            desc: this._toLocale(areaCard.desc),
             image: areaCard.image,
-            scopeImage: areaCard.scopeImage,
-            scopeName: areaCard.scopeName,
+            scopeImage: scopeCard ? scopeCard.image : null,
+            scopeName: scopeCard ? this._toLocale(scopeCard.name) : null,
         };
         this.asideTab = 'AsideArea';
 
@@ -725,15 +736,16 @@ export const game = shallowReactive({
         let scene = this.findScene(id);
         // console.debug('Show Scene', scene);
         let sceneCard = this.findCard(scene.scope_id);
+        let scopeCard = this.findCard(sceneCard.scope_id, false);
         this.activeInfo = {
             id: scene.id,
             scopeId: scene.scope_id,
             type: 'scene',
-            name: sceneCard.name,
-            desc: sceneCard.desc,
+            name: this._toLocale(sceneCard.name),
+            desc: this._toLocale(sceneCard.desc),
             image: sceneCard.image,
-            scopeImage: sceneCard.scopeImage,
-            scopeName: sceneCard.scopeName,
+            scopeImage: scopeCard ? scopeCard.image: null,
+            scopeName: scopeCard ? this._toLocale(sceneCard.name) : null,
         };
         this.asideTab = 'AsideScene';
 
@@ -954,14 +966,58 @@ export const game = shallowReactive({
         this.setActiveObject(o);
         this.showCard(this.activeInfo.id);
     },
-    getCardName(id, current = true) {
-        let card = this.cards[id];
-        if (!card) {
-            console.error('Card for name not found', id);
-            return null;
+    getBookName(id, current = true) {
+        let book = null;
+        if (typeof id === 'number') {
+            book = this.findBook(id);
+        } else {
+            book = id;
         }
-        return current ? card.currentName : card.name;
+        return current ? this._toLocale(book.currentName) : this._toLocale(book.name);
 
+    },
+    /**
+     *
+     * @param {number|GameCard} id
+     * @param current
+     * @return {?string}
+     */
+    getCardName(id, current = true) {
+        let card = null;
+        if (typeof id === 'number') {
+            card = this.findCard(id);
+        } else {
+            card = id;
+        }
+        return current ? this._toLocale(card.currentName) : this._toLocale(card.name);
+
+    },
+    getDomeName(id, current = true) {
+        let dome = null;
+        if (typeof id === 'number') {
+            dome = this.findDome(id);
+        } else {
+            dome = id;
+        }
+        return this.getCardName(this.findCard(dome.scope_id), current);
+    },
+    getAreaName(id, current = true) {
+        let area = null;
+        if (typeof id === 'number') {
+            area = this.findArea(id);
+        } else {
+            area = id;
+        }
+        return this.getCardName(this.findCard(area.scope_id), current);
+    },
+    getSceneName(id, current = true) {
+        let scene = null;
+        if (typeof id === 'number') {
+            scene = this.findScene(id);
+        } else {
+            scene = id;
+        }
+        return this.getCardName(this.findCard(scene.scope_id), current);
     },
     switchTransform() {
         this._offModes('Transform');
@@ -1114,7 +1170,7 @@ export const game = shallowReactive({
         let self = this;
         let filtered = {};
         ids.forEach(function(id) {
-            filtered[id] = toRaw(self.books[id]);
+            filtered[id] = self.findBook(id);
         });
 
         return filtered;
@@ -1132,7 +1188,7 @@ export const game = shallowReactive({
         let self = this;
         let filtered = {};
         ids.forEach(function(id) {
-            filtered[id] = toRaw(self.domes[id]);
+            filtered[id] = self.findDome(id);
         });
 
         return filtered;
@@ -1164,7 +1220,7 @@ export const game = shallowReactive({
         let self = this;
         let filtered = {};
         ids.forEach(function(id) {
-            filtered[id] = toRaw(self.areas[id]);
+            filtered[id] = self.findArea(id);
         });
 
         return filtered;
@@ -1196,7 +1252,7 @@ export const game = shallowReactive({
         let self = this;
         let filtered = {};
         ids.forEach(function(id) {
-            filtered[id] = toRaw(self.scenes[id]);
+            filtered[id] = self.findScene(id);
         });
 
         return filtered;
@@ -1229,14 +1285,14 @@ export const game = shallowReactive({
         let self = this;
         let filtered = {};
         ids.forEach(function(id) {
-            let deck = toRaw(self.decks[id]);
-            let scope = self.cards[deck.scope_id];
-            let target = self.cards[deck.target_id];
+            let deck = self.findDeck(id);
+            let scope = self.findCard(deck.scope_id);
+            let target = self.findCard(deck.target_id);
             filtered[id] = {
                 id: deck.id,
                 type: self._deckType(deck.type),
-                scope: scope.name,
-                target: target.name
+                scope: self._toLocale(scope.name),
+                target: self._toLocale(target.name)
             }
         });
 
@@ -1270,7 +1326,7 @@ export const game = shallowReactive({
         let self = this;
         let filtered = {};
         ids.forEach(function(id) {
-            filtered[id] = toRaw(self.cards[id]);
+            filtered[id] = self.findCard(id);
         });
 
         return filtered;
@@ -1353,9 +1409,13 @@ export const game = shallowReactive({
         this.setActiveObject();
         this.showCard(id);
     },
-    findCard(id) {
+    findCard(id, required = true) {
         if (!this.cards[id]) {
-            throw new Error('Card not found: ' + id);
+            if (required) {
+                throw new Error('Card not found: ' + id);
+            } else {
+                return null;
+            }
         }
         return toRaw(this.cards[id]);
     },
@@ -1382,6 +1442,12 @@ export const game = shallowReactive({
             throw new Error('Book not found: ' + id);
         }
         return toRaw(this.books[id]);
+    },
+    findDeck(id) {
+        if (!this.decks[id]) {
+            throw new Error('Deck not found: ' + id);
+        }
+        return toRaw(this.decks[id]);
     },
     trans(string) {
         return this.dictionary[string] ?
@@ -1421,6 +1487,8 @@ export const game = shallowReactive({
             this.cursorScope = null;
             return;
         }
+        let card = null;
+        let scopeCard = null;
         switch (o.type) {
             case 'card':
                 if (!o.get('opened') && !this.isMaster()) {
@@ -1428,30 +1496,32 @@ export const game = shallowReactive({
                     this.cursorScope = '???';
                     return;
                 }
-                let card = this.cards[o.get('card_id')];
-                this.cursorName = card.name;
-                this.cursorScope = card.scopeName;
+                card = this.findCard(o.get('card_id'));
+                scopeCard = this.findCard(card.scope_id, false);
+                this.cursorName = this._toLocale(card.name);
+                this.cursorScope = scopeCard ? this._toLocale(scopeCard.name) : null;
                 break;
             case 'marker':
-                let marker = this.cards[o.get('marker_id')];
-                this.cursorName = marker.name;
-                this.cursorScope = marker.scopeName;
+                card = this.findCard(o.get('marker_id'));
+                scopeCard = this.findCard(card.scope_id, false);
+                this.cursorName = this._toLocale(card.name);
+                this.cursorScope = scopeCard ? this._toLocale(scopeCard.name) : null;
                 break;
             case 'book':
                 let book = this.books[o.get('book_id')];
-                this.cursorName = book.name;
+                this.cursorName = this._toLocale(book.name);
                 this.cursorScope = this.trans('Book');
                 break;
             case 'dome':
                 let dome = this.domes[o.get('dome_id')];
-                let domeCard = this.cards[dome.scope_id];
-                this.cursorName = domeCard.name;
+                card = this.cards[dome.scope_id];
+                this.cursorName = this._toLocale(card.name);
                 this.cursorScope = this.trans('Dome');
                 break;
             case 'area':
                 let area = this.areas[o.get('area_id')];
-                let areaCard = this.cards[area.scope_id];
-                this.cursorName = areaCard.name;
+                card = this.cards[area.scope_id];
+                this.cursorName = this._toLocale(card.name);
                 this.cursorScope = this.trans('Area');
                 break;
             default:
@@ -1525,7 +1595,8 @@ export const game = shallowReactive({
     _deckType(number) {
         let labels = ['Stack','Set','State','Control'];
 
-        return labels[number];
+
+        return this.trans(labels[number]);
     },
     /**
      * @param {string} type
@@ -1562,5 +1633,25 @@ export const game = shallowReactive({
         });
 
         return data;
-    }
+    },
+    /**
+     *
+     * @param {?Object.<string, string>} data
+     * @return {?string}
+     * @private
+     */
+    _toLocale(data) {
+        if (!data) {
+            return null;
+        }
+        if (!data[this.locale]) {
+            if (data[this.fallbackLocale]) {
+                return data[this.fallbackLocale];
+            } else {
+                return null;
+            }
+        } else {
+            return data[this.locale];
+        }
+    },
 });

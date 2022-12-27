@@ -20,6 +20,7 @@ class DomeProcess extends Process implements SpaceProcessInterface
     protected $fillable = [
         'id',
         'name',
+        'currentName',
         'image',
         'scope_id',
         'area_width',
@@ -30,6 +31,7 @@ class DomeProcess extends Process implements SpaceProcessInterface
         'top_step',
         'left_step',
         'desc',
+        'currentDesc',
         'source_ids',
         'card_ids',
         'deck_ids',

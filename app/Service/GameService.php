@@ -146,7 +146,7 @@ class GameService
     public static function bookToProcess(GameProcess $gameProcess, Book $book): BookProcess
     {
         $book->makeHidden([
-            'sources',
+            'sources', 'domes', 'scenes',
             'scope_id', 'owner_id', 'is_public',
             'created_at', 'updated_at', 'pivot'
         ]);

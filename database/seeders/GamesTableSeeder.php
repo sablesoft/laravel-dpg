@@ -27,13 +27,13 @@ class GamesTableSeeder extends Seeder
                 'image' => 'game/KQXftspceVVCMp6gK9EownutZB15Bat2uRF3g1Mw.jpg',
                 'quest_id' => 40,
                 'owner_id' => 1,
-                'process_id' => '63a7aa39b5ec1eb13602eb02',
+                'process_id' => '63aa4ce1b5ec1eb13602eded',
                 'is_public' => false,
                 'board_image' => 'board/2WoLdF9xdcLwuQGXct4L44JWEophP6EIbK4zJcQh.jpg',
                 'cards_back' => 'back/vgsvSjrgQW3pft9mk67LYr2oCGdsqpa29u71U2GQ.png',
                 'status' => 2,
                 'created_at' => '2022-12-02 02:39:45',
-                'updated_at' => '2022-12-25 01:41:16',
+                'updated_at' => '2022-12-27 01:39:47',
             ),
         ));
         

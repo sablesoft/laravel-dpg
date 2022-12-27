@@ -2397,7 +2397,7 @@ class CardRelationTableSeeder extends Seeder
             ),
             198 => 
             array (
-                'card_id' => 83,
+                'card_id' => 84,
                 'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => 2,
@@ -2409,30 +2409,6 @@ class CardRelationTableSeeder extends Seeder
             ),
             199 => 
             array (
-                'card_id' => 84,
-                'game_id' => NULL,
-                'deck_id' => NULL,
-                'book_id' => 2,
-                'dome_id' => NULL,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'scene_id' => NULL,
-                'count' => 1,
-            ),
-            200 => 
-            array (
-                'card_id' => 33,
-                'game_id' => NULL,
-                'deck_id' => NULL,
-                'book_id' => 2,
-                'dome_id' => NULL,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'scene_id' => NULL,
-                'count' => 1,
-            ),
-            201 => 
-            array (
                 'card_id' => 97,
                 'game_id' => NULL,
                 'deck_id' => NULL,
@@ -2443,7 +2419,7 @@ class CardRelationTableSeeder extends Seeder
                 'scene_id' => NULL,
                 'count' => 1,
             ),
-            202 => 
+            200 => 
             array (
                 'card_id' => 98,
                 'game_id' => NULL,
@@ -2455,19 +2431,7 @@ class CardRelationTableSeeder extends Seeder
                 'scene_id' => NULL,
                 'count' => 1,
             ),
-            203 => 
-            array (
-                'card_id' => 99,
-                'game_id' => NULL,
-                'deck_id' => NULL,
-                'book_id' => 2,
-                'dome_id' => NULL,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'scene_id' => NULL,
-                'count' => 1,
-            ),
-            204 => 
+            201 => 
             array (
                 'card_id' => 99,
                 'game_id' => NULL,
@@ -2479,7 +2443,7 @@ class CardRelationTableSeeder extends Seeder
                 'scene_id' => NULL,
                 'count' => 1,
             ),
-            205 => 
+            202 => 
             array (
                 'card_id' => 100,
                 'game_id' => NULL,
@@ -2491,7 +2455,7 @@ class CardRelationTableSeeder extends Seeder
                 'scene_id' => NULL,
                 'count' => 1,
             ),
-            206 => 
+            203 => 
             array (
                 'card_id' => 100,
                 'game_id' => NULL,
@@ -2503,19 +2467,7 @@ class CardRelationTableSeeder extends Seeder
                 'scene_id' => NULL,
                 'count' => 1,
             ),
-            207 => 
-            array (
-                'card_id' => 100,
-                'game_id' => NULL,
-                'deck_id' => NULL,
-                'book_id' => 2,
-                'dome_id' => NULL,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'scene_id' => NULL,
-                'count' => 1,
-            ),
-            208 => 
+            204 => 
             array (
                 'card_id' => 101,
                 'game_id' => NULL,
@@ -2527,49 +2479,13 @@ class CardRelationTableSeeder extends Seeder
                 'scene_id' => NULL,
                 'count' => 1,
             ),
-            209 => 
-            array (
-                'card_id' => 101,
-                'game_id' => NULL,
-                'deck_id' => NULL,
-                'book_id' => 2,
-                'dome_id' => NULL,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'scene_id' => NULL,
-                'count' => 1,
-            ),
-            210 => 
+            205 => 
             array (
                 'card_id' => 102,
                 'game_id' => NULL,
                 'deck_id' => NULL,
                 'book_id' => NULL,
                 'dome_id' => 1,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'scene_id' => NULL,
-                'count' => 1,
-            ),
-            211 => 
-            array (
-                'card_id' => 102,
-                'game_id' => NULL,
-                'deck_id' => NULL,
-                'book_id' => 2,
-                'dome_id' => NULL,
-                'land_id' => NULL,
-                'area_id' => NULL,
-                'scene_id' => NULL,
-                'count' => 1,
-            ),
-            212 => 
-            array (
-                'card_id' => 32,
-                'game_id' => NULL,
-                'deck_id' => NULL,
-                'book_id' => 2,
-                'dome_id' => NULL,
                 'land_id' => NULL,
                 'area_id' => NULL,
                 'scene_id' => NULL,

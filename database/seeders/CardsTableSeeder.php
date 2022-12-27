@@ -1407,34 +1407,6 @@ class CardsTableSeeder extends Seeder
             ),
             99 => 
             array (
-                'id' => 100,
-                'name' => '{"en":"The Dangerous Delta"}',
-                'code' => NULL,
-                'scope_id' => 15,
-                'info' => '{"en":null}',
-                'image' => 'card/UjUPIEkBpjF1rHR2kHxiOg3CTczos1D8f5aJrxj2.png',
-                'desc' => '{"en":"This is an area where wildlife reigns supreme. Life and death here flow as swiftly as the waters of the mighty river that created this special place. You shouldn\'t go here without being prepared for all the dangers that lie in wait here."}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-12-25 00:05:42',
-                'updated_at' => '2022-12-25 00:05:42',
-            ),
-            100 => 
-            array (
-                'id' => 101,
-                'name' => '{"en":"Arid Jungle"}',
-                'code' => NULL,
-                'scope_id' => NULL,
-                'info' => '{"en":null}',
-                'image' => 'card/i27iOFbWVtLLIqbtRoUNRm9eGtSgOudhHyRWk9x0.jpg',
-                'desc' => '{"en":"During the dry period, this area, covered with tough and thorny vegetation, which is difficult to overcome, is a very inhospitable and harsh place. But everything changes when the rainy season comes. Life again makes its way through the dry thickets and overflows everything around."}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-12-25 00:37:41',
-                'updated_at' => '2022-12-25 00:43:00',
-            ),
-            101 => 
-            array (
                 'id' => 102,
                 'name' => '{"en":"Outskirts"}',
                 'code' => NULL,
@@ -1446,6 +1418,34 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-12-25 01:31:07',
                 'updated_at' => '2022-12-25 01:31:07',
+            ),
+            100 => 
+            array (
+                'id' => 100,
+                'name' => '{"en":"Dangerous Delta"}',
+                'code' => NULL,
+                'scope_id' => 15,
+                'info' => '{"en":null}',
+                'image' => 'card/UjUPIEkBpjF1rHR2kHxiOg3CTczos1D8f5aJrxj2.png',
+                'desc' => '{"en":"This is an area where wildlife reigns supreme. Life and death here flow as swiftly as the waters of the mighty river that created this special place. You shouldn\'t go here without being prepared for all the dangers that lie in wait here."}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-25 00:05:42',
+                'updated_at' => '2022-12-25 02:07:02',
+            ),
+            101 => 
+            array (
+                'id' => 101,
+                'name' => '{"en":"Arid Jungle"}',
+                'code' => NULL,
+                'scope_id' => 15,
+                'info' => '{"en":null}',
+                'image' => 'card/i27iOFbWVtLLIqbtRoUNRm9eGtSgOudhHyRWk9x0.jpg',
+                'desc' => '{"en":"During the dry period, this area, covered with tough and thorny vegetation, which is difficult to overcome, is a very inhospitable and harsh place. But everything changes when the rainy season comes. Life again makes its way through the dry thickets and overflows everything around."}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-25 00:37:41',
+                'updated_at' => '2022-12-26 17:22:33',
             ),
         ));
         

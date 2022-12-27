@@ -133,6 +133,6 @@ class GameController extends Controller
      */
     public function json(Game $game): array
     {
-        return GameService::initProcess($game, App::currentLocale())->toArray();
+        return GameService::initProcess($game)->toArray();
     }
 }

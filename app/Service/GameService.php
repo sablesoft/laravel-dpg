@@ -5,9 +5,8 @@
 namespace App\Service;
 
 use Exception;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\App;
 use App\Models\Area;
 use App\Models\Book;
 use App\Models\Card;
@@ -52,27 +51,21 @@ class GameService
 
     /**
      * @param Game $game
-     * @param string|null $locale
      * @return GameProcess
      * @throws Exception
      */
-    public static function initProcess(Game $game, ?string $locale = null): GameProcess
+    public static function initProcess(Game $game): GameProcess
     {
         static::dropProcess($game);
 
-        if (!$locale) {
-            $locale = App::currentLocale();
-        }
         $game->makeHidden([
             'id',
             'process_id', 'board_image', 'cards_back',
             'owner_id', 'quest_id', 'created_at',
             'is_public', 'status', 'updated_at'
         ]);
-        $info = self::translate($game->toArray(), $game->translatable, $locale);
+        $info = self::toArray($game, $game->translatable);
         $info['image'] = self::image($info['image']);
-        $info['scopeName'] = __('Game');
-        $info['scopeImage'] = null;
         $data = [
             'id' => $game->getKey(),
             'info' => $info,
@@ -82,12 +75,12 @@ class GameService
 
         /** @var GameProcess $gameProcess */
         $gameProcess = GameProcess::create($data);
-        $gameProcess->questId = static::cardToProcess($gameProcess, $game->quest, $locale)->id;
-        $ids = [];
+        $gameProcess->questId = static::cardToProcess($gameProcess, $game->quest)->id;
+        $cardIds = [];
         foreach ($game->heroes as $hero) {
-            $ids[] = static::cardToProcess($gameProcess, $hero, $locale)->id;
+            $cardIds[] = static::cardToProcess($gameProcess, $hero)->id;
         }
-        $gameProcess->heroIds = $ids;
+        $gameProcess->heroIds = $cardIds;
         // prepare all sources:
         /** @var Book[] $books */
         $books = [];
@@ -116,27 +109,27 @@ class GameService
         }
         // prepare books and all cards:
         foreach ($books as $book) {
-            $gameProcess->books()->save(static::bookToProcess($gameProcess, $book, $locale));
+            $gameProcess->books()->save(static::bookToProcess($gameProcess, $book));
         }
         // prepare decks, domes and areas:
         foreach ($books as $book) {
-            foreach ($book->decks as $deck) {
-                static::deckToProcess($gameProcess, $deck, $locale);
-            }
             foreach ($book->domes as $dome) {
-                static::domeToProcess($gameProcess, $dome, $locale);
+                static::domeToProcess($gameProcess, $dome);
+            }
+            foreach ($book->decks as $deck) {
+                static::deckToProcess($gameProcess, $deck);
             }
         }
-        $ids = [];
+        $cardIds = [];
         foreach ($game->cards as $card) {
-            $ids[] = static::cardToProcess($gameProcess, $card, $locale)->id;
+            $cardIds[] = static::cardToProcess($gameProcess, $card)->id;
         }
-        $gameProcess->cardIds = $ids;
-        $ids = [];
+        $gameProcess->cardIds = $cardIds;
+        $cardIds = [];
         foreach ($game->decks as $deck) {
-            $ids[] = static::deckToProcess($gameProcess, $deck, $locale)->id;
+            $cardIds[] = static::deckToProcess($gameProcess, $deck)->id;
         }
-        $gameProcess->deckIds = $ids;
+        $gameProcess->deckIds = $cardIds;
 
         $gameProcess->save();
         $gameProcess->game()->save($game);
@@ -147,32 +140,28 @@ class GameService
     /**
      * @param GameProcess $gameProcess
      * @param Book $book
-     * @param string|null $locale
      * @return BookProcess
      * @throws Exception
      */
-    public static function bookToProcess(GameProcess $gameProcess, Book $book, ?string $locale = null): BookProcess
+    public static function bookToProcess(GameProcess $gameProcess, Book $book): BookProcess
     {
-        if (!$locale) {
-            $locale = App::currentLocale();
-        }
         $book->makeHidden([
             'sources',
             'scope_id', 'owner_id', 'is_public',
             'created_at', 'updated_at', 'pivot'
         ]);
-        $data = self::translate($book->toArray(), $book->translatable, $locale);
+        $data = self::toArray($book, $book->translatable);
         $data['image'] = self::image($data['image']);
         /** @var BookProcess $bookProcess */
         $bookProcess = BookProcess::create($data);
         $ids = [];
         foreach ($book->cards as $card) {
-            $ids[] = static::cardToProcess($gameProcess, $card, $locale)->id;
+            $ids[] = static::cardToProcess($gameProcess, $card)->id;
         }
         $bookProcess->card_ids = $ids;
         $ids = [];
         foreach ($book->scenes as $scene) {
-            $ids[] = static::sceneToProcess($gameProcess, $scene, $locale)->id;
+            $ids[] = static::sceneToProcess($gameProcess, $scene)->id;
         }
         $bookProcess->scene_ids = $ids;
         $ids = [];
@@ -197,15 +186,11 @@ class GameService
     /**
      * @param GameProcess $gameProcess
      * @param Dome $dome
-     * @param string|null $locale
      * @return DomeProcess
      * @throws Exception
      */
-    public static function domeToProcess(GameProcess $gameProcess, Dome $dome, ?string $locale = null): DomeProcess
+    public static function domeToProcess(GameProcess $gameProcess, Dome $dome): DomeProcess
     {
-        if (!$locale) {
-            $locale = App::currentLocale();
-        }
         $dome->makeHidden([
             'code',
             'is_public',
@@ -214,19 +199,19 @@ class GameService
             'created_at',
             'updated_at'
         ]);
-        $data = self::translate($dome->toArray(), $dome->translatable, $locale);
+        $data = self::toArray($dome, $dome->translatable);
         $data['image'] = self::image($data['image']);
         /** @var DomeProcess $domeProcess */
         $domeProcess = DomeProcess::create($data);
-        static::prepareSpaceProcess($gameProcess, $domeProcess, $dome, $locale);
+        static::prepareSpaceProcess($gameProcess, $domeProcess, $dome);
         $ids = [];
         foreach ($dome->areas as $area) {
-            $ids[] = static::areaToProcess($gameProcess, $area, $locale)->id;
+            $ids[] = static::areaToProcess($gameProcess, $area)->id;
         }
         $domeProcess->area_ids = $ids;
         $ids = [];
         foreach ($dome->lands as $land) {
-            $ids[] = static::landToProcess($gameProcess, $land, $locale)->id;
+            $ids[] = static::landToProcess($gameProcess, $land)->id;
         }
         $domeProcess->land_ids = $ids;
         $domeProcess->save();
@@ -238,15 +223,11 @@ class GameService
     /**
      * @param GameProcess $gameProcess
      * @param Land $land
-     * @param string|null $locale
      * @return LandProcess
      * @throws Exception
      */
-    public static function landToProcess(GameProcess $gameProcess, Land $land, ?string $locale = null): LandProcess
+    public static function landToProcess(GameProcess $gameProcess, Land $land): LandProcess
     {
-        if (!$locale) {
-            $locale = App::currentLocale();
-        }
         $land->makeHidden([
             'code',
             'is_public',
@@ -256,11 +237,11 @@ class GameService
             'created_at',
             'updated_at'
         ]);
-        $data = self::translate($land->toArray(), $land->translatable, $locale);
+        $data = self::toArray($land, $land->translatable);
         $data['image'] = self::image($data['image']);
         $landProcess = LandProcess::create($data);
         /** @var LandProcess $landProcess */
-        static::prepareSpaceProcess($gameProcess, $landProcess, $land, $locale);
+        static::prepareSpaceProcess($gameProcess, $landProcess, $land);
         $ids = [];
         foreach ($land->areas as $area) {
             $ids[] = $area->getKey();
@@ -275,15 +256,11 @@ class GameService
     /**
      * @param GameProcess $gameProcess
      * @param Area $area
-     * @param string|null $locale
      * @return AreaProcess
      * @throws Exception
      */
-    public static function areaToProcess(GameProcess $gameProcess, Area $area, ?string $locale = null): AreaProcess
+    public static function areaToProcess(GameProcess $gameProcess, Area $area): AreaProcess
     {
-        if (!$locale) {
-            $locale = App::currentLocale();
-        }
         $area->makeHidden([
             'code',
             'is_public',
@@ -292,11 +269,11 @@ class GameService
             'created_at',
             'updated_at'
         ]);
-        $data = self::translate($area->toArray(), $area->translatable, $locale);
+        $data = self::toArray($area, $area->translatable);
         $data['image'] = self::image($data['image']);
         /** @var AreaProcess $areaProcess */
         $areaProcess = AreaProcess::create($data);
-        static::prepareSpaceProcess($gameProcess, $areaProcess, $area, $locale);
+        static::prepareSpaceProcess($gameProcess, $areaProcess, $area);
         $areaProcess->save();
         $gameProcess->areas()->save($areaProcess);
 
@@ -306,15 +283,11 @@ class GameService
     /**
      * @param GameProcess $gameProcess
      * @param Scene $scene
-     * @param string|null $locale
      * @return SceneProcess
      * @throws Exception
      */
-    public static function sceneToProcess(GameProcess $gameProcess, Scene $scene, ?string $locale = null): SceneProcess
+    public static function sceneToProcess(GameProcess $gameProcess, Scene $scene): SceneProcess
     {
-        if (!$locale) {
-            $locale = App::currentLocale();
-        }
         $scene->makeHidden([
             'code',
             'is_public',
@@ -323,11 +296,11 @@ class GameService
             'created_at',
             'updated_at'
         ]);
-        $data = self::translate($scene->toArray(), $scene->translatable, $locale);
+        $data = self::toArray($scene, $scene->translatable);
         $data['image'] = self::image($data['image']);
         /** @var SceneProcess $sceneProcess */
         $sceneProcess = SceneProcess::create($data);
-        static::prepareSpaceProcess($gameProcess, $sceneProcess, $scene, $locale);
+        static::prepareSpaceProcess($gameProcess, $sceneProcess, $scene);
         $sceneProcess->save();
         $gameProcess->scenes()->save($sceneProcess);
 
@@ -337,22 +310,18 @@ class GameService
     /**
      * @param GameProcess $gameProcess
      * @param Deck $deck
-     * @param string|null $locale
      * @return DeckProcess
      * @throws Exception
      */
-    public static function deckToProcess(GameProcess $gameProcess, Deck $deck, ?string $locale = null): DeckProcess
+    public static function deckToProcess(GameProcess $gameProcess, Deck $deck): DeckProcess
     {
-        if (!$locale) {
-            $locale = App::currentLocale();
-        }
         $deck->makeHidden([
             'is_public',
             'owner_id',
             'created_at',
             'updated_at'
         ]);
-        $data = self::translate($deck->toArray(), $deck->translatable, $locale);
+        $data = self::toArray($deck, $deck->translatable);
         $data['image'] = self::image($data['image']);
         /** @var CardProcess $target */
         if (!$target = $gameProcess->cards()->where('id', $deck->card_id)->first()) {
@@ -392,29 +361,13 @@ class GameService
     /**
      * @param GameProcess $gameProcess
      * @param Card $card
-     * @param string|null $locale
      * @return CardProcess
      */
-    public static function cardToProcess(GameProcess $gameProcess, Card $card, ?string $locale = null): CardProcess
+    public static function cardToProcess(GameProcess $gameProcess, Card $card): CardProcess
     {
-        if (!$locale) {
-            $locale = App::currentLocale();
-        }
         $card->makeHidden(['is_public', 'owner_id', 'created_at', 'updated_at', 'pivot']);
-        $data = $card->toArray();
+        $data = self::toArray($card, $card->translatable);
         $data['image'] = self::image($data['image']);
-        $data = self::translate($data, $card->translatable, $locale);
-        $data['scopeImage'] = null;
-        $data['scopeName'] = null;
-        if ($scope = $card->scope) {
-            $data['scopeImage'] = self::image($scope->image);
-            $data['scopeName'] = json_decode($scope->getRawOriginal('name'), true);
-            $data = self::translate($data, ['scopeName'], $locale);
-        }
-        $overrideFields = ['name', 'desc'];
-        foreach ($overrideFields as $field) {
-            $data['current' . ucfirst($field)] = $data[$field];
-        }
         /** @var CardProcess $cardProcess */
         $cardProcess = CardProcess::create($data);
         $gameProcess->cards()->save($cardProcess);
@@ -441,24 +394,22 @@ class GameService
      * @param GameProcess $gameProcess
      * @param SpaceProcessInterface $process
      * @param SpaceInterface $space
-     * @param string $locale
      * @return void
      * @throws Exception
      */
     protected static function prepareSpaceProcess(
         GameProcess           $gameProcess,
         SpaceProcessInterface $process,
-        SpaceInterface        $space,
-        string                $locale)
+        SpaceInterface        $space)
     {
         $ids = [];
         foreach ($space->cards as $card) {
-            $ids[] = static::cardToProcess($gameProcess, $card, $locale)->id;
+            $ids[] = static::cardToProcess($gameProcess, $card)->id;
         }
         $process->card_ids = $ids;
         $ids = [];
         foreach ($space->decks as $deck) {
-            $ids[] = static::deckToProcess($gameProcess, $deck, $locale)->id;
+            $ids[] = static::deckToProcess($gameProcess, $deck)->id;
         }
         $process->deck_ids = $ids;
         $ids = [];
@@ -469,27 +420,17 @@ class GameService
     }
 
     /**
-     * @param array $data
+     * @param Model $object
      * @param array $fields
-     * @param string $locale
      * @return array
      */
-    protected static function translate(array $data, array $fields, string $locale): array
+    protected static function toArray(Model $object, array $fields): array
     {
-        $fallback = config('app.fallback_locale');
+        $object->makeHidden($fields);
+        $data = $object->toArray();
         foreach ($fields as $field) {
-            if (empty($data[$field])) {
-                continue;
-            }
-            if (empty($data[$field][$locale])) {
-                if (empty($data[$field][$fallback])) {
-                    $data[$field] = null;
-                    continue;
-                }
-                $data[$field] = $data[$field][$fallback];
-            } else {
-                $data[$field] = $data[$field][$locale];
-            }
+            $data[$field] = json_decode($object->getRawOriginal($field), true);
+            $data['current' . ucfirst($field)] = $data[$field];
         }
 
         return $data;

@@ -886,7 +886,7 @@ export const game = shallowReactive({
         let o = new fabric.Area(id, options);
         if (add) {
             this.fb().add(o);
-            o.sendBackwards(true);
+            // o.sendBackwards(true);
             this.fb().requestRenderAll();
         }
         // console.debug('Created area object', o);
@@ -945,11 +945,14 @@ export const game = shallowReactive({
         let self = this;
         setTimeout(function() {
             console.debug('Add fog');
-            self.fb().add(new fabric.Fog({
+            let fog = new fabric.Fog({
                 width: width,
                 height: height
-            }));
-        }, 500);
+            });
+            self.fb().add(fog);
+            fog.bringForward(true);
+            self.fb().requestRenderAll();
+        }, 5000);
     },
     addDome() {
         let center = this._center();

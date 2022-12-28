@@ -6,11 +6,19 @@ onMounted(() => {
     let dome = game.findDome(game.activeDomeId);
     game.initCanvas(dome.canvas, function(fc) {
         if (!dome.canvas) {
-            dome.area_ids.forEach(function(id) {
-                game.createAreaFabric(id);
-            });
-            game.createFog(dome.map_width, dome.map_height);
-            fc.requestRenderAll();
+            let options = {
+                originX : 'left',
+                originY : 'top',
+                opacity: game.areas.length ? 0.4 : 1,
+                erasable: false,
+            };
+            fc.setBackgroundImage(dome.image, game.renderAll.bind(game), options);
+            setTimeout(function() {
+                dome.area_ids.forEach(function(id) {
+                    game.createAreaFabric(id);
+                });
+                game.createFog(dome.map_width, dome.map_height);
+            }, 3000);
         }
         setTimeout(function() {
             game.activateArea();

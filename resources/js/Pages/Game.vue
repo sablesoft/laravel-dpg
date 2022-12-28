@@ -74,37 +74,12 @@ let pageName = function() {
 .action-column {
     flex: 4%;
 }
+.action-column .control-btn {
+    display: flex;
+}
 .aside-column {
     flex: 24%;
     text-align: center;
-}
-.action-column>img {
-    width: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 130px;
-    cursor: pointer;
-}
-.control-btn {
-    flex-shrink:0;
-    width:1.5em;
-    height:1.5em;
-    font-size:24px;
-    padding:.25em;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-radius:8px;
-    background:rgba(255,255,255,.8);
-    transition:.5s all;
-    margin: auto auto 10px;
-}
-.control-btn:hover {
-    background:rgba(255,255,255,1);
-}
-.control-btn .material-icons {
-    font-size:1em;
-    line-height:1em
 }
 </style>
 

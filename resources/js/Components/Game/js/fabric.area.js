@@ -4,7 +4,7 @@ import { game } from "@/Components/Game/js/game";
 
 fabric.Area = fabric.util.createClass(fabric.Group, {
     type: 'area',
-    defaultShowOpacity: 0.7,
+    defaultShowOpacity: 0.5,
     subTargetCheck: true,
 
     /**

@@ -90,6 +90,11 @@ img.align-bottom.w-8.h-8 {
     border-radius:8px;
     background:rgba(255,255,255,.8);
     transition:.5s all;
+    cursor: pointer;
+    margin: auto auto 10px;
+}
+.control-btn:disabled {
+    cursor: default;
 }
 .control-btn:hover {
     background:rgba(255,255,255,1);

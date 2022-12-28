@@ -599,7 +599,7 @@ export const game = shallowReactive({
             case 'MainScene':
                 let scene = this.findScene(this.activeSceneId);
                 let sceneCard = this.findCard(scene.scope_id);
-                scopeCard = this.findCard(scene.scope_id, false);
+                scopeCard = this.findCard(sceneCard.scope_id, false);
                 this.activeInfo = {
                     id: scene.id,
                     scopeId: scene.scope_id,

@@ -16,6 +16,9 @@ use App\Models\Traits\Sources;
  *
  * @property-read Card|null $scene
  * @property-read Book[]|null $books
+ * @property-read Dome[]|null $domes
+ * @property-read Land[]|null $lands
+ * @property-read Area[]|null $areas
  *
  * @property-read string|null $card_image
  */
@@ -48,7 +51,31 @@ class Scene extends Content implements SpaceInterface
      */
     public function books(): BelongsToMany
     {
-        return $this->belongsToMany(Book::class);
+        return $this->belongsToMany(Book::class, 'scene_relation');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function domes(): BelongsToMany
+    {
+        return $this->belongsToMany(Dome::class, 'scene_relation');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function lands(): BelongsToMany
+    {
+        return $this->belongsToMany(Land::class, 'scene_relation');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function areas(): BelongsToMany
+    {
+        return $this->belongsToMany(Area::class, 'scene_relation');
     }
 
     /**

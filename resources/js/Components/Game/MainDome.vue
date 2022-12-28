@@ -18,12 +18,17 @@ onMounted(() => {
                     game.createAreaFabric(id);
                 });
                 game.createFog(dome.map_width, dome.map_height);
+                setTimeout(function() {
+                    game.activateArea();
+                    console.debug('Dome mounted', game.fb());
+                }, 5000);
             }, 3000);
+        } else {
+            setTimeout(function() {
+                game.activateArea();
+                console.debug('Dome mounted', game.fb());
+            }, 5000);
         }
-        setTimeout(function() {
-            game.activateArea();
-            console.debug('Dome mounted', game.fb());
-        }, 5000);
     });
 });
 </script>

@@ -120,6 +120,7 @@ import './fabric.fog';
  * @property {number|string} map_height
  * @property {number[]} land_ids
  * @property {number[]} area_ids
+ * @property {number[]} scene_ids
  * @property {number[]} card_ids
  * @property {number[]} deck_ids
  * @property {number[]} source_ids
@@ -135,6 +136,7 @@ import './fabric.fog';
  * @property {?string} image
  * @property {number} dome_id
  * @property {number[]} area_ids
+ * @property {number[]} scene_ids
  * @property {number[]} card_ids
  * @property {number[]} deck_ids
  * @property {number[]} source_ids
@@ -153,6 +155,7 @@ import './fabric.fog';
  * @property {number} top_step
  * @property {number} left
  * @property {number} left_step
+ * @property {number[]} scene_ids
  * @property {number[]} card_ids
  * @property {number[]} deck_ids
  * @property {number[]} source_ids

@@ -19,7 +19,6 @@
         <!-- selects -->
         <div class="aside-selects">
             <div v-if="Object.keys(game.filteredScenes('areas')).length" class="aside-content">
-
                 <select v-model="game.selectedId" @change="game.selectScene($event)">
                     <option :value="null" disabled>{{ __('Scenes') }}</option>
                     <option v-for="scene in game.filteredScenes('areas')" :value="scene.id">

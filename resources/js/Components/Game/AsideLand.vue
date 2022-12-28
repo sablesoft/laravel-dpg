@@ -26,6 +26,15 @@
                     </option>
                 </select>
             </div>
+            <div v-if="Object.keys(game.filteredScenes('lands')).length"
+                 class="aside-content">
+                <select v-model="game.selectedId" @change="game.selectScene($event)">
+                    <option :value="null" disabled>{{ __('Scenes') }}</option>
+                    <option v-for="scene in game.filteredScenes('lands')" :value="scene.id">
+                        {{ game.getSceneName(scene) }}
+                    </option>
+                </select>
+            </div>
             <div v-if="Object.keys(game.filteredSources('lands')).length" class="aside-content">
                 <select v-model="game.selectedId" @change="game.selectBook($event)">
                     <option :value="null" disabled>{{ __('Books') }}</option>

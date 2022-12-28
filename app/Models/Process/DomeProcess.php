@@ -11,6 +11,7 @@ namespace App\Models\Process;
  * @property int|null $left_step
  * @property int[]|null $area_ids
  * @property int[]|null $land_ids
+ * @property int[]|null $scene_ids
  * @property array|null $canvas
  */
 class DomeProcess extends Process implements SpaceProcessInterface
@@ -36,6 +37,7 @@ class DomeProcess extends Process implements SpaceProcessInterface
         'card_ids',
         'deck_ids',
         'area_ids',
+        'scene_ids',
         'canvas'
     ];
 }

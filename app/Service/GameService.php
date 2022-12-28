@@ -214,6 +214,11 @@ class GameService
             $ids[] = static::landToProcess($gameProcess, $land)->id;
         }
         $domeProcess->land_ids = $ids;
+        $ids = [];
+        foreach ($dome->scenes as $scene) {
+            $ids[] = static::sceneToProcess($gameProcess, $scene)->id;
+        }
+        $domeProcess->scene_ids = $ids;
         $domeProcess->save();
         $gameProcess->domes()->save($domeProcess);
 
@@ -247,6 +252,11 @@ class GameService
             $ids[] = $area->getKey();
         }
         $landProcess->area_ids = $ids;
+        $ids = [];
+        foreach ($land->scenes as $scene) {
+            $ids[] = static::sceneToProcess($gameProcess, $scene)->id;
+        }
+        $landProcess->scene_ids = $ids;
         $landProcess->save();
         $gameProcess->lands()->save($landProcess);
 
@@ -274,6 +284,11 @@ class GameService
         /** @var AreaProcess $areaProcess */
         $areaProcess = AreaProcess::create($data);
         static::prepareSpaceProcess($gameProcess, $areaProcess, $area);
+        $ids = [];
+        foreach ($area->scenes as $scene) {
+            $ids[] = static::sceneToProcess($gameProcess, $scene)->id;
+        }
+        $areaProcess->scene_ids = $ids;
         $areaProcess->save();
         $gameProcess->areas()->save($areaProcess);
 

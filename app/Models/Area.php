@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Traits\Cards;
 use App\Models\Traits\Decks;
+use App\Models\Traits\Scenes;
 use App\Models\Traits\Sources;
 
 /**
@@ -28,7 +29,7 @@ use App\Models\Traits\Sources;
  */
 class Area extends Content implements SpaceInterface
 {
-    use Cards, Decks, Sources;
+    use Cards, Decks, Sources, Scenes;
 
     protected $casts = [
         'markers' => 'array'

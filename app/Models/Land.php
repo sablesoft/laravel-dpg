@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Traits\Cards;
 use App\Models\Traits\Decks;
+use App\Models\Traits\Scenes;
 use App\Models\Traits\Sources;
 
 /**
@@ -18,7 +19,7 @@ use App\Models\Traits\Sources;
  */
 class Land extends Content implements SpaceInterface
 {
-    use Cards, Decks, Sources;
+    use Cards, Decks, Sources, Scenes;
 
     /**
      * @return BelongsTo

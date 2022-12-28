@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Translatable\HasTranslations;
 use App\Models\Traits\Cards;
 use App\Models\Traits\Decks;
+use App\Models\Traits\Scenes;
 use App\Models\Traits\Sources;
 use App\Models\Traits\Subscribers;
 
@@ -20,7 +21,7 @@ use App\Models\Traits\Subscribers;
  */
 class Book extends Content
 {
-    use HasTranslations, Subscribers, Cards, Decks, Sources;
+    use HasTranslations, Subscribers, Scenes, Cards, Decks, Sources;
 
     const SUBSCRIBER_TYPE_PUBLIC = 0;
     const SUBSCRIBER_TYPE_LICENCE = 1;
@@ -36,14 +37,6 @@ class Book extends Content
     public function domes(): BelongsToMany
     {
         return $this->belongsToMany(Dome::class);
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function scenes(): BelongsToMany
-    {
-        return $this->belongsToMany(Scene::class);
     }
 
     /**

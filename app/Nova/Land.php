@@ -81,6 +81,7 @@ class Land extends Content
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
             BelongsToMany::make(__('Areas'), 'areas', Area::class),
+            BelongsToMany::make(__('Scenes'), 'scenes', Scene::class),
             HasMany::make(__('Decks'), 'decks', Deck::class),
             BelongsToMany::make(__('Cards'), 'cards', Card::class),
         ];

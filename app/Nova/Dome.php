@@ -96,6 +96,7 @@ class Dome extends Content
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
             HasMany::make(__('Lands'), 'lands', Land::class),
             HasMany::make(__('Areas'), 'areas', Area::class),
+            BelongsToMany::make(__('Scenes'), 'scenes', Scene::class),
             BelongsToMany::make(__('Cards'), 'cards', Card::class),
             HasMany::make(__('Decks'), 'decks', Deck::class),
             BelongsToMany::make(__('Used In Books'), 'books', Book::class),

@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LandsTableSeeder::class);
         $this->call(LandAreaTableSeeder::class);
         $this->call(ScenesTableSeeder::class);
-        $this->call(BookSceneTableSeeder::class);
         $this->call(DecksTableSeeder::class);
         $this->call(DeckTagTableSeeder::class);
         $this->call(SourceRelationTableSeeder::class);

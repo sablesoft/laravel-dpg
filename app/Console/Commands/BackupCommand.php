@@ -38,7 +38,7 @@ class BackupCommand extends Command
         'lands',
         'land_area',
         'scenes',
-        'book_scene',
+        'scene_relation',
         'decks',
         'deck_tag',
         'source_relation',

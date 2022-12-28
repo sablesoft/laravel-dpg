@@ -30,21 +30,21 @@
         <!-- selects -->
         <div class="aside-selects">
             <div v-if="game.mainTab === 'MainBoard' &&
-                        Object.keys(game.filteredDecks({target_id : game.activeInfo.id})).length"
+                        Object.keys(game.filteredDecks('.target_id')).length"
                  class="aside-content">
                 <select v-model="game.selectedId" @change="game.selectDeck($event)">
                     <option :value="null" disabled>{{ __('Decks') }}</option>
-                    <option v-for="deck in game.filteredDecks({target_id : game.activeInfo.id})"
+                    <option v-for="deck in game.filteredDecks('.target_id')"
                             :value="deck.id">
                         {{ deck.type + ' : ' + deck.target + ' - ' + deck.scope }}
                     </option>
                 </select>
             </div>
-            <div v-if="Object.keys(game.filteredCards({scope_id : game.activeInfo.id})).length"
+            <div v-if="Object.keys(game.filteredCards('.scope_id')).length"
                  class="aside-content">
                 <select v-model="game.selectedId" @change="game.selectCard($event)">
                     <option :value="null" disabled>{{ __('Scope') }}</option>
-                    <option v-for="card in game.filteredCards({scope_id : game.activeInfo.id})"
+                    <option v-for="card in game.filteredCards('.scope_id')"
                             :value="card.id">
                         {{ game.getCardName(card) }}
                     </option>

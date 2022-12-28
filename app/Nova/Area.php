@@ -107,7 +107,7 @@ class Area extends Content
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
             BelongsToMany::make(__('Lands'), 'lands', Land::class),
-            BelongsToMany::make(__('Cards'), 'cards'),
+            BelongsToMany::make(__('Cards'), 'cards', Card::class),
             HasMany::make(__('Decks'), 'decks', Deck::class),
         ];
     }

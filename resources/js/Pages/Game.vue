@@ -11,6 +11,7 @@ import AsideInfo from '@/Components/Game/AsideInfo.vue';
 import AsideCard from '@/Components/Game/AsideCard.vue';
 import AsideBook from '@/Components/Game/AsideBook.vue';
 import AsideDome from '@/Components/Game/AsideDome.vue';
+import AsideLand from '@/Components/Game/AsideLand.vue';
 import AsideArea from '@/Components/Game/AsideArea.vue';
 import AsideScene from '@/Components/Game/AsideScene.vue';
 
@@ -35,6 +36,7 @@ const asideTabs = {
     AsideCard,
     AsideBook,
     AsideDome,
+    AsideLand,
     AsideArea,
     AsideScene
 }

@@ -82,7 +82,7 @@ class Land extends Content
             BelongsToMany::make(__('Sources'), 'sources', Book::class),
             BelongsToMany::make(__('Areas'), 'areas', Area::class),
             HasMany::make(__('Decks'), 'decks', Deck::class),
-            BelongsToMany::make(__('Cards'), 'cards'),
+            BelongsToMany::make(__('Cards'), 'cards', Card::class),
         ];
     }
 

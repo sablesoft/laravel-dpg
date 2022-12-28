@@ -690,6 +690,24 @@ export const game = shallowReactive({
 
         return this;
     },
+    showCard(id) {
+        let card = this.findCard(id);
+        let scopeCard = this.findCard(card.scope_id, false);
+        // console.debug('Show Card', card);
+        this.activeInfo = {
+            id: card.id,
+            scopeId: card.scope_id,
+            type: 'card',
+            name: this._toLocale(card.name),
+            desc: this._toLocale(card.desc),
+            image: card.image,
+            scopeImage: scopeCard ? scopeCard.image : null,
+            scopeName: scopeCard ? this._toLocale(scopeCard.name) : null,
+        };
+        this.asideTab = 'AsideCard';
+
+        return this;
+    },
     showDome(id) {
         let dome = this.findDome(id);
         // console.debug('Show Dome', dome);
@@ -714,21 +732,21 @@ export const game = shallowReactive({
 
         return this;
     },
-    showCard(id) {
-        let card = this.findCard(id);
-        let scopeCard = this.findCard(card.scope_id, false);
-        // console.debug('Show Card', card);
+    showLand(id) {
+        let land = this.findLand(id);
+        // console.debug('Show Land', land);
+        let landCard = this.findCard(land.scope_id);
         this.activeInfo = {
-            id: card.id,
-            scopeId: card.scope_id,
-            type: 'card',
-            name: this._toLocale(card.name),
-            desc: this._toLocale(card.desc),
-            image: card.image,
-            scopeImage: scopeCard ? scopeCard.image : null,
-            scopeName: scopeCard ? this._toLocale(scopeCard.name) : null,
+            id: land.id,
+            scopeId: land.scope_id,
+            type: 'dome',
+            name: this._toLocale(landCard.name),
+            desc: this._toLocale(landCard.desc),
+            image: landCard.image,
+            scopeImage: null,
+            scopeName: null
         };
-        this.asideTab = 'AsideCard';
+        this.asideTab = 'AsideLand';
 
         return this;
     },
@@ -1023,6 +1041,15 @@ export const game = shallowReactive({
         }
         return this.getCardName(this.findCard(dome.scope_id), current);
     },
+    getLandName(id, current = true) {
+        let land = null;
+        if (typeof id === 'number') {
+            land = this.findLand(id);
+        } else {
+            land = id;
+        }
+        return this.getCardName(this.findCard(land.scope_id), current);
+    },
     getAreaName(id, current = true) {
         let area = null;
         if (typeof id === 'number') {
@@ -1165,15 +1192,17 @@ export const game = shallowReactive({
         console.log('TODO - canvas redo');
     },
     /**
-     * @param {?Object|string} filter
+     * @param {?string} filter
+     * @param {?any} value
      * @return {Object<number, any>}
      */
-    filteredSources(filter = null) {
+    filteredSources(filter = null, value = null) {
         let ids = this.isMaster() ?
             Object.keys(this.books) : Array.from(this.visibleBookIds);
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                    filter = 'all';
                     break;
                 case 'MainDome':
                     filter = 'domes';
@@ -1186,109 +1215,201 @@ export const game = shallowReactive({
                     throw new Error('Unknown main tab!');
             }
         }
-        if (filter && filter !== 'all') {
+        let isField = filter[0] === '.';
+        if (isField) {
+            filter = filter.slice(1);
+            value = value ? value : this.activeInfo.id;
+        }
+        if (!isField && filter !== 'all') {
             ids = this._sourceFilter(ids, filter, 'source_ids');
         }
         let self = this;
         let filtered = {};
         ids.forEach(function(id) {
-            filtered[id] = self.findBook(id);
+            let book = self.findBook(id);
+            if (isField && book[filter] !== value) {
+                return;
+            }
+            filtered[id] = book;
         });
 
         return filtered;
     },
     /**
-     * @param {?Object|string} filter
+     * @param {?string} filter
+     * @param {?any} value
      * @return {Object<number, any>}
      */
-    filteredDomes(filter = null) {
+    filteredDomes(filter = null, value = null) {
         let ids = this.isMaster() ?
             Object.keys(this.domes) : Array.from(this.visibleDomeIds);
-        if (filter) {
+        if (!filter) {
+            filter = 'all';
+        }
+        let isField = filter[0] === '.';
+        if (isField) {
+            filter = filter.slice(1);
+            value = value ? value : this.activeInfo.id;
+        }
+        if (!isField && filter !== 'all') {
             ids = this._sourceFilter(ids, filter, 'dome_ids');
         }
         let self = this;
         let filtered = {};
         ids.forEach(function(id) {
-            filtered[id] = self.findDome(id);
+            let dome = self.findDome(id);
+            if (isField && dome[filter] !== value) {
+                return;
+            }
+            filtered[id] = dome;
         });
 
         return filtered;
     },
     /**
-     * @param {?Object|string} filter
+     * @param {?string} filter
+     * @param {?any} value
      * @return {Object<number, any>}
      */
-    filteredAreas(filter = null) {
+    filteredLands(filter = null, value = null) {
+        let ids = this.isMaster() ?
+            Object.keys(this.lands) : Array.from(this.visibleLandIds);
+        if (!filter) {
+            switch (this.mainTab) {
+                case 'MainBoard':
+                    filter = 'all'
+                    break;
+                case 'MainDome':
+                    filter = 'domes';
+                    break;
+                case 'MainScene':
+                    filter = 'all';
+                    break;
+                default:
+                    console.error('Unknown main tab!', this.mainTab);
+                    throw new Error('Unknown main tab!');
+            }
+        }
+        let isField = filter[0] === '.';
+        if (isField) {
+            filter = filter.slice(1);
+            value = value ? value : this.activeInfo.id;
+        }
+        if (!isField && filter !== 'all') {
+            ids = this._sourceFilter(ids, filter, 'land_ids');
+        }
+        let self = this;
+        let filtered = {};
+        ids.forEach(function(id) {
+            let land = self.findLand(id);
+            if (isField && land[filter] !== value) {
+                return;
+            }
+            filtered[id] = land;
+        });
+
+        return filtered;
+    },
+    /**
+     * @param {?string} filter
+     * @param {?any} value
+     * @return {Object<number, any>}
+     */
+    filteredAreas(filter = null, value = null) {
         let ids = this.isMaster() ?
             Object.keys(this.areas) : Array.from(this.visibleAreaIds);
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                    filter = 'all'
                     break;
                 case 'MainDome':
                     filter = 'domes';
                     break;
                 case 'MainScene':
+                    filter = 'all';
                     break;
                 default:
                     console.error('Unknown main tab!', this.mainTab);
                     throw new Error('Unknown main tab!');
             }
         }
-        if (filter) {
+        let isField = filter[0] === '.';
+        if (isField) {
+            filter = filter.slice(1);
+            value = value ? value : this.activeInfo.id;
+        }
+        if (!isField && filter !== 'all') {
             ids = this._sourceFilter(ids, filter, 'area_ids');
         }
         let self = this;
         let filtered = {};
         ids.forEach(function(id) {
-            filtered[id] = self.findArea(id);
+            let area = self.findArea(id);
+            if (isField && area[filter] !== value) {
+                return;
+            }
+            filtered[id] = area;
         });
 
         return filtered;
     },
     /**
-     * @param {?Object|string} filter
+     * @param {?string} filter
+     * @param {?any} value
      * @return {Object<number, any>}
      */
-    filteredScenes(filter = null) {
+    filteredScenes(filter = null, value = null) {
         let ids = this.isMaster() ?
             Object.keys(this.scenes) : Array.from(this.visibleSceneIds);
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                    filter = 'all';
                     break;
                 case 'MainDome':
                     filter = 'domes';
                     break;
                 case 'MainScene':
+                    filter = 'all';
                     break;
                 default:
                     console.error('Unknown main tab!', this.mainTab);
                     throw new Error('Unknown main tab!');
             }
         }
-        if (filter && filter !== 'all') {
+        let isField = filter[0] === '.';
+        if (isField) {
+            filter = filter.slice(1);
+            value = value ? value : this.activeInfo.id;
+        }
+        if (!isField && filter !== 'all') {
             ids = this._sourceFilter(ids, filter, 'scene_ids');
         }
         let self = this;
         let filtered = {};
         ids.forEach(function(id) {
-            filtered[id] = self.findScene(id);
+            let scene = self.findScene(id);
+            if (isField && scene[filter] !== value) {
+                return;
+            }
+            filtered[id] = scene;
         });
 
         return filtered;
     },
     /**
-     * @param {?Object|string} filter
+     * @param {?string} filter
+     * @param {?any} value
      * @return {Object<number, any>}
      */
-    filteredDecks(filter = null) {
+    filteredDecks(filter = null, value = null) {
         let ids = this.isMaster() ?
             Object.keys(this.decks) : Array.from(this.visibleDeckIds);
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                    filter = 'all';
                     break;
                 case 'MainDome':
                     filter = 'domes';
@@ -1301,20 +1422,21 @@ export const game = shallowReactive({
                     throw new Error('Unknown main tab!');
             }
         }
-        if (typeof filter === 'string' && filter !== 'all') {
+        let isField = filter[0] === '.';
+        if (isField) {
+            filter = filter.slice(1);
+            value = value ? value : this.activeInfo.id;
+        }
+        if (!isField && filter !== 'all') {
             ids = this._sourceFilter(ids, filter, 'deck_ids');
-            filter = null;
         }
         let self = this;
         let filtered = {};
-        filter = (!filter || filter === 'all') ? {} : filter;
         ids.forEach(function(id) {
             let deck = self.findDeck(id);
             // apply fields filter:
-            for (let field in filter) {
-                if (deck[field] !== filter[field]) {
+            if (isField && deck[filter] !== value) {
                     return;
-                }
             }
             let scope = self.findCard(deck.scope_id);
             let target = self.findCard(deck.target_id);
@@ -1329,15 +1451,17 @@ export const game = shallowReactive({
         return filtered;
     },
     /**
-     * @param {?Object|string} filter
+     * @param {?string} filter
+     * @param {?any} value
      * @return {Object<number, any>}
      */
-    filteredCards(filter = null) {
+    filteredCards(filter = null, value = null) {
         let ids = this.isMaster() ?
             Object.keys(this.cards) : Array.from(this.visibleCardIds);
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                    filter = 'all';
                     break;
                 case 'MainDome':
                     filter = 'domes';
@@ -1350,20 +1474,21 @@ export const game = shallowReactive({
                     throw new Error('Unknown main tab!');
             }
         }
-        if (typeof filter === 'string' && filter !== 'all') {
+        let isField = filter[0] === '.';
+        if (isField) {
+            filter = filter.slice(1);
+            value = value ? value : this.activeInfo.id;
+        }
+        if (!isField && filter !== 'all') {
             ids = this._sourceFilter(ids, filter, 'card_ids');
-            filter = null;
         }
         let self = this;
         let filtered = {};
-        filter = (!filter || filter === 'all') ? {} : filter;
         ids.forEach(function(id) {
             let card = self.findCard(id);
             // apply fields filter:
-            for (let field in filter) {
-                if (card[field] !== filter[field]) {
-                    return;
-                }
+            if (isField && card[filter] !== value) {
+                return;
             }
             filtered[id] = card;
         });
@@ -1422,6 +1547,11 @@ export const game = shallowReactive({
         this.fb().discardActiveObject();
         this.showDome(event.target.value);
     },
+    selectLand(event) {
+        this.selectedId = null;
+        this.fb().discardActiveObject();
+        this.showLand(event.target.value);
+    },
     selectArea(event) {
         this.selectedId = null;
         this.fb().discardActiveObject();
@@ -1469,6 +1599,12 @@ export const game = shallowReactive({
             throw new Error('Area not found: ' + id);
         }
         return toRaw(this.areas[id]);
+    },
+    findLand(id) {
+        if (!this.lands[id]) {
+            throw new Error('Land not found: ' + id);
+        }
+        return toRaw(this.lands[id]);
     },
     findDome(id) {
         if (!this.domes[id]) {

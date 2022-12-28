@@ -18,6 +18,14 @@
 
         <!-- selects -->
         <div class="aside-selects">
+            <div v-if="Object.keys(game.filteredLands('domes')).length" class="aside-content">
+                <select v-model="game.selectedId" @change="game.selectLand($event)">
+                    <option :value="null" disabled>{{ __('Lands') }}</option>
+                    <option v-for="land in game.filteredLands('domes')" :value="land.id">
+                        {{ game.getLandName(land) }}
+                    </option>
+                </select>
+            </div>
             <div v-if="Object.keys(game.filteredAreas('domes')).length" class="aside-content">
                 <select v-model="game.selectedId" @change="game.selectArea($event)">
                     <option :value="null" disabled>{{ __('Areas') }}</option>

@@ -1184,7 +1184,7 @@ export const game = shallowReactive({
             }
         }
         if (filter && filter !== 'all') {
-            ids = this._filter(ids, filter, 'source_ids');
+            ids = this._sourceFilter(ids, filter, 'source_ids');
         }
         let self = this;
         let filtered = {};
@@ -1202,7 +1202,7 @@ export const game = shallowReactive({
         let ids = this.isMaster() ?
             Object.keys(this.domes) : Array.from(this.visibleDomeIds);
         if (filter) {
-            ids = this._filter(ids, filter, 'dome_ids');
+            ids = this._sourceFilter(ids, filter, 'dome_ids');
         }
         let self = this;
         let filtered = {};
@@ -1234,7 +1234,7 @@ export const game = shallowReactive({
             }
         }
         if (filter) {
-            ids = this._filter(ids, filter, 'area_ids');
+            ids = this._sourceFilter(ids, filter, 'area_ids');
         }
         let self = this;
         let filtered = {};
@@ -1266,7 +1266,7 @@ export const game = shallowReactive({
             }
         }
         if (filter && filter !== 'all') {
-            ids = this._filter(ids, filter, 'scene_ids');
+            ids = this._sourceFilter(ids, filter, 'scene_ids');
         }
         let self = this;
         let filtered = {};
@@ -1298,13 +1298,21 @@ export const game = shallowReactive({
                     throw new Error('Unknown main tab!');
             }
         }
-        if (filter) {
-            ids = this._filter(ids, filter, 'deck_ids');
+        if (typeof filter === 'string' && filter !== 'all') {
+            ids = this._sourceFilter(ids, filter, 'deck_ids');
+            filter = null;
         }
         let self = this;
         let filtered = {};
+        filter = (!filter || filter === 'all') ? {} : filter;
         ids.forEach(function(id) {
             let deck = self.findDeck(id);
+            // apply fields filter:
+            for (let field in filter) {
+                if (deck[field] !== filter[field]) {
+                    return;
+                }
+            }
             let scope = self.findCard(deck.scope_id);
             let target = self.findCard(deck.target_id);
             filtered[id] = {
@@ -1339,13 +1347,22 @@ export const game = shallowReactive({
                     throw new Error('Unknown main tab!');
             }
         }
-        if (filter) {
-            ids = this._filter(ids, filter, 'card_ids');
+        if (typeof filter === 'string' && filter !== 'all') {
+            ids = this._sourceFilter(ids, filter, 'card_ids');
+            filter = null;
         }
         let self = this;
         let filtered = {};
+        filter = (!filter || filter === 'all') ? {} : filter;
         ids.forEach(function(id) {
-            filtered[id] = self.findCard(id);
+            let card = self.findCard(id);
+            // apply fields filter:
+            for (let field in filter) {
+                if (card[field] !== filter[field]) {
+                    return;
+                }
+            }
+            filtered[id] = card;
         });
 
         return filtered;
@@ -1607,7 +1624,7 @@ export const game = shallowReactive({
      * @return {Array}
      * @private
      */
-    _filter(ids, filter, idsField) {
+    _sourceFilter(ids, filter, idsField) {
         if (typeof filter === 'string') {
             let temp = {}
             temp[filter] = this.activeInfo.id;

@@ -25,6 +25,10 @@ img.align-bottom.w-8.h-8 {
 .aside-content {
     margin-top: 10px;
 }
+.aside-selects {
+    height: 180px;
+    overflow: auto;
+}
 .aside-content select {
     width: 90%;
     padding: 0.2rem;

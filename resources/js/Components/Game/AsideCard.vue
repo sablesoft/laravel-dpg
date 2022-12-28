@@ -17,9 +17,35 @@
                  :alt="game.activeInfo.scopeName"
                  :title="game.activeInfo.scopeName">
         </div>
+        <!-- desc -->
         <div class="aside-content aside-desc">
             {{ game.activeInfo.desc }}
         </div>
+        <!-- selects -->
+        <div class="aside-selects">
+            <div v-if="game.mainTab === 'MainBoard' &&
+                        Object.keys(game.filteredDecks({target_id : game.activeInfo.id})).length"
+                 class="aside-content">
+                <select v-model="game.selectedId" @change="game.selectDeck($event)">
+                    <option :value="null" disabled>{{ __('Decks') }}</option>
+                    <option v-for="deck in game.filteredDecks({target_id : game.activeInfo.id})"
+                            :value="deck.id">
+                        {{ deck.type + ' : ' + deck.target + ' - ' + deck.scope }}
+                    </option>
+                </select>
+            </div>
+            <div v-if="Object.keys(game.filteredCards({scope_id : game.activeInfo.id})).length"
+                 class="aside-content">
+                <select v-model="game.selectedId" @change="game.selectCard($event)">
+                    <option :value="null" disabled>{{ __('Scope') }}</option>
+                    <option v-for="card in game.filteredCards({scope_id : game.activeInfo.id})"
+                            :value="card.id">
+                        {{ game.getCardName(card) }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <!-- actions -->
         <div v-if="game.isMaster() || game.mainTab === 'MainBoard'"
              class="aside-content aside-actions">
             <button v-if="game.isMaster() && game.mainTab === 'MainBoard'"

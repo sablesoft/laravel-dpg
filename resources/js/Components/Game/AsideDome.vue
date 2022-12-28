@@ -17,38 +17,40 @@
         </div>
 
         <!-- selects -->
-        <div v-if="Object.keys(game.filteredAreas('domes')).length" class="aside-content">
-            <select v-model="game.selectedId" @change="game.selectArea($event)">
-                <option :value="null" disabled>{{ __('Areas') }}</option>
-                <option v-for="area in game.filteredAreas('domes')" :value="area.id">
-                    {{ game.getAreaName(area) }}
-                </option>
-            </select>
-        </div>
-        <div v-if="Object.keys(game.filteredSources('domes')).length" class="aside-content">
-            <select v-model="game.selectedId" @change="game.selectBook($event)">
-                <option :value="null" disabled>{{ __('Books') }}</option>
-                <option v-for="book in game.filteredSources('domes')" :value="book.id">
-                    {{ game.getBookName(book) }}
-                </option>
-            </select>
-        </div>
-        <div v-if="game.mainTab === 'MainBoard' && Object.keys(game.filteredDecks('domes')).length"
-             class="aside-content">
-            <select v-model="game.selectedId" @change="game.selectDeck($event)">
-                <option :value="null" disabled>{{ __('Decks') }}</option>
-                <option v-for="deck in game.filteredDecks('domes')" :value="deck.id">
-                    {{ deck.type + ' : ' + deck.target + ' - ' + deck.scope }}
-                </option>
-            </select>
-        </div>
-        <div v-if="Object.keys(game.filteredCards('domes')).length" class="aside-content">
-            <select v-model="game.selectedId" @change="game.selectCard($event)">
-                <option :value="null" disabled>{{ __('Cards') }}</option>
-                <option v-for="card in game.filteredCards('domes')" :value="card.id">
-                    {{ game.getCardName(card) }}
-                </option>
-            </select>
+        <div class="aside-selects">
+            <div v-if="Object.keys(game.filteredAreas('domes')).length" class="aside-content">
+                <select v-model="game.selectedId" @change="game.selectArea($event)">
+                    <option :value="null" disabled>{{ __('Areas') }}</option>
+                    <option v-for="area in game.filteredAreas('domes')" :value="area.id">
+                        {{ game.getAreaName(area) }}
+                    </option>
+                </select>
+            </div>
+            <div v-if="Object.keys(game.filteredSources('domes')).length" class="aside-content">
+                <select v-model="game.selectedId" @change="game.selectBook($event)">
+                    <option :value="null" disabled>{{ __('Books') }}</option>
+                    <option v-for="book in game.filteredSources('domes')" :value="book.id">
+                        {{ game.getBookName(book) }}
+                    </option>
+                </select>
+            </div>
+            <div v-if="game.mainTab === 'MainBoard' && Object.keys(game.filteredDecks('domes')).length"
+                 class="aside-content">
+                <select v-model="game.selectedId" @change="game.selectDeck($event)">
+                    <option :value="null" disabled>{{ __('Decks') }}</option>
+                    <option v-for="deck in game.filteredDecks('domes')" :value="deck.id">
+                        {{ deck.type + ' : ' + deck.target + ' - ' + deck.scope }}
+                    </option>
+                </select>
+            </div>
+            <div v-if="Object.keys(game.filteredCards('domes')).length" class="aside-content">
+                <select v-model="game.selectedId" @change="game.selectCard($event)">
+                    <option :value="null" disabled>{{ __('Cards') }}</option>
+                    <option v-for="card in game.filteredCards('domes')" :value="card.id">
+                        {{ game.getCardName(card) }}
+                    </option>
+                </select>
+            </div>
         </div>
 
         <!-- actions -->

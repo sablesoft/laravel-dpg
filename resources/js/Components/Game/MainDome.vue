@@ -14,8 +14,8 @@ onMounted(() => {
         }
         setTimeout(function() {
             game.activateArea();
+            console.debug('Dome mounted', game.fb());
         }, 5000);
-        console.debug('Map mounted', game.fb());
     });
 });
 </script>

@@ -432,7 +432,7 @@ export const game = shallowReactive({
             }
         });
         fc.on('mouse:down', function(opt) {
-            // console.debug('mouse:down', opt);
+            console.debug('mouse:down', opt);
             let evt = opt.e;
             if (self.modeTransform === true) {
                 this.isDragging = true;
@@ -440,8 +440,17 @@ export const game = shallowReactive({
                 this.lastPosX = evt.clientX;
                 this.lastPosY = evt.clientY;
             }
+            let o = opt.target;
+            // check selected area by polygons:
+            if (o && o.type === 'area') {
+                o = self._findArea(o, opt.absolutePointer);
+                if (o) {
+                    self.setActiveObject(o);
+                    self.showAside(o);
+                }
+            }
             // clear aside if no target:
-            if (!opt.target) {
+            if (!o) {
                 self.showInfo();
             }
         });
@@ -456,7 +465,7 @@ export const game = shallowReactive({
                 this.lastPosX = e.clientX;
                 this.lastPosY = e.clientY;
             }
-            self._cursor(opt.target);
+            self._cursor(opt);
         });
         fc.on('mouse:out', function() {
             // console.debug('mouse:out', opt);
@@ -1476,7 +1485,11 @@ export const game = shallowReactive({
             this.showAside();
             return;
         }
+        // prevent for areas:
         let o = event.selected[0];
+        if (o && o.type === 'area') {
+            return;
+        }
         this.setActiveObject(o);
         this.showAside(o);
     },
@@ -1487,16 +1500,13 @@ export const game = shallowReactive({
             y: parseInt(port.tl.y + (port.br.y - port.tl.y)/2)
         }
     },
-    /**
-     * @param {?fabric.Object} o
-     * @private
-     */
-    _cursor(o = null) {
-        if (!o) {
+    _cursor(opt = null) {
+        if (!opt || !opt.target) {
             this.cursorName = null;
             this.cursorScope = null;
             return;
         }
+        let o = opt.target;
         let card = null;
         let scopeCard = null;
         switch (o.type) {
@@ -1529,6 +1539,13 @@ export const game = shallowReactive({
                 this.cursorScope = this.trans('Dome');
                 break;
             case 'area':
+                // find correct area for cursor by polygon
+                o = this._findArea(o, opt.absolutePointer);
+                if (!o) {
+                    this.cursorName = null;
+                    this.cursorScope = null;
+                    break;
+                }
                 let area = this.areas[o.get('area_id')];
                 card = this.cards[area.scope_id];
                 this.cursorName = this._toLocale(card.name);
@@ -1536,6 +1553,26 @@ export const game = shallowReactive({
                 break;
             default:
                 console.error('Unknown object for cursor!', o);
+        }
+    },
+    _findArea(o, point) {
+        if (o.onArea(point)) {
+            return o;
+        }
+        let found = false;
+        this.fb().getObjects('area').forEach(function(a) {
+            if (Number(a.area_id) !== Number(o.area_id) && a.onArea(point)) {
+                found = a;
+            }
+        });
+        if (!found) {
+            o.set('cursor', 'default');
+            this.fb().requestRenderAll();
+            return null;
+        } else {
+            found.set('cursor', 'pointer');
+            this.fb().requestRenderAll();
+            return found;
         }
     },
     /**

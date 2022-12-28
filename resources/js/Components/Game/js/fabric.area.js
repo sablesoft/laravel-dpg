@@ -5,6 +5,7 @@ import { game } from "@/Components/Game/js/game";
 fabric.Area = fabric.util.createClass(fabric.Group, {
     type: 'area',
     defaultShowOpacity: 0.7,
+    subTargetCheck: true,
 
     /**
      * @param {number} id
@@ -97,6 +98,37 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
             polygon.set('stroke', 'rgba(255,255,255,0)');
         }
         this.canvas && this.canvas.requestRenderAll();
+    },
+    onArea(point) {
+        let center = this.getCenterPoint();
+        let polygon = this._item('polygon');
+        let ax = [], ay = [];
+        polygon.points.forEach(function(p) {
+            ax.push(p.x + center.x);
+            ay.push(p.y + center.y);
+        });
+        // console.debug('Check polygon points', ax, ay, point);
+
+        return this._pointCheck(polygon.points.length, ax, ay, point.x, point.y);
+    },
+    /**
+     * @param {number} pointsCount
+     * @param {Array} ax
+     * @param {Array} ay
+     * @param {number} x
+     * @param {number} y
+     * @return {number}
+     * @private
+     */
+    _pointCheck(pointsCount, ax, ay, x, y) {
+        let i, j, c = 0;
+        for (i = 0, j = pointsCount - 1; i < pointsCount; j = i++) {
+            if (((ay[i] > y) !== (ay[j] > y)) &&
+                (x < (ax[j] - ax[i]) * (y - ay[i]) / (ay[j] - ay[i]) + ax[i])) {
+                c = !c;
+            }
+        }
+        return c;
     },
     update() {
         let area = game.findArea(this.get('area_id'));

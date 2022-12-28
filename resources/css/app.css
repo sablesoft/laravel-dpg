@@ -101,3 +101,6 @@ img.align-bottom.w-8.h-8 {
 .control-text {
     vertical-align: super;
 }
+.visible {
+    cursor: pointer;
+}

@@ -1489,6 +1489,14 @@ export const game = shallowReactive({
         return this.dictionary[string] ?
             this.dictionary[string] : string;
     },
+    visible(type, id = null) {
+        if (game.isMaster()) {
+            return true;
+        }
+        let visibleField = this._visibleField(type);
+        id = id ? id : this.activeInfo.id;
+        return this[visibleField].includes(Number(id));
+    },
     /**
      * @return {HTMLCollectionOf<HTMLCanvasElement>}
      * @private
@@ -1671,7 +1679,7 @@ export const game = shallowReactive({
     _visibility(type, id, show) {
         id = Number(id);
         console.debug('Set visibility', type, id, show);
-        let idsField = 'visible' + type.charAt(0).toUpperCase() + type.slice(1) + 'Ids';
+        let idsField = this._visibleField(type);
         if (show) {
             if (!this[idsField].includes(id)) {
                 this[idsField].push(id);
@@ -1682,6 +1690,9 @@ export const game = shallowReactive({
                 this[idsField].splice(index, 1);
             }
         }
+    },
+    _visibleField(type) {
+        return 'visible' + type.charAt(0).toUpperCase() + type.slice(1) + 'Ids';
     },
     _data() {
         let fields = [

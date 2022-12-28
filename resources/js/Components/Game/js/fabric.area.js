@@ -47,33 +47,72 @@ fabric.Area = fabric.util.createClass(fabric.Group, {
         }
 
         let self = this;
-        // todo update images for created objects
         fabric.Image.fromURL(area.image, function(image) {
             image.set('originX', 'center');
             image.set('originY', 'center');
             image.set('erasable', false);
             self.add(image);
+            let polygonOptions = {
+                originX: 'center',
+                originY: 'center',
+                fill: 'rgba(255,255,255,0)',
+                stroke: 'rgba(255,255,255,0)',
+                strokeWidth: 7,
+                strokeDashArray: [50, 80] // 190
+            };
+            if (options.mask) {
+                let points = [];
+                let mask = Array.from(options.mask);
+                let pair = [];
+                while (mask.length) {
+                    pair = mask.splice(0,2);
+                    points.push({
+                        x: pair[0] - options.width/2,
+                        y: pair[1] - options.height/2
+                    });
+                }
+                self.add(new fabric.Polygon(points, polygonOptions));
+            } else {
+                self.add(new fabric.Polygon([{
+                    x: -options.width/2,
+                    y: -options.height/2
+                }, {
+                    x: options.width/2,
+                    y: -options.height/2
+                }, {
+                    x: options.width/2,
+                    y: options.height/2
+                }, {
+                    x: -options.width/2,
+                    y: options.height/2
+                }], polygonOptions));
+            }
         });
+    },
+    activate(activate = true) {
+        let polygon = this._item('polygon');
+        if (activate) {
+            polygon.set('stroke', 'rgba(255,0,234,1)');
+        } else {
+            polygon.set('stroke', 'rgba(255,255,255,0)');
+        }
+        this.canvas && this.canvas.requestRenderAll();
     },
     update() {
         let area = game.findArea(this.get('area_id'));
         this._item('image').setSrc(area.image, function(img) {
-            if (img.canvas) {
-                img.canvas.requestRenderAll();
-            }
+            img.canvas && img.canvas.requestRenderAll();
         });
         this.sendBackwards(true);
-        // todo - update mask polygone
-        if (this.canvas) {
-            this.canvas.requestRenderAll();
-        }
+        // todo - update mask polygon
+        this.canvas && this.canvas.requestRenderAll();
     },
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
             show: this.get('show'),
             area_id: this.get('area_id'),
             card_id: this.get('card_id'),
-            mask: this.get('mask'), // todo - mask for checking cursor
+            mask: this.get('mask'),
         });
     },
     _render: function(ctx) {

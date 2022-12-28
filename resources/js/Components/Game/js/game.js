@@ -503,6 +503,7 @@ export const game = shallowReactive({
                 break;
             case 'area':
                 this.activeAreaId = activate ? id : null;
+                this.activateArea();
                 break;
             case 'scene':
                 this.activeSceneId = activate ? id : null;
@@ -519,6 +520,21 @@ export const game = shallowReactive({
                 console.error('Invalid active info for makeActive', this.activeInfo);
                 throw new Error('Invalid active info for makeActive');
         }
+    },
+    activateArea() {
+        let self = this;
+        console.debug('Activate area', self.activeAreaId);
+        this.fb().getObjects('area').forEach(function(o) {
+            // console.debug('Check area is active', o);
+            if (self.activeAreaId && Number(self.activeAreaId) === Number(o.area_id)) {
+                // console.debug('Activate!');
+                self.moveToCenter(o);
+                o.activate();
+            } else {
+                // console.debug('Deactivate!')
+                o.activate(false);
+            }
+        });
     },
     isActivated() {
         let id = Number(this.activeInfo.id);
@@ -816,10 +832,10 @@ export const game = shallowReactive({
         this.setActiveObject();
         this.showInfo();
     },
-    zoomTo(o = null) {
+    moveToCenter(o = null) {
         o = o ? o : this.activeObject;
         if (!o) {
-            throw new Error('Active object not found for zoomTo!');
+            throw new Error('Active object not found for moveToCenter!');
         }
         let fc = this.fb();
         let zoom = fc.getZoom();

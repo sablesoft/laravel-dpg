@@ -54,7 +54,7 @@
             </button>
             <button v-if="game.activeObject && game.mainTab !== 'MainBoard'"
                     class="control-btn control-center" :title="__('Center')">
-                <span class="material-icons" @click="game.zoomTo()">filter_center_focus</span>
+                <span class="material-icons" @click="game.moveToCenter()">filter_center_focus</span>
             </button>
             <button v-if="game.activeObject && game.isMaster()"
                     class="control-btn control-remove" :title="__('Remove')">
@@ -65,7 +65,7 @@
              class="aside-content aside-actions">
             <button v-if="game.activeObject"
                     class="control-btn control-center" :title="__('Center')">
-                <span class="material-icons" @click="game.zoomTo()">filter_center_focus</span>
+                <span class="material-icons" @click="game.moveToCenter()">filter_center_focus</span>
             </button>
         </div>
     </div>

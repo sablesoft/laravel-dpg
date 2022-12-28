@@ -62,7 +62,7 @@
             </button>
             <button v-if="game.activeObject"
                     class="control-btn control-center" :title="__('Center')">
-                <span class="material-icons" @click="game.zoomTo()">filter_center_focus</span>
+                <span class="material-icons" @click="game.moveToCenter()">filter_center_focus</span>
             </button>
             <button v-if="!game.isActivated()" class="control-btn control-activate" :title="__('Activate')">
                 <span class="material-icons" @click="game.activateSpace()">public</span>
@@ -75,7 +75,7 @@
              class="aside-content aside-actions">
             <button v-if="game.activeObject"
                     class="control-btn control-center" :title="__('Center')">
-                <span class="material-icons" @click="game.zoomTo()">filter_center_focus</span>
+                <span class="material-icons" @click="game.moveToCenter()">filter_center_focus</span>
             </button>
         </div>
         <div v-if="game.mainTab === 'MainBoard'" class="aside-content aside-actions">

@@ -154,7 +154,10 @@ class GameService
         $data = self::toArray($book, $book->translatable);
         $data['image'] = self::image($data['image']);
         /** @var BookProcess $bookProcess */
-        $bookProcess = BookProcess::create($data);
+        $bookProcess = BookProcess::updateOrCreate([
+            'id' => $data['id'],
+            Process::GAME_FOREIGN_KEY => $gameProcess->getKey()
+        ], $data);
         $ids = [];
         foreach ($book->cards as $card) {
             $ids[] = static::cardToProcess($gameProcess, $card)->id;
@@ -203,7 +206,10 @@ class GameService
         $data = self::toArray($dome, $dome->translatable, false);
         $data['image'] = self::image($data['image']);
         /** @var DomeProcess $domeProcess */
-        $domeProcess = DomeProcess::create($data);
+        $domeProcess = DomeProcess::updateOrCreate([
+            'id' => $data['id'],
+            Process::GAME_FOREIGN_KEY => $gameProcess->getKey()
+        ], $data);
         static::prepareSpaceProcess($gameProcess, $domeProcess, $dome);
         $ids = [];
         foreach ($dome->areas as $area) {
@@ -245,7 +251,10 @@ class GameService
         ]);
         $data = self::toArray($land, $land->translatable, false);
         $data['image'] = self::image($data['image']);
-        $landProcess = LandProcess::create($data);
+        $landProcess = LandProcess::updateOrCreate([
+            'id' => $data['id'],
+            Process::GAME_FOREIGN_KEY => $gameProcess->getKey()
+        ], $data);
         /** @var LandProcess $landProcess */
         static::prepareSpaceProcess($gameProcess, $landProcess, $land);
         $ids = [];
@@ -283,7 +292,10 @@ class GameService
         $data = self::toArray($area, $area->translatable, false);
         $data['image'] = self::image($data['image']);
         /** @var AreaProcess $areaProcess */
-        $areaProcess = AreaProcess::create($data);
+        $areaProcess = AreaProcess::updateOrCreate([
+            'id' => $data['id'],
+            Process::GAME_FOREIGN_KEY => $gameProcess->getKey()
+        ], $data);
         static::prepareSpaceProcess($gameProcess, $areaProcess, $area);
         $ids = [];
         foreach ($area->scenes as $scene) {
@@ -315,7 +327,10 @@ class GameService
         $data = self::toArray($scene, $scene->translatable, false);
         $data['image'] = self::image($data['image']);
         /** @var SceneProcess $sceneProcess */
-        $sceneProcess = SceneProcess::create($data);
+        $sceneProcess = SceneProcess::updateOrCreate([
+            'id' => $data['id'],
+            Process::GAME_FOREIGN_KEY => $gameProcess->getKey()
+        ], $data);
         static::prepareSpaceProcess($gameProcess, $sceneProcess, $scene);
         $sceneProcess->save();
         $gameProcess->scenes()->save($sceneProcess);
@@ -368,7 +383,10 @@ class GameService
         }
         $data['cards'] = $cards;
         /** @var DeckProcess */
-        $deckProcess = DeckProcess::create($data);
+        $deckProcess = DeckProcess::updateOrCreate([
+            'id' => $data['id'],
+            Process::GAME_FOREIGN_KEY => $gameProcess->getKey()
+        ], $data);
         $gameProcess->decks()->save($deckProcess);
 
         return $deckProcess;

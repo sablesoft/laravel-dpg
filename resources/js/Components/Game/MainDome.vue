@@ -9,7 +9,7 @@ onMounted(() => {
             let options = {
                 originX : 'left',
                 originY : 'top',
-                opacity: game.filteredAreas().length ? 0.4 : 1,
+                opacity: dome.area_ids.length ? 0.4 : 1,
                 erasable: false,
             };
             fc.setBackgroundImage(dome.image, game.renderAll.bind(game), options);

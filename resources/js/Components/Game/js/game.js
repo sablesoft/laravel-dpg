@@ -638,7 +638,7 @@ export const game = shallowReactive({
             return;
         }
         this._offModes();
-        this.save();
+        this.saveCanvas();
         this.mainTab = tab;
         this.showInfo();
     },
@@ -1129,6 +1129,24 @@ export const game = shallowReactive({
             this.previewFog(false);
         }
     },
+    saveCanvas() {
+        let canvas = this.fb().toObject(['viewportTransform']);
+        switch(this.mainTab) {
+            case 'MainDome':
+                this.domes[this.activeDomeId].canvas = canvas;
+                break;
+            case 'MainScene':
+                this.scenes[this.activeSceneId].canvas = canvas;
+                break;
+            case 'MainBoard':
+                this.canvas = canvas;
+                break;
+            default:
+                throw new Error('Invalid main tab');
+        }
+
+        return canvas;
+    },
     save() {
         this.modeSave = true;
         let gameRequest = {};
@@ -1136,36 +1154,34 @@ export const game = shallowReactive({
         let request = {
             game: gameRequest
         };
-        let canvas = this.fb().toObject(['viewportTransform']);
+        let canvas = this.saveCanvas();
         switch(this.mainTab) {
             case 'MainDome':
-                this.domes[this.activeDomeId].canvas = canvas;
                 request['dome'] = {};
                 request['dome'][this.activeDomeId] = {
                     canvas: canvas
                 };
                 break;
             case 'MainScene':
-                this.scenes[this.activeSceneId].canvas = canvas;
                 request['scene'] = {};
                 request['scene'][this.activeSceneId] = {
                     canvas: canvas
                 };
                 break;
             case 'MainBoard':
-                this.canvas = canvas;
                 request['game'][this.id]['canvas'] = canvas;
                 break;
             default:
                 throw new Error('Invalid main tab');
         }
         if (this.isMaster()) {
+            let self = this;
             request = this._prepareUpdateRequest(request);
             console.debug('Save request', request);
             axios.patch('/game', request)
                 .then(() => {
+                    self._updateRequest = {};
                     self.modeSave = false;
-                    this._updateRequest = {};
                 }).catch(err => {
                     self.modeSave = false;
                     console.error(err);
@@ -1740,24 +1756,24 @@ export const game = shallowReactive({
                 }
                 card = this.findCard(o.get('card_id'));
                 scopeCard = this.findCard(card.scope_id, false);
-                this.cursorName = this._toLocale(card.name);
-                this.cursorScope = scopeCard ? this._toLocale(scopeCard.name) : null;
+                this.cursorName = this._toLocale(card.currentName);
+                this.cursorScope = scopeCard ? this._toLocale(scopeCard.currentName) : null;
                 break;
             case 'marker':
                 card = this.findCard(o.get('marker_id'));
                 scopeCard = this.findCard(card.scope_id, false);
-                this.cursorName = this._toLocale(card.name);
-                this.cursorScope = scopeCard ? this._toLocale(scopeCard.name) : null;
+                this.cursorName = this._toLocale(card.currentName);
+                this.cursorScope = scopeCard ? this._toLocale(scopeCard.currentName) : null;
                 break;
             case 'book':
                 let book = this.books[o.get('book_id')];
-                this.cursorName = this._toLocale(book.name);
+                this.cursorName = this._toLocale(book.currentName);
                 this.cursorScope = this.trans('Book');
                 break;
             case 'dome':
                 let dome = this.domes[o.get('dome_id')];
                 card = this.cards[dome.scope_id];
-                this.cursorName = this._toLocale(card.name);
+                this.cursorName = this._toLocale(card.currentName);
                 this.cursorScope = this.trans('Dome');
                 break;
             case 'area':
@@ -1770,7 +1786,7 @@ export const game = shallowReactive({
                 }
                 let area = this.areas[o.get('area_id')];
                 card = this.cards[area.scope_id];
-                this.cursorName = this._toLocale(card.name);
+                this.cursorName = this._toLocale(card.currentName);
                 this.cursorScope = this.trans('Area');
                 break;
             default:

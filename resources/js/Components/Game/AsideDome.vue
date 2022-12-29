@@ -4,7 +4,7 @@
 <template>
     <div class="aside shadow-sm sm:rounded-lg">
         <div class="aside-content aside-name">
-            {{ game.activeInfo.name }}
+            {{ game.activeInfo.currentName }}
         </div>
         <div class="aside-content aside-image">
             <img :src="game.activeInfo.image" alt="">
@@ -13,7 +13,7 @@
             {{ __('Dome') }}
         </div>
         <div class="aside-content aside-desc">
-            {{ game.activeInfo.desc }}
+            {{ game.activeInfo.currentDesc }}
         </div>
 
         <!-- selects -->
@@ -93,7 +93,10 @@
                 <span class="material-icons" @click="game.visibility(false)">visibility_off</span>
             </button>
             <button class="control-btn control-forward" :title="__('Show Card')">
-                <span class="material-icons" @click="game.showCard(game.activeInfo.scopeId)">content_copy</span>
+                <span class="material-icons" @click="game.showCard(game.activeInfo.scopeId, true)">content_copy</span>
+            </button>
+            <button class="control-btn control-edit" :title="__('Edit')">
+                <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
             </button>
             <button v-if="!game.isActivated()" class="control-btn control-public" :title="__('Activate')">
                 <span class="material-icons" @click="game.activateSpace()">public</span>
@@ -113,12 +116,20 @@
             <button v-if="game.isActivated()" class="control-btn control-public" :title="__('Deactivate')">
                 <span class="material-icons" @click="game.activateSpace(false)">public_off</span>
             </button>
+            <button class="control-btn control-edit" :title="__('Edit')">
+                <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
+            </button>
         </div>
         <div v-if="!game.isMaster() && game.mainTab === 'MainBoard'" class="aside-content aside-actions">
             <button v-if="game.visibleCardIds.includes(game.activeInfo.scopeId)"
                     class="control-btn control-forward" :title="__('Show Card')">
                 <span class="material-icons"
                       @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
+            </button>
+        </div>
+        <div v-if="game.isMaster() && game.mainTab === 'MainScene'" class="aside-content aside-actions">
+            <button class="control-btn control-edit" :title="__('Edit')">
+                <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
             </button>
         </div>
     </div>

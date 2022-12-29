@@ -4,20 +4,20 @@
 <template>
     <div class="aside shadow-sm sm:rounded-lg">
         <div class="aside-content aside-name">
-            {{ game.activeInfo.name }}
+            {{ game.activeInfo.currentName }}
         </div>
         <div class="aside-content aside-image">
             <img :src="game.activeInfo.image" alt="">
         </div>
         <div v-if="!game.activeInfo.scopeImage" :class="{ visible : game.visible('card') }"
              @click="game.visible('card', game.activeInfo.scopeId) ?
-                    game.showCard(game.activeInfo.scopeId) : function() {}"
+                    game.showCard(game.activeInfo.scopeId, true) : function() {}"
              class="aside-content aside-name aside-scope">
             {{ game.activeInfo.scopeName }}
         </div>
         <div v-if="game.activeInfo.scopeImage" :class="{ visible : game.visible('card') }"
              @click="game.visible('card', game.activeInfo.scopeId) ?
-                    game.showCard(game.activeInfo.scopeId) : function() {}"
+                    game.showCard(game.activeInfo.scopeId, true) : function() {}"
              class="aside-content aside-image scope-image">
             <img :src="game.activeInfo.scopeImage"
                  :alt="game.activeInfo.scopeName"
@@ -25,7 +25,7 @@
         </div>
         <!-- desc -->
         <div class="aside-content aside-desc">
-            {{ game.activeInfo.desc }}
+            {{ game.activeInfo.currentDesc }}
         </div>
         <!-- selects -->
         <div class="aside-selects">
@@ -87,6 +87,9 @@
             <button v-if="game.activeObject && game.mainTab !== 'MainBoard'"
                     class="control-btn control-center" :title="__('Center')">
                 <span class="material-icons" @click="game.moveToCenter()">filter_center_focus</span>
+            </button>
+            <button v-if="game.isMaster()" class="control-btn control-edit" :title="__('Edit')">
+                <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
             </button>
             <button v-if="game.activeObject && game.isMaster()"
                     class="control-btn control-remove" :title="__('Remove')">

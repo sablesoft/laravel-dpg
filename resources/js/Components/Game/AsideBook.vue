@@ -4,7 +4,7 @@
 <template>
     <div class="aside shadow-sm sm:rounded-lg">
         <div class="aside-content aside-name">
-            {{ game.activeInfo.name }}
+            {{ game.activeInfo.currentName }}
         </div>
         <div class="aside-content aside-image">
             <img :src="game.activeInfo.image" alt="">
@@ -13,7 +13,7 @@
             {{ __('Book') }}
         </div>
         <div class="aside-content aside-desc">
-            {{ game.activeInfo.desc }}
+            {{ game.activeInfo.currentDesc }}
         </div>
 
         <!-- selects -->
@@ -75,9 +75,18 @@
                     class="control-btn control-forward" :title="__('Hide')">
                 <span class="material-icons" @click="game.visibility(false)">visibility_off</span>
             </button>
+            <button class="control-btn control-edit" :title="__('Edit')">
+                <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
+            </button>
             <button v-if="game.activeObject"
                     class="control-btn control-remove" :title="__('Remove')">
                 <span class="material-icons" @click="game.remove()">delete</span>
+            </button>
+        </div>
+        <div v-if="game.isMaster() && game.mainTab !== 'MainBoard'"
+             class="aside-content aside-actions">
+            <button class="control-btn control-edit" :title="__('Edit')">
+                <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
             </button>
         </div>
     </div>

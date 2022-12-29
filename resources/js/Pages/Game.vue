@@ -9,6 +9,7 @@ import MainScene from '@/Components/Game/MainScene.vue';
 // aside tabs:
 import AsideInfo from '@/Components/Game/AsideInfo.vue';
 import AsideCard from '@/Components/Game/AsideCard.vue';
+import AsideEdit from '@/Components/Game/AsideEdit.vue';
 import AsideBook from '@/Components/Game/AsideBook.vue';
 import AsideDome from '@/Components/Game/AsideDome.vue';
 import AsideLand from '@/Components/Game/AsideLand.vue';
@@ -34,6 +35,7 @@ const props = defineProps({
 const asideTabs = {
     AsideInfo,
     AsideCard,
+    AsideEdit,
     AsideBook,
     AsideDome,
     AsideLand,

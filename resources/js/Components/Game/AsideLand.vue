@@ -4,7 +4,7 @@
 <template>
     <div class="aside shadow-sm sm:rounded-lg">
         <div class="aside-content aside-name">
-            {{ game.activeInfo.name }}
+            {{ game.activeInfo.currentName }}
         </div>
         <div class="aside-content aside-image">
             <img :src="game.activeInfo.image" alt="">
@@ -13,7 +13,7 @@
             {{ __('Land') }}
         </div>
         <div class="aside-content aside-desc">
-            {{ game.activeInfo.desc }}
+            {{ game.activeInfo.currentDesc }}
         </div>
 
         <!-- selects -->
@@ -66,6 +66,9 @@
             <button v-if="game.isMaster() || game.visibleLandIds.includes(game.activeInfo.scopeId)"
                     class="control-btn control-forward" :title="__('Show Card')">
                 <span class="material-icons" @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
+            </button>
+            <button v-if="game.isMaster()" class="control-btn control-edit" :title="__('Edit')">
+                <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
             </button>
         </div>
     </div>

@@ -200,7 +200,7 @@ class GameService
             'created_at',
             'updated_at'
         ]);
-        $data = self::toArray($dome, $dome->translatable);
+        $data = self::toArray($dome, $dome->translatable, false);
         $data['image'] = self::image($data['image']);
         /** @var DomeProcess $domeProcess */
         $domeProcess = DomeProcess::create($data);
@@ -243,7 +243,7 @@ class GameService
             'created_at',
             'updated_at'
         ]);
-        $data = self::toArray($land, $land->translatable);
+        $data = self::toArray($land, $land->translatable, false);
         $data['image'] = self::image($data['image']);
         $landProcess = LandProcess::create($data);
         /** @var LandProcess $landProcess */
@@ -280,7 +280,7 @@ class GameService
             'created_at',
             'updated_at'
         ]);
-        $data = self::toArray($area, $area->translatable);
+        $data = self::toArray($area, $area->translatable, false);
         $data['image'] = self::image($data['image']);
         /** @var AreaProcess $areaProcess */
         $areaProcess = AreaProcess::create($data);
@@ -312,7 +312,7 @@ class GameService
             'created_at',
             'updated_at'
         ]);
-        $data = self::toArray($scene, $scene->translatable);
+        $data = self::toArray($scene, $scene->translatable, false);
         $data['image'] = self::image($data['image']);
         /** @var SceneProcess $sceneProcess */
         $sceneProcess = SceneProcess::create($data);
@@ -337,7 +337,7 @@ class GameService
             'created_at',
             'updated_at'
         ]);
-        $data = self::toArray($deck, $deck->translatable);
+        $data = self::toArray($deck, $deck->translatable, false);
         $data['image'] = self::image($data['image']);
         /** @var CardProcess $target */
         if (!$target = $gameProcess->cards()->where('id', $deck->card_id)->first()) {
@@ -438,15 +438,18 @@ class GameService
     /**
      * @param Model $object
      * @param array $fields
+     * @param bool $makeCurrent
      * @return array
      */
-    protected static function toArray(Model $object, array $fields): array
+    protected static function toArray(Model $object, array $fields, bool $makeCurrent = true): array
     {
         $object->makeHidden($fields);
         $data = $object->toArray();
         foreach ($fields as $field) {
             $data[$field] = json_decode($object->getRawOriginal($field), true);
-            $data['current' . ucfirst($field)] = $data[$field];
+            if ($makeCurrent) {
+                $data['current' . ucfirst($field)] = $data[$field];
+            }
         }
 
         return $data;

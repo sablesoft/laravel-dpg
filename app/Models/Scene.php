@@ -31,6 +31,11 @@ class Scene extends Content implements SpaceInterface
     ];
 
     /**
+     * @var array|string[]
+     */
+    public array $translatable = ['desc'];
+
+    /**
      * @return string|null
      */
     public function getCardImageAttribute(): ?string

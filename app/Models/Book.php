@@ -27,11 +27,6 @@ class Book extends Content
     const SUBSCRIBER_TYPE_LICENCE = 1;
 
     /**
-     * @var array|string[]
-     */
-    public array $translatable = ['name', 'desc'];
-
-    /**
      * @return BelongsToMany
      */
     public function domes(): BelongsToMany

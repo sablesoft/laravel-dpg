@@ -1784,6 +1784,7 @@ export const game = shallowReactive({
                     this.cursorScope = null;
                     break;
                 }
+                o.set('cursor', 'pointer');
                 let area = this.areas[o.get('area_id')];
                 card = this.cards[area.scope_id];
                 this.cursorName = this._toLocale(card.currentName);
@@ -1795,6 +1796,12 @@ export const game = shallowReactive({
     },
     _findArea(o, point) {
         if (o.onArea(point)) {
+            if (!this.isMaster() && !this.visibleAreaIds.includes(Number(o.area_id))) {
+                o.set('cursor', 'default');
+                return null;
+            }
+            o.set('cursor', 'pointer');
+            this.fb().requestRenderAll();
             return o;
         }
         let found = false;
@@ -1805,9 +1812,12 @@ export const game = shallowReactive({
         });
         if (!found) {
             o.set('cursor', 'default');
-            this.fb().requestRenderAll();
             return null;
         } else {
+            if (!this.isMaster() && !this.visibleAreaIds.includes(Number(found.area_id))) {
+                found.set('cursor', 'default');
+                return null;
+            }
             found.set('cursor', 'pointer');
             this.fb().requestRenderAll();
             return found;

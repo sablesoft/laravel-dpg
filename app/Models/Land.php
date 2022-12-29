@@ -22,6 +22,11 @@ class Land extends Content implements SpaceInterface
     use Cards, Decks, Sources, Scenes;
 
     /**
+     * @var array|string[]
+     */
+    public array $translatable = ['desc'];
+
+    /**
      * @return BelongsTo
      */
     public function card(): BelongsTo

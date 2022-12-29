@@ -101,7 +101,7 @@ let pageName = function() {
                         class="control-btn control-board"
                         :disabled="game.mainTab === 'MainBoard'"
                         :title="__('Board')">
-                    <span class="material-icons" @click="game.showMain('MainBoard')">local_library</span>
+                    <span class="material-icons" @click="game.showMain('MainBoard')">table_restaurant</span>
                 </button>
                 <button v-if="game.activeDomeId"
                         class="control-btn control-dome"
@@ -114,6 +114,9 @@ let pageName = function() {
                         :disabled="game.mainTab === 'MainScene'"
                         :title="__('Scene')">
                     <span class="material-icons" @click="game.showMain('MainScene')">my_location</span>
+                </button>
+                <button class="control-btn control-scene" :title="__('Journal')">
+                    <span class="material-icons">local_library</span>
                 </button>
             </div>
             <div class="aside-column bg-white shadow-sm sm:rounded-lg">

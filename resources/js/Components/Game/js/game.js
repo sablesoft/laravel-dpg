@@ -558,13 +558,13 @@ export const game = shallowReactive({
         let id = Number(this.activeInfo.id);
         switch(this.activeInfo.type) {
             case 'dome':
-                console.debug('Active dome', this.activeDomeId);
+                // console.debug('Active dome', this.activeDomeId);
                 return this.activeDomeId === id;
             case 'area':
-                console.debug('Active area', this.activeAreaId);
+                // console.debug('Active area', this.activeAreaId);
                 return this.activeAreaId === id;
             case 'scene':
-                console.debug('Active scene', this.activeSceneId);
+                // console.debug('Active scene', this.activeSceneId);
                 return this.activeSceneId === id;
             default:
                 console.error('Invalid active info for isActivated', this.activeInfo);
@@ -1604,10 +1604,10 @@ export const game = shallowReactive({
             this.activeObjectType = o.type;
             this.fb().setActiveObject(o);
         }
-        console.debug('Active Object', o, {
-            hidden: this.activeObjectHidden,
-            type: this.activeObjectType
-        });
+        // console.debug('Active Object', o, {
+        //     hidden: this.activeObjectHidden,
+        //     type: this.activeObjectType
+        // });
 
         return this;
     },

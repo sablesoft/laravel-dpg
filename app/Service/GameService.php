@@ -385,7 +385,10 @@ class GameService
         $data = self::toArray($card, $card->translatable);
         $data['image'] = self::image($data['image']);
         /** @var CardProcess $cardProcess */
-        $cardProcess = CardProcess::create($data);
+        $cardProcess = CardProcess::updateOrCreate([
+            'id' => $data['id'],
+            Process::GAME_FOREIGN_KEY => $gameProcess->getKey()
+        ], $data);
         $gameProcess->cards()->save($cardProcess);
 
         return $cardProcess;

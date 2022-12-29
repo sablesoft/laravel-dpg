@@ -32,7 +32,6 @@ class GameController extends Controller
      */
     public function process(Request $request, GameProcess $process): Response
     {
-
         return Inertia::render('Game', [
             'data' => $process,
             // todo - remove role test:
@@ -48,25 +47,23 @@ class GameController extends Controller
     public function update(Request $request): array
     {
         $processes = $request->json()->all();
-
+        $gameData = reset($processes['game']);
         /** @var GameProcess $gameProcess */
-        $gameProcess = GameProcess::where('id', $processes['game']['id'])->first();
+        $gameProcess = GameProcess::where('id', $gameData['id'])->first();
         if (!$gameProcess) {
             throw new Exception('Process not found!');
         }
 
         foreach ($processes as $processName => $processRequest) {
-            /** @var Process|GameProcess $process */
-            $process = $this->_process(
-                $gameProcess,
-                $processName,
-                $processRequest['id']
-            );
-            foreach ($processRequest['data'] as $field => $value) {
-                $process->$field = $value;
-            }
-            if (!$process->save()) {
-                throw new Exception('Process saving error - ' . $processName);
+            foreach ($processRequest as $id => $data) {
+                /** @var Process|GameProcess $process */
+                $process = $this->_process($gameProcess, $processName, $id);
+                foreach ($data as $field => $value) {
+                    $process->$field = $value;
+                }
+                if (!$process->save()) {
+                    throw new Exception('Process saving error - ' . $processName);
+                }
             }
         }
 

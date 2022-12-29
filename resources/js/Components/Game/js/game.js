@@ -186,7 +186,7 @@ export const game = shallowReactive({
     info: {
         id: null,
         scopeId: null,
-        type: null,
+        type: 'game',
         name: null,
         currentName: null,
         desc: null,
@@ -361,6 +361,7 @@ export const game = shallowReactive({
     hideOpacity: 0.5,
     brushWidth: 50,
     initiated: false,
+    _updateRequest: {},
     /**
      * @param {Object.<string, any>} data
      * @param {GameOptions} options
@@ -493,10 +494,10 @@ export const game = shallowReactive({
     updateCanvas(fc = null) {
         fc = fc ? fc: this.fb();
         fc.getObjects().forEach(function(o) {
-            console.debug('Check object update', o);
+            // console.debug('Check object update', o);
             // console.debug('Type of update', typeof o.update);
             if (typeof o.update === 'function') {
-                console.debug('Updating object', o);
+                // console.debug('Updating object', o);
                 o.update();
             }
         });
@@ -1130,51 +1131,41 @@ export const game = shallowReactive({
     },
     save() {
         this.modeSave = true;
-        let request = {};
+        let gameRequest = {};
+        gameRequest[this.id] = this._data();
+        let request = {
+            game: gameRequest
+        };
         let canvas = this.fb().toObject(['viewportTransform']);
         switch(this.mainTab) {
             case 'MainDome':
                 this.domes[this.activeDomeId].canvas = canvas;
-                request['dome'] = {
-                    id : this.activeDomeId,
-                }
+                request['dome'] = {};
+                request['dome'][this.activeDomeId] = {
+                    canvas: canvas
+                };
                 break;
             case 'MainScene':
                 this.scenes[this.activeSceneId].canvas = canvas;
-                request['scene'] = {
-                    id : this.activeSceneId,
-                }
+                request['scene'] = {};
+                request['scene'][this.activeSceneId] = {
+                    canvas: canvas
+                };
                 break;
             case 'MainBoard':
                 this.canvas = canvas;
-                request['game'] = {
-                    id : this.id,
-                }
+                request['game'][this.id]['canvas'] = canvas;
                 break;
             default:
                 throw new Error('Invalid main tab');
         }
         if (this.isMaster()) {
-            Object.keys(request).forEach(function(process) {
-                request[process]['data'] = {
-                    canvas : canvas
-                }
-            });
-            let self = this;
-            let data = this._data();
-            if (request['game']) {
-                request['game']['data'] = data;
-                request['game']['data']['canvas'] = canvas;
-            } else {
-                request['game'] = {
-                    id : this.id,
-                    data: data
-                }
-            }
+            request = this._prepareUpdateRequest(request);
             console.debug('Save request', request);
             axios.patch('/game', request)
                 .then(() => {
                     self.modeSave = false;
+                    this._updateRequest = {};
                 }).catch(err => {
                     self.modeSave = false;
                     console.error(err);
@@ -1202,7 +1193,7 @@ export const game = shallowReactive({
                     this.activeInfo.currentName : this.activeInfo.name;
                 book['currentDesc'][this.locale] = this.activeInfo.currentDesc ?
                     this.activeInfo.currentDesc : this.activeInfo.desc;
-                this.books[this.activeInfo.id] = book;
+                this._update('book', book);
                 this.updateCanvas();
                 this.asideTab = 'AsideBook';
                 return;
@@ -1217,7 +1208,7 @@ export const game = shallowReactive({
             this.activeInfo.currentName : this.activeInfo.name;
         card['currentDesc'][this.locale] = this.activeInfo.currentDesc ?
             this.activeInfo.currentDesc : this.activeInfo.desc;
-        this.cards[this.activeInfo.id] = card;
+        this._update('card', card);
         this.updateCanvas();
         this.switchCard(card.id);
     },
@@ -1902,10 +1893,9 @@ export const game = shallowReactive({
     },
     _data() {
         let fields = [
-            'activeDomeId', 'activeSceneId', 'activeAreaId',
+            'id', 'info', 'activeDomeId', 'activeSceneId', 'activeAreaId',
             'visibleDomeIds', 'visibleLandIds', 'visibleAreaIds', 'visibleSceneIds',
-            'visibleBookIds','visibleDeckIds', 'visibleCardIds',
-            'domes', 'lands', 'areas', 'scenes', 'books', 'decks', 'cards'
+            'visibleBookIds', 'visibleDeckIds', 'visibleCardIds'
         ];
         let data = {};
         let self = this;
@@ -1914,6 +1904,46 @@ export const game = shallowReactive({
         });
 
         return data;
+    },
+    /**
+     * @param {string} type
+     * @param {Object.<string, any>} entity
+     * @param {?string[]} fields
+     * @private
+     */
+    _update(type, entity, fields = null) {
+        fields = fields ? fields : ['currentName', 'currentDesc'];
+        let request = this._updateRequest[type] ? this._updateRequest[type]: {};
+        let data = {};
+        fields.forEach(function(field) {
+            data[field] = entity[field];
+        });
+        request[entity.id] = data;
+        this._updateRequest[type] = request;
+        let source = type + 's';
+        this[source][entity.id] = entity;
+        console.debug('Added to update', this._updateRequest);
+    },
+    _prepareUpdateRequest(request) {
+        let self = this;
+        if (Object.keys(self._updateRequest).length) {
+            Object.keys(self._updateRequest).forEach(function(process) {
+                if (request[process]) {
+                    Object.keys(self._updateRequest[process]).forEach(function(id) {
+                        if (request[process][id]) {
+                            Object.keys(self._updateRequest[process][id]).forEach(function(field) {
+                                request[process][id][field] = self._updateRequest[process][id][field];
+                            });
+                        } else {
+                            request[process][id] = self._updateRequest[process][id];
+                        }
+                    });
+                } else {
+                    request[process] = self._updateRequest[process];
+                }
+            });
+        }
+        return request;
     },
     /**
      *

@@ -66,6 +66,7 @@ class GameService
         ]);
         $info = self::toArray($game, $game->translatable);
         $info['image'] = self::image($info['image']);
+        $info['type'] = 'game';
         $data = [
             'id' => $game->getKey(),
             'info' => $info,

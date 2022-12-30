@@ -68,16 +68,16 @@ let activate = function(note, index) {
         flex: 12%;
     }
     .note-title {
-        flex: 33%;
+        flex: 36%;
     }
     .note-author {
-        flex: 25%
+        flex: 26%
     }
     .note-datetime {
-        flex: 15%
+        flex: 17%
     }
     .note-actions {
-        flex: 10%
+        flex: 5%
     }
 </style>
 <template>
@@ -94,19 +94,18 @@ let activate = function(note, index) {
                 <p>
                     <span class="note-number">{{ i + 1 }}</span>
                     <span class="note-code">{{ game.trans(note.code) }}</span>
-                    <span class="note-title">{{ game.trans(note.type) }} - {{ note.name }}</span>
+                    <span class="note-title">{{ game.trans(note.type) }} - {{ game._toLocale(note.name) }}</span>
                     <span class="note-author">{{ __('Added by') }} : {{ note.authorId }}</span>
                     <span class="note-datetime">{{ __('At') }} - {{ note.timestamp }}</span>
                     <span class="note-actions">
                     <button class="control-btn control-edit" :title="__('Edit')">
                         <span class="material-icons">mode_edit</span>
                     </button>
-                    <button class="control-btn control-remove" :title="__('Remove')">
-                        <span class="material-icons">delete</span>
-                    </button>
                 </span>
                 </p>
-                <p class="note-desc" v-if="isActive(i) && note.desc">{{ note.desc }}</p>
+                <p class="note-desc" v-if="isActive(i) && game._toLocale(note.desc)">
+                    {{ game._toLocale(note.desc) }}
+                </p>
             </li>
         </ol>
     </div>

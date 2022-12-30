@@ -88,7 +88,7 @@ let activate = function(note, index) {
     </div>
     <div class="notes">
         <ol>
-            <li v-for="(note, i) in game.journal"
+            <li v-for="(note, i) in game.getFilteredJournal()"
                 :class="{'control-active' : isActive(i)}"
                 @click="activate(note, i)">
                 <p>

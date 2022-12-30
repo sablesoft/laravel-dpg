@@ -112,12 +112,26 @@
                 <span class="material-icons"
                       @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
             </button>
+            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+                    class="control-btn control-journal"
+                    :class="{'control-active' : game.isActiveJournalFilter()}"
+                    :disabled="game.isActiveJournalFilter()"
+                    :title="__('Journal')">
+                <span class="material-icons" @click="game.showFilteredJournal('active')">local_library</span>
+            </button>
         </div>
         <div v-if="!game.isMaster()" class="aside-content aside-actions">
             <button v-if="game.activeInfo.id && game.visibleCardIds.includes(game.activeInfo.scopeId)"
                     class="control-btn control-forward" :title="__('Show Card')">
                 <span class="material-icons"
                       @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
+            </button>
+            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+                    class="control-btn control-journal"
+                    :class="{'control-active' : game.isActiveJournalFilter()}"
+                    :disabled="game.isActiveJournalFilter()"
+                    :title="__('Journal')">
+                <span class="material-icons" @click="game.showFilteredJournal('active')">local_library</span>
             </button>
         </div>
     </div>

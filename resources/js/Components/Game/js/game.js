@@ -41,7 +41,6 @@ import './fabric.fog';
  * @property {?number} id
  * @property {?string} code
  * @property {?string} type
- * @property {?number} targetId
  * @property {?Object.<string, string>} name
  * @property {?Object.<string, string>} desc
  * @property {?number} authorId
@@ -246,7 +245,18 @@ export const game = shallowReactive({
         id: null,
         code: null,
         type: null,
-        targetId: null,
+        name: null,
+        desc: null,
+        authorId: null,
+        timestamp: null,
+    },
+    /**
+     * @member {?JournalNote}
+     */
+    journalFilter: {
+        id: null,
+        code: null,
+        type: null,
         name: null,
         desc: null,
         authorId: null,
@@ -1606,6 +1616,66 @@ export const game = shallowReactive({
 
         return filtered;
     },
+    isActiveJournalFilter() {
+        return this.journalFilter.id === this.activeInfo.id &&
+            this.journalFilter.type === this.activeInfo.type;
+    },
+    getFilteredJournal(filter = null) {
+        if (!filter) {
+            filter = this.journalFilter;
+        }
+        if (filter === 'active') {
+            filter = {
+                id : this.activeInfo.id,
+                type : this.activeInfo.type
+            }
+        }
+        console.debug('Get filtered journal, from', this.journal);
+        console.debug('Filter', filter);
+        let valid;
+        let filtered = [];
+        this.journal.forEach(function(note) {
+            valid = true;
+            Object.keys(filter).forEach(function(field) {
+                if (filter[field] && note[field] !== filter[field]) {
+                    valid = false;
+                }
+            });
+            if (valid) {
+                filtered.push(note);
+            }
+        });
+        console.debug('Result', filtered);
+
+        return filtered;
+    },
+    /**
+     * @param {?Object|string} filter
+     */
+    showFilteredJournal(filter = null) {
+        if (this.isActiveJournalFilter() || !this.getFilteredJournal(filter)) {
+            return;
+        }
+        if (filter === 'active') {
+            filter = {
+                id : this.activeInfo.id,
+                type : this.activeInfo.type
+            }
+        }
+        let updatedFilter = this.journalFilter;
+        Object.keys(updatedFilter).forEach(function(field) {
+            updatedFilter[field] = filter[field] ? filter[field] : null;
+        });
+        this.journalFilter = updatedFilter;
+        let tab = 'MainJournal';
+        if (this.mainTab === tab) {
+            return;
+        }
+        this._offModes();
+        this.setActiveObject();
+        this.saveCanvas();
+        this.mainTab = tab;
+    },
     /**
      * @param {boolean} enable
      */
@@ -1953,10 +2023,9 @@ export const game = shallowReactive({
             data = this.findData('card', data.scope_id)
         }
         this.journal.push({
-            id : null,
+            id : id,
             code: code,
             type: type,
-            targetId: id,
             name: data.currentName,
             desc: data.currentDesc,
             authorId: 1,

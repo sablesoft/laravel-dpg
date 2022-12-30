@@ -88,6 +88,13 @@
                     class="control-btn control-center" :title="__('Center')">
                 <span class="material-icons" @click="game.moveToCenter()">filter_center_focus</span>
             </button>
+            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+                    class="control-btn control-journal"
+                    :class="{'control-active' : game.isActiveJournalFilter()}"
+                    :disabled="game.isActiveJournalFilter()"
+                    :title="__('Journal')">
+                <span class="material-icons" @click="game.showFilteredJournal('active')">local_library</span>
+            </button>
             <button v-if="game.isMaster()" class="control-btn control-edit" :title="__('Edit')">
                 <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
             </button>
@@ -101,6 +108,13 @@
             <button v-if="game.activeObject"
                     class="control-btn control-center" :title="__('Center')">
                 <span class="material-icons" @click="game.moveToCenter()">filter_center_focus</span>
+            </button>
+            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+                    class="control-btn control-journal"
+                    :class="{'control-active' : game.isActiveJournalFilter()}"
+                    :disabled="game.isActiveJournalFilter()"
+                    :title="__('Journal')">
+                <span class="material-icons" @click="game.showFilteredJournal('active')">local_library</span>
             </button>
         </div>
     </div>

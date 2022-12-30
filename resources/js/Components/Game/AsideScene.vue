@@ -48,26 +48,28 @@
         <!-- actions -->
         <div v-if="game.isMaster() && game.mainTab !== 'MainBoard'"
              class="aside-content aside-actions">
-            <button class="control-btn control-forward" :title="__('Show Card')">
-                <span class="material-icons"
-                      @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
-            </button>
             <button v-if="!game.isActivated()" class="control-btn control-public" :title="__('Activate')">
                 <span class="material-icons" @click="game.activateSpace()">public</span>
             </button>
             <button v-if="game.isActivated()" class="control-btn control-public" :title="__('Deactivate')">
                 <span class="material-icons" @click="game.activateSpace(false)">public_off</span>
             </button>
+            <button class="control-btn control-forward" :title="__('Show Card')">
+                <span class="material-icons"
+                      @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
+            </button>
+            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+                    class="control-btn control-journal"
+                    :class="{'control-active' : game.isActiveJournalFilter()}"
+                    :disabled="game.isActiveJournalFilter()"
+                    :title="__('Journal')">
+                <span class="material-icons" @click="game.showFilteredJournal('active')">local_library</span>
+            </button>
             <button class="control-btn control-edit" :title="__('Edit')">
                 <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
             </button>
         </div>
         <div v-if="game.mainTab === 'MainBoard'" class="aside-content aside-actions">
-            <button v-if="game.isMaster() || game.visibleCardIds.includes(game.activeInfo.scopeId)"
-                    class="control-btn control-forward" :title="__('Show Card')">
-                <span class="material-icons"
-                      @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
-            </button>
             <button v-if="game.isMaster() && !game.isActivated()" class="control-btn control-public"
                     :title="__('Activate')">
                 <span class="material-icons" @click="game.activateSpace()">public</span>
@@ -75,6 +77,18 @@
             <button v-if="game.isMaster() && game.isActivated()" class="control-btn control-public"
                     :title="__('Deactivate')">
                 <span class="material-icons" @click="game.activateSpace(false)">public_off</span>
+            </button>
+            <button v-if="game.isMaster() || game.visibleCardIds.includes(game.activeInfo.scopeId)"
+                    class="control-btn control-forward" :title="__('Show Card')">
+                <span class="material-icons"
+                      @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
+            </button>
+            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+                    class="control-btn control-journal"
+                    :class="{'control-active' : game.isActiveJournalFilter()}"
+                    :disabled="game.isActiveJournalFilter()"
+                    :title="__('Journal')">
+                <span class="material-icons" @click="game.showFilteredJournal('active')">local_library</span>
             </button>
             <button v-if="game.isMaster()" class="control-btn control-edit" :title="__('Edit')">
                 <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
@@ -86,6 +100,13 @@
                     class="control-btn control-forward" :title="__('Show Card')">
                 <span class="material-icons"
                       @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
+            </button>
+            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+                    class="control-btn control-journal"
+                    :class="{'control-active' : game.isActiveJournalFilter()}"
+                    :disabled="game.isActiveJournalFilter()"
+                    :title="__('Journal')">
+                <span class="material-icons" @click="game.showFilteredJournal('active')">local_library</span>
             </button>
         </div>
     </div>

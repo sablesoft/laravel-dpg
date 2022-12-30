@@ -92,17 +92,24 @@
                     class="control-btn control-forward" :title="__('Hide')">
                 <span class="material-icons" @click="game.visibility(false)">visibility_off</span>
             </button>
-            <button class="control-btn control-forward" :title="__('Show Card')">
-                <span class="material-icons" @click="game.showCard(game.activeInfo.scopeId, true)">content_copy</span>
-            </button>
-            <button class="control-btn control-edit" :title="__('Edit')">
-                <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
-            </button>
             <button v-if="!game.isActivated()" class="control-btn control-public" :title="__('Activate')">
                 <span class="material-icons" @click="game.activateSpace()">public</span>
             </button>
             <button v-if="game.isActivated()" class="control-btn control-public" :title="__('Deactivate')">
                 <span class="material-icons" @click="game.activateSpace(false)">public_off</span>
+            </button>
+            <button class="control-btn control-forward" :title="__('Show Card')">
+                <span class="material-icons" @click="game.showCard(game.activeInfo.scopeId, true)">content_copy</span>
+            </button>
+            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+                    class="control-btn control-journal"
+                    :class="{'control-active' : game.isActiveJournalFilter()}"
+                    :disabled="game.isActiveJournalFilter()"
+                    :title="__('Journal')">
+                <span class="material-icons" @click="game.showFilteredJournal('active')">local_library</span>
+            </button>
+            <button class="control-btn control-edit" :title="__('Edit')">
+                <span class="material-icons" @click="game.editCurrent()">mode_edit</span>
             </button>
             <button v-if="game.activeObject"
                     class="control-btn control-remove" :title="__('Remove')">
@@ -114,6 +121,13 @@
                     class="control-btn control-forward" :title="__('Show Card')">
                 <span class="material-icons"
                       @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
+            </button>
+            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+                    class="control-btn control-journal"
+                    :class="{'control-active' : game.isActiveJournalFilter()}"
+                    :disabled="game.isActiveJournalFilter()"
+                    :title="__('Journal')">
+                <span class="material-icons" @click="game.showFilteredJournal('active')">local_library</span>
             </button>
         </div>
     </div>

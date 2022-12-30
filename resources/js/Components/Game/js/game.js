@@ -531,7 +531,7 @@ export const game = shallowReactive({
     },
     updateCanvas(fc = null) {
         fc = fc ? fc: this.fb();
-        fc.getObjects().forEach(function(o) {
+        fc && fc.getObjects().forEach(function(o) {
             // console.debug('Check object update', o);
             // console.debug('Type of update', typeof o.update);
             if (typeof o.update === 'function') {
@@ -2000,6 +2000,15 @@ export const game = shallowReactive({
         return 'visible' + this._upFirst(type) + 'Ids';
     },
     _journalPush(code, type, id) {
+        switch (code) {
+            case 'opened':
+                if (this.getFilteredJournal({code: code, type: type, id: id}).length) {
+                    return;
+                }
+                break;
+            default:
+                break;
+        }
         let data = this.findData(type, id);
         let spaceData = ['dome', 'land', 'area', 'scene'];
         if (spaceData.includes(type)) {
@@ -2009,8 +2018,8 @@ export const game = shallowReactive({
             id : id,
             code: code,
             type: type,
-            name: data.currentName,
-            desc: data.currentDesc,
+            name: this._copyObject(data.currentName),
+            desc: this._copyObject(data.currentDesc),
             authorId: 1,
             timestamp: null
         });
@@ -2119,4 +2128,14 @@ export const game = shallowReactive({
             return data[this.locale];
         }
     },
+    /**
+     * @param {any} data
+     * @return {Object}
+     * @private
+     */
+    _copyObject(data) {
+        return (typeof data === 'object') ?
+            JSON.parse(JSON.stringify(data)) :
+            {}
+    }
 });

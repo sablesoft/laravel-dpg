@@ -99,7 +99,7 @@ let pageName = function() {
                 <component :is="mainTabs[game.mainTab]"></component>
             </div>
             <div class="action-column">
-                <button v-if="game.activeDomeId || game.activeSceneId"
+                <button v-if="game.activeDomeId || game.activeSceneId || game.journal.length"
                         class="control-btn control-board"
                         :class="{'control-active' : game.mainTab === 'MainBoard'}"
                         :disabled="game.mainTab === 'MainBoard'"

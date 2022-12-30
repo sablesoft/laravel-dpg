@@ -19,6 +19,14 @@ let activate = function(note, index) {
         game.showAside(note.id, note.type);
     }
 }
+let getClass = function(note, index) {
+    let c = 'note-code-' + note.code;
+    if (isActive(index)) {
+        c += ' control-active';
+    }
+
+    return c;
+}
 </script>
 <style scoped>
     .notes {
@@ -92,7 +100,7 @@ let activate = function(note, index) {
     <div class="notes">
         <ol>
             <li v-for="(note, i) in game.getFilteredJournal()"
-                :class="{'control-active' : isActive(i)}"
+                :class="getClass(note, i)"
                 @click="activate(note, i)">
                 <p>
                     <span class="note-number">{{ i + 1 }}</span>

@@ -1991,8 +1991,9 @@ export const game = shallowReactive({
             }
         } else {
             let index = this[idsField].indexOf(id);
-            if (index !== -1) {
+            if (index > -1) {
                 this[idsField].splice(index, 1);
+                this._journalPull('opened', type, id);
             }
         }
     },
@@ -2023,6 +2024,16 @@ export const game = shallowReactive({
             authorId: 1,
             timestamp: null
         });
+    },
+    _journalPull(code, type, id) {
+        let index = this.journal.findIndex(function(note) {
+            return (note.code === code && note.type === type && note.id === id && !note.timestamp);
+        });
+        if (index > -1) {
+            return this.journal.splice(index, 1);
+        } else {
+            return null;
+        }
     },
     _journalFilter(filter = null) {
         if (typeof filter === 'string') {

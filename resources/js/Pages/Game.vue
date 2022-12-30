@@ -123,9 +123,8 @@ let pageName = function() {
                 <button v-if="game.journal.length"
                         class="control-btn control-journal"
                         :class="{'control-active' : game.mainTab === 'MainJournal'}"
-                        :disabled="game.mainTab === 'MainJournal'"
                         :title="__('Journal')">
-                    <span class="material-icons" @click="game.showMain('MainJournal')">local_library</span>
+                    <span class="material-icons" @click="game.showFilteredJournal('all')">local_library</span>
                 </button>
                 <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase && !game.modeTransform"
                         class="control-btn control-save"

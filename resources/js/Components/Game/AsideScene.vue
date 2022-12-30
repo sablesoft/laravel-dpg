@@ -58,7 +58,7 @@
                 <span class="material-icons"
                       @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
             </button>
-            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+            <button v-if="game.getFilteredJournal('active').length"
                     class="control-btn control-journal"
                     :class="{'control-active' : game.isActiveJournalFilter()}"
                     :disabled="game.isActiveJournalFilter()"
@@ -83,7 +83,7 @@
                 <span class="material-icons"
                       @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
             </button>
-            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+            <button v-if="game.getFilteredJournal('active').length"
                     class="control-btn control-journal"
                     :class="{'control-active' : game.isActiveJournalFilter()}"
                     :disabled="game.isActiveJournalFilter()"
@@ -101,7 +101,7 @@
                 <span class="material-icons"
                       @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
             </button>
-            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+            <button v-if="game.getFilteredJournal('active').length"
                     class="control-btn control-journal"
                     :class="{'control-active' : game.isActiveJournalFilter()}"
                     :disabled="game.isActiveJournalFilter()"

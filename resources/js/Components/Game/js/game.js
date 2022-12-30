@@ -216,7 +216,6 @@ export const game = shallowReactive({
     cursorName: null,
     cursorScope: null,
     activeCardTapped: false,
-    activeObjectType: null,
     activeObjectHidden: false,
     selectedId: null,
     /**
@@ -458,7 +457,7 @@ export const game = shallowReactive({
             // console.debug('mouse:wheel', opt);
             if (self.modeTransform) {
                 let delta = opt.e.deltaY;
-                if (self.activeObjectType === 'marker') {
+                if (self.activeObject && self.activeObject.type === 'marker') {
                     let o = self.activeObject;
                     let scale = o.get('scaleX');
                     scale *= 0.999 ** delta;
@@ -812,7 +811,7 @@ export const game = shallowReactive({
         this.activeInfo = {
             id: land.id,
             scopeId: land.scope_id,
-            type: 'dome',
+            type: 'land',
             name: this._toLocale(landCard.name),
             currentName: this._toLocale(landCard.currentName),
             desc: this._toLocale(landCard.desc),
@@ -1620,61 +1619,45 @@ export const game = shallowReactive({
         return this.journalFilter.id === this.activeInfo.id &&
             this.journalFilter.type === this.activeInfo.type;
     },
-    getFilteredJournal(filter = null) {
+    getFilteredJournal(filter = null)       {
         if (!filter) {
             filter = this.journalFilter;
         }
-        if (filter === 'active') {
-            filter = {
-                id : this.activeInfo.id,
-                type : this.activeInfo.type
-            }
-        }
-        console.debug('Get filtered journal, from', this.journal);
-        console.debug('Filter', filter);
-        let valid;
-        let filtered = [];
-        this.journal.forEach(function(note) {
-            valid = true;
-            Object.keys(filter).forEach(function(field) {
+        filter = this._journalFilter(filter);
+        return this.journal.filter(function(note) {
+            for(let field in filter) {
                 if (filter[field] && note[field] !== filter[field]) {
-                    valid = false;
+                    return false;
                 }
-            });
-            if (valid) {
-                filtered.push(note);
             }
+            return true;
         });
-        console.debug('Result', filtered);
-
-        return filtered;
     },
     /**
-     * @param {?Object|string} filter
+     * @param {Object|string} filter
      */
-    showFilteredJournal(filter = null) {
-        if (this.isActiveJournalFilter() || !this.getFilteredJournal(filter)) {
+    showFilteredJournal(filter = {}) {
+        if (!this.getFilteredJournal(filter)) {
             return;
         }
-        if (filter === 'active') {
-            filter = {
-                id : this.activeInfo.id,
-                type : this.activeInfo.type
-            }
-        }
+        filter = this._journalFilter(filter);
         let updatedFilter = this.journalFilter;
-        Object.keys(updatedFilter).forEach(function(field) {
+        for(let field in updatedFilter) {
             updatedFilter[field] = filter[field] ? filter[field] : null;
-        });
+        }
         this.journalFilter = updatedFilter;
         let tab = 'MainJournal';
         if (this.mainTab === tab) {
-            return;
+            this.mainTab = 'MainBoard';
+        } else {
+            this._offModes();
+            this.saveCanvas();
         }
-        this._offModes();
-        this.setActiveObject();
-        this.saveCanvas();
-        this.mainTab = tab;
+        let self = this;
+        setTimeout(function() {
+            self.mainTab = tab;
+            self.setActiveObject();
+        }, 10);
     },
     /**
      * @param {boolean} enable
@@ -1701,18 +1684,12 @@ export const game = shallowReactive({
         if (!o) {
             this.activeObject = null;
             this.activeObjectHidden = null;
-            this.activeObjectType = null;
             this.fb() && this.fb().discardActiveObject();
         } else {
             this.activeObject = o;
             this.activeObjectHidden = o.get('opacity') < 1;
-            this.activeObjectType = o.type;
             this.fb().setActiveObject(o);
         }
-        // console.debug('Active Object', o, {
-        //     hidden: this.activeObjectHidden,
-        //     type: this.activeObjectType
-        // });
 
         return this;
     },
@@ -2031,6 +2008,33 @@ export const game = shallowReactive({
             authorId: 1,
             timestamp: null
         });
+    },
+    _journalFilter(filter = null) {
+        if (typeof filter === 'string') {
+            switch (filter) {
+                case 'active':
+                    filter = {
+                        id : this.activeInfo.id,
+                        type : this.activeInfo.type
+                    }
+                    break;
+                case 'all':
+                    filter = {};
+                    this.journalFilter = {
+                        id: null,
+                        code: null,
+                        type: null,
+                        name: null,
+                        desc: null,
+                        authorId: null,
+                        timestamp: null,
+                    };
+                    break;
+                default:
+                    throw new Error('Unknown journal filter code: ' + filter);
+            }
+        }
+        return filter;
     },
     _upFirst(string) {
         return string.charAt(0).toUpperCase() + string.slice(1)

@@ -75,7 +75,7 @@
                     class="control-btn control-forward" :title="__('Hide')">
                 <span class="material-icons" @click="game.visibility(false)">visibility_off</span>
             </button>
-            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+            <button v-if="game.getFilteredJournal('active').length"
                     class="control-btn control-journal"
                     :class="{'control-active' : game.isActiveJournalFilter()}"
                     :disabled="game.isActiveJournalFilter()"
@@ -92,7 +92,7 @@
         </div>
         <div v-if="game.isMaster() && game.mainTab !== 'MainBoard'"
              class="aside-content aside-actions">
-            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+            <button v-if="game.getFilteredJournal('active').length"
                     class="control-btn control-journal"
                     :class="{'control-active' : game.isActiveJournalFilter()}"
                     :disabled="game.isActiveJournalFilter()"
@@ -104,7 +104,7 @@
             </button>
         </div>
         <div v-if="!game.isMaster()" class="aside-content aside-actions">
-            <button v-if="game.activeInfo.id && game.getFilteredJournal('active').length"
+            <button v-if="game.getFilteredJournal('active').length"
                     class="control-btn control-journal"
                     :class="{'control-active' : game.isActiveJournalFilter()}"
                     :disabled="game.isActiveJournalFilter()"

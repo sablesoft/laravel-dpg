@@ -8,12 +8,13 @@ let isActive = function(index) {
     return activeIndex.value === index;
 }
 let activate = function(note, index) {
+    console.debug('Activate', index, note);
     if (isActive(index)) {
         activeIndex.value = null;
         game.showInfo();
     } else {
         activeIndex.value = index;
-        game.showAside(note.targetId, note.type);
+        game.showAside(note.id, note.type);
     }
 }
 </script>

@@ -1242,6 +1242,7 @@ export const game = shallowReactive({
                 this.info['currentDesc'][this.locale] = this.activeInfo.currentDesc ?
                     this.activeInfo.currentDesc : this.activeInfo.desc;
                 this.showInfo();
+                this._journalPush('updated', 'game');
                 return;
             case 'book':
                 let book = this.findBook(this.activeInfo.id);
@@ -1252,6 +1253,7 @@ export const game = shallowReactive({
                 this._update('book', book);
                 this.updateCanvas();
                 this.asideTab = 'AsideBook';
+                this._journalPush('updated', 'book', this.activeInfo.id);
                 return;
             case 'card':
                 card = this.findCard(this.activeInfo.id);
@@ -1267,6 +1269,7 @@ export const game = shallowReactive({
         this._update('card', card);
         this.updateCanvas();
         this.switchCard(card.id);
+        this._journalPush('updated', 'card', card.id);
     },
     /**
      * @returns {{overflow: string, width: string, height: string}}
@@ -1756,6 +1759,9 @@ export const game = shallowReactive({
         return this.findData('deck', id, required);
     },
     findData(type, id, required = true) {
+        if (type === 'game') {
+            return this.info;
+        }
         if (type === 'marker') {
             type = 'card';
         }

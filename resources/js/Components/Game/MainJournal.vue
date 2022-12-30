@@ -8,10 +8,12 @@ let isActive = function(index) {
     return activeIndex.value === index;
 }
 let activate = function(note, index) {
-    console.debug('Activate', index, note);
+    // console.debug('Activate', index, note);
     if (isActive(index)) {
         activeIndex.value = null;
-        game.showInfo();
+        if (!game.isActiveJournalFilter()) {
+            game.showInfo();
+        }
     } else {
         activeIndex.value = index;
         game.showAside(note.id, note.type);

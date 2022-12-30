@@ -113,7 +113,11 @@
     "Brush Size": "Размер Кисти",
     "All Books": "Все Книги",
     "All Scenes": "Все Сцены",
-    "Activate": "Активировать",
-    "Deactivate": "Деактивировать",
-    "Center": "Центрировать"
+    "Activate": "Включить",
+    "Deactivate": "Выключить",
+    "Activated": "Включено",
+    "Deactivated": "Выключено",
+    "Center": "Центрировать",
+    "Opened": "Открыто",
+    "Added by": "Добавил"
 }

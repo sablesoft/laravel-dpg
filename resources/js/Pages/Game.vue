@@ -5,6 +5,7 @@ import GameLayout from '@/Layouts/GameLayout.vue';
 import MainBoard from '@/Components/Game/MainBoard.vue';
 import MainDome from '@/Components/Game/MainDome.vue';
 import MainScene from '@/Components/Game/MainScene.vue';
+import MainJournal from '@/Components/Game/MainJournal.vue';
 
 // aside tabs:
 import AsideInfo from '@/Components/Game/AsideInfo.vue';
@@ -45,7 +46,8 @@ const asideTabs = {
 const mainTabs = {
     MainBoard,
     MainDome,
-    MainScene
+    MainScene,
+    MainJournal,
 }
 
 onMounted(() => {
@@ -99,24 +101,38 @@ let pageName = function() {
             <div class="action-column">
                 <button v-if="game.activeDomeId || game.activeSceneId"
                         class="control-btn control-board"
+                        :class="{'control-active' : game.mainTab === 'MainBoard'}"
                         :disabled="game.mainTab === 'MainBoard'"
                         :title="__('Board')">
                     <span class="material-icons" @click="game.showMain('MainBoard')">table_restaurant</span>
                 </button>
                 <button v-if="game.activeDomeId"
                         class="control-btn control-dome"
+                        :class="{'control-active' : game.mainTab === 'MainDome'}"
                         :disabled="game.mainTab === 'MainDome'"
                         :title="__('Dome')">
                     <span class="material-icons" @click="game.showMain('MainDome')">map</span>
                 </button>
                 <button v-if="game.activeSceneId"
                         class="control-btn control-scene"
+                        :class="{'control-active' : game.mainTab === 'MainScene'}"
                         :disabled="game.mainTab === 'MainScene'"
                         :title="__('Scene')">
                     <span class="material-icons" @click="game.showMain('MainScene')">my_location</span>
                 </button>
-                <button class="control-btn control-scene" :title="__('Journal')">
-                    <span class="material-icons">local_library</span>
+                <button v-if="game.journal.length"
+                        class="control-btn control-journal"
+                        :class="{'control-active' : game.mainTab === 'MainJournal'}"
+                        :disabled="game.mainTab === 'MainJournal'"
+                        :title="__('Journal')">
+                    <span class="material-icons" @click="game.showMain('MainJournal')">local_library</span>
+                </button>
+                <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase && !game.modeTransform"
+                        class="control-btn control-save"
+                        :class="{'control-active' : game.modeSave}"
+                        :disabled="game.modeSave"
+                        :title="__('Save')">
+                    <span class="material-icons" @click="game.save()">save</span>
                 </button>
             </div>
             <div class="aside-column bg-white shadow-sm sm:rounded-lg">

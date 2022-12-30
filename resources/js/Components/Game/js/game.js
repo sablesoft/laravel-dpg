@@ -37,6 +37,18 @@ import './fabric.fog';
  */
 
 /**
+ * @typedef {Object} JournalNote
+ * @property {?number} id
+ * @property {?string} code
+ * @property {?string} type
+ * @property {?number} targetId
+ * @property {?string} name
+ * @property {?string} desc
+ * @property {?number} authorId
+ * @property {?number} timestamp
+ */
+
+/**
  * @typedef {Object} ActiveCard
  * @property {?number} id
  * @property {?string} name
@@ -228,6 +240,19 @@ export const game = shallowReactive({
         scopeName: null
     },
     /**
+     * @member {?JournalNote}
+     */
+    activeNote: {
+        id: null,
+        code: null,
+        type: null,
+        targetId: null,
+        name: null,
+        desc: null,
+        authorId: null,
+        timestamp: null,
+    },
+    /**
      * @member {?string} - board image
      */
     boardImage: null,
@@ -361,6 +386,10 @@ export const game = shallowReactive({
     hideOpacity: 0.5,
     brushWidth: 50,
     initiated: false,
+    /**
+     * @member {JournalNote[]}
+     */
+    journal: [],
     _updateRequest: {},
     /**
      * @param {Object.<string, any>} data
@@ -538,6 +567,7 @@ export const game = shallowReactive({
                 console.error('Invalid active info for makeActive', this.activeInfo);
                 throw new Error('Invalid active info for makeActive');
         }
+        this._journalPush(activate ? 'activated' : 'deactivated', this.activeInfo.type, id);
     },
     activateArea() {
         let self = this;
@@ -573,11 +603,10 @@ export const game = shallowReactive({
     },
     showInfo() {
         this.asideTab = 'AsideInfo';
-        if (this.fb()) {
-            this.setActiveObject();
-        }
+        this.setActiveObject();
         let scopeCard = null;
         switch (this.mainTab) {
+            case 'MainJournal':
             case 'MainBoard':
                 this.activeInfo = {
                     id: null,
@@ -638,6 +667,7 @@ export const game = shallowReactive({
             return;
         }
         this._offModes();
+        this.setActiveObject();
         this.saveCanvas();
         this.mainTab = tab;
         this.showInfo();
@@ -658,6 +688,7 @@ export const game = shallowReactive({
             id = o[field];
         } else {
             id = o;
+            o = null;
         }
         if (!id || !type) {
             return this.showInfo();
@@ -675,10 +706,14 @@ export const game = shallowReactive({
                 }
             case 'marker':
                 return this.showCard(id);
-            case 'area':
-                return this.showArea(id);
             case 'dome':
                 return this.showDome(id);
+            case 'land':
+                return this.showLand(id);
+            case 'area':
+                return this.showArea(id);
+            case 'scene':
+                return this.showScene(id);
             default:
                 throw new Error('Unknown object type: ' + type);
         }
@@ -698,11 +733,13 @@ export const game = shallowReactive({
             scopeName: null
         };
         let self = this;
-        this.fb().getObjects('book').forEach(function(o) {
-            if (o.get('book_id') === Number(id)) {
-                self.setActiveObject(o);
-            }
-        });
+        if (this.mainTab === 'MainBoard') {
+            this.fb().getObjects('book').forEach(function(o) {
+                if (o.get('book_id') === Number(id)) {
+                    self.setActiveObject(o);
+                }
+            });
+        }
         this.asideTab = 'AsideBook';
 
         return this;
@@ -747,11 +784,13 @@ export const game = shallowReactive({
             scopeName: null
         };
         let self = this;
-        this.fb().getObjects('dome').forEach(function(o) {
-            if (o.get('dome_id') === Number(id)) {
-                self.setActiveObject(o);
-            }
-        });
+        if (this.mainTab === 'MainBoard') {
+            this.fb().getObjects('dome').forEach(function(o) {
+                if (o.get('dome_id') === Number(id)) {
+                    self.setActiveObject(o);
+                }
+            });
+        }
         this.asideTab = 'AsideDome';
 
         return this;
@@ -841,25 +880,12 @@ export const game = shallowReactive({
             this.activeObjectHidden = opacity < 1;
             this.fb().renderAll();
         }
-        switch (o.type) {
-            case 'card':
-                this._visibility('card', o.get('card_id'), show);
-                break;
-            case 'marker':
-                this._visibility('card', o.get('marker_id'), show);
-                break;
-            case 'dome':
-                this._visibility('dome', o.get('dome_id'), show);
-                break;
-            case 'area':
-                this._visibility('area', o.get('area_id'), show);
-                break;
-            case 'book':
-                this._visibility('book', o.get('book_id'), show);
-                break;
-            default:
-                console.warn('Unknown object for visibility: ', o);
+        let allTypes = ['marker', 'card', 'dome', 'area', 'book'];
+        if (!allTypes.includes(o.type)) {
+            console.error('Unknown object for visibility: ', o);
         }
+        let id = o.get(o.type + '_id');
+        this._visibility(o.type, id, show);
     },
     forward() {
         let o = this.activeObject;
@@ -1130,6 +1156,9 @@ export const game = shallowReactive({
         }
     },
     saveCanvas() {
+        if (!this.fb()) {
+            return null;
+        }
         let canvas = this.fb().toObject(['viewportTransform']);
         switch(this.mainTab) {
             case 'MainDome':
@@ -1170,6 +1199,8 @@ export const game = shallowReactive({
                 break;
             case 'MainBoard':
                 request['game'][this.id]['canvas'] = canvas;
+                break;
+            case 'MainJournal':
                 break;
             default:
                 throw new Error('Invalid main tab');
@@ -1276,6 +1307,7 @@ export const game = shallowReactive({
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                case 'MainJournal':
                     filter = 'all';
                     break;
                 case 'MainDome':
@@ -1351,6 +1383,7 @@ export const game = shallowReactive({
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                case 'MainJournal':
                     filter = 'all'
                     break;
                 case 'MainDome':
@@ -1395,6 +1428,7 @@ export const game = shallowReactive({
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                case 'MainJournal':
                     filter = 'all'
                     break;
                 case 'MainDome':
@@ -1439,6 +1473,7 @@ export const game = shallowReactive({
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                case 'MainJournal':
                     filter = 'all';
                     break;
                 case 'MainDome':
@@ -1483,6 +1518,7 @@ export const game = shallowReactive({
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                case 'MainJournal':
                     filter = 'all';
                     break;
                 case 'MainDome':
@@ -1535,6 +1571,7 @@ export const game = shallowReactive({
         if (!filter) {
             switch (this.mainTab) {
                 case 'MainBoard':
+                case 'MainJournal':
                     filter = 'all';
                     break;
                 case 'MainDome':
@@ -1595,9 +1632,7 @@ export const game = shallowReactive({
             this.activeObject = null;
             this.activeObjectHidden = null;
             this.activeObjectType = null;
-            if (this.fb()) {
-                this.fb().discardActiveObject();
-            }
+            this.fb() && this.fb().discardActiveObject();
         } else {
             this.activeObject = o;
             this.activeObjectHidden = o.get('opacity') < 1;
@@ -1613,39 +1648,39 @@ export const game = shallowReactive({
     },
     selectBook(event) {
         this.selectedId = null;
-        this.fb().discardActiveObject();
+        this.fb() && this.fb().discardActiveObject();
         this.showBook(event.target.value);
     },
     selectDome(event) {
         this.selectedId = null;
-        this.fb().discardActiveObject();
+        this.fb() && this.fb().discardActiveObject();
         this.showDome(event.target.value);
     },
     selectLand(event) {
         this.selectedId = null;
-        this.fb().discardActiveObject();
+        this.fb() && this.fb().discardActiveObject();
         this.showLand(event.target.value);
     },
     selectArea(event) {
         this.selectedId = null;
-        this.fb().discardActiveObject();
+        this.fb() && this.fb().discardActiveObject();
         this.showArea(event.target.value);
     },
     selectScene(event) {
         this.selectedId = null;
-        this.fb().discardActiveObject();
+        this.fb() && this.fb().discardActiveObject();
         this.showScene(event.target.value);
     },
     selectDeck(event) {
         this.selectedId = null;
-        this.fb().discardActiveObject();
+        this.fb() && this.fb().discardActiveObject();
         let deck = this.decks[event.target.value];
         console.debug('Selected Deck', deck);
         // todo
     },
     selectCard(event) {
         this.selectedId = null;
-        this.fb().discardActiveObject();
+        this.fb() && this.fb().discardActiveObject();
         this.showCard(event.target.value);
     },
     switchCard(id) {
@@ -1653,52 +1688,42 @@ export const game = shallowReactive({
         this.showCard(id);
     },
     findCard(id, required = true) {
-        if (!this.cards[id]) {
+        return this.findData('card', id, required);
+    },
+    findScene(id, required = true) {
+        return this.findData('scene', id, required);
+    },
+    findArea(id, required = true) {
+        return this.findData('area', id, required);
+    },
+    findLand(id, required) {
+        return this.findData('land', id, required);
+    },
+    findDome(id, required) {
+        return this.findData('dome', id, required);
+    },
+    findBook(id, required) {
+        return this.findData('book', id, required);
+    },
+    findDeck(id, required) {
+        return this.findData('deck', id, required);
+    },
+    findData(type, id, required = true) {
+        if (type === 'marker') {
+            type = 'card';
+        }
+        let field = type + 's';
+        if (!this[field][id]) {
             if (required) {
-                throw new Error('Card not found: ' + id);
+                throw new Error('Data not found: ' + type + ', ' + id);
             } else {
                 return null;
             }
         }
-        return toRaw(this.cards[id]);
-    },
-    findScene(id) {
-        if (!this.scenes[id]) {
-            throw new Error('Scene not found: ' + id);
-        }
-        return toRaw(this.scenes[id]);
-    },
-    findArea(id) {
-        if (!this.areas[id]) {
-            throw new Error('Area not found: ' + id);
-        }
-        return toRaw(this.areas[id]);
-    },
-    findLand(id) {
-        if (!this.lands[id]) {
-            throw new Error('Land not found: ' + id);
-        }
-        return toRaw(this.lands[id]);
-    },
-    findDome(id) {
-        if (!this.domes[id]) {
-            throw new Error('Dome not found: ' + id);
-        }
-        return toRaw(this.domes[id]);
-    },
-    findBook(id) {
-        if (!this.books[id]) {
-            throw new Error('Book not found: ' + id);
-        }
-        return toRaw(this.books[id]);
-    },
-    findDeck(id) {
-        if (!this.decks[id]) {
-            throw new Error('Deck not found: ' + id);
-        }
-        return toRaw(this.decks[id]);
+        return toRaw(this[field][id]);
     },
     trans(string) {
+        string = this._upFirst(string);
         return this.dictionary[string] ?
             this.dictionary[string] : string;
     },
@@ -1902,10 +1927,14 @@ export const game = shallowReactive({
     _visibility(type, id, show) {
         id = Number(id);
         console.debug('Set visibility', type, id, show);
+        if (type === 'marker') {
+            type = 'card';
+        }
         let idsField = this._visibleField(type);
         if (show) {
             if (!this[idsField].includes(id)) {
                 this[idsField].push(id);
+                this._journalPush('opened', type, id);
             }
         } else {
             let index = this[idsField].indexOf(id);
@@ -1915,7 +1944,30 @@ export const game = shallowReactive({
         }
     },
     _visibleField(type) {
-        return 'visible' + type.charAt(0).toUpperCase() + type.slice(1) + 'Ids';
+        return 'visible' + this._upFirst(type) + 'Ids';
+    },
+    _journalPush(code, type, id) {
+        let data = this.findData(type, id);
+        let spaceData = ['dome', 'land', 'area', 'scene'];
+        if (spaceData.includes(type)) {
+            data = this.findData('card', data.scope_id)
+        }
+        this.journal.push({
+            id : null,
+            code: code,
+            type: type,
+            targetId: id,
+            name: this._toLocale(data.currentName),
+            // todo - remove after dev
+            desc: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\n" +
+                "\n" +
+                "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
+            authorId: 1,
+            timestamp: null
+        });
+    },
+    _upFirst(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1)
     },
     _data() {
         let fields = [

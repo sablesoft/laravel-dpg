@@ -58,7 +58,7 @@
                     class="control-btn control-remove" :title="__('Add')">
                 <span class="material-icons" @click="game.addCard()">add</span>
             </button>
-            <button v-if="game.isMaster() && game.mainTab !== 'MainBoard'"
+            <button v-if="game.isMaster() && game.mainTab !== 'MainBoard' && game.fb()"
                     class="control-btn control-marker" :title="__('Add')" >
                 <span class="material-icons" @click="game.addMarker()">place</span>
             </button>

@@ -115,5 +115,9 @@
     "All Scenes": "All Scenes",
     "Activate": "Activate",
     "Deactivate": "Deactivate",
-    "Center": "Center"
+    "Activated": "Activated",
+    "Deactivated": "Deactivated",
+    "Center": "Center",
+    "Opened": "Opened",
+    "Added by": "Added by"
 }

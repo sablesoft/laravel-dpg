@@ -26,9 +26,6 @@
     .control-btn:hover {
         background:rgba(255,255,255,1);
     }
-    .control-active {
-        border: 3px solid #ff00ea;
-    }
     .control-btn .material-icons {
         font-size:1em;
         line-height:1em
@@ -100,13 +97,7 @@
             <span class="material-icons" @click="game.canvasRedo()">redo</span>
         </button>
 
-        <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase && !game.modeTransform"
-                class="control-btn control-save"
-                :class="{'control-active' : game.modeSave}"
-                :disabled="game.modeSave"
-                :title="__('Save')">
-            <span class="material-icons" @click="game.save()">save</span>
-        </button>
+
     </div>
     <div class="info-wrap">
         <p v-if="game.cursorName">

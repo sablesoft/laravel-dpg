@@ -25,8 +25,12 @@ img.align-bottom.w-8.h-8 {
 .aside-content {
     margin-top: 10px;
 }
+.aside-mini-selects {
+    height: 200px;
+    overflow: auto;
+}
 .aside-selects {
-    height: 180px;
+    height: 300px;
     overflow: auto;
 }
 .aside-content select {
@@ -51,12 +55,13 @@ img.align-bottom.w-8.h-8 {
     border-radius: 0.5rem;
 }
 .aside-desc {
-    height: 130px;
+    height: 140px;
     text-align: left;
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 10px;
     white-space: pre-line;
-    overflow: auto;
+    overflow: scroll;
 }
 .aside-actions {
     background-color: antiquewhite;

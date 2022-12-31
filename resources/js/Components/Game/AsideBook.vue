@@ -17,7 +17,7 @@
         </div>
 
         <!-- selects -->
-        <div class="aside-selects">
+        <div class="aside-mini-selects">
             <div v-if="Object.keys(game.filteredDomes('books')).length" class="aside-content">
                 <select v-model="game.selectedId" @change="game.selectDome($event)">
                     <option :value="null" disabled>{{ __('Domes') }}</option>

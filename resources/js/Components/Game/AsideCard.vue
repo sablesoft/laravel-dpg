@@ -28,9 +28,8 @@
             {{ game.activeInfo.currentDesc }}
         </div>
         <!-- selects -->
-        <div class="aside-selects">
-            <div v-if="game.mainTab === 'MainBoard' &&
-                        Object.keys(game.filteredDecks('.target_id')).length"
+        <div class="aside-mini-selects">
+            <div v-if="Object.keys(game.filteredDecks('.target_id')).length"
                  class="aside-content">
                 <select v-model="game.selectedId" @change="game.selectDeck($event)">
                     <option :value="null" disabled>{{ __('Decks') }}</option>

@@ -12,9 +12,6 @@
         <div class="aside-content aside-name">
             {{ __('Land') }}
         </div>
-        <div class="aside-content aside-desc">
-            {{ game.activeInfo.currentDesc }}
-        </div>
 
         <!-- selects -->
         <div class="aside-selects">

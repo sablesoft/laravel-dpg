@@ -17,9 +17,6 @@
                  :alt="game.activeInfo.scopeName"
                  :title="game.activeInfo.scopeName">
         </div>
-        <div class="aside-content aside-desc">
-            {{ game.activeInfo.currentDesc }}
-        </div>
 
         <!-- selects -->
         <div class="aside-selects">

@@ -8,8 +8,10 @@ let isActive = function(index) {
     return activeIndex.value === index;
 }
 let activate = function(note, index) {
-    // console.debug('Activate', index, note);
     if (isActive(index)) {
+        if (game.mainTab === 'MainPost') {
+            return;
+        }
         activeIndex.value = null;
         if (!game.isActiveJournalFilter()) {
             game.showInfo();
@@ -28,9 +30,6 @@ let getClass = function(note, index) {
     return c;
 }
 let createdAt = function(string) {
-    if (!string) {
-        return __('New')
-    }
     let date = new Date(string);
     let options = {
         year: '2-digit',
@@ -77,7 +76,7 @@ let createdAt = function(string) {
         border-top: 1px solid #ff00ea;
     }
     ol>li>p>span {
-        padding: 10px;
+        padding: 6px;
         text-align: center;
         border-right: 1px solid black;
     }
@@ -88,22 +87,32 @@ let createdAt = function(string) {
         padding: 0;
     }
     .note-number {
-        flex: 5%;
+        flex: 4%;
     }
     .note-code {
-        flex: 12%;
+        flex: 13%;
+    }
+    .note-type {
+        flex: 13%;
     }
     .note-title {
-        flex: 36%;
+        flex: 30%;
     }
     .note-author {
-        flex: 26%
+        flex: 22%
     }
     .note-datetime {
-        flex: 17%
+        flex: 15%
     }
     .note-actions {
-        flex: 5%
+        flex: 4%
+    }
+    .control-btn {
+        margin-bottom: 0;
+        font-size: 21px;
+    }
+    .control-btn>.material-icons {
+        font-size: 0.8em;
     }
 </style>
 <template>
@@ -120,14 +129,18 @@ let createdAt = function(string) {
                 <p>
                     <span class="note-number">{{ i + 1 }}</span>
                     <span class="note-code">{{ game.trans(note.code) }}</span>
-                    <span class="note-title">{{ game.trans(note.type) }} - {{ game._toLocale(note.name) }}</span>
-                    <span class="note-author">{{ __('Added by') }} : {{ note.author_id }}</span>
-                    <span class="note-datetime">{{ createdAt(note.created_at) }}</span>
+                    <span class="note-type">{{ game.trans(note.type) }}</span>
+                    <span class="note-title">{{ game._toLocale(note.name) }}</span>
+                    <span class="note-author">{{ note.author_id }}</span>
+                    <span class="note-datetime">{{ note.created_at ? createdAt(note.created_at) : __('New Note') }}</span>
                     <span class="note-actions">
-                    <button class="control-btn control-edit" :title="__('Edit')">
-                        <span class="material-icons">mode_edit</span>
-                    </button>
-                </span>
+                        <button v-if="!note.created_at"
+                            class="control-btn control-edit"
+                                @click="game.editNote(i)"
+                                :title="__('Edit')">
+                            <span class="material-icons">mode_edit</span>
+                        </button>
+                    </span>
                 </p>
                 <p class="note-desc" v-if="isActive(i) && game._toLocale(note.desc)">
                     {{ game._toLocale(note.desc) }}

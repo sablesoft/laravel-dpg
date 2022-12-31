@@ -6,6 +6,7 @@ import MainBoard from '@/Components/Game/MainBoard.vue';
 import MainDome from '@/Components/Game/MainDome.vue';
 import MainScene from '@/Components/Game/MainScene.vue';
 import MainJournal from '@/Components/Game/MainJournal.vue';
+import MainNote from '@/Components/Game/MainNote.vue';
 
 // aside tabs:
 import AsideInfo from '@/Components/Game/AsideInfo.vue';
@@ -48,6 +49,7 @@ const mainTabs = {
     MainDome,
     MainScene,
     MainJournal,
+    MainNote,
 }
 
 onMounted(() => {
@@ -125,7 +127,7 @@ let pageName = function() {
                         :title="__('Journal')">
                     <span class="material-icons" @click="game.showFilteredJournal('all')">local_library</span>
                 </button>
-                <button v-if="game.isMaster() && !game.modeEraseUndo && !game.modeErase && !game.modeTransform"
+                <button v-if="game.isMaster()"
                         class="control-btn control-save"
                         :class="{'control-active' : game.modeSave}"
                         :disabled="game.modeSave"

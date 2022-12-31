@@ -47,6 +47,13 @@ import './fabric.fog';
  */
 
 /**
+ * @typedef {Object} EditNote
+ * @property {?number} index
+ * @property {?string} name
+ * @property {?string} desc
+ */
+
+/**
  * @typedef {Object} JournalNote
  * @property {?number} id
  * @property {?string} code
@@ -248,15 +255,12 @@ export const game = shallowReactive({
         scopeName: null
     },
     /**
-     * @member {?JournalNote|JournalNewNote}
+     * @member {?JournalNote|EditNote}
      */
     activeNote: {
-        id: null,
-        code: null,
-        type: null,
+        index: null,
         name: null,
         desc: null,
-        author_id: null,
     },
     /**
      * @member {?JournalNote}
@@ -409,6 +413,7 @@ export const game = shallowReactive({
      */
     journal: [],
     _updateRequest: {},
+    _spaceTypes: ['dome', 'land', 'area', 'scene'],
     /**
      * @param {Object.<string, any>} data
      * @param {GameOptions} options
@@ -625,6 +630,7 @@ export const game = shallowReactive({
         let scopeCard = null;
         switch (this.mainTab) {
             case 'MainJournal':
+            case 'MainNote':
             case 'MainBoard':
                 this.activeInfo = {
                     id: null,
@@ -1196,6 +1202,7 @@ export const game = shallowReactive({
         return canvas;
     },
     save() {
+        this._offModes();
         this.modeSave = true;
         let gameRequest = {};
         gameRequest[this.id] = this._data();
@@ -1288,6 +1295,25 @@ export const game = shallowReactive({
         this.switchCard(card.id);
         this._journalPush('updated', 'card', card.id);
     },
+    editNote(index) {
+        let note = this.journal[index];
+        this.activeNote = {
+            index: index,
+            name: this._toLocale(note.name),
+            desc: this._toLocale(note.desc)
+        };
+        this.mainTab = 'MainNote';
+    },
+    updateNote() {
+        let note = this.journal[this.activeNote.index];
+        if (this.activeNote.name) {
+            note.name[this.locale] = this.activeNote.name;
+        }
+        note.desc[this.locale] = this.activeNote.desc;
+        this.journal[this.activeNote.index] = note;
+        this.mainTab = 'MainJournal';
+        this._journalNoteReset();
+    },
     /**
      * @returns {{overflow: string, width: string, height: string}}
      */
@@ -1335,10 +1361,6 @@ export const game = shallowReactive({
             Object.keys(this.books) : Array.from(this.visibleBookIds);
         if (!filter) {
             switch (this.mainTab) {
-                case 'MainBoard':
-                case 'MainJournal':
-                    filter = 'all';
-                    break;
                 case 'MainDome':
                     filter = 'domes';
                     break;
@@ -1346,8 +1368,8 @@ export const game = shallowReactive({
                     filter = 'scenes';
                     break;
                 default:
-                    console.error('Unknown main tab!', this.mainTab);
-                    throw new Error('Unknown main tab!');
+                    filter = 'all';
+                    break;
             }
         }
         let isField = filter[0] === '.';
@@ -1411,19 +1433,12 @@ export const game = shallowReactive({
             Object.keys(this.lands) : Array.from(this.visibleLandIds);
         if (!filter) {
             switch (this.mainTab) {
-                case 'MainBoard':
-                case 'MainJournal':
-                    filter = 'all'
-                    break;
                 case 'MainDome':
                     filter = 'domes';
                     break;
-                case 'MainScene':
-                    filter = 'all';
-                    break;
                 default:
-                    console.error('Unknown main tab!', this.mainTab);
-                    throw new Error('Unknown main tab!');
+                    filter = 'all'
+                    break;
             }
         }
         let isField = filter[0] === '.';
@@ -1456,19 +1471,12 @@ export const game = shallowReactive({
             Object.keys(this.areas) : Array.from(this.visibleAreaIds);
         if (!filter) {
             switch (this.mainTab) {
-                case 'MainBoard':
-                case 'MainJournal':
-                    filter = 'all'
-                    break;
                 case 'MainDome':
                     filter = 'domes';
                     break;
-                case 'MainScene':
-                    filter = 'all';
-                    break;
                 default:
-                    console.error('Unknown main tab!', this.mainTab);
-                    throw new Error('Unknown main tab!');
+                    filter = 'all'
+                    break;
             }
         }
         let isField = filter[0] === '.';
@@ -1501,19 +1509,12 @@ export const game = shallowReactive({
             Object.keys(this.scenes) : Array.from(this.visibleSceneIds);
         if (!filter) {
             switch (this.mainTab) {
-                case 'MainBoard':
-                case 'MainJournal':
-                    filter = 'all';
-                    break;
                 case 'MainDome':
                     filter = 'domes';
                     break;
-                case 'MainScene':
+                default:
                     filter = 'all';
                     break;
-                default:
-                    console.error('Unknown main tab!', this.mainTab);
-                    throw new Error('Unknown main tab!');
             }
         }
         let isField = filter[0] === '.';
@@ -1546,10 +1547,6 @@ export const game = shallowReactive({
             Object.keys(this.decks) : Array.from(this.visibleDeckIds);
         if (!filter) {
             switch (this.mainTab) {
-                case 'MainBoard':
-                case 'MainJournal':
-                    filter = 'all';
-                    break;
                 case 'MainDome':
                     filter = 'domes';
                     break;
@@ -1557,8 +1554,8 @@ export const game = shallowReactive({
                     filter = 'scenes';
                     break;
                 default:
-                    console.error('Unknown main tab!', this.mainTab);
-                    throw new Error('Unknown main tab!');
+                    filter = 'all';
+                    break;
             }
         }
         let isField = filter[0] === '.';
@@ -1599,10 +1596,6 @@ export const game = shallowReactive({
             Object.keys(this.cards) : Array.from(this.visibleCardIds);
         if (!filter) {
             switch (this.mainTab) {
-                case 'MainBoard':
-                case 'MainJournal':
-                    filter = 'all';
-                    break;
                 case 'MainDome':
                     filter = 'domes';
                     break;
@@ -1610,8 +1603,8 @@ export const game = shallowReactive({
                     filter = 'scenes';
                     break;
                 default:
-                    console.error('Unknown main tab!', this.mainTab);
-                    throw new Error('Unknown main tab!');
+                    filter = 'all';
+                    break;
             }
         }
         let isField = filter[0] === '.';
@@ -1634,14 +1627,6 @@ export const game = shallowReactive({
         });
 
         return filtered;
-    },
-    isSavedInJournal(code) {
-        return this.getFilteredJournal({
-            id : this.activeInfo.id,
-            type : this.activeInfo.type,
-            code : code,
-            created_at : '_filled'
-        }).length !== 0;
     },
     isActiveJournalFilter() {
         return this.journalFilter.id === this.activeInfo.id &&
@@ -1673,6 +1658,7 @@ export const game = shallowReactive({
      * @param {Object|string} filter
      */
     showFilteredJournal(filter = {}) {
+        this._journalNoteReset();
         if (!this.getFilteredJournal(filter)) {
             return;
         }
@@ -2029,6 +2015,10 @@ export const game = shallowReactive({
                 this._journalPull('opened', type, id);
             }
         }
+        if (this._spaceTypes.includes(type)) {
+            let data = this.findData(type, id);
+            this._visibility('card', data.scope_id, show);
+        }
     },
     _visibleField(type) {
         return 'visible' + this._upFirst(type) + 'Ids';
@@ -2041,12 +2031,21 @@ export const game = shallowReactive({
                 }
                 break;
             case 'activated':
-                if (this._journalPull('deactivated', type, id)) {
+                if (this._journalPull('deactivated', type, id) ||
+                    this.getFilteredJournal({code: code, type: type, id: id, created_at: '_empty'}).length) {
                     return;
                 }
                 break;
             case 'deactivated':
-                if (this._journalPull('activated', type, id)) {
+                if (this._journalPull('activated', type, id) ||
+                    this.getFilteredJournal({code: code, type: type, id: id, created_at: '_empty'}).length) {
+                    return;
+                }
+                break;
+            case 'updated':
+                let presentNew = {code: code, type: type, id: id, created_at: '_empty'};
+                let notOpenedOld = {code: 'opened', type: type, id: id, created_at: '_filled'};
+                if (this.getFilteredJournal(presentNew).length || !this.getFilteredJournal(notOpenedOld).length) {
                     return;
                 }
                 break;
@@ -2054,8 +2053,7 @@ export const game = shallowReactive({
                 break;
         }
         let data = this.findData(type, id);
-        let spaceData = ['dome', 'land', 'area', 'scene'];
-        if (spaceData.includes(type)) {
+        if (this._spaceTypes.includes(type)) {
             data = this.findData('card', data.scope_id)
         }
         this.journal.push({
@@ -2112,6 +2110,13 @@ export const game = shallowReactive({
             desc: null,
             author_id: null,
             created_at: null,
+        };
+    },
+    _journalNoteReset() {
+        this.activeNote = {
+            index: null,
+            name: null,
+            desc: null
         };
     },
     _upFirst(string) {

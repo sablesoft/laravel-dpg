@@ -58,8 +58,8 @@ onMounted(() => {
         locale: usePage().props.value.locale,
         dictionary: usePage().props.value.language
     }
+    console.debug('INITIAL DATA', toRaw(props.data));
     game.init(props.data, options);
-    console.debug('INITIAL DATA', toRaw(game));
 });
 let pageName = function() {
     let raw = props.data.info.name;
@@ -99,8 +99,7 @@ let pageName = function() {
                 <component :is="mainTabs[game.mainTab]"></component>
             </div>
             <div class="action-column">
-                <button v-if="game.activeDomeId || game.activeSceneId || game.journal.length"
-                        class="control-btn control-board"
+                <button class="control-btn control-board"
                         :class="{'control-active' : game.mainTab === 'MainBoard'}"
                         :disabled="game.mainTab === 'MainBoard'"
                         :title="__('Board')">

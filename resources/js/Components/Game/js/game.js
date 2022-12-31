@@ -37,14 +37,24 @@ import './fabric.fog';
  */
 
 /**
+ * @typedef {Object} JournalNewNote
+ * @property {?number} id
+ * @property {?string} code
+ * @property {?string} type
+ * @property {?Object.<string, string>} name
+ * @property {?Object.<string, string>} desc
+ * @property {?number} author_id
+ */
+
+/**
  * @typedef {Object} JournalNote
  * @property {?number} id
  * @property {?string} code
  * @property {?string} type
  * @property {?Object.<string, string>} name
  * @property {?Object.<string, string>} desc
- * @property {?number} authorId
- * @property {?number} timestamp
+ * @property {?number} author_id
+ * @property {?number} created_at
  */
 
 /**
@@ -238,7 +248,7 @@ export const game = shallowReactive({
         scopeName: null
     },
     /**
-     * @member {?JournalNote}
+     * @member {?JournalNote|JournalNewNote}
      */
     activeNote: {
         id: null,
@@ -246,8 +256,7 @@ export const game = shallowReactive({
         type: null,
         name: null,
         desc: null,
-        authorId: null,
-        timestamp: null,
+        author_id: null,
     },
     /**
      * @member {?JournalNote}
@@ -258,8 +267,8 @@ export const game = shallowReactive({
         type: null,
         name: null,
         desc: null,
-        authorId: null,
-        timestamp: null,
+        author_id: null,
+        created_at: null,
     },
     /**
      * @member {?string} - board image
@@ -396,7 +405,7 @@ export const game = shallowReactive({
     brushWidth: 50,
     initiated: false,
     /**
-     * @member {JournalNote[]}
+     * @member {JournalNote[]|JournalNewNote[]}
      */
     journal: [],
     _updateRequest: {},
@@ -416,7 +425,7 @@ export const game = shallowReactive({
         this.showInfo();
         this.initiated = true;
 
-        console.debug('Game initiated', this);
+        console.debug('Game initiated', toRaw(this));
     },
     /**
      * @param {?Object.<string, any>} json
@@ -478,7 +487,7 @@ export const game = shallowReactive({
             }
         });
         fc.on('mouse:down', function(opt) {
-            console.debug('mouse:down', opt);
+            // console.debug('mouse:down', opt);
             let evt = opt.e;
             if (self.modeTransform === true) {
                 this.isDragging = true;
@@ -680,6 +689,7 @@ export const game = shallowReactive({
         this.saveCanvas();
         this.mainTab = tab;
         this.showInfo();
+        this._journalFilterReset();
     },
     /**
      * @param {?fabric.Object|number} o
@@ -1219,9 +1229,16 @@ export const game = shallowReactive({
             request = this._prepareUpdateRequest(request);
             console.debug('Save request', request);
             axios.patch('/game', request)
-                .then(() => {
-                    self._updateRequest = {};
+                .then(response => {
                     self.modeSave = false;
+                    let data = response.data;
+                    console.debug('Save response', data);
+                    if (data.success) {
+                        self._updateRequest = {};
+                        self.journal = data.journal;
+                    } else {
+                        console.error(data);
+                    }
                 }).catch(err => {
                     self.modeSave = false;
                     console.error(err);
@@ -1618,18 +1635,34 @@ export const game = shallowReactive({
 
         return filtered;
     },
+    isSavedInJournal(code) {
+        return this.getFilteredJournal({
+            id : this.activeInfo.id,
+            type : this.activeInfo.type,
+            code : code,
+            created_at : '_filled'
+        }).length !== 0;
+    },
     isActiveJournalFilter() {
         return this.journalFilter.id === this.activeInfo.id &&
             this.journalFilter.type === this.activeInfo.type;
     },
-    getFilteredJournal(filter = null)       {
+    getFilteredJournal(filter = null) {
         if (!filter) {
             filter = this.journalFilter;
         }
         filter = this._journalFilter(filter);
         return this.journal.filter(function(note) {
             for(let field in filter) {
-                if (filter[field] && note[field] !== filter[field]) {
+                if (filter[field] === '_empty') {
+                    if (note[field]) {
+                        return false;
+                    }
+                } else if (filter[field] === '_filled') {
+                    if (!note[field]) {
+                        return false;
+                    }
+                } else if (filter[field] && note[field] !== filter[field]) {
                     return false;
                 }
             }
@@ -2007,6 +2040,16 @@ export const game = shallowReactive({
                     return;
                 }
                 break;
+            case 'activated':
+                if (this._journalPull('deactivated', type, id)) {
+                    return;
+                }
+                break;
+            case 'deactivated':
+                if (this._journalPull('activated', type, id)) {
+                    return;
+                }
+                break;
             default:
                 break;
         }
@@ -2021,16 +2064,22 @@ export const game = shallowReactive({
             type: type,
             name: this._copyObject(data.currentName),
             desc: this._copyObject(data.currentDesc),
-            authorId: 1,
-            timestamp: null
+            author_id: 1,
         });
     },
     _journalPull(code, type, id) {
         let index = this.journal.findIndex(function(note) {
-            return (note.code === code && note.type === type && note.id === id && !note.timestamp);
+            return (note.code === code &&
+                note.type === type &&
+                note.id === id &&
+                !note.created_at);
         });
         if (index > -1) {
-            return this.journal.splice(index, 1);
+            let pulled = this.journal.splice(index, 1);
+            if (!this.journal.length && this.mainTab === 'MainJournal') {
+                this.mainTab = 'MainBoard';
+            }
+            return pulled;
         } else {
             return null;
         }
@@ -2046,21 +2095,24 @@ export const game = shallowReactive({
                     break;
                 case 'all':
                     filter = {};
-                    this.journalFilter = {
-                        id: null,
-                        code: null,
-                        type: null,
-                        name: null,
-                        desc: null,
-                        authorId: null,
-                        timestamp: null,
-                    };
+                    this._journalFilterReset();
                     break;
                 default:
                     throw new Error('Unknown journal filter code: ' + filter);
             }
         }
         return filter;
+    },
+    _journalFilterReset() {
+        this.journalFilter = {
+            id: null,
+            code: null,
+            type: null,
+            name: null,
+            desc: null,
+            author_id: null,
+            created_at: null,
+        };
     },
     _upFirst(string) {
         return string.charAt(0).toUpperCase() + string.slice(1)
@@ -2116,6 +2168,10 @@ export const game = shallowReactive({
                     request[process] = self._updateRequest[process];
                 }
             });
+        }
+        let journalUpdate = this.getFilteredJournal({created_at : '_empty'});
+        if (journalUpdate.length) {
+            request['journal'] = journalUpdate;
         }
         return request;
     },

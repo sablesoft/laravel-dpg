@@ -27,6 +27,21 @@ let getClass = function(note, index) {
 
     return c;
 }
+let createdAt = function(string) {
+    if (!string) {
+        return __('New')
+    }
+    let date = new Date(string);
+    let options = {
+        year: '2-digit',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+    };
+
+    return date.toLocaleString(game.locale, options);
+}
 </script>
 <style scoped>
     .notes {
@@ -106,8 +121,8 @@ let getClass = function(note, index) {
                     <span class="note-number">{{ i + 1 }}</span>
                     <span class="note-code">{{ game.trans(note.code) }}</span>
                     <span class="note-title">{{ game.trans(note.type) }} - {{ game._toLocale(note.name) }}</span>
-                    <span class="note-author">{{ __('Added by') }} : {{ note.authorId }}</span>
-                    <span class="note-datetime">{{ __('At') }} - {{ note.timestamp }}</span>
+                    <span class="note-author">{{ __('Added by') }} : {{ note.author_id }}</span>
+                    <span class="note-datetime">{{ createdAt(note.created_at) }}</span>
                     <span class="note-actions">
                     <button class="control-btn control-edit" :title="__('Edit')">
                         <span class="material-icons">mode_edit</span>

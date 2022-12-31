@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Process\JournalProcess;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -67,7 +68,10 @@ class GameController extends Controller
             }
         }
 
-        return ['success' => true];
+        return [
+            'success' => true,
+            'journal' => $gameProcess->journal->toArray()
+        ];
     }
 
     /**
@@ -82,6 +86,7 @@ class GameController extends Controller
         /** @var Process|GameProcess $process */
         $process = match ($type) {
             'game' => $gameProcess,
+            'journal' => JournalProcess::create([Process::GAME_FOREIGN_KEY => $gameProcess->getKey()]),
             'book' => BookProcess::where(Process::GAME_FOREIGN_KEY, $gameProcess->getKey())
                 ->where('id', $processId)->first(),
             'card' => CardProcess::where(Process::GAME_FOREIGN_KEY, $gameProcess->getKey())

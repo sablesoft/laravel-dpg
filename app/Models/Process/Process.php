@@ -39,7 +39,7 @@ abstract class Process extends Model
     public static function collections(): array
     {
         return [
-            'books', 'cards', 'decks', 'domes', 'areas', 'lands', 'scenes'
+            'books', 'cards', 'decks', 'domes', 'areas', 'lands', 'scenes', 'journals'
         ];
     }
 }

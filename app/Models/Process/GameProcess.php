@@ -34,6 +34,7 @@ use App\Models\Game;
  * @property-read AreaProcess[]|Collection|null $areas
  * @property-read LandProcess[]|Collection|null $lands
  * @property-read SceneProcess[]|Collection|null $scenes
+ * @property-read JournalProcess[]|Collection|null $journal
  */
 class GameProcess extends Model
 {
@@ -81,6 +82,14 @@ class GameProcess extends Model
     public function getGame(): Game
     {
         return Game::where('process_id', $this->getKey())->first();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function journal(): HasMany
+    {
+        return $this->hasMany(JournalProcess::class);
     }
 
     /**
@@ -145,6 +154,7 @@ class GameProcess extends Model
         $this->setRelation('areas', $this->areas->keyBy('id'));
         $this->setRelation('lands', $this->lands->keyBy('id'));
         $this->setRelation('scenes', $this->scenes->keyBy('id'));
+        $this->setRelation('journal', $this->journal);
         return parent::toArray();
     }
 }

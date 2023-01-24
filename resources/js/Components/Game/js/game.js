@@ -274,6 +274,8 @@ export const game = shallowReactive({
         author_id: null,
         created_at: null,
     },
+    journalSortField: 'created_at',
+    journalSortDirection: 'desc',
     /**
      * @member {?string} - board image
      */
@@ -369,15 +371,15 @@ export const game = shallowReactive({
     /**
      * @member {?fabric.Canvas}
      */
-    fbBoard: null,
+    fbMainBoard: null,
     /**
      * @member {?fabric.Canvas}
      */
-    fbMap: null,
+    fbMainDome: null,
     /**
      * @member {?fabric.Canvas}
      */
-    fbScene: null,
+    fbMainScene: null,
     /**
      * @member {string}
      */
@@ -695,7 +697,7 @@ export const game = shallowReactive({
         this.saveCanvas();
         this.mainTab = tab;
         this.showInfo();
-        this._journalFilterReset();
+        this.resetJournalFilter();
     },
     /**
      * @param {?fabric.Object|number} o
@@ -1637,7 +1639,7 @@ export const game = shallowReactive({
             filter = this.journalFilter;
         }
         filter = this._journalFilter(filter);
-        return this.journal.filter(function(note) {
+        let notes = this.journal.filter(function(note) {
             for(let field in filter) {
                 if (filter[field] === '_empty') {
                     if (note[field]) {
@@ -1653,6 +1655,32 @@ export const game = shallowReactive({
             }
             return true;
         });
+
+        return this._journalSort(notes);
+    },
+    getJournalFields() {
+        return [{
+            code: 'code',
+            name: 'Code'
+        }, {
+            code: 'type',
+            name: 'Type'
+        }, {
+            code: 'name',
+            name: 'Title',
+        }, {
+            code: 'author_id',
+            name: 'Author',
+        }, {
+            code: 'created_at',
+            name: 'Created At'
+        }]
+    },
+    getJournalValues(field) {
+        return this.journal.map(function(note) { return note[field]})
+                    .filter(function(value, index, self) {
+                        return self.indexOf(value) === index;
+                    });
     },
     /**
      * @param {Object|string} filter
@@ -1679,7 +1707,22 @@ export const game = shallowReactive({
         setTimeout(function() {
             self.mainTab = tab;
             self.setActiveObject();
-        }, 10);
+        }, 25);
+    },
+    updateJournalFilter() {
+        this.journalFilter.id = null;
+        this.showFilteredJournal(this.journalFilter);
+    },
+    resetJournalFilter() {
+        this.journalFilter = {
+            id: null,
+            code: null,
+            type: null,
+            name: null,
+            desc: null,
+            author_id: null,
+            created_at: null,
+        };
     },
     /**
      * @param {boolean} enable
@@ -2082,6 +2125,22 @@ export const game = shallowReactive({
             return null;
         }
     },
+    _journalSort(notes = []) {
+        if (!this.journalSortField || !this.journalSortDirection) {
+            this._journalSortReset();
+        }
+
+        let field = this.journalSortField;
+        let desc = (this.journalSortDirection === 'desc') ? -1 : 1;
+
+        return notes.sort(function(a, b) {
+            return a[field] > b[field] ? 1 * desc : -1 * desc;
+        });
+    },
+    _journalSortReset() {
+        this.journalSortField = 'created_at';
+        this.journalSortDirection = 'desc';
+    },
     _journalFilter(filter = null) {
         if (typeof filter === 'string') {
             switch (filter) {
@@ -2093,24 +2152,13 @@ export const game = shallowReactive({
                     break;
                 case 'all':
                     filter = {};
-                    this._journalFilterReset();
+                    this.resetJournalFilter();
                     break;
                 default:
                     throw new Error('Unknown journal filter code: ' + filter);
             }
         }
         return filter;
-    },
-    _journalFilterReset() {
-        this.journalFilter = {
-            id: null,
-            code: null,
-            type: null,
-            name: null,
-            desc: null,
-            author_id: null,
-            created_at: null,
-        };
     },
     _journalNoteReset() {
         this.activeNote = {

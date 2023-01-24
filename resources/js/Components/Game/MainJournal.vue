@@ -49,13 +49,39 @@ let createdAt = function(string) {
     }
     .header {
         margin: 10px 10px 20px;
-    }
-    .header>.title {
         border: 3px solid black;
         border-radius: 10px;
+    }
+    .header>.title {
         padding: 10px;
         font-weight: bold;
         text-align: center;
+        border-bottom: 1px solid black;
+    }
+    .header>.control {
+        padding: 10px;
+        width: 50%;
+        border-top: 1px solid black;
+        display: inline-block;
+    }
+    .header>.control>span {
+        font-weight: bold;
+    }
+    .header>.control>button {
+        cursor: pointer;
+    }
+    .header>.control>span,
+    .header>.control>label,
+    .header>.control>input,
+    .header>.control>button,
+    .header>.control>select {
+        margin-left: 20px;
+    }
+    .header>.ordering {
+        border-right: 1px solid black;
+    }
+    .header>.filtering {
+        border-left: 1px solid black;
     }
     ol>li {
         border: 3px solid black;
@@ -120,6 +146,36 @@ let createdAt = function(string) {
         <p class="title">
             {{ __('Journal') }}
         </p>
+        <div class="control ordering">
+            <span>{{ __('Sort')}} </span>
+            <select v-model="game.journalSortField">
+                <option v-for="field in game.getJournalFields()" :value="field.code">
+                    {{ field.name }}
+                </option>
+            </select>
+            <label for="desc">DESC</label>
+            <input type="radio" id="desc" value="desc" v-model="game.journalSortDirection">
+            <label for="desc">ASC</label>
+            <input type="radio" id="asc" value="asc" v-model="game.journalSortDirection">
+        </div>
+        <div class="control filtering">
+            <span>{{ __('Filter')}} </span>
+            <select @change="game.updateJournalFilter()"
+                    v-model="game.journalFilter['code']">
+                <option :value="null">{{ __('All') }}</option>
+                <option v-for="value in game.getJournalValues('code')" :value="value">
+                    {{ game.trans(value) }}
+                </option>
+            </select>
+            <select @change="game.updateJournalFilter()"
+                    v-model="game.journalFilter['type']">
+                <option :value="null">{{ __('All') }}</option>
+                <option v-for="value in game.getJournalValues('type')" :value="value">
+                    {{ game.trans(value) }}
+                </option>
+            </select>
+            <button type="button" @click="game.resetJournalFilter()">{{ __('Reset')}}</button>
+        </div>
     </div>
     <div class="notes">
         <ol>

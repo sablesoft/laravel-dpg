@@ -60,7 +60,7 @@
 
         <!-- actions -->
         <div class="aside-content aside-actions">
-            <button v-if="game.isMaster() || game.visibleLandIds.includes(game.activeInfo.scopeId)"
+            <button v-if="game.isMaster() || game.isExpert() || game.visibleLandIds.includes(game.activeInfo.scopeId)"
                     class="control-btn control-forward" :title="__('Show Card')">
                 <span class="material-icons" @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>
             </button>

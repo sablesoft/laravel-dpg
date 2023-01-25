@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Process\JournalProcess;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -22,6 +20,7 @@ use App\Models\Process\CardProcess;
 use App\Models\Process\DeckProcess;
 use App\Models\Process\LandProcess;
 use App\Models\Process\SceneProcess;
+use App\Models\Process\JournalProcess;
 
 class GameController extends Controller
 {

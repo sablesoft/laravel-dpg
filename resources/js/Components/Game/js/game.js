@@ -559,6 +559,16 @@ export const game = shallowReactive({
     isMaster() {
         return this.role === 'master';
     },
+    isExpert() {
+        return this.role === 'expert';
+    },
+    canPlay() {
+        if (this.role === 'spectator' || this.role === 'expert') {
+            return false;
+        }
+
+        return true;
+    },
     activateSpace(activate = true) {
         let id = Number(this.activeInfo.id);
         switch(this.activeInfo.type) {
@@ -726,7 +736,7 @@ export const game = shallowReactive({
                 return this.showBook(id);
             case 'card':
                 if (o) {
-                    if (!o.get('opened') && !this.isMaster()) {
+                    if (!o.get('opened') && !(this.isMaster() || this.isExpert())) {
                         return this.showInfo();
                     }
                     this.activeCardTapped = Boolean(o.get('tapped'));
@@ -902,7 +912,7 @@ export const game = shallowReactive({
         if (typeof o.visibility === 'function') {
             o.visibility(show);
         } else {
-            let opacity = show ? 1 : (this.isMaster() ? this.hideOpacity : 0);
+            let opacity = show ? 1 : (this.isMaster() || this.isExpert() ? this.hideOpacity : 0);
             o.set('opacity', opacity);
             this.activeObjectHidden = opacity < 1;
             this.fb().renderAll();
@@ -1359,7 +1369,7 @@ export const game = shallowReactive({
      * @return {Object<number, any>}
      */
     filteredSources(filter = null, value = null) {
-        let ids = this.isMaster() ?
+        let ids = this.isMaster() || this.isExpert() ?
             Object.keys(this.books) : Array.from(this.visibleBookIds);
         if (!filter) {
             switch (this.mainTab) {
@@ -1400,7 +1410,7 @@ export const game = shallowReactive({
      * @return {Object<number, any>}
      */
     filteredDomes(filter = null, value = null) {
-        let ids = this.isMaster() ?
+        let ids = this.isMaster() || this.isExpert() ?
             Object.keys(this.domes) : Array.from(this.visibleDomeIds);
         if (!filter) {
             filter = 'all';
@@ -1431,7 +1441,7 @@ export const game = shallowReactive({
      * @return {Object<number, any>}
      */
     filteredLands(filter = null, value = null) {
-        let ids = this.isMaster() ?
+        let ids = this.isMaster() || this.isExpert() ?
             Object.keys(this.lands) : Array.from(this.visibleLandIds);
         if (!filter) {
             switch (this.mainTab) {
@@ -1469,7 +1479,7 @@ export const game = shallowReactive({
      * @return {Object<number, any>}
      */
     filteredAreas(filter = null, value = null) {
-        let ids = this.isMaster() ?
+        let ids = this.isMaster() || this.isExpert() ?
             Object.keys(this.areas) : Array.from(this.visibleAreaIds);
         if (!filter) {
             switch (this.mainTab) {
@@ -1507,7 +1517,7 @@ export const game = shallowReactive({
      * @return {Object<number, any>}
      */
     filteredScenes(filter = null, value = null) {
-        let ids = this.isMaster() ?
+        let ids = this.isMaster() || this.isExpert() ?
             Object.keys(this.scenes) : Array.from(this.visibleSceneIds);
         if (!filter) {
             switch (this.mainTab) {
@@ -1545,7 +1555,7 @@ export const game = shallowReactive({
      * @return {Object<number, any>}
      */
     filteredDecks(filter = null, value = null) {
-        let ids = this.isMaster() ?
+        let ids = this.isMaster() || this.isExpert() ?
             Object.keys(this.decks) : Array.from(this.visibleDeckIds);
         if (!filter) {
             switch (this.mainTab) {
@@ -1594,7 +1604,7 @@ export const game = shallowReactive({
      * @return {Object<number, any>}
      */
     filteredCards(filter = null, value = null) {
-        let ids = this.isMaster() ?
+        let ids = this.isMaster() || this.isExpert() ?
             Object.keys(this.cards) : Array.from(this.visibleCardIds);
         if (!filter) {
             switch (this.mainTab) {
@@ -1843,7 +1853,7 @@ export const game = shallowReactive({
             this.dictionary[string] : string;
     },
     visible(type, id = null) {
-        if (game.isMaster()) {
+        if (this.isMaster() || this.isExpert()) {
             return true;
         }
         let visibleField = this._visibleField(type);
@@ -1889,7 +1899,7 @@ export const game = shallowReactive({
         let scopeCard = null;
         switch (o.type) {
             case 'card':
-                if (!o.get('opened') && !this.isMaster()) {
+                if (!o.get('opened') && !(this.isMaster() || this.isExpert())) {
                     this.cursorName = '???';
                     this.cursorScope = '???';
                     return;
@@ -1936,7 +1946,7 @@ export const game = shallowReactive({
     },
     _findArea(o, point) {
         if (o.onArea(point)) {
-            if (!this.isMaster() && !this.visibleAreaIds.includes(Number(o.area_id))) {
+            if (!(this.isMaster() || this.isExpert()) && !this.visibleAreaIds.includes(Number(o.area_id))) {
                 o.set('cursor', 'default');
                 return null;
             }
@@ -1954,7 +1964,7 @@ export const game = shallowReactive({
             o.set('cursor', 'default');
             return null;
         } else {
-            if (!this.isMaster() && !this.visibleAreaIds.includes(Number(found.area_id))) {
+            if (!(this.isMaster() || this.isExpert()) && !this.visibleAreaIds.includes(Number(found.area_id))) {
                 found.set('cursor', 'default');
                 return null;
             }

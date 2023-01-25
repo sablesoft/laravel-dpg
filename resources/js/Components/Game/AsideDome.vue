@@ -81,7 +81,7 @@
                     class="control-btn control-forward" :title="__('Backward')">
                 <span class="material-icons" @click="game.backward()">download</span>
             </button>
-            <button v-if="game.mainTab === 'MainBoard'&& game.activeObject && game.activeObjectHidden"
+            <button v-if="game.mainTab === 'MainBoard' && game.activeObject && game.activeObjectHidden"
                     class="control-btn control-forward" :title="__('Show')">
                 <span class="material-icons" @click="game.visibility()">visibility</span>
             </button>
@@ -114,7 +114,7 @@
             </button>
         </div>
         <div v-if="!game.isMaster()" class="aside-content aside-actions">
-            <button v-if="game.visibleCardIds.includes(game.activeInfo.scopeId)"
+            <button v-if="game.isExpert() || game.visibleCardIds.includes(game.activeInfo.scopeId)"
                     class="control-btn control-forward" :title="__('Show Card')">
                 <span class="material-icons"
                       @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>

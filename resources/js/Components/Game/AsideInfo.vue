@@ -118,7 +118,7 @@
             </button>
         </div>
         <div v-if="!game.isMaster()" class="aside-content aside-actions">
-            <button v-if="game.activeInfo.id && game.visibleCardIds.includes(game.activeInfo.scopeId)"
+            <button v-if="game.activeInfo.id && (game.isExpert() || game.visibleCardIds.includes(game.activeInfo.scopeId))"
                     class="control-btn control-forward" :title="__('Show Card')">
                 <span class="material-icons"
                       @click="game.switchCard(game.activeInfo.scopeId)">content_copy</span>

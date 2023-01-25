@@ -5,7 +5,6 @@ fabric.Fog = fabric.util.createClass(fabric.Rect, {
     type: 'fog',
     defaultFill: 'white',
     defaultShowOpacity: 0.5,
-    isMaster: false,
 
     /**
      * @param {Object.<string, any>} options
@@ -14,7 +13,6 @@ fabric.Fog = fabric.util.createClass(fabric.Rect, {
         if (!options.width || !options.height) {
             throw new Error('Width and height are required for fog!');
         }
-        this.isMaster = game.isMaster();
         options.erasable = true;
         options.hoverCursor = 'default';
         options.hasBorders = false;
@@ -30,7 +28,7 @@ fabric.Fog = fabric.util.createClass(fabric.Rect, {
         options.stroke = null;
         options.fill = options.fill || this.defaultFill;
         options.showOpacity = options.showOpacity || this.defaultShowOpacity;
-        options.opacity = this.isMaster ? options.showOpacity : 1;
+        options.opacity = (game.isMaster() || game.isExpert()) ? options.showOpacity : 1;
 
         this.callSuper('initialize', options);
     },

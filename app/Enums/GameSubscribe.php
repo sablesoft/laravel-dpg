@@ -8,7 +8,8 @@ enum GameSubscribe: int
 
     case Spectator = 0;
     case Player = 1;
-    case Master = 100;
+    case Expert = 2;
+    case Master = 3;
 
     /**
      * @return string
@@ -18,6 +19,7 @@ enum GameSubscribe: int
         return match($this) {
             GameSubscribe::Spectator => __('Spectator'),
             GameSubscribe::Player => __('Player'),
+            GameSubscribe::Expert => __('Expert'),
             GameSubscribe::Master => __('Master'),
         };
     }
@@ -27,6 +29,7 @@ enum GameSubscribe: int
         return match($this) {
             GameSubscribe::Spectator => 'spectator',
             GameSubscribe::Player => 'player',
+            GameSubscribe::Expert => 'expert',
             GameSubscribe::Master => 'master',
         };
     }

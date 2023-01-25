@@ -18,7 +18,7 @@ fabric.Group.prototype.visibility = function(show = true) {
         this.opacity = 1;
         this.visible = true;
     } else {
-        if (game.isMaster()) {
+        if (game.isMaster() || game.isExpert()) {
             this.opacity = this.showOpacity;
         } else {
             this.visible = false;

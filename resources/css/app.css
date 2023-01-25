@@ -61,7 +61,7 @@ img.align-bottom.w-8.h-8 {
     margin-right: 20px;
     margin-bottom: 10px;
     white-space: pre-line;
-    overflow: scroll;
+    overflow: auto;
 }
 .aside-actions {
     background-color: antiquewhite;

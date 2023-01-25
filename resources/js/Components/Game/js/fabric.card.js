@@ -129,7 +129,7 @@ fabric.Card = fabric.util.createClass(fabric.Group, {
         // update name:
         this._item('name').set('text', game.getCardName(card.id));
         // update scope name:
-        let scope = this._item('scopeName');
+        let scope = this._item('scopeName', false);
         if (scope) {
             scope.set('text', game.getCardName(card.scope_id));
         }

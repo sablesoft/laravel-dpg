@@ -120,5 +120,10 @@
     "Center": "Center",
     "Opened": "Opened",
     "Updated": "Updated",
-    "Added by": "Added by"
+    "Added by": "Added by",
+    "Journal": "Journal",
+    "Master Turn": "Master Turn",
+    "Players Turn": "Players Turn",
+    "You already made your turn": "You already made your turn",
+    "You need to make your turn": "You need to make your turn"
 }

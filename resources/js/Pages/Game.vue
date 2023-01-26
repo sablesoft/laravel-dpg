@@ -32,6 +32,14 @@ const props = defineProps({
     role: {
         type: String,
         required: true
+    },
+    customerId: {
+        type: Number,
+        required: true
+    },
+    customerName: {
+        type: String,
+        required: true
     }
 });
 const asideTabs = {
@@ -56,6 +64,8 @@ onMounted(() => {
     let options = {
         width: boardRef.value.offsetWidth,
         height: window.innerHeight - 100,
+        customerId: props.customerId,
+        customerName: props.customerName,
         role: props.role,
         locale: usePage().props.value.locale,
         dictionary: usePage().props.value.language
@@ -127,12 +137,10 @@ let pageName = function() {
                         :title="__('Journal')">
                     <span class="material-icons" @click="game.showFilteredJournal('all')">local_library</span>
                 </button>
-                <button v-if="game.isMaster()"
-                        class="control-btn control-save"
-                        :class="{'control-active' : game.modeSave}"
-                        :disabled="game.modeSave"
-                        :title="__('Save')">
-                    <span class="material-icons" @click="game.save()">save</span>
+                <button v-if="game.canTakeTurn()"
+                        class="control-btn control-end"
+                        :title="__('Take Turn')">
+                    <span class="material-icons" @click="game.takeTurn()">hourglass_top</span>
                 </button>
             </div>
             <div class="aside-column bg-white shadow-sm sm:rounded-lg">

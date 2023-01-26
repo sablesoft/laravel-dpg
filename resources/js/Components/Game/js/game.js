@@ -18,6 +18,8 @@ import './fabric.fog';
  * @property {number} width
  * @property {number} height
  * @property {string} role
+ * @property {number} customerId
+ * @property {string} customerName
  * @property {string} locale
  * @property {Object} dictionary
  */
@@ -230,6 +232,13 @@ export const game = shallowReactive({
      * @member {?string} - user role code
      */
     role: null,
+    played_ids: [],
+    customerId: null,
+    customerName: null,
+    /**
+     * @member {?string} - the code of the role to which the turn belongs (master or player)
+     */
+    turn: null,
     cursorName: null,
     cursorScope: null,
     activeCardTapped: false,
@@ -406,7 +415,6 @@ export const game = shallowReactive({
     modeErase: false,
     modeEraseUndo: false,
     modeTransform: false,
-    modeSave: false,
     hideOpacity: 0.5,
     brushWidth: 50,
     initiated: false,
@@ -427,6 +435,8 @@ export const game = shallowReactive({
         this.width = options.width;
         this.height = options.height;
         this.role = options.role;
+        this.customerId = options.customerId;
+        this.customerName = options.customerName;
         this.locale = options.locale;
         this.dictionary = options.dictionary;
         this.showInfo();
@@ -562,12 +572,31 @@ export const game = shallowReactive({
     isExpert() {
         return this.role === 'expert';
     },
-    canPlay() {
-        if (this.role === 'spectator' || this.role === 'expert') {
+    canTakeTurn() {
+        if (this.role !== this.turn) {
             return false;
         }
-
+        if (this.role === 'player' && this.played_ids.includes(this.customerId)) {
+            return false;
+        }
+        // todo - check new turn action in journal, if not - return false
         return true;
+    },
+    takeTurn() {
+        this.save();
+        switch (this.role) {
+            case 'master':
+                this.role = 'expert';
+                break;
+            case 'player':
+                this.role = 'spectator';
+                this.played_ids.push(this.customerId);
+                break;
+            default:
+                throw new Error('Invalid role for end of turn: ' + this.role);
+        }
+        this.updateCanvas();
+        this.showInfo();
     },
     activateSpace(activate = true) {
         let id = Number(this.activeInfo.id);
@@ -654,7 +683,7 @@ export const game = shallowReactive({
                     currentDesc: this._toLocale(this.info.currentDesc),
                     image: this.info.image,
                     scopeImage: null,
-                    scopeName: this.trans('Game')
+                    scopeName: this.status()
                 };
                 return;
             case 'MainDome':
@@ -693,6 +722,19 @@ export const game = shallowReactive({
                 return;
             default:
                 throw new Error('Invalid main tab: ' + this.mainTab);
+        }
+    },
+    status() {
+        if (this.turn === 'master') {
+            return this.trans('Master Turn');
+        }
+        if (this.played_ids.includes(this.customerId)) {
+            return this.trans('You already made your turn');
+        } else {
+            if (this.role !== 'player') {
+                return this.trans('Players Turn');
+            }
+            return this.trans('You need to make your turn');
         }
     },
     /**
@@ -1215,56 +1257,57 @@ export const game = shallowReactive({
     },
     save() {
         this._offModes();
-        this.modeSave = true;
+        let canvas = this.saveCanvas();
         let gameRequest = {};
         gameRequest[this.id] = this._data();
         let request = {
             game: gameRequest
         };
-        let canvas = this.saveCanvas();
-        switch(this.mainTab) {
-            case 'MainDome':
-                request['dome'] = {};
-                request['dome'][this.activeDomeId] = {
-                    canvas: canvas
-                };
-                break;
-            case 'MainScene':
-                request['scene'] = {};
-                request['scene'][this.activeSceneId] = {
-                    canvas: canvas
-                };
-                break;
-            case 'MainBoard':
-                request['game'][this.id]['canvas'] = canvas;
-                break;
-            case 'MainJournal':
-                break;
-            default:
-                throw new Error('Invalid main tab');
-        }
         if (this.isMaster()) {
-            let self = this;
-            request = this._prepareUpdateRequest(request);
-            console.debug('Save request', request);
-            axios.patch('/game', request)
-                .then(response => {
-                    self.modeSave = false;
-                    let data = response.data;
-                    console.debug('Save response', data);
-                    if (data.success) {
-                        self._updateRequest = {};
-                        self.journal = data.journal;
-                    } else {
-                        console.error(data);
-                    }
-                }).catch(err => {
-                    self.modeSave = false;
-                    console.error(err);
-                });
-        } else {
-            this.modeSave = false;
+            switch(this.mainTab) {
+                case 'MainDome':
+                    request['dome'] = {};
+                    request['dome'][this.activeDomeId] = {
+                        canvas: canvas
+                    };
+                    break;
+                case 'MainScene':
+                    request['scene'] = {};
+                    request['scene'][this.activeSceneId] = {
+                        canvas: canvas
+                    };
+                    break;
+                case 'MainBoard':
+                    request['game'][this.id]['canvas'] = canvas;
+                    break;
+                case 'MainJournal':
+                    break;
+                default:
+                    throw new Error('Invalid main tab');
+            }
         }
+        let self = this;
+        request = this._prepareTurnRequest(request);
+        console.debug('Turn request', request);
+        axios.patch('/game/' + this.customerId, request)
+            .then(response => {
+                let data = response.data;
+                console.debug('Turn response', data);
+                if (data.success) {
+                    self._updateRequest = {};
+                    self.journal = data.journal;
+                    self.turn = data.turn;
+                    if (self.turn === 'master') {
+                        self.played_ids = [];
+                    }
+                } else {
+                    console.error(data);
+                }
+                self.showInfo();
+            }).catch(err => {
+                console.error(err);
+                self.showInfo();
+            });
     },
     editCurrent() {
         this.asideTab = 'AsideEdit';
@@ -2181,11 +2224,11 @@ export const game = shallowReactive({
         return string.charAt(0).toUpperCase() + string.slice(1)
     },
     _data() {
-        let fields = [
+        let fields = game.isMaster() ? [
             'id', 'info', 'activeDomeId', 'activeSceneId', 'activeAreaId',
             'visibleDomeIds', 'visibleLandIds', 'visibleAreaIds', 'visibleSceneIds',
             'visibleBookIds', 'visibleDeckIds', 'visibleCardIds'
-        ];
+        ] : ['id'];
         let data = {};
         let self = this;
         fields.forEach(function(field) {
@@ -2213,7 +2256,7 @@ export const game = shallowReactive({
         this[source][entity.id] = entity;
         console.debug('Added to update', this._updateRequest);
     },
-    _prepareUpdateRequest(request) {
+    _prepareTurnRequest(request) {
         let self = this;
         if (Object.keys(self._updateRequest).length) {
             Object.keys(self._updateRequest).forEach(function(process) {

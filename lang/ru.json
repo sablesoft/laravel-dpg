@@ -120,5 +120,10 @@
     "Center": "Центрировать",
     "Opened": "Открыто",
     "Updated": "Обновлено",
-    "Added by": "Добавил"
+    "Added by": "Добавил",
+    "Journal": "Журнал",
+    "Master Turn": "Ход Мастера",
+    "Players Turn": "Ход Игроков",
+    "You already made your turn": "Вы уже сделали свой ход",
+    "You need to make your turn": "Вам нужно сделать свой ход"
 }

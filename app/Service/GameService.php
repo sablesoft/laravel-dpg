@@ -4,6 +4,7 @@
 
 namespace App\Service;
 
+use App\Enums\GameSubscribe;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -70,6 +71,8 @@ class GameService
         $data = [
             'id' => $game->getKey(),
             'info' => $info,
+            'turn' => GameSubscribe::Master->code(),
+            'played_ids' => [],
             'boardImage' => self::image($game->board_image),
             'cardsBack' => self::image($game->cards_back),
         ];

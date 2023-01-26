@@ -13,6 +13,8 @@ use App\Models\Game;
  * @property string|null $boardImage
  * @property string|null $cardsBack
  * @property int|null $questId
+ * @property string|null $turn
+ * @property array|null $played_ids
  * @property int[]|null $heroIds
  * @property int[]|null $cardIds
  * @property int[]|null $deckIds
@@ -44,6 +46,7 @@ class GameProcess extends Model
     protected $fillable = [
         'id',
         'info',
+        'turn',
         'boardImage',
         'cardsBack',
         'questId',

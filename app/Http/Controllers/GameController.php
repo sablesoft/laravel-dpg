@@ -32,19 +32,23 @@ class GameController extends Controller
      */
     public function process(Request $request, GameProcess $process): Response
     {
+        /** @var User $user */
+        $user = Auth::user();
         return Inertia::render('Game', [
             'data' => $process,
-            // todo - remove role test:
-            'role' => $request->query('role') ?: $this->_role($process->getGame())
+            'customerId' => $user->getKey(),
+            'customerName' => $user->name,
+            'role' => $this->_role($process->getGame(), $user)
         ]);
     }
 
     /**
      * @param Request $request
+     * @param User $user
      * @return array
      * @throws Exception
      */
-    public function update(Request $request): array
+    public function turn(Request $request, User $user): array
     {
         $processes = $request->json()->all();
         $gameData = reset($processes['game']);
@@ -53,6 +57,8 @@ class GameController extends Controller
         if (!$gameProcess) {
             throw new Exception('Process not found!');
         }
+
+        $role = $this->checkTurnRole($gameProcess, $user);
 
         foreach ($processes as $processName => $processRequest) {
             foreach ($processRequest as $id => $data) {
@@ -69,8 +75,51 @@ class GameController extends Controller
 
         return [
             'success' => true,
+            'turn' => $this->takeTurn($gameProcess, $user, $role),
             'journal' => $gameProcess->journal->toArray()
         ];
+    }
+
+    /**
+     * @param GameProcess $process
+     * @param User $user
+     * @return string
+     * @throws Exception
+     */
+    protected function checkTurnRole(GameProcess $process, User $user): string
+    {
+        $role = $this->_role($process->getGame(), $user);
+        if ($role !== $process->turn || in_array($user->getKey(), (array) $process->played_ids)) {
+            throw new Exception('This customer doesnt have turn now!');
+        }
+
+        return $role;
+    }
+
+    /**
+     * @param GameProcess $process
+     * @param User $user
+     * @param string $role
+     * @return string
+     */
+    protected function takeTurn(GameProcess $process, User $user, string $role): string
+    {
+        if ($role === GameSubscribe::Master->code()) {
+            $process->turn = GameSubscribe::Player->code();
+        } else {
+            $playedIds = (array) $process->played_ids;
+            $playedIds[] = $user->getKey();
+            $totalCount = $process->getGame()->subscribers()
+                ->where('type', GameSubscribe::Player->value)->count();
+            if (count($playedIds) === $totalCount) {
+                $process->turn = GameSubscribe::Master->code();
+                $playedIds = [];
+            }
+            $process->played_ids = $playedIds;
+        }
+        $process->save();
+
+        return $process->turn;
     }
 
     /**
@@ -111,14 +160,15 @@ class GameController extends Controller
 
     /**
      * @param Game $game
+     * @param User $user
      * @return string
      * @throws Exception
      */
-    protected function _role(Game $game): string
+    protected function _role(Game $game, User $user): string
     {
         /** @var User|null $subscriber */
-        if (!$subscriber = $game->subscribers()->where('subscriber_id', Auth::id())->first()) {
-            if ($game->owner_id !== Auth::id()) {
+        if (!$subscriber = $game->subscribers()->where('subscriber_id', $user->getKey())->first()) {
+            if ($game->owner_id !== $user->getKey()) {
                 throw new Exception(__('Unknown game user!'));
             }
             return GameSubscribe::Master->code();

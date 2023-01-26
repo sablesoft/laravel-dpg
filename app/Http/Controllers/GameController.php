@@ -38,7 +38,7 @@ class GameController extends Controller
             'data' => $process,
             'customerId' => $user->getKey(),
             'customerName' => $user->name,
-            'role' => $this->_role($process->getGame(), $user)
+            'role' => $this->_role($process, $user)
         ]);
     }
 
@@ -88,7 +88,7 @@ class GameController extends Controller
      */
     protected function checkTurnRole(GameProcess $process, User $user): string
     {
-        $role = $this->_role($process->getGame(), $user);
+        $role = $this->_role($process, $user, false);
         if ($role !== $process->turn || in_array($user->getKey(), (array) $process->played_ids)) {
             throw new Exception('This customer doesnt have turn now!');
         }
@@ -159,22 +159,43 @@ class GameController extends Controller
     }
 
     /**
-     * @param Game $game
+     * @param GameProcess $process
      * @param User $user
+     * @param bool $checkTurn
      * @return string
      * @throws Exception
      */
-    protected function _role(Game $game, User $user): string
+    protected function _role(GameProcess $process, User $user, bool $checkTurn = true): string
     {
+        $game = $process->getGame();
         /** @var User|null $subscriber */
         if (!$subscriber = $game->subscribers()->where('subscriber_id', $user->getKey())->first()) {
             if ($game->owner_id !== $user->getKey()) {
                 throw new Exception(__('Unknown game user!'));
             }
-            return GameSubscribe::Master->code();
+            $role = GameSubscribe::Master;
+        } else {
+            $role = GameSubscribe::from($subscriber->pivot->type);
         }
 
-        return GameSubscribe::from($subscriber->pivot->type)->code();
+        if ($checkTurn) {
+            switch ($role->value) {
+                case GameSubscribe::Player->value:
+                    if ($process->turn !== GameSubscribe::Player->code()) {
+                        $role = GameSubscribe::Spectator;
+                    }
+                    break;
+                case GameSubscribe::Master->value:
+                    if ($process->turn !== GameSubscribe::Master->code()) {
+                        $role = GameSubscribe::Expert;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $role->code();
     }
 
     /**

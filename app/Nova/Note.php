@@ -3,9 +3,15 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
+/**
+ * @mixin \App\Models\Guide\Note
+ */
 class Note extends Resource
 {
     /**
@@ -14,6 +20,8 @@ class Note extends Resource
      * @var string
      */
     public static $group = 'Guide';
+
+    public static $displayInNavigation = false;
 
     /**
      * The model the resource corresponds to.
@@ -27,7 +35,7 @@ class Note extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -41,23 +49,67 @@ class Note extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function fields(Request $request)
+    public function fields(Request $request): array
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
+            BelongsTo::make(__('Project'), 'project')
+                ->readonly()->hideWhenCreating()->hideFromIndex()
+                ->showOnUpdating(function(NovaRequest $request) {
+                    return $this->checkNoteType($request, 'project_id');
+                })->showOnDetail(function(NovaRequest $request) {
+                    return $this->checkNoteType($request, 'project_id');
+                }),
+            BelongsTo::make(__('Post'), 'post')
+                ->readonly()->hideWhenCreating()->hideFromIndex()
+                ->showOnUpdating(function(NovaRequest $request) {
+                    return $this->checkNoteType($request, 'post_id');
+                })->showOnDetail(function(NovaRequest $request) {
+                    return $this->checkNoteType($request, 'post_id');
+                }),
+            BelongsTo::make(__('Topic'), 'topic')
+                ->nullable(false)->required(true)
+                ->rules('required'),
+            Text::make(__('Content'), 'content')
+                ->onlyOnIndex()->displayUsing(function ($text) {
+                    if (mb_strlen($text) > 90) {
+                        return mb_substr($text, 0, 90) . '...';
+                    }
+                    return $text;
+                }),
+            Textarea::make(__('Content'), 'content')
+                ->nullable(true)->required(false)->alwaysShow(),
+            DateTime::make(__('Created At'), 'created_at')
+                ->hideFromIndex()
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
+            DateTime::make(__('Updated At'), 'updated_at')
+                ->hideFromIndex()
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
         ];
+    }
+
+    /**
+     * @param NovaRequest $request
+     * @param $field
+     * @return bool
+     */
+    public function checkNoteType(NovaRequest $request, $field): bool
+    {
+        $resource = $request->findResourceOrFail();
+        /** @var \App\Models\Guide\Note $model */
+        $model = $resource->model();
+        return $model && !!$model->$field;
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function cards(Request $request)
+    public function cards(Request $request): array
     {
         return [];
     }
@@ -65,10 +117,10 @@ class Note extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function filters(Request $request)
+    public function filters(Request $request): array
     {
         return [];
     }
@@ -76,10 +128,10 @@ class Note extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function lenses(Request $request)
+    public function lenses(Request $request): array
     {
         return [];
     }
@@ -87,10 +139,10 @@ class Note extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function actions(Request $request)
+    public function actions(Request $request): array
     {
         return [];
     }

@@ -3,8 +3,10 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 
 class Topic extends Resource
 {
@@ -27,7 +29,7 @@ class Topic extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -35,29 +37,43 @@ class Topic extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name'
     ];
 
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function fields(Request $request)
+    public function fields(Request $request): array
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
+            Text::make(__('Name'), 'name')
+                ->nullable(false)->required()
+                ->sortable()->rules('required', 'max:30'),
+            Textarea::make(__('Desc'), 'desc')
+                ->nullable(true)->required(false)->alwaysShow(),
+            BelongsTo::make('Project', 'project')
+                ->nullable(true)->required(false),
+            BelongsTo::make(__('Owner'), 'owner', User::class)
+                ->sortable()->hideWhenUpdating()->hideWhenCreating(),
+            DateTime::make(__('Created At'), 'created_at')
+                ->hideFromIndex()
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
+            DateTime::make(__('Updated At'), 'updated_at')
+                ->hideFromIndex()
+                ->hideWhenCreating()->hideWhenUpdating()->sortable(true),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function cards(Request $request)
+    public function cards(Request $request): array
     {
         return [];
     }
@@ -65,10 +81,10 @@ class Topic extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function filters(Request $request)
+    public function filters(Request $request): array
     {
         return [];
     }
@@ -76,10 +92,10 @@ class Topic extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function lenses(Request $request)
+    public function lenses(Request $request): array
     {
         return [];
     }
@@ -87,10 +103,10 @@ class Topic extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function actions(Request $request)
+    public function actions(Request $request): array
     {
         return [];
     }

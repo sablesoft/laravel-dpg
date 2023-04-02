@@ -11,10 +11,11 @@ use App\Models\Traits\Owner;
 /**
  * @property int|null $id
  * @property string|null $name
- * @property string|null $desc
+ * @property string|null $code
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
+ * @property-read Note[]|null $notes
  * @property-read Post[]|null $posts
  * @property-read Topic[]|null $topics
  */
@@ -23,6 +24,14 @@ class Project extends Model
     use Owner;
 
     protected $table = 'guide_projects';
+
+    /**
+     * @return HasMany
+     */
+    public function notes(): HasMany
+    {
+        return $this->hasMany(Note::class);
+    }
 
     /**
      * @return HasMany

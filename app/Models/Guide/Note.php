@@ -9,20 +9,40 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int|null $id
+ * @property int|null $project_id
  * @property int|null $post_id
  * @property int|null $topic_id
  * @property string|null $content
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
+ * @property Project|null $project
  * @property Post|null $post
  * @property Topic|null $topic
  * @property Link[]|null $links
  * @property Link[]|null $targetLinks
+ *
+ * @property-read string|null $title
  */
 class Note extends Model
 {
     protected $table = 'guide_notes';
+
+    public function getTitleAttribute(): ?string
+    {
+        $targetName = $this->project ? $this->project->code: optional($this->post)->topic->name;
+        $topicName = optional($this->topic)->name;
+
+        return $targetName && $topicName ? "$targetName - $topicName" : null;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
 
     /**
      * @return BelongsTo

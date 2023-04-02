@@ -5,8 +5,8 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 
 class Project extends Resource
 {
@@ -29,7 +29,7 @@ class Project extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -37,7 +37,7 @@ class Project extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name', 'code'
     ];
 
     /**
@@ -55,9 +55,9 @@ class Project extends Resource
             Text::make(__('Code'), 'code')
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:7'),
+            HasMany::make(__('Notes'), 'notes'),
             BelongsTo::make(__('Owner'), 'owner', User::class)
-                ->sortable()
-                ->hideWhenUpdating()->hideWhenCreating(),
+                ->sortable()->hideWhenUpdating()->hideWhenCreating(),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),

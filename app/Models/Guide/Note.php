@@ -28,9 +28,12 @@ class Note extends Model
 {
     protected $table = 'guide_notes';
 
+    /**
+     * @return string|null
+     */
     public function getTitleAttribute(): ?string
     {
-        $targetName = $this->project ? $this->project->code: optional($this->post)->topic->name;
+        $targetName = $this->project ? $this->project->code: optional($this->post)->title;
         $topicName = optional($this->topic)->name;
 
         return $targetName && $topicName ? "$targetName - $topicName" : null;

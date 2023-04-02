@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -81,6 +82,8 @@ class Note extends Resource
                 }),
             Textarea::make(__('Content'), 'content')
                 ->nullable(true)->required(false)->alwaysShow(),
+            HasMany::make(__('Links'), 'links'),
+            HasMany::make(__('Target Links'), 'targetLinks', Link::class),
             DateTime::make(__('Created At'), 'created_at')
                 ->hideFromIndex()
                 ->hideWhenCreating()->hideWhenUpdating()->sortable(true),

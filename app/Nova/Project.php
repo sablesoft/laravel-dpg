@@ -56,6 +56,8 @@ class Project extends Resource
                 ->nullable(false)->required()
                 ->sortable()->rules('required', 'max:7'),
             HasMany::make(__('Notes'), 'notes'),
+            HasMany::make(__('Posts'), 'Posts'),
+            HasMany::make(__('Topics'), 'topics'),
             BelongsTo::make(__('Owner'), 'owner', User::class)
                 ->sortable()->hideWhenUpdating()->hideWhenCreating(),
             DateTime::make(__('Created At'), 'created_at')

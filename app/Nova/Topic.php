@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 
@@ -56,6 +57,10 @@ class Topic extends Resource
                 ->nullable(true)->required(false)->alwaysShow(),
             BelongsTo::make('Project', 'project')
                 ->nullable(true)->required(false),
+            HasMany::make(__('Category Posts'), 'categoryPosts', Post::class),
+            HasMany::make(__('Posts'), 'posts', Post::class),
+            HasMany::make(__('Notes'), 'notes', Note::class),
+            HasMany::make(__('Category Links'), 'categoryLinks', Link::class),
             BelongsTo::make(__('Owner'), 'owner', User::class)
                 ->sortable()->hideWhenUpdating()->hideWhenCreating(),
             DateTime::make(__('Created At'), 'created_at')

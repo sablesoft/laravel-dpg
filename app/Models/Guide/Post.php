@@ -20,10 +20,23 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Topic|null $topic
  * @property Note[]|null $notes
  * @property Link[]|null $targetLinks
+ *
+ * @property-read string|null $title
  */
 class Post extends Model
 {
     protected $table = 'guide_posts';
+
+    /**
+     * @return string|null
+     */
+    public function getTitleAttribute(): ?string
+    {
+        $categoryName = $this->category?->name;
+        $topicName = $this->topic?->name;
+
+        return $categoryName && $topicName ? "$categoryName - $topicName" : null;
+    }
 
     /**
      * @return BelongsTo

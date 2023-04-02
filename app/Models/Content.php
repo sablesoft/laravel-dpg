@@ -17,13 +17,11 @@ use App\Models\Traits\Options;
  * @property string|null $image
  * @property string|null $name
  * @property string|null $desc
- * @property int|null $owner_id
  * @property bool|null $is_public
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
  * @property-read Card|null $scope
- * @property-read User|null $owner
  *
  * @method Builder isPublic(bool $isPublic = true, string $boolean = 'and')
  */

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property int|null $owner_id
+ * @property-read User|null $owner
  * @method Builder hasOwner(User $owner, string $boolean = 'and')
  */
 trait Owner

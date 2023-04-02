@@ -36,11 +36,6 @@ class Area extends Content implements SpaceInterface
     ];
 
     /**
-     * @var array|string[]
-     */
-    public array $translatable = ['desc'];
-
-    /**
      * @return BelongsTo
      */
     public function dome(): BelongsTo

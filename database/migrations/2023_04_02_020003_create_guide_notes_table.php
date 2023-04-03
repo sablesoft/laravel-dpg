@@ -24,6 +24,8 @@ return new class extends Migration
             $table->text('content')->nullable(true);
             $table->timestamps();
 
+            $table->unique(['post_id', 'topic_id']);
+            $table->unique(['project_id', 'topic_id']);
             $table->unique(['project_id', 'post_id', 'topic_id']);
         });
     }

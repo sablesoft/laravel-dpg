@@ -26,6 +26,12 @@ class Project extends Model
 
     protected $table = 'guide_projects';
 
+    protected $fillable = [
+        'name',
+        'code',
+        'owner_id'
+    ];
+
     /**
      * @return HasMany
      */

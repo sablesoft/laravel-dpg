@@ -29,6 +29,12 @@ class Topic extends Model
 
     protected $table = 'guide_topics';
 
+    protected $fillable = [
+        'name',
+        'desc',
+        'project_id'
+    ];
+
     /**
      * @return BelongsTo
      */

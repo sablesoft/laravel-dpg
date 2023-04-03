@@ -1,7 +1,11 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AddTopic from '@/Components/Guide/AddTopic.vue';
+import AddProject from '@/Components/Guide/AddProject.vue';
+import Editable from '@/Components/Editable.vue';
 import {Head} from '@inertiajs/inertia-vue3';
-import {onMounted, shallowRef, toRaw} from "vue";
+import {onMounted, shallowRef} from "vue";
+import { guide } from "@/guide";
 
 const projectId = shallowRef(null);
 const topicId = shallowRef(null);
@@ -33,8 +37,10 @@ let view = function(name) {
 }
 
 onMounted(() => {
-    console.debug('INITIAL PROJECTS', toRaw(props.projects));
-    console.debug('INITIAL TOPICS', toRaw(props.topics));
+    guide.init({
+        projects : props.projects,
+        topics : props.topics
+    });
 });
 </script>
 <style>
@@ -68,15 +74,17 @@ onMounted(() => {
         <div class="py-2">
             <div class="py-2">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <select v-model="projectId">
+                    <select v-model="projectId" v-if="!guide.isAddProject">
                         <option :value="null">{{ __('Select Project, or') }}</option>
                         <option v-for="project in projects.data" :value="project.id">
                             {{ project.name }}
                         </option>
                     </select>
-                    <button v-if="!projectId">{{ __('Create New')}}</button>
+                    <button v-if="!projectId && !guide.isAddProject"
+                            @click="guide.isAddProject = !guide.isAddProject">{{ __('Create New')}}</button>
                     <button v-if="projectId" @click="view('project')">{{ __('View')}}</button>
                     <button v-if="projectId">{{ __('Delete')}}</button>
+                    <AddProject/>
                 </div>
             </div>
             <div v-if="projectId" class="py-2">
@@ -108,15 +116,17 @@ onMounted(() => {
 
             <div class="py-2">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <select v-model="topicId">
+                    <select v-model="topicId" v-if="!guide.isAddTopic">
                         <option :value="null">{{ __('Select Topic, or') }}</option>
                         <option v-for="topic in topics.data" :value="topic.id">
                             {{ topic.name }}
                         </option>
                     </select>
-                    <button v-if="!topicId">{{ __('Create New')}}</button>
+                    <button v-if="!topicId && !guide.isAddTopic"
+                            @click="guide.isAddTopic = !guide.isAddTopic">{{ __('Create New')}}</button>
                     <button v-if="topicId" @click="view('topic')">{{ __('View')}}</button>
                     <button v-if="topicId">{{ __('Delete')}}</button>
+                    <AddTopic/>
                 </div>
             </div>
             <div v-if="topicId" class="py-2">
@@ -124,14 +134,18 @@ onMounted(() => {
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-4 text-gray-900">
                             <p class="note-row">
-                                <span class="note-mark">{{ __('Name')}}:</span> {{ getTopic().name }}
+                                <span class="note-mark">{{ __('Name')}}: </span>
+                                <Editable :text="getTopic().name"
+                                          @updated="(text) => guide.updateTopic(getTopic().id, text, 'name')"/>
+                            </p>
+                            <p class="note-row">
+                                <span class="note-mark">{{ __('Desc')}}: </span>
+                                <Editable :text="getTopic().desc"
+                                          @updated="(text) => guide.updateTopic(getTopic().id, text, 'desc')"/>
                             </p>
                             <p class="note-row">
                                 <span class="note-mark">{{ __('Project')}}:</span>
                                 {{ getTopic().projectId ? getProject(getTopic().projectId).name : __('Global')}}
-                            </p>
-                            <p class="note-row">
-                                <span class="note-mark">{{ __('Desc')}}:</span> {{ getTopic().desc }}
                             </p>
                             <p class="note-row">
                                 <span class="note-mark">{{ __('Created At')}}:</span>

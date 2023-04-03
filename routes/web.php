@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\GuideController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Guide\Project;
+use App\Http\Resources\TopicResource;
+use App\Http\Resources\ProjectResource;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 
@@ -36,8 +40,26 @@ Route::get('language/{language}', function ($language) {
 })->name('language');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    /** @var User $user */
+    $user = auth()->user();
+    return Inertia::render('Dashboard', [
+        'projects' => ProjectResource::collection($user->projects->keyBy('id')),
+        'topics' => TopicResource::collection($user->topics->keyBy('id'))
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/project/{project}', function (Project $project) {
+    /** @var User $user */
+    $user = auth()->user();
+    return Inertia::render('Project', [
+        'project' => ProjectResource::make($project),
+        'topics' => TopicResource::collection($user->topics->keyBy('id'))
+    ]);
+})->middleware(['auth', 'verified'])->name('guide.project');
+Route::post('/guide/update', [GuideController::class, 'update'])
+    ->middleware(['auth', 'verified'])->name('guide.update');
+Route::post('/guide/create', [GuideController::class, 'create'])
+    ->middleware(['auth', 'verified'])->name('guide.create');
 
 Route::get('/game/{process}', [GameController::class, 'process'])
     ->middleware(['auth', 'verified', 'game.visitor'])->name('game');

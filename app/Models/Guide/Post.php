@@ -4,6 +4,7 @@ namespace App\Models\Guide;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -18,8 +19,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Project|null $project
  * @property Topic|null $category
  * @property Topic|null $topic
- * @property Note[]|null $notes
- * @property Link[]|null $targetLinks
+ * @property Note[]|Collection $notes
+ * @property Link[]|Collection $targetLinks
  *
  * @property-read string|null $title
  */

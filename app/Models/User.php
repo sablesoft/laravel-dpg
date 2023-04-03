@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Translatable\HasTranslations;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Guide\Topic;
+use App\Models\Guide\Project;
 use App\Models\Traits\Options;
 
 /**
@@ -26,8 +29,10 @@ use App\Models\Traits\Options;
  * @property Carbon|null $updated_at
  *
  * @property-read Language|null $language
- * @property-read Book[]|null $books
- * @property-read Card[]|null $cards
+ * @property-read Book[]|Collection $books
+ * @property-read Card[]|Collection $cards
+ * @property-read Project[]|Collection $projects
+ * @property-read Project[]|Collection $topics
  *
  * @property-read string|null $content_path
  * @property-read array $roles_names
@@ -80,6 +85,22 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->hasRole(static::ROLE_ADMIN);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class, 'owner_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function topics(): HasMany
+    {
+        return $this->hasMany(Topic::class, 'owner_id');
     }
 
     /**

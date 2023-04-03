@@ -3,6 +3,7 @@
 namespace App\Models\Guide;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -15,9 +16,9 @@ use App\Models\Traits\Owner;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
- * @property-read Note[]|null $notes
- * @property-read Post[]|null $posts
- * @property-read Topic[]|null $topics
+ * @property-read Note[]|Collection $notes
+ * @property-read Post[]|Collection $posts
+ * @property-read Topic[]|Collection $topics
  */
 class Project extends Model
 {

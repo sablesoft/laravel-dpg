@@ -28,6 +28,13 @@ class Note extends Model
 {
     protected $table = 'guide_notes';
 
+    protected $fillable = [
+        'topic_id',
+        'project_id',
+        'post_id',
+        'content'
+    ];
+
     /**
      * @return string|null
      */

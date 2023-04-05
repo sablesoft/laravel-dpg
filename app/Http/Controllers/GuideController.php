@@ -49,4 +49,18 @@ class GuideController extends Controller
             default: throw new Exception('Unknown table: ' . $data['table']);
         }
     }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function delete(Request $request): array
+    {
+        $data = $request->post();
+        $result = \DB::table('guide_'. $data['table'])
+            ->where('id', $data['id'])
+            ->delete();
+
+        return ['result' => $result];
+    }
 }

@@ -27,31 +27,31 @@ const form = useForm({
             <div class="p-4 text-gray-900">
                 <p class="note-row">
                     <span class="note-mark">{{ __('Name')}}: </span>
-                    <Editable :text="guide.project.data.name"
+                    <Editable :text="guide.getProject().name"
                               @updated="(text) => guide.updateProject('name', text)"/>
                 </p>
                 <p class="note-row">
                     <span class="note-mark">{{ __('Code')}}: </span>
-                    <Editable :text="guide.project.data.code"
+                    <Editable :text="guide.getProject().code"
                               @updated="(text) => guide.updateProject('code', text)"/>
                 </p>
-                <p v-for="note in guide.project.data.notes" class="note-row">
-                    <span class="note-mark">{{ __(note.topic.name)}}: </span>
+                <p v-for="note in guide.getProjectNotes()" class="note-row">
+                    <span class="note-mark">{{ __(guide.getTopicField('name', note.topicId))}}: </span>
                     <Editable :text="note.content"
                               @updated="(text) => guide.updateNote(note.id, text)"/>
                 </p>
-                <SecondaryButton v-if="!guide.isAddNote" @click="guide.isAddNote = !guide.isAddNote">
+                <SecondaryButton v-if="!guide.isAddNote" @click="guide.isAddNote = true">
                     {{__('Add Note')}}
                 </SecondaryButton>
                 <AddNote/>
                 <br/><br/><hr/><br/>
                 <p class="note-row">
                     <span class="note-mark">{{ __('Created At')}}:</span>
-                    {{ guide.project.data.createdAt }}
+                    {{ guide.getProject().createdAt }}
                 </p>
                 <p class="note-row">
                     <span class="note-mark">{{ __('Updated At')}}:</span>
-                    {{ guide.project.data.updatedAt }}
+                    {{ guide.getProject().updatedAt }}
                 </p>
             </div>
         </div>

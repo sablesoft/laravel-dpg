@@ -1,10 +1,12 @@
 import {reactive} from 'vue';
 
 export const guide = reactive({
-    project : null,
-    projects : null,
-    topics : null,
-    topic : null,
+    projects : {},
+    topics : {},
+    notes : {},
+    posts : {},
+    topicsId : null,
+    projectsId : null,
     isReady: false,
     isAddNote: false,
     isAddTopic: false,
@@ -16,10 +18,47 @@ export const guide = reactive({
     },
     init(data) {
         for (const [key, value] of Object.entries(data)) {
-            this[key] = value;
+            this[key] = value.data ? value.data : value;
         }
         this.isReady = true;
-        console.log(this);
+        console.log('GUIDE:', this);
+    },
+    getProject(id = null) {
+        id = id ? id : this.projectsId;
+        return id ? this.projects[id] : null;
+    },
+    getProjectNotes(id = null) {
+        let project = this.getProject(id);
+        if (!project) {
+            return [];
+        }
+        let notes = [];
+        let self = this;
+        project.noteIds.forEach(function(id) {
+           notes.push(self.notes[id]);
+        });
+
+        return notes;
+    },
+    getTopic(id = null) {
+        id = id ? id : this.topicsId;
+        return id ? this.topics[id] : null;
+    },
+    getTopicField(field, id = null) {
+        let topic = this.getTopic(id);
+        return topic ? topic[field] : null;
+    },
+    getTopicProject(id = null, field = null) {
+        let topic = this.getTopic(id);
+        if (!topic) {
+            return null;
+        }
+        let project = this.getProject(topic.projectId);
+        if (!project) {
+            return null;
+        }
+
+        return field ? project[field] : project;
     },
     request(routeName, post, callback) {
         axios.post(route(routeName), post)
@@ -28,43 +67,114 @@ export const guide = reactive({
                 console.error(err);
             });
     },
-    updateProject(field, value) {
+    delete(table) {
+        let id = this[table + 'Id'];
+        let entity = this[table][id];
+        if (!entity) {
+            throw new Error('Entity not found: ' + table + ' - ' +  id);
+        }
         let self = this;
+        this.request('guide.delete', {
+           'table' : table,
+           'id' : id
+        }, function(res) {
+            switch (table) {
+                case 'topics':
+                    self.removeTopic(id);
+                    self.topicsId = null;
+                    break;
+                default:
+                    break;
+            }
+        });
+    },
+    removeTopic(id) {
+        let topic = this.topics[id];
+        console.log('Remove topic:', topic);
+        for (const [noteId, note] of Object.entries(this.notes)) {
+            if (note.topicId === id) {
+                this.removeNote(noteId);
+            }
+        }
+        for (const [postId, post] of Object.entries(this.posts)) {
+            if (post.topicId === id) {
+                this.removePost(postId);
+            }
+        }
+        delete this.topics[id];
+    },
+    removeNote(id) {
+        let note = this.notes[id];
+        console.log('Remove note:', note);
+        if (note.projectId) {
+            let project = this.projects[note.projectId];
+            let noteIds = project.noteIds;
+            const index = noteIds.indexOf(parseInt(id));
+            if (index > -1) {
+                noteIds.splice(index, 1);
+                project.noteIds = noteIds;
+                console.log('Project noteIds cleared!', project);
+            }
+        }
+        if (note.postId) {
+            let post = this.posts[note.postId];
+            const index = post.noteIds.indexOf(id);
+            if (index > -1) {
+                post.noteIds.splice(index, 1);
+            }
+        }
+        delete this.notes[id];
+    },
+    removePost(id) {
+        let post = this.posts[id];
+        console.log('Remove post:', post);
+        let project = this.projects[post.projectId];
+        const index = project.postIds.indexOf(id);
+        if (index > -1) {
+            project.postIds.splice(index, 1);
+        }
+        delete this.posts[id];
+    },
+    updateProject(field, value) {
+        let project = this.getProject();
         this.request('guide.update', {
             table: 'projects',
-            id: this.project.data.id,
+            id: project.id,
             field: field,
             value: value
         }, function(res) {
-            self.project.data[field] = value;
+            project[field] = value;
         });
     },
     updateNote(id, value) {
-        let self = this;
+        let note = this.notes[id];
+        if (!note) {
+            throw new Error('Note not found: ' + id);
+        }
         this.request('guide.update', {
             table: 'notes',
-            id: id,
+            id: note.id,
             field: 'content',
             value: value
         }, function(res) {
-            let note = self.project.data.notes[id];
             note.content = value;
         });
     },
-    updateTopic(id, value, field) {
-        let self = this;
+    updateTopic(value, field, id = null) {
+        id = id ? id : this.topicsId;
+        if (!id) {
+            throw new Error('No topic id for updating!');
+        }
+        let topic = this.topics[id];
+        if (!topic) {
+            throw new Error('Topic not found for updating: ' + id);
+        }
         this.request('guide.update', {
             table: 'topics',
             id: id,
             field: field,
             value: value
         }, function(res) {
-            let topic;
-            if (self.project) {
-                topic = self.project.data.topics[id];
-            } else {
-                topic = self.topics.data[id];
-            }
             topic[field] = value;
         });
     },
@@ -83,17 +193,17 @@ export const guide = reactive({
         let self = this;
         this.createNote({
             target : 'project',
-            targetId :  this.project.data.id,
+            targetId :  this.projectsId,
             topicId : form.topicId,
             content : form.content
         }, function(res) {
             if (res.status === 201) {
+                console.log('addProjectNote - response', res.data);
                 let note = res.data.data;
-                if (Array.isArray(self.project.data.notes) && !self.project.data.notes.length) {
-                    self.project.data.notes = {};
-                }
-                self.project.data.notes[note.id] = note;
-                console.log(self.project.data);
+                self.notes[note.id] = note;
+                let project = self.getProject();
+                project.noteIds.push(parseInt(note.id));
+                console.log(self.notes);
             }
             self.isAddNote = false;
         });
@@ -110,24 +220,14 @@ export const guide = reactive({
         this.createTopic({
                 name : form.name,
                 desc : form.desc,
-                project_id : this.project ? this.project.data.id : null
+                project_id : this.projectsId
             },
             function(res) {
             if (res.status === 201) {
+                console.log('addTopic - response', res.data);
                 let topic = res.data.data;
-                if (!self.project) {
-                    if (Array.isArray(self.topics) && !self.topics.data.length) {
-                        self.topics.data = {};
-                    }
-                    self.topics.data[topic.id] = topic;
-                    self.isAddTopic = false;
-                    return;
-                }
-                if (Array.isArray(self.project.data.topics) && !self.project.data.topics.length) {
-                    self.project.data.topics = {};
-                }
-                self.project.data.topics[topic.id] = topic;
-                console.log(self.project.data);
+                self.topics[topic.id] = topic;
+                console.log(self.topics);
             }
             self.isAddTopic = false;
         });

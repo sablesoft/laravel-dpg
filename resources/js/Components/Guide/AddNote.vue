@@ -22,17 +22,15 @@ const form = useForm({
             <InputLabel for="topic" :value="__('Topic')" />
             <select v-model="form.topicId" required class="mt-1 block w-full">
                 <option :value="null" disabled>{{ __('Select Note Topic') }}</option>
-                <option v-for="topic in guide.topics.data" :value="topic.id">
+                <option v-for="topic in guide.topics" :value="topic.id">
                     {{ topic.name }}
                 </option>
             </select>
-            <InputError class="mt-2" :message="form.errors.topicId" />
         </div>
         <div>
             <InputLabel for="content" value="Content" />
             <TextInput id="content" type="text" class="mt-1 block w-full"
                        v-model="form.content" required />
-            <InputError class="mt-2" :message="form.errors.content" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

@@ -7,6 +7,7 @@ export const guide = reactive({
     notes : {},
     posts : {},
     links : {},
+    notesId : null,
     topicsId : null,
     projectsId : null,
     categoriesId : null,
@@ -109,6 +110,9 @@ export const guide = reactive({
     },
     delete(table, id = null) {
         id = id ? id : this[table + 'Id'];
+        if (!id) {
+            return;
+        }
         let entity = this[table][id];
         if (!entity) {
             throw new Error('Entity not found: ' + table + ' - ' +  id);
@@ -124,6 +128,9 @@ export const guide = reactive({
                     break;
                 case 'projects':
                     self.removeProject(id);
+                    break;
+                case 'notes':
+                    self.removeNote(id);
                     break;
                 default:
                     break;

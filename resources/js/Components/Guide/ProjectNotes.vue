@@ -4,11 +4,23 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import AddNote from '@/Components/Guide/AddNote.vue';
 
 import { guide } from "@/guide";
-import {useForm} from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/inertia-vue3";
+import { onMounted } from "vue";
+
 const form = useForm({
     topicId: null,
     content: null
 });
+
+onMounted(() => {
+    window.addEventListener('keydown', function(event) {
+        const key = event.key;
+        if (key === "Backspace" || key === "Delete") {
+            console.log('Delete note key!');
+            guide.delete('notes');
+        }
+    })
+})
 
 </script>
 
@@ -35,16 +47,21 @@ const form = useForm({
                     <Editable :text="guide.getProject().code"
                               @updated="(text) => guide.updateProject('code', text)"/>
                 </p>
-                <p v-for="note in guide.getProjectNotes()" class="note-row">
+                <SecondaryButton v-if="!guide.isAddNote" @click="guide.isAddNote = true">
+                    {{__('Add Note')}}
+                </SecondaryButton>
+                <AddNote v-if="guide.isAddNote"/>
+                <br/><br/>
+                <p v-if="!guide.isAddNote"
+                   v-for="note in guide.getProjectNotes()"
+                   @click="guide.notesId = guide.notesId === note.id ? null : note.id"
+                   :class="guide.notesId === note.id ? 'active-note' : ''"
+                   class="note-row ease-in-out duration-150">
                     <span class="note-mark">{{ __(guide.getTopicField('name', note.topicId))}}: </span>
                     <Editable :text="note.content"
                               @updated="(text) => guide.updateNote(note.id, text)"/>
                 </p>
-                <SecondaryButton v-if="!guide.isAddNote" @click="guide.isAddNote = true">
-                    {{__('Add Note')}}
-                </SecondaryButton>
-                <AddNote/>
-                <br/><br/><hr/><br/>
+                <hr/><br/>
                 <p class="note-row">
                     <span class="note-mark">{{ __('Created At')}}:</span>
                     {{ guide.getProject().createdAt }}

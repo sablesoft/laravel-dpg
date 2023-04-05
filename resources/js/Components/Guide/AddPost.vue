@@ -23,7 +23,7 @@ onMounted(() => {
 
 <template>
     <form @submit.prevent="guide.addProjectPost(form)">
-        <h2 class="block-title">{{__('Create Post')}}</h2>
+        <h2 class="action-title">{{__('Create Post')}}</h2>
         <hr/><br/>
         <div>
             <InputLabel for="category" :value="__('Category')" />

@@ -44,7 +44,6 @@ button {
             </select>
             <button v-if="!guide.topicsId && !guide.isAddTopic"
                     @click="guide.isAddTopic = true">{{ __('Create New')}}</button>
-            <button v-if="guide.topicsId" @click="view('topic')">{{ __('View')}}</button>
             <button v-if="guide.topicsId" @click="guide.delete('topics')">
                 {{ __('Delete')}}
             </button>

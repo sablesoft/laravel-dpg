@@ -124,7 +124,15 @@ img.align-bottom.w-8.h-8 {
     font-weight: bold;
     font-size: 24px;
 }
-.active-note {
+.action-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+.block-subtitle {
+    font-weight: bold;
+    font-size: 20px;
+}
+.active-block {
     --tw-ring-offset-width: 7px;
     --tw-ring-opacity: 1;
     --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity));

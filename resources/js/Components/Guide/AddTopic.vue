@@ -2,6 +2,7 @@
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import TextareaInput from '@/Components/TextInput.vue';
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 import { guide } from "@/guide";
@@ -18,7 +19,7 @@ const form = useForm({
 
 <template>
     <form @submit.prevent="guide.addTopic(form)">
-        <h2 class="block-title">{{__('Create Topic')}}</h2>
+        <h2 class="action-title">{{__('Create Topic')}}</h2>
         <hr/><br/>
         <div>
             <InputLabel for="name" :value="__('Name')" />
@@ -27,7 +28,7 @@ const form = useForm({
         </div>
         <div>
             <InputLabel for="desc" :value="__('Desc')" />
-            <TextInput id="desc" type="text" class="mt-1 block w-full"
+            <TextareaInput id="desc" type="text" class="mt-1 block w-full"
                        v-model="form.desc" />
         </div>
 

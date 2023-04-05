@@ -1,7 +1,7 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import TextareaInput from '@/Components/TextareaInput.vue';
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 import { guide } from "@/guide";
@@ -18,11 +18,11 @@ const form = useForm({
 
 <template>
     <form @submit.prevent="guide.addProjectNote(form)">
-        <h2 class="block-title">{{__('Create Note')}}</h2>
+        <h2 class="action-title">{{__('Create Note')}}</h2>
         <hr/><br/>
         <div>
             <InputLabel for="topic" :value="__('Topic')" />
-            <select v-model="form.topicId" required class="mt-1 block w-full">
+            <select v-model="form.topicId" required class="mt-1 block w-full" @click.prevent.stop="">
                 <option :value="null" disabled>{{ __('Select Note Topic') }}</option>
                 <option v-for="topic in guide.topics" :value="topic.id">
                     {{ topic.name }}
@@ -31,7 +31,8 @@ const form = useForm({
         </div>
         <div>
             <InputLabel for="content" :value="__('Content')" />
-            <TextInput id="content" type="text" class="mt-1 block w-full"
+            <TextareaInput id="content" class="mt-1 block w-full"
+                       @click.prevent.stop=""
                        v-model="form.content" required />
         </div>
 

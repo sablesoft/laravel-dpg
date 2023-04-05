@@ -18,7 +18,7 @@ const form = useForm({
 
 <template>
     <form @submit.prevent="guide.addProject(form)">
-        <h2 class="block-title">{{__('Create Project')}}</h2>
+        <h2 class="action-title">{{__('Create Project')}}</h2>
         <hr/><br/>
         <div>
             <InputLabel for="name" :value="__('Name')" />

@@ -8,6 +8,7 @@ export const guide = reactive({
     posts : {},
     links : {},
     notesId : null,
+    postsId : null,
     topicsId : null,
     projectsId : null,
     categoriesId : null,
@@ -68,6 +69,23 @@ export const guide = reactive({
         });
 
         return posts;
+    },
+    getPost(id = null) {
+        id = id ? id : this.postsId;
+        return id ? this.posts[id] : null;
+    },
+    getPostNotes(id = null) {
+        let post = this.getPost(id);
+        if (!post) {
+            return [];
+        }
+        let notes = {};
+        let self = this;
+        post.noteIds.forEach(function(id) {
+            notes[id] = self.notes[id];
+        });
+
+        return notes;
     },
     getProjectCategories(id = null) {
         let posts = this.getProjectPosts(id);

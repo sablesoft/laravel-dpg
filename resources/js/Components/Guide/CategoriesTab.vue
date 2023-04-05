@@ -1,6 +1,7 @@
 <script setup>
 import Editable from '@/Components/Editable.vue';
 import AddPost from '@/Components/Guide/AddPost.vue';
+import Post from '@/Components/Guide/Post.vue';
 
 import { guide } from "@/guide";
 
@@ -59,6 +60,7 @@ button {
                                   @updated="(text) => guide.updateTopic(text, 'desc', guide.categoriesId)"/>
                     </p>
                     <hr/><br/>
+                    <Post v-for="post in guide.getProjectPosts()" :post="post"/>
                     <p class="note-row">
                         <span class="note-mark">{{ __('Created At')}}:</span>
                         {{ guide.getTopicField('createdAt', guide.categoriesId) }}

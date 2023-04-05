@@ -64,10 +64,11 @@ Route::get('/project/{project}', function (Project $project) {
         ->orWhereNull('project_id')->get()->keyBy('id');
     $links = $user->links()->whereIn('note_id', $notes->modelKeys())->get()->keyBy('id');
     return Inertia::render('Project', [
-        'project' => ProjectResource::make($project),
+        'projectId' => $project->getKey(),
+        'projects' => ProjectResource::collection([$project->getKey() => $project]),
+        'topics' => TopicResource::collection($topics),
         'posts' => PostResource::collection($posts),
         'notes' => NoteResource::collection($notes),
-        'topics' => TopicResource::collection($topics),
         'links' => LinkResource::collection($links)
     ]);
 })->middleware(['auth', 'verified'])->name('guide.project');

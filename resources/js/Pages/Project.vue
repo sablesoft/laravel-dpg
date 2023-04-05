@@ -1,3 +1,4 @@
+<!--suppress JSConstantReassignment -->
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
@@ -12,11 +13,27 @@ import {onMounted, shallowRef, toRaw} from "vue";
 const tabName = shallowRef('notes');
 
 const props = defineProps({
-    project: {
+    projectId: {
+        type: Number,
+        required: true
+    },
+    projects: {
         type: Object,
         required: true
     },
     topics: {
+        type: Object,
+        required: true
+    },
+    notes: {
+        type: Object,
+        required: true
+    },
+    posts: {
+        type: Object,
+        required: true
+    },
+    links: {
         type: Object,
         required: true
     }
@@ -24,10 +41,14 @@ const props = defineProps({
 
 onMounted(() => {
     guide.init({
-        project: props.project,
-        topics: props.topics
+        projectsId: toRaw(props.projectId),
+        projects: props.projects,
+        topics: props.topics,
+        posts: props.posts,
+        notes: props.notes,
+        links: props.links,
     })
-    console.debug('PROJECT', toRaw(props.project));
+    console.debug('PROJECT', toRaw(props.projectId));
 });
 
 </script>
@@ -38,13 +59,13 @@ onMounted(() => {
 </style>
 <template>
     <Head>
-        <title>{{ project.data.code }}</title>
+        <title v-if="guide.isReady">{{ guide.getProject().code }}</title>
     </Head>
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ project.data.name + ' ('+ project.data.code +')'}}
+            <h2 v-if="guide.isReady" class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ guide.getProject().name + ' ('+ guide.getProject().code +')'}}
             </h2>
         </template>
         <div class="py-2" v-if="guide.isReady">

@@ -1,22 +1,25 @@
 import {reactive} from 'vue';
-import {isEmpty} from "lodash/lang";
+import {isEmpty, isNumber} from "lodash/lang";
 
 export const guide = reactive({
     projects : {},
     topics : {},
     notes : {},
     posts : {},
+    links : {},
     topicsId : null,
     projectsId : null,
     isReady: false,
     isAddNote: false,
     isAddTopic: false,
     isAddProject: false,
-    init(data) {
-        for (const [key, value] of Object.entries(data)) {
+    init(config) {
+        for (const [key, value] of Object.entries(config)) {
+            console.log('Init: ', key);
             let data = value.data ? value.data : value;
-            if (!isEmpty(data)) {
-                this[key] = value.data ? value.data : value;
+            if (isNumber(data) || !isEmpty(data)) {
+                this[key] = data;
+                console.log('Initiated!');
             }
         }
         this.isReady = true;
@@ -38,6 +41,19 @@ export const guide = reactive({
         });
 
         return notes;
+    },
+    getProjectTopics(id = null) {
+        let project = this.getProject(id);
+        if (!project) {
+            return [];
+        }
+        let topics = [];
+        let self = this;
+        project.topicIds.forEach(function(id) {
+            topics.push(self.topics[id]);
+        });
+
+        return topics;
     },
     getTopic(id = null) {
         id = id ? id : this.topicsId;
@@ -66,8 +82,8 @@ export const guide = reactive({
                 console.error(err);
             });
     },
-    delete(table) {
-        let id = this[table + 'Id'];
+    delete(table, id = null) {
+        id = id ? id : this[table + 'Id'];
         let entity = this[table][id];
         if (!entity) {
             throw new Error('Entity not found: ' + table + ' - ' +  id);
@@ -118,6 +134,16 @@ export const guide = reactive({
         for (const [postId, post] of Object.entries(this.posts)) {
             if (parseInt(post.topicId) === parseInt(id)) {
                 this.removePost(postId);
+            }
+        }
+        if (topic.projectId) {
+            let project = this.getProject(topic.projectId);
+            let topicIds = project.topicIds;
+            const index = topicIds.indexOf(parseInt(id));
+            if (index > -1) {
+                topicIds.splice(index, 1);
+                project.topicIds = topicIds;
+                console.log('Project topicIds cleared!', project);
             }
         }
         if (this.topicsId && parseInt(this.topicsId) === parseInt(id)) {

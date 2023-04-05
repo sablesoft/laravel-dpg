@@ -26,16 +26,13 @@ class ProjectResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $name = $request->route()->getName();
         return [
             'id' => $this->id,
             'name' => $this->name,
             'code' => $this->code,
-            'notes' => NoteResource::collection($this->notes->keyBy('id')),
-            $this->mergeWhen($name !== 'dashboard', [
-                'posts' => PostResource::collection($this->posts->keyBy('id')),
-                'topics' => TopicResource::collection($this->topics->keyBy('id'))
-            ]),
+            'noteIds' => $this->notes->modelKeys(),
+            'postIds' => $this->posts->modelKeys(),
+            'topicIds' => $this->topics->modelKeys(),
             "createdAt" => optional($this->created_at)->format('Y-m-d'),
             "updatedAt" => optional($this->updated_at)->format('Y-m-d'),
         ];

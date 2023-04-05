@@ -2,14 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Guide\Link;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Guide\Post;
 
 /**
- * @mixin Post
+ * @mixin Link
  */
-class PostResource extends JsonResource
+class LinkResource extends JsonResource
 {
     /**
      * Indicates if the resource's collection keys should be preserved.
@@ -28,11 +28,10 @@ class PostResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'projectId' => $this->project_id,
-            'categoryId' => $this->category_id,
-            'topicId' => $this->topic_id,
-            'noteIds' => $this->notes->modelKeys(),
-            'targetLinkIds' => $this->targetLinks->modelKeys(),
+            'noteId' => $this->note_id,
+            'targetCategoryId' => $this->target_category_id,
+            'targetPostId' => $this->target_post_id,
+            'targetNoteId' => $this->target_note_id,
             "createdAt" => optional($this->created_at)->format('Y-m-d'),
             "updatedAt" => optional($this->updated_at)->format('Y-m-d'),
         ];

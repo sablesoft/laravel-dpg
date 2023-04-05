@@ -3,11 +3,8 @@
 namespace App\Models\Guide;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\Traits\Owner;
 
 /**
  * @property int|null $id
@@ -17,31 +14,20 @@ use App\Models\Traits\Owner;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
- * @property Project|null $project
- * @property Post[]|null $categoryPosts
- * @property Post[]|null $posts
- * @property Note[]|null $notes
- * @property Link[]|null $categoryLinks
+ * @property Post[]|Collection $categoryPosts
+ * @property Link[]|Collection $categoryLinks
  */
-class Topic extends Model
+class Topic extends GuideItem
 {
-    use Owner;
+    use HasNotes, HasPosts, BelongsToProject;
 
-    protected $table = 'guide_topics';
+    protected $table = 'topics';
 
     protected $fillable = [
         'name',
         'desc',
         'project_id'
     ];
-
-    /**
-     * @return BelongsTo
-     */
-    public function project(): BelongsTo
-    {
-        return $this->belongsTo(Project::class);
-    }
 
     /**
      * @return HasMany
@@ -54,36 +40,8 @@ class Topic extends Model
     /**
      * @return HasMany
      */
-    public function posts(): HasMany
-    {
-        return $this->hasMany(Post::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function notes(): HasMany
-    {
-        return $this->hasMany(Note::class);
-    }
-
-    /**
-     * @return HasMany
-     */
     public function categoryLinks(): HasMany
     {
         return $this->hasMany(Link::class, 'target_category_id');
-    }
-
-    /**
-     * @return void
-     */
-    public static function boot(): void
-    {
-        parent::boot();
-
-        static::creating(function (Topic $topic) {
-            $topic->owner()->associate(Auth::user());
-        });
     }
 }

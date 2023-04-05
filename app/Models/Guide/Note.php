@@ -3,7 +3,7 @@
 namespace App\Models\Guide;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -16,17 +16,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
- * @property Project|null $project
  * @property Post|null $post
- * @property Topic|null $topic
- * @property Link[]|null $links
- * @property Link[]|null $targetLinks
+ * @property Link[]|Collection $links
+ * @property Link[]|Collection $targetLinks
  *
  * @property-read string|null $title
  */
-class Note extends Model
+class Note extends GuideItem
 {
-    protected $table = 'guide_notes';
+    use BelongsToProject, BelongsToTopic;
+
+    protected $table = 'notes';
 
     protected $fillable = [
         'topic_id',
@@ -49,25 +49,9 @@ class Note extends Model
     /**
      * @return BelongsTo
      */
-    public function project(): BelongsTo
-    {
-        return $this->belongsTo(Project::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function topic(): BelongsTo
-    {
-        return $this->belongsTo(Topic::class);
     }
 
     /**

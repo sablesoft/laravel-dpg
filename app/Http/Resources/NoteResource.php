@@ -26,17 +26,14 @@ class NoteResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $name = $request->route()->getName();
         return [
             'id' => $this->id,
             'projectId' => $this->project_id,
             'postId' => $this->post_id,
             'topicId' => $this->topic_id,
-            'title' => $this->title,
             'content' => $this->content,
-            $this->mergeWhen($name !== 'dashboard', [
-                'topic' => TopicResource::make($this->topic),
-            ]),
+            'linkIds' => $this->links->modelKeys(),
+            'targetLinkIds' => $this->targetLinks->modelKeys(),
             "createdAt" => optional($this->created_at)->format('Y-m-d'),
             "updatedAt" => optional($this->updated_at)->format('Y-m-d'),
         ];

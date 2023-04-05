@@ -26,18 +26,15 @@ class TopicResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $name = $request->route()->getName();
         return [
             'id' => $this->id,
             'name' => $this->name,
             'desc' => $this->desc,
             'projectId' => $this->project_id,
-            $this->mergeWhen($name !== 'dashboard', [
-                'categoryPosts' => PostResource::collection($this->categoryPosts),
-                'posts' => PostResource::collection($this->posts),
-                'notes' => $this->notes,
-                'categoryLinks' => $this->categoryLinks,
-            ]),
+            'postIds' => $this->posts->modelKeys(),
+            'noteIds' => $this->notes->modelKeys(),
+            'categoryPostIds' => $this->categoryPosts->modelKeys(),
+            'categoryLinkIds' => $this->categoryLinks->modelKeys(),
             "createdAt" => optional($this->created_at)->format('Y-m-d'),
             "updatedAt" => optional($this->updated_at)->format('Y-m-d'),
         ];

@@ -3,7 +3,6 @@
 namespace App\Models\Guide;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -20,9 +19,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Post|null $targetPost
  * @property Note|null $targetNote
  */
-class Link extends Model
+class Link extends GuideItem
 {
-    protected $table = 'guide_links';
+    protected $table = 'links';
 
     /**
      * @return BelongsTo

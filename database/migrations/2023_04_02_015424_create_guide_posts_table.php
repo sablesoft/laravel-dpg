@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('guide_posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('owner_id')->nullable(false)
+                ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('project_id')->nullable(false)
                 ->constrained('guide_projects')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('category_id')->nullable(false)

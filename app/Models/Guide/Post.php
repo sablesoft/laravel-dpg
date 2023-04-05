@@ -26,6 +26,12 @@ class Post extends GuideItem
 
     protected $table = 'guide_posts';
 
+    protected $fillable = [
+        'topic_id',
+        'category_id',
+        'project_id',
+    ];
+
     /**
      * @return string|null
      */

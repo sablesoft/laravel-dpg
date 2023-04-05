@@ -9,17 +9,17 @@ export const guide = reactive({
     links : {},
     topicsId : null,
     projectsId : null,
+    categoriesId : null,
     isReady: false,
     isAddNote: false,
     isAddTopic: false,
     isAddProject: false,
+    isAddPost: false,
     init(config) {
         for (const [key, value] of Object.entries(config)) {
-            console.log('Init: ', key);
             let data = value.data ? value.data : value;
             if (isNumber(data) || !isEmpty(data)) {
                 this[key] = data;
-                console.log('Initiated!');
             }
         }
         this.isReady = true;
@@ -34,10 +34,10 @@ export const guide = reactive({
         if (!project) {
             return [];
         }
-        let notes = [];
+        let notes = {};
         let self = this;
         project.noteIds.forEach(function(id) {
-           notes.push(self.notes[id]);
+           notes[id] = self.notes[id];
         });
 
         return notes;
@@ -47,13 +47,38 @@ export const guide = reactive({
         if (!project) {
             return [];
         }
-        let topics = [];
+        let topics = {};
         let self = this;
         project.topicIds.forEach(function(id) {
-            topics.push(self.topics[id]);
+            topics[id] = self.topics[id];
         });
 
         return topics;
+    },
+    getProjectPosts(id = null) {
+        let project = this.getProject(id);
+        if (!project) {
+            return [];
+        }
+        let posts = {};
+        let self = this;
+        project.postIds.forEach(function(id) {
+            posts[id] = self.posts[id];
+        });
+
+        return posts;
+    },
+    getProjectCategories(id = null) {
+        let posts = this.getProjectPosts(id);
+        if (isEmpty(posts)) {
+            return {};
+        }
+        let categories = {};
+        for (const [id, post] of Object.entries(posts)) {
+            categories[post.categoryId] = this.getTopic(post.categoryId);
+        }
+
+        return categories;
     },
     getTopic(id = null) {
         id = id ? id : this.topicsId;
@@ -237,6 +262,24 @@ export const guide = reactive({
         post['data'][config['target'] + '_id'] = config['targetId'];
         this.request('guide.create', post, callback);
     },
+    createPost(config, callback) {
+        let post = {
+            table: 'posts',
+            data: {
+                topic_id: config['topicId'],
+                category_id: config['categoryId']
+            }
+        };
+        post['data'][config['target'] + '_id'] = config['targetId'];
+        this.request('guide.create', post, callback);
+    },
+    createTopic(config, callback) {
+        let post = {
+            table: 'topics',
+            data: config
+        };
+        this.request('guide.create', post, callback);
+    },
     addProjectNote(form) {
         let self = this;
         this.createNote({
@@ -256,12 +299,24 @@ export const guide = reactive({
             self.isAddNote = false;
         });
     },
-    createTopic(config, callback) {
-        let post = {
-            table: 'topics',
-            data: config
-        };
-        this.request('guide.create', post, callback);
+    addProjectPost(form) {
+        let self = this;
+        this.createPost({
+            target : 'project',
+            targetId :  this.projectsId,
+            categoryId : form.categoryId,
+            topicId : form.topicId
+        }, function(res) {
+            if (res.status === 201) {
+                console.log('addProjectPost - response', res.data);
+                let post = res.data.data;
+                self.posts[post.id] = post;
+                let project = self.getProject();
+                project.postIds.push(parseInt(post.id));
+                console.log(self.posts);
+            }
+            self.isAddPost = false;
+        });
     },
     addTopic(form) {
         let self = this;
@@ -301,5 +356,12 @@ export const guide = reactive({
             }
             self.isAddProject = false;
         });
+    },
+    resetAdding() {
+        let self = this;
+        ['Note', 'Project', 'Topic', 'Post'].forEach(function(field) {
+            field = 'isAdd' + field;
+            self[field] = false;
+        })
     }
 });

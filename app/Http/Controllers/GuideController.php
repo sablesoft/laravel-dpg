@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Guide\Post;
 use App\Models\Guide\Note;
 use App\Models\Guide\Topic;
 use App\Models\Guide\Project;
+use App\Http\Resources\PostResource;
 use App\Http\Resources\NoteResource;
 use App\Http\Resources\TopicResource;
 use App\Http\Resources\ProjectResource;
@@ -46,6 +48,9 @@ class GuideController extends Controller
             case 'projects':
                 $project = Project::create($data['data']);
                 return ProjectResource::make($project);
+            case 'posts':
+                $post = Post::create($data['data']);
+                return PostResource::make($post);
             default: throw new Exception('Unknown table: ' . $data['table']);
         }
     }

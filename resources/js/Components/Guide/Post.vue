@@ -14,18 +14,30 @@ const props = defineProps({
 <style>
 </style>
 <template>
-    <div @click="guide.postsId = guide.postsId === post.id ? null : post.id"
-         :class="guide.postsId === post.id ? 'active-block' : ''"
+    <div :class="guide.postsId === post.id ? 'active-block' : ''"
          class="post-row ease-in-out duration-150">
-        <h2 class="block-subtitle">
-            <Editable :text="guide.getTopicField('name', post.topicId)"
+        <h2 class="block-subtitle" @click="guide.postsId = guide.postsId === post.id ? null : post.id">
+            <Editable :text="guide.getTopicField('name', post.topicId)" type="input"
                       @updated="(text) => guide.updateTopic(text, 'name', post.topicId)"/>
         </h2>
+        <p>
+            <Editable :text="guide.getTopicField('desc', post.topicId)"
+                      @updated="(text) => guide.updateTopic(text, 'desc', post.topicId)"/>
+        </p>
+        <div class="post-more" v-if="guide.postsId === post.id">
+            <hr/>
+            <SecondaryButton v-if="!guide.isAddNote" @click.prevent.stop="guide.isAddNote = true">
+                {{__('Add Note')}}
+            </SecondaryButton>
+            <AddNote v-if="guide.isAddNote" target="post"/>
+            <Note v-if="!guide.isAddNote" v-for="note in guide.getPostNotes(post.id)" :note="note"/>
+            <p>
+                <span class="note-mark">{{ __('Created At')}}:</span> {{ post.createdAt }}
+            </p>
+            <p>
+                <span class="note-mark">{{ __('Updated At')}}:</span> {{ post.updatedAt }}
+            </p>
+        </div>
         <hr/><br/>
-        <SecondaryButton v-if="!guide.isAddNote" @click.prevent.stop="guide.isAddNote = true">
-            {{__('Add Note')}}
-        </SecondaryButton>
-        <AddNote v-if="guide.isAddNote"/>
-        <Note v-if="!guide.isAddNote" v-for="note in guide.getPostNotes(post.id)" :note="note"/>
     </div>
 </template>

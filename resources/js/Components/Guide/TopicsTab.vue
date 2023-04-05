@@ -56,25 +56,25 @@ button {
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 text-gray-900">
                     <p class="note-row">
-                        <span class="note-mark">{{ __('Name')}}: </span>
-                        <Editable :text="guide.getTopicField('name')"
+                        <span class="note-mark">{{ __('Name')}}</span>
+                        <Editable :text="guide.getTopicField('name')" type="input"
                                   @updated="(text) => guide.updateTopic(text, 'name')"/>
                     </p>
                     <p class="note-row">
-                        <span class="note-mark">{{ __('Desc')}}: </span>
+                        <span class="note-mark">{{ __('Desc')}}</span>
                         <Editable :text="guide.getTopicField('desc')"
                                   @updated="(text) => guide.updateTopic(text, 'desc')"/>
                     </p>
                     <p class="note-row">
-                        <span class="note-mark">{{ __('Project')}}:</span>
+                        <span class="note-mark">{{ __('Project')}}: </span>
                         {{ guide.getTopicProject() ? guide.getTopicProject().name : __('Global')}}
                     </p>
                     <p class="note-row">
-                        <span class="note-mark">{{ __('Created At')}}:</span>
+                        <span class="note-mark">{{ __('Created At')}}: </span>
                         {{ guide.getTopicField('createdAt') }}
                     </p>
                     <p class="note-row">
-                        <span class="note-mark">{{ __('Updated At')}}:</span>
+                        <span class="note-mark">{{ __('Updated At')}}: </span>
                         {{ guide.getTopicField('updatedAt') }}
                     </p>
                 </div>

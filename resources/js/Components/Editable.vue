@@ -35,10 +35,10 @@ textarea, input {
 <template>
     <template v-if="editMode">
         <div @keydown.stop @click.stop>
-            <input v-if="type === 'input'" v-model="props.text"
-                   ref="input" @blur="edit" />
-            <textarea v-if="type !== 'input'" v-model="props.text" rows="8"
-                      ref="input" @blur="edit" />
+            <input v-if="type === 'input'" @keydown.esc.stop="$event.target.blur()"
+                   v-model="props.text" ref="input" @blur="edit" />
+            <textarea v-if="type !== 'input'" @keydown.esc.stop="$event.target.blur()"
+                      v-model="props.text" rows="8" ref="input" @blur="edit" />
         </div>
     </template>
     <template v-else>

@@ -11,9 +11,6 @@ import { guide } from "@/guide";
 .note-mark {
     font-weight: bold;
 }
-.note-row {
-    margin-bottom: 8px;
-}
 button {
     background-color: #fff;
     border-color: #6b7280;
@@ -52,7 +49,7 @@ button {
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 text-gray-900">
                     <h2 class="block-title">
-                        <Editable :text="guide.getTopicField('name', guide.categoriesId)"
+                        <Editable :text="guide.getTopicField('name', guide.categoriesId)" type="input"
                                   @updated="(text) => guide.updateTopic(text, 'name', guide.categoriesId)"/>
                     </h2>
                     <p>
@@ -61,11 +58,11 @@ button {
                     </p>
                     <hr/><br/>
                     <Post v-for="post in guide.getProjectPosts()" :post="post"/>
-                    <p class="note-row">
+                    <p>
                         <span class="note-mark">{{ __('Created At')}}:</span>
                         {{ guide.getTopicField('createdAt', guide.categoriesId) }}
                     </p>
-                    <p class="note-row">
+                    <p>
                         <span class="note-mark">{{ __('Updated At')}}:</span>
                         {{ guide.getTopicField('updatedAt', guide.categoriesId) }}
                     </p>

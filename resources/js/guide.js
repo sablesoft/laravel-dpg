@@ -150,6 +150,8 @@ export const guide = reactive({
                 case 'notes':
                     self.removeNote(id);
                     break;
+                case 'posts':
+                    self.removePost(id);
                 default:
                     break;
             }
@@ -171,7 +173,10 @@ export const guide = reactive({
         if (this.projectsId && parseInt(this.projectsId) === parseInt(id)) {
             this.projectsId = null;
         }
-        delete this.projects[id];
+        // pause for all staff deleting:
+        setTimeout(function() {
+            delete self.projects[id];
+        }, 2000);
     },
     removeTopic(id) {
         let topic = this.topics[id];
@@ -203,7 +208,11 @@ export const guide = reactive({
         if (this.categoriesId && parseInt(this.categoriesId) === parseInt(id)) {
             this.categoriesId = null;
         }
-        delete this.topics[id];
+        let self = this;
+        // pause for all staff deleting:
+        setTimeout(function() {
+            delete self.topics[id];
+        }, 1000);
     },
     removeNote(id) {
         let note = this.notes[id];
@@ -228,6 +237,9 @@ export const guide = reactive({
                 console.log('Post noteIds cleared!', post);
             }
         }
+        if (this.notesId && parseInt(this.notesId) === parseInt(id)) {
+            this.notesId = null;
+        }
         delete this.notes[id];
     },
     removePost(id) {
@@ -241,7 +253,17 @@ export const guide = reactive({
             project.postIds = postIds;
             console.log('Project postIds cleared!');
         }
-        delete this.posts[id];
+        let self = this;
+        post.noteIds.forEach(function(id) {
+            self.removeNote(parseInt(id));
+        });
+        if (this.postsId && parseInt(this.postsId) === parseInt(id)) {
+            this.postsId = null;
+        }
+        // pause for notes deleting:
+        setTimeout(function() {
+            delete self.posts[id];
+        }, 500);
     },
     updateProject(field, value) {
         let project = this.getProject();
@@ -315,20 +337,38 @@ export const guide = reactive({
         };
         this.request('guide.create', post, callback);
     },
-    addProjectNote(form) {
+    addNote(form, target = 'project') {
         let self = this;
+        let targetId = this[target + 'sId']
         this.createNote({
-            target : 'project',
-            targetId :  this.projectsId,
+            target : target,
+            targetId : targetId,
             topicId : form.topicId,
             content : form.content
         }, function(res) {
             if (res.status === 201) {
-                console.log('addProjectNote - response', res.data);
+                console.log('addNote - response', res.data);
                 let note = res.data.data;
                 self.notes[note.id] = note;
-                let project = self.getProject();
-                project.noteIds.push(parseInt(note.id));
+                let noteIds;
+                switch (target) {
+                    case 'project':
+                        let project = self.getProject(targetId);
+                        noteIds = project.noteIds;
+                        noteIds.push(parseInt(note.id));
+                        project.noteIds = noteIds;
+                        console.log('Project notes updated!');
+                        break;
+                    case 'post':
+                        let post = self.getPost(targetId);
+                        noteIds = post.noteIds;
+                        noteIds.push(parseInt(note.id));
+                        post.noteIds = noteIds;
+                        console.log('Post notes updated!');
+                        break;
+                    default:
+                        break;
+                }
                 console.log(self.notes);
             }
             self.isAddNote = false;
@@ -398,6 +438,12 @@ export const guide = reactive({
         ['Note', 'Project', 'Topic', 'Post'].forEach(function(field) {
             field = 'isAdd' + field;
             self[field] = false;
+        })
+    },
+    resetSelect() {
+        let self = this;
+        ['notesId', 'postsId'].forEach(function(field) {
+            self[field] = null;
         })
     }
 });

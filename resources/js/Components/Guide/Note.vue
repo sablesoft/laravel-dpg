@@ -18,15 +18,13 @@ const props = defineProps({
         </h3>
         <Editable :text="note.content"
                   @updated="(text) => guide.updateNote(note.id, text)"/>
-        <div v-if="guide.notesId === note.id" class="note-additional">
+        <div v-if="guide.notesId === note.id" class="note-more">
             <hr/><br/>
-            <p class="note-more">
-                <span class="note-mark">{{ __('Created At')}}:</span>
-                {{ note.createdAt }}
+            <p>
+                <span class="note-mark">{{ __('Created At')}}: </span> {{ note.createdAt }}
             </p>
-            <p class="note-more">
-                <span class="note-mark">{{ __('Updated At')}}:</span>
-                {{ note.updatedAt }}
+            <p>
+                <span class="note-mark">{{ __('Updated At')}}: </span> {{ note.updatedAt }}
             </p>
         </div>
     </div>

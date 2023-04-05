@@ -13,16 +13,6 @@ const form = useForm({
     content: null
 });
 
-onMounted(() => {
-    window.addEventListener('keydown', function(event) {
-        const key = event.key;
-        if (key === "Backspace" || key === "Delete") {
-            console.log('Delete note key!', event);
-            guide.delete('notes');
-        }
-    })
-})
-
 </script>
 
 <style>

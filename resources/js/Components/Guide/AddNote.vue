@@ -6,6 +6,13 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
+const props = defineProps({
+    target: {
+        type: String,
+        required: false
+    }
+});
+
 const form = useForm({
     topicId: null,
     content: null
@@ -17,7 +24,7 @@ const form = useForm({
 </style>
 
 <template>
-    <form @submit.prevent="guide.addProjectNote(form)">
+    <form @submit.prevent="guide.addNote(form, target)">
         <h2 class="action-title">{{__('Create Note')}}</h2>
         <hr/><br/>
         <div>
@@ -32,7 +39,7 @@ const form = useForm({
         <div>
             <InputLabel for="content" :value="__('Content')" />
             <TextareaInput id="content" class="mt-1 block w-full"
-                       @click.prevent.stop=""
+                       @click.stop @keydown.stop @keyup.stop
                        v-model="form.content" required />
         </div>
 

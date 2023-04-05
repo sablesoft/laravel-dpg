@@ -4,6 +4,7 @@ namespace App\Models\Guide;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\User;
 
 /**
  * @property-read Topic[]|Collection $topics
@@ -15,6 +16,7 @@ trait HasTopics
      */
     public function topics(): HasMany
     {
-        return $this->hasMany(Topic::class);
+        $foreignKey = get_class($this) === User::class ? 'owner_id' : null;
+        return $this->hasMany(Topic::class, $foreignKey);
     }
 }

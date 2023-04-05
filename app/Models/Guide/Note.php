@@ -26,7 +26,7 @@ class Note extends GuideItem
 {
     use BelongsToProject, BelongsToTopic, HasLinks;
 
-    protected $table = 'notes';
+    protected $table = 'guide_notes';
 
     protected $fillable = [
         'topic_id',

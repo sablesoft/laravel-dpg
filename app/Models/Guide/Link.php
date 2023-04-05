@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Link extends GuideItem
 {
-    protected $table = 'links';
+    protected $table = 'guide_links';
 
     /**
      * @return BelongsTo

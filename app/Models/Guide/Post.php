@@ -24,7 +24,7 @@ class Post extends GuideItem
 {
     use BelongsToProject, BelongsToTopic, HasNotes;
 
-    protected $table = 'posts';
+    protected $table = 'guide_posts';
 
     /**
      * @return string|null

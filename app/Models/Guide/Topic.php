@@ -21,7 +21,7 @@ class Topic extends GuideItem
 {
     use HasNotes, HasPosts, BelongsToProject;
 
-    protected $table = 'topics';
+    protected $table = 'guide_topics';
 
     protected $fillable = [
         'name',

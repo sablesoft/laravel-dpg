@@ -164,7 +164,8 @@ export const guide = reactive({
             }
         }
         for (const [postId, post] of Object.entries(this.posts)) {
-            if (parseInt(post.topicId) === parseInt(id)) {
+            if (parseInt(post.categoryId) === parseInt(id) ||
+                parseInt(post.topicId) === parseInt(id)) {
                 this.removePost(postId);
             }
         }
@@ -180,6 +181,9 @@ export const guide = reactive({
         }
         if (this.topicsId && parseInt(this.topicsId) === parseInt(id)) {
             this.topicsId = null;
+        }
+        if (this.categoriesId && parseInt(this.categoriesId) === parseInt(id)) {
+            this.categoriesId = null;
         }
         delete this.topics[id];
     },
@@ -198,9 +202,12 @@ export const guide = reactive({
         }
         if (note.postId) {
             let post = this.posts[note.postId];
-            const index = post.noteIds.indexOf(id);
+            let noteIds = post.noteIds;
+            const index = noteIds.indexOf(parseInt(id));
             if (index > -1) {
-                post.noteIds.splice(index, 1);
+                noteIds.splice(index, 1);
+                post.noteIds = noteIds;
+                console.log('Post noteIds cleared!', post);
             }
         }
         delete this.notes[id];
@@ -209,9 +216,12 @@ export const guide = reactive({
         let post = this.posts[id];
         console.log('Remove post:', post);
         let project = this.projects[post.projectId];
-        const index = project.postIds.indexOf(id);
+        let postIds = project.postIds;
+        const index = postIds.indexOf(parseInt(id));
         if (index > -1) {
-            project.postIds.splice(index, 1);
+            postIds.splice(index, 1);
+            project.postIds = postIds;
+            console.log('Project postIds cleared!');
         }
         delete this.posts[id];
     },
@@ -320,6 +330,7 @@ export const guide = reactive({
                 self.posts[post.id] = post;
                 let project = self.getProject();
                 project.postIds.push(parseInt(post.id));
+                self.categoriesId = post.categoryId;
                 console.log(self.posts);
             }
             self.isAddPost = false;

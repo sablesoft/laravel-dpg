@@ -65,7 +65,7 @@ onMounted(() => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 v-if="guide.isReady" class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 v-if="guide.isReady" class="block-title font-semibold text-xl text-gray-800 leading-tight">
                 {{ guide.getProject().name + ' ('+ guide.getProject().code +')'}}
             </h2>
             <hr>

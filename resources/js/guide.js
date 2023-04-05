@@ -278,6 +278,7 @@ export const guide = reactive({
                 if (topic.projectId) {
                     self.projects[topic.projectId].topicIds.push(topic.id);
                 }
+                self.topicsId = topic.id;
                 console.log(self.topics);
             }
             self.isAddTopic = false;

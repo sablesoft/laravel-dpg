@@ -31,7 +31,7 @@ textarea {
 
 <template>
     <template v-if="editMode">
-        <textarea v-model="props.text" ref="textarea" @blur="edit"/>
+        <textarea v-model="props.text" rows="8" ref="textarea" @blur="edit"/>
     </template>
     <template v-else>
         <span @dblclick="edit">

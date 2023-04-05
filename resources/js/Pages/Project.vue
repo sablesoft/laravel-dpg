@@ -3,7 +3,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import ProjectNotes from '@/Components/Guide/ProjectNotes.vue';
-import ProjectTopics from '@/Components/Guide/ProjectTopics.vue';
+import TopicTabs from '@/Components/Guide/TopicsTab.vue';
 import {Head} from '@inertiajs/inertia-vue3';
 
 import { guide } from "@/guide";
@@ -74,8 +74,8 @@ onMounted(() => {
                     <SecondaryButton @click="tabName = 'notes'">
                         {{__('Notes')}}
                     </SecondaryButton>
-                    <SecondaryButton @click="tabName = 'posts'">
-                        {{__('Posts')}}
+                    <SecondaryButton @click="tabName = 'categories'">
+                        {{__('Categories')}}
                     </SecondaryButton>
                     <SecondaryButton @click="tabName = 'topics'">
                         {{__('Topics')}}
@@ -86,7 +86,7 @@ onMounted(() => {
                 <ProjectNotes/>
             </div>
             <div v-if="tabName === 'topics'" class="py-2">
-                <ProjectTopics/>
+                <TopicTabs :topics="guide.getProjectTopics()"/>
             </div>
         </div>
     </AuthenticatedLayout>

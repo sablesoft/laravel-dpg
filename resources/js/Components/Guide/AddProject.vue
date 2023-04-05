@@ -1,6 +1,7 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from '@/Components/TextInput.vue';
 
 import { guide } from "@/guide";
@@ -16,7 +17,9 @@ const form = useForm({
 </style>
 
 <template>
-    <form v-if="guide.isAddProject" @submit.prevent="guide.addProject(form)">
+    <form @submit.prevent="guide.addProject(form)">
+        <h2 class="block-title">{{__('Create Project')}}</h2>
+        <hr/><br/>
         <div>
             <InputLabel for="name" :value="__('Name')" />
             <TextInput id="name" type="text" class="mt-1 block w-full"
@@ -29,7 +32,11 @@ const form = useForm({
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <PrimaryButton>
+            <SecondaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                             @click="guide.resetAdding()">
+                {{__('Cancel')}}
+            </SecondaryButton>
+            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 {{__('Add')}}
             </PrimaryButton>
         </div>

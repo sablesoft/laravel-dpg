@@ -1,14 +1,19 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
+import { onMounted } from "vue";
+
 const form = useForm({
+    categoryId: null,
     topicId: null,
-    content: null
+});
+
+onMounted(() => {
+    form.categoryId = guide.categoriesId;
 });
 
 </script>
@@ -17,27 +22,30 @@ const form = useForm({
 </style>
 
 <template>
-    <form @submit.prevent="guide.addProjectNote(form)">
-        <h2 class="block-title">{{__('Create Note')}}</h2>
+    <form @submit.prevent="guide.addProjectPost(form)">
+        <h2 class="block-title">{{__('Create Post')}}</h2>
         <hr/><br/>
         <div>
-            <InputLabel for="topic" :value="__('Topic')" />
-            <select v-model="form.topicId" required class="mt-1 block w-full">
-                <option :value="null" disabled>{{ __('Select Note Topic') }}</option>
+            <InputLabel for="category" :value="__('Category')" />
+            <select v-model="form.categoryId" required class="mt-1 block w-full">
+                <option :value="null" disabled>{{ __('Select Post Category') }}</option>
                 <option v-for="topic in guide.topics" :value="topic.id">
                     {{ topic.name }}
                 </option>
             </select>
         </div>
         <div>
-            <InputLabel for="content" :value="__('Content')" />
-            <TextInput id="content" type="text" class="mt-1 block w-full"
-                       v-model="form.content" required />
+            <InputLabel for="topic" :value="__('Topic')" />
+            <select v-model="form.topicId" required class="mt-1 block w-full">
+                <option :value="null" disabled>{{ __('Select Post Topic') }}</option>
+                <option v-for="topic in guide.topics" :value="topic.id">
+                    {{ topic.name }}
+                </option>
+            </select>
         </div>
-
         <div class="flex items-center justify-end mt-4">
             <SecondaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                             @click="guide.resetAdding()">
+                @click="guide.resetAdding()">
                 {{__('Cancel')}}
             </SecondaryButton>
             <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

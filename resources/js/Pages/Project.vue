@@ -3,14 +3,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import ProjectNotes from '@/Components/Guide/ProjectNotes.vue';
-import TopicTabs from '@/Components/Guide/TopicsTab.vue';
+import TopicsTab from '@/Components/Guide/TopicsTab.vue';
+import CategoriesTab from '@/Components/Guide/CategoriesTab.vue';
 import {Head} from '@inertiajs/inertia-vue3';
 
 import { guide } from "@/guide";
 
 import {onMounted, shallowRef, toRaw} from "vue";
 
-const tabName = shallowRef('notes');
+const tabName = shallowRef('Info');
 
 const props = defineProps({
     projectId: {
@@ -67,26 +68,31 @@ onMounted(() => {
             <h2 v-if="guide.isReady" class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ guide.getProject().name + ' ('+ guide.getProject().code +')'}}
             </h2>
+            <hr>
+            <p>{{ __(tabName) }}</p>
         </template>
         <div class="py-2" v-if="guide.isReady">
             <div class="py-2">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <SecondaryButton @click="tabName = 'notes'">
-                        {{__('Notes')}}
+                    <SecondaryButton @click="tabName = 'Info'">
+                        {{__('Info')}}
                     </SecondaryButton>
-                    <SecondaryButton @click="tabName = 'categories'">
+                    <SecondaryButton @click="tabName = 'Categories'">
                         {{__('Categories')}}
                     </SecondaryButton>
-                    <SecondaryButton @click="tabName = 'topics'">
+                    <SecondaryButton @click="tabName = 'Topics'">
                         {{__('Topics')}}
                     </SecondaryButton>
                 </div>
             </div>
-            <div v-if="tabName === 'notes'" class="py-2">
+            <div v-if="tabName === 'Info'" class="py-2">
                 <ProjectNotes/>
             </div>
-            <div v-if="tabName === 'topics'" class="py-2">
-                <TopicTabs :topics="guide.getProjectTopics()"/>
+            <div v-if="tabName === 'Topics'" class="py-2">
+                <TopicsTab :topics="guide.getProjectTopics()"/>
+            </div>
+            <div v-if="tabName === 'Categories'" class="py-2">
+                <CategoriesTab/>
             </div>
         </div>
     </AuthenticatedLayout>

@@ -23,7 +23,7 @@ const props = defineProps({
     }
 });
 
-const tabName = shallowRef('projects');
+const tabName = shallowRef('Projects');
 
 let view = function(name) {
     window.location.href = name === 'topic' ? '/topic/' + guide.topicsId :
@@ -59,19 +59,21 @@ onMounted(() => {
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Dashboard') }}
             </h2>
+            <hr>
+            <p>{{ __(tabName) }}</p>
         </template>
         <div class="py-2" v-if="guide.isReady">
             <div class="py-2">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <SecondaryButton @click="tabName = 'projects'">
+                    <SecondaryButton @click="tabName = 'Projects'">
                         {{__('Projects')}}
                     </SecondaryButton>
-                    <SecondaryButton @click="tabName = 'topics'">
+                    <SecondaryButton @click="tabName = 'Topics'">
                         {{__('Topics')}}
                     </SecondaryButton>
                 </div>
             </div>
-            <div v-if="tabName === 'projects'" class="py-2">
+            <div v-if="tabName === 'Projects'" class="py-2">
                 <!-- Projects Control Tab -->
                 <div class="py-2">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -87,13 +89,13 @@ onMounted(() => {
                         <button v-if="guide.projectsId" @click="guide.delete('projects')">
                             {{ __('Delete')}}
                         </button>
-                        <AddProject/>
+                        <AddProject v-if="guide.isAddProject"/>
                     </div>
                 </div>
                 <!-- Project Notes -->
                 <ProjectNotes v-if="guide.projectsId"/>
             </div>
-            <div v-if="tabName === 'topics'" class="py-2">
+            <div v-if="tabName === 'Topics'" class="py-2">
                 <!-- Topics -->
                 <TopicsTab :topics="guide.topics"/>
             </div>

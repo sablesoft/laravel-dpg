@@ -87,6 +87,7 @@ onMounted(() => {
             <!-- Project Notes -->
             <ProjectNotes v-if="guide.projectsId"/>
 
+            <!-- Topics Control Tab -->
             <div class="py-2">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <select v-model="guide.topicsId" v-if="!guide.isAddTopic">
@@ -104,6 +105,7 @@ onMounted(() => {
                     <AddTopic/>
                 </div>
             </div>
+            <!-- Topic Info -->
             <div v-if="guide.topicsId" class="py-2">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

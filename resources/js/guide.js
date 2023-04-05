@@ -1,4 +1,5 @@
 import {reactive} from 'vue';
+import {isEmpty} from "lodash/lang";
 
 export const guide = reactive({
     projects : {},
@@ -11,14 +12,12 @@ export const guide = reactive({
     isAddNote: false,
     isAddTopic: false,
     isAddProject: false,
-    topicForm : {
-        name : null,
-        desc : null,
-        project_id: null
-    },
     init(data) {
         for (const [key, value] of Object.entries(data)) {
-            this[key] = value.data ? value.data : value;
+            let data = value.data ? value.data : value;
+            if (!isEmpty(data)) {
+                this[key] = value.data ? value.data : value;
+            }
         }
         this.isReady = true;
         console.log('GUIDE:', this);
@@ -50,7 +49,7 @@ export const guide = reactive({
     },
     getTopicProject(id = null, field = null) {
         let topic = this.getTopic(id);
-        if (!topic) {
+        if (!topic || !topic.projectId) {
             return null;
         }
         let project = this.getProject(topic.projectId);

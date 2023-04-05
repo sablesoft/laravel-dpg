@@ -35,7 +35,7 @@ textarea {
     </template>
     <template v-else>
         <span @dblclick="edit">
-          {{ text }}
+          {{ text ? text : '-----' }}
         </span>
     </template>
 </template>

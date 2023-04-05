@@ -1,14 +1,18 @@
 <?php
 
-use App\Http\Controllers\GuideController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use Illuminate\Database\Eloquent\Collection;
 use Inertia\Inertia;
 use App\Models\User;
 use App\Models\Guide\Project;
+use App\Http\Resources\NoteResource;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\LinkResource;
 use App\Http\Resources\TopicResource;
 use App\Http\Resources\ProjectResource;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\GuideController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -44,22 +48,36 @@ Route::get('/dashboard', function () {
     $user = auth()->user();
     return Inertia::render('Dashboard', [
         'projects' => ProjectResource::collection($user->projects->keyBy('id')),
-        'topics' => TopicResource::collection($user->topics->keyBy('id'))
+        'topics' => TopicResource::collection($user->topics->keyBy('id')),
+        'notes' => NoteResource::collection($user->notes->keyBy('id')),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/project/{project}', function (Project $project) {
     /** @var User $user */
     $user = auth()->user();
+    $posts = $project->posts->keyBy('id');
+    /** @var Collection $notes */
+    $notes = $user->notes()->where('project_id', $project->getKey())
+        ->orWhereIn('post_id', $posts->modelKeys())->get()->keyBy('id');
+    $topics = $user->topics()->where('project_id', $project->getKey())
+        ->orWhereNull('project_id')->get()->keyBy('id');
+    $links = $user->links()->whereIn('note_id', $notes->modelKeys())->get()->keyBy('id');
     return Inertia::render('Project', [
         'project' => ProjectResource::make($project),
-        'topics' => TopicResource::collection($user->topics->keyBy('id'))
+        'posts' => PostResource::collection($posts),
+        'notes' => NoteResource::collection($notes),
+        'topics' => TopicResource::collection($topics),
+        'links' => LinkResource::collection($links)
     ]);
 })->middleware(['auth', 'verified'])->name('guide.project');
+
 Route::post('/guide/update', [GuideController::class, 'update'])
     ->middleware(['auth', 'verified'])->name('guide.update');
 Route::post('/guide/create', [GuideController::class, 'create'])
     ->middleware(['auth', 'verified'])->name('guide.create');
+Route::post('/guide/delete', [GuideController::class, 'delete'])
+    ->middleware(['auth', 'verified'])->name('guide.delete');
 
 Route::get('/game/{process}', [GameController::class, 'process'])
     ->middleware(['auth', 'verified', 'game.visitor'])->name('game');

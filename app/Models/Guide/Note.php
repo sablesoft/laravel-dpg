@@ -17,14 +17,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon|null $updated_at
  *
  * @property Post|null $post
- * @property Link[]|Collection $links
+
  * @property Link[]|Collection $targetLinks
  *
  * @property-read string|null $title
  */
 class Note extends GuideItem
 {
-    use BelongsToProject, BelongsToTopic;
+    use BelongsToProject, BelongsToTopic, HasLinks;
 
     protected $table = 'notes';
 
@@ -52,14 +52,6 @@ class Note extends GuideItem
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function links(): HasMany
-    {
-        return $this->hasMany(Link::class);
     }
 
     /**

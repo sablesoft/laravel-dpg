@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Translatable\HasTranslations;
 use Spatie\Permission\Traits\HasRoles;
-use App\Models\Guide\Topic;
 use App\Models\Guide\Project;
+use App\Models\Guide\HasLinks;
+use App\Models\Guide\HasTopics;
 use App\Models\Traits\Options;
+use App\Models\Guide\HasNotes;
 
 /**
  * @property int|null $id
@@ -32,7 +34,6 @@ use App\Models\Traits\Options;
  * @property-read Book[]|Collection $books
  * @property-read Card[]|Collection $cards
  * @property-read Project[]|Collection $projects
- * @property-read Project[]|Collection $topics
  *
  * @property-read string|null $content_path
  * @property-read array $roles_names
@@ -40,7 +41,8 @@ use App\Models\Traits\Options;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, HasTranslations,
-        HasRoles, Notifiable, Options;
+        HasRoles, Notifiable, Options,
+        HasNotes, HasLinks, HasTopics;
 
     const ROLE_ADMIN = 'Admin';
 
@@ -93,14 +95,6 @@ class User extends Authenticatable
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class, 'owner_id');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function topics(): HasMany
-    {
-        return $this->hasMany(Topic::class, 'owner_id');
     }
 
     /**

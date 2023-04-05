@@ -81,25 +81,48 @@ export const guide = reactive({
             switch (table) {
                 case 'topics':
                     self.removeTopic(id);
-                    self.topicsId = null;
+                    break;
+                case 'projects':
+                    self.removeProject(id);
                     break;
                 default:
                     break;
             }
         });
     },
+    removeProject(id) {
+        let project = this.projects[id];
+        console.log('Remove project:', project);
+        let self = this;
+        project.noteIds.forEach(function(id) {
+            self.removeNote(id);
+        });
+        project.postIds.forEach(function(id) {
+            self.removePost(id);
+        });
+        project.topicIds.forEach(function(id) {
+            self.removeTopic(id);
+        });
+        if (this.projectsId && parseInt(this.projectsId) === parseInt(id)) {
+            this.projectsId = null;
+        }
+        delete this.projects[id];
+    },
     removeTopic(id) {
         let topic = this.topics[id];
         console.log('Remove topic:', topic);
         for (const [noteId, note] of Object.entries(this.notes)) {
-            if (note.topicId === id) {
+            if (parseInt(note.topicId) === parseInt(id)) {
                 this.removeNote(noteId);
             }
         }
         for (const [postId, post] of Object.entries(this.posts)) {
-            if (post.topicId === id) {
+            if (parseInt(post.topicId) === parseInt(id)) {
                 this.removePost(postId);
             }
+        }
+        if (this.topicsId && parseInt(this.topicsId) === parseInt(id)) {
+            this.topicsId = null;
         }
         delete this.topics[id];
     },
@@ -227,6 +250,9 @@ export const guide = reactive({
                 console.log('addTopic - response', res.data);
                 let topic = res.data.data;
                 self.topics[topic.id] = topic;
+                if (topic.projectId) {
+                    self.projects[topic.projectId].topicIds.push(topic.id);
+                }
                 console.log(self.topics);
             }
             self.isAddTopic = false;
@@ -236,15 +262,16 @@ export const guide = reactive({
         let self = this;
         let post = {
             table: 'projects',
-            data : form
+            data : {
+                name: form['name'],
+                code: form['code']
+            }
         };
         this.request('guide.create', post, function(res) {
             if (res.status === 201) {
                 let project = res.data.data;
-                if (Array.isArray(self.projects.data) && !self.projects.data.length) {
-                    self.projects.data = {};
-                }
-                self.projects.data[project.id] = project;
+                self.projects[project.id] = project;
+                self.projectsId = project.id;
             }
             self.isAddProject = false;
         });

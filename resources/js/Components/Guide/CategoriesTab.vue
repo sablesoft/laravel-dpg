@@ -57,7 +57,7 @@ button {
                                   @updated="(text) => guide.updateTopic(text, 'desc', guide.categoriesId)"/>
                     </p>
                     <hr/><br/>
-                    <Post v-for="post in guide.getProjectPosts()" :post="post"/>
+                    <Post v-for="post in guide.getCategoryPosts()" :post="post"/>
                     <p>
                         <span class="note-mark">{{ __('Created At')}}:</span>
                         {{ guide.getTopicField('createdAt', guide.categoriesId) }}

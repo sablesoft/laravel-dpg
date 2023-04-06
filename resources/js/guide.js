@@ -99,6 +99,20 @@ export const guide = reactive({
 
         return categories;
     },
+    getCategoryPosts(id = null) {
+        id = id ? id : this.categoriesId;
+        let topic = this.getTopic(id);
+        if (!topic) {
+            return [];
+        }
+        let self = this;
+        let posts = {};
+        topic.categoryPostIds.forEach(function(id) {
+           posts[id] =  self.getPost(id);
+        });
+
+        return posts;
+    },
     getTopic(id = null) {
         id = id ? id : this.topicsId;
         return id ? this.topics[id] : null;
@@ -152,6 +166,7 @@ export const guide = reactive({
                     break;
                 case 'posts':
                     self.removePost(id);
+                    break;
                 default:
                     break;
             }
@@ -192,15 +207,10 @@ export const guide = reactive({
                 this.removePost(postId);
             }
         }
+        // remove topic id from project:
         if (topic.projectId) {
             let project = this.getProject(topic.projectId);
-            let topicIds = project.topicIds;
-            const index = topicIds.indexOf(parseInt(id));
-            if (index > -1) {
-                topicIds.splice(index, 1);
-                project.topicIds = topicIds;
-                console.log('Project topicIds cleared!', project);
-            }
+            project.topicIds = this._removeFromIds(id, project.topicIds);
         }
         if (this.topicsId && parseInt(this.topicsId) === parseInt(id)) {
             this.topicsId = null;
@@ -216,26 +226,15 @@ export const guide = reactive({
     },
     removeNote(id) {
         let note = this.notes[id];
-        console.log('Remove note:', note);
+        // remove note id from project:
         if (note.projectId) {
             let project = this.projects[note.projectId];
-            let noteIds = project.noteIds;
-            const index = noteIds.indexOf(parseInt(id));
-            if (index > -1) {
-                noteIds.splice(index, 1);
-                project.noteIds = noteIds;
-                console.log('Project noteIds cleared!', project);
-            }
+            project.noteIds = this._removeFromIds(id, project.noteIds);
         }
+        // remove note id from post:
         if (note.postId) {
             let post = this.posts[note.postId];
-            let noteIds = post.noteIds;
-            const index = noteIds.indexOf(parseInt(id));
-            if (index > -1) {
-                noteIds.splice(index, 1);
-                post.noteIds = noteIds;
-                console.log('Post noteIds cleared!', post);
-            }
+            post.noteIds = this._removeFromIds(id, post.noteIds);
         }
         if (this.notesId && parseInt(this.notesId) === parseInt(id)) {
             this.notesId = null;
@@ -245,18 +244,18 @@ export const guide = reactive({
     removePost(id) {
         let post = this.posts[id];
         console.log('Remove post:', post);
+        // remove post id from project:
         let project = this.projects[post.projectId];
-        let postIds = project.postIds;
-        const index = postIds.indexOf(parseInt(id));
-        if (index > -1) {
-            postIds.splice(index, 1);
-            project.postIds = postIds;
-            console.log('Project postIds cleared!');
-        }
+        project.postIds = this._removeFromIds(id, project.postIds);
+        // remove post id from category:
+        let category = this.topics[post.categoryId];
+        category.categoryPostIds = this._removeFromIds(id, category.categoryPostIds);
         let self = this;
+        // remove post notes:
         post.noteIds.forEach(function(id) {
             self.removeNote(parseInt(id));
         });
+        // update current post id:
         if (this.postsId && parseInt(this.postsId) === parseInt(id)) {
             this.postsId = null;
         }
@@ -347,29 +346,22 @@ export const guide = reactive({
             content : form.content
         }, function(res) {
             if (res.status === 201) {
-                console.log('addNote - response', res.data);
                 let note = res.data.data;
                 self.notes[note.id] = note;
-                let noteIds;
                 switch (target) {
                     case 'project':
                         let project = self.getProject(targetId);
-                        noteIds = project.noteIds;
-                        noteIds.push(parseInt(note.id));
-                        project.noteIds = noteIds;
-                        console.log('Project notes updated!');
+                        project.noteIds = self._addToIds(note.id, project.noteIds);
                         break;
                     case 'post':
                         let post = self.getPost(targetId);
-                        noteIds = post.noteIds;
-                        noteIds.push(parseInt(note.id));
-                        post.noteIds = noteIds;
-                        console.log('Post notes updated!');
+                        post.noteIds = self._addToIds(note.id, post.noteIds);
                         break;
                     default:
                         break;
                 }
-                console.log(self.notes);
+            } else {
+                console.error(res);
             }
             self.isAddNote = false;
         });
@@ -383,13 +375,19 @@ export const guide = reactive({
             topicId : form.topicId
         }, function(res) {
             if (res.status === 201) {
-                console.log('addProjectPost - response', res.data);
+                // save new post:
                 let post = res.data.data;
                 self.posts[post.id] = post;
+                // add new post id to project:
                 let project = self.getProject();
-                project.postIds.push(parseInt(post.id));
+                project.postIds = self._addToIds(post.id, project.postIds);
+                // add new post id to category:
+                let category = self.getTopic(post.categoryId);
+                category.categoryPostIds = self._addToIds(post.id, category.categoryPostIds);
+                // update current category:
                 self.categoriesId = post.categoryId;
-                console.log(self.posts);
+            } else {
+                console.error(res);
             }
             self.isAddPost = false;
         });
@@ -403,14 +401,17 @@ export const guide = reactive({
             },
             function(res) {
             if (res.status === 201) {
-                console.log('addTopic - response', res.data);
                 let topic = res.data.data;
                 self.topics[topic.id] = topic;
+                // add topic id to project:
                 if (topic.projectId) {
-                    self.projects[topic.projectId].topicIds.push(topic.id);
+                    let project = self.getProject(topic.projectId);
+                    project.topicIds = self._addToIds(topic.id, project.topicIds);
                 }
+                // set current topic id:
                 self.topicsId = topic.id;
-                console.log(self.topics);
+            } else {
+                console.error(res);
             }
             self.isAddTopic = false;
         });
@@ -429,6 +430,8 @@ export const guide = reactive({
                 let project = res.data.data;
                 self.projects[project.id] = project;
                 self.projectsId = project.id;
+            } else {
+                console.error(res);
             }
             self.isAddProject = false;
         });
@@ -445,5 +448,27 @@ export const guide = reactive({
         ['notesId', 'postsId'].forEach(function(field) {
             self[field] = null;
         })
+    },
+    _removeFromIds(id, ids) {
+        let idsCopy = ids;
+        let index = idsCopy.indexOf(parseInt(id));
+        if (index > -1) {
+            idsCopy.splice(index, 1);
+        } else {
+            console.warn('ID not found in IDS!', id, idsCopy);
+        }
+
+        return idsCopy;
+    },
+    _addToIds(id, ids) {
+        let idsCopy = ids;
+        let index = idsCopy.indexOf(parseInt(id));
+        if (index > -1) {
+            console.warn('ID already in IDS!', id, idsCopy);
+        } else {
+            idsCopy.push(parseInt(id));
+        }
+
+        return idsCopy;
     }
 });

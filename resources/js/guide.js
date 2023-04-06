@@ -264,47 +264,23 @@ export const guide = reactive({
             delete self.posts[id];
         }, 500);
     },
-    updateProject(field, value) {
-        let project = this.getProject();
-        this.request('guide.update', {
-            table: 'projects',
-            id: project.id,
-            field: field,
-            value: value
-        }, function(res) {
-            project[field] = value;
-        });
-    },
-    updateNote(id, value) {
-        let note = this.notes[id];
-        if (!note) {
-            throw new Error('Note not found: ' + id);
-        }
-        this.request('guide.update', {
-            table: 'notes',
-            id: note.id,
-            field: 'content',
-            value: value
-        }, function(res) {
-            note.content = value;
-        });
-    },
-    updateTopic(value, field, id = null) {
-        id = id ? id : this.topicsId;
+    updateField(table, field, value, id = null) {
+        let currentIdField = table + 'Id';
+        id = id ? id : this[currentIdField];
         if (!id) {
-            throw new Error('No topic id for updating!');
+            throw new Error('Id for updating ' + table + ' not found!');
         }
-        let topic = this.topics[id];
-        if (!topic) {
-            throw new Error('Topic not found for updating: ' + id);
+        let entity = this[table][id];
+        if (!entity) {
+            throw new Error('Entity '+ table +' with id '+ id +' not found!');
         }
         this.request('guide.update', {
-            table: 'topics',
+            table: table,
             id: id,
             field: field,
             value: value
         }, function(res) {
-            topic[field] = value;
+            entity[field] = value;
         });
     },
     createNote(config, callback) {

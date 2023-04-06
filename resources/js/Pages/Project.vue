@@ -52,12 +52,9 @@ onMounted(() => {
     window.addEventListener('keydown', function(event) {
         const key = event.key;
         if (key === "Backspace" || key === "Delete") {
-            console.log('delete key!');
             if (guide.notesId) {
-                console.log('delete note!');
                 guide.delete('notes');
             } else if (guide.postsId) {
-                console.log('delete post!');
                 guide.delete('posts');
             }
         }
@@ -65,7 +62,6 @@ onMounted(() => {
             guide.resetSelect();
         }
     });
-    console.debug('PROJECT', toRaw(props.projectId));
 });
 
 </script>

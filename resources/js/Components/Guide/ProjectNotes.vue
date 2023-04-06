@@ -32,12 +32,12 @@ const form = useForm({
                 <div class="note-row">
                     <h3 class="note-mark">{{ __('Name')}}</h3>
                     <Editable :text="guide.getProject().name" type="input"
-                              @updated="(text) => guide.updateProject('name', text)"/>
+                              @updated="(text) => guide.updateField('projects','name', text)"/>
                 </div>
                 <div class="note-row">
                     <h3 class="note-mark">{{ __('Code')}}</h3>
                     <Editable :text="guide.getProject().code" type="input"
-                              @updated="(text) => guide.updateProject('code', text)"/>
+                              @updated="(text) => guide.updateField('projects','code', text)"/>
                 </div>
                 <SecondaryButton v-if="!guide.isAddNote" @click="guide.isAddNote = true">
                     {{__('Add Note')}}

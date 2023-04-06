@@ -58,12 +58,12 @@ button {
                     <p class="note-row">
                         <span class="note-mark">{{ __('Name')}}</span>
                         <Editable :text="guide.getTopicField('name')" type="input"
-                                  @updated="(text) => guide.updateTopic(text, 'name')"/>
+                                  @updated="(text) => guide.updateField('topics', 'name', text)"/>
                     </p>
                     <p class="note-row">
                         <span class="note-mark">{{ __('Desc')}}</span>
                         <Editable :text="guide.getTopicField('desc')"
-                                  @updated="(text) => guide.updateTopic(text, 'desc')"/>
+                                  @updated="(text) => guide.updateField('topics', 'desc', text)"/>
                     </p>
                     <p class="note-row">
                         <span class="note-mark">{{ __('Project')}}: </span>

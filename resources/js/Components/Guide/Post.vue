@@ -18,11 +18,11 @@ const props = defineProps({
          class="post-row ease-in-out duration-150">
         <h2 class="block-subtitle" @click="guide.postsId = guide.postsId === post.id ? null : post.id">
             <Editable :text="guide.getTopicField('name', post.topicId)" type="input"
-                      @updated="(text) => guide.updateTopic(text, 'name', post.topicId)"/>
+                      @updated="(text) => guide.updateField('topics', 'name', text, post.topicId)"/>
         </h2>
         <p>
-            <Editable :text="guide.getTopicField('desc', post.topicId)"
-                      @updated="(text) => guide.updateTopic(text, 'desc', post.topicId)"/>
+            <Editable :text="post.desc"
+                      @updated="(text) => guide.updateField('posts', 'desc', text, post.id)"/>
         </p>
         <div class="post-more" v-if="guide.postsId === post.id">
             <hr/>

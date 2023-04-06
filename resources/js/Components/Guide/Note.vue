@@ -17,7 +17,7 @@ const props = defineProps({
             {{ __(guide.getTopicField('name', note.topicId))}}
         </h3>
         <Editable :text="note.content"
-                  @updated="(text) => guide.updateNote(note.id, text)"/>
+                  @updated="(text) => guide.updateField('notes', 'content', text, note.id)"/>
         <div v-if="guide.notesId === note.id" class="note-more">
             <hr/><br/>
             <p>

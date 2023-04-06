@@ -50,11 +50,11 @@ button {
                 <div class="p-4 text-gray-900">
                     <h2 class="block-title">
                         <Editable :text="guide.getTopicField('name', guide.categoriesId)" type="input"
-                                  @updated="(text) => guide.updateTopic(text, 'name', guide.categoriesId)"/>
+                                  @updated="(text) => guide.updateField('topics', 'name', text, guide.categoriesId)"/>
                     </h2>
                     <p>
                         <Editable :text="guide.getTopicField('desc', guide.categoriesId)"
-                                  @updated="(text) => guide.updateTopic(text, 'desc', guide.categoriesId)"/>
+                                  @updated="(text) => guide.updateField('topics', 'desc', text, guide.categoriesId)"/>
                     </p>
                     <hr/><br/>
                     <Post v-for="post in guide.getCategoryPosts()" :post="post"/>

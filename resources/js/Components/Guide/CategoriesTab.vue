@@ -2,15 +2,13 @@
 import Editable from '@/Components/Editable.vue';
 import AddPost from '@/Components/Guide/AddPost.vue';
 import Post from '@/Components/Guide/Post.vue';
+import BlockFooter from '@/Components/Guide/BlockFooter.vue';
 
 import { guide } from "@/guide";
 
 </script>
 
 <style>
-.note-mark {
-    font-weight: bold;
-}
 button {
     background-color: #fff;
     border-color: #6b7280;
@@ -48,7 +46,7 @@ button {
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 text-gray-900">
-                    <h2 class="block-title">
+                    <h2 class="block-title cursor-pointer">
                         <Editable :text="guide.getTopicField('name', guide.categoriesId)" type="input"
                                   @updated="(text) => guide.updateField('topics', 'name', text, guide.categoriesId)"/>
                     </h2>
@@ -58,14 +56,7 @@ button {
                     </p>
                     <hr/><br/>
                     <Post v-for="post in guide.getCategoryPosts()" :post="post"/>
-                    <p>
-                        <span class="note-mark">{{ __('Created At')}}:</span>
-                        {{ guide.getTopicField('createdAt', guide.categoriesId) }}
-                    </p>
-                    <p>
-                        <span class="note-mark">{{ __('Updated At')}}:</span>
-                        {{ guide.getTopicField('updatedAt', guide.categoriesId) }}
-                    </p>
+                    <BlockFooter :entity="guide.getTopic(guide.categoriesId)"/>
                 </div>
             </div>
         </div>

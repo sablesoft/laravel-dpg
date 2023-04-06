@@ -1,6 +1,7 @@
 <script setup>
 import Editable from '@/Components/Editable.vue';
 import AddTopic from '@/Components/Guide/AddTopic.vue';
+import BlockFooter from '@/Components/Guide/BlockFooter.vue';
 
 import { guide } from "@/guide";
 const props = defineProps({
@@ -69,14 +70,7 @@ button {
                         <span class="note-mark">{{ __('Project')}}: </span>
                         {{ guide.getTopicProject() ? guide.getTopicProject().name : __('Global')}}
                     </p>
-                    <p class="note-row">
-                        <span class="note-mark">{{ __('Created At')}}: </span>
-                        {{ guide.getTopicField('createdAt') }}
-                    </p>
-                    <p class="note-row">
-                        <span class="note-mark">{{ __('Updated At')}}: </span>
-                        {{ guide.getTopicField('updatedAt') }}
-                    </p>
+                    <BlockFooter :entity="guide.getTopic()"/>
                 </div>
             </div>
         </div>

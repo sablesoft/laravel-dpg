@@ -1,5 +1,6 @@
 <script setup>
 import Editable from '@/Components/Editable.vue';
+import BlockFooter from '@/Components/Guide/BlockFooter.vue';
 import { guide } from "@/guide";
 const props = defineProps({
     note: {
@@ -13,19 +14,13 @@ const props = defineProps({
 <template>
     <div :id="'note' + note.id" :class="guide.notesId === note.id ? 'active-block' : ''"
        class="note-row ease-in-out duration-150">
-        <h3 class="note-mark" @click="guide.notesId = guide.notesId === note.id ? null : note.id">
+        <h3 class="note-mark cursor-pointer" @click="guide.notesId = guide.notesId === note.id ? null : note.id">
             {{ __(guide.getTopicField('name', note.topicId))}}
         </h3>
-        <Editable :text="note.content"
+        <Editable :text="note.content" class="block-content"
                   @updated="(text) => guide.updateField('notes', 'content', text, note.id)"/>
         <div v-if="guide.notesId === note.id" class="note-more">
-            <hr/><br/>
-            <p>
-                <span class="note-mark">{{ __('Created At')}}: </span> {{ note.createdAt }}
-            </p>
-            <p>
-                <span class="note-mark">{{ __('Updated At')}}: </span> {{ note.updatedAt }}
-            </p>
+            <BlockFooter :entity="note"/>
         </div>
     </div>
 </template>

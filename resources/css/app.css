@@ -142,11 +142,11 @@ img.align-bottom.w-8.h-8 {
     border-radius: 0.375rem;
 }
 
-.post-desc {
+.block-content {
     max-height: 100px;
     overflow-y: scroll;
 }
 
-.active-block .post-desc {
+.active-block>.block-content {
     max-height: 100%;
 }

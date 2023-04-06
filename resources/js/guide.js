@@ -299,7 +299,8 @@ export const guide = reactive({
             table: 'posts',
             data: {
                 topic_id: config['topicId'],
-                category_id: config['categoryId']
+                category_id: config['categoryId'],
+                desc: config['desc']
             }
         };
         post['data'][config['target'] + '_id'] = config['targetId'];
@@ -344,11 +345,13 @@ export const guide = reactive({
     },
     addProjectPost(form) {
         let self = this;
+        console.log("ADD PROJECT POST: ", form);
         this.createPost({
             target : 'project',
             targetId :  this.projectsId,
             categoryId : form.categoryId,
-            topicId : form.topicId
+            topicId : form.topicId,
+            desc : form.desc
         }, function(res) {
             if (res.status === 201) {
                 // save new post:
@@ -373,7 +376,7 @@ export const guide = reactive({
         this.createTopic({
                 name : form.name,
                 desc : form.desc,
-                project_id : this.projectsId
+                project_id : form.isGlobal ? null : this.projectsId
             },
             function(res) {
             if (res.status === 201) {

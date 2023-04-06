@@ -20,10 +20,8 @@ const props = defineProps({
             <Editable :text="guide.getTopicField('name', post.topicId)" type="input"
                       @updated="(text) => guide.updateField('topics', 'name', text, post.topicId)"/>
         </h2>
-        <p>
-            <Editable :text="post.desc"
-                      @updated="(text) => guide.updateField('posts', 'desc', text, post.id)"/>
-        </p>
+        <Editable :text="post.desc" class="post-desc"
+                  @updated="(text) => guide.updateField('posts', 'desc', text, post.id)"/>
         <div class="post-more" v-if="guide.postsId === post.id">
             <hr/>
             <SecondaryButton v-if="!guide.isAddNote" @click.prevent.stop="guide.isAddNote = true">

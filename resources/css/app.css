@@ -141,3 +141,12 @@ img.align-bottom.w-8.h-8 {
     box-shadow: var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow, 0 0 #0000);
     border-radius: 0.375rem;
 }
+
+.post-desc {
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+.active-block .post-desc {
+    max-height: 100%;
+}

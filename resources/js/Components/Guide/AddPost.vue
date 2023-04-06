@@ -1,6 +1,7 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextareaInput from '@/Components/TextareaInput.vue';
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 import { guide } from "@/guide";
@@ -10,6 +11,7 @@ import { onMounted } from "vue";
 const form = useForm({
     categoryId: null,
     topicId: null,
+    desc: null
 });
 
 onMounted(() => {
@@ -42,6 +44,12 @@ onMounted(() => {
                     {{ topic.name }}
                 </option>
             </select>
+        </div>
+        <div>
+            <InputLabel for="desc" :value="__('Desc')" />
+            <TextareaInput id="desc" class="mt-1 block w-full"
+                           @click.stop @keydown.stop @keyup.stop
+                           v-model="form.desc" />
         </div>
         <div class="flex items-center justify-end mt-4">
             <SecondaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing"

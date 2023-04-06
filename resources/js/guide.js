@@ -455,7 +455,7 @@ export const guide = reactive({
             self[field] = null;
         })
     },
-    goTo(link, anchor) {
+    goTo(link, target) {
         this.backLink = {
             categoriesId: this.categoriesId,
             postsId: this.postsId,
@@ -465,14 +465,17 @@ export const guide = reactive({
         this.postsId = null;
         this.notesId = null;
         this.categoriesId = link.targetCategoryId;
-        if (anchor === 'category') {
+        if (target === 'category') {
+            location.hash = "#" + 'category' + this.categoriesId;
             return;
         }
         this.postsId = link.targetPostId;
-        if (anchor === 'post') {
+        if (target === 'post') {
+            location.hash = "#" + 'post' + this.postsId;
             return;
         }
         this.notesId = link.targetNoteId;
+        location.hash = "#" + 'note' + this.notesId;
     },
     goBack() {
         let self = this;
@@ -481,6 +484,13 @@ export const guide = reactive({
         });
         setTimeout(function() {
             self.backLink = null;
+            if (self.notesId) {
+                location.hash = "#" + 'note' + self.notesId;
+            } else if (self.postsId) {
+                location.hash = "#" + 'post' + self.postsId;
+            } else {
+                location.hash = "#" + 'category' + self.categoriesId;
+            }
         }, 100);
     },
     _removeFromIds(id, ids) {

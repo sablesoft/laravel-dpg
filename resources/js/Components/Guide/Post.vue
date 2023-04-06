@@ -19,7 +19,7 @@ const props = defineProps({
 }
 </style>
 <template>
-    <div :class="guide.postsId === post.id ? 'active-block' : ''"
+    <div :id="'post' + post.id" :class="guide.postsId === post.id ? 'active-block' : ''"
          class="post-row ease-in-out duration-150">
         <h2 class="block-subtitle" @click="guide.postsId = guide.postsId === post.id ? null : post.id">
             <Editable :text="guide.getTopicField('name', post.topicId)" type="input"

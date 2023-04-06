@@ -11,7 +11,7 @@ const props = defineProps({
 <style>
 </style>
 <template>
-    <div :class="guide.notesId === note.id ? 'active-block' : ''"
+    <div :id="'note' + note.id" :class="guide.notesId === note.id ? 'active-block' : ''"
        class="note-row ease-in-out duration-150">
         <h3 class="note-mark" @click="guide.notesId = guide.notesId === note.id ? null : note.id">
             {{ __(guide.getTopicField('name', note.topicId))}}

@@ -27,7 +27,10 @@ class GuideController extends Controller
             ->where('id', $data['id'])
             ->update([$data['field'] => $data['value']]);
 
-        return ['result' => $result];
+        return $result ? [
+            'success' => true,
+            'updated_at' => now()
+        ] : ['success' => false];
     }
 
     /**

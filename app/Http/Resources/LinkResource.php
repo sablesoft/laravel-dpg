@@ -28,6 +28,7 @@ class LinkResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'entity' => 'link',
             'number' => $this->number,
             'postId' => $this->post_id,
             'noteId' => $this->note_id,

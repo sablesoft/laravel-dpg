@@ -28,6 +28,7 @@ class ProjectResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'entity' => 'project',
             'name' => $this->name,
             'code' => $this->code,
             'noteIds' => $this->notes->modelKeys(),

@@ -23,8 +23,6 @@ const props = defineProps({
     }
 });
 
-const tabName = shallowRef('Projects');
-
 let view = function(name) {
     window.location.href = name === 'topic' ? '/topic/' + guide.topicsId :
         '/project/' + guide.projectsId;
@@ -60,18 +58,28 @@ onMounted(() => {
                 {{ __('Dashboard') }}
             </h2>
             <div class="inline max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <SecondaryButton @click="tabName = 'Projects'" class="mb-2">
+                <SecondaryButton @click="guide.changeTab('Info')" class="mb-2">
+                    {{__('info')}}
+                </SecondaryButton>
+                <SecondaryButton @click="guide.changeTab('Projects')" class="mb-2">
                     {{__('Projects')}}
                 </SecondaryButton>
-                <SecondaryButton @click="tabName = 'Topics'" class="mb-2">
+                <SecondaryButton @click="guide.changeTab('Topics')" class="mb-2">
                     {{__('Topics')}}
                 </SecondaryButton>
             </div>
             <hr>
-            <p>{{ __(tabName) }}</p>
+            <p>{{ __(guide.tab) }}</p>
         </template>
         <div class="py-2" v-if="guide.isReady">
-            <div v-if="tabName === 'Projects'" class="py-2">
+            <div v-if="guide.tab === 'Info'" class="py-2">
+                <div class="py-2">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <h2>IN DEVELOPMENT</h2>
+                    </div>
+                </div>
+            </div>
+            <div v-if="guide.tab === 'Projects'" class="py-2">
                 <!-- Projects Control Tab -->
                 <div class="py-2">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -93,7 +101,7 @@ onMounted(() => {
                 <!-- Project Notes -->
                 <ProjectNotes v-if="guide.projectsId"/>
             </div>
-            <div v-if="tabName === 'Topics'" class="py-2">
+            <div v-if="guide.tab === 'Topics'" class="py-2">
                 <!-- Topics -->
                 <TopicsTab :topics="guide.topics"/>
             </div>

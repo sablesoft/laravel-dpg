@@ -2,6 +2,7 @@ import {reactive} from 'vue';
 import {isEmpty, isNumber} from "lodash/lang";
 
 export const guide = reactive({
+    tab: 'Info',
     projects : {},
     topics : {},
     notes : {},
@@ -455,15 +456,13 @@ export const guide = reactive({
             self[field] = null;
         })
     },
+    changeTab(tab) {
+        this._setBackLink();
+        this.tab = tab;
+    },
     goTo(link, target) {
-        this.backLink = {
-            categoriesId: this.categoriesId,
-            postsId: this.postsId,
-            notesId: this.notesId
-        };
-        this.categoriesId = null;
-        this.postsId = null;
-        this.notesId = null;
+        this._setBackLink();
+        this.tab = 'Categories';
         this.categoriesId = link.targetCategoryId;
         if (target === 'category') {
             location.hash = "#" + 'category' + this.categoriesId;
@@ -479,8 +478,9 @@ export const guide = reactive({
     },
     goBack() {
         let self = this;
-        ['categoriesId', 'postsId', 'notesId'].forEach(function(id) {
-            self[id] = self.backLink[id];
+        this.tab = 'Categories';
+        ['categoriesId', 'postsId', 'notesId'].forEach(function(field) {
+            self[field] = self.backLink[field];
         });
         setTimeout(function() {
             self.backLink = null;
@@ -514,5 +514,17 @@ export const guide = reactive({
         }
 
         return idsCopy;
+    },
+    _setBackLink() {
+        if (this.categoriesId) {
+            this.backLink = {
+                categoriesId: this.categoriesId,
+                postsId: this.postsId,
+                notesId: this.notesId
+            };
+        }
+        this.categoriesId = null;
+        this.postsId = null;
+        this.notesId = null;
     }
 });

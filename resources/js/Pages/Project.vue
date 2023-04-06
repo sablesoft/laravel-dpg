@@ -11,8 +11,6 @@ import { guide } from "@/guide";
 
 import {onMounted, shallowRef, toRaw} from "vue";
 
-const tabName = shallowRef('Info');
-
 const props = defineProps({
     projectId: {
         type: Number,
@@ -81,13 +79,13 @@ onMounted(() => {
                 {{ guide.getProject().name + ' ('+ guide.getProject().code +')'}}
             </h2>
             <div class="inline max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <SecondaryButton @click="tabName = 'Info'" class="mb-2">
+                <SecondaryButton @click="guide.changeTab('Info')" class="mb-2">
                     {{__('Info')}}
                 </SecondaryButton>
-                <SecondaryButton @click="tabName = 'Categories'" class="mb-2">
+                <SecondaryButton @click="guide.changeTab('Categories')" class="mb-2">
                     {{__('Categories')}}
                 </SecondaryButton>
-                <SecondaryButton @click="tabName = 'Topics'" class="mb-2">
+                <SecondaryButton @click="guide.changeTab('Topics')" class="mb-2">
                     {{__('Topics')}}
                 </SecondaryButton>
                 <SecondaryButton v-if="guide.backLink" @click="guide.goBack()" class="mb-2">
@@ -95,16 +93,16 @@ onMounted(() => {
                 </SecondaryButton>
             </div>
             <hr>
-            <p>{{ __(tabName) }}</p>
+            <p>{{ __(guide.tab) }}</p>
         </template>
         <div class="py-2" v-if="guide.isReady">
-            <div v-if="tabName === 'Info'" class="py-2">
+            <div v-if="guide.tab === 'Info'" class="py-2">
                 <ProjectNotes/>
             </div>
-            <div v-if="tabName === 'Topics'" class="py-2">
+            <div v-if="guide.tab === 'Topics'" class="py-2">
                 <TopicsTab :topics="guide.getProjectTopics()"/>
             </div>
-            <div v-if="tabName === 'Categories'" class="py-2">
+            <div v-if="guide.tab === 'Categories'" class="py-2">
                 <CategoriesTab/>
             </div>
         </div>

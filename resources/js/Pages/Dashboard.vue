@@ -56,23 +56,21 @@ onMounted(() => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="block-title font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="block-title inline font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Dashboard') }}
             </h2>
+            <div class="inline max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <SecondaryButton @click="tabName = 'Projects'" class="mb-2">
+                    {{__('Projects')}}
+                </SecondaryButton>
+                <SecondaryButton @click="tabName = 'Topics'" class="mb-2">
+                    {{__('Topics')}}
+                </SecondaryButton>
+            </div>
             <hr>
             <p>{{ __(tabName) }}</p>
         </template>
         <div class="py-2" v-if="guide.isReady">
-            <div class="py-2">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <SecondaryButton @click="tabName = 'Projects'">
-                        {{__('Projects')}}
-                    </SecondaryButton>
-                    <SecondaryButton @click="tabName = 'Topics'">
-                        {{__('Topics')}}
-                    </SecondaryButton>
-                </div>
-            </div>
             <div v-if="tabName === 'Projects'" class="py-2">
                 <!-- Projects Control Tab -->
                 <div class="py-2">

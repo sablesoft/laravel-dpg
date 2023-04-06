@@ -77,29 +77,27 @@ onMounted(() => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 v-if="guide.isReady" class="block-title font-semibold text-xl text-gray-800 leading-tight">
+            <h2 v-if="guide.isReady" class="block-title inline font-semibold text-xl text-gray-800 leading-tight">
                 {{ guide.getProject().name + ' ('+ guide.getProject().code +')'}}
             </h2>
+            <div class="inline max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <SecondaryButton @click="tabName = 'Info'" class="mb-2">
+                    {{__('Info')}}
+                </SecondaryButton>
+                <SecondaryButton @click="tabName = 'Categories'" class="mb-2">
+                    {{__('Categories')}}
+                </SecondaryButton>
+                <SecondaryButton @click="tabName = 'Topics'" class="mb-2">
+                    {{__('Topics')}}
+                </SecondaryButton>
+                <SecondaryButton v-if="guide.backLink" @click="guide.goBack()" class="mb-2">
+                    {{__('Go Back')}}
+                </SecondaryButton>
+            </div>
             <hr>
             <p>{{ __(tabName) }}</p>
         </template>
         <div class="py-2" v-if="guide.isReady">
-            <div class="py-2">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <SecondaryButton @click="tabName = 'Info'">
-                        {{__('Info')}}
-                    </SecondaryButton>
-                    <SecondaryButton @click="tabName = 'Categories'">
-                        {{__('Categories')}}
-                    </SecondaryButton>
-                    <SecondaryButton @click="tabName = 'Topics'">
-                        {{__('Topics')}}
-                    </SecondaryButton>
-                    <SecondaryButton v-if="guide.backLink" @click="guide.goBack()">
-                        {{__('Go Back')}}
-                    </SecondaryButton>
-                </div>
-            </div>
             <div v-if="tabName === 'Info'" class="py-2">
                 <ProjectNotes/>
             </div>

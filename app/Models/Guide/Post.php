@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int|null $id
+ * @property string|null $desc
  * @property int|null $project_id
  * @property int|null $category_id
  * @property int|null $topic_id
@@ -17,8 +18,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property Topic|null $category
  * @property Link[]|Collection $targetLinks
- *
- * @property-read string|null $title
  */
 class Post extends GuideItem
 {
@@ -27,21 +26,11 @@ class Post extends GuideItem
     protected $table = 'guide_posts';
 
     protected $fillable = [
+        'desc',
         'topic_id',
         'category_id',
         'project_id',
     ];
-
-    /**
-     * @return string|null
-     */
-    public function getTitleAttribute(): ?string
-    {
-        $categoryName = $this->category?->name;
-        $topicName = $this->topic?->name;
-
-        return $categoryName && $topicName ? "$categoryName - $topicName" : null;
-    }
 
     /**
      * @return BelongsTo

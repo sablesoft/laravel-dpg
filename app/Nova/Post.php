@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Textarea;
 
 class Post extends Resource
 {
@@ -47,6 +48,7 @@ class Post extends Resource
     public function fields(Request $request)
     {
         return [
+            Textarea::make(__('Desc'), 'desc'),
             BelongsTo::make(__('Project'), 'project'),
             BelongsTo::make(__('Category'), 'category', Topic::class),
             BelongsTo::make(__('Topic'), 'topic'),

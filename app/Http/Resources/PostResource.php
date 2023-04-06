@@ -33,6 +33,7 @@ class PostResource extends JsonResource
             'categoryId' => $this->category_id,
             'topicId' => $this->topic_id,
             'noteIds' => $this->notes->modelKeys(),
+            'linkIds' => $this->links->modelKeys(),
             'targetLinkIds' => $this->targetLinks->modelKeys(),
             "createdAt" => optional($this->created_at)->format('Y-m-d'),
             "updatedAt" => optional($this->updated_at)->format('Y-m-d'),

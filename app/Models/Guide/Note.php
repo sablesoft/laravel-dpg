@@ -4,7 +4,6 @@ namespace App\Models\Guide;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -16,15 +15,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
- * @property Post|null $post
-
  * @property Link[]|Collection $targetLinks
  *
  * @property-read string|null $title
  */
 class Note extends GuideItem
 {
-    use BelongsToProject, BelongsToTopic, HasLinks;
+    use BelongsToProject, BelongsToTopic, BelongsToPost, HasLinks;
 
     protected $table = 'guide_notes';
 
@@ -44,14 +41,6 @@ class Note extends GuideItem
         $topicName = optional($this->topic)->name;
 
         return $targetName && $topicName ? "$targetName - $topicName" : null;
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function post(): BelongsTo
-    {
-        return $this->belongsTo(Post::class);
     }
 
     /**

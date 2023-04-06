@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Post extends GuideItem
 {
-    use BelongsToProject, BelongsToTopic, HasNotes;
+    use BelongsToProject, BelongsToTopic, HasNotes, HasLinks;
 
     protected $table = 'guide_posts';
 

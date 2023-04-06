@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int|null $id
+ * @property int|null $number
+ * @property int|null $post_id
  * @property int|null $note_id
  * @property int|null $target_category_id
  * @property int|null $target_post_id
@@ -21,6 +23,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Link extends GuideItem
 {
+    use BelongsToPost;
+
     protected $table = 'guide_links';
 
     /**

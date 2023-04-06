@@ -14,9 +14,11 @@ export const guide = reactive({
     categoriesId : null,
     isReady: false,
     isAddNote: false,
+    isAddLink: false,
     isAddTopic: false,
     isAddProject: false,
     isAddPost: false,
+    backLink: null,
     init(config) {
         for (const [key, value] of Object.entries(config)) {
             let data = value.data ? value.data : value;
@@ -86,6 +88,23 @@ export const guide = reactive({
         });
 
         return notes;
+    },
+    getPostLinks(id = null) {
+        let post = this.getPost(id);
+        if (!post) {
+            return [];
+        }
+        let links = {};
+        let self = this;
+        post.linkIds.forEach(function(id) {
+            links[id] = self.links[id];
+        });
+
+        return links;
+    },
+    getNote(id = null) {
+        id = id ? id : this.notesId;
+        return id ? this.notes[id] : null;
     },
     getProjectCategories(id = null) {
         let posts = this.getProjectPosts(id);
@@ -283,55 +302,27 @@ export const guide = reactive({
             entity[field] = value;
         });
     },
-    createNote(config, callback) {
-        let post = {
-            table: 'notes',
-            data: {
-                topic_id: config['topicId'],
-                content: config['content']
-            }
-        };
-        post['data'][config['target'] + '_id'] = config['targetId'];
-        this.request('guide.create', post, callback);
-    },
-    createPost(config, callback) {
-        let post = {
-            table: 'posts',
-            data: {
-                topic_id: config['topicId'],
-                category_id: config['categoryId'],
-                desc: config['desc']
-            }
-        };
-        post['data'][config['target'] + '_id'] = config['targetId'];
-        this.request('guide.create', post, callback);
-    },
-    createTopic(config, callback) {
-        let post = {
-            table: 'topics',
-            data: config
-        };
-        this.request('guide.create', post, callback);
-    },
-    addNote(form, target = 'project') {
+    createNote(form, entity) {
         let self = this;
-        let targetId = this[target + 'sId']
-        this.createNote({
-            target : target,
-            targetId : targetId,
-            topicId : form.topicId,
-            content : form.content
+        let data = {
+            content : form.content,
+            topic_id : form.topicId,
+        }
+        data[entity.entity + '_id'] = entity.id;
+        this.request('guide.create', {
+            table: 'notes',
+            data: data
         }, function(res) {
             if (res.status === 201) {
                 let note = res.data.data;
                 self.notes[note.id] = note;
-                switch (target) {
+                switch (entity.entity) {
                     case 'project':
-                        let project = self.getProject(targetId);
+                        let project = self.getProject(entity.id);
                         project.noteIds = self._addToIds(note.id, project.noteIds);
                         break;
                     case 'post':
-                        let post = self.getPost(targetId);
+                        let post = self.getPost(entity.id);
                         post.noteIds = self._addToIds(note.id, post.noteIds);
                         break;
                     default:
@@ -343,15 +334,16 @@ export const guide = reactive({
             self.isAddNote = false;
         });
     },
-    addProjectPost(form) {
+    createPost(form) {
         let self = this;
-        console.log("ADD PROJECT POST: ", form);
-        this.createPost({
-            target : 'project',
-            targetId :  this.projectsId,
-            categoryId : form.categoryId,
-            topicId : form.topicId,
-            desc : form.desc
+        this.request('guide.create', {
+            table: 'posts',
+            data: {
+                category_id : form.categoryId,
+                topic_id : form.topicId,
+                desc: form.desc,
+                project_id: this.projectsId
+            }
         }, function(res) {
             if (res.status === 201) {
                 // save new post:
@@ -371,12 +363,15 @@ export const guide = reactive({
             self.isAddPost = false;
         });
     },
-    addTopic(form) {
+    createTopic(form) {
         let self = this;
-        this.createTopic({
-                name : form.name,
-                desc : form.desc,
-                project_id : form.isGlobal ? null : this.projectsId
+        this.request('guide.create', {
+                table: 'topics',
+                data : {
+                    name : form.name,
+                    desc : form.desc,
+                    project_id : form.isGlobal ? null : this.projectsId
+                }
             },
             function(res) {
             if (res.status === 201) {
@@ -395,16 +390,15 @@ export const guide = reactive({
             self.isAddTopic = false;
         });
     },
-    addProject(form) {
+    createProject(form) {
         let self = this;
-        let post = {
+        this.request('guide.create', {
             table: 'projects',
             data : {
                 name: form['name'],
                 code: form['code']
             }
-        };
-        this.request('guide.create', post, function(res) {
+        }, function(res) {
             if (res.status === 201) {
                 let project = res.data.data;
                 self.projects[project.id] = project;
@@ -415,9 +409,42 @@ export const guide = reactive({
             self.isAddProject = false;
         });
     },
+    createLink(form, entity) {
+        let self = this;
+        let data = {
+            target_category_id : form.categoryId,
+            target_post_id : form.postId,
+            target_note_id : form.noteId,
+        }
+        data[entity.entity + '_id'] = entity.id;
+        this.request('guide.create', {
+            table: 'links',
+            data: data
+        }, function(res) {
+            if (res.status === 201) {
+                let link = res.data.data;
+                self.links[link.id] = link;
+                switch (entity.entity) {
+                    case 'note':
+                        let note = self.getNote(entity.id);
+                        note.linkIds = self._addToIds(link.id, note.linkIds);
+                        break;
+                    case 'post':
+                        let post = self.getPost(entity.id);
+                        post.linkIds = self._addToIds(link.id, post.linkIds);
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                console.error(res);
+            }
+            self.isAddLink = false;
+        });
+    },
     resetAdding() {
         let self = this;
-        ['Note', 'Project', 'Topic', 'Post'].forEach(function(field) {
+        ['Note', 'Project', 'Topic', 'Post', 'Link'].forEach(function(field) {
             field = 'isAdd' + field;
             self[field] = false;
         })
@@ -427,6 +454,34 @@ export const guide = reactive({
         ['notesId', 'postsId'].forEach(function(field) {
             self[field] = null;
         })
+    },
+    goTo(link, anchor) {
+        this.backLink = {
+            categoriesId: this.categoriesId,
+            postsId: this.postsId,
+            notesId: this.notesId
+        };
+        this.categoriesId = null;
+        this.postsId = null;
+        this.notesId = null;
+        this.categoriesId = link.targetCategoryId;
+        if (anchor === 'category') {
+            return;
+        }
+        this.postsId = link.targetPostId;
+        if (anchor === 'post') {
+            return;
+        }
+        this.notesId = link.targetNoteId;
+    },
+    goBack() {
+        let self = this;
+        ['categoriesId', 'postsId', 'notesId'].forEach(function(id) {
+            self[id] = self.backLink[id];
+        });
+        setTimeout(function() {
+            self.backLink = null;
+        }, 100);
     },
     _removeFromIds(id, ids) {
         let idsCopy = ids;

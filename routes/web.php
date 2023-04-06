@@ -56,13 +56,17 @@ Route::get('/dashboard', function () {
 Route::get('/project/{project}', function (Project $project) {
     /** @var User $user */
     $user = auth()->user();
+    /** @var Collection $posts */
     $posts = $project->posts->keyBy('id');
     /** @var Collection $notes */
     $notes = $user->notes()->where('project_id', $project->getKey())
         ->orWhereIn('post_id', $posts->modelKeys())->get()->keyBy('id');
     $topics = $user->topics()->where('project_id', $project->getKey())
         ->orWhereNull('project_id')->get()->keyBy('id');
-    $links = $user->links()->whereIn('note_id', $notes->modelKeys())->get()->keyBy('id');
+    $links = $user->links()
+        ->whereIn('note_id', $notes->modelKeys())
+        ->orWhereIn('post_id', $posts->modelKeys())
+        ->get()->keyBy('id');
     return Inertia::render('Project', [
         'projectId' => $project->getKey(),
         'projects' => ProjectResource::collection([$project->getKey() => $project]),

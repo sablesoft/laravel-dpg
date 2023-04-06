@@ -24,7 +24,7 @@ onMounted(() => {
 </style>
 
 <template>
-    <form @submit.prevent="guide.addProjectPost(form)">
+    <form @submit.prevent="guide.createPost(form)">
         <h2 class="action-title">{{__('Create Post')}}</h2>
         <hr/><br/>
         <div>

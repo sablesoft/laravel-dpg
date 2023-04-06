@@ -20,7 +20,7 @@ const form = useForm({
 </style>
 
 <template>
-    <form @submit.prevent="guide.addTopic(form)">
+    <form @submit.prevent="guide.createTopic(form)">
         <h2 class="action-title">{{__('Create Topic')}}</h2>
         <hr/><br/>
         <div>

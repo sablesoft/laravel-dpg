@@ -95,6 +95,9 @@ onMounted(() => {
                     <SecondaryButton @click="tabName = 'Topics'">
                         {{__('Topics')}}
                     </SecondaryButton>
+                    <SecondaryButton v-if="guide.backLink" @click="guide.goBack()">
+                        {{__('Go Back')}}
+                    </SecondaryButton>
                 </div>
             </div>
             <div v-if="tabName === 'Info'" class="py-2">

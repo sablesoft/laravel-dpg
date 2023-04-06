@@ -27,6 +27,15 @@ class Link extends GuideItem
 
     protected $table = 'guide_links';
 
+    protected $fillable = [
+        'target_category_id',
+        'target_post_id',
+        'target_note_id',
+        'post_id',
+        'note_id',
+        'number',
+    ];
+
     /**
      * @return BelongsTo
      */

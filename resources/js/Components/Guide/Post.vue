@@ -3,6 +3,8 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import AddNote from '@/Components/Guide/AddNote.vue';
 import Editable from '@/Components/Editable.vue';
 import Note from '@/Components/Guide/Note.vue';
+import Link from '@/Components/Guide/Link.vue';
+import AddLink from '@/Components/Guide/AddLink.vue';
 import { guide } from "@/guide";
 const props = defineProps({
     post: {
@@ -12,6 +14,9 @@ const props = defineProps({
 });
 </script>
 <style>
+.post-more {
+    padding-top: 5px;
+}
 </style>
 <template>
     <div :class="guide.postsId === post.id ? 'active-block' : ''"
@@ -23,18 +28,19 @@ const props = defineProps({
         <Editable :text="post.desc" class="post-desc"
                   @updated="(text) => guide.updateField('posts', 'desc', text, post.id)"/>
         <div class="post-more" v-if="guide.postsId === post.id">
+            <Link v-for="link in guide.getPostLinks()" :link="link"/>
             <hr/>
+            <SecondaryButton v-if="!guide.isAddLink" @click.prevent.stop="guide.isAddLink = true">
+                {{__('Add Link')}}
+            </SecondaryButton>
             <SecondaryButton v-if="!guide.isAddNote" @click.prevent.stop="guide.isAddNote = true">
                 {{__('Add Note')}}
             </SecondaryButton>
-            <AddNote v-if="guide.isAddNote" target="post"/>
+            <AddLink v-if="guide.isAddLink" :entity="post"/>
+            <AddNote v-if="guide.isAddNote" :entity="post"/>
             <Note v-if="!guide.isAddNote" v-for="note in guide.getPostNotes(post.id)" :note="note"/>
-            <p>
-                <span class="note-mark">{{ __('Created At')}}:</span> {{ post.createdAt }}
-            </p>
-            <p>
-                <span class="note-mark">{{ __('Updated At')}}:</span> {{ post.updatedAt }}
-            </p>
+            <p><span class="note-mark">{{ __('Created At')}}:</span> {{ post.createdAt }}</p>
+            <p><span class="note-mark">{{ __('Updated At')}}:</span> {{ post.updatedAt }}</p>
         </div>
         <hr/><br/>
     </div>

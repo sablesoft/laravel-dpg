@@ -17,7 +17,7 @@ const form = useForm({
 </style>
 
 <template>
-    <form @submit.prevent="guide.addProject(form)">
+    <form @submit.prevent="guide.createProject(form)">
         <h2 class="action-title">{{__('Create Project')}}</h2>
         <hr/><br/>
         <div>

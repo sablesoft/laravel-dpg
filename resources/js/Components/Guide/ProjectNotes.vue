@@ -5,13 +5,6 @@ import AddNote from '@/Components/Guide/AddNote.vue';
 import Note from '@/Components/Guide/Note.vue';
 
 import { guide } from "@/guide";
-import { useForm } from "@inertiajs/inertia-vue3";
-import { onMounted } from "vue";
-
-const form = useForm({
-    topicId: null,
-    content: null
-});
 
 </script>
 
@@ -42,7 +35,7 @@ const form = useForm({
                 <SecondaryButton v-if="!guide.isAddNote" @click="guide.isAddNote = true">
                     {{__('Add Note')}}
                 </SecondaryButton>
-                <AddNote v-if="guide.isAddNote"/>
+                <AddNote v-if="guide.isAddNote" :entity="guide.getProject()"/>
                 <br/><br/>
                 <Note v-if="!guide.isAddNote" v-for="note in guide.getProjectNotes()" :note="note"/>
                 <hr/><br/>

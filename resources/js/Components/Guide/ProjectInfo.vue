@@ -20,15 +20,15 @@ import { guide } from "@/guide";
     <div v-if="!guide.isAddProject && guide.projectsId" :id="'project' + guide.projectsId"
          class="py-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-4 text-gray-900">
+            <div class="p-6 text-gray-900">
                 <div class="note-row">
                     <span class="note-mark">{{ __('Name')}}: </span>
-                    <Editable :text="guide.getProject().name" type="input" class="inline"
+                    <Editable :value="guide.getProject().name" type="input" class="inline"
                               @updated="(text) => guide.updateField('projects','name', text)"/>
                 </div>
                 <div class="note-row">
                     <span class="note-mark">{{ __('Code')}}: </span>
-                    <Editable :text="guide.getProject().code" type="input" class="inline"
+                    <Editable :value="guide.getProject().code" type="input" class="inline"
                               @updated="(text) => guide.updateField('projects','code', text)"/>
                 </div>
                 <Control :item="guide.getProject()"/>

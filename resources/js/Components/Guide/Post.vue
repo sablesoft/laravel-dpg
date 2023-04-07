@@ -20,11 +20,11 @@ const props = defineProps({
     <div :id="'post' + post.id" :class="guide.postsId === post.id ? 'active-block' : ''"
          class="post-row ease-in-out duration-150">
         <h2 class="block-subtitle cursor-pointer" @click="guide.postsId = guide.postsId === post.id ? null : post.id">
-            <Editable :text="guide.getTopicField('name', post.topicId)" type="input"
+            <Editable :value="guide.getTopicField('name', post.topicId)" type="input"
                       @updated="(text) => guide.updateField('topics', 'name', text, post.topicId)"/>
         </h2>
         <Control :item="post"/>
-        <Editable :text="post.desc" class="block-content"
+        <Editable :value="post.desc" class="block-content"
                   @updated="(text) => guide.updateField('posts', 'desc', text, post.id)"/>
         <div class="post-more" v-if="guide.isActive(post)">
             <Link v-if="!guide.isAddLink" v-for="link in guide.getPostLinks()" :link="link"/>

@@ -25,14 +25,14 @@ button {
     <div v-if="guide.categoriesId" :id="'category' + guide.categoriesId"
          class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-2">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-4 text-gray-900">
+            <div class="p-6 text-gray-900">
                 <h2 class="block-title cursor-pointer">
-                    <Editable :text="guide.getTopicField('name', guide.categoriesId)" type="input"
+                    <Editable :value="guide.getTopicField('name', guide.categoriesId)" type="input"
                               @updated="(text) => guide.updateField('topics', 'name', text, guide.categoriesId)"/>
                 </h2>
                 <Control entity="category" :item="guide.getTopic(guide.categoriesId)"/>
                 <p>
-                    <Editable :text="guide.getTopicField('desc', guide.categoriesId)"
+                    <Editable :value="guide.getTopicField('desc', guide.categoriesId)"
                               @updated="(text) => guide.updateField('topics', 'desc', text, guide.categoriesId)"/>
                 </p>
                 <Post v-for="post in guide.getCategoryPosts()" :post="post"/>

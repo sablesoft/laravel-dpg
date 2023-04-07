@@ -32,10 +32,10 @@ button {
     <div v-if="guide.topicsId && !guide.isAddTopic" :id="'topic' + guide.topicsId"
          class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-2">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-4 text-gray-900">
+            <div class="p-6 text-gray-900">
                 <p class="note-row">
                     <span class="note-mark inline">{{ __('Name')}}: </span>
-                    <Editable :text="guide.getTopicField('name')" type="input" class="inline"
+                    <Editable :value="guide.getTopicField('name')" type="input" class="inline"
                               @updated="(text) => guide.updateField('topics', 'name', text)"/>
                 </p>
                 <p class="note-row">
@@ -45,7 +45,7 @@ button {
                 <Control :item="guide.getTopic()"/>
                 <p class="note-row">
                     <span class="note-mark">{{ __('Desc')}}</span>
-                    <Editable :text="guide.getTopicField('desc')"
+                    <Editable :value="guide.getTopicField('desc')"
                               @updated="(text) => guide.updateField('topics', 'desc', text)"/>
                 </p>
             </div>

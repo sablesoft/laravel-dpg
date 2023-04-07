@@ -105,6 +105,19 @@ export const guide = reactive({
 
         return links;
     },
+    getNoteLinks(id = null) {
+        let note = this.getNote(id);
+        if (!note) {
+            return [];
+        }
+        let links = {};
+        let self = this;
+        note.linkIds.forEach(function(id) {
+            links[id] = self.links[id];
+        });
+
+        return links;
+    },
     getNote(id = null) {
         id = id ? id : this.notesId;
         return id ? this.notes[id] : null;
@@ -462,7 +475,7 @@ export const guide = reactive({
         this._isAddFields.forEach(function(field) {
             self[field] = false;
         });
-        if (this.tab === 'Project' && !this.projectsId) {
+        if (this.tab === 'ProjectInfo' && !this.projectsId) {
             this.tab = 'Info';
         }
         if (this.tab === 'Category' && !this.categoriesId) {

@@ -24,7 +24,7 @@ const props = defineProps({
 });
 
 let showProject = function(id) {
-    guide.changeTab('Project');
+    guide.changeTab('ProjectInfo');
     if (id === 'new') {
         guide.projectsId = null;
         guide.isAddProject = true;
@@ -89,7 +89,7 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <ProjectInfo v-if="guide.tab === 'Project'"/>
+            <ProjectInfo v-if="guide.tab === 'ProjectInfo'"/>
             <TopicsTab v-if="guide.tab === 'Topic'"/>
         </div>
     </AuthenticatedLayout>

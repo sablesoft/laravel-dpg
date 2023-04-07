@@ -33,7 +33,7 @@ let isActive = function() {
     return true;
 }
 let showView = function() {
-    return guide.tab === 'Project';
+    return guide.tab === 'ProjectInfo' && !guide.notesId && !guide.postsId;
 }
 let showCreatePost = function() {
     return !guide.isAddPost &&
@@ -44,7 +44,7 @@ let showAddNote = function() {
         (_entity() === 'project' || _entity() === 'post');
 }
 let showAddLink = function() {
-    return !guide.isAddLink &&
+    return !guide.isAddLink && guide.tab !== 'ProjectInfo' &&
         (_entity() === 'post' || _entity() === 'note');
 }
 let showDelete = function() {

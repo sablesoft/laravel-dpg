@@ -36,17 +36,20 @@ button {
                 <p class="note-row">
                     <span class="note-mark inline">{{ __('Name')}}: </span>
                     <Editable :value="guide.getTopicField('name')" type="input" class="inline"
-                              @updated="(text) => guide.updateField('topics', 'name', text)"/>
+                              @updated="(value) => guide.updateField('topics', 'name', value)"/>
                 </p>
                 <p class="note-row">
                     <span class="note-mark">{{ __('Project')}}: </span>
-                    {{ guide.getTopicProject() ? guide.getTopicProject().name : __('Global')}}
+                    <Editable :value="guide.getTopicProject() ? guide.getTopicProject().id : null"
+                              class="inline" type="select" :items="guide.projects"
+                              placeholder="Global" placeholder-enabled="1"
+                              @updated="(value) => guide.updateField('topics', 'project_id', value)"/>
                 </p>
                 <Control :item="guide.getTopic()"/>
                 <p class="note-row">
                     <span class="note-mark">{{ __('Desc')}}</span>
                     <Editable :value="guide.getTopicField('desc')"
-                              @updated="(text) => guide.updateField('topics', 'desc', text)"/>
+                              @updated="(value) => guide.updateField('topics', 'desc', value)"/>
                 </p>
             </div>
         </div>

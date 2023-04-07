@@ -1,4 +1,5 @@
 <script setup>
+import Link from '@/Components/Guide/Link.vue';
 import Editable from '@/Components/Editable.vue';
 import Control from '@/Components/Guide/Control.vue';
 import { guide } from "@/guide";
@@ -18,9 +19,10 @@ const props = defineProps({
             {{ __(guide.getTopicField('name', note.topicId))}}
         </h3>
         <Control v-if="guide.isActive(note)" :item="note"/>
-        <Editable :text="note.content" class="block-content"
+        <Editable :value="note.content" class="block-content"
                   @updated="(text) => guide.updateField('notes', 'content', text, note.id)"/>
-        <div v-if="guide.isActive(note)" class="note-more">
+        <div v-if="guide.isActive(note) && guide.tab !== 'ProjectInfo'" class="note-more">
+            <Link v-if="!guide.isAddLink" v-for="link in guide.getNoteLinks()" :link="link"/>
         </div>
     </div>
 </template>

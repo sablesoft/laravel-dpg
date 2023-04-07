@@ -63,6 +63,7 @@ onMounted(() => {
 let showCategory = function(id) {
     guide.changeTab('Category');
     if (id === 'new') {
+        guide.categoriesId = null;
         guide.isAddPost = true;
     } else {
         guide.categoriesId = id;
@@ -71,6 +72,7 @@ let showCategory = function(id) {
 let showTopic = function(id) {
     guide.changeTab('Topic');
     if (id === 'new') {
+        guide.topicsId = null;
         guide.isAddTopic = true;
     } else {
         guide.topicsId = id;
@@ -93,10 +95,10 @@ let showTopic = function(id) {
                     {{__('Info')}}
                 </SecondaryButton>
                 <Select placeholder="Categories" class="mb-2 mr-2"
-                        :action="{id: 'new', name: 'New Post'}"
+                        :action="{id: 'new', name: 'New'}"
                         :items="guide.getProjectCategories()" @change="showCategory"/>
                 <Select placeholder="Topics" class="mb-2 mr-2"
-                        :action="{id: 'new', name: 'New Topic'}"
+                        :action="{id: 'new', name: 'New'}"
                         :items="guide.getProjectTopics()" @change="showTopic"/>
                 <SecondaryButton v-if="guide.backLink" @click="guide.goBack()" class="mb-2">
                     {{__('Go Back')}}

@@ -1,5 +1,6 @@
 <script setup>
 import Editable from '@/Components/Editable.vue';
+import AddProject from '@/Components/Guide/AddProject.vue';
 import Control from '@/Components/Guide/Control.vue';
 import Note from '@/Components/Guide/Note.vue';
 import { guide } from "@/guide";
@@ -13,7 +14,12 @@ import { guide } from "@/guide";
     }
 </style>
 <template>
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div v-if="guide.isAddProject" class="py-2">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <AddProject/>
+        </div>
+    </div>
+    <div v-if="!guide.isAddProject && guide.projectsId" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-4 text-gray-900">
                 <div class="note-row">

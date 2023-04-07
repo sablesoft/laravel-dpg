@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import AddProject from '@/Components/Guide/AddProject.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import Select from '@/Components/Select.vue';
 import ProjectInfo from '@/Components/Guide/ProjectInfo.vue';
 import TopicsTab from '@/Components/Guide/TopicsTab.vue';
 import { Head } from '@inertiajs/inertia-vue3';
@@ -23,11 +23,15 @@ const props = defineProps({
     }
 });
 
-let view = function(name) {
-    window.location.href = name === 'topic' ? '/topic/' + guide.topicsId :
-        '/project/' + guide.projectsId;
+let showProject = function(id) {
+    guide.changeTab('Project');
+    if (id === 'new') {
+        guide.projectsId = null;
+        guide.isAddProject = true;
+    } else {
+        guide.projectsId = id;
+    }
 }
-
 onMounted(() => {
     guide.init({
         projects : props.projects,
@@ -51,19 +55,18 @@ onMounted(() => {
 </style>
 <template>
     <Head title="Dashboard" />
-
     <AuthenticatedLayout>
         <template #header>
             <h2 class="block-title inline font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Dashboard') }}
             </h2>
             <div class="inline max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <SecondaryButton @click="guide.changeTab('Info')" class="mb-2">
+                <SecondaryButton @click="guide.changeTab('Info')" class="mb-2 mr-2">
                     {{__('info')}}
                 </SecondaryButton>
-                <SecondaryButton @click="guide.changeTab('Projects')" class="mb-2">
-                    {{__('Projects')}}
-                </SecondaryButton>
+                <Select placeholder="Projects" class="mb-2 mr-2"
+                        :action="{id: 'new', name: 'New'}"
+                        :items="guide.projects" @change="showProject"/>
                 <SecondaryButton @click="guide.changeTab('Topics')" class="mb-2">
                     {{__('Topics')}}
                 </SecondaryButton>
@@ -79,30 +82,10 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <div v-if="guide.tab === 'Projects'" class="py-2">
-                <!-- Projects Control Tab -->
-                <div class="py-2">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <select v-model="guide.projectsId" v-if="!guide.isAddProject">
-                            <option :value="null">{{ __('Select Project, or') }}</option>
-                            <option v-for="project in guide.projects" :value="project.id">
-                                {{ project.name }}
-                            </option>
-                        </select>
-                        <button v-if="!guide.projectsId && !guide.isAddProject"
-                                @click="guide.isAddProject = true">{{ __('Create New')}}</button>
-                        <button v-if="guide.projectsId" @click="view('project')">{{ __('View')}}</button>
-                        <button v-if="guide.projectsId" @click="guide.delete(guide.getProject())">
-                            {{ __('Delete')}}
-                        </button>
-                        <AddProject v-if="guide.isAddProject"/>
-                    </div>
-                </div>
-                <!-- Project Info -->
-                <ProjectInfo v-if="guide.projectsId"/>
+            <div v-if="guide.tab === 'Project'" class="py-2">
+                <ProjectInfo/>
             </div>
             <div v-if="guide.tab === 'Topics'" class="py-2">
-                <!-- Topics -->
                 <TopicsTab :topics="guide.topics"/>
             </div>
         </div>

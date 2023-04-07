@@ -216,6 +216,7 @@ export const guide = reactive({
         });
         if (this.projectsId && parseInt(this.projectsId) === parseInt(id)) {
             this.projectsId = null;
+            this.tab = 'Info';
         }
         // pause for all staff deleting:
         setTimeout(function() {
@@ -461,6 +462,9 @@ export const guide = reactive({
         this._isAddFields.forEach(function(field) {
             self[field] = false;
         });
+        if (this.tab === 'Project' && !this.projectsId) {
+            this.tab = 'Info';
+        }
         if (this.tab === 'Category' && !this.categoriesId) {
             this.tab = 'Info';
         }

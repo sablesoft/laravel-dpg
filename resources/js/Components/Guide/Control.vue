@@ -29,6 +29,9 @@ let isActive = function() {
 
     return true;
 }
+let showView = function() {
+    return guide.tab === 'Project';
+}
 let showCreatePost = function() {
     return !guide.isAddPost &&
         _entity() === 'category';
@@ -52,6 +55,9 @@ let showDelete = function() {
     }
     return true;
 }
+let view = function() {
+    window.location.href = '/' + _entity() + '/' + guide[_entity() + 'sId'];
+}
 let _entity = function() {
     return props.entity ? props.entity : props.item.entity;
 }
@@ -65,6 +71,9 @@ let _entity = function() {
         <hr/>
         <div v-if="!guide.isAdding()" class="control">
             <div class="float-left pt-2">
+                <SecondaryButton v-if="showView()" @click.prevent.stop="view()">
+                    {{ __('View')}}
+                </SecondaryButton>
                 <SecondaryButton v-if="showCreatePost()" @click.prevent.stop="guide.isAddPost = true">
                     {{__('Add Post')}}
                 </SecondaryButton>

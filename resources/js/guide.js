@@ -20,6 +20,7 @@ export const guide = reactive({
     isAddLink: false,
     backLink: null,
     isReady: false,
+    deleteAsk: null,
     _itemsIdFields : ['categoriesId', 'topicsId', 'postsId', 'notesId'],
     _isAddFields : ['isAddProject', 'isAddTopic', 'isAddPost', 'isAddNote', 'isAddLink'],
     init(config) {
@@ -175,7 +176,15 @@ export const guide = reactive({
                 console.error(err);
             });
     },
-    delete(item, entity = '') {
+    askDeletion(item, entity = '') {
+        this.deleteAsk = {
+            item : item,
+            entity : entity
+        }
+    },
+    delete(item = null, entity = null) {
+        entity = entity ? entity : this.deleteAsk.entity;
+        item = item ? item : this.deleteAsk.item;
         if (entity === 'category') {
             return this.clearCategory(item);
         }
@@ -204,6 +213,7 @@ export const guide = reactive({
                 default:
                     break;
             }
+            self.deleteAsk = null;
         });
     },
     clearCategory(item) {

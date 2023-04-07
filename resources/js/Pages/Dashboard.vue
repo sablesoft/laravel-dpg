@@ -1,9 +1,10 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import Select from '@/Components/Select.vue';
+import ModalDeletion from '@/Components/Guide/ModalDeletion.vue';
 import ProjectInfo from '@/Components/Guide/ProjectInfo.vue';
 import TopicsTab from '@/Components/Guide/TopicsTab.vue';
+import Select from '@/Components/Select.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import { onMounted } from "vue";
 import { guide } from "@/guide";
@@ -92,5 +93,6 @@ onMounted(() => {
             <ProjectInfo v-if="guide.tab === 'ProjectInfo'"/>
             <TopicsTab v-if="guide.tab === 'Topic'"/>
         </div>
+        <ModalDeletion/>
     </AuthenticatedLayout>
 </template>

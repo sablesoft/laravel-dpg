@@ -4,6 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import Select from '@/Components/Select.vue';
 import ProjectInfo from '@/Components/Guide/ProjectInfo.vue';
+import ModalDeletion from '@/Components/Guide/ModalDeletion.vue';
 import TopicsTab from '@/Components/Guide/TopicsTab.vue';
 import Category from '@/Components/Guide/Category.vue';
 import {Head} from '@inertiajs/inertia-vue3';
@@ -50,9 +51,9 @@ onMounted(() => {
         const key = event.key;
         if (key === "Backspace" || key === "Delete") {
             if (guide.notesId) {
-                guide.delete(guide.getNote());
+                guide.askDeletion(guide.getNote());
             } else if (guide.postsId) {
-                guide.delete(guide.getPost());
+                guide.askDeletion(guide.getPost());
             }
         }
         if (key === "Escape") {
@@ -112,5 +113,6 @@ let showTopic = function(id) {
             <Category v-if="guide.tab === 'Category'"/>
             <TopicsTab v-if="guide.tab === 'Topic'" :topics="guide.getProjectTopics()"/>
         </div>
+        <ModalDeletion/>
     </AuthenticatedLayout>
 </template>

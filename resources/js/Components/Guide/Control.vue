@@ -86,7 +86,7 @@ let _entity = function() {
                 <SecondaryButton v-if="showAddLink()" @click.prevent.stop="guide.isAddLink = true">
                     {{__('Add Link')}}
                 </SecondaryButton>
-                <SecondaryButton v-if="showDelete()" @click.prevent.stop="guide.delete(item, _entity())">
+                <SecondaryButton v-if="showDelete()" @click.prevent.stop="guide.askDeletion(item, _entity())">
                     {{__('Delete')}}
                 </SecondaryButton>
                 <SecondaryButton v-if="guide.backLink" @click="guide.goBack()">

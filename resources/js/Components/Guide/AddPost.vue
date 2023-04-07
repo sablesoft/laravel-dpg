@@ -3,7 +3,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextareaInput from '@/Components/TextareaInput.vue';
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-
+import Select from "@/Components/Select.vue";
 import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
 import { onMounted } from "vue";
@@ -14,35 +14,35 @@ const form = useForm({
     desc: null
 });
 
+let ready = function() {
+    return form.categoryId && form.topicId;
+}
+let categoryChange = function(value) {
+    form.categoryId = value;
+}
+let topicChange = function(value) {
+    form.topicId = value;
+}
 onMounted(() => {
     form.categoryId = guide.categoriesId;
 });
-
 </script>
-
 <style>
 </style>
-
 <template>
     <form @submit.prevent="guide.createPost(form)">
         <h2 class="action-title">{{__('Create Post')}}</h2>
         <div v-if="!guide.categoriesId">
-            <InputLabel for="category" :value="__('Category')" />
-            <select v-model="form.categoryId" required class="mt-1 block w-full">
-                <option :value="null" disabled>{{ __('Select Post Category') }}</option>
-                <option v-for="topic in guide.topics" :value="topic.id">
-                    {{ topic.name }}
-                </option>
-            </select>
+            <InputLabel for="selectCategory" :value="__('Category')" />
+            <Select id="selectCategory" placeholder="Select Category" class="mt-1 block w-full"
+                    keep-values="1"
+                    @change="categoryChange" :items="guide.topics"/>
         </div>
         <div>
-            <InputLabel for="topic" :value="__('Topic')" />
-            <select v-model="form.topicId" required class="mt-1 block w-full">
-                <option :value="null" disabled>{{ __('Select Post Topic') }}</option>
-                <option v-for="topic in guide.topics" :value="topic.id">
-                    {{ topic.name }}
-                </option>
-            </select>
+            <InputLabel for="selectTopic" :value="__('Topic')" />
+            <Select id="selectTopic" placeholder="Select Topic" class="mt-1 block w-full"
+                    keep-values="1"
+                    @change="topicChange" :items="guide.topics"/>
         </div>
         <div>
             <InputLabel for="desc" :value="__('Desc')" />
@@ -55,7 +55,7 @@ onMounted(() => {
                 @click="guide.resetAdding()">
                 {{__('Cancel')}}
             </SecondaryButton>
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="!ready() || form.processing">
                 {{__('Add')}}
             </PrimaryButton>
         </div>

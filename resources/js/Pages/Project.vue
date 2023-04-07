@@ -62,38 +62,42 @@ onMounted(() => {
 });
 let showCategory = function(id) {
     guide.changeTab('Category');
-    if (id === 'post') {
+    if (id === 'new') {
         guide.isAddPost = true;
     } else {
         guide.categoriesId = id;
     }
 }
-
+let showTopic = function(id) {
+    guide.changeTab('Topic');
+    if (id === 'new') {
+        guide.isAddTopic = true;
+    } else {
+        guide.topicsId = id;
+    }
+}
 </script>
 <style scoped>
-    button {
-        margin-right: 5px;
-    }
 </style>
 <template>
     <Head>
         <title v-if="guide.isReady">{{ guide.getProject().code }}</title>
     </Head>
-
     <AuthenticatedLayout>
         <template #header>
             <h2 v-if="guide.isReady" class="block-title inline font-semibold text-xl text-gray-800 leading-tight">
                 {{ guide.getProject().name + ' ('+ guide.getProject().code +')'}}
             </h2>
             <div class="inline max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <SecondaryButton @click="guide.changeTab('Info')" class="mb-2">
+                <SecondaryButton @click="guide.changeTab('Info')" class="mb-2 mr-2">
                     {{__('Info')}}
                 </SecondaryButton>
-                <Select placeholder="Categories" :action="{id: 'post', name: 'Create Post'}"
+                <Select placeholder="Categories" class="mb-2 mr-2"
+                        :action="{id: 'new', name: 'New Post'}"
                         :items="guide.getProjectCategories()" @change="showCategory"/>
-                <SecondaryButton @click="guide.changeTab('Topics')" class="mb-2">
-                    {{__('Topics')}}
-                </SecondaryButton>
+                <Select placeholder="Topics" class="mb-2 mr-2"
+                        :action="{id: 'new', name: 'New Topic'}"
+                        :items="guide.getProjectTopics()" @change="showTopic"/>
                 <SecondaryButton v-if="guide.backLink" @click="guide.goBack()" class="mb-2">
                     {{__('Go Back')}}
                 </SecondaryButton>
@@ -108,7 +112,7 @@ let showCategory = function(id) {
             <div v-if="guide.tab === 'Category'" class="py-2">
                 <Category/>
             </div>
-            <div v-if="guide.tab === 'Topics'" class="py-2">
+            <div v-if="guide.tab === 'Topic'" class="py-2">
                 <TopicsTab :topics="guide.getProjectTopics()"/>
             </div>
         </div>

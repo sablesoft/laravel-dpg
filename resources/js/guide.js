@@ -460,7 +460,13 @@ export const guide = reactive({
         let self = this;
         this._isAddFields.forEach(function(field) {
             self[field] = false;
-        })
+        });
+        if (this.tab === 'Category' && !this.categoriesId) {
+            this.tab = 'Info';
+        }
+        if (this.tab === 'Topic') {
+            this.tab = 'Info';
+        }
     },
     resetSelect() {
         if (this.notesId) {

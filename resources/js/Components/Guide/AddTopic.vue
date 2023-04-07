@@ -22,7 +22,6 @@ const form = useForm({
 <template>
     <form @submit.prevent="guide.createTopic(form)">
         <h2 class="action-title">{{__('Create Topic')}}</h2>
-        <hr/><br/>
         <div>
             <InputLabel for="name" :value="__('Name')" />
             <TextInput id="name" type="text" class="mt-1 block w-full"

@@ -1,11 +1,13 @@
 <script setup>
 import {ref} from "vue";
-defineProps(['placeholder', 'action', 'items']);
+let props = defineProps(['placeholder', 'action', 'items', 'keepValues']);
 const emit = defineEmits(['change']);
 let select = ref(null);
 let onChange = function(event) {
     emit('change', event.target.value);
-    select.value.value = "_";
+    if (!props.keepValues) {
+        select.value.value = "_";
+    }
 }
 </script>
 

@@ -26,7 +26,6 @@ const form = useForm({
 <template>
     <form @submit.prevent="guide.createNote(form, item)">
         <h2 class="action-title">{{__('Create Note')}}</h2>
-        <hr/><br/>
         <div>
             <InputLabel for="topic" :value="__('Topic')" />
             <select v-model="form.topicId" required class="mt-1 block w-full" @click.prevent.stop="">

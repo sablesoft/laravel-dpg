@@ -2,7 +2,6 @@
 import Editable from '@/Components/Editable.vue';
 import AddTopic from '@/Components/Guide/AddTopic.vue';
 import Control from '@/Components/Guide/Control.vue';
-
 import { guide } from "@/guide";
 const props = defineProps({
     topics: {
@@ -10,9 +9,7 @@ const props = defineProps({
         required: true
     }
 });
-
 </script>
-
 <style>
 .note-mark {
     font-weight: bold;
@@ -32,23 +29,11 @@ button {
     margin-left: 6px;
 }
 </style>
-
 <template>
-    <!-- Topics Control Tab -->
-    <div class="py-2">
+    <!-- Add Topic -->
+    <div v-if="!guide.topicsId" class="py-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <select v-model="guide.topicsId" v-if="!guide.isAddTopic">
-                <option :value="null">{{ __('Select Topic, or') }}</option>
-                <option v-for="topic in topics" :value="topic.id">
-                    {{ topic.name }}
-                </option>
-            </select>
-            <button v-if="!guide.topicsId && !guide.isAddTopic"
-                    @click="guide.isAddTopic = true">{{ __('Create New')}}</button>
-            <button v-if="guide.topicsId" @click="guide.delete(guide.getTopic())">
-                {{ __('Delete')}}
-            </button>
-            <AddTopic v-if="guide.isAddTopic"/>
+            <AddTopic/>
         </div>
     </div>
     <!-- Topic Info -->

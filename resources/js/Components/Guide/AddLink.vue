@@ -6,7 +6,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
 const props = defineProps({
-    entity: {
+    item: {
         type: Object,
         required: true
     }
@@ -17,8 +17,8 @@ const form = useForm({
     noteId: null
 });
 
-let title = function(entity) {
-    let topic = guide.getTopic(entity.topicId);
+let title = function(item) {
+    let topic = guide.getTopic(item.topicId);
 
     return topic.name;
 }
@@ -28,7 +28,7 @@ let title = function(entity) {
 </style>
 
 <template>
-    <form @submit.prevent="guide.createLink(form, entity)">
+    <form @submit.prevent="guide.createLink(form, item)">
         <h2 class="action-title">{{__('Create Link')}}</h2>
         <hr/><br/>
         <div>

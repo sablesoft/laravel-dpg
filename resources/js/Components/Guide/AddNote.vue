@@ -7,7 +7,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
 const props = defineProps({
-    entity: {
+    item: {
         type: Object,
         required: true
     }
@@ -24,7 +24,7 @@ const form = useForm({
 </style>
 
 <template>
-    <form @submit.prevent="guide.createNote(form, entity)">
+    <form @submit.prevent="guide.createNote(form, item)">
         <h2 class="action-title">{{__('Create Note')}}</h2>
         <hr/><br/>
         <div>

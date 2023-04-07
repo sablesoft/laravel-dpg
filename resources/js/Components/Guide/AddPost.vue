@@ -26,8 +26,7 @@ onMounted(() => {
 <template>
     <form @submit.prevent="guide.createPost(form)">
         <h2 class="action-title">{{__('Create Post')}}</h2>
-        <hr/><br/>
-        <div>
+        <div v-if="!guide.categoriesId">
             <InputLabel for="category" :value="__('Category')" />
             <select v-model="form.categoryId" required class="mt-1 block w-full">
                 <option :value="null" disabled>{{ __('Select Post Category') }}</option>

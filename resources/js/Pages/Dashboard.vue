@@ -32,6 +32,15 @@ let showProject = function(id) {
         guide.projectsId = id;
     }
 }
+let showTopic = function(id) {
+    guide.changeTab('Topic');
+    if (id === 'new') {
+        guide.topicsId = null;
+        guide.isAddTopic = true;
+    } else {
+        guide.topicsId = id;
+    }
+}
 onMounted(() => {
     guide.init({
         projects : props.projects,
@@ -64,12 +73,10 @@ onMounted(() => {
                 <SecondaryButton @click="guide.changeTab('Info')" class="mb-2 mr-2">
                     {{__('info')}}
                 </SecondaryButton>
-                <Select placeholder="Projects" class="mb-2 mr-2"
-                        :action="{id: 'new', name: 'New'}"
+                <Select placeholder="Projects" class="mb-2 mr-2" :action="{id: 'new', name: 'New'}"
                         :items="guide.projects" @change="showProject"/>
-                <SecondaryButton @click="guide.changeTab('Topics')" class="mb-2">
-                    {{__('Topics')}}
-                </SecondaryButton>
+                <Select placeholder="Topics" class="mb-2 mr-2" :action="{id: 'new', name: 'New'}"
+                        :items="guide.topics" @change="showTopic"/>
             </div>
             <hr>
             <p>{{ __(guide.tab) }}</p>
@@ -82,12 +89,8 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <div v-if="guide.tab === 'Project'" class="py-2">
-                <ProjectInfo/>
-            </div>
-            <div v-if="guide.tab === 'Topics'" class="py-2">
-                <TopicsTab :topics="guide.topics"/>
-            </div>
+            <ProjectInfo v-if="guide.tab === 'Project'"/>
+            <TopicsTab v-if="guide.tab === 'Topic'"/>
         </div>
     </AuthenticatedLayout>
 </template>

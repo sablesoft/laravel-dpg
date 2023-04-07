@@ -14,12 +14,11 @@ import { guide } from "@/guide";
     }
 </style>
 <template>
-    <div v-if="guide.isAddProject" class="py-2">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <AddProject/>
-        </div>
+    <div v-if="guide.isAddProject" class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-2">
+        <AddProject/>
     </div>
-    <div v-if="!guide.isAddProject && guide.projectsId" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div v-if="!guide.isAddProject && guide.projectsId" :id="'project' + guide.projectsId"
+         class="py-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-4 text-gray-900">
                 <div class="note-row">

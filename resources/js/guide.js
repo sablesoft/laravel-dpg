@@ -564,7 +564,7 @@ export const guide = reactive({
         return idsCopy;
     },
     _setBackLink() {
-        if (this.tab === 'Category') {
+        if (this.tab === 'Category' && this.categoriesId) {
             this.backLink = {
                 categoriesId: this.categoriesId,
                 postsId: this.postsId,

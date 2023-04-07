@@ -108,15 +108,9 @@ let showTopic = function(id) {
             <p>{{ __(guide.tab) }}</p>
         </template>
         <div class="py-2" v-if="guide.isReady">
-            <div v-if="guide.tab === 'Info'" class="py-2">
-                <ProjectInfo/>
-            </div>
-            <div v-if="guide.tab === 'Category'" class="py-2">
-                <Category/>
-            </div>
-            <div v-if="guide.tab === 'Topic'" class="py-2">
-                <TopicsTab :topics="guide.getProjectTopics()"/>
-            </div>
+            <ProjectInfo v-if="guide.tab === 'Info'"/>
+            <Category v-if="guide.tab === 'Category'"/>
+            <TopicsTab v-if="guide.tab === 'Topic'" :topics="guide.getProjectTopics()"/>
         </div>
     </AuthenticatedLayout>
 </template>

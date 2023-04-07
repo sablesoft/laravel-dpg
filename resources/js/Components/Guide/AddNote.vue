@@ -2,6 +2,7 @@
 import InputLabel from '@/Components/InputLabel.vue';
 import TextareaInput from '@/Components/TextareaInput.vue';
 import ControlAdd from "@/Components/Guide/ControlAdd.vue";
+import Select from "@/Components/Select.vue";
 
 import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -16,6 +17,9 @@ const form = useForm({
     content: null
 });
 
+let topicChange = function(value) {
+    form.topicId = value;
+}
 let ready = function() {
     return form.topicId && form.content;
 }
@@ -28,13 +32,10 @@ let ready = function() {
     <form @submit.prevent="guide.createNote(form, item)">
         <h2 class="action-title">{{__('Create Note')}}</h2>
         <div>
-            <InputLabel for="topic" :value="__('Topic')" />
-            <select v-model="form.topicId" required class="mt-1 block w-full" @click.prevent.stop="">
-                <option :value="null" disabled>{{ __('Select Note Topic') }}</option>
-                <option v-for="topic in guide.topics" :value="topic.id">
-                    {{ topic.name }}
-                </option>
-            </select>
+            <InputLabel for="selectTopic" :value="__('Topic')" />
+            <Select id="selectTopic" placeholder="Select Topic" class="mt-1 block w-full"
+                    keep-values="1"
+                    @change="topicChange" :items="guide.topics"/>
         </div>
         <div>
             <InputLabel for="content" :value="__('Content')" />

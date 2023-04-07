@@ -23,6 +23,9 @@ let isActive = function() {
     if (_entity() === 'category' && guide.isActive(guide.getPost())) {
         return false;
     }
+    if (_entity() === 'project' && guide.isActive(guide.getNote())) {
+        return false;
+    }
     if (_entity() === 'post' && guide.isActive(guide.getNote())) {
         return false;
     }

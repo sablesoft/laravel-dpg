@@ -2,10 +2,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import AddProject from '@/Components/Guide/AddProject.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import ProjectNotes from '@/Components/Guide/ProjectNotes.vue';
+import ProjectInfo from '@/Components/Guide/ProjectInfo.vue';
 import TopicsTab from '@/Components/Guide/TopicsTab.vue';
 import { Head } from '@inertiajs/inertia-vue3';
-import {onMounted, shallowRef} from "vue";
+import { onMounted } from "vue";
 import { guide } from "@/guide";
 
 const props = defineProps({
@@ -98,8 +98,8 @@ onMounted(() => {
                         <AddProject v-if="guide.isAddProject"/>
                     </div>
                 </div>
-                <!-- Project Notes -->
-                <ProjectNotes v-if="guide.projectsId"/>
+                <!-- Project Info -->
+                <ProjectInfo v-if="guide.projectsId"/>
             </div>
             <div v-if="guide.tab === 'Topics'" class="py-2">
                 <!-- Topics -->

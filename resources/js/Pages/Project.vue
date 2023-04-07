@@ -3,14 +3,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import Select from '@/Components/Select.vue';
-import ProjectNotes from '@/Components/Guide/ProjectNotes.vue';
+import ProjectInfo from '@/Components/Guide/ProjectInfo.vue';
 import TopicsTab from '@/Components/Guide/TopicsTab.vue';
-import CategoriesTab from '@/Components/Guide/CategoriesTab.vue';
+import Category from '@/Components/Guide/Category.vue';
 import {Head} from '@inertiajs/inertia-vue3';
-
 import { guide } from "@/guide";
-
-import {onMounted, shallowRef, toRaw} from "vue";
+import {onMounted, toRaw} from "vue";
 
 const props = defineProps({
     projectId: {
@@ -63,7 +61,7 @@ onMounted(() => {
     });
 });
 let showCategory = function(id) {
-    guide.changeTab('Categories');
+    guide.changeTab('Category');
     if (id === 'post') {
         guide.isAddPost = true;
     } else {
@@ -105,10 +103,10 @@ let showCategory = function(id) {
         </template>
         <div class="py-2" v-if="guide.isReady">
             <div v-if="guide.tab === 'Info'" class="py-2">
-                <ProjectNotes/>
+                <ProjectInfo/>
             </div>
-            <div v-if="guide.tab === 'Categories'" class="py-2">
-                <CategoriesTab/>
+            <div v-if="guide.tab === 'Category'" class="py-2">
+                <Category/>
             </div>
             <div v-if="guide.tab === 'Topics'" class="py-2">
                 <TopicsTab :topics="guide.getProjectTopics()"/>

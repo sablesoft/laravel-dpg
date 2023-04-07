@@ -3,9 +3,7 @@ import Editable from '@/Components/Editable.vue';
 import Post from '@/Components/Guide/Post.vue';
 import Control from '@/Components/Guide/Control.vue';
 import AddPost from '@/Components/Guide/AddPost.vue';
-
 import { guide } from "@/guide";
-
 </script>
 <style>
 button {

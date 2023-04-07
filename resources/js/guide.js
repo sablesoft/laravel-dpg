@@ -475,7 +475,7 @@ export const guide = reactive({
     },
     goTo(link, target) {
         this._setBackLink();
-        this.tab = 'Categories';
+        this.tab = 'Category';
         this.categoriesId = link.targetCategoryId;
         if (target === 'category') {
             location.hash = "#" + 'category' + this.categoriesId;
@@ -491,7 +491,7 @@ export const guide = reactive({
     },
     goBack() {
         let self = this;
-        this.tab = 'Categories';
+        this.tab = 'Category';
         ['categoriesId', 'postsId', 'notesId'].forEach(function(field) {
             self[field] = self.backLink[field];
         });
@@ -554,7 +554,7 @@ export const guide = reactive({
         return idsCopy;
     },
     _setBackLink() {
-        if (this.tab === 'Categories') {
+        if (this.tab === 'Category') {
             this.backLink = {
                 categoriesId: this.categoriesId,
                 postsId: this.postsId,

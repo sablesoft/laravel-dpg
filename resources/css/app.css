@@ -145,10 +145,30 @@ img.align-bottom.w-8.h-8 {
 }
 
 .block-content {
-    max-height: 100px;
-    overflow-y: scroll;
+    overflow: hidden;
+    position: relative;
+    line-height: 1.2em;
+    max-height: 3.6em;
+    text-align: justify;
+    border-bottom-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(156 163 175 / var(--tw-border-opacity));
+}
+
+.block-content:before {
+    content:'';
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    background:linear-gradient(transparent 2.4em, white);
 }
 
 .active-block>.block-content {
     max-height: 100%;
+    white-space: pre-wrap;
+}
+.active-block>.block-content:before {
+    background: none;
 }

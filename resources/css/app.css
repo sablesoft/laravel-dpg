@@ -148,7 +148,7 @@ img.align-bottom.w-8.h-8 {
     overflow: hidden;
     position: relative;
     line-height: 1.2em;
-    max-height: 3.6em;
+    max-height: 4.8em;
     text-align: justify;
     border-bottom-width: 1px;
     --tw-border-opacity: 1;
@@ -162,7 +162,7 @@ img.align-bottom.w-8.h-8 {
     position:absolute;
     left:0;
     top:0;
-    background:linear-gradient(transparent 2.4em, white);
+    background:linear-gradient(transparent 3.7em, white);
 }
 
 .active-block>.block-content {

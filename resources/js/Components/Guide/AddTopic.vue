@@ -1,10 +1,9 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import TextareaInput from '@/Components/TextareaInput.vue';
 import Checkbox from '@/Components/Checkbox.vue';
-import SecondaryButton from "@/Components/SecondaryButton.vue";
+import ControlAdd from "@/Components/Guide/ControlAdd.vue";
 
 import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -14,6 +13,9 @@ const form = useForm({
     isGlobal: true
 });
 
+let ready = function() {
+    return form.name;
+}
 </script>
 
 <style>
@@ -41,15 +43,6 @@ const form = useForm({
                       v-model="form.isGlobal" />
             <span v-if="!form.isGlobal">({{__('Project') +': '+ guide.getProject().code}})</span>
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <SecondaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                             @click="guide.resetAdding()">
-                {{__('Cancel')}}
-            </SecondaryButton>
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                {{__('Add')}}
-            </PrimaryButton>
-        </div>
+        <ControlAdd :ready="ready()" :processing="form.processing"/>
     </form>
 </template>

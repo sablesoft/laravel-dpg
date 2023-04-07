@@ -1,8 +1,7 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextareaInput from '@/Components/TextareaInput.vue';
-import SecondaryButton from "@/Components/SecondaryButton.vue";
+import ControlAdd from "@/Components/Guide/ControlAdd.vue";
 import Select from "@/Components/Select.vue";
 import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -50,14 +49,6 @@ onMounted(() => {
                            @click.stop @keydown.stop @keyup.stop
                            v-model="form.desc" />
         </div>
-        <div class="flex items-center justify-end mt-4">
-            <SecondaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                @click="guide.resetAdding()">
-                {{__('Cancel')}}
-            </SecondaryButton>
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="!ready() || form.processing">
-                {{__('Add')}}
-            </PrimaryButton>
-        </div>
+        <ControlAdd :ready="ready()" :processing="form.processing"/>
     </form>
 </template>

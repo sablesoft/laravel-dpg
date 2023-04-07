@@ -1,8 +1,7 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextareaInput from '@/Components/TextareaInput.vue';
-import SecondaryButton from "@/Components/SecondaryButton.vue";
+import ControlAdd from "@/Components/Guide/ControlAdd.vue";
 
 import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -12,12 +11,14 @@ const props = defineProps({
         required: true
     }
 });
-
 const form = useForm({
     topicId: null,
     content: null
 });
 
+let ready = function() {
+    return form.topicId && form.content;
+}
 </script>
 
 <style>
@@ -41,15 +42,6 @@ const form = useForm({
                        @click.stop @keydown.stop @keyup.stop
                        v-model="form.content" required />
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <SecondaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                             @click="guide.resetAdding()">
-                {{__('Cancel')}}
-            </SecondaryButton>
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                {{__('Add')}}
-            </PrimaryButton>
-        </div>
+        <ControlAdd :ready="ready()" :processing="form.processing"/>
     </form>
 </template>

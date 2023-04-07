@@ -1,7 +1,7 @@
 <script setup>
 import Editable from '@/Components/Editable.vue';
 import AddTopic from '@/Components/Guide/AddTopic.vue';
-import BlockFooter from '@/Components/Guide/BlockFooter.vue';
+import Control from '@/Components/Guide/Control.vue';
 
 import { guide } from "@/guide";
 const props = defineProps({
@@ -57,20 +57,20 @@ button {
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 text-gray-900">
                     <p class="note-row">
-                        <span class="note-mark">{{ __('Name')}}</span>
-                        <Editable :text="guide.getTopicField('name')" type="input"
+                        <span class="note-mark inline">{{ __('Name')}}: </span>
+                        <Editable :text="guide.getTopicField('name')" type="input" class="inline"
                                   @updated="(text) => guide.updateField('topics', 'name', text)"/>
-                    </p>
-                    <p class="note-row">
-                        <span class="note-mark">{{ __('Desc')}}</span>
-                        <Editable :text="guide.getTopicField('desc')"
-                                  @updated="(text) => guide.updateField('topics', 'desc', text)"/>
                     </p>
                     <p class="note-row">
                         <span class="note-mark">{{ __('Project')}}: </span>
                         {{ guide.getTopicProject() ? guide.getTopicProject().name : __('Global')}}
                     </p>
-                    <BlockFooter :entity="guide.getTopic()"/>
+                    <Control :item="guide.getTopic()"/>
+                    <p class="note-row">
+                        <span class="note-mark">{{ __('Desc')}}</span>
+                        <Editable :text="guide.getTopicField('desc')"
+                                  @updated="(text) => guide.updateField('topics', 'desc', text)"/>
+                    </p>
                 </div>
             </div>
         </div>

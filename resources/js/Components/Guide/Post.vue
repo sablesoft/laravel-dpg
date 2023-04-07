@@ -1,11 +1,8 @@
 <script setup>
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import AddNote from '@/Components/Guide/AddNote.vue';
-import Editable from '@/Components/Editable.vue';
 import Note from '@/Components/Guide/Note.vue';
 import Link from '@/Components/Guide/Link.vue';
-import AddLink from '@/Components/Guide/AddLink.vue';
-import BlockFooter from '@/Components/Guide/BlockFooter.vue';
+import Editable from '@/Components/Editable.vue';
+import Control from '@/Components/Guide/Control.vue';
 import { guide } from "@/guide";
 const props = defineProps({
     post: {
@@ -26,21 +23,12 @@ const props = defineProps({
             <Editable :text="guide.getTopicField('name', post.topicId)" type="input"
                       @updated="(text) => guide.updateField('topics', 'name', text, post.topicId)"/>
         </h2>
+        <Control :item="post"/>
         <Editable :text="post.desc" class="block-content"
                   @updated="(text) => guide.updateField('posts', 'desc', text, post.id)"/>
-        <div class="post-more" v-if="guide.postsId === post.id">
-            <Link v-for="link in guide.getPostLinks()" :link="link"/>
-            <SecondaryButton v-if="!guide.isAddLink" @click.prevent.stop="guide.isAddLink = true">
-                {{__('Add Link')}}
-            </SecondaryButton>
-            <SecondaryButton v-if="!guide.isAddNote" @click.prevent.stop="guide.isAddNote = true">
-                {{__('Add Note')}}
-            </SecondaryButton>
-            <AddLink v-if="guide.isAddLink" :entity="post"/>
-            <AddNote v-if="guide.isAddNote" :entity="post"/>
-            <Note v-if="!guide.isAddNote" v-for="note in guide.getPostNotes(post.id)" :note="note"/>
-            <BlockFooter :entity="post"/>
+        <div class="post-more" v-if="guide.isActive(post)">
+            <Link v-if="!guide.isAddLink" v-for="link in guide.getPostLinks()" :link="link"/>
+            <Note v-if="!guide.isAddNote" v-for="note in guide.getPostNotes()" :note="note"/>
         </div>
-        <hr/>
     </div>
 </template>

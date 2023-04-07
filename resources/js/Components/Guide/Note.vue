@@ -1,6 +1,6 @@
 <script setup>
 import Editable from '@/Components/Editable.vue';
-import BlockFooter from '@/Components/Guide/BlockFooter.vue';
+import Control from '@/Components/Guide/Control.vue';
 import { guide } from "@/guide";
 const props = defineProps({
     note: {
@@ -17,10 +17,10 @@ const props = defineProps({
         <h3 class="note-mark cursor-pointer" @click="guide.notesId = guide.notesId === note.id ? null : note.id">
             {{ __(guide.getTopicField('name', note.topicId))}}
         </h3>
+        <Control v-if="guide.isActive(note)" :item="note"/>
         <Editable :text="note.content" class="block-content"
                   @updated="(text) => guide.updateField('notes', 'content', text, note.id)"/>
-        <div v-if="guide.notesId === note.id" class="note-more">
-            <BlockFooter :entity="note"/>
+        <div v-if="guide.isActive(note)" class="note-more">
         </div>
     </div>
 </template>

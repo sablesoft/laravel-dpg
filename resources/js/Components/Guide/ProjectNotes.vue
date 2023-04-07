@@ -1,14 +1,9 @@
 <script setup>
 import Editable from '@/Components/Editable.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import AddNote from '@/Components/Guide/AddNote.vue';
-import BlockFooter from '@/Components/Guide/BlockFooter.vue';
+import Control from '@/Components/Guide/Control.vue';
 import Note from '@/Components/Guide/Note.vue';
-
 import { guide } from "@/guide";
-
 </script>
-
 <style>
     .note-mark {
         font-weight: bold;
@@ -17,7 +12,6 @@ import { guide } from "@/guide";
         margin-bottom: 8px;
     }
 </style>
-
 <template>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -32,13 +26,8 @@ import { guide } from "@/guide";
                     <Editable :text="guide.getProject().code" type="input" class="inline"
                               @updated="(text) => guide.updateField('projects','code', text)"/>
                 </div>
-                <SecondaryButton v-if="!guide.isAddNote" @click="guide.isAddNote = true">
-                    {{__('Add Note')}}
-                </SecondaryButton>
-                <AddNote v-if="guide.isAddNote" :entity="guide.getProject()"/>
-                <br/><br/>
+                <Control :item="guide.getProject()"/>
                 <Note v-if="!guide.isAddNote" v-for="note in guide.getProjectNotes()" :note="note"/>
-                <BlockFooter :entity="guide.getProject()"/>
             </div>
         </div>
     </div>

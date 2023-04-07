@@ -1,4 +1,4 @@
-import {reactive} from 'vue';
+import {reactive, toRaw} from 'vue';
 import {isEmpty, isNumber} from "lodash/lang";
 
 export const guide = reactive({
@@ -8,18 +8,20 @@ export const guide = reactive({
     notes : {},
     posts : {},
     links : {},
-    notesId : null,
-    postsId : null,
-    topicsId : null,
     projectsId : null,
     categoriesId : null,
-    isReady: false,
+    topicsId : null,
+    postsId : null,
+    notesId : null,
+    isAddProject: false,
+    isAddTopic: false,
+    isAddPost: false,
     isAddNote: false,
     isAddLink: false,
-    isAddTopic: false,
-    isAddProject: false,
-    isAddPost: false,
     backLink: null,
+    isReady: false,
+    _itemsIdFields : ['categoriesId', 'topicsId', 'postsId', 'notesId'],
+    _isAddFields : ['isAddProject', 'isAddTopic', 'isAddPost', 'isAddNote', 'isAddLink'],
     init(config) {
         for (const [key, value] of Object.entries(config)) {
             let data = value.data ? value.data : value;
@@ -244,29 +246,13 @@ export const guide = reactive({
         }
         if (this.categoriesId && parseInt(this.categoriesId) === parseInt(id)) {
             this.categoriesId = null;
+            this.changeTab('Info');
         }
         let self = this;
         // pause for all staff deleting:
         setTimeout(function() {
             delete self.topics[id];
         }, 1000);
-    },
-    removeNote(id) {
-        let note = this.notes[id];
-        // remove note id from project:
-        if (note.projectId) {
-            let project = this.projects[note.projectId];
-            project.noteIds = this._removeFromIds(id, project.noteIds);
-        }
-        // remove note id from post:
-        if (note.postId) {
-            let post = this.posts[note.postId];
-            post.noteIds = this._removeFromIds(id, post.noteIds);
-        }
-        if (this.notesId && parseInt(this.notesId) === parseInt(id)) {
-            this.notesId = null;
-        }
-        delete this.notes[id];
     },
     removePost(id) {
         let post = this.posts[id];
@@ -291,15 +277,35 @@ export const guide = reactive({
             delete self.posts[id];
         }, 500);
     },
+    removeNote(id) {
+        let note = this.notes[id];
+        // remove note id from project:
+        if (note.projectId) {
+            let project = this.projects[note.projectId];
+            project.noteIds = this._removeFromIds(id, project.noteIds);
+        }
+        // remove note id from post:
+        if (note.postId) {
+            let post = this.posts[note.postId];
+            post.noteIds = this._removeFromIds(id, post.noteIds);
+        }
+        if (this.notesId && parseInt(this.notesId) === parseInt(id)) {
+            this.notesId = null;
+        }
+        delete this.notes[id];
+    },
+    removeLink(id) {
+        // todo
+    },
     updateField(table, field, value, id = null) {
         let currentIdField = table + 'Id';
         id = id ? id : this[currentIdField];
         if (!id) {
             throw new Error('Id for updating ' + table + ' not found!');
         }
-        let entity = this[table][id];
-        if (!entity) {
-            throw new Error('Entity '+ table +' with id '+ id +' not found!');
+        let item = this[table][id];
+        if (!item) {
+            throw new Error('Item of '+ table +' with id '+ id +' not found!');
         }
         this.request('guide.update', {
             table: table,
@@ -307,16 +313,16 @@ export const guide = reactive({
             field: field,
             value: value
         }, function(res) {
-            entity[field] = value;
+            item[field] = value;
         });
     },
-    createNote(form, entity) {
+    createNote(form, item) {
         let self = this;
         let data = {
             content : form.content,
             topic_id : form.topicId,
         }
-        data[entity.entity + '_id'] = entity.id;
+        data[item.entity + '_id'] = item.id;
         this.request('guide.create', {
             table: 'notes',
             data: data
@@ -324,13 +330,13 @@ export const guide = reactive({
             if (res.status === 201) {
                 let note = res.data.data;
                 self.notes[note.id] = note;
-                switch (entity.entity) {
+                switch (item.entity) {
                     case 'project':
-                        let project = self.getProject(entity.id);
+                        let project = self.getProject(item.id);
                         project.noteIds = self._addToIds(note.id, project.noteIds);
                         break;
                     case 'post':
-                        let post = self.getPost(entity.id);
+                        let post = self.getPost(item.id);
                         post.noteIds = self._addToIds(note.id, post.noteIds);
                         break;
                     default:
@@ -417,14 +423,14 @@ export const guide = reactive({
             self.isAddProject = false;
         });
     },
-    createLink(form, entity) {
+    createLink(form, item) {
         let self = this;
         let data = {
             target_category_id : form.categoryId,
             target_post_id : form.postId,
             target_note_id : form.noteId,
         }
-        data[entity.entity + '_id'] = entity.id;
+        data[item.entity + '_id'] = item.id;
         this.request('guide.create', {
             table: 'links',
             data: data
@@ -432,13 +438,13 @@ export const guide = reactive({
             if (res.status === 201) {
                 let link = res.data.data;
                 self.links[link.id] = link;
-                switch (entity.entity) {
+                switch (item.entity) {
                     case 'note':
-                        let note = self.getNote(entity.id);
+                        let note = self.getNote(item.id);
                         note.linkIds = self._addToIds(link.id, note.linkIds);
                         break;
                     case 'post':
-                        let post = self.getPost(entity.id);
+                        let post = self.getPost(item.id);
                         post.linkIds = self._addToIds(link.id, post.linkIds);
                         break;
                     default:
@@ -452,16 +458,16 @@ export const guide = reactive({
     },
     resetAdding() {
         let self = this;
-        ['Note', 'Project', 'Topic', 'Post', 'Link'].forEach(function(field) {
-            field = 'isAdd' + field;
+        this._isAddFields.forEach(function(field) {
             self[field] = false;
         })
     },
     resetSelect() {
-        let self = this;
-        ['notesId', 'postsId'].forEach(function(field) {
-            self[field] = null;
-        })
+        if (this.notesId) {
+            this.notesId = null;
+        } else if (this.postsId) {
+            this.postsId = null;
+        }
     },
     changeTab(tab) {
         this._setBackLink();
@@ -500,6 +506,31 @@ export const guide = reactive({
             }
         }, 100);
     },
+    isActive(item, entity = '') {
+        if (!item) {
+            return false;
+        }
+
+        let idField = (entity === 'category') ?
+            'categoriesId' : item.entity + 'sId';
+
+        return parseInt(this[idField]) === parseInt(item.id);
+    },
+    isAdding(entity = null) {
+        if (entity) {
+            let field = 'isAdd' + entity.charAt(0).toUpperCase() + entity.slice(1);
+            return this[field];
+        }
+        let self = this;
+        let isAdd = false;
+        this._isAddFields.forEach(function(field) {
+            if (self[field]) {
+                isAdd = true;
+            }
+        });
+
+        return isAdd;
+    },
     _removeFromIds(id, ids) {
         let idsCopy = ids;
         let index = idsCopy.indexOf(parseInt(id));
@@ -523,15 +554,17 @@ export const guide = reactive({
         return idsCopy;
     },
     _setBackLink() {
-        if (this.categoriesId) {
+        if (this.tab === 'Categories') {
             this.backLink = {
                 categoriesId: this.categoriesId,
                 postsId: this.postsId,
                 notesId: this.notesId
             };
         }
-        this.categoriesId = null;
-        this.postsId = null;
-        this.notesId = null;
+        let self = this;
+        this.resetAdding();
+        this._itemsIdFields.forEach(function(field) {
+           self[field] = null;
+        });
     }
 });

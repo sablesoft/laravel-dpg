@@ -160,36 +160,43 @@ export const guide = reactive({
                 console.error(err);
             });
     },
-    delete(table, id = null) {
-        id = id ? id : this[table + 'Id'];
-        if (!id) {
-            return;
-        }
-        let entity = this[table][id];
-        if (!entity) {
-            throw new Error('Entity not found: ' + table + ' - ' +  id);
+    delete(item, entity = '') {
+        if (entity === 'category') {
+            return this.clearCategory(item);
         }
         let self = this;
+        let id = item.id;
         this.request('guide.delete', {
-           'table' : table,
+           'table' : item.entity + 's',
            'id' : id
         }, function(res) {
-            switch (table) {
-                case 'topics':
+            switch (item.entity) {
+                case 'topic':
                     self.removeTopic(id);
                     break;
-                case 'projects':
+                case 'project':
                     self.removeProject(id);
                     break;
-                case 'notes':
+                case 'post':
+                    self.removePost(id);
+                    break;
+                case 'note':
                     self.removeNote(id);
                     break;
-                case 'posts':
-                    self.removePost(id);
+                case 'link':
+                    self.removeLink(id);
                     break;
                 default:
                     break;
             }
+        });
+    },
+    clearCategory(item) {
+        let self = this;
+        item.categoryPostIds.forEach(function(id) {
+            let post = self.getPost(id);
+            console.log('Delete category post:', post);
+            self.delete(post);
         });
     },
     removeProject(id) {

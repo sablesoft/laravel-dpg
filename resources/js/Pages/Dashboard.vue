@@ -92,7 +92,7 @@ onMounted(() => {
                         <button v-if="!guide.projectsId && !guide.isAddProject"
                                 @click="guide.isAddProject = true">{{ __('Create New')}}</button>
                         <button v-if="guide.projectsId" @click="view('project')">{{ __('View')}}</button>
-                        <button v-if="guide.projectsId" @click="guide.delete('projects')">
+                        <button v-if="guide.projectsId" @click="guide.delete(guide.getProject())">
                             {{ __('Delete')}}
                         </button>
                         <AddProject v-if="guide.isAddProject"/>

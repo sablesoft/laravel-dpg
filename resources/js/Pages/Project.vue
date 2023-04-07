@@ -51,9 +51,9 @@ onMounted(() => {
         const key = event.key;
         if (key === "Backspace" || key === "Delete") {
             if (guide.notesId) {
-                guide.delete('notes');
+                guide.delete(guide.getNote());
             } else if (guide.postsId) {
-                guide.delete('posts');
+                guide.delete(guide.getPost());
             }
         }
         if (key === "Escape") {

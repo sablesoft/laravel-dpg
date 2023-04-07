@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,14 +25,18 @@ class GuideController extends Controller
      */
     public function update(Request $request): array
     {
+        $time = Carbon::now();
         $data = $request->post();
         $result = \DB::table('guide_'. $data['table'])
             ->where('id', $data['id'])
-            ->update([$data['field'] => $data['value']]);
+            ->update([
+                $data['field'] => $data['value'],
+                'updated_at' => $time
+            ]);
 
         return $result ? [
             'success' => true,
-            'updated_at' => now()
+            'updatedAt' => $time->format('Y-m-d')
         ] : ['success' => false];
     }
 

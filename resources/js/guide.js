@@ -1,5 +1,5 @@
-import {reactive, toRaw} from 'vue';
-import {isEmpty, isNumber} from "lodash/lang";
+import { reactive } from 'vue';
+import { isEmpty, isNumber } from "lodash/lang";
 
 export const guide = reactive({
     tab: 'Info',
@@ -337,7 +337,12 @@ export const guide = reactive({
             field: field,
             value: value
         }, function(res) {
-            item[field] = value;
+            if (res.data.success) {
+                item[field] = value;
+                item['updatedAt'] = res.data.updatedAt;
+            } else {
+                console.error('Update field problem', res);
+            }
         });
     },
     createNote(form, item) {

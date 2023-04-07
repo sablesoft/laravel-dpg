@@ -2,6 +2,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import Select from '@/Components/Select.vue';
 import ProjectNotes from '@/Components/Guide/ProjectNotes.vue';
 import TopicsTab from '@/Components/Guide/TopicsTab.vue';
 import CategoriesTab from '@/Components/Guide/CategoriesTab.vue';
@@ -61,6 +62,14 @@ onMounted(() => {
         }
     });
 });
+let showCategory = function(id) {
+    guide.changeTab('Categories');
+    if (id === 'post') {
+        guide.isAddPost = true;
+    } else {
+        guide.categoriesId = id;
+    }
+}
 
 </script>
 <style scoped>
@@ -82,9 +91,8 @@ onMounted(() => {
                 <SecondaryButton @click="guide.changeTab('Info')" class="mb-2">
                     {{__('Info')}}
                 </SecondaryButton>
-                <SecondaryButton @click="guide.changeTab('Categories')" class="mb-2">
-                    {{__('Categories')}}
-                </SecondaryButton>
+                <Select placeholder="Categories" :action="{id: 'post', name: 'Create Post'}"
+                        :items="guide.getProjectCategories()" @change="showCategory"/>
                 <SecondaryButton @click="guide.changeTab('Topics')" class="mb-2">
                     {{__('Topics')}}
                 </SecondaryButton>
@@ -99,11 +107,11 @@ onMounted(() => {
             <div v-if="guide.tab === 'Info'" class="py-2">
                 <ProjectNotes/>
             </div>
-            <div v-if="guide.tab === 'Topics'" class="py-2">
-                <TopicsTab :topics="guide.getProjectTopics()"/>
-            </div>
             <div v-if="guide.tab === 'Categories'" class="py-2">
                 <CategoriesTab/>
+            </div>
+            <div v-if="guide.tab === 'Topics'" class="py-2">
+                <TopicsTab :topics="guide.getProjectTopics()"/>
             </div>
         </div>
     </AuthenticatedLayout>

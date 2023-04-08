@@ -99,10 +99,13 @@ export const guide = reactive({
         if (!post) {
             return [];
         }
-        let links = {};
+        let links = [];
         let self = this;
         post.linkIds.forEach(function(id) {
-            links[id] = self.links[id];
+            links.push(self.links[id]);
+        });
+        links.sort(function(a, b) {
+            return a.number - b.number;
         });
 
         return links;
@@ -112,10 +115,13 @@ export const guide = reactive({
         if (!note) {
             return [];
         }
-        let links = {};
+        let links = [];
         let self = this;
         note.linkIds.forEach(function(id) {
-            links[id] = self.links[id];
+            links.push(self.links[id]);
+        });
+        links.sort(function(a, b) {
+            return a.number - b.number;
         });
 
         return links;

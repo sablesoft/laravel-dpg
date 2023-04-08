@@ -32,7 +32,7 @@ class NoteResource extends JsonResource
             'projectId' => $this->project_id,
             'postId' => $this->post_id,
             'topicId' => $this->topic_id,
-            'content' => $this->content,
+            'text' => $this->text,
             'linkIds' => $this->links->modelKeys(),
             'targetLinkIds' => $this->targetLinks->modelKeys(),
             "createdAt" => optional($this->created_at)->format('Y-m-d'),

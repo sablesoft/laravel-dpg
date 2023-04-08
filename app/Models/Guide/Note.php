@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int|null $project_id
  * @property int|null $post_id
  * @property int|null $topic_id
- * @property string|null $content
+ * @property string|null $text
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
@@ -29,7 +29,7 @@ class Note extends GuideItem
         'topic_id',
         'project_id',
         'post_id',
-        'content'
+        'text'
     ];
 
     /**

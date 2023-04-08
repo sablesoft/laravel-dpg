@@ -14,14 +14,14 @@ const props = defineProps({
 });
 const form = useForm({
     topicId: null,
-    content: null
+    text: null
 });
 
 let topicChange = function(value) {
     form.topicId = value;
 }
 let ready = function() {
-    return form.topicId && form.content;
+    return form.topicId && form.text;
 }
 </script>
 
@@ -38,10 +38,10 @@ let ready = function() {
                     @change="topicChange" :items="guide.topics"/>
         </div>
         <div>
-            <InputLabel for="content" :value="__('Content')" />
-            <TextareaInput id="content" class="mt-1 block w-full"
+            <InputLabel for="text" :value="__('Content')" />
+            <TextareaInput id="text" class="mt-1 block w-full"
                        @click.stop @keydown.stop @keyup.stop
-                       v-model="form.content" required />
+                       v-model="form.text" required />
         </div>
         <ControlAdd :ready="ready()" :processing="form.processing"/>
     </form>

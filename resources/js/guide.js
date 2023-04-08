@@ -348,7 +348,7 @@ export const guide = reactive({
     createNote(form, item) {
         let self = this;
         let data = {
-            content : form.content,
+            text : form.text,
             topic_id : form.topicId,
         }
         data[item.entity + '_id'] = item.id;

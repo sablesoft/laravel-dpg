@@ -48,8 +48,8 @@ button {
                 <Control :item="guide.getTopic()"/>
                 <p class="note-row">
                     <span class="note-mark">{{ __('Desc')}}</span>
-                    <Editable :value="guide.getTopicField('desc')"
-                              @updated="(value) => guide.updateField('topics', 'desc', value)"/>
+                    <Editable :value="guide.getTopicField('text')"
+                              @updated="(value) => guide.updateField('topics', 'text', value)"/>
                 </p>
             </div>
         </div>

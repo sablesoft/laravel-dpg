@@ -10,7 +10,7 @@ import { onMounted } from "vue";
 const form = useForm({
     categoryId: null,
     topicId: null,
-    desc: null
+    text: null
 });
 
 let ready = function() {
@@ -44,10 +44,10 @@ onMounted(() => {
                     @change="topicChange" :items="guide.topics"/>
         </div>
         <div>
-            <InputLabel for="desc" :value="__('Desc')" />
-            <TextareaInput id="desc" class="mt-1 block w-full"
+            <InputLabel for="text" :value="__('Desc')" />
+            <TextareaInput id="text" class="mt-1 block w-full"
                            @click.stop @keydown.stop @keyup.stop
-                           v-model="form.desc" />
+                           v-model="form.text" />
         </div>
         <ControlAdd :ready="ready()" :processing="form.processing"/>
     </form>

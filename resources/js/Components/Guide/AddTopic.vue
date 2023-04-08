@@ -9,7 +9,7 @@ import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
 const form = useForm({
     name: null,
-    desc: null,
+    text: null,
     isGlobal: true
 });
 
@@ -30,9 +30,9 @@ let ready = function() {
                        v-model="form.name" required />
         </div>
         <div class="mb-2">
-            <InputLabel for="desc" :value="__('Desc')" />
-            <TextareaInput id="desc" class="mt-1 block w-full"
-                       v-model="form.desc" />
+            <InputLabel for="text" :value="__('Desc')" />
+            <TextareaInput id="text" class="mt-1 block w-full"
+                       v-model="form.text" />
         </div>
         <div>
             <InputLabel for="isGlobal" :value="__('Is Global')" class="inline mr-2"/>

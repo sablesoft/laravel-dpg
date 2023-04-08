@@ -384,7 +384,7 @@ export const guide = reactive({
             data: {
                 category_id : form.categoryId,
                 topic_id : form.topicId,
-                desc: form.desc,
+                text: form.text,
                 project_id: this.projectsId
             }
         }, function(res) {
@@ -412,7 +412,7 @@ export const guide = reactive({
                 table: 'topics',
                 data : {
                     name : form.name,
-                    desc : form.desc,
+                    text : form.text,
                     project_id : form.isGlobal ? null : this.projectsId
                 }
             },

@@ -29,7 +29,7 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'entity' => 'post',
-            'desc' => $this->desc,
+            'text' => $this->text,
             'projectId' => $this->project_id,
             'categoryId' => $this->category_id,
             'topicId' => $this->topic_id,

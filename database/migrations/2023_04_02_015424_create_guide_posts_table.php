@@ -23,7 +23,7 @@ return new class extends Migration
                 ->constrained('guide_topics')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('topic_id')->nullable(false)
                 ->constrained('guide_topics')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->text('desc')->nullable(true);
+            $table->text('text')->nullable(true);
             $table->timestamps();
 
             $table->unique(['project_id', 'category_id', 'topic_id']);

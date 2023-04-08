@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int|null $id
  * @property string|null $name
- * @property string|null $desc
+ * @property string|null $text
  * @property int|null $project_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -25,7 +25,7 @@ class Topic extends GuideItem
 
     protected $fillable = [
         'name',
-        'desc',
+        'text',
         'project_id'
     ];
 

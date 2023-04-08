@@ -32,8 +32,8 @@ button {
                 </h2>
                 <Control entity="category" :item="guide.getTopic(guide.categoriesId)"/>
                 <p>
-                    <Editable :value="guide.getTopicField('desc', guide.categoriesId)"
-                              @updated="(text) => guide.updateField('topics', 'desc', text, guide.categoriesId)"/>
+                    <Editable :value="guide.getTopicField('text', guide.categoriesId)"
+                              @updated="(text) => guide.updateField('topics', 'text', text, guide.categoriesId)"/>
                 </p>
                 <Post v-for="post in guide.getCategoryPosts()" :post="post"/>
             </div>

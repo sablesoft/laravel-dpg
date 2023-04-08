@@ -24,8 +24,8 @@ const props = defineProps({
                       @updated="(text) => guide.updateField('topics', 'name', text, post.topicId)"/>
         </h2>
         <Control :item="post"/>
-        <Editable :value="post.desc" class="block-content"
-                  @updated="(text) => guide.updateField('posts', 'desc', text, post.id)"/>
+        <Editable :value="post.text" class="block-content"
+                  @updated="(text) => guide.updateField('posts', 'text', text, post.id)"/>
         <div class="post-more" v-if="guide.isActive(post)">
             <Link v-if="!guide.isAddLink" v-for="link in guide.getPostLinks()" :link="link"/>
             <Note v-if="!guide.isAddNote" v-for="note in guide.getPostNotes()" :note="note"/>

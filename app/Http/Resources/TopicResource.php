@@ -30,7 +30,7 @@ class TopicResource extends JsonResource
             'id' => $this->id,
             'entity' => 'topic',
             'name' => $this->name,
-            'desc' => $this->desc,
+            'text' => $this->text,
             'projectId' => $this->project_id,
             'postIds' => $this->posts->modelKeys(),
             'noteIds' => $this->notes->modelKeys(),

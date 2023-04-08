@@ -28,12 +28,12 @@ button {
             <div class="p-6 text-gray-900">
                 <h2 class="block-title cursor-pointer">
                     <Editable :value="guide.getTopicField('name', guide.categoriesId)" type="input"
-                              @updated="(text) => guide.updateField('topics', 'name', text, guide.categoriesId)"/>
+                              @updated="(text) => guide.updateField('topic', 'name', text, guide.categoriesId)"/>
                 </h2>
                 <Control entity="category" :item="guide.getTopic(guide.categoriesId)"/>
                 <p>
                     <Editable :value="guide.getTopicField('text', guide.categoriesId)"
-                              @updated="(text) => guide.updateField('topics', 'text', text, guide.categoriesId)"/>
+                              @updated="(text) => guide.updateField('topic', 'text', text, guide.categoriesId)"/>
                 </p>
                 <Post v-for="post in guide.getCategoryPosts()" :post="post"/>
             </div>

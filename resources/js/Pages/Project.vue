@@ -67,7 +67,7 @@ let showCategory = function(id) {
     guide.changeTab('Category');
     if (id === 'new') {
         guide.categoriesId = null;
-        guide.isAddPost = true;
+        guide.postAdding = true;
     } else {
         guide.categoriesId = id;
     }
@@ -76,7 +76,7 @@ let showTopic = function(id) {
     guide.changeTab('Topic');
     if (id === 'new') {
         guide.topicsId = null;
-        guide.isAddTopic = true;
+        guide.topicAdding = true;
     } else {
         guide.topicsId = id;
     }

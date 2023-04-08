@@ -20,9 +20,9 @@ const props = defineProps({
         </h3>
         <Control v-if="guide.isActive(note)" :item="note"/>
         <Editable :value="note.text" class="block-content"
-                  @updated="(text) => guide.updateField('notes', 'text', text, note.id)"/>
+                  @updated="(text) => guide.updateField('note', 'text', text, note.id)"/>
         <div v-if="guide.isActive(note) && guide.tab !== 'ProjectInfo'" class="note-more">
-            <Link v-if="!guide.isAddLink" v-for="link in guide.getNoteLinks()" :link="link"/>
+            <Link v-if="!guide.linkAdding" v-for="link in guide.getNoteLinks()" :link="link"/>
         </div>
     </div>
 </template>

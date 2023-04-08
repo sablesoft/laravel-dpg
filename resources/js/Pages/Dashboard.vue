@@ -24,7 +24,7 @@ let showProject = function(id) {
     guide.changeTab('ProjectInfo');
     if (id === 'new') {
         guide.projectsId = null;
-        guide.isAddProject = true;
+        guide.projectAdding = true;
     } else {
         guide.projectsId = id;
     }
@@ -33,7 +33,7 @@ let showTopic = function(id) {
     guide.changeTab('Topic');
     if (id === 'new') {
         guide.topicsId = null;
-        guide.isAddTopic = true;
+        guide.topicAdding = true;
     } else {
         guide.topicsId = id;
     }

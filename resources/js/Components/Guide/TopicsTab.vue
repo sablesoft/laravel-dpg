@@ -25,31 +25,31 @@ button {
 </style>
 <template>
     <!-- Add Topic -->
-    <div v-if="!guide.topicsId && guide.isAddTopic" class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-2">
+    <div v-if="!guide.topicsId && guide.topicAdding" class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-2">
         <AddTopic/>
     </div>
     <!-- Topic Info -->
-    <div v-if="guide.topicsId && !guide.isAddTopic" :id="'topic' + guide.topicsId"
+    <div v-if="guide.topicsId && !guide.topicAdding" :id="'topic' + guide.topicsId"
          class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-2">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <p class="note-row">
                     <span class="note-mark inline">{{ __('Name')}}: </span>
                     <Editable :value="guide.getTopicField('name')" type="input" class="inline"
-                              @updated="(value) => guide.updateField('topics', 'name', value)"/>
+                              @updated="(value) => guide.updateField('topic', 'name', value)"/>
                 </p>
                 <p class="note-row">
                     <span class="note-mark">{{ __('Project')}}: </span>
                     <Editable :value="guide.getTopicProject() ? guide.getTopicProject().id : null"
                               class="inline" type="select" :items="guide.projects"
                               placeholder="Global" placeholder-enabled="1"
-                              @updated="(value) => guide.updateField('topics', 'project_id', value)"/>
+                              @updated="(value) => guide.updateField('topic', 'project_id', value)"/>
                 </p>
                 <Control :item="guide.getTopic()"/>
                 <p class="note-row">
                     <span class="note-mark">{{ __('Desc')}}</span>
                     <Editable :value="guide.getTopicField('text')"
-                              @updated="(value) => guide.updateField('topics', 'text', value)"/>
+                              @updated="(value) => guide.updateField('topic', 'text', value)"/>
                 </p>
             </div>
         </div>

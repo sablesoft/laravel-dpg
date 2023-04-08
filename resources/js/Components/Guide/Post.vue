@@ -21,14 +21,14 @@ const props = defineProps({
          class="post-row ease-in-out duration-150">
         <h2 class="block-subtitle cursor-pointer" @click="guide.postsId = guide.postsId === post.id ? null : post.id">
             <Editable :value="guide.getTopicField('name', post.topicId)" type="input"
-                      @updated="(text) => guide.updateField('topics', 'name', text, post.topicId)"/>
+                      @updated="(text) => guide.updateField('topic', 'name', text, post.topicId)"/>
         </h2>
         <Control :item="post"/>
         <Editable :value="post.text" class="block-content"
-                  @updated="(text) => guide.updateField('posts', 'text', text, post.id)"/>
+                  @updated="(text) => guide.updateField('post', 'text', text, post.id)"/>
         <div class="post-more" v-if="guide.isActive(post)">
-            <Link v-if="!guide.isAddLink" v-for="link in guide.getPostLinks()" :link="link"/>
-            <Note v-if="!guide.isAddNote" v-for="note in guide.getPostNotes()" :note="note"/>
+            <Link v-if="!guide.linkAdding" v-for="link in guide.getPostLinks()" :link="link"/>
+            <Note v-if="!guide.noteAdding" v-for="note in guide.getPostNotes()" :note="note"/>
         </div>
     </div>
 </template>

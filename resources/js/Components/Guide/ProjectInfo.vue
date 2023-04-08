@@ -14,30 +14,30 @@ import { guide } from "@/guide";
     }
 </style>
 <template>
-    <div v-if="guide.isAddProject" class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-2">
+    <div v-if="guide.projectAdding" class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-2">
         <AddProject/>
     </div>
-    <div v-if="!guide.isAddProject && guide.projectsId" :id="'project' + guide.projectsId"
+    <div v-if="!guide.projectAdding && guide.projectsId" :id="'project' + guide.projectsId"
          class="py-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <div class="note-row">
                     <span class="note-mark">{{ __('Name')}}: </span>
                     <Editable :value="guide.getProject().name" type="input" class="inline"
-                              @updated="(text) => guide.updateField('projects','name', text)"/>
+                              @updated="(text) => guide.updateField('project','name', text)"/>
                 </div>
                 <div class="note-row">
                     <span class="note-mark">{{ __('Code')}}: </span>
                     <Editable :value="guide.getProject().code" type="input" class="inline"
-                              @updated="(text) => guide.updateField('projects','code', text)"/>
+                              @updated="(text) => guide.updateField('project','code', text)"/>
                 </div>
                 <div class="note-row">
                     <span class="note-mark">{{ __('Desc')}}: </span>
                     <Editable :value="guide.getProject().text" class="project-desc"
-                              @updated="(text) => guide.updateField('projects', 'text', text, guide.getProject().id)"/>
+                              @updated="(text) => guide.updateField('project', 'text', text, guide.getProject().id)"/>
                 </div>
                 <Control :item="guide.getProject()"/>
-                <Note v-if="guide.tab !== 'ProjectInfo' && !guide.isAddNote"
+                <Note v-if="guide.tab !== 'ProjectInfo' && !guide.noteAdding"
                       v-for="note in guide.getProjectNotes()" :note="note"/>
             </div>
         </div>

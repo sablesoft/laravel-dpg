@@ -36,15 +36,15 @@ let showView = function() {
     return guide.tab === 'ProjectInfo' && !guide.notesId && !guide.postsId;
 }
 let showCreatePost = function() {
-    return !guide.isAddPost &&
+    return !guide.postAdding &&
         _entity() === 'category';
 }
 let showAddNote = function() {
-    return guide.tab !== 'ProjectInfo' && !guide.isAddNote &&
+    return guide.tab !== 'ProjectInfo' && !guide.noteAdding &&
         (_entity() === 'project' || _entity() === 'post');
 }
 let showAddLink = function() {
-    return !guide.isAddLink && guide.tab !== 'ProjectInfo' &&
+    return !guide.linkAdding && guide.tab !== 'ProjectInfo' &&
         (_entity() === 'post' || _entity() === 'note');
 }
 let showDelete = function() {
@@ -77,13 +77,13 @@ let _entity = function() {
                 <SecondaryButton v-if="showView()" @click.prevent.stop="view()">
                     {{ __('View')}}
                 </SecondaryButton>
-                <SecondaryButton v-if="showCreatePost()" @click.prevent.stop="guide.isAddPost = true">
+                <SecondaryButton v-if="showCreatePost()" @click.prevent.stop="guide.postAdding = true">
                     {{__('Add Post')}}
                 </SecondaryButton>
-                <SecondaryButton v-if="showAddNote()" @click.prevent.stop="guide.isAddNote = true">
+                <SecondaryButton v-if="showAddNote()" @click.prevent.stop="guide.noteAdding = true">
                     {{__('Add Note')}}
                 </SecondaryButton>
-                <SecondaryButton v-if="showAddLink()" @click.prevent.stop="guide.isAddLink = true">
+                <SecondaryButton v-if="showAddLink()" @click.prevent.stop="guide.linkAdding = true">
                     {{__('Add Link')}}
                 </SecondaryButton>
                 <SecondaryButton v-if="showDelete()" @click.prevent.stop="guide.askDeletion(item, _entity())">
@@ -106,9 +106,9 @@ let _entity = function() {
             <div style="clear:both;"></div>
         </div>
         <div class="forms">
-            <AddPost v-if="guide.isAddPost"/>
-            <AddNote v-if="guide.isAddNote" :item="item"/>
-            <AddLink v-if="guide.isAddLink" :item="item"/>
+            <AddPost v-if="guide.postAdding"/>
+            <AddNote v-if="guide.noteAdding" :item="item"/>
+            <AddLink v-if="guide.linkAdding" :item="item"/>
         </div>
         <hr/>
     </div>

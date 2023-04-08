@@ -34,8 +34,10 @@ let getNoteLink = function() {
 }
 </style>
 <template>
-    <p>
-        <span class="link-number">{{link.number}}: </span>
+    <p :id="'link' + link.id" :class="guide.linksId === link.id ? 'active-block' : ''">
+        <span class="link-number cursor-pointer" @click="guide.linksId = guide.linksId === link.id ? null : link.id">
+            {{link.number}}:
+        </span>
         <span class="link-title" @click.prevent.stop="guide.goTo(link, 'category')">
             {{getCategoryLink()}}
         </span>

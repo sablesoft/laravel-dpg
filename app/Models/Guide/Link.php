@@ -67,4 +67,29 @@ class Link extends GuideItem
     {
         return $this->belongsTo(Note::class, 'target_note_id');
     }
+
+    /**
+     * @param int|null $postId
+     * @param int|null $noteId
+     * @return int|null
+     */
+    public static function allowedNumber(?int $postId = null, ?int $noteId = null): ?int
+    {
+        if (!($postId xor $noteId)) {
+            return null;
+        }
+
+        $n = 1;
+        $numbers = static::where('post_id', $postId)
+            ->where('note_id', $noteId)->pluck('number')->toArray();
+        sort($numbers);
+        foreach ($numbers as $number) {
+            if ($number > $n) {
+                return $n;
+            }
+            $n++;
+        }
+
+        return $n;
+    }
 }

@@ -65,12 +65,10 @@ class GuideController extends Controller
             case 'links':
                 $postId = $data['post_id'] ?? null;
                 $noteId = $data['note_id'] ?? null;
-                if (!($postId xor $noteId)) {
+                if (!$number = Link::allowedNumber($postId, $noteId)) {
                     throw new Exception('One of both - Post ID or Note ID - required for creating: ' . $table);
                 }
-                $max = (int) Link::where('post_id', $postId)
-                        ->where('note_id', $noteId)->max('number');
-                $data['number'] = ++$max;
+                $data['number'] = $number;
                 $link = Link::create($data);
                 return LinkResource::make($link);
             default: throw new Exception('Unknown table: ' . $table);

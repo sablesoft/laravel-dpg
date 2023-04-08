@@ -50,7 +50,9 @@ onMounted(() => {
     window.addEventListener('keydown', function(event) {
         const key = event.key;
         if (key === "Backspace" || key === "Delete") {
-            if (guide.notesId) {
+            if (guide.linksId) {
+                guide.askDeletion(guide.getLink());
+            } else if (guide.notesId) {
                 guide.askDeletion(guide.getNote());
             } else if (guide.postsId) {
                 guide.askDeletion(guide.getPost());

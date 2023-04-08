@@ -13,6 +13,7 @@ export const guide = reactive({
     topicsId : null,
     postsId : null,
     notesId : null,
+    linksId : null,
     isAddProject: false,
     isAddTopic: false,
     isAddPost: false,
@@ -122,6 +123,10 @@ export const guide = reactive({
     getNote(id = null) {
         id = id ? id : this.notesId;
         return id ? this.notes[id] : null;
+    },
+    getLink(id = null) {
+        id = id ? id : this.linksId;
+        return id ? this.links[id] : null;
     },
     getProjectCategories(id = null) {
         let posts = this.getProjectPosts(id);
@@ -248,16 +253,24 @@ export const guide = reactive({
     },
     removeTopic(id) {
         let topic = this.topics[id];
-        console.log('Remove topic:', topic);
+        console.debug('Remove topic:', topic);
+        // delete notes:
         for (const [noteId, note] of Object.entries(this.notes)) {
             if (parseInt(note.topicId) === parseInt(id)) {
                 this.removeNote(noteId);
             }
         }
+        // delete topics:
         for (const [postId, post] of Object.entries(this.posts)) {
             if (parseInt(post.categoryId) === parseInt(id) ||
                 parseInt(post.topicId) === parseInt(id)) {
                 this.removePost(postId);
+            }
+        }
+        // delete links:
+        for (const [linkId, link] of Object.entries(this.links)) {
+            if (parseInt(link.targetCategoryId) === parseInt(id)) {
+                delete this.links[linkId];
             }
         }
         // remove topic id from project:
@@ -292,6 +305,10 @@ export const guide = reactive({
         post.noteIds.forEach(function(id) {
             self.removeNote(parseInt(id));
         });
+        // remove post links:
+        post.linkIds.forEach(function(id) {
+           delete self.links[id];
+        });
         // update current post id:
         if (this.postsId && parseInt(this.postsId) === parseInt(id)) {
             this.postsId = null;
@@ -313,13 +330,28 @@ export const guide = reactive({
             let post = this.posts[note.postId];
             post.noteIds = this._removeFromIds(id, post.noteIds);
         }
+        let self = this;
+        note.linkIds.forEach(function(id) {
+            delete self.links[id];
+        });
         if (this.notesId && parseInt(this.notesId) === parseInt(id)) {
             this.notesId = null;
         }
         delete this.notes[id];
     },
     removeLink(id) {
-        // todo
+        let link = this.links[id];
+        // remove link from post:
+        let post = this.getPost(link.postId);
+        if (post) {
+            post.linkIds = this._removeFromIds(id, post.linkIds);
+        }
+        // remove link from note:
+        let note = this.getNote(link.noteId);
+        if (note) {
+            note.linkIds = this._removeFromIds(id, note.linkIds);
+        }
+        delete this.links[id];
     },
     updateField(table, field, value, id = null) {
         let currentIdField = table + 'Id';

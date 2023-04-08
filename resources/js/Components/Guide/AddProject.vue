@@ -1,13 +1,15 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
+import TextareaInput from '@/Components/TextareaInput.vue';
 import ControlAdd from "@/Components/Guide/ControlAdd.vue";
 
 import { guide } from "@/guide";
 import { useForm } from "@inertiajs/inertia-vue3";
 const form = useForm({
     name: null,
-    code: null
+    code: null,
+    text: null,
 });
 
 let ready = function() {
@@ -28,6 +30,11 @@ let ready = function() {
             <InputLabel for="code" :value="__('Code')" />
             <TextInput id="code" type="text" class="mt-1 block w-full"
                        v-model="form.code" required/>
+        </div>
+        <div>
+            <InputLabel for="text" :value="__('Desc')" />
+            <TextareaInput id="text" class="mt-1 block w-full"
+                       v-model="form.text"/>
         </div>
         <ControlAdd :ready="ready()" :processing="form.processing"/>
     </form>

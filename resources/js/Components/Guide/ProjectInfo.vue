@@ -31,8 +31,14 @@ import { guide } from "@/guide";
                     <Editable :value="guide.getProject().code" type="input" class="inline"
                               @updated="(text) => guide.updateField('projects','code', text)"/>
                 </div>
+                <div class="note-row">
+                    <span class="note-mark">{{ __('Desc')}}: </span>
+                    <Editable :value="guide.getProject().text" class="project-desc"
+                              @updated="(text) => guide.updateField('projects', 'text', text, guide.getProject().id)"/>
+                </div>
                 <Control :item="guide.getProject()"/>
-                <Note v-if="!guide.isAddNote" v-for="note in guide.getProjectNotes()" :note="note"/>
+                <Note v-if="guide.tab !== 'ProjectInfo' && !guide.isAddNote"
+                      v-for="note in guide.getProjectNotes()" :note="note"/>
             </div>
         </div>
     </div>

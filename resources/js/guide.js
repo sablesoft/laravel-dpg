@@ -435,11 +435,13 @@ export const guide = reactive({
     },
     createProject(form) {
         let self = this;
+        console.log('create project!', form);
         this.request('guide.create', {
             table: 'projects',
             data : {
                 name: form['name'],
-                code: form['code']
+                code: form['code'],
+                text: form['text']
             }
         }, function(res) {
             if (res.status === 201) {

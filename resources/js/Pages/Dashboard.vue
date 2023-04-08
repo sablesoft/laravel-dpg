@@ -17,10 +17,6 @@ const props = defineProps({
     topics: {
         type: Object,
         required: true
-    },
-    notes: {
-        type: Object,
-        required: true
     }
 });
 
@@ -45,8 +41,7 @@ let showTopic = function(id) {
 onMounted(() => {
     guide.init({
         projects : props.projects,
-        topics : props.topics,
-        notes : props.notes
+        topics : props.topics
     });
 });
 </script>

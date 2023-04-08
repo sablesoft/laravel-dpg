@@ -49,7 +49,6 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
         'projects' => ProjectResource::collection($user->projects->keyBy('id')),
         'topics' => TopicResource::collection($user->topics->keyBy('id')),
-        'notes' => NoteResource::collection($user->notes->keyBy('id')),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 

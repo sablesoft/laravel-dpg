@@ -40,7 +40,7 @@ let showCreatePost = function() {
         _entity() === 'category';
 }
 let showAddNote = function() {
-    return !guide.isAddNote &&
+    return guide.tab !== 'ProjectInfo' && !guide.isAddNote &&
         (_entity() === 'project' || _entity() === 'post');
 }
 let showAddLink = function() {

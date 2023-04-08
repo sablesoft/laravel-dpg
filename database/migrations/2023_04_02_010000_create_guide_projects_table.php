@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 30)->nullable(false);
             $table->string('code', 7)->nullable(false)->unique();
+            $table->text('text')->nullable(true);
             $table->foreignId('owner_id')->nullable(false)
                 ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

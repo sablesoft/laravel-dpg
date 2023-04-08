@@ -8,6 +8,7 @@ use Carbon\Carbon;
  * @property int|null $id
  * @property string|null $name
  * @property string|null $code
+ * @property string|null $text
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
@@ -20,6 +21,7 @@ class Project extends GuideItem
     protected $fillable = [
         'name',
         'code',
+        'text',
         'owner_id'
     ];
 }

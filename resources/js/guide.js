@@ -203,7 +203,7 @@ export const guide = reactive({
         }
         this.request('guide.update', {
             table: entity + 's',
-            id: id,
+            id: item.id,
             field: field,
             value: value
         }, function(res) {
@@ -224,7 +224,7 @@ export const guide = reactive({
         this.request('guide.create', {
             table: 'notes',
             data: data
-        }, this._createCallback);
+        }, this._createCallback.bind(this));
     },
     createPost(form) {
         this.request('guide.create', {
@@ -235,7 +235,7 @@ export const guide = reactive({
                 text: form.text,
                 project_id: this.projectsId
             }
-        }, this._createCallback);
+        }, this._createCallback.bind(this));
     },
     createTopic(form) {
         this.request('guide.create', {
@@ -245,7 +245,7 @@ export const guide = reactive({
                     text : form.text,
                     project_id : form.isGlobal ? null : this.projectsId
                 }
-            }, this._createCallback);
+            }, this._createCallback.bind(this));
     },
     createProject(form) {
         console.log('create project!', form);
@@ -256,7 +256,7 @@ export const guide = reactive({
                 code: form['code'],
                 text: form['text']
             }
-        }, this._createCallback);
+        }, this._createCallback.bind(this));
     },
     createLink(form, item) {
         let data = {
@@ -268,7 +268,7 @@ export const guide = reactive({
         this.request('guide.create', {
             table: 'links',
             data: data
-        }, this._createCallback);
+        }, this._createCallback.bind(this));
     },
     delete(item = null, entity = null) {
         item = item ? item : this.deleteAsk.item;
@@ -345,6 +345,7 @@ export const guide = reactive({
         }
         if (this.topicsId && parseInt(this.topicsId) === parseInt(id)) {
             this.topicsId = null;
+            this.changeTab('Info');
         }
         if (this.categoriesId && parseInt(this.categoriesId) === parseInt(id)) {
             this.categoriesId = null;
@@ -436,7 +437,7 @@ export const guide = reactive({
         if (this.tab === 'Category' && !this.categoriesId) {
             this.tab = 'Info';
         }
-        if (this.tab === 'Topic') {
+        if (this.tab === 'Topic' && !this.topicsId) {
             this.tab = 'Info';
         }
     },
@@ -554,6 +555,7 @@ export const guide = reactive({
                 if (item.projectId) {
                     belongsTo = ['project'];
                 }
+                this.topicsId = item.id;
                 break;
             case 'post':
                 belongsTo = ['topic', 'project'];
@@ -577,7 +579,7 @@ export const guide = reactive({
         });
     },
     _register(item, entity) {
-        let belongsTo = self.getItem(entity, item[entity + 'Id']);
+        let belongsTo = this.getItem(entity, item[entity + 'Id']);
         let idsField = item.entity + 'Ids';
         belongsTo[idsField] = this._addToIds(item.id, belongsTo[idsField]);
     },

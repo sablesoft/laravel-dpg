@@ -77,6 +77,9 @@ let _entity = function() {
                 <SecondaryButton v-if="showView()" @click.prevent.stop="view()">
                     {{ __('View')}}
                 </SecondaryButton>
+                <SecondaryButton v-if="!guide.draggable" @click.prevent.stop="guide.draggable = true">
+                    {{ __('Sort')}}
+                </SecondaryButton>
                 <SecondaryButton v-if="showCreatePost()" @click.prevent.stop="guide.postAdding = true">
                     {{__('Add Post')}}
                 </SecondaryButton>

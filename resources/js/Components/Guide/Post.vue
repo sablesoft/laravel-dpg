@@ -3,8 +3,8 @@ import Note from '@/Components/Guide/Note.vue';
 import Link from '@/Components/Guide/Link.vue';
 import Editable from '@/Components/Editable.vue';
 import Control from '@/Components/Guide/Control.vue';
+import DraggableList from '@/Components/Guide/DraggableList.vue';
 import { guide } from "@/guide";
-import { VueDraggableNext } from 'vue-draggable-next';
 const props = defineProps({
     post: {
         type: Object,
@@ -29,12 +29,12 @@ const props = defineProps({
         <Editable :value="post.text" class="block-content"
                   @updated="(text) => guide.updateField('post', 'text', text, post.id)"/>
         <div class="post-more" v-if="guide.isActive(post)">
-            <VueDraggableNext :list="guide.getPostLinks()" @end="(e) => guide.dragged(e)">
+            <DraggableList :list="guide.getPostLinks()">
                 <Link v-if="!guide.linkAdding" v-for="link in guide.getPostLinks()" :link="link"/>
-            </VueDraggableNext>
-            <VueDraggableNext :list="guide.getPostNotes()" @end="(e) => guide.dragged(e)">
+            </DraggableList>
+            <DraggableList :list="guide.getPostNotes()">
                 <Note v-if="!guide.noteAdding" v-for="note in guide.getPostNotes()" :note="note"/>
-            </VueDraggableNext>
+            </DraggableList>
         </div>
     </div>
 </template>

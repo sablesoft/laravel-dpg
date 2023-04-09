@@ -2,7 +2,7 @@
 import Link from '@/Components/Guide/Link.vue';
 import Editable from '@/Components/Editable.vue';
 import Control from '@/Components/Guide/Control.vue';
-import { VueDraggableNext } from 'vue-draggable-next';
+import DraggableList from '@/Components/Guide/DraggableList.vue';
 import { guide } from "@/guide";
 const props = defineProps({
     note: {
@@ -24,9 +24,9 @@ const props = defineProps({
         <Editable :value="note.text" class="block-content"
                   @updated="(text) => guide.updateField('note', 'text', text, note.id)"/>
         <div v-if="guide.isActive(note) && guide.tab !== 'ProjectInfo'" class="note-more">
-            <VueDraggableNext :list="guide.getNoteLinks()" @end="(e) => guide.dragged(e)">
+            <DraggableList :list="guide.getNoteLinks()">
                 <Link v-if="!guide.linkAdding" v-for="link in guide.getNoteLinks()" :link="link"/>
-            </VueDraggableNext>
+            </DraggableList>
         </div>
     </div>
 </template>

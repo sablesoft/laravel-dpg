@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property int|null $id
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Topic|null $category
  * @property Link[]|Collection $targetLinks
  */
-class Post extends GuideItem
+class Post extends GuideItem implements UseNumber
 {
     use BelongsToProject, BelongsToTopic, HasNotes, HasLinks;
 
@@ -67,5 +68,13 @@ class Post extends GuideItem
         }
 
         return $n;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function numbersQuery(): Builder
+    {
+        return Post::where('category_id', $this->category_id);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models\Guide;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Post|null $targetPost
  * @property Note|null $targetNote
  */
-class Link extends GuideItem
+class Link extends GuideItem implements UseNumber
 {
     use BelongsToPost;
 
@@ -91,5 +92,13 @@ class Link extends GuideItem
         }
 
         return $n;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function numbersQuery(): Builder
+    {
+        return Link::where('post_id', $this->post_id)->where('note_id', $this->note_id);
     }
 }

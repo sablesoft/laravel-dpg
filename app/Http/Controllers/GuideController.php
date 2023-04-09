@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guide\UseNumber;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -22,22 +23,92 @@ class GuideController extends Controller
     /**
      * @param Request $request
      * @return array
+     * @throws Exception
      */
     public function update(Request $request): array
     {
         $time = Carbon::now();
         $data = $request->post();
-        $result = \DB::table('guide_'. $data['table'])
-            ->where('id', $data['id'])
-            ->update([
-                $data['field'] => $data['value'],
-                'updated_at' => $time
-            ]);
+        if ($data['field'] === 'number') {
+            $result = $this->updateNumber($data, $time);
+        } else {
+            $result = \DB::table('guide_'. $data['table'])
+                ->where('id', $data['id'])
+                ->update([
+                    $data['field'] => $data['value'],
+                    'updated_at' => $time
+                ]);
+        }
 
         return $result ? [
             'success' => true,
-            'updatedAt' => $time->format('Y-m-d')
+            'updatedAt' => $time->format('Y-m-d'),
+            'result' => $result
         ] : ['success' => false];
+    }
+
+    /**
+     * @param array $data
+     * @param Carbon $time
+     * @return array|null
+     * @throws Exception
+     */
+    protected function updateNumber(array $data, Carbon $time): ?array
+    {
+        switch ($data['table']) {
+            case 'notes':
+                /** @var UseNumber $item */
+                $item = Note::findOrFail($data['id']);
+                break;
+            case 'posts':
+                /** @var UseNumber $item */
+                $item = Post::findOrFail($data['id']);
+                break;
+            case 'links':
+                /** @var UseNumber $item */
+                $item = Link::findOrFail($data['id']);
+                break;
+            default:
+                throw new Exception('Unknown entity for number updating: '. $data['table']);
+        }
+        $query = $item->numbersQuery();
+        $next = $query->max('number') + 1;
+        $ids = $query->orderBy('number')->pluck('id')->toArray();
+        $ids = $this->changePosition($ids, $item->number, $data['value']);
+        foreach ($ids as $index => $id) {
+            \DB::table('guide_'. $data['table'])
+                ->where('id', $id)
+                ->update([
+                    'number' => $next + $index,
+                    'updated_at' => $time
+                ]);
+        }
+        foreach ($ids as $index => $id) {
+            \DB::table('guide_'. $data['table'])
+                ->where('id', $id)
+                ->update([
+                    'number' => 1 + $index,
+                    'updated_at' => $time
+                ]);
+        }
+
+        return \DB::table('guide_'. $data['table'])
+                ->whereIn('id', $ids)->select(['id', 'number'])
+                ->orderBy('number')->get()->toArray();
+    }
+
+    /**
+     * @param $ids
+     * @param $old
+     * @param $new
+     * @return array
+     */
+    protected function changePosition($ids, $old, $new): array
+    {
+        $out = array_splice($ids, $old - 1, 1);
+        array_splice($ids, $new - 1, 0, $out);
+
+        return $ids;
     }
 
     /**

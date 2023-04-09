@@ -3,6 +3,7 @@
 namespace App\Models\Guide;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property-read string|null $title
  */
-class Note extends GuideItem
+class Note extends GuideItem implements UseNumber
 {
     use BelongsToProject, BelongsToTopic, BelongsToPost, HasLinks;
 
@@ -76,5 +77,13 @@ class Note extends GuideItem
         }
 
         return $n;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function numbersQuery(): Builder
+    {
+        return Note::where('post_id', $this->post_id)->where('project_id', $this->project_id);
     }
 }

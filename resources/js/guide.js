@@ -1,5 +1,6 @@
-import { reactive } from 'vue';
+import {reactive, toRaw} from 'vue';
 import { isEmpty, isNumber } from "lodash/lang";
+import {uuid} from "vue-uuid";
 
 export const guide = reactive({
     tab: 'Info',
@@ -22,6 +23,7 @@ export const guide = reactive({
     backLink: null,
     deleteAsk: null,
     isReady: false,
+    draggable: null,
     _itemsIdFields : ['categoriesId', 'topicsId', 'postsId', 'notesId', 'linksId'],
     _addingFields : ['projectAdding', 'topicAdding', 'postAdding', 'noteAdding', 'linkAdding'],
 
@@ -97,11 +99,8 @@ export const guide = reactive({
     },
     getProjectNotes(id = null) {
         let notes = this.getRelations('project', 'note', id, true);
-        notes.sort(function(a, b) {
-            return a.number - b.number;
-        });
 
-        return notes;
+        return this._sortItemsByNumber(notes);
     },
     getProjectTopics(id = null) {
         let topics = this.getRelations('project', 'topic', id, true);
@@ -114,27 +113,18 @@ export const guide = reactive({
     },
     getPostNotes(id = null) {
         let notes = this.getRelations('post', 'note', id, true);
-        notes.sort(function(a, b) {
-            return a.number - b.number;
-        });
 
-        return notes;
+        return this._sortItemsByNumber(notes);
     },
     getPostLinks(id = null) {
         let links = this.getRelations('post', 'link', id, true);
-        links.sort(function(a, b) {
-            return a.number - b.number;
-        });
 
-        return links;
+        return this._sortItemsByNumber(links);
     },
     getNoteLinks(id = null) {
         let links = this.getRelations('note', 'link', id, true);
-        links.sort(function(a, b) {
-            return a.number - b.number;
-        });
 
-        return links;
+        return this._sortItemsByNumber(links);
     },
     getTopicPosts(id = null) {
         return this.getRelations('topic', 'post', id);
@@ -169,11 +159,8 @@ export const guide = reactive({
         topic.categoryPostIds.forEach(function(id) {
            posts.push(self.getPost(id));
         });
-        posts.sort(function(a, b) {
-            return a.number - b.number;
-        });
 
-        return posts;
+        return this._sortItemsByNumber(posts);
     },
     getGeneralTopics() {
         let topics = [];
@@ -214,6 +201,7 @@ export const guide = reactive({
             });
     },
     updateField(entity, field, value, id = null) {
+        let self = this;
         let item = this.getItem(entity, id);
         if (!item) {
             throw new Error(entity +' with id '+ id +' not found!');
@@ -225,12 +213,24 @@ export const guide = reactive({
             value: value
         }, function(res) {
             if (res.data.success) {
-                item[field] = value;
+                if (field === 'number') {
+                    self.updateNumber(item, res.data.result);
+                } else {
+                    item[field] = value;
+                }
                 item['updatedAt'] = res.data.updatedAt;
             } else {
                 console.error('Update field problem', res);
             }
         });
+    },
+    updateNumber(item, list) {
+        let self = this;
+        let listField = item.entity + 's';
+        list.forEach(function(item) {
+            self[listField][item.id]['number'] = item.number;
+        });
+        this.draggable = false;
     },
     createNote(form, item) {
         let data = {
@@ -471,11 +471,7 @@ export const guide = reactive({
     dragged(event) {
         let entity = event.item.getAttribute('data-entity');
         let id = event.item.getAttribute('data-id');
-        let oldNumber = event.oldIndex + 1;
         let newNumber = event.newIndex + 1;
-        console.log('dragged', entity, id);
-        console.log('from - to', oldNumber, newNumber);
-        console.log(this);
         this.updateField(entity, 'number', newNumber, id);
     },
     changeTab(tab) {
@@ -609,6 +605,31 @@ export const guide = reactive({
         let belongsTo = this.getItem(entity, item[entity + 'Id']);
         let idsField = item.entity + 'Ids';
         belongsTo[idsField] = this._addToIds(item.id, belongsTo[idsField]);
+    },
+    _updateNumbers(oldNumber, newNumber, list) {
+        console.log('old - new: ', oldNumber, newNumber);
+        let ids = [];
+        toRaw(list).forEach(function(item) {
+            ids.splice(item.number - 1, 0, toRaw(item.id));
+        });
+        console.log('list ids before:', ids);
+        let id = ids.splice(oldNumber - 1, 1)[0];
+        console.log('change position for', id);
+        ids.splice(newNumber - 1, 0, id);
+        console.log('list ids after:', ids);
+        list.forEach(function(item) {
+            item.number = ids.indexOf(item.id) + 1;
+        });
+        console.log('list items:', toRaw(list));
+
+        return this._sortItemsByNumber(list);
+    },
+    _sortItemsByNumber(list) {
+        list.sort(function(a, b) {
+            return a.number - b.number;
+        });
+
+        return list;
     },
     _removeFromIds(id, ids) {
         let idsCopy = ids;

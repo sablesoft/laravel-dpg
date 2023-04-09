@@ -1,8 +1,102 @@
 <script setup>
 import Editable from '@/Components/Editable.vue';
+import Link from '@/Components/Guide/Link.vue';
 import AddTopic from '@/Components/Guide/AddTopic.vue';
 import Control from '@/Components/Guide/Control.vue';
 import { guide } from "@/guide";
+import { isEmpty } from "lodash/lang";
+let linkToCategory = function() {
+    return {
+        id : null,
+        entity : 'link',
+        number : null,
+        targetCategoryId : guide.topicsId,
+        targetPostId : null,
+        targetNoteId : null
+    };
+}
+let linksToPosts = function() {
+    let number = 1;
+    let links = [];
+    let posts = guide.getRelations('topic', 'post', null, true);
+    posts.forEach(function(post) {
+        links.push({
+            id : null,
+            entity : 'link',
+            number : number++,
+            targetCategoryId : post.categoryId,
+            targetPostId : post.id,
+            targetNoteId : null
+        });
+    });
+
+    return links;
+}
+let linksToNotes = function() {
+    let number = 1;
+    let links = [];
+    let notes = guide.getRelations('topic', 'note', null, true);
+    notes.forEach(function(note) {
+        links.push({
+            id : null,
+            entity : 'link',
+            number : number++,
+            targetCategoryId : note.postId ? guide.getPost(note.postId).categoryId : null,
+            targetPostId : note.postId ? note.postId : null,
+            targetNoteId : note.id
+        });
+    });
+
+    return links;
+}
+let linksToLinks = function() {
+    let number = 1;
+    let links = [];
+    guide.getTopic().categoryLinkIds.forEach(function(id) {
+        let link = guide.getLink(id);
+        links.push({
+            id : null,
+            number : number++,
+            entity : 'link',
+            targetCategoryId : link.postId ? guide.getPost(link.postId).categoryId : null,
+            targetPostId : link.postId,
+            targetNoteId : link.noteId,
+            targetLinkId : id
+        });
+    });
+    let posts = guide.getRelations('topic', 'post', null, true);
+    posts.forEach(function(post) {
+        post.targetLinkIds.forEach(function(id) {
+            let link = guide.getLink(id);
+            links.push({
+                id : null,
+                number : number++,
+                entity : 'link',
+                targetCategoryId : link.postId ? guide.getPost(link.postId).categoryId : null,
+                targetPostId : link.postId,
+                targetNoteId : link.noteId,
+                targetLinkId : id
+            });
+        });
+    });
+    let notes = guide.getRelations('topic', 'note', null, true);
+    notes.forEach(function(note) {
+        note.targetLinkIds.forEach(function(id) {
+            let link = guide.getLink(id);
+            links.push({
+                id : null,
+                number : number++,
+                entity : 'link',
+                targetCategoryId : link.postId ? guide.getPost(link.postId).categoryId : null,
+                targetPostId : link.postId,
+                targetNoteId : link.noteId,
+                targetLinkId : id
+            });
+        });
+    });
+
+    return links;
+}
 </script>
 <style>
 .note-mark {
@@ -34,12 +128,12 @@ button {
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <p class="note-row">
-                    <span class="note-mark inline">{{ __('Name')}}: </span>
+                    <span class="note-mark inline">{{ __('Name') }}: </span>
                     <Editable :value="guide.getTopicField('name')" type="input" class="inline"
                               @updated="(value) => guide.updateField('topic', 'name', value)"/>
                 </p>
                 <p class="note-row">
-                    <span class="note-mark">{{ __('Project')}}: </span>
+                    <span class="note-mark">{{ __('Project') }}: </span>
                     <Editable :value="guide.getTopicProject() ? guide.getTopicProject().id : null"
                               class="inline" type="select" :items="guide.projects"
                               placeholder="Global" placeholder-enabled="1"
@@ -47,10 +141,33 @@ button {
                 </p>
                 <Control :item="guide.getTopic()"/>
                 <p class="note-row">
-                    <span class="note-mark">{{ __('Desc')}}</span>
+                    <span class="note-mark">{{ __('Desc') }}</span>
                     <Editable :value="guide.getTopicField('text')"
                               @updated="(value) => guide.updateField('topic', 'text', value)"/>
                 </p>
+                <div v-if="guide.isCategory()" class="note-row">
+                    <hr><br>
+                    <span class="note-mark">{{ __('Category') }}: </span>
+                    <Link :link="linkToCategory()" class="inline"/>
+                </div>
+                <div v-if="!isEmpty(linksToPosts())" class="note-row">
+                    <hr><br>
+                    <span class="note-mark">{{ __('Posts') }}</span>
+                    <hr>
+                    <Link v-for="link in linksToPosts()" :link="link"/>
+                </div>
+                <div v-if="!isEmpty(linksToNotes())" class="note-row">
+                    <hr><br>
+                    <span class="note-mark">{{ __('Notes') }}</span>
+                    <hr>
+                    <Link v-for="link in linksToNotes()" :link="link"/>
+                </div>
+                <div v-if="!isEmpty(linksToLinks())" class="note-row">
+                    <hr><br>
+                    <span class="note-mark">{{ __('Links') }}</span>
+                    <hr>
+                    <Link v-for="link in linksToLinks()" :link="link"/>
+                </div>
             </div>
         </div>
     </div>

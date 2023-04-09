@@ -100,9 +100,12 @@ let showTopic = function(id) {
                 <Select placeholder="Categories" class="mb-2 mr-2"
                         :action="{id: 'new', name: 'New'}"
                         :items="guide.getProjectCategories()" @change="showCategory"/>
-                <Select placeholder="Topics" class="mb-2 mr-2"
+                <Select placeholder="Project Topics" class="mb-2 mr-2"
                         :action="{id: 'new', name: 'New'}"
                         :items="guide.getProjectTopics()" @change="showTopic"/>
+                <Select placeholder="General Topics" class="mb-2 mr-2"
+                        :action="{id: 'new', name: 'New'}"
+                        :items="guide.getGeneralTopics()" @change="showTopic"/>
                 <SecondaryButton v-if="guide.backLink" @click="guide.goBack()" class="mb-2">
                     {{__('Go Back')}}
                 </SecondaryButton>

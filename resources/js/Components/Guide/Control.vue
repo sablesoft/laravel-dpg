@@ -5,7 +5,7 @@ import AddNote from '@/Components/Guide/AddNote.vue';
 import AddLink from '@/Components/Guide/AddLink.vue';
 
 import { guide } from "@/guide";
-import {isEmpty} from "lodash/lang";
+import { isEmpty } from "lodash/lang";
 const props = defineProps({
     item: {
         type: Object,

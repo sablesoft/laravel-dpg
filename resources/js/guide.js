@@ -62,7 +62,7 @@ export const guide = reactive({
     // relation getters:
     getRelation(entity, relationEntity, id = null) {
         let relationField = relationEntity + 'Id';
-        let item = this.getItem(entity);
+        let item = this.getItem(entity, id);
         if (!item || !item[relationField]) {
             return null;
         }
@@ -132,6 +132,7 @@ export const guide = reactive({
     getTopicLinks(id = null) {
         return this.getRelations('topic', 'link', id);
     },
+
     getProjectCategories(id = null) {
         let posts = this.getProjectPosts(id);
         if (isEmpty(posts)) {
@@ -157,6 +158,25 @@ export const guide = reactive({
         });
 
         return posts;
+    },
+    getGeneralTopics() {
+        let topics = {};
+        for (const [id, topic] of Object.entries(this.topics)) {
+            if (!topic.projectId) {
+                topics[topic.id] = topic;
+            }
+        }
+
+        return topics;
+    },
+    isCategory(id = null) {
+        id = id ? id : this.topicsId;
+        for (const [postId, post] of Object.entries(this.posts)) {
+            if (parseInt(post.categoryId) === parseInt(id)) {
+                return true;
+            }
+        }
+        return false;
     },
 
     // field getters:
@@ -436,19 +456,38 @@ export const guide = reactive({
     },
     goTo(link, target) {
         this._setBackLink();
-        this.tab = 'Category';
-        this.categoriesId = link.targetCategoryId;
+        let self = this;
+        if (link.targetCategoryId) {
+            this.tab = 'Category';
+            this.categoriesId = link.targetCategoryId;
+        }
         if (target === 'category') {
-            location.hash = "#" + 'category' + this.categoriesId;
+            setTimeout(function() {
+                location.hash = "#" + 'category' + self.categoriesId;
+            }, 200);
             return;
         }
         this.postsId = link.targetPostId;
         if (target === 'post') {
-            location.hash = "#" + 'post' + this.postsId;
+            setTimeout(function() {
+                location.hash = "#" + 'post' + self.postsId;
+            }, 200);
             return;
         }
+        if (!link.targetCategoryId) {
+            this.tab = 'Info';
+        }
         this.notesId = link.targetNoteId;
-        location.hash = "#" + 'note' + this.notesId;
+        if (target === 'note') {
+            setTimeout(function() {
+                location.hash = "#" + 'note' + self.notesId;
+            }, 200);
+            return;
+        }
+        this.linksId = link.targetLinkId;
+        setTimeout(function() {
+            location.hash = "#" + 'link' + self.linksId;
+        },200);
     },
     goBack() {
         let self = this;

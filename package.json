@@ -23,6 +23,7 @@
     "dependencies": {
         "@vitejs/plugin-vue": "^3.2.0",
         "fabric-with-erasing": "^1.0.1",
-        "vue": "^3.2.36"
+        "vue": "^3.2.36",
+        "vue-uuid": "^3.0.0"
     }
 }

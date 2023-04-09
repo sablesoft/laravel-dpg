@@ -1,5 +1,6 @@
 <script setup>
 import { guide } from "@/guide";
+import { uuid } from 'vue-uuid';
 const props = defineProps({
     link: {
         type: Object,
@@ -11,17 +12,20 @@ let getCategoryLink = function() {
 }
 
 let getPostLink = function() {
-    let post = guide.getPost(props.link.targetPostId);
-    let topic = guide.getTopic(post.topicId);
-
-    return topic.name;
+    return guide.getRelation('post', 'topic', props.link.targetPostId).name;
 }
 
 let getNoteLink = function() {
-    let note = guide.getNote(props.link.targetNoteId);
-    let topic = guide.getTopic(note.topicId);
-
-    return topic.name;
+    return guide.getRelation('note', 'topic', props.link.targetNoteId).name;
+}
+let getLinkName = function() {
+    let link = guide.getLink(props.link.targetLinkId);
+    let categoryName = guide.getField('topic', 'name', link.targetCategoryId);
+    categoryName = categoryName ? categoryName : 'Info';
+    let postName = guide.getRelation('post', 'topic', link.targetPostId).name;
+    let noteTopic = guide.getRelation('note', 'topic', link.targetNoteId);
+    let noteName = noteTopic ? noteTopic.name : null;
+    return '(' + link.number + ': ' + categoryName + ' - ' + postName + (noteName ? ' - ' + noteName : '') + ')';
 }
 </script>
 <style>
@@ -34,19 +38,31 @@ let getNoteLink = function() {
 }
 </style>
 <template>
-    <p :id="'link' + link.id" :class="guide.linksId === link.id ? 'active-block' : ''">
-        <span class="link-number cursor-pointer" @click="guide.linksId = guide.linksId === link.id ? null : link.id">
-            {{link.number}}:
+    <p :id="'link' + (link.id ? link.id : uuid.v1())" :class="link.id && guide.linksId === link.id ? 'active-block' : ''">
+        <span v-if="link.number" class="link-number cursor-pointer" @click="guide.linksId = guide.linksId === link.id ? null : link.id">
+            {{ link.number }}:
         </span>
-        <span class="link-title" @click.prevent.stop="guide.goTo(link, 'category')">
-            {{getCategoryLink()}}
-        </span>
-        - <span class="link-title" @click.prevent.stop="guide.goTo(link, 'post')">
-            {{getPostLink()}}
-        </span>
+        <template v-if="link.targetCategoryId">
+            <span class="link-title" @click.prevent.stop="guide.goTo(link, 'category')">
+                {{ getCategoryLink() }}
+            </span>
+        </template>
+        <template v-else>
+            <span>{{ __('Info') }}</span>
+        </template>
+        <template v-if="link.targetPostId">
+            - <span class="link-title" @click.prevent.stop="guide.goTo(link, 'post')">
+                {{ getPostLink() }}
+            </span>
+        </template>
         <template v-if="link.targetNoteId">
             - <span class="link-title" @click.prevent.stop="guide.goTo(link, 'note')">
-                {{getNoteLink()}}
+                {{ getNoteLink() }}
+            </span>
+        </template>
+        <template v-if="link.targetLinkId">
+            - <span class="link-title" @click.prevent.stop="guide.goTo(link, 'link')">
+                {{ getLinkName() }}
             </span>
         </template>
     </p>

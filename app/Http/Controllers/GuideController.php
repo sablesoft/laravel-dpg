@@ -51,6 +51,12 @@ class GuideController extends Controller
         $data = $request->post('data');
         switch ($table) {
             case 'notes':
+                $postId = $data['post_id'] ?? null;
+                $projectId = $data['project_id'] ?? null;
+                if (!$number = Note::allowedNumber($postId, $projectId)) {
+                    throw new Exception('One of both - Post ID or Project ID - required for creating: ' . $table);
+                }
+                $data['number'] = $number;
                 $note = Note::create($data);
                 return NoteResource::make($note);
             case 'topics':
@@ -60,6 +66,8 @@ class GuideController extends Controller
                 $project = Project::create($data);
                 return ProjectResource::make($project);
             case 'posts':
+                $categoryId = $data['category_id'];
+                $data['number'] = Post::allowedNumber($categoryId);
                 $post = Post::create($data);
                 return PostResource::make($post);
             case 'links':

@@ -29,10 +29,10 @@ const props = defineProps({
         <Editable :value="post.text" class="block-content"
                   @updated="(text) => guide.updateField('post', 'text', text, post.id)"/>
         <div class="post-more" v-if="guide.isActive(post)">
-            <VueDraggableNext :list="guide.getPostLinks()" @end="guide.dragged.bind(guide)">
+            <VueDraggableNext :list="guide.getPostLinks()" @end="(e) => guide.dragged(e)">
                 <Link v-if="!guide.linkAdding" v-for="link in guide.getPostLinks()" :link="link"/>
             </VueDraggableNext>
-            <VueDraggableNext :list="guide.getPostNotes()" @end="guide.dragged.bind(guide)">
+            <VueDraggableNext :list="guide.getPostNotes()" @end="(e) => guide.dragged(e)">
                 <Note v-if="!guide.noteAdding" v-for="note in guide.getPostNotes()" :note="note"/>
             </VueDraggableNext>
         </div>

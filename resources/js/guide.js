@@ -96,7 +96,12 @@ export const guide = reactive({
         return relations;
     },
     getProjectNotes(id = null) {
-        return this.getRelations('project', 'note', id);
+        let notes = this.getRelations('project', 'note', id, true);
+        notes.sort(function(a, b) {
+            return a.number - b.number;
+        });
+
+        return notes;
     },
     getProjectTopics(id = null) {
         return this.getRelations('project', 'topic', id);
@@ -105,7 +110,12 @@ export const guide = reactive({
         return this.getRelations('project', 'post', id);
     },
     getPostNotes(id = null) {
-        return this.getRelations('post', 'note', id, true);
+        let notes = this.getRelations('post', 'note', id, true);
+        notes.sort(function(a, b) {
+            return a.number - b.number;
+        });
+
+        return notes;
     },
     getPostLinks(id = null) {
         let links = this.getRelations('post', 'link', id, true);
@@ -152,9 +162,12 @@ export const guide = reactive({
             return [];
         }
         let self = this;
-        let posts = {};
+        let posts = [];
         topic.categoryPostIds.forEach(function(id) {
-           posts[id] =  self.getPost(id);
+           posts.push(self.getPost(id));
+        });
+        posts.sort(function(a, b) {
+            return a.number - b.number;
         });
 
         return posts;
@@ -458,6 +471,8 @@ export const guide = reactive({
         let newNumber = event.newIndex + 1;
         console.log('dragged', entity, id);
         console.log('from - to', oldNumber, newNumber);
+        console.log(this);
+        this.updateField(entity, 'number', newNumber, id);
     },
     changeTab(tab) {
         this._setBackLink();

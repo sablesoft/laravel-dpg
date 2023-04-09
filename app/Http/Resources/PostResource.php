@@ -30,6 +30,7 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'entity' => 'post',
             'text' => $this->text,
+            'number' => $this->number,
             'projectId' => $this->project_id,
             'categoryId' => $this->category_id,
             'topicId' => $this->topic_id,

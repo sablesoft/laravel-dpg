@@ -24,7 +24,7 @@ const props = defineProps({
         <Editable :value="note.text" class="block-content"
                   @updated="(text) => guide.updateField('note', 'text', text, note.id)"/>
         <div v-if="guide.isActive(note) && guide.tab !== 'ProjectInfo'" class="note-more">
-            <VueDraggableNext :list="guide.getNoteLinks()" @end="guide.dragged.bind(guide)">
+            <VueDraggableNext :list="guide.getNoteLinks()" @end="(e) => guide.dragged(e)">
                 <Link v-if="!guide.linkAdding" v-for="link in guide.getNoteLinks()" :link="link"/>
             </VueDraggableNext>
         </div>

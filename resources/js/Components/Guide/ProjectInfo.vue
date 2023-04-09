@@ -3,6 +3,7 @@ import Editable from '@/Components/Editable.vue';
 import AddProject from '@/Components/Guide/AddProject.vue';
 import Control from '@/Components/Guide/Control.vue';
 import Note from '@/Components/Guide/Note.vue';
+import { VueDraggableNext } from 'vue-draggable-next';
 import { guide } from "@/guide";
 </script>
 <style>
@@ -37,8 +38,10 @@ import { guide } from "@/guide";
                               @updated="(text) => guide.updateField('project', 'text', text, guide.getProject().id)"/>
                 </div>
                 <Control :item="guide.getProject()"/>
-                <Note v-if="guide.tab !== 'ProjectInfo' && !guide.noteAdding"
-                      v-for="note in guide.getProjectNotes()" :note="note"/>
+                <VueDraggableNext :list="guide.getProjectNotes()" @end="(e) => guide.dragged(e)">
+                    <Note v-if="guide.tab !== 'ProjectInfo' && !guide.noteAdding"
+                          v-for="note in guide.getProjectNotes()" :note="note"/>
+                </VueDraggableNext>
             </div>
         </div>
     </div>

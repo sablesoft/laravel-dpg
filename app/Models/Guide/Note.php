@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int|null $post_id
  * @property int|null $topic_id
  * @property string|null $text
+ * @property int|null $number
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
@@ -29,7 +30,8 @@ class Note extends GuideItem
         'topic_id',
         'project_id',
         'post_id',
-        'text'
+        'text',
+        'number'
     ];
 
     /**
@@ -49,5 +51,30 @@ class Note extends GuideItem
     public function targetLinks(): HasMany
     {
         return $this->hasMany(Link::class, 'target_note_id');
+    }
+
+    /**
+     * @param int|null $postId
+     * @param int|null $projectId
+     * @return int|null
+     */
+    public static function allowedNumber(?int $postId = null, ?int $projectId = null): ?int
+    {
+        if (!($postId xor $projectId)) {
+            return null;
+        }
+
+        $n = 1;
+        $numbers = static::where('post_id', $postId)
+            ->where('project_id', $projectId)->pluck('number')->toArray();
+        sort($numbers);
+        foreach ($numbers as $number) {
+            if ($number > $n) {
+                return $n;
+            }
+            $n++;
+        }
+
+        return $n;
     }
 }

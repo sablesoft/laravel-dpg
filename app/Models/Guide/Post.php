@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int|null $id
  * @property string|null $text
+ * @property int|null $number
  * @property int|null $project_id
  * @property int|null $category_id
  * @property int|null $topic_id
@@ -27,6 +28,7 @@ class Post extends GuideItem
 
     protected $fillable = [
         'text',
+        'number',
         'topic_id',
         'category_id',
         'project_id',
@@ -46,5 +48,24 @@ class Post extends GuideItem
     public function targetLinks(): HasMany
     {
         return $this->hasMany(Link::class, 'target_post_id');
+    }
+
+    /**
+     * @param int $categoryId
+     * @return int|null
+     */
+    public static function allowedNumber(int $categoryId): ?int
+    {
+        $n = 1;
+        $numbers = static::where('category_id', $categoryId)->pluck('number')->toArray();
+        sort($numbers);
+        foreach ($numbers as $number) {
+            if ($number > $n) {
+                return $n;
+            }
+            $n++;
+        }
+
+        return $n;
     }
 }

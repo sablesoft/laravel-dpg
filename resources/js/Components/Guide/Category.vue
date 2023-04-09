@@ -36,7 +36,7 @@ button {
                     <Editable :value="guide.getTopicField('text', guide.categoriesId)"
                               @updated="(text) => guide.updateField('topic', 'text', text, guide.categoriesId)"/>
                 </p>
-                <VueDraggableNext :list="guide.getCategoryPosts()" @end="guide.dragged.bind(guide)">
+                <VueDraggableNext :list="guide.getCategoryPosts()" @end="(e) => guide.dragged(e)">
                     <Post v-for="post in guide.getCategoryPosts()" :post="post"/>
                 </VueDraggableNext>
             </div>

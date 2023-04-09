@@ -24,11 +24,15 @@ return new class extends Migration
             $table->foreignId('topic_id')->nullable(false)
                 ->constrained('guide_topics')->cascadeOnUpdate()->cascadeOnDelete();
             $table->text('text')->nullable(true);
+            $table->unsignedSmallInteger('number')->nullable(true);
             $table->timestamps();
 
             $table->unique(['post_id', 'topic_id']);
             $table->unique(['project_id', 'topic_id']);
             $table->unique(['project_id', 'post_id', 'topic_id']);
+            $table->unique(['post_id', 'number']);
+            $table->unique(['project_id', 'number']);
+            $table->unique(['project_id', 'post_id', 'number']);
         });
     }
 

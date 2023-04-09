@@ -24,7 +24,7 @@
         "@vitejs/plugin-vue": "^3.2.0",
         "fabric-with-erasing": "^1.0.1",
         "vue": "^3.2.36",
-        "vue-uuid": "^3.0.0",
-        "vuedraggable": "^2.24.3"
+        "vue-draggable-next": "^2.1.1",
+        "vue-uuid": "^3.0.0"
     }
 }

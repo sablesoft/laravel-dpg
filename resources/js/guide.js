@@ -105,7 +105,7 @@ export const guide = reactive({
         return this.getRelations('project', 'post', id);
     },
     getPostNotes(id = null) {
-        return this.getRelations('post', 'note', id);
+        return this.getRelations('post', 'note', id, true);
     },
     getPostLinks(id = null) {
         let links = this.getRelations('post', 'link', id, true);
@@ -451,6 +451,14 @@ export const guide = reactive({
         }
     },
 
+    dragged(event) {
+        let entity = event.item.getAttribute('data-entity');
+        let id = event.item.getAttribute('data-id');
+        let oldNumber = event.oldIndex + 1;
+        let newNumber = event.newIndex + 1;
+        console.log('dragged', entity, id);
+        console.log('from - to', oldNumber, newNumber);
+    },
     changeTab(tab) {
         this._setBackLink();
         this.tab = tab;

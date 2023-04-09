@@ -38,7 +38,9 @@ let getLinkName = function() {
 }
 </style>
 <template>
-    <p :id="'link' + (link.id ? link.id : uuid.v1())" :class="link.id && guide.linksId === link.id ? 'active-block' : ''">
+    <p :id="'link' + (link.id ? link.id : uuid.v1())"
+       data-entity="link" :data-id="link.id"
+       :class="link.id && guide.linksId === link.id ? 'active-block' : ''">
         <span v-if="link.number" class="link-number cursor-pointer" @click="guide.linksId = guide.linksId === link.id ? null : link.id">
             {{ link.number }}:
         </span>

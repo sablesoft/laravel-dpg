@@ -104,7 +104,10 @@ export const guide = reactive({
         return notes;
     },
     getProjectTopics(id = null) {
-        return this.getRelations('project', 'topic', id);
+        let topics = this.getRelations('project', 'topic', id, true);
+        topics.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+
+        return topics;
     },
     getProjectPosts(id = null) {
         return this.getRelations('project', 'post', id);
@@ -173,12 +176,13 @@ export const guide = reactive({
         return posts;
     },
     getGeneralTopics() {
-        let topics = {};
+        let topics = [];
         for (const [id, topic] of Object.entries(this.topics)) {
             if (!topic.projectId) {
-                topics[topic.id] = topic;
+                topics.push(topic);
             }
         }
+        topics.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 
         return topics;
     },

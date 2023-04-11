@@ -3,7 +3,7 @@ import Editable from '@/Components/Editable.vue';
 import Post from '@/Components/Guide/Post.vue';
 import Control from '@/Components/Guide/Control.vue';
 import AddPost from '@/Components/Guide/AddPost.vue';
-import { VueDraggableNext } from 'vue-draggable-next';
+import DraggableList from '@/Components/Guide/DraggableList.vue';
 import { guide } from "@/guide";
 </script>
 <style>
@@ -36,9 +36,9 @@ button {
                     <Editable :value="guide.getTopicField('text', guide.categoriesId)"
                               @updated="(text) => guide.updateField('topic', 'text', text, guide.categoriesId)"/>
                 </p>
-                <VueDraggableNext :list="guide.getCategoryPosts()" @end="(e) => guide.dragged(e)">
+                <DraggableList :list="guide.getCategoryPosts()">
                     <Post v-for="post in guide.getCategoryPosts()" :post="post"/>
-                </VueDraggableNext>
+                </DraggableList>
             </div>
         </div>
     </div>

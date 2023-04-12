@@ -35,13 +35,13 @@ onMounted(() => {
             <InputLabel for="selectCategory" :value="__('Category')" />
             <Select id="selectCategory" placeholder="Select Category" class="mt-1 block w-full"
                     keep-values="1"
-                    @change="categoryChange" :items="guide.topics"/>
+                    @change="categoryChange" :items="guide.getSortedTopics()"/>
         </div>
         <div>
             <InputLabel for="selectTopic" :value="__('Topic')" />
             <Select id="selectTopic" placeholder="Select Topic" class="mt-1 block w-full"
                     keep-values="1"
-                    @change="topicChange" :items="guide.topics"/>
+                    @change="topicChange" :items="guide.getSortedTopics()"/>
         </div>
         <div>
             <InputLabel for="text" :value="__('Desc')" />

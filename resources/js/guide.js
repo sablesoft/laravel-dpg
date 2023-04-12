@@ -1,6 +1,5 @@
 import {reactive, toRaw} from 'vue';
 import { isEmpty, isNumber } from "lodash/lang";
-import {uuid} from "vue-uuid";
 
 export const guide = reactive({
     tab: 'Info',
@@ -23,7 +22,7 @@ export const guide = reactive({
     backLink: null,
     deleteAsk: null,
     isReady: false,
-    draggable: null,
+    draggable: false,
     _itemsIdFields : ['categoriesId', 'topicsId', 'postsId', 'notesId', 'linksId'],
     _addingFields : ['projectAdding', 'topicAdding', 'postAdding', 'noteAdding', 'linkAdding'],
 
@@ -102,6 +101,15 @@ export const guide = reactive({
 
         return this._sortItemsByNumber(notes);
     },
+    getSortedTopics() {
+        let topics = [];
+        for (const [id, topic] of Object.entries(this.topics)) {
+            topics.push(topic);
+        }
+        topics.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+
+        return topics;
+    },
     getProjectTopics(id = null) {
         let topics = this.getRelations('project', 'topic', id, true);
         topics.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
@@ -141,10 +149,15 @@ export const guide = reactive({
         if (isEmpty(posts)) {
             return {};
         }
-        let categories = {};
+        let ids = {};
+        let categories = [];
         for (const [id, post] of Object.entries(posts)) {
-            categories[post.categoryId] = this.getTopic(post.categoryId);
+            if (!ids[post.categoryId]) {
+                categories.push(this.getTopic(post.categoryId));
+                ids[post.categoryId] = true;
+            }
         }
+        categories.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 
         return categories;
     },
@@ -466,6 +479,7 @@ export const guide = reactive({
         } else if (this.postsId) {
             this.postsId = null;
         }
+        this.draggable = false;
     },
 
     dragged(event) {

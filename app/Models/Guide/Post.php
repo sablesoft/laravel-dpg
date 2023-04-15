@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Builder;
  * @property int|null $id
  * @property string|null $text
  * @property int|null $number
- * @property int|null $project_id
  * @property int|null $category_id
  * @property int|null $topic_id
  * @property Carbon|null $created_at

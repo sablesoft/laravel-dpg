@@ -7,9 +7,9 @@ import ProjectInfo from '@/Components/Guide/ProjectInfo.vue';
 import ModalDeletion from '@/Components/Guide/ModalDeletion.vue';
 import TopicsTab from '@/Components/Guide/TopicsTab.vue';
 import Category from '@/Components/Guide/Category.vue';
-import {Head} from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 import { guide } from "@/guide";
-import {onMounted, toRaw} from "vue";
+import { onMounted, toRaw } from "vue";
 
 const props = defineProps({
     projectId: {
@@ -35,6 +35,10 @@ const props = defineProps({
     links: {
         type: Object,
         required: true
+    },
+    buffer: {
+        type: Object,
+        required: true
     }
 });
 
@@ -46,6 +50,7 @@ onMounted(() => {
         posts: props.posts,
         notes: props.notes,
         links: props.links,
+        buffer: props.buffer
     });
     window.addEventListener('keydown', function(event) {
         const key = event.key;

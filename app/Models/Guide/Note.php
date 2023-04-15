@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int|null $id
- * @property int|null $project_id
  * @property int|null $post_id
  * @property int|null $topic_id
  * @property string|null $text

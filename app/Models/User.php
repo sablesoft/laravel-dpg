@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Translatable\HasTranslations;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Guide\Buffer;
 use App\Models\Guide\Project;
 use App\Models\Guide\HasLinks;
 use App\Models\Guide\HasTopics;
@@ -34,6 +35,7 @@ use App\Models\Guide\HasNotes;
  * @property-read Book[]|Collection $books
  * @property-read Card[]|Collection $cards
  * @property-read Project[]|Collection $projects
+ * @property-read Buffer[]|Collection $buffers
  *
  * @property-read string|null $content_path
  * @property-read array $roles_names
@@ -95,6 +97,11 @@ class User extends Authenticatable
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class, 'owner_id');
+    }
+
+    public function buffers(): HasMany
+    {
+        return $this->hasMany(Buffer::class, 'owner_id');
     }
 
     /**

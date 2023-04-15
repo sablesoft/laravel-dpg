@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Guide\Buffer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,6 +11,7 @@ use App\Http\Resources\NoteResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\LinkResource;
 use App\Http\Resources\TopicResource;
+use App\Http\Resources\BufferResource;
 use App\Http\Resources\ProjectResource;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GuideController;
@@ -62,6 +64,7 @@ Route::get('/project/{project}', function (Project $project) {
         ->orWhereIn('post_id', $posts->modelKeys())->get()->keyBy('id');
     $topics = $user->topics()->where('project_id', $project->getKey())
         ->orWhereNull('project_id')->get()->keyBy('id');
+    $buffer = $project->buffer ?: Buffer::create(['owner_id' => $user->getKey(), 'project_id' => $project->getKey()]);
     $links = $user->links()
         ->whereIn('note_id', $notes->modelKeys())
         ->orWhereIn('post_id', $posts->modelKeys())
@@ -72,7 +75,8 @@ Route::get('/project/{project}', function (Project $project) {
         'topics' => TopicResource::collection($topics),
         'posts' => PostResource::collection($posts),
         'notes' => NoteResource::collection($notes),
-        'links' => LinkResource::collection($links)
+        'links' => LinkResource::collection($links),
+        'buffer' => BufferResource::make($buffer)
     ]);
 })->middleware(['auth', 'verified'])->name('guide.project');
 

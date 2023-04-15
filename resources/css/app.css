@@ -169,6 +169,7 @@ img.align-bottom.w-8.h-8 {
     white-space: pre-wrap;
 }
 .active-block>.editable-text:before {
+    content: none;
     background: none;
 }
 .editable-text.project-desc {

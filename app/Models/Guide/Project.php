@@ -3,6 +3,7 @@
 namespace App\Models\Guide;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int|null $id
@@ -11,6 +12,8 @@ use Carbon\Carbon;
  * @property string|null $text
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
+ * @property-read Buffer|null $buffer
  */
 class Project extends GuideItem
 {
@@ -24,4 +27,12 @@ class Project extends GuideItem
         'text',
         'owner_id'
     ];
+
+    /**
+     * @return HasOne
+     */
+    public function buffer(): HasOne
+    {
+        return $this->hasOne(Buffer::class);
+    }
 }

@@ -7,12 +7,17 @@ import ProjectInfo from '@/Components/Guide/ProjectInfo.vue';
 import ModalDeletion from '@/Components/Guide/ModalDeletion.vue';
 import TopicsTab from '@/Components/Guide/TopicsTab.vue';
 import Category from '@/Components/Guide/Category.vue';
+import Buffer from '@/Components/Guide/Buffer.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import { guide } from "@/guide";
 import { onMounted, toRaw } from "vue";
 
 const props = defineProps({
     projectId: {
+        type: Number,
+        required: true
+    },
+    bufferId: {
         type: Number,
         required: true
     },
@@ -36,7 +41,7 @@ const props = defineProps({
         type: Object,
         required: true
     },
-    buffer: {
+    buffers: {
         type: Object,
         required: true
     }
@@ -50,7 +55,8 @@ onMounted(() => {
         posts: props.posts,
         notes: props.notes,
         links: props.links,
-        buffer: props.buffer
+        buffers: props.buffers,
+        buffersId : props.bufferId
     });
     window.addEventListener('keydown', function(event) {
         const key = event.key;
@@ -111,6 +117,9 @@ let showTopic = function(id) {
                 <Select placeholder="General Topics" class="mb-2 mr-2"
                         :action="{id: 'new', name: 'New'}"
                         :items="guide.getGeneralTopics()" @change="showTopic"/>
+                <SecondaryButton @click="guide.changeTab('Buffer')" class="mb-2">
+                    {{__('Buffer')}}
+                </SecondaryButton>
                 <SecondaryButton v-if="guide.backLink" @click="guide.goBack()" class="mb-2">
                     {{__('Go Back')}}
                 </SecondaryButton>
@@ -122,6 +131,7 @@ let showTopic = function(id) {
             <ProjectInfo v-if="guide.tab === 'Info'"/>
             <Category v-if="guide.tab === 'Category'"/>
             <TopicsTab v-if="guide.tab === 'Topic'" :topics="guide.getProjectTopics()"/>
+            <Buffer v-if="guide.tab === 'Buffer'"/>
         </div>
         <ModalDeletion/>
     </AuthenticatedLayout>

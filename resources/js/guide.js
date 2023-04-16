@@ -8,8 +8,9 @@ export const guide = reactive({
     posts : {},
     notes : {},
     links : {},
-    buffer: {},
+    buffers: {},
     projectsId : null,
+    buffersId : null,
     categoriesId : null,
     topicsId : null,
     postsId : null,
@@ -301,11 +302,70 @@ export const guide = reactive({
             data: data
         }, this._createCallback.bind(this));
     },
+    copy(item, entity) {
+        let text = '';
+        switch (entity) {
+            case 'note':
+                text = this._noteToText(item.id);
+                break;
+            case 'post':
+                text = this._postToText(item.id, false);
+                break;
+            case 'category':
+                text = this._categoryToText(item.id, false);
+                break;
+            case 'buffer':
+                text = this.getItem('buffer').text;
+                break;
+            default:
+                throw new Error('Unknown entity for buffering: ' + entity);
+        }
+        navigator.clipboard.writeText(text);
+    },
+    addToBuffer(item, entity) {
+        let buffer = this.getItem('buffer');
+        let text = buffer.text ? buffer.text + '\r\n' : '';
+        switch (entity) {
+            case 'note':
+                text = this._noteToText(item.id);
+                break;
+            case 'post':
+                text = this._postToText(item.id);
+                break;
+            case 'category':
+                text = this._categoryToText(item.id);
+                break;
+            default:
+                throw new Error('Unknown entity for buffering: ' + entity);
+        }
+        this.updateField('buffer', 'text', text);
+        this.changeTab('Buffer');
+    },
+    downloadBuffer(id = null) {
+        let buffer = this.getItem('buffer', id);
+        if (!buffer || !buffer.text) {
+            return;
+        }
+        let now = new Date();
+        console.log(now);
+        let filename = now.getFullYear() +'-'+ (now.getMonth() + 1) +'-'+
+            now.getDate() +'-'+ now.getHours() +'-'+ now.getMinutes() + '.txt';
+        let element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(buffer.text));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    },
     delete(item = null, entity = null) {
         item = item ? item : this.deleteAsk.item;
         entity = entity ? entity : this.deleteAsk.entity;
         if (entity === 'category') {
             return this.clearCategory(item);
+        }
+        if (entity === 'buffer') {
+            return this.clearBuffer(item);
         }
         let self = this;
         let id = item.id;
@@ -314,6 +374,23 @@ export const guide = reactive({
            'id' : id
         }, function(res) {
             self[item.entity + 'Remove'](id);
+            self.deleteAsk = null;
+        });
+    },
+    clearBuffer(item) {
+        let self = this;
+        this.request('guide.update', {
+            table: 'buffers',
+            id: item.id,
+            field: 'text',
+            value: null
+        }, function(res) {
+            if (res.data.success) {
+                item['text'] = null;
+                item['updatedAt'] = res.data.updatedAt;
+            } else {
+                console.error('Update field problem', res);
+            }
             self.deleteAsk = null;
         });
     },
@@ -572,6 +649,88 @@ export const guide = reactive({
         return isAdding;
     },
 
+    _categoryToText(id = null, withPosts = true) {
+        let category = this.getItem('topic', id ? id : this.categoriesId);
+        if (!category) {
+            return '';
+        }
+        let self = this;
+        let title = '# ' + this.getProject().code + ' - ' + category.name + '\r\n';
+        let text = title + (category.text ? category.text + '\r\n' : '');
+        if (withPosts) {
+            let posts = this.getCategoryPosts(category.id);
+            posts.forEach(function(post) {
+                text = text + '\r\n' + self._postToText(post.id);
+            });
+        }
+
+        return text;
+    },
+    _postToText(id = null, withNotes = true) {
+        let post = this.getItem('post', id);
+        if (!post) {
+            return '';
+        }
+        let text = '';
+        let title = '## ' + this.getProject().code + ' - ';
+        title = title + this.getTopic(post.categoryId).name + ' - ';
+        title = title + this.getTopic(post.topicId).name + '\r\n';
+        text = text + title + post.text + '\r\n';
+        let self = this;
+        let links = this.getRelations('post', 'link', id, true);
+        links = this._sortItemsByNumber(links);
+        links.forEach(function(link) {
+            text = text + self._linkToText(link.id);
+        });
+        if (withNotes) {
+            let notes = this.getRelations('post', 'note', id, true);
+            notes =  this._sortItemsByNumber(notes);
+            notes.forEach(function(note) {
+                text = text + '\r\n' + self._noteToText(note.id);
+            });
+        }
+
+        return text;
+    },
+    _noteToText(id = null) {
+        let note = this.getItem('note', id);
+        if (!note) {
+            return '';
+        }
+        let text = '';
+        let title = '### ' + this.getProject(note.projectId).code + ' - ';
+        if (note.postId) {
+            let post = this.getItem('post', note.postId);
+            title = title + this.getTopic(post.categoryId).name + ' - ';
+            title = title + this.getTopic(post.topicId).name + ' - ';
+        }
+        text = text + title + this.getRelation('note', 'topic', note.id).name + '\r\n';
+        text = text + note.text + '\r\n';
+        let self = this;
+        let links = this.getRelations('note', 'link', id, true);
+        links = this._sortItemsByNumber(links);
+        links.forEach(function(link) {
+            text = text + self._linkToText(link.id);
+        });
+
+        return text;
+    },
+    _linkToText(id = null) {
+        let link = this.getItem('link', id);
+        if (!link) {
+            return '';
+        }
+        // let text = '*[(' + link.number + ')]: ';
+        let text = link.number + '. ';
+        text = text + this.getTopic(link.targetCategoryId).name + ' - ';
+        text = text + this.getRelation('post', 'topic', link.targetPostId).name;
+        if (link.targetNoteId) {
+            text = text + ' - ' + this.getRelation('note', 'topic', link.targetNoteId).name;
+        }
+        text = text + '\r\n';
+
+        return text;
+    },
     _createCallback(res) {
         if (res.status === 201) {
             this._registerItem(res.data.data);

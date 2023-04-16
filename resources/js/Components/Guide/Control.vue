@@ -35,6 +35,9 @@ let isActive = function() {
 let showView = function() {
     return guide.tab === 'ProjectInfo' && !guide.notesId && !guide.postsId;
 }
+let showSort = function() {
+    return guide.tab !== 'Buffer' && !guide.draggable;
+}
 let showCreatePost = function() {
     return !guide.postAdding &&
         _entity() === 'category';
@@ -47,15 +50,30 @@ let showAddLink = function() {
     return !guide.linkAdding && guide.tab !== 'ProjectInfo' &&
         (_entity() === 'post' || _entity() === 'note');
 }
+let showCopy = function() {
+    if (_entity() === 'buffer' && !guide.getItem('buffer').text) {
+        return false;
+    }
+    return ['category', 'post', 'note', 'buffer'].includes(_entity());
+}
+let showDownload = function() {
+    return _entity() === 'buffer' && guide.getItem('buffer').text;
+}
+let showBuffer = function() {
+    return ['category', 'post', 'note'].includes(_entity());
+}
 let showDelete = function() {
-    // noinspection RedundantIfStatementJS
     if (_entity() === 'category' && isEmpty(props.item.categoryPostIds)) {
+        return false;
+    }
+    if (_entity() === 'buffer' && !guide.getItem('buffer').text) {
         return false;
     }
     // noinspection RedundantIfStatementJS
     if (_entity() === 'project' && route().current() === 'guide.project') {
         return false;
     }
+
     return true;
 }
 let view = function() {
@@ -77,7 +95,7 @@ let _entity = function() {
                 <SecondaryButton v-if="showView()" @click.prevent.stop="view()">
                     {{ __('View')}}
                 </SecondaryButton>
-                <SecondaryButton v-if="!guide.draggable" @click.prevent.stop="guide.draggable = true">
+                <SecondaryButton v-if="showSort()" @click.prevent.stop="guide.draggable = true">
                     {{ __('Sort')}}
                 </SecondaryButton>
                 <SecondaryButton v-if="showCreatePost()" @click.prevent.stop="guide.postAdding = true">
@@ -88,6 +106,15 @@ let _entity = function() {
                 </SecondaryButton>
                 <SecondaryButton v-if="showAddLink()" @click.prevent.stop="guide.linkAdding = true">
                     {{__('Add Link')}}
+                </SecondaryButton>
+                <SecondaryButton v-if="showCopy()" @click.prevent.stop="guide.copy(item, _entity())">
+                    {{__('Copy')}}
+                </SecondaryButton>
+                <SecondaryButton v-if="showDownload()" @click.prevent.stop="guide.downloadBuffer()">
+                    {{__('Download')}}
+                </SecondaryButton>
+                <SecondaryButton v-if="showBuffer()" @click.prevent.stop="guide.addToBuffer(item, _entity())">
+                    {{__('Buffer')}}
                 </SecondaryButton>
                 <SecondaryButton v-if="showDelete()" @click.prevent.stop="guide.askDeletion(item, _entity())">
                     {{__('Delete')}}

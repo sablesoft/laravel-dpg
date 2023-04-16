@@ -76,7 +76,8 @@ Route::get('/project/{project}', function (Project $project) {
         'posts' => PostResource::collection($posts),
         'notes' => NoteResource::collection($notes),
         'links' => LinkResource::collection($links),
-        'buffer' => BufferResource::make($buffer)
+        'bufferId' => $buffer->getKey(),
+        'buffers' => BufferResource::collection([$buffer->getKey() => $buffer])
     ]);
 })->middleware(['auth', 'verified'])->name('guide.project');
 

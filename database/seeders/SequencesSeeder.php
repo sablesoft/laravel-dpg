@@ -18,7 +18,12 @@ class SequencesSeeder extends Seeder
         'games',
         'domes',
         'areas',
-        'scenes'
+        'scenes',
+        'guide_projects',
+        'guide_topics',
+        'guide_posts',
+        'guide_notes',
+        'guide_links',
     ];
 
     /**

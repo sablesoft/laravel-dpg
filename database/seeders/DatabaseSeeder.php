@@ -36,6 +36,11 @@ class DatabaseSeeder extends Seeder
         $this->call(GameHeroTableSeeder::class);
         $this->call(GameBookTableSeeder::class);
         $this->call(GameSubscriberTableSeeder::class);
+        $this->call(GuideProjectsTableSeeder::class);
+        $this->call(GuideTopicsTableSeeder::class);
+        $this->call(GuidePostsTableSeeder::class);
+        $this->call(GuideNotesTableSeeder::class);
+        $this->call(GuideLinksTableSeeder::class);
         $this->call(SequencesSeeder::class);
     }
 }

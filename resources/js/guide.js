@@ -327,13 +327,13 @@ export const guide = reactive({
         let text = buffer.text ? buffer.text + '\r\n' : '';
         switch (entity) {
             case 'note':
-                text = this._noteToText(item.id);
+                text = text + this._noteToText(item.id);
                 break;
             case 'post':
-                text = this._postToText(item.id);
+                text = text + this._postToText(item.id);
                 break;
             case 'category':
-                text = this._categoryToText(item.id);
+                text = text + this._categoryToText(item.id);
                 break;
             default:
                 throw new Error('Unknown entity for buffering: ' + entity);

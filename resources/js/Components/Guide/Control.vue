@@ -98,14 +98,14 @@ let _entity = function() {
                 <SecondaryButton v-if="showSort()" @click.prevent.stop="guide.draggable = true">
                     {{ __('Sort')}}
                 </SecondaryButton>
+                <SecondaryButton v-if="showAddLink()" @click.prevent.stop="guide.linkAdding = true">
+                    {{__('Add Link')}}
+                </SecondaryButton>
                 <SecondaryButton v-if="showCreatePost()" @click.prevent.stop="guide.postAdding = true">
                     {{__('Add Post')}}
                 </SecondaryButton>
                 <SecondaryButton v-if="showAddNote()" @click.prevent.stop="guide.noteAdding = true">
                     {{__('Add Note')}}
-                </SecondaryButton>
-                <SecondaryButton v-if="showAddLink()" @click.prevent.stop="guide.linkAdding = true">
-                    {{__('Add Link')}}
                 </SecondaryButton>
                 <SecondaryButton v-if="showCopy()" @click.prevent.stop="guide.copy(item, _entity())">
                     {{__('Copy')}}

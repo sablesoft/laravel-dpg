@@ -25,7 +25,7 @@ let getLinkName = function() {
     let postName = guide.getRelation('post', 'topic', link.targetPostId).name;
     let noteTopic = guide.getRelation('note', 'topic', link.targetNoteId);
     let noteName = noteTopic ? noteTopic.name : null;
-    return '(' + link.number + ': ' + categoryName + ' - ' + postName + (noteName ? ' - ' + noteName : '') + ')';
+    return link.number + ': ' + categoryName + ' - ' + postName + (noteName ? ' - ' + noteName : '');
 }
 </script>
 <style>
@@ -64,7 +64,7 @@ let getLinkName = function() {
         </template>
         <template v-if="link.targetLinkId">
             - <span class="link-title" @click.prevent.stop="guide.goTo(link, 'link')">
-                {{ getLinkName() }}
+                ( {{ getLinkName() }} )
             </span>
         </template>
     </p>

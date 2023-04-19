@@ -53,49 +53,38 @@ let linksToLinks = function() {
     let number = 1;
     let links = [];
     guide.getTopic().categoryLinkIds.forEach(function(id) {
-        let link = guide.getLink(id);
-        links.push({
-            id : null,
-            number : number++,
-            entity : 'link',
-            targetCategoryId : link.postId ? guide.getPost(link.postId).categoryId : null,
-            targetPostId : link.postId,
-            targetNoteId : link.noteId,
-            targetLinkId : id
-        });
+        links.push(_linkToLink(id, number++));
     });
     let posts = guide.getRelations('topic', 'post', null, true);
     posts.forEach(function(post) {
         post.targetLinkIds.forEach(function(id) {
-            let link = guide.getLink(id);
-            links.push({
-                id : null,
-                number : number++,
-                entity : 'link',
-                targetCategoryId : link.postId ? guide.getPost(link.postId).categoryId : null,
-                targetPostId : link.postId,
-                targetNoteId : link.noteId,
-                targetLinkId : id
-            });
+            links.push(_linkToLink(id, number++));
         });
     });
     let notes = guide.getRelations('topic', 'note', null, true);
     notes.forEach(function(note) {
         note.targetLinkIds.forEach(function(id) {
-            let link = guide.getLink(id);
-            links.push({
-                id : null,
-                number : number++,
-                entity : 'link',
-                targetCategoryId : link.postId ? guide.getPost(link.postId).categoryId : null,
-                targetPostId : link.postId,
-                targetNoteId : link.noteId,
-                targetLinkId : id
-            });
+            links.push(_linkToLink(id, number++));
         });
     });
 
     return links;
+}
+let _linkToLink = function(id, number) {
+    let link = guide.getLink(id);
+    let post = link.postId ? guide.getItem('post', link.postId) :
+        guide.getRelation('note', 'post', link.noteId);
+    let categoryId = post ? post.categoryId : null;
+
+    return {
+        id : null,
+        number : number,
+        entity : 'link',
+        targetCategoryId : categoryId,
+        targetPostId : post ? post.id : null,
+        targetNoteId : link.noteId,
+        targetLinkId : id
+    }
 }
 </script>
 <style>

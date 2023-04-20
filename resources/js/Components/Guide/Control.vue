@@ -3,6 +3,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import AddPost from '@/Components/Guide/AddPost.vue';
 import AddNote from '@/Components/Guide/AddNote.vue';
 import AddLink from '@/Components/Guide/AddLink.vue';
+import AddTag from '@/Components/Guide/AddTag.vue';
 
 import { guide } from "@/guide";
 import { isEmpty } from "lodash/lang";
@@ -37,6 +38,9 @@ let showView = function() {
 }
 let showSort = function() {
     return guide.tab !== 'Buffer' && !guide.draggable;
+}
+let showTags = function() {
+    return guide.postsId;
 }
 let showCreatePost = function() {
     return !guide.postAdding &&
@@ -98,6 +102,9 @@ let _entity = function() {
                 <SecondaryButton v-if="showSort()" @click.prevent.stop="guide.draggable = true">
                     {{ __('Sort')}}
                 </SecondaryButton>
+                <SecondaryButton v-if="showTags()" @click.prevent.stop="guide.tagAdding = true">
+                    {{ __('Tags')}}
+                </SecondaryButton>
                 <SecondaryButton v-if="showAddLink()" @click.prevent.stop="guide.linkAdding = true">
                     {{__('Add Link')}}
                 </SecondaryButton>
@@ -139,6 +146,7 @@ let _entity = function() {
             <AddPost v-if="guide.postAdding"/>
             <AddNote v-if="guide.noteAdding" :item="item"/>
             <AddLink v-if="guide.linkAdding" :item="item"/>
+            <AddTag v-if="guide.tagAdding" :item="item"/>
         </div>
         <hr/>
     </div>

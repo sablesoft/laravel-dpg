@@ -7,11 +7,13 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Guide\Tag;
 use App\Models\Guide\Post;
 use App\Models\Guide\Link;
 use App\Models\Guide\Note;
 use App\Models\Guide\Topic;
 use App\Models\Guide\Project;
+use App\Http\Resources\TagResource;
 use App\Http\Resources\LinkResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\NoteResource;
@@ -150,6 +152,9 @@ class GuideController extends Controller
                 $data['number'] = $number;
                 $link = Link::create($data);
                 return LinkResource::make($link);
+            case 'tags':
+                $tag = Tag::create($data);
+                return TagResource::make($tag);
             default: throw new Exception('Unknown table: ' . $table);
         }
     }

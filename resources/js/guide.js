@@ -17,17 +17,19 @@ export const guide = reactive({
     postsId : null,
     notesId : null,
     linksId : null,
+    tagsId : null,
     projectAdding: false,
     topicAdding: false,
     postAdding: false,
     noteAdding: false,
     linkAdding: false,
+    tagAdding: false,
     backLink: null,
     deleteAsk: null,
     isReady: false,
     draggable: false,
     _itemsIdFields : ['categoriesId', 'topicsId', 'postsId', 'notesId', 'linksId'],
-    _addingFields : ['projectAdding', 'topicAdding', 'postAdding', 'noteAdding', 'linkAdding'],
+    _addingFields : ['projectAdding', 'topicAdding', 'postAdding', 'noteAdding', 'linkAdding', 'tagAdding'],
 
     // ========== METHODS ===========
 
@@ -131,6 +133,9 @@ export const guide = reactive({
         let links = this.getRelations('post', 'link', id, true);
 
         return this._sortItemsByNumber(links);
+    },
+    getPostTags(id = null) {
+        return guide.getRelations('post', 'tag', id, true)
     },
     getNoteLinks(id = null) {
         let links = this.getRelations('note', 'link', id, true);
@@ -256,6 +261,17 @@ export const guide = reactive({
         data[item.entity + '_id'] = item.id;
         this.request('guide.create', {
             table: 'notes',
+            data: data
+        }, this._createCallback.bind(this));
+    },
+    createTag(form, item) {
+        let data = {
+            topic_id : form.topicId,
+            post_id : item.id,
+            project_id : item.projectId
+        }
+        this.request('guide.create', {
+            table: 'tags',
             data: data
         }, this._createCallback.bind(this));
     },
@@ -770,6 +786,8 @@ export const guide = reactive({
             case 'link':
                 belongsTo.push(item.postId ? 'post' : 'note');
                 break;
+            case 'tag':
+                belongsTo.push('post');
         }
         let self = this;
         belongsTo.forEach(function(belongsEntity) {

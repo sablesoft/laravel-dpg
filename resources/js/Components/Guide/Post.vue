@@ -16,6 +16,13 @@ const props = defineProps({
 .post-more {
     padding-top: 5px;
 }
+.tags {
+    font-style: italic;
+    font-size: 16px;
+}
+.tags span.tag {
+    cursor: pointer;
+}
 </style>
 <template>
     <div :id="'post' + post.id" data-entity="post" :data-id="post.id"
@@ -25,6 +32,16 @@ const props = defineProps({
             <Editable :value="guide.getTopicField('name', post.topicId)" type="input"
                       @updated="(text) => guide.updateField('topic', 'name', text, post.topicId)"/>
         </h2>
+        <p class="tags">
+            <template v-for="(tag, index) in guide.getPostTags(post.id)">
+                <span class="tag"
+                      :class="guide.tagsId === tag.id ? 'active-block' : ''"
+                      @click="guide.tagsId = guide.tagsId === tag.id ? null : tag.id">
+                    {{ guide.getField('topic', 'name', tag.topicId) }}
+                </span>
+                <span v-if="index !== guide.getPostTags(post.id).length - 1">, </span>
+            </template>
+        </p>
         <Control :item="post"/>
         <Editable :value="post.text" class="block-content"
                   @updated="(text) => guide.updateField('post', 'text', text, post.id)"/>

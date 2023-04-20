@@ -4,12 +4,12 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Guide\Project;
+use App\Models\Guide\Tag;
 
 /**
- * @mixin Project
+ * @mixin Tag
  */
-class ProjectResource extends JsonResource
+class TagResource extends JsonResource
 {
     /**
      * Indicates if the resource's collection keys should be preserved.
@@ -28,14 +28,10 @@ class ProjectResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'entity' => 'project',
-            'name' => $this->name,
-            'code' => $this->code,
-            'text' => $this->text,
-            'tagIds' => $this->tags->modelKeys(),
-            'noteIds' => $this->notes->modelKeys(),
-            'postIds' => $this->posts->modelKeys(),
-            'topicIds' => $this->topics->modelKeys(),
+            'entity' => 'tag',
+            'projectId' => $this->project_id,
+            'postId' => $this->post_id,
+            'topicId' => $this->topic_id,
             "createdAt" => optional($this->created_at)->format('Y-m-d'),
             "updatedAt" => optional($this->updated_at)->format('Y-m-d'),
         ];

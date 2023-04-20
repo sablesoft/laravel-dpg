@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Post extends GuideItem implements UseNumber
 {
-    use BelongsToProject, BelongsToTopic, HasNotes, HasLinks;
+    use BelongsToProject, BelongsToTopic, HasNotes, HasLinks, HasTags;
 
     protected $table = 'guide_posts';
 

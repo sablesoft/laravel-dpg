@@ -34,6 +34,7 @@ class PostResource extends JsonResource
             'projectId' => $this->project_id,
             'categoryId' => $this->category_id,
             'topicId' => $this->topic_id,
+            'tagIds' => $this->tags->modelKeys(),
             'noteIds' => $this->notes->modelKeys(),
             'linkIds' => $this->links->modelKeys(),
             'targetLinkIds' => $this->targetLinks->modelKeys(),

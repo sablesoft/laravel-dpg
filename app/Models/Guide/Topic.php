@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Topic extends GuideItem
 {
-    use HasNotes, HasPosts, BelongsToProject;
+    use HasNotes, HasPosts, HasTags, BelongsToProject;
 
     protected $table = 'guide_topics';
 

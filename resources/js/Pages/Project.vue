@@ -41,6 +41,10 @@ const props = defineProps({
         type: Object,
         required: true
     },
+    tags: {
+        type: Object,
+        required: true
+    },
     buffers: {
         type: Object,
         required: true
@@ -55,6 +59,7 @@ onMounted(() => {
         posts: props.posts,
         notes: props.notes,
         links: props.links,
+        tags: props.tags,
         buffers: props.buffers,
         buffersId : props.bufferId
     });

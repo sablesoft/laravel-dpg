@@ -8,6 +8,7 @@ export const guide = reactive({
     posts : {},
     notes : {},
     links : {},
+    tags : {},
     buffers: {},
     projectsId : null,
     buffersId : null,

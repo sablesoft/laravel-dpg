@@ -1,12 +1,13 @@
 <?php
 
-use App\Models\Guide\Buffer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Illuminate\Database\Eloquent\Collection;
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Guide\Buffer;
 use App\Models\Guide\Project;
+use App\Http\Resources\TagResource;
 use App\Http\Resources\NoteResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\LinkResource;
@@ -59,6 +60,8 @@ Route::get('/project/{project}', function (Project $project) {
     $user = auth()->user();
     /** @var Collection $posts */
     $posts = $project->posts->keyBy('id');
+    /** @var Collection $tags */
+    $tags = $project->tags->keyBy('id');
     /** @var Collection $notes */
     $notes = $user->notes()->where('project_id', $project->getKey())
         ->orWhereIn('post_id', $posts->modelKeys())->get()->keyBy('id');
@@ -76,6 +79,7 @@ Route::get('/project/{project}', function (Project $project) {
         'posts' => PostResource::collection($posts),
         'notes' => NoteResource::collection($notes),
         'links' => LinkResource::collection($links),
+        'tags' => TagResource::collection($tags),
         'bufferId' => $buffer->getKey(),
         'buffers' => BufferResource::collection([$buffer->getKey() => $buffer])
     ]);

@@ -15,6 +15,7 @@ use Spatie\Translatable\HasTranslations;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Guide\Buffer;
 use App\Models\Guide\Project;
+use App\Models\Guide\HasTags;
 use App\Models\Guide\HasLinks;
 use App\Models\Guide\HasTopics;
 use App\Models\Traits\Options;
@@ -44,7 +45,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, HasTranslations,
         HasRoles, Notifiable, Options,
-        HasNotes, HasLinks, HasTopics;
+        HasNotes, HasLinks, HasTopics, HasTags;
 
     const ROLE_ADMIN = 'Admin';
 

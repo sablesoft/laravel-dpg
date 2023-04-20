@@ -64,6 +64,9 @@ export const guide = reactive({
     getLink(id = null) {
         return this.getItem('link', id);
     },
+    getTag(id = null) {
+        return this.getItem('tag', id);
+    },
 
     // relation getters:
     getRelation(entity, relationEntity, id = null) {
@@ -149,7 +152,7 @@ export const guide = reactive({
         return this.getRelations('topic', 'note', id);
     },
     getTopicLinks(id = null) {
-        return this.getRelations('topic', 'link', id);
+        let tags = this.getRelations('topic', 'link', id);
     },
 
     getProjectCategories(id = null) {
@@ -169,6 +172,20 @@ export const guide = reactive({
 
         return categories;
     },
+    getProjectTags(id = null) {
+        let self = this;
+        let tags = this.getRelations('project', 'tag', id, true);
+        let ids = {};
+        let topics = [];
+        tags.forEach(function(tag) {
+            if (!ids[tag.topicId]) {
+                topics.push(self.getRelation('tag', 'topic', tag.id));
+                ids[tag.topicId] = true;
+            }
+        });
+
+        return topics;
+    },
     getCategoryPosts(id = null) {
         id = id ? id : this.categoriesId;
         let topic = this.getTopic(id);
@@ -182,6 +199,20 @@ export const guide = reactive({
         });
 
         return this._sortItemsByNumber(posts);
+    },
+    getTagPosts(id = null) {
+        id = id ? id : this.topicsId;
+        let topic = this.getTopic(id);
+        if (!topic) {
+            return [];
+        }
+        let self = this;
+        let posts = [];
+        topic.tagIds.forEach(function(id) {
+            posts.push(self.getRelation('tag', 'post', id));
+        });
+
+        return posts;
     },
     getGeneralTopics() {
         let topics = [];
@@ -544,6 +575,25 @@ export const guide = reactive({
         }
         delete this.links[id];
     },
+    tagRemove(id) {
+        let tag = this.tags[id];
+        // remove tag from post:
+        let post = this.getPost(tag.postId);
+        if (post) {
+            post.tagIds = this._removeFromIds(id, post.tagIds);
+        }
+        // remove tag from project:
+        let project = this.getProject(tag.projectId);
+        if (project) {
+            project.tagIds = this._removeFromIds(id, project.tagIds);
+        }
+        // remove tag from topic:
+        let topic = this.getTopic(tag.topicId);
+        if (topic) {
+            topic.tagIds = this._removeFromIds(id, topic.tagIds);
+        }
+        delete this.tags[id];
+    },
 
     askDeletion(item, entity = '') {
         this.deleteAsk = {
@@ -787,7 +837,7 @@ export const guide = reactive({
                 belongsTo.push(item.postId ? 'post' : 'note');
                 break;
             case 'tag':
-                belongsTo.push('post');
+                belongsTo = ['post', 'project', 'topic'];
         }
         let self = this;
         belongsTo.forEach(function(belongsEntity) {

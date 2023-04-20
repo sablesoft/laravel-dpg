@@ -7,6 +7,7 @@ import ProjectInfo from '@/Components/Guide/ProjectInfo.vue';
 import ModalDeletion from '@/Components/Guide/ModalDeletion.vue';
 import TopicsTab from '@/Components/Guide/TopicsTab.vue';
 import Category from '@/Components/Guide/Category.vue';
+import TagTab from "@/Components/Guide/TagTab.vue";
 import Buffer from '@/Components/Guide/Buffer.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import { guide } from "@/guide";
@@ -66,7 +67,9 @@ onMounted(() => {
     window.addEventListener('keydown', function(event) {
         const key = event.key;
         if (key === "Backspace" || key === "Delete") {
-            if (guide.linksId) {
+            if (guide.tagsId) {
+                guide.askDeletion(guide.getTag());
+            } else if (guide.linksId) {
                 guide.askDeletion(guide.getLink());
             } else if (guide.notesId) {
                 guide.askDeletion(guide.getNote());
@@ -97,6 +100,10 @@ let showTopic = function(id) {
         guide.topicsId = id;
     }
 }
+let showTag = function(id) {
+    guide.changeTab('Tag');
+    guide.topicsId = id;
+}
 </script>
 <style scoped>
 </style>
@@ -116,6 +123,8 @@ let showTopic = function(id) {
                 <Select placeholder="Categories" class="mb-2 mr-2"
                         :action="{id: 'new', name: 'New'}"
                         :items="guide.getProjectCategories()" @change="showCategory"/>
+                <Select placeholder="Tags" class="mb-2 mr-2"
+                        :items="guide.getProjectTags()" @change="showTag"/>
                 <Select placeholder="Project Topics" class="mb-2 mr-2"
                         :action="{id: 'new', name: 'New'}"
                         :items="guide.getProjectTopics()" @change="showTopic"/>
@@ -135,6 +144,7 @@ let showTopic = function(id) {
         <div class="py-2" v-if="guide.isReady">
             <ProjectInfo v-if="guide.tab === 'Info'"/>
             <Category v-if="guide.tab === 'Category'"/>
+            <TagTab v-if="guide.tab === 'Tag'"/>
             <TopicsTab v-if="guide.tab === 'Topic'" :topics="guide.getProjectTopics()"/>
             <Buffer v-if="guide.tab === 'Buffer'"/>
         </div>

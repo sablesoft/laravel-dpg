@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GuidePostsTableSeeder::class);
         $this->call(GuideNotesTableSeeder::class);
         $this->call(GuideLinksTableSeeder::class);
+        $this->call(GuideTagsTableSeeder::class);
         $this->call(SequencesSeeder::class);
     }
 }

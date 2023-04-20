@@ -54,7 +54,7 @@ class BackupCommand extends Command
         'guide_links',
     ];
 
-    protected string $lastTable = 'guide_links';
+    protected string $lastTable = 'guide_tags';
 
     /**
      * Execute the console command.

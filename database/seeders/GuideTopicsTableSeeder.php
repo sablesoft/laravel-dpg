@@ -769,6 +769,16 @@ class GuideTopicsTableSeeder extends Seeder
                 'created_at' => '2023-04-19 01:50:54',
                 'updated_at' => '2023-04-19 01:50:54',
             ),
+            75 => 
+            array (
+                'id' => 88,
+                'name' => 'Книга Карт',
+                'text' => 'Здесь находится коллекция всех игровых карт с подробным описанием каждой.',
+                'project_id' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2023-04-19 21:55:17',
+                'updated_at' => '2023-04-19 21:55:17',
+            ),
         ));
         
         

@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Builder;
  * @property string|null $text
  * @property int|null $number
  * @property int|null $category_id
- * @property int|null $topic_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
@@ -22,7 +21,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Post extends GuideItem implements UseNumber
 {
-    use BelongsToProject, BelongsToTopic, HasNotes, HasLinks, HasTags;
+    use BelongsToProject, BelongsToModule, BelongsToTopic, HasNotes, HasLinks, HasTags;
 
     protected $table = 'guide_posts';
 
@@ -32,6 +31,7 @@ class Post extends GuideItem implements UseNumber
         'topic_id',
         'category_id',
         'project_id',
+        'module_id'
     ];
 
     /**
@@ -52,12 +52,14 @@ class Post extends GuideItem implements UseNumber
 
     /**
      * @param int $categoryId
+     * @param int|null $moduleId
      * @return int|null
      */
-    public static function allowedNumber(int $categoryId): ?int
+    public static function allowedNumber(int $categoryId, ?int $moduleId = null): ?int
     {
         $n = 1;
-        $numbers = static::where('category_id', $categoryId)->pluck('number')->toArray();
+        $numbers = static::where('category_id', $categoryId)->where('module_id', $moduleId)
+            ->pluck('number')->toArray();
         sort($numbers);
         foreach ($numbers as $number) {
             if ($number > $n) {
@@ -74,6 +76,7 @@ class Post extends GuideItem implements UseNumber
      */
     public function numbersQuery(): Builder
     {
-        return Post::where('category_id', $this->category_id);
+        return Post::where('category_id', $this->category_id)
+                    ->where('module_id', $this->module_id);
     }
 }

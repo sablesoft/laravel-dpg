@@ -35,6 +35,8 @@ class TopicResource extends JsonResource
             'tagIds' => $this->tags->modelKeys(),
             'postIds' => $this->posts->modelKeys(),
             'noteIds' => $this->notes->modelKeys(),
+            'moduleIds' => $this->modules->modelKeys(),
+            'typeModuleIds' => $this->typeModules->modelKeys(),
             'categoryPostIds' => $this->categoryPosts->modelKeys(),
             'categoryLinkIds' => $this->categoryLinks->modelKeys(),
             "createdAt" => optional($this->created_at)->format('Y-m-d'),

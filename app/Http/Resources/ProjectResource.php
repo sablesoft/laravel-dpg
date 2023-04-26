@@ -36,6 +36,7 @@ class ProjectResource extends JsonResource
             'noteIds' => $this->notes->modelKeys(),
             'postIds' => $this->posts->modelKeys(),
             'topicIds' => $this->topics->modelKeys(),
+            'moduleIds' => $this->modules->modelKeys(),
             "createdAt" => optional($this->created_at)->format('Y-m-d'),
             "updatedAt" => optional($this->updated_at)->format('Y-m-d'),
         ];

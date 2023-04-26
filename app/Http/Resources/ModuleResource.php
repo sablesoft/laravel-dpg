@@ -4,12 +4,12 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Guide\Post;
+use App\Models\Guide\Module;
 
 /**
- * @mixin Post
+ * @mixin Module
  */
-class PostResource extends JsonResource
+class ModuleResource extends JsonResource
 {
     /**
      * Indicates if the resource's collection keys should be preserved.
@@ -28,17 +28,12 @@ class PostResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'entity' => 'post',
-            'text' => $this->text,
-            'number' => $this->number,
-            'projectId' => $this->project_id,
-            'moduleId' => $this->module_id,
-            'categoryId' => $this->category_id,
+            'entity' => 'module',
             'topicId' => $this->topic_id,
-            'tagIds' => $this->tags->modelKeys(),
+            'typeId' => $this->type_id,
             'noteIds' => $this->notes->modelKeys(),
-            'linkIds' => $this->links->modelKeys(),
-            'targetLinkIds' => $this->targetLinks->modelKeys(),
+            'postIds' => $this->posts->modelKeys(),
+            'topicIds' => $this->topics->modelKeys(),
             "createdAt" => optional($this->created_at)->format('Y-m-d'),
             "updatedAt" => optional($this->updated_at)->format('Y-m-d'),
         ];

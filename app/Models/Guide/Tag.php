@@ -7,7 +7,6 @@ use Carbon\Carbon;
 /**
  * @property int|null $id
  * @property int|null $post_id
- * @property int|null $topic_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *

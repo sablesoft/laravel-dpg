@@ -5,7 +5,6 @@ namespace App\Models\Guide;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @property int|null $project_id
  * @property int|null $category_id
  * @property int|null $post_id
  * @property int|null $note_id

@@ -15,10 +15,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property Post[]|Collection $categoryPosts
  * @property Link[]|Collection $categoryLinks
+ * @property Module[]|Collection $typeModules
  */
 class Topic extends GuideItem
 {
-    use HasNotes, HasPosts, HasTags, BelongsToProject;
+    use HasModules, HasNotes, HasPosts, HasTags,
+        BelongsToProject, BelongsToModule;
 
     protected $table = 'guide_topics';
 
@@ -42,5 +44,13 @@ class Topic extends GuideItem
     public function categoryLinks(): HasMany
     {
         return $this->hasMany(Link::class, 'target_category_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function typeModules(): HasMany
+    {
+        return $this->hasMany(Module::class, 'type_id');
     }
 }

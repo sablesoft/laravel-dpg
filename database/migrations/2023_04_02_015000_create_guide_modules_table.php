@@ -29,6 +29,11 @@ return new class extends Migration
             $table->unique(['project_id', 'type_id', 'topic_id']);
             $table->unique(['project_id', 'type_id', 'number']);
         });
+
+        Schema::table('guide_topics', function (Blueprint $table) {
+            $table->foreignId('module_id')->nullable(true)
+                ->constrained('guide_modules')->cascadeOnUpdate()->cascadeOnDelete();
+        });
     }
 
     /**
@@ -38,6 +43,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropColumns('guide_topics', ['module_id']);
         Schema::dropIfExists('guide_modules');
     }
 };

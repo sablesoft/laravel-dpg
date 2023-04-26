@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int|null $id
  * @property int|null $post_id
- * @property int|null $topic_id
  * @property string|null $text
  * @property int|null $number
  * @property Carbon|null $created_at
@@ -22,13 +21,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Note extends GuideItem implements UseNumber
 {
-    use BelongsToProject, BelongsToTopic, BelongsToPost, HasLinks;
+    use BelongsToProject, BelongsToModule, BelongsToTopic, BelongsToPost, HasLinks;
 
     protected $table = 'guide_notes';
 
     protected $fillable = [
         'topic_id',
         'project_id',
+        'module_id',
         'post_id',
         'text',
         'number'
@@ -56,9 +56,10 @@ class Note extends GuideItem implements UseNumber
     /**
      * @param int|null $postId
      * @param int|null $projectId
+     * @param int|null $moduleId
      * @return int|null
      */
-    public static function allowedNumber(?int $postId = null, ?int $projectId = null): ?int
+    public static function allowedNumber(?int $postId = null, ?int $projectId = null, ?int $moduleId = null): ?int
     {
         if (!($postId xor $projectId)) {
             return null;
@@ -66,7 +67,8 @@ class Note extends GuideItem implements UseNumber
 
         $n = 1;
         $numbers = static::where('post_id', $postId)
-            ->where('project_id', $projectId)->pluck('number')->toArray();
+            ->where('project_id', $projectId)
+            ->where('module_id', $moduleId)->pluck('number')->toArray();
         sort($numbers);
         foreach ($numbers as $number) {
             if ($number > $n) {
@@ -83,6 +85,8 @@ class Note extends GuideItem implements UseNumber
      */
     public function numbersQuery(): Builder
     {
-        return Note::where('post_id', $this->post_id)->where('project_id', $this->project_id);
+        return Note::where('post_id', $this->post_id)
+            ->where('project_id', $this->project_id)
+            ->where('module_id', $this->module_id);
     }
 }

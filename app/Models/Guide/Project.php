@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Project extends GuideItem
 {
-    use HasNotes, HasPosts, HasTopics, HasTags;
+    use HasModules, HasNotes, HasPosts, HasTopics, HasTags;
 
     protected $table = 'guide_projects';
 

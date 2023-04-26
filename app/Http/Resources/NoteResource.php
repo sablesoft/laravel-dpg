@@ -30,6 +30,7 @@ class NoteResource extends JsonResource
             'id' => $this->id,
             'entity' => 'note',
             'projectId' => $this->project_id,
+            'moduleId' => $this->module_id,
             'postId' => $this->post_id,
             'topicId' => $this->topic_id,
             'text' => $this->text,

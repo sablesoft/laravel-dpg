@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('text')->nullable(true);
             $table->foreignId('project_id')->nullable(true)
                 ->constrained('guide_projects')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('module_id')->nullable(true)
+                ->constrained('guide_modules')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('owner_id')->nullable(false)
                 ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

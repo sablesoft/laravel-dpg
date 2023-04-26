@@ -11,26 +11,23 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('guide_posts', function (Blueprint $table) {
+        Schema::create('guide_modules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('owner_id')->nullable(false)
                 ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('project_id')->nullable(false)
                 ->constrained('guide_projects')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('module_id')->nullable(true)
-                ->constrained('guide_modules')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('category_id')->nullable(false)
+            $table->foreignId('type_id')->nullable(false)
                 ->constrained('guide_topics')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('topic_id')->nullable(false)
                 ->constrained('guide_topics')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->text('text')->nullable(true);
             $table->unsignedSmallInteger('number')->nullable(true);
             $table->timestamps();
 
-            $table->unique(['project_id', 'module_id', 'category_id', 'topic_id']);
-            $table->unique(['project_id', 'module_id', 'category_id', 'number']);
+            $table->unique(['project_id', 'type_id', 'topic_id']);
+            $table->unique(['project_id', 'type_id', 'number']);
         });
     }
 
@@ -39,8 +36,8 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('guide_posts');
+        Schema::dropIfExists('guide_modules');
     }
 };

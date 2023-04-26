@@ -4,9 +4,14 @@ let props = defineProps(['placeholder', 'placeholderEnabled', 'action', 'items',
 const emit = defineEmits(['change']);
 let select = ref(null);
 let onChange = function(event) {
-    emit('change', event.target.value);
+    let value = event.target.value;
+    emit('change', value);
     if (!props.keepValues) {
         select.value.value = "_";
+    } else {
+        setTimeout(function() {
+            select.value.value = value;
+        }, 100);
     }
 }
 </script>

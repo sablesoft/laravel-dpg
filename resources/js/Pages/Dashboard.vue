@@ -71,8 +71,9 @@ onMounted(() => {
                 </SecondaryButton>
                 <Select placeholder="Projects" class="mb-2 mr-2" :action="{id: 'new', name: 'New'}"
                         :items="guide.projects" @change="showProject"/>
-                <Select placeholder="Topics" class="mb-2 mr-2" :action="{id: 'new', name: 'New'}"
-                        :items="guide.topics" @change="showTopic"/>
+                <Select placeholder="General Topics" class="mb-2 mr-2"
+                        :action="{id: 'new', name: 'New'}"
+                        :items="guide.getGeneralTopics()" @change="showTopic"/>
             </div>
             <hr>
             <p>{{ __(guide.tab) }}</p>

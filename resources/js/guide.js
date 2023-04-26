@@ -41,7 +41,7 @@ export const guide = reactive({
             }
         }
         this.isReady = true;
-        console.log('GUIDE:', this);
+        console.log('GUIDE:', toRaw(this));
     },
 
     // item getters:
@@ -93,12 +93,18 @@ export const guide = reactive({
         if (asArray) {
             relations = [];
             item[relationEntity + 'Ids'].forEach(function(id) {
-                relations.push(self[relationEntity + 's'][id]);
+                let entity = self[relationEntity + 's'][id];
+                if (entity) {
+                    relations.push(entity);
+                }
             });
         } else {
             relations = {};
             item[relationEntity + 'Ids'].forEach(function(id) {
-                relations[id] = self[relationEntity + 's'][id];
+                let entity = self[relationEntity + 's'][id];
+                if (entity) {
+                    relations[id] = entity;
+                }
             });
         }
 
@@ -151,9 +157,6 @@ export const guide = reactive({
     getTopicNotes(id = null) {
         return this.getRelations('topic', 'note', id);
     },
-    getTopicLinks(id = null) {
-        let tags = this.getRelations('topic', 'link', id);
-    },
 
     getProjectCategories(id = null) {
         let posts = this.getProjectPosts(id);
@@ -195,7 +198,10 @@ export const guide = reactive({
         let self = this;
         let posts = [];
         topic.categoryPostIds.forEach(function(id) {
-           posts.push(self.getPost(id));
+            let post = self.getPost(id);
+            if (post) {
+                posts.push(post);
+            }
         });
 
         return this._sortItemsByNumber(posts);
@@ -209,7 +215,10 @@ export const guide = reactive({
         let self = this;
         let posts = [];
         topic.tagIds.forEach(function(id) {
-            posts.push(self.getRelation('tag', 'post', id));
+            let post = self.getRelation('tag', 'post', id);
+            if (post) {
+                posts.push(post);
+            }
         });
 
         return posts;
@@ -395,9 +404,8 @@ export const guide = reactive({
             return;
         }
         let now = new Date();
-        console.log(now);
         let filename = now.getFullYear() +'-'+ (now.getMonth() + 1) +'-'+
-            now.getDate() +'-'+ now.getHours() +'-'+ now.getMinutes() + '.txt';
+            now.getDate() +'-'+ now.getHours() +'-'+ now.getMinutes() + '.md';
         let element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(buffer.text));
         element.setAttribute('download', filename);
@@ -722,7 +730,7 @@ export const guide = reactive({
             return '';
         }
         let self = this;
-        let title = '# ' + this.getProject().code + ' - ' + category.name + '\r\n';
+        let title = '# ' + category.name + '\r\n';
         let text = title + (category.text ? category.text + '\r\n' : '');
         if (withPosts) {
             let posts = this.getCategoryPosts(category.id);
@@ -739,7 +747,7 @@ export const guide = reactive({
             return '';
         }
         let text = '';
-        let title = '## ' + this.getProject().code + ' - ';
+        let title = '## ';
         title = title + this.getTopic(post.categoryId).name + ' - ';
         title = title + this.getTopic(post.topicId).name + '\r\n';
         text = text + title + post.text + '\r\n';
@@ -765,7 +773,7 @@ export const guide = reactive({
             return '';
         }
         let text = '';
-        let title = '### ' + this.getProject(note.projectId).code + ' - ';
+        let title = '### ';
         if (note.postId) {
             let post = this.getItem('post', note.postId);
             title = title + this.getTopic(post.categoryId).name + ' - ';

@@ -12,6 +12,7 @@ use App\Http\Resources\NoteResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\LinkResource;
 use App\Http\Resources\TopicResource;
+use App\Http\Resources\ModuleResource;
 use App\Http\Resources\BufferResource;
 use App\Http\Resources\ProjectResource;
 use App\Http\Controllers\GameController;
@@ -62,6 +63,8 @@ Route::get('/project/{project}', function (Project $project) {
     $posts = $project->posts->keyBy('id');
     /** @var Collection $tags */
     $tags = $project->tags->keyBy('id');
+    /** @var Collection $modules */
+    $modules = $project->modules->keyBy('id');
     /** @var Collection $notes */
     $notes = $user->notes()->where('project_id', $project->getKey())
         ->orWhereIn('post_id', $posts->modelKeys())->get()->keyBy('id');
@@ -75,6 +78,7 @@ Route::get('/project/{project}', function (Project $project) {
     return Inertia::render('Project', [
         'projectId' => $project->getKey(),
         'projects' => ProjectResource::collection([$project->getKey() => $project]),
+        'modules' => ModuleResource::collection($modules),
         'topics' => TopicResource::collection($topics),
         'posts' => PostResource::collection($posts),
         'notes' => NoteResource::collection($notes),

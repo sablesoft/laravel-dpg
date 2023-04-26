@@ -4,6 +4,7 @@ import { isEmpty, isNumber } from "lodash/lang";
 export const guide = reactive({
     tab: 'Info',
     projects : {},
+    modules : {},
     topics : {},
     posts : {},
     notes : {},
@@ -11,6 +12,7 @@ export const guide = reactive({
     tags : {},
     buffers: {},
     projectsId : null,
+    modulesId : null,
     buffersId : null,
     categoriesId : null,
     topicsId : null,
@@ -19,6 +21,7 @@ export const guide = reactive({
     linksId : null,
     tagsId : null,
     projectAdding: false,
+    moduleAdding: false,
     topicAdding: false,
     postAdding: false,
     noteAdding: false,
@@ -29,7 +32,10 @@ export const guide = reactive({
     isReady: false,
     draggable: false,
     _itemsIdFields : ['categoriesId', 'topicsId', 'postsId', 'notesId', 'linksId'],
-    _addingFields : ['projectAdding', 'topicAdding', 'postAdding', 'noteAdding', 'linkAdding', 'tagAdding'],
+    _addingFields : [
+        'projectAdding', 'moduleAdding', 'topicAdding',
+        'postAdding', 'noteAdding', 'linkAdding', 'tagAdding'
+    ],
 
     // ========== METHODS ===========
 

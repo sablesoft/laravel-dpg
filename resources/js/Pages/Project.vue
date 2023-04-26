@@ -26,6 +26,10 @@ const props = defineProps({
         type: Object,
         required: true
     },
+    modules: {
+        type: Object,
+        required: true
+    },
     topics: {
         type: Object,
         required: true
@@ -56,6 +60,7 @@ onMounted(() => {
     guide.init({
         projectsId: toRaw(props.projectId),
         projects: props.projects,
+        modules: props.modules,
         topics: props.topics,
         posts: props.posts,
         notes: props.notes,

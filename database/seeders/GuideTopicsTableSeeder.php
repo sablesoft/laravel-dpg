@@ -871,16 +871,6 @@ class GuideTopicsTableSeeder extends Seeder
             ),
             85 => 
             array (
-                'id' => 102,
-                'name' => 'Бустер',
-                'text' => 'Разбей свой игровой карточный проект на бустеры и мысли блоками',
-                'project_id' => NULL,
-                'owner_id' => 1,
-                'created_at' => '2023-04-25 16:37:16',
-                'updated_at' => '2023-04-25 16:37:29',
-            ),
-            86 => 
-            array (
                 'id' => 103,
                 'name' => 'Амнезия',
                 'text' => 'Позабыть все на свете - это не больно. Другое дело - все вспомнить.',
@@ -888,6 +878,16 @@ class GuideTopicsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2023-04-26 02:26:22',
                 'updated_at' => '2023-04-26 02:26:22',
+            ),
+            86 => 
+            array (
+                'id' => 102,
+                'name' => 'Модуль',
+                'text' => 'Разбей свой игровой карточный проект на модули и мысли блоками',
+                'project_id' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2023-04-25 16:37:16',
+                'updated_at' => '2023-04-26 14:44:47',
             ),
         ));
         

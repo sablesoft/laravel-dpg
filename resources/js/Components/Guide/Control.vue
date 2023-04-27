@@ -30,6 +30,9 @@ let isActive = function() {
     if (_entity() === 'post' && guide.isActive(guide.getNote())) {
         return false;
     }
+    if (_entity() === 'module' && guide.isActive(guide.getNote())) {
+        return false;
+    }
 
     return true;
 }

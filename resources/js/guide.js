@@ -194,7 +194,7 @@ export const guide = reactive({
     },
 
     getCategories(id = null) {
-        id = id ? id : this.modulesId;
+        id = id ? id : (this.linkAdding ? null : this.modulesId);
         let posts = id ? this.getModulePosts(id) : this.getProjectPosts();
         if (isEmpty(posts)) {
             return {};
@@ -228,7 +228,7 @@ export const guide = reactive({
     },
     getCategoryPosts(id = null, moduleId = null) {
         id = id ? id : this.categoriesId;
-        moduleId = moduleId ? moduleId : this.modulesId;
+        moduleId = moduleId ? moduleId : (this.linkAdding ? null : this.modulesId);
         let topic = this.getTopic(id);
         if (!topic) {
             return [];

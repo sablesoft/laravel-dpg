@@ -86,6 +86,14 @@ let _linkToLink = function(id, number) {
         targetLinkId : id
     }
 }
+let updateModule = function(value) {
+    guide.updateField('topic', 'project_id', null);
+    guide.updateField('topic', 'module_id', value);
+}
+let updateProject = function(value) {
+    guide.updateField('topic', 'module_id', null);
+    guide.updateField('topic', 'project_id', value);
+}
 </script>
 <style>
 .note-mark {
@@ -126,7 +134,14 @@ button {
                     <Editable :value="guide.getTopicProject() ? guide.getTopicProject().id : null"
                               class="inline" type="select" :items="guide.projects"
                               placeholder="Global" placeholder-enabled="1"
-                              @updated="(value) => guide.updateField('topic', 'project_id', value)"/>
+                              @updated="(value) => updateProject(value)"/>
+                </p>
+                <p class="note-row">
+                    <span class="note-mark">{{ __('Module') }}: </span>
+                    <Editable :value="guide.getTopicField('module_id')"
+                              class="inline" type="select" :items="guide.getProjectModules()"
+                              placeholder="Select Module" placeholder-enabled="1"
+                              @updated="(value) => updateModule(value)"/>
                 </p>
                 <Control :item="guide.getTopic()"/>
                 <p class="note-row">

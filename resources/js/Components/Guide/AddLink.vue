@@ -37,7 +37,7 @@ let title = function(item) {
                     @change="form.postId = null; form.noteId = null;"
                     class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150 mt-1 block w-full">
                 <option :value="null" disabled>{{ __('Select Category') }}</option>
-                <option v-for="category in guide.getProjectCategories()" :value="category.id">
+                <option v-for="category in guide.getCategories()" :value="category.id">
                     {{ category.name }}
                 </option>
             </select>

@@ -10,7 +10,7 @@ import { useForm } from "@inertiajs/inertia-vue3";
 const form = useForm({
     name: null,
     text: null,
-    isGlobal: true
+    isGlobal: false
 });
 
 let ready = function() {
@@ -39,7 +39,6 @@ let ready = function() {
             <Checkbox id="isGlobal"
                       class="mr-2"
                       :disabled="!guide.projectsId"
-                      checked="checked"
                       v-model="form.isGlobal" />
             <span v-if="!form.isGlobal">({{__('Project') +': '+ guide.getProject().code}})</span>
         </div>

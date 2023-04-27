@@ -58,6 +58,9 @@ export const guide = reactive({
     getProject(id = null) {
         return this.getItem('project', id);
     },
+    getModule(id = null) {
+        return this.getItem('module', id);
+    },
     getTopic(id = null) {
         return this.getItem('topic', id);
     },
@@ -86,6 +89,17 @@ export const guide = reactive({
     },
     getTopicProject(id = null) {
         return this.getRelation('topic', 'project', id);
+    },
+    getModuleTopic(id = null) {
+        return this.getRelation('module', 'topic', id);
+    },
+    getModuleType(id = null) {
+        let module = this.getItem('module', id);
+        if (!module) {
+            return null;
+        }
+
+        return this.getTopic(module.typeId);
     },
 
     // relations getters:
@@ -121,6 +135,11 @@ export const guide = reactive({
 
         return this._sortItemsByNumber(notes);
     },
+    getModuleNotes(id = null) {
+        let notes = this.getRelations('module', 'note', id, true);
+
+        return this._sortItemsByNumber(notes);
+    },
     getSortedTopics() {
         let topics = [];
         for (const [id, topic] of Object.entries(this.topics)) {
@@ -130,14 +149,24 @@ export const guide = reactive({
 
         return topics;
     },
-    getProjectTopics(id = null) {
-        let topics = this.getRelations('project', 'topic', id, true);
+    getProjectModules(id = null) {
+        let modules = this.getRelations('project', 'module', id, true);
+        modules.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+
+        return modules;
+    },
+    getTopics() {
+        let entity = this.modulesId ? 'module' : 'project';
+        let topics = this.getRelations(entity, 'topic', null, true);
         topics.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 
         return topics;
     },
     getProjectPosts(id = null) {
         return this.getRelations('project', 'post', id);
+    },
+    getModulePosts(id = null) {
+        return this.getRelations('module', 'post', id);
     },
     getPostNotes(id = null) {
         let notes = this.getRelations('post', 'note', id, true);
@@ -164,8 +193,8 @@ export const guide = reactive({
         return this.getRelations('topic', 'note', id);
     },
 
-    getProjectCategories(id = null) {
-        let posts = this.getProjectPosts(id);
+    getCategories() {
+        let posts = this.modulesId ? this.getModulePosts() : this.getProjectPosts();
         if (isEmpty(posts)) {
             return {};
         }
@@ -181,7 +210,8 @@ export const guide = reactive({
 
         return categories;
     },
-    getProjectTags(id = null) {
+    // todo - add tags to modules:
+    getTags(id = null) {
         let self = this;
         let tags = this.getRelations('project', 'tag', id, true);
         let ids = {};
@@ -343,13 +373,22 @@ export const guide = reactive({
             }, this._createCallback.bind(this));
     },
     createProject(form) {
-        console.log('create project!', form);
         this.request('guide.create', {
             table: 'projects',
             data : {
                 name: form['name'],
                 code: form['code'],
                 text: form['text']
+            }
+        }, this._createCallback.bind(this));
+    },
+    createModule(form) {
+        this.request('guide.create', {
+            table: 'modules',
+            data : {
+                type_id: form['typeId'],
+                topic_id: form['topicId'],
+                project_id: this.projectsId
             }
         }, this._createCallback.bind(this));
     },
@@ -829,6 +868,10 @@ export const guide = reactive({
             case 'project':
                 this.projectsId = item.id;
                 break;
+            case 'module':
+                belongsTo = ['project', 'topic'];
+                this.modulesId = item.id;
+                break;
             case 'topic':
                 if (item.projectId) {
                     belongsTo = ['project'];
@@ -881,9 +924,9 @@ export const guide = reactive({
 
         return this._sortItemsByNumber(list);
     },
-    _sortItemsByNumber(list) {
+    _sortItemsByNumber(list, field = 'number') {
         list.sort(function(a, b) {
-            return a.number - b.number;
+            return a[field] - b[field];
         });
 
         return list;
@@ -918,10 +961,13 @@ export const guide = reactive({
                 notesId: this.notesId
             };
         }
-        let self = this;
         this.resetAdding();
+        this._resetItemIds();
+    },
+    _resetItemIds() {
+        let self = this;
         this._itemsIdFields.forEach(function(field) {
-           self[field] = null;
+            self[field] = null;
         });
     }
 });

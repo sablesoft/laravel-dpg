@@ -6,6 +6,7 @@ import Select from '@/Components/Select.vue';
 import ProjectInfo from '@/Components/Guide/ProjectInfo.vue';
 import ModalDeletion from '@/Components/Guide/ModalDeletion.vue';
 import TopicsTab from '@/Components/Guide/TopicsTab.vue';
+import ModuleInfo from "@/Components/Guide/ModuleInfo.vue";
 import Category from '@/Components/Guide/Category.vue';
 import TagTab from "@/Components/Guide/TagTab.vue";
 import Buffer from '@/Components/Guide/Buffer.vue';
@@ -87,6 +88,18 @@ onMounted(() => {
         }
     });
 });
+let showInfo = function() {
+    guide.changeTab('Info');
+    guide.modulesId = null;
+}
+let showModule = function(id) {
+    guide.changeTab('Module');
+    if (id === 'new') {
+        guide.moduleAdding = true;
+    } else {
+        guide.modulesId = id;
+    }
+}
 let showCategory = function(id) {
     guide.changeTab('Category');
     if (id === 'new') {
@@ -120,19 +133,25 @@ let showTag = function(id) {
         <template #header>
             <h2 v-if="guide.isReady" class="block-title inline font-semibold text-xl text-gray-800 leading-tight">
                 {{ guide.getProject().name + ' ('+ guide.getProject().code +')'}}
+                <span v-if="guide.modulesId">
+                    - {{ guide.getModule().name }}
+                </span>
             </h2>
-            <div class="inline max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <SecondaryButton @click="guide.changeTab('Info')" class="mb-2 mr-2">
+            <div class="max-w-7xl mx-auto mt-2">
+                <SecondaryButton @click="showInfo" class="mb-2 mr-2">
                     {{__('Info')}}
                 </SecondaryButton>
+                <Select placeholder="Modules" class="mb-2 mr-2"
+                        :action="{id: 'new', name: 'New'}"
+                        :items="guide.getProjectModules()" @change="showModule"/>
                 <Select placeholder="Categories" class="mb-2 mr-2"
                         :action="{id: 'new', name: 'New'}"
-                        :items="guide.getProjectCategories()" @change="showCategory"/>
+                        :items="guide.getCategories()" @change="showCategory"/>
                 <Select placeholder="Tags" class="mb-2 mr-2"
-                        :items="guide.getProjectTags()" @change="showTag"/>
-                <Select placeholder="Project Topics" class="mb-2 mr-2"
+                        :items="guide.getTags()" @change="showTag"/>
+                <Select placeholder="Topics" class="mb-2 mr-2"
                         :action="{id: 'new', name: 'New'}"
-                        :items="guide.getProjectTopics()" @change="showTopic"/>
+                        :items="guide.getTopics()" @change="showTopic"/>
                 <Select placeholder="General Topics" class="mb-2 mr-2"
                         :action="{id: 'new', name: 'New'}"
                         :items="guide.getGeneralTopics()" @change="showTopic"/>
@@ -148,9 +167,10 @@ let showTag = function(id) {
         </template>
         <div class="py-2" v-if="guide.isReady">
             <ProjectInfo v-if="guide.tab === 'Info'"/>
+            <ModuleInfo v-if="guide.tab === 'Module'"/>
             <Category v-if="guide.tab === 'Category'"/>
             <TagTab v-if="guide.tab === 'Tag'"/>
-            <TopicsTab v-if="guide.tab === 'Topic'" :topics="guide.getProjectTopics()"/>
+            <TopicsTab v-if="guide.tab === 'Topic'" :topics="guide.getTopics()"/>
             <Buffer v-if="guide.tab === 'Buffer'"/>
         </div>
         <ModalDeletion/>

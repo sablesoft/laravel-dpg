@@ -12,12 +12,14 @@ use App\Models\Guide\Post;
 use App\Models\Guide\Link;
 use App\Models\Guide\Note;
 use App\Models\Guide\Topic;
+use App\Models\Guide\Module;
 use App\Models\Guide\Project;
 use App\Http\Resources\TagResource;
 use App\Http\Resources\LinkResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\NoteResource;
 use App\Http\Resources\TopicResource;
+use App\Http\Resources\ModuleResource;
 use App\Http\Resources\ProjectResource;
 
 class GuideController extends Controller
@@ -138,6 +140,10 @@ class GuideController extends Controller
             case 'projects':
                 $project = Project::create($data);
                 return ProjectResource::make($project);
+            case 'modules':
+                $data['number'] = Module::allowedNumber($data['project_id'], $data['type_id']);
+                $module = Module::create($data);
+                return ModuleResource::make($module);
             case 'posts':
                 $categoryId = $data['category_id'];
                 $data['number'] = Post::allowedNumber($categoryId);

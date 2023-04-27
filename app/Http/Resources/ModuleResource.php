@@ -29,6 +29,7 @@ class ModuleResource extends JsonResource
         return [
             'id' => $this->id,
             'entity' => 'module',
+            'name' => $this->type->name . ' : ' . $this->topic->name,
             'topicId' => $this->topic_id,
             'typeId' => $this->type_id,
             'noteIds' => $this->notes->modelKeys(),

@@ -37,6 +37,28 @@ class Module extends GuideItem implements UseNumber
         return $this->belongsTo(Topic::class, 'type_id');
     }
 
+
+    /**
+     * @param int $projectId
+     * @param int $typeId
+     * @return int|null
+     */
+    public static function allowedNumber(int $projectId, int $typeId): ?int
+    {
+        $n = 1;
+        $numbers = static::where('project_id', $projectId)->where('type_id', $typeId)
+            ->pluck('number')->toArray();
+        sort($numbers);
+        foreach ($numbers as $number) {
+            if ($number > $n) {
+                return $n;
+            }
+            $n++;
+        }
+
+        return $n;
+    }
+
     /**
      * @return Builder
      */

@@ -10,6 +10,7 @@ const props = defineProps({
     }
 });
 const form = useForm({
+    moduleId: null,
     categoryId: null,
     postId: null,
     noteId: null
@@ -32,12 +33,21 @@ let title = function(item) {
         <h2 class="action-title">{{__('Create Link')}}</h2>
         <hr/><br/>
         <div>
+            <InputLabel for="moduleSelect" :value="__('Module')" />
+            <select id="moduleSelect" v-model="form.moduleId"
+                    @change="form.categoryId = form.postId = form.noteId = null;"
+                    class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150 mt-1 block w-full">
+                <option :value="null">{{ __('Select Module') }}</option>
+                <option v-for="module in guide.getProjectModules()" :value="module.id">
+                    {{ module.name }}
+                </option>
+            </select>
             <InputLabel for="categorySelect" :value="__('*Category')" />
             <select id="categorySelect" v-model="form.categoryId" required
-                    @change="form.postId = null; form.noteId = null;"
+                    @change="form.postId = form.noteId = null;"
                     class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150 mt-1 block w-full">
                 <option :value="null" disabled>{{ __('Select Category') }}</option>
-                <option v-for="category in guide.getCategories()" :value="category.id">
+                <option v-for="category in guide.getCategories(form.moduleId)" :value="category.id">
                     {{ category.name }}
                 </option>
             </select>
@@ -47,7 +57,7 @@ let title = function(item) {
             <select id="postSelect" v-model="form.postId" required
                     class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150 mt-1 block w-full">
                 <option :value="null" disabled>{{ __('Select Post') }}</option>
-                <option v-for="post in guide.getCategoryPosts(form.categoryId)" :value="post.id">
+                <option v-for="post in guide.getCategoryPosts(form.categoryId, form.moduleId)" :value="post.id">
                     {{ title(post) }}
                 </option>
             </select>

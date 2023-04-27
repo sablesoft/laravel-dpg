@@ -193,8 +193,9 @@ export const guide = reactive({
         return this.getRelations('topic', 'note', id);
     },
 
-    getCategories() {
-        let posts = this.modulesId ? this.getModulePosts() : this.getProjectPosts();
+    getCategories(id = null) {
+        id = id ? id : this.modulesId;
+        let posts = id ? this.getModulePosts(id) : this.getProjectPosts();
         if (isEmpty(posts)) {
             return {};
         }
@@ -225,8 +226,9 @@ export const guide = reactive({
 
         return topics;
     },
-    getCategoryPosts(id = null) {
+    getCategoryPosts(id = null, moduleId = null) {
         id = id ? id : this.categoriesId;
+        moduleId = moduleId ? moduleId : this.modulesId;
         let topic = this.getTopic(id);
         if (!topic) {
             return [];
@@ -236,7 +238,7 @@ export const guide = reactive({
         topic.categoryPostIds.forEach(function(id) {
             let post = self.getPost(id);
             // noinspection EqualityComparisonWithCoercionJS
-            if (post && (post.moduleId == self.modulesId)) {
+            if (post && (post.moduleId == moduleId)) {
                 posts.push(post);
             }
         });
@@ -729,6 +731,8 @@ export const guide = reactive({
     goTo(link, target) {
         this._setBackLink();
         let self = this;
+        let module = this.getRelation('post', 'module', link.targetPostId);
+        this.modulesId = module ? module.id : null;
         if (link.targetCategoryId) {
             this.tab = 'Category';
             this.categoriesId = link.targetCategoryId;

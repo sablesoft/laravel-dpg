@@ -27,6 +27,10 @@ let getLinkName = function() {
     let noteName = noteTopic ? noteTopic.name : null;
     return link.number + ': ' + categoryName + ' - ' + postName + (noteName ? ' - ' + noteName : '');
 }
+let getModuleName = function() {
+    let module = guide.getRelation('post', 'module', props.link.targetPostId);
+    return module ? module.name : null;
+}
 </script>
 <style>
 .link-number {
@@ -65,6 +69,11 @@ let getLinkName = function() {
         <template v-if="link.targetLinkId">
             - <span class="link-title" @click.prevent.stop="guide.goTo(link, 'link')">
                 ( {{ getLinkName() }} )
+            </span>
+        </template>
+        <template v-if="getModuleName()">
+            <span>
+                [ {{ __('Module') + ' "' + getModuleName() + '"' }} ]
             </span>
         </template>
     </p>

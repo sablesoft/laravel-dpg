@@ -27,7 +27,8 @@ class Topic extends GuideItem
     protected $fillable = [
         'name',
         'text',
-        'project_id'
+        'project_id',
+        'module_id'
     ];
 
     /**

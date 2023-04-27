@@ -20,10 +20,12 @@ class SequencesSeeder extends Seeder
         'areas',
         'scenes',
         'guide_projects',
+        'guide_modules',
         'guide_topics',
         'guide_posts',
         'guide_notes',
         'guide_links',
+        'guide_tags',
     ];
 
     /**

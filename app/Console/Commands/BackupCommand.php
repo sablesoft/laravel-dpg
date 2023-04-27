@@ -48,6 +48,7 @@ class BackupCommand extends Command
         'game_book',
         'game_subscriber',
         'guide_projects',
+        'guide_modules',
         'guide_topics',
         'guide_posts',
         'guide_notes',

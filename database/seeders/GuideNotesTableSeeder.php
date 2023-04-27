@@ -63,6 +63,21 @@ class GuideNotesTableSeeder extends Seeder
             ),
             3 => 
             array (
+                'id' => 33,
+                'owner_id' => 1,
+                'project_id' => NULL,
+                'module_id' => NULL,
+                'post_id' => 23,
+                'topic_id' => 31,
+            'text' => 'Во время заключительной арки (Арка 8. Пробуждение), в процессе очередной жестокой стычки с Наблюдателями, героям открывается очередное окно возможности - особое завершение сюжета. Это окно появляется только тогда, когда герои активировали необходимые условия (Достижения - Дружба в Крепости) Сутью окна является заключение мирного договора и союза между мастерами сновидения и Наблюдателями (Персонажи - Наблюдатели).
+
+Также у этого союза есть определенные требования к обоим сторонам. Например, сторона мастеров сновидения обязуется помочь Наблюдателям выйти из ловушки бестелесности ко времени, когда весь мир людей примет и усвоит искусство сновидения. Для успешного поддержания союза обе стороны обязуются периодически взаимодействовать и помогать ему и друг другу. В свою очередь, Наблюдатели обязуются передать людям согласно их запросу любые знания и умения, которые были накоплены Наблюдателями за их бессмертные годы существования.',
+                'number' => 2,
+                'created_at' => '2023-04-07 23:04:02',
+                'updated_at' => '2023-04-27 17:30:57',
+            ),
+            4 => 
+            array (
                 'id' => 14,
                 'owner_id' => 1,
                 'project_id' => 1,
@@ -74,7 +89,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 07:32:51',
                 'updated_at' => '2023-04-27 04:34:43',
             ),
-            4 => 
+            5 => 
             array (
                 'id' => 9,
                 'owner_id' => 1,
@@ -87,7 +102,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 07:29:51',
                 'updated_at' => '2023-04-27 04:37:31',
             ),
-            5 => 
+            6 => 
             array (
                 'id' => 180,
                 'owner_id' => 1,
@@ -100,7 +115,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-27 15:13:46',
                 'updated_at' => '2023-04-27 15:13:58',
             ),
-            6 => 
+            7 => 
             array (
                 'id' => 181,
                 'owner_id' => 1,
@@ -114,7 +129,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-27 15:58:56',
                 'updated_at' => '2023-04-27 16:49:50',
             ),
-            7 => 
+            8 => 
             array (
                 'id' => 182,
                 'owner_id' => 1,
@@ -127,7 +142,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-27 16:24:01',
                 'updated_at' => '2023-04-27 16:56:37',
             ),
-            8 => 
+            9 => 
             array (
                 'id' => 183,
                 'owner_id' => 1,
@@ -142,7 +157,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-27 16:31:20',
                 'updated_at' => '2023-04-27 16:49:50',
             ),
-            9 => 
+            10 => 
             array (
                 'id' => 184,
                 'owner_id' => 1,
@@ -155,7 +170,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-27 16:37:07',
                 'updated_at' => '2023-04-27 16:49:50',
             ),
-            10 => 
+            11 => 
             array (
                 'id' => 118,
                 'owner_id' => 1,
@@ -168,7 +183,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-20 02:28:17',
                 'updated_at' => '2023-04-21 18:30:41',
             ),
-            11 => 
+            12 => 
             array (
                 'id' => 101,
                 'owner_id' => 1,
@@ -181,7 +196,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-19 00:40:15',
                 'updated_at' => '2023-04-19 01:37:14',
             ),
-            12 => 
+            13 => 
             array (
                 'id' => 4,
                 'owner_id' => 1,
@@ -194,7 +209,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 07:27:06',
                 'updated_at' => '2023-04-09 19:59:27',
             ),
-            13 => 
+            14 => 
             array (
                 'id' => 10,
                 'owner_id' => 1,
@@ -207,7 +222,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 07:30:35',
                 'updated_at' => '2023-04-09 19:59:27',
             ),
-            14 => 
+            15 => 
             array (
                 'id' => 8,
                 'owner_id' => 1,
@@ -220,35 +235,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 07:29:33',
                 'updated_at' => '2023-04-09 19:59:27',
             ),
-            15 => 
-            array (
-                'id' => 60,
-                'owner_id' => 1,
-                'project_id' => NULL,
-                'module_id' => NULL,
-                'post_id' => 44,
-                'topic_id' => 20,
-                'text' => 'В заметках с данной темой указывается различная информация, касающаяся игроков.',
-                'number' => 1,
-                'created_at' => '2023-04-11 02:32:50',
-                'updated_at' => '2023-04-11 02:33:38',
-            ),
             16 => 
-            array (
-                'id' => 63,
-                'owner_id' => 1,
-                'project_id' => NULL,
-                'module_id' => NULL,
-                'post_id' => 40,
-                'topic_id' => 67,
-            'text' => 'Одна из функций игровых карт с точки зрения игровой механики - это обеспечение вариативности (1). Игровые карты очень удобно использовать для создания колод различного назначения, из которых при необходимости можно тянуть карты различными способами. При этом такую вариативность довольно удобно настраивать, убирая или добавляя в такие колоды различные карты.
-
-Таким образом, это один из ключевых моментов всей игровой механики, которому следует уделить самое пристальное внимание.',
-                'number' => 2,
-                'created_at' => '2023-04-11 15:17:51',
-                'updated_at' => '2023-04-11 15:58:48',
-            ),
-            17 => 
             array (
                 'id' => 160,
                 'owner_id' => 1,
@@ -261,7 +248,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-22 01:48:07',
                 'updated_at' => '2023-04-22 01:48:07',
             ),
-            18 => 
+            17 => 
             array (
                 'id' => 72,
                 'owner_id' => 1,
@@ -274,7 +261,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-12 01:13:30',
                 'updated_at' => '2023-04-12 01:26:06',
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 73,
                 'owner_id' => 1,
@@ -287,7 +274,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-12 01:31:21',
                 'updated_at' => '2023-04-12 01:32:49',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 81,
                 'owner_id' => 1,
@@ -322,7 +309,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-12 19:18:21',
                 'updated_at' => '2023-04-12 19:20:11',
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 146,
                 'owner_id' => 1,
@@ -336,7 +323,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-22 00:15:16',
                 'updated_at' => '2023-04-22 01:57:48',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 159,
                 'owner_id' => 1,
@@ -349,7 +336,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-22 01:47:53',
                 'updated_at' => '2023-04-22 01:47:53',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 169,
                 'owner_id' => 1,
@@ -370,7 +357,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-25 01:29:25',
                 'updated_at' => '2023-04-25 01:29:25',
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 30,
                 'owner_id' => 1,
@@ -383,20 +370,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 22:55:24',
                 'updated_at' => '2023-04-17 01:37:34',
             ),
-            25 => 
-            array (
-                'id' => 58,
-                'owner_id' => 1,
-                'project_id' => NULL,
-                'module_id' => NULL,
-                'post_id' => 40,
-                'topic_id' => 20,
-                'text' => 'Заметки с данной темой используются для описания соответствующих игровых карт, их изображений и художественного публичного текста, который игроки будут видеть во время открытия данной карты.',
-                'number' => 3,
-                'created_at' => '2023-04-11 02:16:04',
-                'updated_at' => '2023-04-11 15:34:12',
-            ),
-            26 => 
+            24 => 
             array (
                 'id' => 161,
                 'owner_id' => 1,
@@ -409,7 +383,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-22 01:48:21',
                 'updated_at' => '2023-04-22 01:48:21',
             ),
-            27 => 
+            25 => 
             array (
                 'id' => 106,
                 'owner_id' => 1,
@@ -422,7 +396,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-19 02:06:55',
                 'updated_at' => '2023-04-21 02:26:10',
             ),
-            28 => 
+            26 => 
             array (
                 'id' => 3,
                 'owner_id' => 1,
@@ -435,7 +409,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 04:35:28',
                 'updated_at' => '2023-04-18 23:17:45',
             ),
-            29 => 
+            27 => 
             array (
                 'id' => 11,
                 'owner_id' => 1,
@@ -448,7 +422,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 07:30:54',
                 'updated_at' => '2023-04-14 17:05:34',
             ),
-            30 => 
+            28 => 
             array (
                 'id' => 77,
                 'owner_id' => 1,
@@ -466,7 +440,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-12 15:57:45',
                 'updated_at' => '2023-04-26 13:41:14',
             ),
-            31 => 
+            29 => 
             array (
                 'id' => 55,
                 'owner_id' => 1,
@@ -485,7 +459,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-10 17:33:44',
                 'updated_at' => '2023-04-10 17:33:44',
             ),
-            32 => 
+            30 => 
             array (
                 'id' => 47,
                 'owner_id' => 1,
@@ -498,7 +472,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 23:34:50',
                 'updated_at' => '2023-04-07 23:34:50',
             ),
-            33 => 
+            31 => 
             array (
                 'id' => 24,
                 'owner_id' => 1,
@@ -511,7 +485,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 14:58:09',
                 'updated_at' => '2023-04-14 17:24:34',
             ),
-            34 => 
+            32 => 
             array (
                 'id' => 163,
                 'owner_id' => 1,
@@ -524,7 +498,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-22 01:51:56',
                 'updated_at' => '2023-04-22 01:52:49',
             ),
-            35 => 
+            33 => 
             array (
                 'id' => 108,
                 'owner_id' => 1,
@@ -538,7 +512,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-19 02:19:55',
                 'updated_at' => '2023-04-21 02:08:57',
             ),
-            36 => 
+            34 => 
             array (
                 'id' => 52,
                 'owner_id' => 1,
@@ -551,7 +525,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 23:37:15',
                 'updated_at' => '2023-04-07 23:37:15',
             ),
-            37 => 
+            35 => 
             array (
                 'id' => 51,
                 'owner_id' => 1,
@@ -564,7 +538,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 23:37:01',
                 'updated_at' => '2023-04-07 23:37:01',
             ),
-            38 => 
+            36 => 
             array (
                 'id' => 20,
                 'owner_id' => 1,
@@ -579,7 +553,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 13:38:48',
                 'updated_at' => '2023-04-07 13:38:48',
             ),
-            39 => 
+            37 => 
             array (
                 'id' => 18,
                 'owner_id' => 1,
@@ -592,7 +566,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 07:59:14',
                 'updated_at' => '2023-04-07 07:59:14',
             ),
-            40 => 
+            38 => 
             array (
                 'id' => 46,
                 'owner_id' => 1,
@@ -605,7 +579,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 23:34:34',
                 'updated_at' => '2023-04-07 23:34:34',
             ),
-            41 => 
+            39 => 
             array (
                 'id' => 150,
                 'owner_id' => 1,
@@ -618,7 +592,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-22 00:45:29',
                 'updated_at' => '2023-04-22 00:45:29',
             ),
-            42 => 
+            40 => 
             array (
                 'id' => 22,
                 'owner_id' => 1,
@@ -632,7 +606,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 13:41:38',
                 'updated_at' => '2023-04-14 17:18:38',
             ),
-            43 => 
+            41 => 
             array (
                 'id' => 5,
                 'owner_id' => 1,
@@ -645,7 +619,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 07:27:24',
                 'updated_at' => '2023-04-09 19:59:27',
             ),
-            44 => 
+            42 => 
             array (
                 'id' => 23,
                 'owner_id' => 1,
@@ -659,7 +633,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 13:42:09',
                 'updated_at' => '2023-04-14 17:22:13',
             ),
-            45 => 
+            43 => 
             array (
                 'id' => 38,
                 'owner_id' => 1,
@@ -672,7 +646,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 23:30:37',
                 'updated_at' => '2023-04-18 23:47:07',
             ),
-            46 => 
+            44 => 
             array (
                 'id' => 120,
                 'owner_id' => 1,
@@ -685,7 +659,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-20 02:28:48',
                 'updated_at' => '2023-04-20 02:45:08',
             ),
-            47 => 
+            45 => 
             array (
                 'id' => 29,
                 'owner_id' => 1,
@@ -698,7 +672,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 22:55:01',
                 'updated_at' => '2023-04-17 01:37:34',
             ),
-            48 => 
+            46 => 
             array (
                 'id' => 151,
                 'owner_id' => 1,
@@ -711,7 +685,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-22 00:48:49',
                 'updated_at' => '2023-04-22 00:48:49',
             ),
-            49 => 
+            47 => 
             array (
                 'id' => 15,
                 'owner_id' => 1,
@@ -724,7 +698,7 @@ class GuideNotesTableSeeder extends Seeder
                 'created_at' => '2023-04-07 07:33:31',
                 'updated_at' => '2023-04-14 17:09:42',
             ),
-            50 => 
+            48 => 
             array (
                 'id' => 87,
                 'owner_id' => 1,
@@ -738,7 +712,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-14 17:55:53',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        51 => 
+        49 => 
         array (
             'id' => 45,
             'owner_id' => 1,
@@ -751,7 +725,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:33:48',
             'updated_at' => '2023-04-07 23:33:48',
         ),
-        52 => 
+        50 => 
         array (
             'id' => 50,
             'owner_id' => 1,
@@ -764,7 +738,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:36:17',
             'updated_at' => '2023-04-07 23:36:17',
         ),
-        53 => 
+        51 => 
         array (
             'id' => 41,
             'owner_id' => 1,
@@ -777,7 +751,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:31:52',
             'updated_at' => '2023-04-07 23:31:52',
         ),
-        54 => 
+        52 => 
         array (
             'id' => 44,
             'owner_id' => 1,
@@ -790,7 +764,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:33:33',
             'updated_at' => '2023-04-07 23:33:33',
         ),
-        55 => 
+        53 => 
         array (
             'id' => 40,
             'owner_id' => 1,
@@ -803,7 +777,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:31:38',
             'updated_at' => '2023-04-07 23:31:38',
         ),
-        56 => 
+        54 => 
         array (
             'id' => 79,
             'owner_id' => 1,
@@ -816,7 +790,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-12 16:36:39',
             'updated_at' => '2023-04-26 13:52:20',
         ),
-        57 => 
+        55 => 
         array (
             'id' => 102,
             'owner_id' => 1,
@@ -830,7 +804,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-19 00:50:20',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        58 => 
+        56 => 
         array (
             'id' => 48,
             'owner_id' => 1,
@@ -843,7 +817,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:35:12',
             'updated_at' => '2023-04-07 23:35:12',
         ),
-        59 => 
+        57 => 
         array (
             'id' => 54,
             'owner_id' => 1,
@@ -858,7 +832,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-09 03:38:39',
             'updated_at' => '2023-04-11 15:34:12',
         ),
-        60 => 
+        58 => 
         array (
             'id' => 162,
             'owner_id' => 1,
@@ -871,7 +845,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 01:50:35',
             'updated_at' => '2023-04-22 01:50:35',
         ),
-        61 => 
+        59 => 
         array (
             'id' => 59,
             'owner_id' => 1,
@@ -884,7 +858,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-11 02:19:45',
             'updated_at' => '2023-04-11 02:19:45',
         ),
-        62 => 
+        60 => 
         array (
             'id' => 83,
             'owner_id' => 1,
@@ -903,7 +877,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-14 00:23:49',
             'updated_at' => '2023-04-17 02:14:16',
         ),
-        63 => 
+        61 => 
         array (
             'id' => 107,
             'owner_id' => 1,
@@ -916,7 +890,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-19 02:16:19',
             'updated_at' => '2023-04-21 02:11:49',
         ),
-        64 => 
+        62 => 
         array (
             'id' => 82,
             'owner_id' => 1,
@@ -929,7 +903,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-14 00:08:20',
             'updated_at' => '2023-04-14 00:26:00',
         ),
-        65 => 
+        63 => 
         array (
             'id' => 19,
             'owner_id' => 1,
@@ -943,7 +917,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 08:00:16',
             'updated_at' => '2023-04-07 08:00:16',
         ),
-        66 => 
+        64 => 
         array (
             'id' => 148,
             'owner_id' => 1,
@@ -956,7 +930,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 00:15:51',
             'updated_at' => '2023-04-22 00:37:01',
         ),
-        67 => 
+        65 => 
         array (
             'id' => 35,
             'owner_id' => 1,
@@ -969,7 +943,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:10:01',
             'updated_at' => '2023-04-07 23:10:01',
         ),
-        68 => 
+        66 => 
         array (
             'id' => 43,
             'owner_id' => 1,
@@ -982,7 +956,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:32:54',
             'updated_at' => '2023-04-07 23:32:54',
         ),
-        69 => 
+        67 => 
         array (
             'id' => 39,
             'owner_id' => 1,
@@ -995,7 +969,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:30:56',
             'updated_at' => '2023-04-07 23:30:56',
         ),
-        70 => 
+        68 => 
         array (
             'id' => 13,
             'owner_id' => 1,
@@ -1008,7 +982,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 07:32:34',
             'updated_at' => '2023-04-14 17:07:39',
         ),
-        71 => 
+        69 => 
         array (
             'id' => 34,
             'owner_id' => 1,
@@ -1021,7 +995,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:04:39',
             'updated_at' => '2023-04-07 23:04:39',
         ),
-        72 => 
+        70 => 
         array (
             'id' => 17,
             'owner_id' => 1,
@@ -1035,7 +1009,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 07:58:44',
             'updated_at' => '2023-04-07 07:58:44',
         ),
-        73 => 
+        71 => 
         array (
             'id' => 49,
             'owner_id' => 1,
@@ -1048,7 +1022,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:36:01',
             'updated_at' => '2023-04-07 23:36:01',
         ),
-        74 => 
+        72 => 
         array (
             'id' => 21,
             'owner_id' => 1,
@@ -1061,20 +1035,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 13:39:16',
             'updated_at' => '2023-04-09 20:05:02',
         ),
-        75 => 
-        array (
-            'id' => 56,
-            'owner_id' => 1,
-            'project_id' => NULL,
-            'module_id' => NULL,
-            'post_id' => 43,
-            'topic_id' => 20,
-            'text' => 'Заметки с данной темой используются для указания данных, касающихся книги мастера.',
-            'number' => 1,
-            'created_at' => '2023-04-11 02:14:45',
-            'updated_at' => '2023-04-11 02:14:45',
-        ),
-        76 => 
+        73 => 
         array (
             'id' => 27,
             'owner_id' => 1,
@@ -1087,7 +1048,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 22:47:33',
             'updated_at' => '2023-04-17 01:51:08',
         ),
-        77 => 
+        74 => 
         array (
             'id' => 119,
             'owner_id' => 1,
@@ -1101,7 +1062,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-20 02:28:32',
             'updated_at' => '2023-04-20 02:53:12',
         ),
-        78 => 
+        75 => 
         array (
             'id' => 110,
             'owner_id' => 1,
@@ -1114,7 +1075,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-19 02:30:55',
             'updated_at' => '2023-04-21 02:28:20',
         ),
-        79 => 
+        76 => 
         array (
             'id' => 36,
             'owner_id' => 1,
@@ -1136,7 +1097,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:11:23',
             'updated_at' => '2023-04-07 23:11:23',
         ),
-        80 => 
+        77 => 
         array (
             'id' => 53,
             'owner_id' => 1,
@@ -1149,7 +1110,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:37:33',
             'updated_at' => '2023-04-07 23:37:33',
         ),
-        81 => 
+        78 => 
         array (
             'id' => 42,
             'owner_id' => 1,
@@ -1162,22 +1123,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:32:36',
             'updated_at' => '2023-04-07 23:32:36',
         ),
-        82 => 
-        array (
-            'id' => 33,
-            'owner_id' => 1,
-            'project_id' => NULL,
-            'module_id' => NULL,
-            'post_id' => 23,
-            'topic_id' => 31,
-        'text' => 'Во время заключительной арки (Арка 7 - Пробуждение), в процессе очередной жестокой стычки с Наблюдателями, героям открывается очередное окно возможности - особое завершение сюжета. Это окно появляется только тогда, когда герои активировали необходимые условия (Достижения - Дружба в Крепости) Сутью окна является заключение мирного договора и союза между мастерами сновидения и Наблюдателями (Персонажи - Наблюдатели).
-
-Также у этого союза есть определенные требования к обоим сторонам. Например, сторона мастеров сновидения обязуется помочь Наблюдателям выйти из ловушки бестелесности ко времени, когда весь мир людей примет и усвоит искусство сновидения. Для успешного поддержания союза обе стороны обязуются периодически взаимодействовать и помогать ему и друг другу. В свою очередь, Наблюдатели обязуются передать людям согласно их запросу любые знания и умения, которые были накоплены Наблюдателями за их бессмертные годы существования.',
-            'number' => 2,
-            'created_at' => '2023-04-07 23:04:02',
-            'updated_at' => '2023-04-07 23:04:02',
-        ),
-        83 => 
+        79 => 
         array (
             'id' => 37,
             'owner_id' => 1,
@@ -1190,7 +1136,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 23:12:39',
             'updated_at' => '2023-04-14 00:26:48',
         ),
-        84 => 
+        80 => 
         array (
             'id' => 12,
             'owner_id' => 1,
@@ -1203,7 +1149,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 07:31:39',
             'updated_at' => '2023-04-14 17:02:55',
         ),
-        85 => 
+        81 => 
         array (
             'id' => 7,
             'owner_id' => 1,
@@ -1216,7 +1162,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 07:28:40',
             'updated_at' => '2023-04-09 19:59:27',
         ),
-        86 => 
+        82 => 
         array (
             'id' => 152,
             'owner_id' => 1,
@@ -1229,7 +1175,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 00:51:22',
             'updated_at' => '2023-04-22 00:53:06',
         ),
-        87 => 
+        83 => 
         array (
             'id' => 78,
             'owner_id' => 1,
@@ -1244,7 +1190,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-12 16:03:00',
             'updated_at' => '2023-04-12 16:09:12',
         ),
-        88 => 
+        84 => 
         array (
             'id' => 112,
             'owner_id' => 1,
@@ -1257,7 +1203,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-19 23:22:04',
             'updated_at' => '2023-04-19 23:55:30',
         ),
-        89 => 
+        85 => 
         array (
             'id' => 170,
             'owner_id' => 1,
@@ -1279,7 +1225,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-25 01:38:24',
             'updated_at' => '2023-04-25 01:38:24',
         ),
-        90 => 
+        86 => 
         array (
             'id' => 98,
             'owner_id' => 1,
@@ -1293,7 +1239,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-18 23:39:25',
             'updated_at' => '2023-04-22 02:12:48',
         ),
-        91 => 
+        87 => 
         array (
             'id' => 26,
             'owner_id' => 1,
@@ -1306,7 +1252,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 22:45:57',
             'updated_at' => '2023-04-18 23:21:05',
         ),
-        92 => 
+        88 => 
         array (
             'id' => 88,
             'owner_id' => 1,
@@ -1319,7 +1265,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-14 18:22:41',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        93 => 
+        89 => 
         array (
             'id' => 113,
             'owner_id' => 1,
@@ -1332,7 +1278,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-19 23:36:27',
             'updated_at' => '2023-04-19 23:53:32',
         ),
-        94 => 
+        90 => 
         array (
             'id' => 91,
             'owner_id' => 1,
@@ -1345,7 +1291,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-17 01:03:31',
             'updated_at' => '2023-04-17 01:04:29',
         ),
-        95 => 
+        91 => 
         array (
             'id' => 121,
             'owner_id' => 1,
@@ -1358,7 +1304,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-20 02:29:26',
             'updated_at' => '2023-04-20 03:03:16',
         ),
-        96 => 
+        92 => 
         array (
             'id' => 153,
             'owner_id' => 1,
@@ -1371,7 +1317,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 01:06:33',
             'updated_at' => '2023-04-22 01:06:49',
         ),
-        97 => 
+        93 => 
         array (
             'id' => 61,
             'owner_id' => 1,
@@ -1385,7 +1331,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-11 02:48:27',
             'updated_at' => '2023-04-26 15:15:57',
         ),
-        98 => 
+        94 => 
         array (
             'id' => 25,
             'owner_id' => 1,
@@ -1398,25 +1344,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 22:45:37',
             'updated_at' => '2023-04-17 02:38:05',
         ),
-        99 => 
-        array (
-            'id' => 127,
-            'owner_id' => 1,
-            'project_id' => NULL,
-            'module_id' => NULL,
-            'post_id' => 40,
-            'topic_id' => 56,
-            'text' => 'Многие игровые карты могут играть роль состояний. И многие из этих состояний могут иметь противоположности, например:
-Кома - Дух
-Одиночество - Команда
-Бессоница - Сновидение
-Беспокойство - Тишина
-Положительные состояния можно практиковать, делая их навыками с помощью игровой карты Навык.',
-            'number' => 4,
-            'created_at' => '2023-04-21 02:42:19',
-            'updated_at' => '2023-04-21 02:42:19',
-        ),
-        100 => 
+        95 => 
         array (
             'id' => 32,
             'owner_id' => 1,
@@ -1429,7 +1357,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 22:58:10',
             'updated_at' => '2023-04-17 01:28:11',
         ),
-        101 => 
+        96 => 
         array (
             'id' => 114,
             'owner_id' => 1,
@@ -1442,7 +1370,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-19 23:43:25',
             'updated_at' => '2023-04-19 23:55:56',
         ),
-        102 => 
+        97 => 
         array (
             'id' => 93,
             'owner_id' => 1,
@@ -1455,7 +1383,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-17 02:02:47',
             'updated_at' => '2023-04-17 02:14:16',
         ),
-        103 => 
+        98 => 
         array (
             'id' => 124,
             'owner_id' => 1,
@@ -1469,7 +1397,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-20 12:05:21',
             'updated_at' => '2023-04-22 01:52:49',
         ),
-        104 => 
+        99 => 
         array (
             'id' => 100,
             'owner_id' => 1,
@@ -1482,7 +1410,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-19 00:22:52',
             'updated_at' => '2023-04-22 02:11:37',
         ),
-        105 => 
+        100 => 
         array (
             'id' => 154,
             'owner_id' => 1,
@@ -1496,7 +1424,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 01:19:56',
             'updated_at' => '2023-04-22 02:15:23',
         ),
-        106 => 
+        101 => 
         array (
             'id' => 167,
             'owner_id' => 1,
@@ -1509,7 +1437,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-23 03:53:39',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        107 => 
+        102 => 
         array (
             'id' => 104,
             'owner_id' => 1,
@@ -1522,7 +1450,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-19 01:55:25',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        108 => 
+        103 => 
         array (
             'id' => 103,
             'owner_id' => 1,
@@ -1535,7 +1463,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-19 01:26:53',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        109 => 
+        104 => 
         array (
             'id' => 31,
             'owner_id' => 1,
@@ -1551,7 +1479,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 22:55:55',
             'updated_at' => '2023-04-17 01:37:34',
         ),
-        110 => 
+        105 => 
         array (
             'id' => 92,
             'owner_id' => 1,
@@ -1564,7 +1492,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-17 01:41:42',
             'updated_at' => '2023-04-17 01:41:42',
         ),
-        111 => 
+        106 => 
         array (
             'id' => 115,
             'owner_id' => 1,
@@ -1577,7 +1505,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-20 00:01:01',
             'updated_at' => '2023-04-20 00:04:04',
         ),
-        112 => 
+        107 => 
         array (
             'id' => 28,
             'owner_id' => 1,
@@ -1590,7 +1518,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-07 22:47:52',
             'updated_at' => '2023-04-17 01:51:08',
         ),
-        113 => 
+        108 => 
         array (
             'id' => 94,
             'owner_id' => 1,
@@ -1603,7 +1531,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-17 02:14:09',
             'updated_at' => '2023-04-17 02:24:25',
         ),
-        114 => 
+        109 => 
         array (
             'id' => 95,
             'owner_id' => 1,
@@ -1616,7 +1544,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-17 02:28:02',
             'updated_at' => '2023-04-17 02:28:59',
         ),
-        115 => 
+        110 => 
         array (
             'id' => 89,
             'owner_id' => 1,
@@ -1629,7 +1557,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-15 03:09:13',
             'updated_at' => '2023-04-26 15:05:59',
         ),
-        116 => 
+        111 => 
         array (
             'id' => 145,
             'owner_id' => 1,
@@ -1642,7 +1570,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-21 18:23:41',
             'updated_at' => '2023-04-26 15:16:30',
         ),
-        117 => 
+        112 => 
         array (
             'id' => 173,
             'owner_id' => 1,
@@ -1656,7 +1584,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-25 16:40:14',
             'updated_at' => '2023-04-26 15:19:01',
         ),
-        118 => 
+        113 => 
         array (
             'id' => 70,
             'owner_id' => 1,
@@ -1669,7 +1597,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-11 18:36:35',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        119 => 
+        114 => 
         array (
             'id' => 99,
             'owner_id' => 1,
@@ -1684,7 +1612,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-19 00:04:54',
             'updated_at' => '2023-04-19 02:32:58',
         ),
-        120 => 
+        115 => 
         array (
             'id' => 123,
             'owner_id' => 1,
@@ -1698,7 +1626,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-20 12:05:09',
             'updated_at' => '2023-04-22 01:52:49',
         ),
-        121 => 
+        116 => 
         array (
             'id' => 157,
             'owner_id' => 1,
@@ -1711,7 +1639,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 01:21:38',
             'updated_at' => '2023-04-22 01:22:23',
         ),
-        122 => 
+        117 => 
         array (
             'id' => 125,
             'owner_id' => 1,
@@ -1725,7 +1653,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-20 12:05:44',
             'updated_at' => '2023-04-22 01:52:49',
         ),
-        123 => 
+        118 => 
         array (
             'id' => 126,
             'owner_id' => 1,
@@ -1739,7 +1667,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-20 12:05:59',
             'updated_at' => '2023-04-22 01:52:49',
         ),
-        124 => 
+        119 => 
         array (
             'id' => 147,
             'owner_id' => 1,
@@ -1753,7 +1681,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 00:15:38',
             'updated_at' => '2023-04-22 01:58:51',
         ),
-        125 => 
+        120 => 
         array (
             'id' => 155,
             'owner_id' => 1,
@@ -1767,7 +1695,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 01:20:12',
             'updated_at' => '2023-04-22 02:17:55',
         ),
-        126 => 
+        121 => 
         array (
             'id' => 86,
             'owner_id' => 1,
@@ -1780,7 +1708,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-14 17:29:15',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        127 => 
+        122 => 
         array (
             'id' => 85,
             'owner_id' => 1,
@@ -1793,7 +1721,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-14 16:54:56',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        128 => 
+        123 => 
         array (
             'id' => 90,
             'owner_id' => 1,
@@ -1806,7 +1734,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-15 03:53:57',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        129 => 
+        124 => 
         array (
             'id' => 66,
             'owner_id' => 1,
@@ -1819,7 +1747,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-11 16:41:43',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        130 => 
+        125 => 
         array (
             'id' => 156,
             'owner_id' => 1,
@@ -1833,7 +1761,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 01:20:24',
             'updated_at' => '2023-04-22 01:39:28',
         ),
-        131 => 
+        126 => 
         array (
             'id' => 174,
             'owner_id' => 1,
@@ -1846,7 +1774,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-26 02:30:10',
             'updated_at' => '2023-04-26 02:32:41',
         ),
-        132 => 
+        127 => 
         array (
             'id' => 171,
             'owner_id' => 1,
@@ -1921,7 +1849,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-25 01:54:16',
             'updated_at' => '2023-04-27 15:13:58',
         ),
-        133 => 
+        128 => 
         array (
             'id' => 80,
             'owner_id' => 1,
@@ -1937,7 +1865,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-12 17:29:12',
             'updated_at' => '2023-04-26 13:51:51',
         ),
-        134 => 
+        129 => 
         array (
             'id' => 164,
             'owner_id' => 1,
@@ -1950,7 +1878,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 02:02:19',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        135 => 
+        130 => 
         array (
             'id' => 158,
             'owner_id' => 1,
@@ -1963,7 +1891,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-22 01:41:30',
             'updated_at' => '2023-04-22 01:41:46',
         ),
-        136 => 
+        131 => 
         array (
             'id' => 175,
             'owner_id' => 1,
@@ -1976,7 +1904,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-26 02:30:26',
             'updated_at' => '2023-04-26 02:39:26',
         ),
-        137 => 
+        132 => 
         array (
             'id' => 74,
             'owner_id' => 1,
@@ -1989,7 +1917,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-12 01:40:34',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        138 => 
+        133 => 
         array (
             'id' => 75,
             'owner_id' => 1,
@@ -2002,7 +1930,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-12 01:55:12',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        139 => 
+        134 => 
         array (
             'id' => 69,
             'owner_id' => 1,
@@ -2015,7 +1943,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-11 18:32:22',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        140 => 
+        135 => 
         array (
             'id' => 71,
             'owner_id' => 1,
@@ -2029,7 +1957,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-11 18:40:33',
             'updated_at' => '2023-04-26 15:11:32',
         ),
-        141 => 
+        136 => 
         array (
             'id' => 176,
             'owner_id' => 1,
@@ -2044,7 +1972,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-26 02:30:42',
             'updated_at' => '2023-04-26 02:50:30',
         ),
-        142 => 
+        137 => 
         array (
             'id' => 65,
             'owner_id' => 1,
@@ -2057,7 +1985,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-11 16:01:36',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        143 => 
+        138 => 
         array (
             'id' => 177,
             'owner_id' => 1,
@@ -2070,7 +1998,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-26 02:45:40',
             'updated_at' => '2023-04-26 02:48:14',
         ),
-        144 => 
+        139 => 
         array (
             'id' => 62,
             'owner_id' => 1,
@@ -2085,7 +2013,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-11 14:38:05',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        145 => 
+        140 => 
         array (
             'id' => 64,
             'owner_id' => 1,
@@ -2098,7 +2026,7 @@ class GuideNotesTableSeeder extends Seeder
             'created_at' => '2023-04-11 15:53:21',
             'updated_at' => '2023-04-26 15:01:43',
         ),
-        146 => 
+        141 => 
         array (
             'id' => 96,
             'owner_id' => 1,

@@ -16,6 +16,14 @@ const form = useForm({
 let ready = function() {
     return form.name;
 }
+let nonGlobalTitle = function() {
+    let title = guide.getProject().code;
+    if (guide.getModule()) {
+        title = title + ' - ' + guide.getModule().name;
+    }
+
+    return title;
+}
 </script>
 
 <style>
@@ -40,7 +48,7 @@ let ready = function() {
                       class="mr-2"
                       :disabled="!guide.projectsId"
                       v-model="form.isGlobal" />
-            <span v-if="!form.isGlobal">({{__('Project') +': '+ guide.getProject().code}})</span>
+            <span v-if="!form.isGlobal">({{ nonGlobalTitle() }})</span>
         </div>
         <ControlAdd :ready="ready()" :processing="form.processing"/>
     </form>

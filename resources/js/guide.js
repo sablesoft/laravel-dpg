@@ -137,7 +137,6 @@ export const guide = reactive({
     },
     getModuleNotes(id = null) {
         let notes = this.getRelations('module', 'note', id, true);
-        console.log('module notes', notes);
 
         return this._sortItemsByNumber(notes);
     },
@@ -236,7 +235,8 @@ export const guide = reactive({
         let posts = [];
         topic.categoryPostIds.forEach(function(id) {
             let post = self.getPost(id);
-            if (post) {
+            // noinspection EqualityComparisonWithCoercionJS
+            if (post && (post.moduleId == self.modulesId)) {
                 posts.push(post);
             }
         });
@@ -263,7 +263,7 @@ export const guide = reactive({
     getGeneralTopics() {
         let topics = [];
         for (const [id, topic] of Object.entries(this.topics)) {
-            if (!topic.projectId) {
+            if (!topic.projectId && !topic.moduleId) {
                 topics.push(topic);
             }
         }
@@ -359,7 +359,8 @@ export const guide = reactive({
                 category_id : form.categoryId,
                 topic_id : form.topicId,
                 text: form.text,
-                project_id: this.projectsId
+                project_id: this.projectsId,
+                module_id: this.modulesId
             }
         }, this._createCallback.bind(this));
     },
@@ -369,7 +370,8 @@ export const guide = reactive({
                 data : {
                     name : form.name,
                     text : form.text,
-                    project_id : form.isGlobal ? null : this.projectsId
+                    project_id : form.isGlobal ? null : (this.modulesId ? null : this.projectsId),
+                    module_id : form.isGlobal ? null : this.modulesId
                 }
             }, this._createCallback.bind(this));
     },
@@ -504,10 +506,33 @@ export const guide = reactive({
         });
     },
 
+    moduleRemove(id) {
+        let module = this.modules[id];
+        let self = this;
+        module.noteIds.forEach(function(id) {
+            self.noteRemove(id);
+        });
+        module.postIds.forEach(function(id) {
+            self.postRemove(id);
+        });
+        module.topicIds.forEach(function(id) {
+            self.topicRemove(id);
+        });
+        if (this.modulesId && parseInt(this.modulesId) === parseInt(id)) {
+            this.modulesId = null;
+            this.tab = 'Info';
+        }
+        // pause for all staff deleting:
+        setTimeout(function() {
+            delete self.modules[id];
+        }, 2000);
+    },
     projectRemove(id) {
         let project = this.projects[id];
-        console.log('Remove project:', project);
         let self = this;
+        project.moduleIds.forEach(function(id) {
+            self.moduleRemove(id);
+        });
         project.noteIds.forEach(function(id) {
             self.noteRemove(id);
         });
@@ -528,7 +553,6 @@ export const guide = reactive({
     },
     topicRemove(id) {
         let topic = this.topics[id];
-        console.debug('Remove topic:', topic);
         // delete notes:
         for (const [noteId, note] of Object.entries(this.notes)) {
             if (parseInt(note.topicId) === parseInt(id)) {
@@ -548,10 +572,21 @@ export const guide = reactive({
                 delete this.links[linkId];
             }
         }
+        // delete modules:
+        for (const [moduleId, module] of Object.entries(this.modules)) {
+            if (parseInt(module.topicId) === parseInt(id)) {
+                this.moduleRemove(moduleId);
+            }
+        }
         // remove topic id from project:
         if (topic.projectId) {
             let project = this.getProject(topic.projectId);
             project.topicIds = this._removeFromIds(id, project.topicIds);
+        }
+        // remove topic id from module:
+        if (topic.moduleId) {
+            let module = this.getModule(topic.moduleId);
+            module.topicIds = this._removeFromIds(id, module.topicIds);
         }
         if (this.topicsId && parseInt(this.topicsId) === parseInt(id)) {
             this.topicsId = null;
@@ -880,7 +915,7 @@ export const guide = reactive({
                 this.topicsId = item.id;
                 break;
             case 'post':
-                belongsTo = ['topic', 'project'];
+                belongsTo = ['topic', 'project', 'module'];
                 // add new post id to category:
                 let category = this.getTopic(item.categoryId);
                 category.categoryPostIds = this._addToIds(item.id, category.categoryPostIds);
@@ -908,6 +943,9 @@ export const guide = reactive({
     },
     _register(item, entity) {
         let belongsTo = this.getItem(entity, item[entity + 'Id']);
+        if (!belongsTo) {
+            return;
+        }
         let idsField = item.entity + 'Ids';
         belongsTo[idsField] = this._addToIds(item.id, belongsTo[idsField]);
     },

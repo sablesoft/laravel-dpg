@@ -29,7 +29,10 @@ let getLinkName = function() {
 }
 let getModuleName = function() {
     let module = guide.getRelation('post', 'module', props.link.targetPostId);
-    return module ? module.name : null;
+    if (!module) {
+        return null;
+    }
+    return parseInt(module.id) !== parseInt(guide.modulesId) ? module.name : 'Module';
 }
 </script>
 <style>
@@ -47,6 +50,9 @@ let getModuleName = function() {
        :class="link.id && guide.linksId === link.id ? 'active-block' : ''">
         <span v-if="link.number" class="link-number cursor-pointer" @click="guide.linksId = guide.linksId === link.id ? null : link.id">
             {{ link.number }}:
+        </span>
+        <span>
+            [ {{ getModuleName() ? __( getModuleName() ) : __('Core') }} ]
         </span>
         <template v-if="link.targetCategoryId">
             <span class="link-title" @click.prevent.stop="guide.goTo(link, 'category')">
@@ -69,11 +75,6 @@ let getModuleName = function() {
         <template v-if="link.targetLinkId">
             - <span class="link-title" @click.prevent.stop="guide.goTo(link, 'link')">
                 ( {{ getLinkName() }} )
-            </span>
-        </template>
-        <template v-if="getModuleName()">
-            <span>
-                [ {{ __('Module') + ' "' + getModuleName() + '"' }} ]
             </span>
         </template>
     </p>

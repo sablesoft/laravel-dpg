@@ -133,7 +133,7 @@ button {
                     <span class="note-mark">{{ __('Project') }}: </span>
                     <Editable :value="guide.getTopicProject() ? guide.getTopicProject().id : null"
                               class="inline" type="select" :items="guide.projects"
-                              placeholder="Global" placeholder-enabled="1"
+                              :placeholder="__('Global')" placeholder-enabled="1"
                               @updated="(value) => updateProject(value)"/>
                 </p>
                 <p class="note-row">

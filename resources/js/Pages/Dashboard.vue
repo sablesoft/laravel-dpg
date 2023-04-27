@@ -67,7 +67,7 @@ onMounted(() => {
             </h2>
             <div class="inline max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <SecondaryButton @click="guide.changeTab('Info')" class="mb-2 mr-2">
-                    {{__('info')}}
+                    {{ __('Info') }}
                 </SecondaryButton>
                 <Select placeholder="Projects" class="mb-2 mr-2" :action="{id: 'new', name: 'New'}"
                         :items="guide.projects" @change="showProject"/>

@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->call(LanguagesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GameSubscriberTableSeeder::class);
         $this->call(GuideProjectsTableSeeder::class);
         $this->call(GuideTopicsTableSeeder::class);
+        $this->call(GuideModulesTableSeeder::class);
+        $this->call(GuideTopicModulesSeeder::class);
         $this->call(GuidePostsTableSeeder::class);
         $this->call(GuideNotesTableSeeder::class);
         $this->call(GuideLinksTableSeeder::class);

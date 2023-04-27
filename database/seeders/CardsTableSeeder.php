@@ -21,482 +21,6 @@ class CardsTableSeeder extends Seeder
         \DB::table('cards')->insert(array (
             0 => 
             array (
-                'id' => 1,
-                'name' => '{"en":"Info","ru":"Инфо"}',
-                'code' => 'info',
-                'scope_id' => NULL,
-                'info' => NULL,
-                'image' => 'card/UG4v2eNtJX1qh64ze451BBdrKs3wdkcO8urXOeQu.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-06 05:07:36',
-                'updated_at' => '2022-12-07 00:14:28',
-            ),
-            1 => 
-            array (
-                'id' => 2,
-                'name' => '{"en":"Quest","ru":"Квест"}',
-                'code' => 'quest',
-                'scope_id' => NULL,
-                'info' => NULL,
-                'image' => 'card/f18Y5XNVmbFPHixcoFU9hE2Bt8CULngklAVij9I0.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 23:33:42',
-                'updated_at' => '2022-12-07 00:14:20',
-            ),
-            2 => 
-            array (
-                'id' => 3,
-                'name' => '{"en":"Event","ru":"Событие"}',
-                'code' => 'event',
-                'scope_id' => NULL,
-                'info' => NULL,
-                'image' => 'card/g1Mlq38NS2PyQDlFVfgZ5vRaGJyPyQYBetlck1TT.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-09 04:51:54',
-                'updated_at' => '2022-12-07 00:13:59',
-            ),
-            3 => 
-            array (
-                'id' => 5,
-                'name' => '{"en":"Power","ru":"Сила"}',
-                'code' => 'power',
-                'scope_id' => NULL,
-                'info' => NULL,
-                'image' => 'card/2QBxEsJrrdEYGHmt9vM0Zy848y2T7m9SjG7unwJm.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-08 02:43:27',
-                'updated_at' => '2022-12-07 00:13:30',
-            ),
-            4 => 
-            array (
-                'id' => 6,
-                'name' => '{"en":"Item","ru":"Предмет"}',
-                'code' => 'item',
-                'scope_id' => NULL,
-                'info' => NULL,
-                'image' => 'card/8fgEP6sc7EEKyUZ7nDvM0jhNXASJR5nqWhssOuSn.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 23:57:58',
-                'updated_at' => '2022-12-07 00:13:37',
-            ),
-            5 => 
-            array (
-                'id' => 7,
-                'name' => '{"en":"Creature","ru":"Существо"}',
-                'code' => 'creature',
-                'scope_id' => 5,
-                'info' => NULL,
-                'image' => 'card/6TM9RZ35XzuQdeEOLTxrGsWH4tOZTWvHKSL1hEzy.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-08 02:11:58',
-                'updated_at' => '2022-12-07 00:13:46',
-            ),
-            6 => 
-            array (
-                'id' => 9,
-                'name' => '{"en":"Hero","ru":"Герой"}',
-                'code' => 'hero',
-                'scope_id' => 8,
-                'info' => NULL,
-                'image' => 'card/ZUz1OYVtqZJqq3eaGNVD0JdP5IGO5k85cQS6KWvX.png',
-                'desc' => '{"ru":"Герой - это любой персонаж, действия которого определяются игроками, а не мастером игры. Это главный персонаж всей игры.","en":"A hero is any character whose actions are determined by the players and not by the gamemaster. This is the main character of the whole game."}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 23:33:23',
-                'updated_at' => '2022-12-04 07:05:19',
-            ),
-            7 => 
-            array (
-                'id' => 10,
-                'name' => '{"en":"Time","ru":"Время"}',
-                'code' => 'time',
-                'scope_id' => NULL,
-                'info' => NULL,
-                'image' => 'card/gew8IFxzDggbw2k570pdHMIAvTwKj2h5k1gNdMK9.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 01:55:13',
-                'updated_at' => '2022-12-07 00:13:09',
-            ),
-            8 => 
-            array (
-                'id' => 13,
-                'name' => '{"en":"Encounter","ru":"Встреча"}',
-                'code' => 'encounter',
-                'scope_id' => 3,
-                'info' => NULL,
-                'image' => 'card/TGTqBwbQvMDQuGxpMxLuWimd5soM31zp40Xtc4rE.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-09 04:55:16',
-                'updated_at' => '2022-11-23 00:16:12',
-            ),
-            9 => 
-            array (
-                'id' => 51,
-                'name' => '{"en":"Jaguar"}',
-                'code' => NULL,
-                'scope_id' => 19,
-                'info' => NULL,
-                'image' => 'card/4398zjBN6BzZW25zi36LbDLBWw7wzZCCzkAju85H.jpg',
-                'desc' => '{"en":"Jaguars spend much of their time on the ground. They use their padded paws to move silently through the forest floor. Although not quite as agile as a leopard, jaguars are capable of climbing trees to hunt or to rest. Jaguars are mostly nocturnal hunters. They use their excellent vision and sharp teeth to ambush prey and crush their skulls."}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-11-12 02:59:15',
-                'updated_at' => '2022-11-23 03:45:26',
-            ),
-            10 => 
-            array (
-                'id' => 59,
-                'name' => '{"en":"Night","ru":"Ночь"}',
-                'code' => NULL,
-                'scope_id' => 10,
-                'info' => NULL,
-                'image' => 'card/iZcFdcfs740fG9vY4R6FnBZ6yy6dLhcxLwbsb6ds.png',
-                'desc' => '{"ru":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-13 01:56:02',
-                'updated_at' => '2022-11-23 21:02:25',
-            ),
-            11 => 
-            array (
-                'id' => 8,
-                'name' => '{"en":"Character","ru":"Персонаж"}',
-                'code' => 'character',
-                'scope_id' => 7,
-                'info' => '{"en":"Also, each character has his specifications. Use this card as a character scope to list them:\\r\\n- Weariness"}',
-                'image' => 'card/4TJrtuwnmgW2KotswgAJO8U2ML8OgawEoJguQPd0.png',
-                'desc' => '{"en":"Any creature that plays an important role in the game is a character. Each character has a name, skills, knowledge, features, and other characteristics."}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-08 02:20:38',
-                'updated_at' => '2022-12-10 23:49:21',
-            ),
-            12 => 
-            array (
-                'id' => 11,
-                'name' => '{"en":"Skill","ru":"Навык"}',
-                'code' => 'skill',
-                'scope_id' => 8,
-                'info' => '{"en":"TIPS: Use as a character deck scope for all his skills."}',
-                'image' => 'card/KjUaRvY8p8Fv7awBHqCFKc12uD77zGmKkf8fcijU.png',
-                'desc' => '{"en":"Skills are the ability of a character to do something. The better the skill, the more successfully and efficiently he can perform this action.","ru":"Навыки — это способность персонажа делать что-либо. Чем лучше навык, тем успешнее и эффективнее он сможет выполнить связанные с этим навыком действия.\\r\\n\\r\\nПОДСКАЗКИ: Используй в качестве сферы для колоды всех умений персонажа."}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-16 02:48:50',
-                'updated_at' => '2022-12-10 23:55:16',
-            ),
-            13 => 
-            array (
-                'id' => 12,
-                'name' => '{"en":"Folk","ru":"Народ"}',
-                'code' => 'folk',
-                'scope_id' => NULL,
-                'info' => '{"en":"Depending on population density, the following types of folk are distinguished:\\r\\n- Wilderness\\r\\n- Settlements\\r\\n- Villages\\r\\n- Towns\\r\\n- Cities\\r\\n- and others\\r\\n\\r\\nTIPS:\\r\\n- Use as a scope for the Hero\'s deck to indicate Folk for the current Space."}',
-                'image' => 'card/gxkKNqJE7VGnuDY4yRsGNj9pWYrZ85GfHYutqHin.png',
-                'desc' => '{"en":"Folk refers to the inhabitants of a particular area, with its own characteristics, history, culture, population density, and so on.","ru":"Под народом подразумеваются жители определенной местности, имеющие свои особенности, историю, культуру, плотность населения и так далее.\\r\\n\\r\\nВ зависимости от плотности населения выделяют следующие виды населения:\\r\\n- Дикие Земли\\r\\n- Поселения\\r\\n- Деревни\\r\\n- Городки\\r\\n- Города\\r\\n- и другие\\r\\n\\r\\nПОДСКАЗКИ:\\r\\n- Используйте в качестве сферы для колоды Героя, чтобы указать население данного места."}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-24 18:22:30',
-                'updated_at' => '2022-12-10 23:56:10',
-            ),
-            14 => 
-            array (
-                'id' => 16,
-                'name' => '{"en":"Scene","ru":"Сцена"}',
-                'code' => 'scene',
-                'scope_id' => 4,
-                'info' => NULL,
-                'image' => 'card/U8JqwjGBHernRKnTZzcuEaMwWGGDZw3bFzBxzfJt.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-24 23:30:30',
-                'updated_at' => '2022-12-07 00:09:30',
-            ),
-            15 => 
-            array (
-                'id' => 17,
-                'name' => '{"en":"Dome","ru":"Мир"}',
-                'code' => 'dome',
-                'scope_id' => 4,
-                'info' => NULL,
-                'image' => 'card/B4NfU3toiHggUxWg7S1K39ElNfirBJkFuI65zOR1.png',
-                'desc' => '{"ru":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-12-04 07:22:33',
-                'updated_at' => '2022-12-04 20:30:19',
-            ),
-            16 => 
-            array (
-                'id' => 18,
-                'name' => '{"en":"Geo"}',
-                'code' => 'geo',
-                'scope_id' => 4,
-                'info' => NULL,
-                'image' => 'card/3t87a8aPoMZXqr421DIk4VlOphNSd5a2YS75JWN4.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-12-07 00:03:42',
-                'updated_at' => '2022-12-07 00:08:16',
-            ),
-            17 => 
-            array (
-                'id' => 37,
-                'name' => '{"en":"Clan","ru":"Клан"}',
-                'code' => NULL,
-                'scope_id' => 12,
-                'info' => NULL,
-                'image' => 'card/s3HdOVmqD1LNQprc9X43t518pgtBU03wV4JPrABQ.png',
-                'desc' => '{"en":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-06 05:08:04',
-                'updated_at' => '2022-11-24 18:44:12',
-            ),
-            18 => 
-            array (
-                'id' => 57,
-                'name' => '{"en":"Weariness","ru":"Усталость"}',
-                'code' => NULL,
-                'scope_id' => 3,
-                'info' => NULL,
-                'image' => 'card/QReWTHEz0FELexQleah1DfCeh0c4LdbQWAZian3z.png',
-                'desc' => '{"en":"Even the heroes get tired over time. And the more weariness they accumulate, the harder it is for them to act. Weariness is removed by rest and food.","ru":"Даже герои со временем устают. И чем больше они накапливают усталости, тем труднее им действовать.\\r\\nУсталость снимается отдыхом и едой."}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 14:36:47',
-                'updated_at' => '2022-11-23 18:03:12',
-            ),
-            19 => 
-            array (
-                'id' => 79,
-                'name' => '{"en":"Practice","ru":"Практика"}',
-                'code' => NULL,
-                'scope_id' => 3,
-                'info' => NULL,
-                'image' => 'card/2TgPhkQrN8CrilDvbZ6uFiKXn1irUXfXG3ceDKoP.png',
-                'desc' => '{"ru":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 14:36:58',
-                'updated_at' => '2022-11-25 04:28:25',
-            ),
-            20 => 
-            array (
-                'id' => 85,
-                'name' => '{"en":"Find","ru":"Находка"}',
-                'code' => NULL,
-                'scope_id' => 3,
-                'info' => NULL,
-                'image' => 'card/0tlgU14s6yXgkSmE2OBY1c3fbJvahnXHVnDuzPEW.png',
-                'desc' => '{"ru":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 14:39:42',
-                'updated_at' => '2022-11-25 04:28:05',
-            ),
-            21 => 
-            array (
-                'id' => 86,
-                'name' => '{"en":"Wilderness","ru":"Дикие Земли"}',
-                'code' => NULL,
-                'scope_id' => 12,
-                'info' => NULL,
-                'image' => 'card/6LszdfAv403cEVxgvgjvZXBLTmu1n63rSpjEpbF5.png',
-                'desc' => '{"ru":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 14:24:51',
-                'updated_at' => '2022-11-25 04:27:45',
-            ),
-            22 => 
-            array (
-                'id' => 87,
-                'name' => '{"en":"Settlement","ru":"Поселение"}',
-                'code' => NULL,
-                'scope_id' => 12,
-                'info' => NULL,
-                'image' => 'card/dgWw6Se0HB8pJ1dAndY1sbJLhD8cBe4v5Au7pNlb.png',
-                'desc' => '{"ru":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-10 14:26:20',
-                'updated_at' => '2022-11-25 04:27:31',
-            ),
-            23 => 
-            array (
-                'id' => 90,
-                'name' => '{"en":"Legend","ru":"Легенда"}',
-                'code' => NULL,
-                'scope_id' => 12,
-                'info' => NULL,
-                'image' => 'card/ZilOalIpLiHYHs1V9WTY2jy1yDCXBe2iGF9TjsB5.png',
-                'desc' => '{"en":"A people without legends is like a tree without roots."}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-06 05:07:52',
-                'updated_at' => '2022-11-24 18:45:15',
-            ),
-            24 => 
-            array (
-                'id' => 72,
-                'name' => '{"en":"Fail","ru":"Провал"}',
-                'code' => NULL,
-                'scope_id' => 3,
-                'info' => NULL,
-                'image' => 'card/MbRnrUlQ6ypOuIMK1xP4dgxxc8e4bxLf3qI5SkQN.png',
-                'desc' => '{"en":"The meaning of this card depends on the context.","ru":"Значение этой карты зависит от контекста."}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-15 17:12:25',
-                'updated_at' => '2022-11-25 01:17:41',
-            ),
-            25 => 
-            array (
-                'id' => 94,
-                'name' => '{"en":"New Moon","ru":"Новолуние"}',
-                'code' => NULL,
-                'scope_id' => 91,
-                'info' => NULL,
-                'image' => 'card/9Cz86Z3d0mlOneA6cXnPxqQlstOqNBxrVbmf8XjH.png',
-                'desc' => '{"ru":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-25 02:42:25',
-                'updated_at' => '2022-11-25 04:14:51',
-            ),
-            26 => 
-            array (
-                'id' => 63,
-                'name' => '{"en":"Bird","ru":"Птица"}',
-                'code' => NULL,
-                'scope_id' => 19,
-                'info' => NULL,
-                'image' => 'card/2kAnIEBToqa7pMqAtwNK45RtmyyMyibXP3Iq9WHA.png',
-                'desc' => '{"en":"Birds are a group of warm-blooded vertebrates, characterized by feathers, toothless beaked jaws, the laying of hard-shelled eggs, a high metabolic rate, a four-chambered heart, and a strong yet lightweight skeleton. Birds live worldwide and range in size from the bee hummingbird to the ostrich. There are about ten thousand living species, more than half of which are passerine, or \\"perching\\" birds.\\r\\n\\r\\nMany social species pass on knowledge across generations, which is considered a form of culture. Birds are social, communicating with visual signals, calls, and songs, and participating in such behaviours as cooperative breeding and hunting, flocking, and mobbing of predators."}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-08 02:17:34',
-                'updated_at' => '2022-11-22 21:52:17',
-            ),
-            27 => 
-            array (
-                'id' => 28,
-                'name' => '{"en":"Insect","ru":"Насекомое"}',
-                'code' => NULL,
-                'scope_id' => 19,
-                'info' => NULL,
-                'image' => 'card/baIHDjIYRBSJp9FIuyk2lPcA5JVcpAMk8pNIV1fS.png',
-                'desc' => '{"en":"Insects are the most diverse group of animals; they include more than a million described species and represent more than half of all known living organisms. The total number of extant species is estimated at between six and ten million; potentially over 90% of the animal life forms on Earth are insects.\\r\\n\\r\\nInsect pollinators are essential to the life cycle of many flowering plant species on which most organisms, including humans, are at least partly dependent; without them, the terrestrial portion of the biosphere would be devastated. Many insects are considered ecologically beneficial as predators and a few provide direct economic benefit. Silkworms produce silk and honey bees produce honey and both have been domesticated by humans. Insects are consumed as food in 80% of the world\'s nations, by people in roughly 3000 ethnic groups"}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-08 02:18:53',
-                'updated_at' => '2022-11-23 00:22:39',
-            ),
-            28 => 
-            array (
-                'id' => 23,
-                'name' => '{"en":"Savanna Tract","ru":"Засушливый Тракт"}',
-                'code' => NULL,
-                'scope_id' => 15,
-                'info' => NULL,
-                'image' => 'card/AZkPqM2WN5LEjgw7Z4xsuxi24XnpxWj6KU6jTt8c.jpg',
-                'desc' => '{"ru":null}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-12-04 16:27:50',
-                'updated_at' => '2022-12-04 20:29:00',
-            ),
-            29 => 
-            array (
-                'id' => 32,
-                'name' => '{"en":"Deep Forest","ru":"Реликтовые Джунгли"}',
-                'code' => NULL,
-                'scope_id' => 15,
-                'info' => NULL,
-                'image' => 'card/oXhBtbwowwjZl719wFncIr6nepLbW0z7jgbDuVgu.png',
-                'desc' => '{"ru":null}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-12-04 16:00:09',
-                'updated_at' => '2022-12-04 20:28:14',
-            ),
-            30 => 
-            array (
-                'id' => 96,
-                'name' => '{"en":"Serpent\'s Lair","ru":"Гнездо Змея"}',
-                'code' => NULL,
-                'scope_id' => 17,
-                'info' => NULL,
-                'image' => 'card/bndXsHEJTvrFWbzwcSAuRkWdwmJ2ktQ5SD1uPApS.jpg',
-                'desc' => '{"en":null}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-12-04 07:37:34',
-                'updated_at' => '2022-12-05 19:22:59',
-            ),
-            31 => 
-            array (
-                'id' => 65,
-                'name' => '{"en":"Year","ru":"Год"}',
-                'code' => NULL,
-                'scope_id' => 10,
-                'info' => NULL,
-                'image' => 'card/X24HeU13Bom5zMH4dmMWrj3k2gvhAi8iG5mFuC1Z.png',
-                'desc' => '{"ru":null}',
-                'is_public' => true,
-                'owner_id' => 1,
-                'created_at' => '2022-11-25 02:56:01',
-                'updated_at' => '2022-11-25 04:13:49',
-            ),
-            32 => 
-            array (
-                'id' => 38,
-                'name' => '{"en":"Eagle Nest","ru":"Орлиное Гнездо"}',
-                'code' => NULL,
-                'scope_id' => 1,
-                'info' => NULL,
-                'image' => NULL,
-                'desc' => '{"en":"This ancient clan still lives in the depths of the unknown to this day. Finding the way to the inconspicuous is easy. But everyone who follows his own path of the heart will certainly meet him.","ru":"Этот древний клан и по сей день живет в самых недрах неизведанного. Найти дорогу к нему не просто. Но каждый, кто следует своему пути сердца однажды непременно встречается с ним"}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-11-06 05:16:54',
-                'updated_at' => '2022-11-09 04:42:58',
-            ),
-            33 => 
-            array (
-                'id' => 39,
-                'name' => '{"en":"Serpent Path","ru":"Тропа Змея"}',
-                'code' => NULL,
-                'scope_id' => 1,
-                'info' => NULL,
-                'image' => NULL,
-                'desc' => '{"en":"The wise people follow the sacred path of the Serpent. Everyone who walks this path cultivates living blood in himself. Everyone who walks this path holds on to the other in order to honor this path together.","ru":"Мудрый народ следует священной Тропе Змея. Каждый, идущий по этой тропе, взращивает в себе кровь живую. Каждый, идущий по этой тропе, держится другого чтобы вместе чтить этот путь."}',
-                'is_public' => false,
-                'owner_id' => 1,
-                'created_at' => '2022-11-06 05:09:50',
-                'updated_at' => '2022-11-09 04:43:14',
-            ),
-            34 => 
-            array (
                 'id' => 30,
                 'name' => '{"en":"Seasonal Forest"}',
                 'code' => NULL,
@@ -509,7 +33,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:04:11',
                 'updated_at' => '2022-11-24 18:39:02',
             ),
-            35 => 
+            1 => 
             array (
                 'id' => 21,
                 'name' => '{"en":"Human","ru":"Человек"}',
@@ -523,7 +47,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:15:03',
                 'updated_at' => '2022-11-23 00:02:41',
             ),
-            36 => 
+            2 => 
             array (
                 'id' => 29,
                 'name' => '{"en":"Grassland","ru":"Луга"}',
@@ -537,7 +61,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:02:37',
                 'updated_at' => '2022-11-25 04:24:12',
             ),
-            37 => 
+            3 => 
             array (
                 'id' => 58,
                 'name' => '{"en":"Day","ru":"День"}',
@@ -551,7 +75,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:55:41',
                 'updated_at' => '2022-11-23 21:10:09',
             ),
-            38 => 
+            4 => 
             array (
                 'id' => 56,
                 'name' => '{"en":"Poison Dart Frog"}',
@@ -565,7 +89,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 01:22:08',
                 'updated_at' => '2022-11-23 03:40:03',
             ),
-            39 => 
+            5 => 
             array (
                 'id' => 60,
                 'name' => '{"en":"Action","ru":"Действие"}',
@@ -579,7 +103,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:02:13',
                 'updated_at' => '2022-11-23 21:01:26',
             ),
-            40 => 
+            6 => 
             array (
                 'id' => 70,
                 'name' => '{"en":"Nothing","ru":"Ничего"}',
@@ -593,7 +117,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:09:47',
                 'updated_at' => '2022-11-23 20:48:37',
             ),
-            41 => 
+            7 => 
             array (
                 'id' => 84,
                 'name' => '{"en":"Spear","ru":"Копье"}',
@@ -607,7 +131,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 03:08:36',
                 'updated_at' => '2022-11-23 18:03:43',
             ),
-            42 => 
+            8 => 
             array (
                 'id' => 22,
                 'name' => '{"en":"Enemy","ru":"Враг"}',
@@ -621,7 +145,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:49:41',
                 'updated_at' => '2022-11-25 04:27:01',
             ),
-            43 => 
+            9 => 
             array (
                 'id' => 31,
                 'name' => '{"en":"Savanna"}',
@@ -635,7 +159,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:09:23',
                 'updated_at' => '2022-12-06 15:40:44',
             ),
-            44 => 
+            10 => 
             array (
                 'id' => 92,
                 'name' => '{"en":"Waxing Moon","ru":"Убывающая Луна"}',
@@ -649,7 +173,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-25 02:36:04',
                 'updated_at' => '2022-11-25 04:15:40',
             ),
-            45 => 
+            11 => 
             array (
                 'id' => 68,
                 'name' => '{"en":"Morning","ru":"Утро"}',
@@ -663,7 +187,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-13 02:54:10',
                 'updated_at' => '2022-11-23 20:49:04',
             ),
-            46 => 
+            12 => 
             array (
                 'id' => 71,
                 'name' => '{"en":"Success","ru":"Успех"}',
@@ -677,7 +201,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:11:37',
                 'updated_at' => '2022-11-25 01:15:53',
             ),
-            47 => 
+            13 => 
             array (
                 'id' => 47,
                 'name' => '{"en":"Lilika","ru":"Лилика"}',
@@ -691,7 +215,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:36:25',
                 'updated_at' => '2022-11-23 03:59:39',
             ),
-            48 => 
+            14 => 
             array (
                 'id' => 48,
                 'name' => '{"en":"Zaizi","ru":"Зайзи"}',
@@ -705,7 +229,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:31:41',
                 'updated_at' => '2022-11-23 03:52:29',
             ),
-            49 => 
+            15 => 
             array (
                 'id' => 27,
                 'name' => '{"en":"Spirit","ru":"Дух"}',
@@ -719,7 +243,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:43:41',
                 'updated_at' => '2022-11-22 23:48:56',
             ),
-            50 => 
+            16 => 
             array (
                 'id' => 20,
                 'name' => '{"en":"Plant","ru":"Растение"}',
@@ -733,7 +257,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:14:35',
                 'updated_at' => '2022-11-23 00:15:28',
             ),
-            51 => 
+            17 => 
             array (
                 'id' => 35,
                 'name' => '{"ru":"Джунгли","en":"Rainforest"}',
@@ -747,7 +271,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:56:49',
                 'updated_at' => '2022-11-24 18:35:31',
             ),
-            52 => 
+            18 => 
             array (
                 'id' => 34,
                 'name' => '{"en":"Marsh","ru":"Marsh"}',
@@ -761,7 +285,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:27:08',
                 'updated_at' => '2022-11-24 17:35:55',
             ),
-            53 => 
+            19 => 
             array (
                 'id' => 24,
                 'name' => '{"en":"Predator","ru":"Хищник"}',
@@ -775,7 +299,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:54:28',
                 'updated_at' => '2022-11-25 04:26:45',
             ),
-            54 => 
+            20 => 
             array (
                 'id' => 25,
                 'name' => '{"en":"Herbivore","ru":"Травоядное"}',
@@ -789,7 +313,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:58:18',
                 'updated_at' => '2022-11-25 04:26:08',
             ),
-            55 => 
+            21 => 
             array (
                 'id' => 46,
                 'name' => '{"en":"Araki","ru":"Араки"}',
@@ -803,7 +327,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:29:38',
                 'updated_at' => '2022-11-23 03:32:45',
             ),
-            56 => 
+            22 => 
             array (
                 'id' => 78,
                 'name' => '{"en":"Omnivorous"}',
@@ -817,7 +341,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 02:19:43',
                 'updated_at' => '2022-12-07 03:08:57',
             ),
-            57 => 
+            23 => 
             array (
                 'id' => 43,
                 'name' => '{"en":"Airi","ru":"Айри"}',
@@ -831,7 +355,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:35:19',
                 'updated_at' => '2022-11-23 03:57:33',
             ),
-            58 => 
+            24 => 
             array (
                 'id' => 40,
                 'name' => '{"en":"Totem Quest","ru":"Поиски Тотема"}',
@@ -845,7 +369,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-10 23:41:18',
                 'updated_at' => '2022-11-23 04:01:22',
             ),
-            59 => 
+            25 => 
             array (
                 'id' => 45,
                 'name' => '{"en":"Pua","ru":"Пуа"}',
@@ -859,7 +383,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:33:05',
                 'updated_at' => '2022-11-23 03:54:51',
             ),
-            60 => 
+            26 => 
             array (
                 'id' => 26,
                 'name' => '{"en":"Frugivorous","ru":"Плодоядное"}',
@@ -873,7 +397,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 04:23:13',
                 'updated_at' => '2022-11-25 04:31:05',
             ),
-            61 => 
+            27 => 
             array (
                 'id' => 74,
                 'name' => '{"en":"Flashback","ru":"Воспоминание"}',
@@ -887,7 +411,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-15 17:26:20',
                 'updated_at' => '2022-11-23 18:42:02',
             ),
-            62 => 
+            28 => 
             array (
                 'id' => 80,
                 'name' => '{"en":"Titu","ru":"Титу"}',
@@ -901,7 +425,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-08 02:27:58',
                 'updated_at' => '2022-11-21 19:24:51',
             ),
-            63 => 
+            29 => 
             array (
                 'id' => 82,
                 'name' => '{"en":"Handling","ru":"Сноровка"}',
@@ -915,7 +439,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-16 03:03:44',
                 'updated_at' => '2022-12-11 00:13:18',
             ),
-            64 => 
+            30 => 
             array (
                 'id' => 33,
                 'name' => '{"en":"River of Birth","ru":"Река Рождения"}',
@@ -929,7 +453,7 @@ class CardsTableSeeder extends Seeder
                 'created_at' => '2022-11-12 03:25:49',
                 'updated_at' => '2022-12-04 20:35:01',
             ),
-            65 => 
+            31 => 
             array (
                 'id' => 49,
                 'name' => '{"en":"Scarlet Macaw"}',
@@ -942,6 +466,482 @@ class CardsTableSeeder extends Seeder
                 'owner_id' => 1,
                 'created_at' => '2022-11-12 04:20:48',
                 'updated_at' => '2022-11-23 03:49:44',
+            ),
+            32 => 
+            array (
+                'id' => 1,
+                'name' => '{"en":"Info","ru":"Инфо"}',
+                'code' => 'info',
+                'scope_id' => NULL,
+                'info' => NULL,
+                'image' => 'card/UG4v2eNtJX1qh64ze451BBdrKs3wdkcO8urXOeQu.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-06 05:07:36',
+                'updated_at' => '2022-12-07 00:14:28',
+            ),
+            33 => 
+            array (
+                'id' => 2,
+                'name' => '{"en":"Quest","ru":"Квест"}',
+                'code' => 'quest',
+                'scope_id' => NULL,
+                'info' => NULL,
+                'image' => 'card/f18Y5XNVmbFPHixcoFU9hE2Bt8CULngklAVij9I0.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 23:33:42',
+                'updated_at' => '2022-12-07 00:14:20',
+            ),
+            34 => 
+            array (
+                'id' => 3,
+                'name' => '{"en":"Event","ru":"Событие"}',
+                'code' => 'event',
+                'scope_id' => NULL,
+                'info' => NULL,
+                'image' => 'card/g1Mlq38NS2PyQDlFVfgZ5vRaGJyPyQYBetlck1TT.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-09 04:51:54',
+                'updated_at' => '2022-12-07 00:13:59',
+            ),
+            35 => 
+            array (
+                'id' => 5,
+                'name' => '{"en":"Power","ru":"Сила"}',
+                'code' => 'power',
+                'scope_id' => NULL,
+                'info' => NULL,
+                'image' => 'card/2QBxEsJrrdEYGHmt9vM0Zy848y2T7m9SjG7unwJm.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-08 02:43:27',
+                'updated_at' => '2022-12-07 00:13:30',
+            ),
+            36 => 
+            array (
+                'id' => 6,
+                'name' => '{"en":"Item","ru":"Предмет"}',
+                'code' => 'item',
+                'scope_id' => NULL,
+                'info' => NULL,
+                'image' => 'card/8fgEP6sc7EEKyUZ7nDvM0jhNXASJR5nqWhssOuSn.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 23:57:58',
+                'updated_at' => '2022-12-07 00:13:37',
+            ),
+            37 => 
+            array (
+                'id' => 7,
+                'name' => '{"en":"Creature","ru":"Существо"}',
+                'code' => 'creature',
+                'scope_id' => 5,
+                'info' => NULL,
+                'image' => 'card/6TM9RZ35XzuQdeEOLTxrGsWH4tOZTWvHKSL1hEzy.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-08 02:11:58',
+                'updated_at' => '2022-12-07 00:13:46',
+            ),
+            38 => 
+            array (
+                'id' => 9,
+                'name' => '{"en":"Hero","ru":"Герой"}',
+                'code' => 'hero',
+                'scope_id' => 8,
+                'info' => NULL,
+                'image' => 'card/ZUz1OYVtqZJqq3eaGNVD0JdP5IGO5k85cQS6KWvX.png',
+                'desc' => '{"ru":"Герой - это любой персонаж, действия которого определяются игроками, а не мастером игры. Это главный персонаж всей игры.","en":"A hero is any character whose actions are determined by the players and not by the gamemaster. This is the main character of the whole game."}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 23:33:23',
+                'updated_at' => '2022-12-04 07:05:19',
+            ),
+            39 => 
+            array (
+                'id' => 10,
+                'name' => '{"en":"Time","ru":"Время"}',
+                'code' => 'time',
+                'scope_id' => NULL,
+                'info' => NULL,
+                'image' => 'card/gew8IFxzDggbw2k570pdHMIAvTwKj2h5k1gNdMK9.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 01:55:13',
+                'updated_at' => '2022-12-07 00:13:09',
+            ),
+            40 => 
+            array (
+                'id' => 13,
+                'name' => '{"en":"Encounter","ru":"Встреча"}',
+                'code' => 'encounter',
+                'scope_id' => 3,
+                'info' => NULL,
+                'image' => 'card/TGTqBwbQvMDQuGxpMxLuWimd5soM31zp40Xtc4rE.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-09 04:55:16',
+                'updated_at' => '2022-11-23 00:16:12',
+            ),
+            41 => 
+            array (
+                'id' => 51,
+                'name' => '{"en":"Jaguar"}',
+                'code' => NULL,
+                'scope_id' => 19,
+                'info' => NULL,
+                'image' => 'card/4398zjBN6BzZW25zi36LbDLBWw7wzZCCzkAju85H.jpg',
+                'desc' => '{"en":"Jaguars spend much of their time on the ground. They use their padded paws to move silently through the forest floor. Although not quite as agile as a leopard, jaguars are capable of climbing trees to hunt or to rest. Jaguars are mostly nocturnal hunters. They use their excellent vision and sharp teeth to ambush prey and crush their skulls."}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-11-12 02:59:15',
+                'updated_at' => '2022-11-23 03:45:26',
+            ),
+            42 => 
+            array (
+                'id' => 59,
+                'name' => '{"en":"Night","ru":"Ночь"}',
+                'code' => NULL,
+                'scope_id' => 10,
+                'info' => NULL,
+                'image' => 'card/iZcFdcfs740fG9vY4R6FnBZ6yy6dLhcxLwbsb6ds.png',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-13 01:56:02',
+                'updated_at' => '2022-11-23 21:02:25',
+            ),
+            43 => 
+            array (
+                'id' => 8,
+                'name' => '{"en":"Character","ru":"Персонаж"}',
+                'code' => 'character',
+                'scope_id' => 7,
+                'info' => '{"en":"Also, each character has his specifications. Use this card as a character scope to list them:\\r\\n- Weariness"}',
+                'image' => 'card/4TJrtuwnmgW2KotswgAJO8U2ML8OgawEoJguQPd0.png',
+                'desc' => '{"en":"Any creature that plays an important role in the game is a character. Each character has a name, skills, knowledge, features, and other characteristics."}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-08 02:20:38',
+                'updated_at' => '2022-12-10 23:49:21',
+            ),
+            44 => 
+            array (
+                'id' => 11,
+                'name' => '{"en":"Skill","ru":"Навык"}',
+                'code' => 'skill',
+                'scope_id' => 8,
+                'info' => '{"en":"TIPS: Use as a character deck scope for all his skills."}',
+                'image' => 'card/KjUaRvY8p8Fv7awBHqCFKc12uD77zGmKkf8fcijU.png',
+                'desc' => '{"en":"Skills are the ability of a character to do something. The better the skill, the more successfully and efficiently he can perform this action.","ru":"Навыки — это способность персонажа делать что-либо. Чем лучше навык, тем успешнее и эффективнее он сможет выполнить связанные с этим навыком действия.\\r\\n\\r\\nПОДСКАЗКИ: Используй в качестве сферы для колоды всех умений персонажа."}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-16 02:48:50',
+                'updated_at' => '2022-12-10 23:55:16',
+            ),
+            45 => 
+            array (
+                'id' => 12,
+                'name' => '{"en":"Folk","ru":"Народ"}',
+                'code' => 'folk',
+                'scope_id' => NULL,
+                'info' => '{"en":"Depending on population density, the following types of folk are distinguished:\\r\\n- Wilderness\\r\\n- Settlements\\r\\n- Villages\\r\\n- Towns\\r\\n- Cities\\r\\n- and others\\r\\n\\r\\nTIPS:\\r\\n- Use as a scope for the Hero\'s deck to indicate Folk for the current Space."}',
+                'image' => 'card/gxkKNqJE7VGnuDY4yRsGNj9pWYrZ85GfHYutqHin.png',
+                'desc' => '{"en":"Folk refers to the inhabitants of a particular area, with its own characteristics, history, culture, population density, and so on.","ru":"Под народом подразумеваются жители определенной местности, имеющие свои особенности, историю, культуру, плотность населения и так далее.\\r\\n\\r\\nВ зависимости от плотности населения выделяют следующие виды населения:\\r\\n- Дикие Земли\\r\\n- Поселения\\r\\n- Деревни\\r\\n- Городки\\r\\n- Города\\r\\n- и другие\\r\\n\\r\\nПОДСКАЗКИ:\\r\\n- Используйте в качестве сферы для колоды Героя, чтобы указать население данного места."}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 18:22:30',
+                'updated_at' => '2022-12-10 23:56:10',
+            ),
+            46 => 
+            array (
+                'id' => 16,
+                'name' => '{"en":"Scene","ru":"Сцена"}',
+                'code' => 'scene',
+                'scope_id' => 4,
+                'info' => NULL,
+                'image' => 'card/U8JqwjGBHernRKnTZzcuEaMwWGGDZw3bFzBxzfJt.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-24 23:30:30',
+                'updated_at' => '2022-12-07 00:09:30',
+            ),
+            47 => 
+            array (
+                'id' => 17,
+                'name' => '{"en":"Dome","ru":"Мир"}',
+                'code' => 'dome',
+                'scope_id' => 4,
+                'info' => NULL,
+                'image' => 'card/B4NfU3toiHggUxWg7S1K39ElNfirBJkFuI65zOR1.png',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-12-04 07:22:33',
+                'updated_at' => '2022-12-04 20:30:19',
+            ),
+            48 => 
+            array (
+                'id' => 18,
+                'name' => '{"en":"Geo"}',
+                'code' => 'geo',
+                'scope_id' => 4,
+                'info' => NULL,
+                'image' => 'card/3t87a8aPoMZXqr421DIk4VlOphNSd5a2YS75JWN4.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-12-07 00:03:42',
+                'updated_at' => '2022-12-07 00:08:16',
+            ),
+            49 => 
+            array (
+                'id' => 37,
+                'name' => '{"en":"Clan","ru":"Клан"}',
+                'code' => NULL,
+                'scope_id' => 12,
+                'info' => NULL,
+                'image' => 'card/s3HdOVmqD1LNQprc9X43t518pgtBU03wV4JPrABQ.png',
+                'desc' => '{"en":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-06 05:08:04',
+                'updated_at' => '2022-11-24 18:44:12',
+            ),
+            50 => 
+            array (
+                'id' => 57,
+                'name' => '{"en":"Weariness","ru":"Усталость"}',
+                'code' => NULL,
+                'scope_id' => 3,
+                'info' => NULL,
+                'image' => 'card/QReWTHEz0FELexQleah1DfCeh0c4LdbQWAZian3z.png',
+                'desc' => '{"en":"Even the heroes get tired over time. And the more weariness they accumulate, the harder it is for them to act. Weariness is removed by rest and food.","ru":"Даже герои со временем устают. И чем больше они накапливают усталости, тем труднее им действовать.\\r\\nУсталость снимается отдыхом и едой."}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 14:36:47',
+                'updated_at' => '2022-11-23 18:03:12',
+            ),
+            51 => 
+            array (
+                'id' => 79,
+                'name' => '{"en":"Practice","ru":"Практика"}',
+                'code' => NULL,
+                'scope_id' => 3,
+                'info' => NULL,
+                'image' => 'card/2TgPhkQrN8CrilDvbZ6uFiKXn1irUXfXG3ceDKoP.png',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 14:36:58',
+                'updated_at' => '2022-11-25 04:28:25',
+            ),
+            52 => 
+            array (
+                'id' => 85,
+                'name' => '{"en":"Find","ru":"Находка"}',
+                'code' => NULL,
+                'scope_id' => 3,
+                'info' => NULL,
+                'image' => 'card/0tlgU14s6yXgkSmE2OBY1c3fbJvahnXHVnDuzPEW.png',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 14:39:42',
+                'updated_at' => '2022-11-25 04:28:05',
+            ),
+            53 => 
+            array (
+                'id' => 86,
+                'name' => '{"en":"Wilderness","ru":"Дикие Земли"}',
+                'code' => NULL,
+                'scope_id' => 12,
+                'info' => NULL,
+                'image' => 'card/6LszdfAv403cEVxgvgjvZXBLTmu1n63rSpjEpbF5.png',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 14:24:51',
+                'updated_at' => '2022-11-25 04:27:45',
+            ),
+            54 => 
+            array (
+                'id' => 87,
+                'name' => '{"en":"Settlement","ru":"Поселение"}',
+                'code' => NULL,
+                'scope_id' => 12,
+                'info' => NULL,
+                'image' => 'card/dgWw6Se0HB8pJ1dAndY1sbJLhD8cBe4v5Au7pNlb.png',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-10 14:26:20',
+                'updated_at' => '2022-11-25 04:27:31',
+            ),
+            55 => 
+            array (
+                'id' => 90,
+                'name' => '{"en":"Legend","ru":"Легенда"}',
+                'code' => NULL,
+                'scope_id' => 12,
+                'info' => NULL,
+                'image' => 'card/ZilOalIpLiHYHs1V9WTY2jy1yDCXBe2iGF9TjsB5.png',
+                'desc' => '{"en":"A people without legends is like a tree without roots."}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-06 05:07:52',
+                'updated_at' => '2022-11-24 18:45:15',
+            ),
+            56 => 
+            array (
+                'id' => 72,
+                'name' => '{"en":"Fail","ru":"Провал"}',
+                'code' => NULL,
+                'scope_id' => 3,
+                'info' => NULL,
+                'image' => 'card/MbRnrUlQ6ypOuIMK1xP4dgxxc8e4bxLf3qI5SkQN.png',
+                'desc' => '{"en":"The meaning of this card depends on the context.","ru":"Значение этой карты зависит от контекста."}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-15 17:12:25',
+                'updated_at' => '2022-11-25 01:17:41',
+            ),
+            57 => 
+            array (
+                'id' => 94,
+                'name' => '{"en":"New Moon","ru":"Новолуние"}',
+                'code' => NULL,
+                'scope_id' => 91,
+                'info' => NULL,
+                'image' => 'card/9Cz86Z3d0mlOneA6cXnPxqQlstOqNBxrVbmf8XjH.png',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-25 02:42:25',
+                'updated_at' => '2022-11-25 04:14:51',
+            ),
+            58 => 
+            array (
+                'id' => 63,
+                'name' => '{"en":"Bird","ru":"Птица"}',
+                'code' => NULL,
+                'scope_id' => 19,
+                'info' => NULL,
+                'image' => 'card/2kAnIEBToqa7pMqAtwNK45RtmyyMyibXP3Iq9WHA.png',
+                'desc' => '{"en":"Birds are a group of warm-blooded vertebrates, characterized by feathers, toothless beaked jaws, the laying of hard-shelled eggs, a high metabolic rate, a four-chambered heart, and a strong yet lightweight skeleton. Birds live worldwide and range in size from the bee hummingbird to the ostrich. There are about ten thousand living species, more than half of which are passerine, or \\"perching\\" birds.\\r\\n\\r\\nMany social species pass on knowledge across generations, which is considered a form of culture. Birds are social, communicating with visual signals, calls, and songs, and participating in such behaviours as cooperative breeding and hunting, flocking, and mobbing of predators."}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-08 02:17:34',
+                'updated_at' => '2022-11-22 21:52:17',
+            ),
+            59 => 
+            array (
+                'id' => 28,
+                'name' => '{"en":"Insect","ru":"Насекомое"}',
+                'code' => NULL,
+                'scope_id' => 19,
+                'info' => NULL,
+                'image' => 'card/baIHDjIYRBSJp9FIuyk2lPcA5JVcpAMk8pNIV1fS.png',
+                'desc' => '{"en":"Insects are the most diverse group of animals; they include more than a million described species and represent more than half of all known living organisms. The total number of extant species is estimated at between six and ten million; potentially over 90% of the animal life forms on Earth are insects.\\r\\n\\r\\nInsect pollinators are essential to the life cycle of many flowering plant species on which most organisms, including humans, are at least partly dependent; without them, the terrestrial portion of the biosphere would be devastated. Many insects are considered ecologically beneficial as predators and a few provide direct economic benefit. Silkworms produce silk and honey bees produce honey and both have been domesticated by humans. Insects are consumed as food in 80% of the world\'s nations, by people in roughly 3000 ethnic groups"}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-08 02:18:53',
+                'updated_at' => '2022-11-23 00:22:39',
+            ),
+            60 => 
+            array (
+                'id' => 23,
+                'name' => '{"en":"Savanna Tract","ru":"Засушливый Тракт"}',
+                'code' => NULL,
+                'scope_id' => 15,
+                'info' => NULL,
+                'image' => 'card/AZkPqM2WN5LEjgw7Z4xsuxi24XnpxWj6KU6jTt8c.jpg',
+                'desc' => '{"ru":null}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-04 16:27:50',
+                'updated_at' => '2022-12-04 20:29:00',
+            ),
+            61 => 
+            array (
+                'id' => 32,
+                'name' => '{"en":"Deep Forest","ru":"Реликтовые Джунгли"}',
+                'code' => NULL,
+                'scope_id' => 15,
+                'info' => NULL,
+                'image' => 'card/oXhBtbwowwjZl719wFncIr6nepLbW0z7jgbDuVgu.png',
+                'desc' => '{"ru":null}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-04 16:00:09',
+                'updated_at' => '2022-12-04 20:28:14',
+            ),
+            62 => 
+            array (
+                'id' => 96,
+                'name' => '{"en":"Serpent\'s Lair","ru":"Гнездо Змея"}',
+                'code' => NULL,
+                'scope_id' => 17,
+                'info' => NULL,
+                'image' => 'card/bndXsHEJTvrFWbzwcSAuRkWdwmJ2ktQ5SD1uPApS.jpg',
+                'desc' => '{"en":null}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-12-04 07:37:34',
+                'updated_at' => '2022-12-05 19:22:59',
+            ),
+            63 => 
+            array (
+                'id' => 65,
+                'name' => '{"en":"Year","ru":"Год"}',
+                'code' => NULL,
+                'scope_id' => 10,
+                'info' => NULL,
+                'image' => 'card/X24HeU13Bom5zMH4dmMWrj3k2gvhAi8iG5mFuC1Z.png',
+                'desc' => '{"ru":null}',
+                'is_public' => true,
+                'owner_id' => 1,
+                'created_at' => '2022-11-25 02:56:01',
+                'updated_at' => '2022-11-25 04:13:49',
+            ),
+            64 => 
+            array (
+                'id' => 38,
+                'name' => '{"en":"Eagle Nest","ru":"Орлиное Гнездо"}',
+                'code' => NULL,
+                'scope_id' => 1,
+                'info' => NULL,
+                'image' => NULL,
+                'desc' => '{"en":"This ancient clan still lives in the depths of the unknown to this day. Finding the way to the inconspicuous is easy. But everyone who follows his own path of the heart will certainly meet him.","ru":"Этот древний клан и по сей день живет в самых недрах неизведанного. Найти дорогу к нему не просто. Но каждый, кто следует своему пути сердца однажды непременно встречается с ним"}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-11-06 05:16:54',
+                'updated_at' => '2022-11-09 04:42:58',
+            ),
+            65 => 
+            array (
+                'id' => 39,
+                'name' => '{"en":"Serpent Path","ru":"Тропа Змея"}',
+                'code' => NULL,
+                'scope_id' => 1,
+                'info' => NULL,
+                'image' => NULL,
+                'desc' => '{"en":"The wise people follow the sacred path of the Serpent. Everyone who walks this path cultivates living blood in himself. Everyone who walks this path holds on to the other in order to honor this path together.","ru":"Мудрый народ следует священной Тропе Змея. Каждый, идущий по этой тропе, взращивает в себе кровь живую. Каждый, идущий по этой тропе, держится другого чтобы вместе чтить этот путь."}',
+                'is_public' => false,
+                'owner_id' => 1,
+                'created_at' => '2022-11-06 05:09:50',
+                'updated_at' => '2022-11-09 04:43:14',
             ),
             66 => 
             array (

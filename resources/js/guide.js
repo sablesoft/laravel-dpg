@@ -113,17 +113,17 @@ export const guide = reactive({
         if (asArray) {
             relations = [];
             item[relationEntity + 'Ids'].forEach(function(id) {
-                let entity = self[relationEntity + 's'][id];
-                if (entity) {
-                    relations.push(entity);
+                let relation = self[relationEntity + 's'][id];
+                if (relation) {
+                    relations.push(relation);
                 }
             });
         } else {
             relations = {};
             item[relationEntity + 'Ids'].forEach(function(id) {
-                let entity = self[relationEntity + 's'][id];
-                if (entity) {
-                    relations[id] = entity;
+                let relation = self[relationEntity + 's'][id];
+                if (relation) {
+                    relations[id] = relation;
                 }
             });
         }
@@ -137,6 +137,7 @@ export const guide = reactive({
     },
     getModuleNotes(id = null) {
         let notes = this.getRelations('module', 'note', id, true);
+        console.log('module notes', notes);
 
         return this._sortItemsByNumber(notes);
     },
@@ -888,7 +889,11 @@ export const guide = reactive({
                 break;
             case 'note':
                 belongsTo = ['topic'];
-                belongsTo.push(item.projectId ? 'project' : 'post');
+                if (item.postId) {
+                    belongsTo.push('post');
+                } else {
+                    belongsTo.push(item.projectId ? 'project' : 'module');
+                }
                 break;
             case 'link':
                 belongsTo.push(item.postId ? 'post' : 'note');

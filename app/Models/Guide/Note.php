@@ -61,7 +61,10 @@ class Note extends GuideItem implements UseNumber
      */
     public static function allowedNumber(?int $postId = null, ?int $projectId = null, ?int $moduleId = null): ?int
     {
-        if (!($postId xor $projectId)) {
+        $valid = ($postId && (!$projectId && !$moduleId)) ||
+                 ($projectId && (!$postId && !$moduleId)) ||
+                 ($moduleId && (!$projectId && !$postId));
+        if (!$valid) {
             return null;
         }
 

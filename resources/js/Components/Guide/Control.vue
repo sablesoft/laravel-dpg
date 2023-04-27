@@ -48,7 +48,7 @@ let showCreatePost = function() {
 }
 let showAddNote = function() {
     return guide.tab !== 'ProjectInfo' && !guide.noteAdding &&
-        (_entity() === 'project' || _entity() === 'post');
+        (['project', 'post', 'module'].includes(_entity()));
 }
 let showAddLink = function() {
     return !guide.linkAdding && guide.tab !== 'ProjectInfo' &&

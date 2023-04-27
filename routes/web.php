@@ -67,7 +67,8 @@ Route::get('/project/{project}', function (Project $project) {
     $modules = $project->modules->keyBy('id');
     /** @var Collection $notes */
     $notes = $user->notes()->where('project_id', $project->getKey())
-        ->orWhereIn('post_id', $posts->modelKeys())->get()->keyBy('id');
+        ->orWhereIn('post_id', $posts->modelKeys())
+        ->orWhereIn('module_id', $modules->modelKeys())->get()->keyBy('id');
     $topics = $user->topics()->where('project_id', $project->getKey())
         ->orWhereNull('project_id')->get()->keyBy('id');
     $buffer = $project->buffer ?: Buffer::create(['owner_id' => $user->getKey(), 'project_id' => $project->getKey()]);

@@ -128,8 +128,9 @@ class GuideController extends Controller
             case 'notes':
                 $postId = $data['post_id'] ?? null;
                 $projectId = $data['project_id'] ?? null;
-                if (!$number = Note::allowedNumber($postId, $projectId)) {
-                    throw new Exception('One of both - Post ID or Project ID - required for creating: ' . $table);
+                $moduleId = $data['module_id'] ?? null;
+                if (!$number = Note::allowedNumber($postId, $projectId, $moduleId)) {
+                    throw new Exception('One of ids - Post ID, Module Id or Project ID - required for creating: ' . $table);
                 }
                 $data['number'] = $number;
                 $note = Note::create($data);

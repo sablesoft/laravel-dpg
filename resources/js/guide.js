@@ -201,7 +201,10 @@ export const guide = reactive({
         }
         let ids = {};
         let categories = [];
-        for (const [id, post] of Object.entries(posts)) {
+        for (const [postId, post] of Object.entries(posts)) {
+            if (post.moduleId && parseInt(post.moduleId) !== parseInt(this.modulesId)) {
+                continue;
+            }
             if (!ids[post.categoryId]) {
                 categories.push(this.getTopic(post.categoryId));
                 ids[post.categoryId] = true;

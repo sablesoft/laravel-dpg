@@ -36,8 +36,8 @@ button {
                     <Editable :value="guide.getTopicField('text', guide.categoriesId)"
                               @updated="(text) => guide.updateField('topic', 'text', text, guide.categoriesId)"/>
                 </p>
-                <DraggableList :list="guide.getCategoryPosts()">
-                    <Post v-for="post in guide.getCategoryPosts()" :post="post"/>
+                <DraggableList :list="guide.getCategoryPosts(guide.categoriesId, guide.modulesId)">
+                    <Post v-for="post in guide.getCategoryPosts(guide.categoriesId, guide.modulesId)" :post="post"/>
                 </DraggableList>
             </div>
         </div>

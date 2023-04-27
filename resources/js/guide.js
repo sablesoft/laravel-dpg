@@ -916,6 +916,9 @@ export const guide = reactive({
                 if (item.projectId) {
                     belongsTo = ['project'];
                 }
+                if (item.moduleId) {
+                    belongsTo = ['module'];
+                }
                 this.topicsId = item.id;
                 break;
             case 'post':

@@ -146,8 +146,7 @@ class GuideController extends Controller
                 $module = Module::create($data);
                 return ModuleResource::make($module);
             case 'posts':
-                $categoryId = $data['category_id'];
-                $data['number'] = Post::allowedNumber($categoryId);
+                $data['number'] = Post::allowedNumber($data['category_id'], $data['module_id']);
                 $post = Post::create($data);
                 return PostResource::make($post);
             case 'links':

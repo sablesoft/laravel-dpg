@@ -14,78 +14,122 @@ class GuideTopicsTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('guide_topics')->delete();
-        
+
         \DB::table('guide_topics')->insert(array (
-            0 => 
+            0 =>
             array (
-                'id' => 93,
-                'name' => 'Красная Шапочка',
-                'text' => 'Главная героиня',
-                'project_id' => 4,
+                'id' => 57,
+                'name' => 'Бессоница',
+                'text' => 'Иногда такое случается - заснуть не удается.',
+                'project_id' => NULL,
                 'owner_id' => 1,
-                'created_at' => '2023-04-21 17:49:12',
-                'updated_at' => '2023-04-21 17:49:12',
+                'created_at' => '2023-04-08 17:21:39',
+                'updated_at' => '2023-04-10 17:41:09',
                 'module_id' => NULL,
             ),
-            1 => 
+            1 =>
             array (
-                'id' => 94,
-                'name' => 'Бабушка',
-                'text' => 'Добрая и заботливая, но старая и больная',
-                'project_id' => 4,
+                'id' => 72,
+                'name' => 'Лимбо',
+                'text' => 'Лимбо есть у каждого из нас. И когда оказываешься в этом странном и пустынном месте, то главное твое испытание - выстоять перед сокрушительным натиском тотального одиночества.',
+                'project_id' => NULL,
                 'owner_id' => 1,
-                'created_at' => '2023-04-21 17:49:31',
-                'updated_at' => '2023-04-21 17:49:31',
+                'created_at' => '2023-04-11 17:13:18',
+                'updated_at' => '2023-04-11 17:13:18',
                 'module_id' => NULL,
             ),
-            2 => 
+            2 =>
             array (
-                'id' => 95,
-                'name' => 'Темный Лес',
-                'text' => 'Темный и страшный дремучий лес',
-                'project_id' => 4,
+                'id' => 73,
+                'name' => 'Тишина',
+                'text' => 'Иногда тишина необходима для нас как воздух. Чтобы отдохнуть, чтобы погрузиться в себя, чтобы найти правильное решение. Но как быть, когда ее становится слишком много?',
+                'project_id' => NULL,
                 'owner_id' => 1,
-                'created_at' => '2023-04-21 17:49:47',
-                'updated_at' => '2023-04-21 17:49:47',
+                'created_at' => '2023-04-11 17:29:32',
+                'updated_at' => '2023-04-11 17:29:32',
                 'module_id' => NULL,
             ),
-            3 => 
+            3 =>
             array (
-                'id' => 96,
-                'name' => 'Серый Волк',
-                'text' => 'Опасный и коварный',
-                'project_id' => 4,
+                'id' => 75,
+                'name' => 'Кома',
+                'text' => 'Потеря сознания, потеря контакта с реальностью и беспамятство.',
+                'project_id' => NULL,
                 'owner_id' => 1,
-                'created_at' => '2023-04-21 17:50:05',
-                'updated_at' => '2023-04-21 17:50:05',
+                'created_at' => '2023-04-11 18:20:47',
+                'updated_at' => '2023-04-11 18:20:47',
                 'module_id' => NULL,
             ),
-            4 => 
+            4 =>
+            array (
+                'id' => 69,
+                'name' => 'Одиночество',
+                'text' => 'Иногда одиночество бывает вполне сносным, или даже желанным. Но когда дело доходит до полного тотального одиночества, то даже у самых крепких постепенно начинают сдавать нервы...',
+                'project_id' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2023-04-11 16:25:13',
+                'updated_at' => '2023-04-11 16:25:13',
+                'module_id' => NULL,
+            ),
+            5 =>
+            array (
+                'id' => 104,
+                'name' => 'Таинственный Голос',
+                'text' => 'Что это? Игра воспаленного воображения, или нечто большее?',
+                'project_id' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2023-04-27 15:15:22',
+                'updated_at' => '2023-04-27 15:15:22',
+                'module_id' => NULL,
+            ),
+            6 =>
             array (
                 'id' => 97,
                 'name' => 'Дух',
                 'text' => 'Удивительная сила, наделяющая нас осознанием и деятельностью.',
-                'project_id' => 1,
+                'project_id' => NULL,
                 'owner_id' => 1,
                 'created_at' => '2023-04-22 01:08:10',
                 'updated_at' => '2023-04-22 01:08:10',
                 'module_id' => NULL,
             ),
-            5 => 
+            7 =>
             array (
                 'id' => 98,
                 'name' => 'Стресс',
                 'text' => 'Беспокойство может стать серьезной проблемой для решения жизненных задач.',
-                'project_id' => 1,
+                'project_id' => NULL,
                 'owner_id' => 1,
                 'created_at' => '2023-04-22 01:44:22',
                 'updated_at' => '2023-04-22 01:49:26',
                 'module_id' => NULL,
             ),
-            6 => 
+            8 =>
+            array (
+                'id' => 103,
+                'name' => 'Амнезия',
+                'text' => 'Позабыть все на свете - это не больно. Другое дело - все вспомнить.',
+                'project_id' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2023-04-26 02:26:22',
+                'updated_at' => '2023-04-27 04:09:15',
+                'module_id' => NULL,
+            ),
+            9 =>
+            array (
+                'id' => 105,
+                'name' => 'Чарующая Песня',
+                'text' => 'Этот прекрасный голос исцеляет тело и душу.',
+                'project_id' => NULL,
+                'owner_id' => 1,
+                'created_at' => '2023-04-27 15:16:51',
+                'updated_at' => '2023-04-27 15:16:51',
+                'module_id' => NULL,
+            ),
+            10 =>
             array (
                 'id' => 99,
                 'name' => 'Сила Карты',
@@ -96,7 +140,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-22 02:00:43',
                 'module_id' => NULL,
             ),
-            7 => 
+            11 =>
             array (
                 'id' => 100,
                 'name' => 'Время',
@@ -107,7 +151,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-23 03:50:52',
                 'module_id' => NULL,
             ),
-            8 => 
+            12 =>
             array (
                 'id' => 101,
                 'name' => 'Событие',
@@ -118,18 +162,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-25 01:06:52',
                 'module_id' => NULL,
             ),
-            9 => 
-            array (
-                'id' => 103,
-                'name' => 'Амнезия',
-                'text' => 'Позабыть все на свете - это не больно. Другое дело - все вспомнить.',
-                'project_id' => 1,
-                'owner_id' => 1,
-                'created_at' => '2023-04-26 02:26:22',
-                'updated_at' => '2023-04-26 02:26:22',
-                'module_id' => NULL,
-            ),
-            10 => 
+            13 =>
             array (
                 'id' => 102,
                 'name' => 'Модуль',
@@ -140,7 +173,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-26 14:44:47',
                 'module_id' => NULL,
             ),
-            11 => 
+            14 =>
             array (
                 'id' => 2,
                 'name' => 'Команда',
@@ -151,7 +184,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-06 17:57:20',
                 'module_id' => NULL,
             ),
-            12 => 
+            15 =>
             array (
                 'id' => 4,
                 'name' => 'Роли',
@@ -162,7 +195,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-06 19:02:13',
                 'module_id' => NULL,
             ),
-            13 => 
+            16 =>
             array (
                 'id' => 5,
                 'name' => 'Лидер',
@@ -173,7 +206,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-06 19:02:26',
                 'module_id' => NULL,
             ),
-            14 => 
+            17 =>
             array (
                 'id' => 8,
                 'name' => 'Предыстория',
@@ -184,7 +217,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 04:34:40',
                 'module_id' => NULL,
             ),
-            15 => 
+            18 =>
             array (
                 'id' => 9,
                 'name' => 'Тип',
@@ -195,7 +228,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 05:08:06',
                 'module_id' => NULL,
             ),
-            16 => 
+            19 =>
             array (
                 'id' => 10,
                 'name' => 'Тон',
@@ -206,7 +239,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 05:27:04',
                 'module_id' => NULL,
             ),
-            17 => 
+            20 =>
             array (
                 'id' => 11,
                 'name' => 'Жанр',
@@ -217,7 +250,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 05:30:12',
                 'module_id' => NULL,
             ),
-            18 => 
+            21 =>
             array (
                 'id' => 12,
                 'name' => 'Сеттинг',
@@ -228,7 +261,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 07:29:10',
                 'module_id' => NULL,
             ),
-            19 => 
+            22 =>
             array (
                 'id' => 13,
                 'name' => 'Тема',
@@ -239,7 +272,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 07:30:23',
                 'module_id' => NULL,
             ),
-            20 => 
+            23 =>
             array (
                 'id' => 14,
                 'name' => 'Сюжет',
@@ -250,7 +283,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 07:31:31',
                 'module_id' => NULL,
             ),
-            21 => 
+            24 =>
             array (
                 'id' => 15,
                 'name' => 'Конфликты',
@@ -261,7 +294,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 07:32:09',
                 'module_id' => NULL,
             ),
-            22 => 
+            25 =>
             array (
                 'id' => 16,
                 'name' => 'Символизм',
@@ -272,7 +305,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 07:33:10',
                 'module_id' => NULL,
             ),
-            23 => 
+            26 =>
             array (
                 'id' => 17,
                 'name' => 'Оскар Вега',
@@ -283,7 +316,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 07:56:45',
                 'module_id' => NULL,
             ),
-            24 => 
+            27 =>
             array (
                 'id' => 18,
                 'name' => 'Образ',
@@ -294,7 +327,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 07:58:19',
                 'module_id' => NULL,
             ),
-            25 => 
+            28 =>
             array (
                 'id' => 21,
                 'name' => 'Лорелей',
@@ -305,7 +338,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 13:37:48',
                 'module_id' => NULL,
             ),
-            26 => 
+            29 =>
             array (
                 'id' => 22,
                 'name' => 'Наблюдатели',
@@ -316,7 +349,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 13:40:07',
                 'module_id' => NULL,
             ),
-            27 => 
+            30 =>
             array (
                 'id' => 23,
                 'name' => 'Дети Наблюдателей',
@@ -327,7 +360,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 14:56:44',
                 'module_id' => NULL,
             ),
-            28 => 
+            31 =>
             array (
                 'id' => 25,
                 'name' => 'Диалоги',
@@ -338,7 +371,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 15:02:21',
                 'module_id' => NULL,
             ),
-            29 => 
+            32 =>
             array (
                 'id' => 32,
                 'name' => 'Прошлое Лорелей',
@@ -349,7 +382,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 21:17:55',
                 'module_id' => NULL,
             ),
-            30 => 
+            33 =>
             array (
                 'id' => 33,
                 'name' => 'Дружба в Крепости',
@@ -360,7 +393,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 21:19:35',
                 'module_id' => NULL,
             ),
-            31 => 
+            34 =>
             array (
                 'id' => 35,
                 'name' => 'Дух Команды',
@@ -371,7 +404,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 21:21:18',
                 'module_id' => NULL,
             ),
-            32 => 
+            35 =>
             array (
                 'id' => 40,
                 'name' => 'Загадка Веги',
@@ -382,7 +415,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 23:05:59',
                 'module_id' => NULL,
             ),
-            33 => 
+            36 =>
             array (
                 'id' => 41,
                 'name' => 'Загадка Восприятия',
@@ -393,7 +426,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 23:07:09',
                 'module_id' => NULL,
             ),
-            34 => 
+            37 =>
             array (
                 'id' => 42,
                 'name' => 'Прохождение',
@@ -404,7 +437,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 23:09:24',
                 'module_id' => NULL,
             ),
-            35 => 
+            38 =>
             array (
                 'id' => 44,
                 'name' => 'План',
@@ -415,7 +448,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 23:16:51',
                 'module_id' => NULL,
             ),
-            36 => 
+            39 =>
             array (
                 'id' => 37,
                 'name' => 'Завершение',
@@ -426,7 +459,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 23:23:57',
                 'module_id' => NULL,
             ),
-            37 => 
+            40 =>
             array (
                 'id' => 34,
                 'name' => 'Паразиты Сознания',
@@ -437,7 +470,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 21:20:43',
                 'module_id' => NULL,
             ),
-            38 => 
+            41 =>
             array (
                 'id' => 50,
                 'name' => 'Арка 7. Терра',
@@ -448,7 +481,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 15:03:16',
                 'module_id' => NULL,
             ),
-            39 => 
+            42 =>
             array (
                 'id' => 36,
                 'name' => 'Тайна Восприятия',
@@ -459,7 +492,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 22:56:39',
                 'module_id' => NULL,
             ),
-            40 => 
+            43 =>
             array (
                 'id' => 38,
                 'name' => 'Союз Пробуждения',
@@ -470,7 +503,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-07 23:01:36',
                 'module_id' => NULL,
             ),
-            41 => 
+            44 =>
             array (
                 'id' => 54,
                 'name' => 'Дельта',
@@ -481,7 +514,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-08 14:04:39',
                 'module_id' => NULL,
             ),
-            42 => 
+            45 =>
             array (
                 'id' => 55,
                 'name' => 'Терра',
@@ -492,7 +525,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-08 16:45:11',
                 'module_id' => NULL,
             ),
-            43 => 
+            46 =>
             array (
                 'id' => 24,
                 'name' => 'Слуги Наблюдателей',
@@ -503,7 +536,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 02:10:59',
                 'module_id' => NULL,
             ),
-            44 => 
+            47 =>
             array (
                 'id' => 20,
                 'name' => 'Советы',
@@ -514,7 +547,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 02:11:22',
                 'module_id' => NULL,
             ),
-            45 => 
+            48 =>
             array (
                 'id' => 46,
                 'name' => 'Арка 3. Кома',
@@ -525,7 +558,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 15:02:18',
                 'module_id' => NULL,
             ),
-            46 => 
+            49 =>
             array (
                 'id' => 47,
                 'name' => 'Арка 4. Дельта',
@@ -536,7 +569,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 15:02:30',
                 'module_id' => NULL,
             ),
-            47 => 
+            50 =>
             array (
                 'id' => 48,
                 'name' => 'Арка 5. Воспоминания',
@@ -547,7 +580,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 15:02:42',
                 'module_id' => NULL,
             ),
-            48 => 
+            51 =>
             array (
                 'id' => 49,
                 'name' => 'Арка 6. Крепость',
@@ -558,7 +591,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 15:02:53',
                 'module_id' => NULL,
             ),
-            49 => 
+            52 =>
             array (
                 'id' => 51,
                 'name' => 'Арка 8. Пробуждение',
@@ -569,7 +602,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 15:03:33',
                 'module_id' => NULL,
             ),
-            50 => 
+            53 =>
             array (
                 'id' => 45,
                 'name' => 'Арка 2. Принятие',
@@ -580,7 +613,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 15:46:09',
                 'module_id' => NULL,
             ),
-            51 => 
+            54 =>
             array (
                 'id' => 26,
                 'name' => 'Достижение',
@@ -591,7 +624,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-14 18:05:21',
                 'module_id' => NULL,
             ),
-            52 => 
+            55 =>
             array (
                 'id' => 39,
                 'name' => 'Задание',
@@ -602,7 +635,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-14 18:05:49',
                 'module_id' => NULL,
             ),
-            53 => 
+            56 =>
             array (
                 'id' => 31,
                 'name' => 'Условие',
@@ -613,7 +646,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-14 18:19:11',
                 'module_id' => NULL,
             ),
-            54 => 
+            57 =>
             array (
                 'id' => 43,
                 'name' => 'Открытие',
@@ -624,7 +657,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-15 03:15:04',
                 'module_id' => NULL,
             ),
-            55 => 
+            58 =>
             array (
                 'id' => 56,
                 'name' => 'Состояние',
@@ -635,7 +668,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-09 02:54:30',
                 'module_id' => NULL,
             ),
-            56 => 
+            59 =>
             array (
                 'id' => 74,
                 'name' => 'Эффект',
@@ -646,7 +679,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 18:26:10',
                 'module_id' => NULL,
             ),
-            57 => 
+            60 =>
             array (
                 'id' => 62,
                 'name' => 'Игровая Карта',
@@ -657,7 +690,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-10 17:13:16',
                 'module_id' => NULL,
             ),
-            58 => 
+            61 =>
             array (
                 'id' => 63,
                 'name' => 'Мастер Игры',
@@ -668,7 +701,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-10 17:19:31',
                 'module_id' => NULL,
             ),
-            59 => 
+            62 =>
             array (
                 'id' => 76,
                 'name' => 'Жетон',
@@ -679,18 +712,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 18:35:33',
                 'module_id' => NULL,
             ),
-            60 => 
-            array (
-                'id' => 57,
-                'name' => 'Бессоница',
-                'text' => 'Иногда такое случается - заснуть не удается.',
-                'project_id' => 1,
-                'owner_id' => 1,
-                'created_at' => '2023-04-08 17:21:39',
-                'updated_at' => '2023-04-10 17:41:09',
-                'module_id' => NULL,
-            ),
-            61 => 
+            63 =>
             array (
                 'id' => 64,
                 'name' => 'Книга Мастера',
@@ -701,7 +723,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 01:52:42',
                 'module_id' => NULL,
             ),
-            62 => 
+            64 =>
             array (
                 'id' => 66,
                 'name' => 'Словарь',
@@ -712,7 +734,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 02:34:39',
                 'module_id' => NULL,
             ),
-            63 => 
+            65 =>
             array (
                 'id' => 67,
                 'name' => 'Вариативность',
@@ -723,7 +745,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 14:50:13',
                 'module_id' => NULL,
             ),
-            64 => 
+            66 =>
             array (
                 'id' => 7,
                 'name' => 'Разработка',
@@ -734,7 +756,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 15:30:33',
                 'module_id' => NULL,
             ),
-            65 => 
+            67 =>
             array (
                 'id' => 68,
                 'name' => 'Группа',
@@ -745,18 +767,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 16:09:51',
                 'module_id' => NULL,
             ),
-            66 => 
-            array (
-                'id' => 69,
-                'name' => 'Одиночество',
-                'text' => 'Иногда одиночество бывает вполне сносным, или даже желанным. Но когда дело доходит до полного тотального одиночества, то даже у самых крепких постепенно начинают сдавать нервы...',
-                'project_id' => 1,
-                'owner_id' => 1,
-                'created_at' => '2023-04-11 16:25:13',
-                'updated_at' => '2023-04-11 16:25:13',
-                'module_id' => NULL,
-            ),
-            67 => 
+            68 =>
             array (
                 'id' => 70,
                 'name' => 'Загадка Мира',
@@ -767,7 +778,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 16:32:14',
                 'module_id' => NULL,
             ),
-            68 => 
+            69 =>
             array (
                 'id' => 65,
                 'name' => 'Игрок',
@@ -778,7 +789,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 16:42:06',
                 'module_id' => NULL,
             ),
-            69 => 
+            70 =>
             array (
                 'id' => 71,
                 'name' => 'Портал',
@@ -789,40 +800,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-11 16:47:21',
                 'module_id' => NULL,
             ),
-            70 => 
-            array (
-                'id' => 72,
-                'name' => 'Лимбо',
-                'text' => 'Лимбо есть у каждого из нас. И когда оказываешься в этом странном и пустынном месте, то главное твое испытание - выстоять перед сокрушительным натиском тотального одиночества.',
-                'project_id' => 1,
-                'owner_id' => 1,
-                'created_at' => '2023-04-11 17:13:18',
-                'updated_at' => '2023-04-11 17:13:18',
-                'module_id' => NULL,
-            ),
-            71 => 
-            array (
-                'id' => 73,
-                'name' => 'Тишина',
-                'text' => 'Иногда тишина необходима для нас как воздух. Чтобы отдохнуть, чтобы погрузиться в себя, чтобы найти правильное решение. Но как быть, когда ее становится слишком много?',
-                'project_id' => 1,
-                'owner_id' => 1,
-                'created_at' => '2023-04-11 17:29:32',
-                'updated_at' => '2023-04-11 17:29:32',
-                'module_id' => NULL,
-            ),
-            72 => 
-            array (
-                'id' => 75,
-                'name' => 'Кома',
-                'text' => 'Потеря сознания, потеря контакта с реальностью и беспамятство.',
-                'project_id' => 1,
-                'owner_id' => 1,
-                'created_at' => '2023-04-11 18:20:47',
-                'updated_at' => '2023-04-11 18:20:47',
-                'module_id' => NULL,
-            ),
-            73 => 
+            71 =>
             array (
                 'id' => 77,
                 'name' => 'Герой',
@@ -833,7 +811,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 01:36:24',
                 'module_id' => NULL,
             ),
-            74 => 
+            72 =>
             array (
                 'id' => 78,
                 'name' => 'Действие',
@@ -844,7 +822,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 01:49:01',
                 'module_id' => NULL,
             ),
-            75 => 
+            73 =>
             array (
                 'id' => 79,
                 'name' => 'Арка 1. Лимбо',
@@ -855,7 +833,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 15:01:32',
                 'module_id' => NULL,
             ),
-            76 => 
+            74 =>
             array (
                 'id' => 80,
                 'name' => 'Подготовка',
@@ -866,7 +844,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-12 15:54:43',
                 'module_id' => NULL,
             ),
-            77 => 
+            75 =>
             array (
                 'id' => 81,
                 'name' => 'Пленники Комы',
@@ -877,7 +855,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-14 00:03:39',
                 'module_id' => NULL,
             ),
-            78 => 
+            76 =>
             array (
                 'id' => 82,
                 'name' => 'Кризис Спящих',
@@ -888,7 +866,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-14 00:34:10',
                 'module_id' => NULL,
             ),
-            79 => 
+            77 =>
             array (
                 'id' => 19,
                 'name' => 'Возможность',
@@ -899,7 +877,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-14 18:04:56',
                 'module_id' => NULL,
             ),
-            80 => 
+            78 =>
             array (
                 'id' => 83,
                 'name' => 'Песня',
@@ -910,7 +888,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-17 01:01:17',
                 'module_id' => NULL,
             ),
-            81 => 
+            79 =>
             array (
                 'id' => 84,
                 'name' => 'Подсказка',
@@ -921,7 +899,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-17 02:37:11',
                 'module_id' => NULL,
             ),
-            82 => 
+            80 =>
             array (
                 'id' => 85,
                 'name' => 'Сброс',
@@ -932,7 +910,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-19 00:39:44',
                 'module_id' => NULL,
             ),
-            83 => 
+            81 =>
             array (
                 'id' => 86,
                 'name' => 'Сновидение',
@@ -943,7 +921,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-19 01:49:04',
                 'module_id' => NULL,
             ),
-            84 => 
+            82 =>
             array (
                 'id' => 87,
                 'name' => 'Навык',
@@ -954,7 +932,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-19 01:50:54',
                 'module_id' => NULL,
             ),
-            85 => 
+            83 =>
             array (
                 'id' => 88,
                 'name' => 'Книга Карт',
@@ -965,7 +943,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'updated_at' => '2023-04-19 21:55:17',
                 'module_id' => NULL,
             ),
-            86 => 
+            84 =>
             array (
                 'id' => 1,
                 'name' => 'Персонаж',
@@ -977,7 +955,7 @@ class GuideTopicsTableSeeder extends Seeder
                 'module_id' => NULL,
             ),
         ));
-        
-        
+
+
     }
 }

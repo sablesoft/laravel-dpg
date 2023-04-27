@@ -139,6 +139,26 @@ class GuideTagsTableSeeder extends Seeder
                 'created_at' => '2023-04-26 02:27:59',
                 'updated_at' => '2023-04-26 02:27:59',
             ),
+            12 => 
+            array (
+                'id' => 16,
+                'topic_id' => 26,
+                'post_id' => 80,
+                'project_id' => 1,
+                'owner_id' => 1,
+                'created_at' => '2023-04-27 15:28:16',
+                'updated_at' => '2023-04-27 15:28:16',
+            ),
+            13 => 
+            array (
+                'id' => 17,
+                'topic_id' => 101,
+                'post_id' => 81,
+                'project_id' => 1,
+                'owner_id' => 1,
+                'created_at' => '2023-04-27 15:31:24',
+                'updated_at' => '2023-04-27 15:31:24',
+            ),
         ));
         
         

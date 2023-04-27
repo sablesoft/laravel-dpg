@@ -29,16 +29,6 @@ class GuideProjectsTableSeeder extends Seeder
                 'created_at' => '2023-04-06 17:56:45',
                 'updated_at' => '2023-04-08 16:41:15',
             ),
-            1 => 
-            array (
-                'id' => 4,
-                'name' => 'Приключения Красной Шапочки!',
-                'code' => 'RHJ',
-                'text' => 'Добро пожаловать в сказку!',
-                'owner_id' => 1,
-                'created_at' => '2023-04-21 17:46:14',
-                'updated_at' => '2023-04-21 17:46:36',
-            ),
         ));
         
         

@@ -25,7 +25,16 @@ class GuideTopicModulesSeeder extends Seeder
     protected function updates(): array
     {
         return [
-            93 => null,
+            57 => 3,
+            72 => 3,
+            73 => 3,
+            75 => 3,
+            69 => 3,
+            104 => 3,
+            97 => 3,
+            98 => 3,
+            103 => 3,
+            105 => 3,
         ];
     }
 }

@@ -202,7 +202,7 @@ export const guide = reactive({
         let ids = {};
         let categories = [];
         for (const [postId, post] of Object.entries(posts)) {
-            if (post.moduleId && parseInt(post.moduleId) !== parseInt(this.modulesId)) {
+            if (post.moduleId && (parseInt(post.moduleId) !== parseInt(id))) {
                 continue;
             }
             if (!ids[post.categoryId]) {

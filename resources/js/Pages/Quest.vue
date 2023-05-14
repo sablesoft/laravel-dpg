@@ -1,0 +1,24 @@
+<script setup>
+import { Head } from '@inertiajs/inertia-vue3';
+import Screen from 'questjs-core/components/Screen.vue';
+import * as questjs from "questjs-core";
+import "@/Games/test/settings";
+import "@/Games/test/code";
+import "@/Games/test/data";
+import {onMounted, defineProps} from "vue";
+
+defineProps({
+});
+
+onMounted(() => {
+   questjs.run();
+});
+</script>
+<style>
+    @import "questjs-core/assets/css/sans-serif.css";
+    /*@import "questjs-core/assets/css/serif.css";*/
+</style>
+<template>
+    <Head :title="questjs.settings.title" />
+    <Screen :questjs="questjs"/>
+</template>

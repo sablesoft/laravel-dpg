@@ -23,6 +23,7 @@
     "dependencies": {
         "@vitejs/plugin-vue": "^3.2.0",
         "fabric-with-erasing": "^1.0.1",
+        "questjs-core": "^1.1.0",
         "vue": "^3.2.36",
         "vue-draggable-next": "^2.1.1",
         "vue-uuid": "^3.0.0"

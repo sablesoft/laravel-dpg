@@ -16,6 +16,7 @@ use App\Http\Resources\ModuleResource;
 use App\Http\Resources\BufferResource;
 use App\Http\Resources\ProjectResource;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\QuestController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\ProfileController;
 
@@ -89,6 +90,8 @@ Route::get('/project/{project}', function (Project $project) {
         'buffers' => BufferResource::collection([$buffer->getKey() => $buffer])
     ]);
 })->middleware(['auth', 'verified'])->name('guide.project');
+
+Route::get('/quest/test', [QuestController::class, 'test']);
 
 Route::post('/guide/update', [GuideController::class, 'update'])
     ->middleware(['auth', 'verified'])->name('guide.update');

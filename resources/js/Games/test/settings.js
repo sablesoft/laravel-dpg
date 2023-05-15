@@ -10,6 +10,7 @@ settings.warnings = "No warnings have been set for this game."
 settings.playMode = "dev"
 settings.lang = "lang-en"
 settings.files = ["code", "data"];
+settings.iconsFolder = '/build/assets/icons/';
 // settings.collapsibleSidePanes = true;
 
 settings.mapShowNotVisited = false

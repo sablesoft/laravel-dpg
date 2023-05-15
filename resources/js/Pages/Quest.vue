@@ -5,10 +5,7 @@ import * as questjs from "questjs-core";
 import "@/Games/test/settings";
 import "@/Games/test/code";
 import "@/Games/test/data";
-import {onMounted, defineProps} from "vue";
-
-defineProps({
-});
+import {onMounted} from "vue";
 
 onMounted(() => {
    questjs.run();

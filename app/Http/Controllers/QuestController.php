@@ -7,8 +7,12 @@ use Inertia\Response;
 
 class QuestController extends Controller
 {
-    public function test(): Response
+    /**
+     * @param string $code
+     * @return Response
+     */
+    public function run(string $code): Response
     {
-        return Inertia::render('Quest', []);
+        return Inertia::render("QuestJS/$code/Game", []);
     }
 }

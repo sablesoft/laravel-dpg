@@ -91,7 +91,8 @@ Route::get('/project/{project}', function (Project $project) {
     ]);
 })->middleware(['auth', 'verified'])->name('guide.project');
 
-Route::get('/quest/test', [QuestController::class, 'test']);
+Route::get('/quest/run/{code}', [QuestController::class, 'run']);
+Route::get('/quest/ai', [QuestController::class, 'ai']);
 
 Route::post('/guide/update', [GuideController::class, 'update'])
     ->middleware(['auth', 'verified'])->name('guide.update');

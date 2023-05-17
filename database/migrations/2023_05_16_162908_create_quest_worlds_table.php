@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('slug')->nullable(false)->unique();
             $table->string('name', 30)->nullable(false);
             $table->text('desc')->nullable(true);
+            $table->json('filenames')->nullable(true);
             $table->foreignId('owner_id')->nullable(false)
                 ->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

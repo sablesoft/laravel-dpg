@@ -1,8 +1,9 @@
+<!--suppress JSUnresolvedVariable -->
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import { useForm } from "@inertiajs/inertia-vue3";
-import {reactive, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 
 import Codemirror from "codemirror-editor-vue3";
 import "codemirror/mode/javascript/javascript.js";
@@ -44,25 +45,22 @@ const cmOptions = reactive({
     mode: "text/javascript", // Language mode
     theme: props.editorTheme,
 });
+const fileEditor = ref('settings');
 
 const form = useForm({
     id: props.world.id,
     name: props.world.name,
     slug: props.world.slug,
     desc: props.world.desc,
-    fileEditor: 'settings',
-    fileSettings: props.world.fileSettings,
-    fileData: props.world.fileData,
-    fileCode: props.world.fileCode
+    files : props.world.files
 });
 const mirrorChange = function(event) {
-    console.log(event);
+    // console.log(event);
 }
 const cmThemeChanged = function(event) {
     let theme = event.target.value;
     if (theme !== 'default' && !cmThemesLoaded.includes(theme)) {
         let file = document.createElement('link');
-        // import('./theme/' + theme + '.css');
         file.rel = 'stylesheet';
         file.href = '/build/assets/theme/' + theme + '.css';
         document.head.appendChild(file)
@@ -73,6 +71,9 @@ const cmThemeChanged = function(event) {
 const submit = () => {
     form.put(route("worlds.update", props.world.id));
 };
+onMounted(() => {
+    console.log(props.world);
+})
 </script>
 <template>
     <Head title="World Edit" />
@@ -134,59 +135,29 @@ const submit = () => {
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                     Files
                                 </label>
-                                <div>
-                                    <p>Select a theme:
-                                    <select v-model="cmOptions.theme" id="cmThemeSelect" @change="cmThemeChanged">
+                                <div class="inline mb-2">
+                                    <label for="cmThemeSelect" class="mr-2">Theme</label>
+                                    <select v-model="cmOptions.theme" class="mr-2" id="cmThemeSelect" @change="cmThemeChanged">
                                         <option>default</option>
                                         <option v-for="theme in cmThemes">{{theme}}</option>
                                     </select>
-                                    </p>
-                                    <label for="fontSize">Font Size</label>
-                                    <input type="number" id="fontSize" v-model="cmFontSize" step="1" min="8"/>
-                                    <br>
-                                    <input type="radio" id="settings" value="settings" v-model="form.fileEditor" />
-                                    <label for="settings">Settings</label>
-                                    <input type="radio" id="data" value="data" v-model="form.fileEditor" />
-                                    <label for="data">Data</label>
-                                    <input type="radio" id="code" value="code" v-model="form.fileEditor" />
-                                    <label for="code">Code</label>
+                                    <label for="fontSize" class="mr-2">Font Size</label>
+                                    <input type="number" id="fontSize" v-model="cmFontSize" step="1" min="8" class="mr-2"/>
+
+                                    <label for="fileSelect" class="mr-2">File</label>
+                                    <select v-model="fileEditor" class="mr-2" id="fileSelect">
+                                        <option v-for="(file, name) in world.files">{{name}}</option>
+                                    </select>
                                 </div>
 
-                                <div v-if="form.fileEditor === 'settings'">
-                                    <Codemirror v-model:value="form.fileSettings"
+                                <div v-for="(file, name) in world.files" class="mt-4">
+                                    <Codemirror v-if="fileEditor === name" v-model:value="form.files[name]"
                                         :style="{'font-size' : cmFontSize + 'pt'}"
                                         :options="cmOptions" border
-                                        placeholder="test placeholder"
+                                        placeholder="// write your code there"
                                         :height="editorHeight"
                                         :width="editorWidth"
                                         @change="mirrorChange"/>
-                                    <div v-if="form.errors.fileSettings" class="text-sm text-red-600">
-                                        {{ form.errors.fileSettings }}
-                                    </div>
-                                </div>
-                                <div v-if="form.fileEditor === 'data'">
-                                    <Codemirror v-model:value="form.fileData"
-                                        :style="{'font-size' : cmFontSize + 'pt'}"
-                                        :options="cmOptions" border
-                                        placeholder="test placeholder"
-                                        :height="editorHeight"
-                                        :width="editorWidth"
-                                        @change="mirrorChange"/>
-                                    <div v-if="form.errors.fileData" class="text-sm text-red-600">
-                                        {{ form.errors.fileData }}
-                                    </div>
-                                </div>
-                                <div v-if="form.fileEditor === 'code'">
-                                    <Codemirror v-model:value="form.fileCode"
-                                        :style="{'font-size' : cmFontSize + 'pt'}"
-                                        :options="cmOptions" border
-                                        placeholder="test placeholder"
-                                        :height="editorHeight"
-                                        :width="editorWidth"
-                                        @change="mirrorChange"/>
-                                    <div v-if="form.errors.fileCode" class="text-sm text-red-600">
-                                        {{ form.errors.fileCode }}
-                                    </div>
                                 </div>
                             </div>
                             <button type="submit"

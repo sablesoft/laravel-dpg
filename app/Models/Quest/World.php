@@ -12,24 +12,29 @@ use Illuminate\Support\Facades\File;
  * @property string|null $slug
  * @property string|null $name
  * @property string|null $desc
- * @property string|null $fileSettings
- * @property string|null $fileData
- * @property string|null $fileCode
+ * @property array|null $files
+ * @property array|null $filenames
  */
 class World extends Model
 {
-    const GAME_PATH = 'resources/js/Pages/QuestJS/Game/';
     use Owner;
+
+    const GAME_PATH = 'resources/js/Pages/QuestJS/Game/';
 
     /**
      * @var string
      */
     protected $table = 'quest_worlds';
 
+    protected $casts = [
+        'filenames' => 'array'
+    ];
+
     protected $fillable = [
         'slug',
         'name',
         'desc',
+        'files',
         'fileSettings',
         'fileData',
         'fileCode',
@@ -37,57 +42,31 @@ class World extends Model
         'number',
     ];
 
-    protected $appends = ['fileSettings', 'fileData', 'fileCode'];
+    protected $appends = ['files'];
 
     /**
-     * @return string|null
+     * @return array
      */
-    public function getFileSettingsAttribute(): ?string
+    public function getFilesAttribute(): array
     {
-        return $this->getFileContent('settings');
+        $data = [];
+        foreach ($this->filenames as $file) {
+            $data[$file] = $this->getFileContent($file);
+        }
+        return $data;
     }
 
     /**
-     * @param string $content
-     * @return $this
+     * @param array $files
+     * @return self
      */
-    public function setFileSettingsAttribute(string $content): self
+    public function setFilesAttribute(array $files): self
     {
-        return $this->putFileContent('settings', $content);
-    }
+        foreach ($files as $file => $content) {
+            $this->putFileContent($file, $content);
+        }
 
-    /**
-     * @return string|null
-     */
-    public function getFileCodeAttribute(): ?string
-    {
-        return $this->getFileContent('code');
-    }
-
-    /**
-     * @param string $content
-     * @return $this
-     */
-    public function setFileCodeAttribute(string $content): self
-    {
-        return $this->putFileContent('code', $content);
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getFileDataAttribute(): ?string
-    {
-        return $this->getFileContent('data');
-    }
-
-    /**
-     * @param string $content
-     * @return $this
-     */
-    public function setFileDataAttribute(string $content): self
-    {
-        return $this->putFileContent('data', $content);
+        return $this;
     }
 
     /**
@@ -125,8 +104,9 @@ class World extends Model
     {
         parent::boot();
 
-        static::creating(function (World $item) {
-            $item->owner()->associate(Auth::user());
+        static::creating(function (World $world) {
+            $world->filenames = ['settings', 'data', 'code'];
+            $world->owner()->associate(Auth::user());
         });
     }
 }

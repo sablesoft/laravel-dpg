@@ -99,12 +99,10 @@ class WorldController extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
             'desc' => 'sometimes|string',
-            'fileSettings' => 'sometimes|string',
-            'fileData' => 'sometimes|string',
-            'fileCode' => 'sometimes|string',
+            'files' => 'sometimes|array',
         ]);
 
-        foreach (['name', 'slug', 'desc', 'fileSettings', 'fileData', 'fileCode'] as $field) {
+        foreach (['name', 'slug', 'desc', 'files'] as $field) {
             $world->$field = $request->get($field);
         }
         $world->save();

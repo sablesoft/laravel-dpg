@@ -2,9 +2,9 @@
 import { Head } from '@inertiajs/inertia-vue3';
 import Screen from 'questjs-core/components/Screen.vue';
 import * as questjs from "questjs-core";
-import "./settings";
-import "./code";
-import "./data";
+// import "./settings";
+// import "./code";
+// import "./data";
 import {onMounted} from "vue";
 onMounted(() => {
     questjs.run();

@@ -19,6 +19,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\QuestController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Quest\WorldController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,7 @@ Route::get('/project/{project}', function (Project $project) {
     ]);
 })->middleware(['auth', 'verified'])->name('guide.project');
 
+Route::resource('/quest/worlds', WorldController::class)->middleware(['auth', 'verified']);
 Route::get('/quest/run/{code}', [QuestController::class, 'run']);
 Route::get('/quest/ai', [QuestController::class, 'ai']);
 
@@ -103,9 +105,7 @@ Route::post('/guide/delete', [GuideController::class, 'delete'])
 
 Route::get('/game/{process}', [GameController::class, 'process'])
     ->middleware(['auth', 'verified', 'game.visitor'])->name('game');
-
 Route::patch('/game/{user}', [GameController::class, 'turn']);
-
 Route::get('/game/{game}/json', [GameController::class, 'json']);
 
 Route::middleware('auth')->group(function () {

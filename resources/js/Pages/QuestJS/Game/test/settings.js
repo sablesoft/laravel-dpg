@@ -4,14 +4,14 @@ import { settings } from "questjs-core";
 
 settings.title = "Quest 6 Testing"
 settings.author = "Ziggy Shu"
-settings.version = "0.1"
+settings.version = "0.2"
 settings.thanks = []
 settings.warnings = "No warnings have been set for this game."
 settings.playMode = "dev"
 settings.lang = "lang-en"
 settings.files = ["code", "data"];
 settings.iconsFolder = '/build/assets/icons/';
-// settings.collapsibleSidePanes = true;
+settings.collapsibleSidePanes = true;
 
 settings.mapShowNotVisited = false
 settings.mapCellSize = 55

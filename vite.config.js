@@ -14,6 +14,10 @@ export default defineConfig({
                 {
                     src: path.join(__dirname, '/node_modules/questjs-core/assets/icons'),
                     dest: path.join(__dirname, '/public/build/assets')
+                },
+                {
+                    src: path.join(__dirname, '/node_modules/codemirror/theme'),
+                    dest: path.join(__dirname, '/public/build/assets')
                 }
             ],
             silent: false
